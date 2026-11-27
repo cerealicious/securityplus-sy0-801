@@ -1,0 +1,90 @@
+{
+  "id": "qz-2.4",
+  "objective": "2.4",
+  "title": "Quiz — Vulnerabilities and Attack Surfaces",
+  "questions": [
+    {
+      "id": "q-2.4-01",
+      "type": "single",
+      "q": "A server is no longer in the inventory and no tool monitors it. Which term applies?",
+      "options": [
+        "Unsupported",
+        "Unpatched",
+        "Unmanaged",
+        "Obsolete"
+      ],
+      "answer": [2],
+      "explain": "Unmanaged means outside management and inventory. Unsupported means the vendor no longer provides support.",
+      "ref": "2.4-01"
+    },
+    {
+      "id": "q-2.4-02",
+      "type": "single",
+      "q": "A file is verified as safe and then replaced before it is opened. Which vulnerability is this?",
+      "options": [
+        "Race condition / TOCTOU",
+        "Zero-day",
+        "Hardcoded secret",
+        "Misconfiguration"
+      ],
+      "answer": [0],
+      "explain": "The gap between time-of-check and time-of-use is exploited: this is a race condition.",
+      "ref": "2.4-01"
+    },
+    {
+      "id": "q-2.4-03",
+      "type": "multi",
+      "q": "Which attack surfaces relate to identity or configuration? (Select all that apply)",
+      "options": [
+        "Stale credentials",
+        "Rogue devices",
+        "Shadow IT",
+        "Public storage bucket"
+      ],
+      "answer": [0, 1, 2, 3],
+      "explain": "All four are attack surfaces: forgotten credentials, unauthorized devices, unapproved services, and misconfigured public storage.",
+      "ref": "2.4-02"
+    },
+    {
+      "id": "q-2.4-04",
+      "type": "match",
+      "q": "Match each scenario to its vulnerability category.",
+      "pairs": [
+        { "left": "API key in a public repository", "right": "Public repository / hardcoded secret" },
+        { "left": "Flaw with no known vendor patch", "right": "Zero-day" },
+        { "left": "User logged into an unapproved service", "right": "Shadow IT" },
+        { "left": "Wireless network with a rogue access point", "right": "Wireless / misconfiguration" }
+      ],
+      "explain": "The category depends on the nature of the weakness, not the attacker's tool.",
+      "ref": "2.4-02"
+    },
+    {
+      "id": "q-2.4-05",
+      "type": "single",
+      "q": "Which control is most appropriate when facing a zero-day?",
+      "options": [
+        "Wait for the next patch",
+        "Reduce the attack surface, segment, and detect anomalous behavior",
+        "Disable logging",
+        "Add the CVE to an exclusion list"
+      ],
+      "answer": [1],
+      "explain": "Without a patch or known signature, attack surface reduction, segmentation, and behavioral detection remain effective.",
+      "ref": "2.4-01"
+    },
+    {
+      "id": "q-2.4-06",
+      "type": "single",
+      "q": "Which concept is absent from the four textbooks but required in objective 2.4?",
+      "options": [
+        "Patch management",
+        "Hardcoded secrets",
+        "Large language models (LLMs) as an attack surface",
+        "Wireless networking"
+      ],
+      "answer": [2],
+      "explain": "LLMs, IdPs, public repositories, and public object storage are gaps in the textbooks: covered in the official exam objectives only.",
+      "ref": "2.4-02"
+    }
+  ]
+}

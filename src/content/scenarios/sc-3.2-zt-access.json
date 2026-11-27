@@ -1,0 +1,90 @@
+{
+  "id": "sc-3.2-zt-access",
+  "objective": "3.2",
+  "title": "Critical Access: Where to Place the Control?",
+  "context": "An administrator must access a critical server from outside the network. You must design the access path and decide the behavior if the control fails.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "Which first check must be required before granting access?",
+      "choices": [
+        {
+          "text": "Authenticate the user (MFA) and verify device health/inventory",
+          "next": "n2",
+          "score": 4,
+          "why": "Zero Trust verifies identity and device before any access, even from outside."
+        },
+        {
+          "text": "Accept the connection if it comes from a known IP",
+          "next": "n2",
+          "score": 0,
+          "why": "Network location is not proof of identity in Zero Trust."
+        },
+        {
+          "text": "Simply ask for a password",
+          "next": "n2",
+          "score": 1,
+          "why": "A password alone covers neither device health nor least privilege."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "Which path should administration go through?",
+      "choices": [
+        {
+          "text": "A jump host/bastion on an out-of-band network, with MFA and recorded sessions",
+          "next": "n3",
+          "score": 4,
+          "why": "The bastion enforces a single, tracked entry point separated from the user network."
+        },
+        {
+          "text": "Directly via RDP from the administrator's workstation",
+          "next": "n3",
+          "score": 0,
+          "why": "Direct access bypasses centralized control and logging."
+        },
+        {
+          "text": "Through a temporary file share",
+          "next": "n3",
+          "score": 0,
+          "why": "This is not a controlled administration channel."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "The authentication service goes down during the maintenance. Which failure mode should you choose for this critical server?",
+      "choices": [
+        {
+          "text": "Fail-closed: block access as long as authentication is unavailable",
+          "next": "n4",
+          "score": 4,
+          "why": "For a critical server, denying unauthenticated access takes precedence over continuity."
+        },
+        {
+          "text": "Fail-open: allow traffic through so maintenance is not interrupted",
+          "next": "n4",
+          "score": 0,
+          "why": "Fail-open would allow unverified access to a critical system."
+        },
+        {
+          "text": "Disable logging during the outage",
+          "next": "n4",
+          "score": 0,
+          "why": "An outage is not a reason to remove traceability."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "You verified identity and device, enforced the out-of-band bastion, and chose fail-closed on a critical asset."
+    }
+  },
+  "debrief": [
+    "Zero Trust verifies the user, the device, and application access, not just the network.",
+    "The out-of-band bastion centralizes and tracks administration.",
+    "Failure mode is decided by criticality: availability or denial of unverified access."
+  ]
+}

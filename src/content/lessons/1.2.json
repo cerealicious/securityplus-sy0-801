@@ -1,0 +1,302 @@
+[
+  {
+    "id": "1.2-01",
+    "objective": "1.2",
+    "order": 1,
+    "title": "The Change Request: From Ticket to CAB",
+    "minutes": 16,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "In security, an uncontrolled change is an outage waiting to happen. Objective **1.2** measures your ability to explain how a change management process reduces risk: **who requests, who approves, what impacts are analyzed, and how we roll back**."
+      },
+      {
+        "type": "h",
+        "text": "Change as a Cause of Incidents"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-1.2-L01-change-window"
+      },
+      {
+        "type": "p",
+        "text": "The SOC notes devote two pages to the **change request** and the **CAB**: a change can be technical (patch, configuration, application) or organizational (process, role), but in all cases it must be **requested, evaluated, approved, scheduled, tested, and documented**. It is this traceability that the exam seeks to verify, not mastery of a ticketing tool."
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "Change request / CAB",
+        "page": 135,
+        "strength": "primary",
+        "note": "Change request and Change Advisory Board (pp. 135-136)"
+      },
+      {
+        "type": "term",
+        "en": "Change advisory board (CAB)",
+        "fr": "Change advisory board (CAB)",
+        "field": "Group of stakeholders (IT, security, business, operations) that reviews change requests, evaluates their impact, and grants or denies approval before production deployment."
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Requester / owner**: the person who submits the request and remains responsible until closure.",
+          "**CAB**: arbitrates risk and schedule, especially for high-impact changes.",
+          "**Stakeholders**: business, support, security, vendors — they experience or validate the effect of the change.",
+          "**Change manager**: prepares the file, checks completeness, and archives decisions."
+        ]
+      },
+      {
+        "type": "h",
+        "text": "Steps of a Complete Request"
+      },
+      {
+        "type": "steps",
+        "items": [
+          {
+            "title": "1. Opening the Ticket",
+            "text": "Describe the change, its reason, the affected system, the owner, and stakeholders (SOCN pp. 38-40)."
+          },
+          {
+            "title": "2. Impact Analysis",
+            "text": "Identify affected services, dependencies, users, and security controls."
+          },
+          {
+            "title": "3. CAB Review and Approval",
+            "text": "The board decides: approved, rejected, or approved with conditions (window, additional testing)."
+          },
+          {
+            "title": "4. Maintenance Window Scheduling",
+            "text": "Choose a low-impact slot, announce expected downtime, and notify business units."
+          },
+          {
+            "title": "5. Testing and Results",
+            "text": "Validate in a test environment, record results, then apply in production."
+          },
+          {
+            "title": "6. Backout and Closure",
+            "text": "Keep an executable rollback plan ready until the end of the window, then document."
+          }
+        ]
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "Ticketing",
+        "page": 38,
+        "strength": "supporting",
+        "note": "Opening and tracking a ticket (pp. 38-40)"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-1.2-cab-flow"
+      },
+      {
+        "type": "h",
+        "text": "Impact Analysis, Testing, and Rollback"
+      },
+      {
+        "type": "p",
+        "text": "**Impact analysis** must cover three dimensions: availability (downtime, restart), security (allow list changes, port openings), and continuity (dependencies, legacy applications). A \"harmless\" change on one server can break an entire dependency chain."
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Fundamentals",
+        "page": 55,
+        "printed": 35,
+        "strength": "supporting",
+        "note": "Prioritization and impact of operations on SOC availability (printed pp. 35-36)"
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "Backout Planning",
+          "points": [
+            "**Return to the previous state** if the change fails.",
+            "Requires a backup, a known configuration, and a tested procedure.",
+            "Typical answer when a scenario mentions an immediate outage after deployment."
+          ]
+        },
+        "right": {
+          "title": "Fail Forward",
+          "points": [
+            "**Move forward** with a patch, workaround, or new version rather than rolling back.",
+            "Chosen when rollback is impossible or riskier (data already migrated).",
+            "Must remain an explicit, documented decision, not improvisation."
+          ]
+        }
+      },
+      {
+        "type": "callout",
+        "kind": "warning",
+        "text": "Classic trap: presenting **rollback** as an automatic solution. A backout is only reliable if it has been **tested** and if the maintenance window leaves enough time to execute it."
+      },
+      {
+        "type": "check",
+        "q": "A patch is applied in production. Ten minutes later, authentications fail. Which action is expected first?",
+        "options": [
+          "Open a new change request for next month",
+          "Execute the backout plan within the maintenance window, then document the failure",
+          "Restart all servers without verification",
+          "Wait until the end of the window to notify the CAB"
+        ],
+        "answer": 1,
+        "explain": "The backout plan exists precisely for this case: it must be executable during the window, then the failure is recorded and re-analyzed by the CAB."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "A change is requested, evaluated, approved, scheduled, tested, applied, and documented.",
+          "The CAB arbitrates; the owner bears responsibility; stakeholders experience the impact.",
+          "Impact analysis = availability + security + dependencies.",
+          "Backout = return to previous state; fail forward = move forward with a fix."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1.2-02",
+    "objective": "1.2",
+    "order": 2,
+    "title": "Technical Implications and Change Documentation",
+    "minutes": 15,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "A change is not judged solely on its technical success: it must also **leave the environment in a documented, consistent, and secure state**. This is the part most often forgotten in exam scenarios."
+      },
+      {
+        "type": "h",
+        "text": "Allow Lists, Restricted Activities, and Restarts"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-1.2-L02-rollback"
+      },
+      {
+        "type": "term",
+        "en": "Allow list / deny list",
+        "fr": "Allow list / deny list",
+        "field": "Control mechanism that explicitly permits or blocks addresses, applications, or commands. A change can modify these lists: the security effect must be analyzed before application."
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Allow lists / deny lists**: verify that a new rule does not open a prohibited flow (e.g., adding an IP range to an allow list).",
+          "**Restricted activities**: certain actions require heightened authorization (administrator access, production, maintenance).",
+          "**Downtime**: announced and accepted unavailability duration during the window.",
+          "**Service restart / application restart**: a restart can reset sessions, certificates, or processing queues.",
+          "**Legacy applications**: an unsupported application may be the only system depending on an old protocol or port.",
+          "**Dependencies**: database, directory, DNS, certificates, API — recovery depends on the slowest link."
+        ]
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "Disaster Recovery",
+        "page": 126,
+        "printed": 104,
+        "strength": "primary",
+        "note": "Rollback, restoration, and system dependencies (printed p. 104)"
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "If a scenario mentions a legacy application that \"must absolutely remain available\", look for the hidden **dependency** (port, service, service account) in the expected answer."
+      },
+      {
+        "type": "h",
+        "text": "Change Seen Through Security"
+      },
+      {
+        "type": "p",
+        "text": "A change that modifies a security control (firewall, MFA, logging, encryption) must be reviewed by security **before** the CAB: that is often where regressions hide. The **Defensive Security Handbook** emphasizes the need to document decisions and keep procedures up to date after every intervention."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "Policies / Standards and Procedures",
+        "page": 166,
+        "printed": 144,
+        "strength": "supporting",
+        "note": "Documentation, standards, and procedures kept up to date (printed p. 144)"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Item to Update",
+          "Why"
+        ],
+        "rows": [
+          [
+            "Architecture and flow diagrams",
+            "An outdated diagram makes the next impact analysis wrong."
+          ],
+          [
+            "Policies and procedures / SOPs",
+            "The procedure must reflect the configuration actually deployed."
+          ],
+          [
+            "Inventory and version control",
+            "Identifying the exact version in production enables rollback and auditing."
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "Development / The Extra Mile",
+        "page": 194,
+        "printed": 172,
+        "strength": "supporting",
+        "note": "Version control and change tracking (printed p. 172)"
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "Vulnerability Management",
+        "page": 197,
+        "printed": 175,
+        "strength": "supporting",
+        "note": "Patch management and version tracking (printed p. 175)"
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Prioritize Incident Response",
+        "page": 150,
+        "printed": 130,
+        "strength": "supporting",
+        "note": "SOPs / runbooks and repeatable execution of operations (printed pp. 130-132)"
+      },
+      {
+        "type": "callout",
+        "kind": "warning",
+        "text": "**Version control** is not limited to code: it also covers configurations, deployment scripts, and policies. Without it, backout relies on an administrator's memory."
+      },
+      {
+        "type": "check",
+        "q": "After a successful change, which updates are part of closure?",
+        "options": [
+          "Only the ticket; the rest will be done at the next audit",
+          "Diagrams, policies/procedures, and version control",
+          "Only the application version in the inventory",
+          "None: the CAB handles it automatically"
+        ],
+        "answer": 1,
+        "explain": "Post-change documentation is an explicit requirement: diagrams, policies/procedures, and version control must reflect the actual state."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Analyze the change's effect on allow/deny lists, restarts, downtime, and dependencies.",
+          "Legacy applications and security controls deserve special attention.",
+          "Closure = diagrams + policies/procedures + up-to-date version control.",
+          "An untested or undocumented backout is not a reliable plan."
+        ]
+      }
+    ]
+  }
+]

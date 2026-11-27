@@ -1,0 +1,61 @@
+{
+  "id": "pbq-4.6-automation",
+  "objective": "4.6",
+  "type": "classify",
+  "title": "Classify Automation and AI Use Cases",
+  "prompt": "Classify each scenario into the corresponding automation or AI capability category.",
+  "categories": [
+    "Provisioning / desired state",
+    "Detection / analysis",
+    "Ticketing / coordination",
+    "Applied AI"
+  ],
+  "items": [
+    {
+      "id": "i1",
+      "label": "Automatically create a new employee's account and assign role-based permissions",
+      "cat": "Provisioning / desired state"
+    },
+    {
+      "id": "i2",
+      "label": "Deploy a virtual machine on demand from an approved template",
+      "cat": "Provisioning / desired state"
+    },
+    {
+      "id": "i3",
+      "label": "Compare actual configuration against the baseline and remediate drift",
+      "cat": "Provisioning / desired state"
+    },
+    {
+      "id": "i4",
+      "label": "Spot an anomaly in logs based on a baseline",
+      "cat": "Detection / analysis"
+    },
+    {
+      "id": "i5",
+      "label": "Conversational assistant that helps the analyst draft their notes",
+      "cat": "Applied AI"
+    },
+    {
+      "id": "i6",
+      "label": "Anticipate an outage based on observed trends",
+      "cat": "Applied AI"
+    },
+    {
+      "id": "i7",
+      "label": "Behavioral baseline enhanced by machine learning",
+      "cat": "Applied AI"
+    },
+    {
+      "id": "i8",
+      "label": "AI agent that chains triage, blocking, and documentation under guardrails",
+      "cat": "Applied AI"
+    },
+    {
+      "id": "i9",
+      "label": "Create, assign, and close a ticket from an alert",
+      "cat": "Ticketing / coordination"
+    }
+  ],
+  "explain": "Provisioning and desired state act on resources; detection produces signals; ticketing handles coordination; the four AI capabilities (chatbot, prediction, augmented baselines, agentic AI) form the final category."
+}

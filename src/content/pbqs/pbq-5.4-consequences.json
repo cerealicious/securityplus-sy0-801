@@ -1,0 +1,23 @@
+{
+  "id": "pbq-5.4-consequences",
+  "objective": "5.4",
+  "type": "classify",
+  "title": "Classify Consequences of Non-Compliance",
+  "prompt": "For each situation, select the most accurate consequence of non-compliance.",
+  "categories": ["Reputational", "Financial", "Legal", "Contractual", "Sanction", "Loss of license"],
+  "items": [
+    { "id": "i1", "label": "Negative press campaign and customer churn after a breach", "cat": "Reputational" },
+    { "id": "i2", "label": "Damage to brand image among business partners", "cat": "Reputational" },
+    { "id": "i3", "label": "Regulatory fine of €2 million", "cat": "Financial" },
+    { "id": "i4", "label": "Remediation costs and lost revenue during downtime", "cat": "Financial" },
+    { "id": "i5", "label": "Lawsuit holding executives personally liable", "cat": "Legal" },
+    { "id": "i6", "label": "Statutory obligation to notify the supervisory authority of the breach", "cat": "Legal" },
+    { "id": "i7", "label": "Contract termination by a major customer", "cat": "Contractual" },
+    { "id": "i8", "label": "Penalties stipulated in a vendor contract", "cat": "Contractual" },
+    { "id": "i9", "label": "Internal disciplinary action recorded in an employee's file", "cat": "Sanction" },
+    { "id": "i10", "label": "Formal warning issued by the regulator", "cat": "Sanction" },
+    { "id": "i11", "label": "Revocation of PCI DSS certification: card processing prohibited", "cat": "Loss of license" },
+    { "id": "i12", "label": "Revocation of the platform's operating license", "cat": "Loss of license" }
+  ],
+  "explain": "Reputational = image and trust; financial = money; legal = liability and statutory obligations; contractual = commitments between parties; sanction = formal penalty; loss of license = revocation of an authorization or certification."
+}

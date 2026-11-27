@@ -1,0 +1,30 @@
+{
+  "id": "pbq-4.8-volatility",
+  "objective": "4.8",
+  "type": "order",
+  "title": "Order Evidence Collection by Volatility",
+  "prompt": "Put the evidence sources in collection order, from most volatile to most stable.",
+  "items": [
+    {
+      "id": "s1",
+      "label": "Volatile memory (RAM): keys, payloads, and processes — capture before any shutdown"
+    },
+    {
+      "id": "s2",
+      "label": "Active network connections, sockets, ARP table, and process state"
+    },
+    {
+      "id": "s3",
+      "label": "Caches, buffers, and logs not yet written to disk"
+    },
+    {
+      "id": "s4",
+      "label": "Persistent data on disk: files, registry, logs, bit-by-bit image"
+    },
+    {
+      "id": "s5",
+      "label": "Backups, archives, and offline storage — least volatile"
+    }
+  ],
+  "explain": "The rule is to capture what disappears fastest first. A reboot destroys RAM, connections, and caches; disk and backups remain accessible longer, but must also be protected with hashing and chain of custody."
+}

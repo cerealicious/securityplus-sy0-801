@@ -1,0 +1,90 @@
+{
+  "id": "sc-5.6-phishing",
+  "objective": "5.6",
+  "title": "Internal Phishing Campaign: Choosing Actions",
+  "context": "Your organization launches a simulated phishing campaign, then must use the results to improve security awareness.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "Before sending, what must you plan as a priority?",
+      "choices": [
+        {
+          "text": "A clear objective, defined audience, and approval from management and legal",
+          "next": "n2",
+          "score": 4,
+          "why": "A campaign is a governed action: without objective or authorization, it loses legitimacy."
+        },
+        {
+          "text": "The trickiest possible message, without notifying anyone",
+          "next": "n2",
+          "score": 0,
+          "why": "Realism does not excuse skipping scoping and authorization."
+        },
+        {
+          "text": "Publishing the employee ranking before sending",
+          "next": "n2",
+          "score": 0,
+          "why": "Shaming harms trust and reporting."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "Results: 18% clicks and only 4% reports. Which type of training do you deploy first?",
+      "choices": [
+        {
+          "text": "Remedial training for those who clicked and targeted phishing training for exposed teams",
+          "next": "n3",
+          "score": 4,
+          "why": "The trigger is a mistake (remedial) and the risk is tied to an audience (targeted)."
+        },
+        {
+          "text": "Initial onboarding training for the entire organization",
+          "next": "n3",
+          "score": 1,
+          "why": "Onboarding is for new hires, not an observed behavior."
+        },
+        {
+          "text": "No training: the drop in clicks is enough",
+          "next": "n3",
+          "score": 0,
+          "why": "A low reporting rate shows active vigilance remains insufficient."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "One quarter later, clicks drop and reports rise. What do you report to management?",
+      "choices": [
+        {
+          "text": "Compared metrics and an executive report with trends and upcoming actions",
+          "next": "n4",
+          "score": 4,
+          "why": "Metrics and executive reports are the official deliverables for effectiveness tracking."
+        },
+        {
+          "text": "Only the number of messages sent",
+          "next": "n4",
+          "score": 0,
+          "why": "Volume sent does not measure program effectiveness."
+        },
+        {
+          "text": "The risk score of an external vendor",
+          "next": "n4",
+          "score": 0,
+          "why": "That is a third-party risk indicator (5.3), unrelated to internal awareness."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "You scoped the campaign, chose remedial and targeted training, and delivered actionable metrics."
+    }
+  },
+  "debrief": [
+    "Every internal campaign requires an objective, an audience, and authorization.",
+    "The trigger determines the training type: mistake = remedial, role risk = targeted.",
+    "Metrics and executive reports measure effectiveness over time."
+  ]
+}

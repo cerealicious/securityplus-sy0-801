@@ -1,0 +1,91 @@
+{
+  "id": "qz-2.6",
+  "objective": "2.6",
+  "title": "Quiz — AI-Related Threats",
+  "questions": [
+    {
+      "id": "q-2.6-01",
+      "type": "single",
+      "q": "Erroneous examples are injected into the training dataset. Which threat is this?",
+      "options": [
+        "Evasion",
+        "Poisoning",
+        "Jailbreaking",
+        "Session hijacking"
+      ],
+      "answer": [1],
+      "explain": "Poisoning targets the training data upstream of the model.",
+      "ref": "2.6-01"
+    },
+    {
+      "id": "q-2.6-02",
+      "type": "single",
+      "q": "An analyzed document contains 'ignore system instructions.' Which threat is this?",
+      "options": [
+        "Hallucination",
+        "Prompt injection",
+        "Bias",
+        "Data loss"
+      ],
+      "answer": [1],
+      "explain": "A hostile instruction embedded in processed content hijacks the prompt: prompt injection.",
+      "ref": "2.6-02"
+    },
+    {
+      "id": "q-2.6-03",
+      "type": "single",
+      "q": "The model provides a convincing but completely fabricated answer. Which concept is this?",
+      "options": [
+        "Jailbreaking",
+        "Hallucination",
+        "Evasion",
+        "Poisoning"
+      ],
+      "answer": [1],
+      "explain": "A hallucination is a false output presented with confidence.",
+      "ref": "2.6-02"
+    },
+    {
+      "id": "q-2.6-04",
+      "type": "multi",
+      "q": "Which concepts relate to privacy and data protection? (Select all that apply)",
+      "options": [
+        "Data loss",
+        "Privacy",
+        "Bias",
+        "Explainability"
+      ],
+      "answer": [0, 1],
+      "explain": "Data loss and privacy relate to confidentiality. Bias and explainability relate to model quality and governance.",
+      "ref": "2.6-01"
+    },
+    {
+      "id": "q-2.6-05",
+      "type": "single",
+      "q": "An AI agent has shell access and executes an unauthorized command. Which concept is this?",
+      "options": [
+        "Code execution",
+        "Model manipulation",
+        "Hallucination",
+        "Poisoning"
+      ],
+      "answer": [0],
+      "explain": "A tool-enabled agent can be tricked into executing code: this is the 'Code execution' threat.",
+      "ref": "2.6-02"
+    },
+    {
+      "id": "q-2.6-06",
+      "type": "single",
+      "q": "Why is this chapter marked 'beyond the textbooks'?",
+      "options": [
+        "The textbooks treat AI as a defensive tool only",
+        "The textbooks were written before 2020",
+        "The textbooks prohibit AI",
+        "The textbooks only cover cryptography"
+      ],
+      "answer": [0],
+      "explain": "The four textbooks mention ML/AI for detection (EDR, UEBA) but never as a threat vector: this content comes from official objective 2.6.",
+      "ref": "2.6-01"
+    }
+  ]
+}

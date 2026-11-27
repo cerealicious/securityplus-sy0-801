@@ -1,0 +1,90 @@
+{
+  "id": "qz-2.1",
+  "objective": "2.1",
+  "title": "Quiz — Threats, Vulnerabilities, and Prioritization",
+  "questions": [
+    {
+      "id": "q-2.1-01",
+      "type": "single",
+      "q": "Which formula correctly summarizes risk?",
+      "options": [
+        "Risk = threat + vulnerability",
+        "Risk = vulnerability × threat",
+        "Risk = CVSS × CVE",
+        "Risk = impact − likelihood"
+      ],
+      "answer": [1],
+      "explain": "Risk combines a vulnerability and the threat that can exploit it, often expressed as likelihood × impact.",
+      "ref": "2.1-01"
+    },
+    {
+      "id": "q-2.1-02",
+      "type": "single",
+      "q": "Which factor increases the likelihood that a vulnerability will be exploited?",
+      "options": [
+        "A deployed compensating control",
+        "Internet exposure and a public exploit",
+        "An air-gapped system",
+        "Low asset criticality"
+      ],
+      "answer": [1],
+      "explain": "Exposure and the availability of a public exploit make exploitation much more likely.",
+      "ref": "2.1-01"
+    },
+    {
+      "id": "q-2.1-03",
+      "type": "multi",
+      "q": "Which of the following are threat intelligence sources? (Select all that apply)",
+      "options": [
+        "Commercial and open-source threat feeds",
+        "Internal logs and EDR telemetry",
+        "CERT / ISAC and vendor advisories",
+        "The codename of an attacker group"
+      ],
+      "answer": [0, 1, 2],
+      "explain": "Sources are both internal and external. A mere group codename is not an actionable intelligence source.",
+      "ref": "2.1-01"
+    },
+    {
+      "id": "q-2.1-04",
+      "type": "single",
+      "q": "What is the role of CVSS?",
+      "options": [
+        "Assign a unique identifier to a flaw",
+        "Produce a severity score from 0 to 10",
+        "Classify code weakness types",
+        "Declare an incident"
+      ],
+      "answer": [1],
+      "explain": "CVSS measures severity; CVE is the identifier and CWE is the weakness type.",
+      "ref": "2.1-02"
+    },
+    {
+      "id": "q-2.1-05",
+      "type": "match",
+      "q": "Match each concept to its definition.",
+      "pairs": [
+        { "left": "Base metrics", "right": "Intrinsic characteristics of the flaw" },
+        { "left": "Temporal metrics", "right": "Exploit and patch availability" },
+        { "left": "Environmental metrics", "right": "Asset criticality and local controls" },
+        { "left": "CVE", "right": "Unique identifier for a vulnerability" }
+      ],
+      "explain": "The three CVSS metric groups and the role of CVE are classic exam definitions.",
+      "ref": "2.1-02"
+    },
+    {
+      "id": "q-2.1-06",
+      "type": "single",
+      "q": "Two flaws: A = CVSS 9.8 on an isolated test bench; B = CVSS 7.5 on an internet-facing server with a public exploit. Which should be prioritized?",
+      "options": [
+        "A, because the score is higher",
+        "B, because exposure and the public exploit increase risk",
+        "Neither; wait for an incident",
+        "Both have the same priority"
+      ],
+      "answer": [1],
+      "explain": "Priority depends on context: exposure, exploitability, and criticality outweigh the raw CVSS score alone.",
+      "ref": "2.1-02"
+    }
+  ]
+}

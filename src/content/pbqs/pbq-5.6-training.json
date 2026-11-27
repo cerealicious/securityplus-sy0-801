@@ -1,0 +1,23 @@
+{
+  "id": "pbq-5.6-training",
+  "objective": "5.6",
+  "type": "classify",
+  "title": "Choose the Training Type by Situation",
+  "prompt": "For each situation, select the most appropriate training type. Reason based on the trigger, not the topic covered.",
+  "categories": ["Initial / onboarding", "Continuous / ongoing", "Targeted", "Corrective"],
+  "items": [
+    { "id": "i1", "label": "New hire's first week: AUP and access", "cat": "Initial / onboarding" },
+    { "id": "i2", "label": "Onboarding session before a new administrator starts their role", "cat": "Initial / onboarding" },
+    { "id": "i3", "label": "Signing the policy acknowledgment upon hire", "cat": "Initial / onboarding" },
+    { "id": "i4", "label": "Mandatory annual training for all staff", "cat": "Continuous / ongoing" },
+    { "id": "i5", "label": "Quarterly update module on emerging threats", "cat": "Continuous / ongoing" },
+    { "id": "i6", "label": "Annual password policy reminder campaign", "cat": "Continuous / ongoing" },
+    { "id": "i7", "label": "BEC (wire fraud) session for the accounting department", "cat": "Targeted" },
+    { "id": "i8", "label": "Enhanced MFA training reserved for administrator accounts", "cat": "Targeted" },
+    { "id": "i9", "label": "Securing remote work for distributed teams", "cat": "Targeted" },
+    { "id": "i10", "label": "Individual coaching after clicking a simulated phishing link", "cat": "Corrective" },
+    { "id": "i11", "label": "Debriefing after sending data to the wrong recipient", "cat": "Corrective" },
+    { "id": "i12", "label": "Dedicated training following a breach involving a team", "cat": "Corrective" }
+  ],
+  "explain": "Initial = arrival; continuous = calendar schedule; targeted = specific risk or role; corrective = observed mistake or incident. The same topic (passwords) can fall under multiple types depending on the trigger."
+}

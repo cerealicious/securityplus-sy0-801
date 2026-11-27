@@ -1,0 +1,114 @@
+{
+  "id": "qz-5.3",
+  "objective": "5.3",
+  "title": "Quiz — Third-Party Risk",
+  "questions": [
+    {
+      "id": "q-5.3-01",
+      "type": "single",
+      "q": "Which document requests a detailed solution proposal from shortlisted vendors?",
+      "options": [
+        "RFI",
+        "RFQ",
+        "RFP",
+        "SOW"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "An RFP focuses on the proposed approach; an RFI gathers general information; an RFQ focuses on price.",
+      "ref": "5.3-01"
+    },
+    {
+      "id": "q-5.3-02",
+      "type": "single",
+      "q": "Which agreement sets the general terms applicable to all engagements with the same vendor?",
+      "options": [
+        "MSA",
+        "SOW",
+        "SLA",
+        "NDA"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "The MSA is the master framework agreement. The SOW describes a specific engagement; the SLA measures service; the NDA protects information.",
+      "ref": "5.3-02"
+    },
+    {
+      "id": "q-5.3-03",
+      "type": "match",
+      "q": "Match each agreement to its purpose.",
+      "pairs": [
+        {
+          "left": "SLA",
+          "right": "Commit to measurable service levels"
+        },
+        {
+          "left": "NDA",
+          "right": "Protect exchanged information"
+        },
+        {
+          "left": "MOU",
+          "right": "Express intent to cooperate"
+        },
+        {
+          "left": "SOW",
+          "right": "Describe an engagement and its deliverables"
+        }
+      ],
+      "explain": "Each agreement answers a distinct question: performance, confidentiality, intent, and engagement scope.",
+      "ref": "5.3-02"
+    },
+    {
+      "id": "q-5.3-04",
+      "type": "multi",
+      "q": "Which mechanisms allow monitoring a vendor after signing? (Select all that apply)",
+      "options": [
+        "Right to audit",
+        "Service-level monitoring",
+        "Compliance attestation",
+        "Expression of interest"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "explain": "An EOI is an upstream survey before selection. The other three are ongoing monitoring mechanisms.",
+      "ref": "5.3-03"
+    },
+    {
+      "id": "q-5.3-05",
+      "type": "single",
+      "q": "A vendor hosts your data in a jurisdiction where law permits seizure without notification. Which constraint is in play?",
+      "options": [
+        "Geography / jurisdiction",
+        "Staffing limitations",
+        "Vendor registry",
+        "Rules of engagement"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Location and applicable law determine legal risks and data sovereignty.",
+      "ref": "5.3-03"
+    },
+    {
+      "id": "q-5.3-06",
+      "type": "single",
+      "q": "Which document legally bounds a penetration test performed by a third party?",
+      "options": [
+        "RFP",
+        "MOU",
+        "Rules of engagement",
+        "SLO"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Rules of engagement define scope, authorized techniques, schedules, and the stop procedure.",
+      "ref": "5.3-02"
+    }
+  ]
+}

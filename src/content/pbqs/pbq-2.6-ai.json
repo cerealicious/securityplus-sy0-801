@@ -1,0 +1,55 @@
+{
+  "id": "pbq-2.6-ai",
+  "objective": "2.6",
+  "type": "classify",
+  "title": "Classify AI-Related Threats",
+  "prompt": "Classify each situation into the correct family: Model & data / Usage & output / Governance & ethics.",
+  "categories": [
+    "Model & data",
+    "Usage & output",
+    "Governance & ethics"
+  ],
+  "items": [
+    {
+      "id": "i1",
+      "label": "Incorrectly labeled data added to training",
+      "cat": "Model & data"
+    },
+    {
+      "id": "i2",
+      "label": "Hostile instruction hidden inside an analyzed PDF",
+      "cat": "Usage & output"
+    },
+    {
+      "id": "i3",
+      "label": "Model fabricates a nonexistent reference",
+      "cat": "Usage & output"
+    },
+    {
+      "id": "i4",
+      "label": "Discriminatory response caused by an imbalanced dataset",
+      "cat": "Governance & ethics"
+    },
+    {
+      "id": "i5",
+      "label": "Unable to explain the model's decision",
+      "cat": "Governance & ethics"
+    },
+    {
+      "id": "i6",
+      "label": "AI agent executing an unauthorized command",
+      "cat": "Usage & output"
+    },
+    {
+      "id": "i7",
+      "label": "Model parameters modified without authorization",
+      "cat": "Model & data"
+    },
+    {
+      "id": "i8",
+      "label": "Confidential data returned to another user",
+      "cat": "Model & data"
+    }
+  ],
+  "explain": "Model & data: poisoning, tampering, data leakage. Usage & output: prompt injection, jailbreaking, hallucinations, code execution. Governance & ethics: bias, explainability, ethical considerations."
+}

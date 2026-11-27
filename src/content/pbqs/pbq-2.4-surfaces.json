@@ -1,0 +1,28 @@
+{
+  "id": "pbq-2.4-surfaces",
+  "objective": "2.4",
+  "type": "classify",
+  "title": "Identify Attack Surfaces",
+  "prompt": "Classify each situation into the correct vulnerability / attack surface category.",
+  "categories": [
+    "System and platform",
+    "Application and code",
+    "Identity, device, and configuration",
+    "Modern surface"
+  ],
+  "items": [
+    { "id": "i1", "label": "Server whose vendor has ended all support", "cat": "System and platform" },
+    { "id": "i2", "label": "Critical patch available for six months but never applied", "cat": "System and platform" },
+    { "id": "i3", "label": "Unpatched VMs allowing lateral movement between guests", "cat": "System and platform" },
+    { "id": "i4", "label": "Flaw unknown to the vendor, with no patch available", "cat": "System and platform" },
+    { "id": "i5", "label": "File checked then replaced before opening (time-of-check / time-of-use)", "cat": "Application and code" },
+    { "id": "i6", "label": "API password hardcoded in plaintext in the source code", "cat": "Application and code" },
+    { "id": "i7", "label": "Error message displaying the SQL query and server path", "cat": "Application and code" },
+    { "id": "i8", "label": "Forgotten service account with administrator privileges", "cat": "Identity, device, and configuration" },
+    { "id": "i9", "label": "SaaS application used by teams without security approval", "cat": "Identity, device, and configuration" },
+    { "id": "i10", "label": "Rogue Wi-Fi access point installed in the office", "cat": "Identity, device, and configuration" },
+    { "id": "i11", "label": "Internal chatbot accepting instructions embedded in an uploaded document", "cat": "Modern surface" },
+    { "id": "i12", "label": "Object storage bucket accidentally made publicly accessible", "cat": "Modern surface" }
+  ],
+  "explain": "Separate the nature of the weakness: system (end-of-support, patching, VM, zero-day), code (TOCTOU, secrets, exception handling), identity/configuration (credentials, shadow IT, rogue device), and modern surfaces (LLMs, public cloud storage)."
+}

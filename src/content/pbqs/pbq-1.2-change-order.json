@@ -1,0 +1,42 @@
+{
+  "id": "pbq-1.2-change-order",
+  "objective": "1.2",
+  "type": "order",
+  "title": "Put a Change Request in Order",
+  "prompt": "The administrator must deploy a security patch in production. Order the following steps correctly, from opening the request to closure.",
+  "items": [
+    {
+      "id": "s1",
+      "label": "Open the change ticket with the owner and stakeholders"
+    },
+    {
+      "id": "s2",
+      "label": "Perform impact analysis: services, dependencies, and security controls"
+    },
+    {
+      "id": "s3",
+      "label": "Present the package to the CAB and obtain approval"
+    },
+    {
+      "id": "s4",
+      "label": "Schedule the maintenance window and announce the downtime"
+    },
+    {
+      "id": "s5",
+      "label": "Execute tests and document the results"
+    },
+    {
+      "id": "s6",
+      "label": "Deploy to production with the backout plan ready to execute"
+    },
+    {
+      "id": "s7",
+      "label": "Verify the service after restart and decide, if needed, on backout or fail forward"
+    },
+    {
+      "id": "s8",
+      "label": "Update diagrams, policies/procedures, and version control, then close the ticket"
+    }
+  ],
+  "explain": "The expected order is: ticket and ownership -> impact analysis -> CAB approval -> maintenance window -> testing -> implementation with backout -> verification/decision -> documentation and closure. An untested backout plan or omitted documentation are the most common mistakes."
+}

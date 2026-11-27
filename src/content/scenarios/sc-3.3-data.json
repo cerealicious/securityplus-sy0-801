@@ -1,0 +1,90 @@
+{
+  "id": "sc-3.3-data",
+  "objective": "3.3",
+  "title": "Exposed Customer Data: Choosing Protections",
+  "context": "A sales team exports a customer file for a campaign. The file contains names, emails, card numbers, and dates of birth. Three decisions are required.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "Card numbers must be stored in the payment database. Which method limits risk without breaking the process?",
+      "choices": [
+        {
+          "text": "Display them in plaintext in the application to simplify support",
+          "next": "n2",
+          "score": 0,
+          "why": "Plaintext exposure increases theft surface and PCI DSS compliance scope."
+        },
+        {
+          "text": "Replace them with tokens and display only the last 4 digits",
+          "next": "n2",
+          "score": 4,
+          "why": "Tokenization at storage and masking on display: the two protections are complementary."
+        },
+        {
+          "text": "Hash them with SHA-256 in the database",
+          "next": "n2",
+          "score": 1,
+          "why": "A hash is not reversible: it does not allow retrieving the card for a payment."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "The export file must be shared with a partner for statistical analysis. What is the best approach?",
+      "choices": [
+        {
+          "text": "Send the full file via encrypted email",
+          "next": "n3",
+          "score": 1,
+          "why": "Encryption protects transit, but sends unnecessary personal data to the partner."
+        },
+        {
+          "text": "De-identify the dataset, then restrict access by role",
+          "next": "n3",
+          "score": 4,
+          "why": "De-identification reduces personal data scope and least privilege limits access."
+        },
+        {
+          "text": "Simply delete the email column",
+          "next": "n3",
+          "score": 2,
+          "why": "Partial: other fields (name, date of birth) allow re-identification."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "Which role should bear final responsibility for this data?",
+      "choices": [
+        {
+          "text": "The data owner",
+          "next": "n4",
+          "score": 4,
+          "why": "The owner decides classification and access rules; the custodian implements the controls."
+        },
+        {
+          "text": "The developer who wrote the export script",
+          "next": "n4",
+          "score": 0,
+          "why": "The developer implements, they do not define data policy."
+        },
+        {
+          "text": "The vendor receiving the file",
+          "next": "n4",
+          "score": 0,
+          "why": "The processor is a third party handling data, not the data owner."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "You distinguished tokenization, masking, de-identification, and data protection roles."
+    }
+  },
+  "debrief": [
+    "Tokenization = controlled reversible substitute; masking = hiding on display.",
+    "De-identification reduces the scope of shared personal data.",
+    "Data owner = decision and classification; data custodian = implementation of controls."
+  ]
+}

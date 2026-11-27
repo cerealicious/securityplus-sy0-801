@@ -1,0 +1,90 @@
+{
+  "id": "sc-3.1-cloud-choice",
+  "objective": "3.1",
+  "title": "Choosing an Architecture Under Constraints",
+  "context": "A hospital is launching a new patient records platform. Data must remain in the country, and an HVAC control system must stay isolated. You arbitrate the architecture in three decisions.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "First constraint: patient records must not leave the national jurisdiction. Which criterion drives the choice?",
+      "choices": [
+        {
+          "text": "Data sovereignty: local hosting or sovereign cloud",
+          "next": "n2",
+          "score": 4,
+          "why": "Data sovereignty is a business criterion that overrides cost when required by law."
+        },
+        {
+          "text": "Encryption at rest, regardless of location",
+          "next": "n2",
+          "score": 1,
+          "why": "Encryption protects confidentiality, but does not satisfy a legal residency requirement."
+        },
+        {
+          "text": "The cheapest provider",
+          "next": "n2",
+          "score": 0,
+          "why": "Cost cannot override a regulatory constraint."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "IT wants to host the application in the cloud but keep the database on-premises. Which model does this describe?",
+      "choices": [
+        {
+          "text": "Hybrid model, with a VPN/federated identity junction to secure",
+          "next": "n3",
+          "score": 4,
+          "why": "The hybrid model combines both worlds; the junction becomes a distinct trust zone."
+        },
+        {
+          "text": "Pure public cloud",
+          "next": "n3",
+          "score": 0,
+          "why": "The database stays on-premises: it is not a pure public cloud."
+        },
+        {
+          "text": "Complete air-gapped isolation",
+          "next": "n3",
+          "score": 1,
+          "why": "The cloud application rules out total physical isolation."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "The HVAC system (OT) must remain inaccessible from the Internet. Which decision is safest?",
+      "choices": [
+        {
+          "text": "Isolated OT network and physical segmentation, controlled transfers, no active scanning",
+          "next": "n4",
+          "score": 4,
+          "why": "In OT, availability and safety come first: strong isolation and passive inspection."
+        },
+        {
+          "text": "Expose OT behind a simple admin password",
+          "next": "n4",
+          "score": 0,
+          "why": "A password does not replace network separation."
+        },
+        {
+          "text": "Run an active vulnerability scan every night on OT",
+          "next": "n4",
+          "score": 0,
+          "why": "An active scan can disrupt equipment that controls physical processes."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "You arbitrated on sovereignty, secured the hybrid junction, and isolated OT without compromising its availability."
+    }
+  },
+  "debrief": [
+    "Data sovereignty is a business criterion that can dictate the hosting model.",
+    "A hybrid model shifts risk to the on-premises / cloud junction.",
+    "OT requires isolation and gentle analysis: availability takes precedence over convenience."
+  ]
+}

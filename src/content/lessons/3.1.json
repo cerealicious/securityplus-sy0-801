@@ -1,0 +1,346 @@
+[
+  {
+    "id": "3.1-01",
+    "objective": "3.1",
+    "order": 1,
+    "title": "Cloud, On-Premises, and Deployment Models",
+    "minutes": 16,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Choosing an architecture is not choosing a technology: it is choosing **who bears responsibility for each control**. The exam asks you to compare the security implications of models, not to recite vendor definitions."
+      },
+      {
+        "type": "h",
+        "text": "Cloud, On-Premises, Hybrid: Who Carries What?"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-3.1-L01-cloud-models"
+      },
+      {
+        "type": "p",
+        "text": "In the **public cloud**, the provider secures the infrastructure (datacenter, network, hypervisor) while the customer remains responsible for their data, identities, configurations, and applications. This is the **shared responsibility** principle: the cloud shifts risk, it does not eliminate it."
+      },
+      {
+        "type": "table",
+        "head": [
+          "Model",
+          "Infrastructure Owned By",
+          "Dominant Security Implication"
+        ],
+        "rows": [
+          [
+            "Public cloud",
+            "Provider",
+            "Shared responsibility; customer misconfiguration = #1 cause of exposure"
+          ],
+          [
+            "Private cloud",
+            "Organization (or dedicated provider)",
+            "Maximum control, but patching cost and burden remain"
+          ],
+          [
+            "Community cloud",
+            "Group of organizations",
+            "Peer trust and logical isolation to govern"
+          ],
+          [
+            "Hybrid",
+            "Both",
+            "Interface between worlds = additional attack surface"
+          ],
+          [
+            "On-premises",
+            "Organization",
+            "Full control, but everything must be maintained (patching, power, recovery)"
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 285,
+        "strength": "primary",
+        "note": "Cloud and deployment models (services and responsibilities)"
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "—",
+        "page": 56,
+        "printed": 36,
+        "strength": "supporting",
+        "note": "Knowing what you are protecting and why, before choosing architecture"
+      },
+      {
+        "type": "term",
+        "en": "Hybrid deployment model",
+        "fr": "Hybrid deployment model",
+        "field": "Combination of on-premises and cloud resources, connected by VPN, dedicated interconnect, or federated identity. The junction point must be treated as a distinct trust zone.",
+        "gap": false
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "In a scenario, the right answer is often the one reminding you that **the customer remains responsible for their data and access**, even with a cloud provider. \"The provider manages everything\" is false."
+      },
+      {
+        "type": "h",
+        "text": "Serverless, Microservices, Infrastructure as Code"
+      },
+      {
+        "type": "term",
+        "en": "Serverless",
+        "fr": "Serverless",
+        "field": "The provider executes functions without you managing operating systems. You no longer patch the OS, but you must secure the code, credentials, and triggers.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Microservices",
+        "fr": "Microservices",
+        "field": "Application split into small independent services communicating over APIs. The attack surface becomes the number of interfaces, not the size of the program.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Infrastructure as Code (IaC)",
+        "fr": "Infrastructure as Code (IaC)",
+        "field": "Describing infrastructure in versioned files applied by a pipeline. Advantage: reproducibility. Risk: a template containing a secret or overly broad firewall rule propagates the error at scale.",
+        "gap": true
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "chapter": "—",
+        "page": "3.1",
+        "strength": "primary",
+        "note": "Official objectives — none of the 4 books covers serverless, microservices, or IaC"
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "Serverless, microservices, and IaC are required in **§3.1** but absent from the four provided books. The definitions above come from the objectives and industry practice, without attribution to a book."
+      },
+      {
+        "type": "p",
+        "text": "With IaC, the control is no longer a manual command but a **code review**: reviewing templates, banning plaintext secrets, scanning templates before deployment, and monitoring **configuration drift** between declared state and actual state."
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "Declarative IaC",
+          "points": [
+            "Desired state described in a versioned file.",
+            "Reproducible, auditable, reviewable in code review.",
+            "A template error propagates across the entire environment."
+          ]
+        },
+        "right": {
+          "title": "Manual Configuration",
+          "points": [
+            "Changes made by hand, often untracked.",
+            "Rapid drift between environments.",
+            "Hard to reproduce during recovery."
+          ]
+        }
+      },
+      {
+        "type": "check",
+        "q": "A team deploys on-demand functions without managing operating systems. Which risk remains their responsibility?",
+        "options": [
+          "Patching the host kernel",
+          "Datacenter maintenance",
+          "Securing the code, credentials, and triggers",
+          "Room cooling"
+        ],
+        "answer": 2,
+        "explain": "In serverless, the provider manages the host and underlying platform. The customer retains responsibility for code, access, and trigger configuration — that is shared responsibility."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "The cloud shifts responsibility, it does not eliminate it: data, identities, and configurations remain the customer's.",
+          "Public / private / community / hybrid / on-premises are compared on control, cost, and maintenance burden.",
+          "Serverless, microservices, and IaC are objectives concepts absent from the books.",
+          "IaC shifts control toward code review and drift detection."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "3.1-02",
+    "objective": "3.1",
+    "order": 2,
+    "title": "OT, Air-Gap, Segmentation, and Selection Criteria",
+    "minutes": 15,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Not all architectures fare equally against an outage or an attacker. Two variables constantly recur on the exam: **level of isolation** and **criticality of services** to protect."
+      },
+      {
+        "type": "h",
+        "text": "Operational Technology (OT)"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-3.1-L02-iac-drift"
+      },
+      {
+        "type": "term",
+        "en": "Operational technology (OT)",
+        "fr": "Operational technology (OT)",
+        "field": "Systems that control physical processes (SCADA, ICS, PLCs). Availability and safety take precedence over confidentiality; a reboot or aggressive scan can halt a production line."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "—",
+        "page": 145,
+        "printed": 123,
+        "strength": "supporting",
+        "note": "OT / SCADA: industrial environments and availability constraints"
+      },
+      {
+        "type": "h",
+        "text": "Air-Gap and Segmentation"
+      },
+      {
+        "type": "term",
+        "en": "Air-gapped network",
+        "fr": "Air-gapped network",
+        "field": "Network with no connection to the public network or Internet. It drastically reduces the attack surface, but requires controlled transfers via removable media and complicates updates."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "—",
+        "page": 103,
+        "printed": 81,
+        "strength": "primary",
+        "note": "Isolation, air-gap, and software-defined networks"
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "Physical Segmentation",
+          "points": [
+            "Separation via distinct equipment and cabling.",
+            "Strong isolation, high cost and complexity.",
+            "Typical of OT and air-gapped networks."
+          ]
+        },
+        "right": {
+          "title": "Logical Segmentation",
+          "points": [
+            "VLANs, ACLs, firewalls, microsegmentation.",
+            "Flexible and less expensive, but depends on configuration.",
+            "A rule error can undo the separation."
+          ]
+        }
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "15",
+        "page": 177,
+        "printed": 155,
+        "strength": "primary",
+        "note": "Network segmentation: separating zones and limiting lateral movement"
+      },
+      {
+        "type": "h",
+        "text": "Technical and Business Criteria"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Technical Criterion",
+          "Question to Ask",
+          "Related Business Criterion"
+        ],
+        "rows": [
+          [
+            "Availability / resilience",
+            "What happens if this service goes down?",
+            "Cost of interruption"
+          ],
+          [
+            "Compute / power requirements",
+            "What load and what power supply?",
+            "Environmental requirements"
+          ],
+          [
+            "Responsibility",
+            "Who patches, who restores, who monitors?",
+            "Ownership / risk"
+          ],
+          [
+            "Proprietary vs. open source",
+            "Vendor dependency or auditability?",
+            "Scalability / lock-in"
+          ],
+          [
+            "Ease of recovery",
+            "How long to recover?",
+            "Data sovereignty / classification"
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "NET",
+        "chapter": "—",
+        "page": 12,
+        "strength": "primary",
+        "note": "Network zones, DMZ, and importance of placement"
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "—",
+        "page": 245,
+        "printed": 225,
+        "strength": "supporting",
+        "note": "Architecture, diversity, and resilience of critical systems"
+      },
+      {
+        "type": "p",
+        "text": "**Open source** allows code auditing and avoids vendor lock-in; a **proprietary** solution can offer simpler support and integration. The right choice depends on **accepted risk**, budget, and data sovereignty."
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "If a scenario mentions data that **must not leave a country**, the answer is **data sovereignty**: local hosting or sovereign cloud, not encryption alone."
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-3.1-arch-models"
+      },
+      {
+        "type": "check",
+        "q": "A production line must never be exposed to the Internet and poorly tolerates active scans. Which architecture should be preferred?",
+        "options": [
+          "Multi-region public cloud",
+          "Isolated OT network (air-gapped) with physical segmentation",
+          "Serverless microservices exposed via API",
+          "Shared community cloud"
+        ],
+        "answer": 1,
+        "explain": "OT prioritizes availability and safety: physical isolation, no intrusive scans, and strict transfer control."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "OT = physical systems; availability and safety before confidentiality.",
+          "Air-gap = physical isolation; logical segmentation = VLAN/ACL/firewall.",
+          "Shared responsibility: the customer keeps data, identities, and configuration.",
+          "The choice depends on criticality, cost, sovereignty, and ease of recovery."
+        ]
+      }
+    ]
+  }
+]

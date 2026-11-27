@@ -1,0 +1,97 @@
+{
+  "id": "pbq-4.1-controls",
+  "objective": "4.1",
+  "type": "classify",
+  "title": "Choose the Right Control",
+  "prompt": "Classify each control into its functional category: Network prevention, Detection/monitoring, Endpoint and data, Deception, or Messaging and application.",
+  "categories": [
+    "Network prevention",
+    "Detection/monitoring",
+    "Endpoint and data",
+    "Deception",
+    "Messaging and application"
+  ],
+  "items": [
+    {
+      "id": "i1",
+      "label": "NIDS: traffic copy analyzed without blocking",
+      "cat": "Detection/monitoring"
+    },
+    {
+      "id": "i2",
+      "label": "HIDS: agent that alerts on file changes",
+      "cat": "Detection/monitoring"
+    },
+    {
+      "id": "i3",
+      "label": "WAF: filtering of application-layer HTTP requests",
+      "cat": "Network prevention"
+    },
+    {
+      "id": "i4",
+      "label": "NIPS: inline blocking of malicious traffic",
+      "cat": "Network prevention"
+    },
+    {
+      "id": "i5",
+      "label": "802.1X: authentication before network port access",
+      "cat": "Network prevention"
+    },
+    {
+      "id": "i6",
+      "label": "Rate limiting: restricting the number of requests",
+      "cat": "Network prevention"
+    },
+    {
+      "id": "i7",
+      "label": "EDR: behavioral detection and host isolation",
+      "cat": "Endpoint and data"
+    },
+    {
+      "id": "i8",
+      "label": "DLP: blocking exfiltration of sensitive data",
+      "cat": "Endpoint and data"
+    },
+    {
+      "id": "i9",
+      "label": "MDM: enforcing policy on mobile devices",
+      "cat": "Endpoint and data"
+    },
+    {
+      "id": "i10",
+      "label": "XDR: correlation across endpoint, network, cloud, and identity",
+      "cat": "Detection/monitoring"
+    },
+    {
+      "id": "i11",
+      "label": "Honeypot: decoy system that attracts the attacker",
+      "cat": "Deception"
+    },
+    {
+      "id": "i12",
+      "label": "Honeytoken: fake credential whose use is an alert signal",
+      "cat": "Deception"
+    },
+    {
+      "id": "i13",
+      "label": "Canary account: monitored nonexistent account",
+      "cat": "Deception"
+    },
+    {
+      "id": "i14",
+      "label": "DMARC: SPF/DKIM alignment policy and reporting",
+      "cat": "Messaging and application"
+    },
+    {
+      "id": "i15",
+      "label": "Secrets scanning: searching for hardcoded keys in code",
+      "cat": "Messaging and application"
+    },
+    {
+      "id": "i16",
+      "label": "SELinux: mandatory access control on a Linux host",
+      "cat": "Endpoint and data"
+    }
+  ],
+  "explain": "Reason by layer and effect: block (prevention), alert (detection), protect the host or data (endpoint/DLP), deceive (deception), or secure messaging and code. IDS = detection, IPS = prevention: this is the most frequently tested distinction."
+}

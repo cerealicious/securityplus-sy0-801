@@ -1,0 +1,50 @@
+{
+  "id": "pbq-4.5-iam-models",
+  "objective": "4.5",
+  "type": "match",
+  "title": "IAM Concepts and Access Models: Match the Pairs",
+  "prompt": "Match each concept on the left to its definition on the right.",
+  "pairs": [
+    {
+      "left": "RBAC",
+      "right": "Permissions are attached to a role that users inherit"
+    },
+    {
+      "left": "DAC",
+      "right": "The resource owner decides who gets access"
+    },
+    {
+      "left": "MAC",
+      "right": "Labels and a central policy enforce the access decision"
+    },
+    {
+      "left": "Rule-based access control",
+      "right": "Explicit rules apply to everyone, regardless of role"
+    },
+    {
+      "left": "Time-based access control",
+      "right": "Access is only permitted within a defined time window"
+    },
+    {
+      "left": "Just-in-time access",
+      "right": "Approved temporary privilege with automatic revocation"
+    },
+    {
+      "left": "Identity proofing",
+      "right": "Verifying the real person before creating the account"
+    },
+    {
+      "left": "Federation",
+      "right": "Trust between separate domains around an external identity"
+    },
+    {
+      "left": "SAML",
+      "right": "Signed assertion exchanged between identity provider and service"
+    },
+    {
+      "left": "OAuth",
+      "right": "Delegation of authorization to a third-party app with limited scopes"
+    }
+  ],
+  "explain": "Distinguish between the **decision model** (RBAC, DAC, MAC, rule-based), **duration** (time-based, JIT), and **protocol** (SAML = authentication, OAuth = authorization)."
+}

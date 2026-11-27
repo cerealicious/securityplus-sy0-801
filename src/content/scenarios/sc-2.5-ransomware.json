@@ -1,0 +1,90 @@
+{
+  "id": "sc-2.5-ransomware",
+  "objective": "2.5",
+  "title": "Scenario: Ransomware Alert",
+  "context": "It is 02:14. The SIEM reports a series of encrypted file creations on server FIN-01, followed by a ransom note. You are the on-call analyst.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "Which indicator most directly confirms ransomware?",
+      "choices": [
+        {
+          "text": "An increase in outbound DNS traffic",
+          "next": "n2",
+          "score": 1,
+          "why": "It is a possible signal, but non-specific."
+        },
+        {
+          "text": "Hundreds of files renamed with the same extension and a ransom note",
+          "next": "n2",
+          "score": 4,
+          "why": "Mass extension renaming and a ransom note are the behavioral signature of ransomware."
+        },
+        {
+          "text": "A failed login on an account",
+          "next": "n2",
+          "score": 0,
+          "why": "This signal is too generic."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "You find an outbound connection to an unknown IP. Which IOC do you record as a priority?",
+      "choices": [
+        {
+          "text": "The IP address, timestamp, and process hash",
+          "next": "n3",
+          "score": 4,
+          "why": "IP, timestamp, and hash are actionable IOCs for correlation and blocking."
+        },
+        {
+          "text": "The server name only",
+          "next": "n3",
+          "score": 0,
+          "why": "Too sparse: impossible to correlate or block."
+        },
+        {
+          "text": "The color of the alert in the SIEM",
+          "next": "n3",
+          "score": 0,
+          "why": "The color is a display attribute, not investigation data."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "The responsible process is `powershell.exe` with an encoded string. What is the most likely interpretation?",
+      "choices": [
+        {
+          "text": "Legitimate Windows update",
+          "next": "n4",
+          "score": 0,
+          "why": "An encoded string and encryption behavior point toward malicious use."
+        },
+        {
+          "text": "Fileless malware / living-off-the-land",
+          "next": "n4",
+          "score": 4,
+          "why": "Abuse of native tools with an encoded payload is typical of fileless malware."
+        },
+        {
+          "text": "SIEM configuration error",
+          "next": "n4",
+          "score": 0,
+          "why": "The artifacts are consistent with one another: this is not rule noise."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "You qualified the attack, collected IOCs, and identified the fileless vector: three key reflexes for objective 2.5."
+    }
+  },
+  "debrief": [
+    "Ransomware is confirmed by encryption behavior and the ransom note, not an isolated alert.",
+    "A useful IOC is precise, timestamped, and shareable (IP, domain, hash, path).",
+    "Abuse of PowerShell with an encoded string points to fileless / living-off-the-land."
+  ]
+}

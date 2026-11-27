@@ -1,0 +1,118 @@
+{
+  "id": "qz-4.6",
+  "objective": "4.6",
+  "title": "Quiz — Automation and Orchestration",
+  "questions": [
+    {
+      "id": "q-4.6-01",
+      "type": "single",
+      "q": "Which mechanism limits the scope and duration of an automated action?",
+      "options": [
+        "A guardrail",
+        "Delayed logging",
+        "Skipping testing",
+        "Sharing the administrator account"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Guardrails bound the impact of an error: scope, duration, approval, and reversibility.",
+      "ref": "4.6-01"
+    },
+    {
+      "id": "q-4.6-02",
+      "type": "match",
+      "q": "Match each use case to its effect.",
+      "pairs": [
+        {
+          "left": "User provisioning",
+          "right": "Consistent account creation and revocation"
+        },
+        {
+          "left": "Resource provisioning",
+          "right": "Repeatable deployment of VMs or cloud accounts"
+        },
+        {
+          "left": "Desired state management",
+          "right": "Automatic remediation of configuration drift"
+        },
+        {
+          "left": "Anomaly detection",
+          "right": "Analysis of logs and baselines"
+        },
+        {
+          "left": "Ticket management",
+          "right": "Automated creation, assignment, and closure"
+        }
+      ],
+      "explain": "These five use cases cover identity, resources, configuration, detection, and tracking.",
+      "ref": "4.6-01"
+    },
+    {
+      "id": "q-4.6-03",
+      "type": "single",
+      "q": "Which AI capability is absent from the four textbooks but required by objective 4.6?",
+      "options": [
+        "Chatbot",
+        "Predictive analysis",
+        "Agentic AI",
+        "AI-augmented baselines"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Agentic AI, capable of executing actions autonomously, is not covered in the provided textbooks. Flagged as beyond-textbooks in objective 4.6.",
+      "ref": "4.6-02"
+    },
+    {
+      "id": "q-4.6-04",
+      "type": "multi",
+      "q": "Which elements are part of considerations before automating? (Select all that apply)",
+      "options": [
+        "Automation logic",
+        "Workflow complexity",
+        "Process risks",
+        "Omitting logging to save time"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "explain": "Logging is mandatory: removing audit trails increases risk instead of reducing it.",
+      "ref": "4.6-01"
+    },
+    {
+      "id": "q-4.6-05",
+      "type": "single",
+      "q": "What is the difference between automation and orchestration?",
+      "options": [
+        "Orchestration coordinates multiple tools in an end-to-end workflow",
+        "Automation is always performed by agentic AI",
+        "Orchestration cannot be logged",
+        "Automation prohibits guardrails"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Automation targets a single task; orchestration chains multiple tasks and tools into a scenario.",
+      "ref": "4.6-02"
+    },
+    {
+      "id": "q-4.6-06",
+      "type": "single",
+      "q": "In an IP-blocking playbook, what should be done after the action itself?",
+      "options": [
+        "Delete the ticket",
+        "Verify the effect, monitor for false positives, and tune the rule",
+        "Disable logging",
+        "Expand the block to the entire network"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "The loop closes with verification and continuous improvement of the playbook.",
+      "ref": "4.6-02"
+    }
+  ]
+}

@@ -1,0 +1,461 @@
+{
+  "simulations": [
+    {
+      "id": "sim-tls",
+      "objective": "1.3",
+      "title": "TLS Handshake: Who Does What?",
+      "kind": "flow",
+      "intro": "A browser opens https://bank.example. Follow the handshake to see where authentication and confidentiality happen.",
+      "steps": [
+        {
+          "id": "s1",
+          "label": "Client Hello",
+          "detail": "The client announces its TLS version, its random number (client random), and the cipher suites it supports. At this stage, nothing has been authenticated yet.",
+          "callout": "A cipher suite names the key exchange, signature, symmetric cipher, and MAC, e.g., TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256."
+        },
+        {
+          "id": "s2",
+          "label": "Server Hello + Certificate",
+          "detail": "The server selects a suite, returns its random and its certificate: an identity plus a public key, signed by a CA. The certificate proves an identity; it does not encrypt anything.",
+          "callout": "The certificate contains the public key, never the private key: if the private key left the server, the entire chain of trust would collapse."
+        },
+        {
+          "id": "s3",
+          "label": "CA / CRL / OCSP Verification",
+          "detail": "The client walks the chain up to a trusted root, checks the dates, hostname (SAN), and revocation via CRL or OCSP. A valid signature is not enough if the certificate has been revoked.",
+          "callout": "CRL = downloaded list of revoked certificates; OCSP = online query for a specific certificate."
+        },
+        {
+          "id": "s4",
+          "label": "Key Exchange (DH / ECDHE)",
+          "detail": "Client and server perform a Diffie-Hellman exchange, most often ECDHE, and derive the same shared secret without that secret ever crossing the network.",
+          "callout": "Key property: an observer capturing all packets cannot reconstruct the secret — this is Perfect Forward Secrecy (PFS)."
+        },
+        {
+          "id": "s5",
+          "label": "Symmetric Session Keys",
+          "detail": "The secret feeds a key derivation function (KDF). Both sides obtain separate AES/GCM session keys for each direction of communication.",
+          "callout": "Asymmetric crypto is used for authentication and key exchange, then we switch to symmetric crypto, which is much faster for bulk data."
+        },
+        {
+          "id": "s6",
+          "label": "Encrypted Data",
+          "detail": "TLS records are encrypted and authenticated (AEAD) with these session keys. The certificate proves who you are talking to; the symmetric session protects the data.",
+          "callout": "If any step fails (invalid chain, wrong SAN, revoked certificate), the client displays a warning and aborts before sending data."
+        }
+      ],
+      "check": {
+        "q": "An attacker passively eavesdrops on the entire TLS conversation and copies the server's certificate. Why can't they decrypt the session?",
+        "options": [
+          "Because the certificate is signed by a CA, making it unreadable by a third party.",
+          "Because the ECDHE shared secret never crossed the wire: the certificate only contains the public key, not the session keys.",
+          "Because the client encrypts the data with its private key, which the attacker does not have.",
+          "Because TLS compresses the data before encrypting it."
+        ],
+        "answer": 1,
+        "explain": "The certificate is public by definition: the attacker has the server's public key, not its private key, and most importantly the ECDHE secret is never transmitted — it is computed on each side. The AES keys come from that secret via the KDF. The CA signature proves identity, it does not encrypt; the client does not use its private key to encrypt data; compression is not a protection and was even exploited (CRIME)."
+      },
+      "source": { "book": "OBJ", "page": "1.3" }
+    },
+    {
+      "id": "sim-crypto-compare",
+      "objective": "1.3",
+      "title": "Symmetric, Asymmetric, Hashing: Three Tools, Three Uses",
+      "kind": "compare",
+      "intro": "A single exchange can involve multiple primitives. Compare them by what they provide, not by their name.",
+      "left": {
+        "title": "Symmetric Encryption (AES)",
+        "points": [
+          "A single shared secret key: whoever encrypts can also decrypt.",
+          "Very fast, even on terabytes: the everyday workhorse (TLS, disk, VPN).",
+          "Confidentiality first: only key holders can read the data.",
+          "The weak point is key distribution: how to transmit the key without interception?",
+          "In GCM mode, AES also provides integrity for the encrypted data."
+        ]
+      },
+      "right": {
+        "title": "Asymmetric (RSA/ECC) + Hashing",
+        "points": [
+          "Key pair: the public key is shared, the private key stays secret.",
+          "Much slower: used for small data (keys, signatures), not an entire file.",
+          "Authentication and non-repudiation: signing with your private key proves origin, verifiable with the public key.",
+          "Used for key exchange and PKI: a certificate binds an identity to a public key signed by the CA.",
+          "Hashing (SHA-256) is not encryption: a one-way, fixed-size digest used to detect modification."
+        ]
+      },
+      "check": {
+        "q": "You need to send a 200 MB contract and prove it came from you. Which combination is correct?",
+        "options": [
+          "Encrypt the 200 MB with your RSA private key: the signature guarantees confidentiality and integrity.",
+          "Hash the contract and send the digest in plaintext: the hash proves origin and confidentiality.",
+          "Hash and sign the digest with your private key, and encrypt the contract with an AES key transported via RSA/ECC.",
+          "Encrypt with AES and publish the AES key in the certificate so the partner can verify it."
+        ],
+        "answer": 2,
+        "explain": "You combine their strengths: the digest is small, so you sign it with your private key for authentication; the large file is encrypted with AES for speed; asymmetric crypto transports the AES key. Encrypting with your private key provides no confidentiality since everyone has the public key. A plaintext hash detects modification, not the sender. Publishing an AES key in a certificate makes it public and destroys confidentiality."
+      },
+      "source": { "book": "SOCN", "page": "1.3", "printed": 172 }
+    },
+    {
+      "id": "sim-network-attack",
+      "objective": "2.5",
+      "title": "From Phishing to Exfiltration: The Attack Chain",
+      "kind": "flow",
+      "intro": "One click on a fake delivery email is enough. Follow the attacker's progression and spot what remains for the SOC.",
+      "steps": [
+        {
+          "id": "s1",
+          "label": "Vector: Phishing",
+          "detail": "An email impersonates a shipping carrier and urges the user to open an attachment. This is the vector: entry happens through the user, not by breaking through the firewall.",
+          "callout": "The most common entry point remains the human: hence controls on macros, attachments, and links."
+        },
+        {
+          "id": "s2",
+          "label": "Execution",
+          "detail": "The attachment launches a script that downloads the malware (dropper). The code runs with the logged-in user's privileges.",
+          "callout": "Least privilege turns a total compromise into a single-workstation compromise."
+        },
+        {
+          "id": "s3",
+          "label": "C2 Connection",
+          "detail": "The malware contacts a command and control server, often over HTTPS, to receive instructions: it \"phones home.\"",
+          "callout": "Outbound traffic to a newly registered domain or unknown IP is a network IOC, even if port 443 is allowed."
+        },
+        {
+          "id": "s4",
+          "label": "Lateral Movement",
+          "detail": "Using harvested credentials (credential dumping, tokens), the attacker moves from the workstation to other machines and then to the file server.",
+          "callout": "Separating admin accounts from user accounts and segmenting the network slows down this stage."
+        },
+        {
+          "id": "s5",
+          "label": "Exfiltration",
+          "detail": "Data leaves toward external storage or an attacker-controlled domain, often in small volumes spread over several days.",
+          "callout": "DLP and outbound volume monitoring detect exfiltration better than an antivirus signature."
+        },
+        {
+          "id": "s6",
+          "label": "IOCs Left Behind",
+          "detail": "The attacker may clear local logs, but they leave traces: file hash, C2 domain, IP, registry key, account name, timestamps.",
+          "callout": "An isolated IOC is not proof of infection: it must be correlated in the SIEM/EDR before declaring an incident."
+        }
+      ],
+      "check": {
+        "q": "The firewall blocks all inbound traffic and the antivirus has no matching signature. Yet the attack succeeds. Why?",
+        "options": [
+          "Because the firewall always lets attacks from the outside pass through.",
+          "Because execution starts from an internal user and the C2 connection is outbound: inbound controls and signatures do not cover this path.",
+          "Because the antivirus only checks digitally signed files.",
+          "Because phishing bypasses DNS rules by using an IP address directly."
+        ],
+        "answer": 1,
+        "explain": "The click comes from inside and the C2 channel is an outbound connection to a commonly allowed port (443). A signature-based antivirus misses a novel dropper. A properly configured firewall is not \"always\" permeable; antivirus also scans unsigned files; phishing does not need to evade DNS to work. Hence the value of EDR, egress filtering, and IOC correlation."
+      },
+      "source": { "book": "SOCN", "page": "2.5", "printed": 91 }
+    },
+    {
+      "id": "sim-osi-layers",
+      "objective": "2.3",
+      "title": "OSI Model: Where Does the Attack Happen?",
+      "kind": "layers",
+      "intro": "Click a layer to see what it carries and what targets it. The goal is not to recite seven names, but to locate the problem.",
+      "layers": [
+        {
+          "n": 7,
+          "name": "Application",
+          "detail": "Interface with the user and applications: browser, email client, web server. This is where a request is formulated.",
+          "protocols": "HTTP, HTTPS, SMTP, DNS, FTP",
+          "attack": "Phishing, SQL injection, XSS, malware"
+        },
+        {
+          "n": 6,
+          "name": "Presentation",
+          "detail": "Data translation: encoding, compression, encryption. Format and encryption are negotiated here.",
+          "protocols": "TLS/SSL, JPEG, MIME, ASCII",
+          "attack": "TLS downgrade, POODLE on SSLv3, malicious encoding"
+        },
+        {
+          "n": 5,
+          "name": "Session",
+          "detail": "Establishes, maintains, and terminates the session between two applications: the concept of an \"active connection.\"",
+          "protocols": "NetBIOS, RPC, PPTP",
+          "attack": "Session hijacking, session cookie theft, session fixation"
+        },
+        {
+          "n": 4,
+          "name": "Transport",
+          "detail": "Segments data and manages delivery: TCP is reliable and uses ports, UDP is connectionless.",
+          "protocols": "TCP, UDP, ports 80/443/53",
+          "attack": "SYN flood DDoS (connection exhaustion), port scanning, UDP flood"
+        },
+        {
+          "n": 3,
+          "name": "Network",
+          "detail": "Logical addressing and routing between networks: IP chooses the path, the router executes it.",
+          "protocols": "IP, ICMP, IPsec, routers",
+          "attack": "IP spoofing, ICMP flood, route poisoning"
+        },
+        {
+          "n": 2,
+          "name": "Data Link",
+          "detail": "Transport on a single segment via MAC addresses; the switch learns which MAC is on which port.",
+          "protocols": "Ethernet, ARP, switch, VLAN",
+          "attack": "ARP spoofing / poisoning, MAC flooding, VLAN hopping"
+        },
+        {
+          "n": 1,
+          "name": "Physical",
+          "detail": "Signals, cables, ports, and waves: nothing here is logical, everything is electrical, optical, or radio.",
+          "protocols": "USB, RJ45, fiber, Wi-Fi/RF, Bluetooth",
+          "attack": "RF interception, USB dropper (BadUSB), physical access, cable tap"
+        }
+      ],
+      "check": {
+        "q": "A workstation sends packets to an IP address, but its frames arrive at the wrong machine on the same local network. Which layer is at fault?",
+        "options": [
+          "Layer 7: the server returned a bad HTTP response.",
+          "Layer 4: the TCP port number was wrong.",
+          "Layer 2: the IP-to-MAC mapping was falsified (ARP spoofing), diverting traffic within the LAN.",
+          "Layer 1: the network cable was unplugged."
+        ],
+        "answer": 2,
+        "explain": "Layer 3 IP routing decides correctly, but within a LAN the IP → MAC mapping comes from ARP (Layer 2). An attacker replying with their own MAC poisons the workstation's table: frames go to the wrong NIC. An HTTP error or wrong port does not change the destination MAC, and an unplugged cable would drop the link rather than divert it."
+      },
+      "source": { "book": "OBJ", "page": "2.3" }
+    },
+    {
+      "id": "sim-zero-trust",
+      "objective": "3.2",
+      "title": "Zero Trust: What Actually Decides Access?",
+      "kind": "identify",
+      "intro": "In a Zero Trust architecture, click the elements that make the access decision, not those that describe the legacy model.",
+      "items": [
+        {
+          "id": "z1",
+          "label": "Identity (IdP / MFA)",
+          "detail": "Who is the user? Verified at every access via the IdP, with MFA and context.",
+          "isTarget": true
+        },
+        {
+          "id": "z2",
+          "label": "Device (posture / EDR)",
+          "detail": "Is the device healthy and compliant? Patches, encryption, and EDR feed into the decision.",
+          "isTarget": true
+        },
+        {
+          "id": "z3",
+          "label": "Policy (PDP/PEP engine)",
+          "detail": "The rule combines identity, device, location, and resource to allow, deny, or require step-up verification.",
+          "isTarget": true
+        },
+        {
+          "id": "z4",
+          "label": "Implicitly Trusted Network",
+          "detail": "\"We are on the internal LAN, so it is safe\": this is the exact assumption Zero Trust eliminates.",
+          "isTarget": false
+        },
+        {
+          "id": "z5",
+          "label": "Single VLAN",
+          "detail": "A flat network evaluates neither identity nor posture: it is not an access decision.",
+          "isTarget": false
+        },
+        {
+          "id": "z6",
+          "label": "Perimeter Firewall",
+          "detail": "It protects the boundary, but once inside it does not re-verify anything: castle-and-moat model.",
+          "isTarget": false
+        }
+      ],
+      "check": {
+        "q": "An employee is on the corporate Wi-Fi and opens the payroll application. Under Zero Trust, what should determine access?",
+        "options": [
+          "The fact that they are on the internal network: connecting to Wi-Fi already proves trust.",
+          "The IP address assigned by DHCP, because it belongs to the employees VLAN.",
+          "The number of times the employee has previously logged into this application.",
+          "The combination of verified identity (MFA), device posture, and policy evaluated at each access."
+        ],
+        "answer": 3,
+        "explain": "Zero Trust does not replace trust with a single criterion: it explicitly and continuously verifies identity, device, and context, then enforces a policy (PDP/PEP) with least privilege. Internal network, VLAN, and internal IP are not proof of identity: that is the \"never trust, always verify\" principle. Login frequency can be a risk signal, not an access decision."
+      },
+      "source": { "book": "STRAT", "page": "3.2", "printed": 230 }
+    },
+    {
+      "id": "sim-rto-rpo",
+      "objective": "3.4",
+      "title": "RPO and RTO: Two Clocks, Two Promises",
+      "kind": "flow",
+      "intro": "The primary site goes down at T0. Follow the two counters: one measures lost data, the other measures downtime.",
+      "steps": [
+        {
+          "id": "s1",
+          "label": "T0: The Incident",
+          "detail": "The system stops at 14:00. Two immediate questions: how far back is the last copy, and when will the service return?",
+          "callout": "RPO and RTO are set before the incident, in the BIA and recovery plan — not during the crisis."
+        },
+        {
+          "id": "s2",
+          "label": "Data Loss (RPO)",
+          "detail": "The last usable copy is from 13:45: the 15 minutes of writes up to 14:00 are lost. RPO is measured in data, not repair duration.",
+          "callout": "Low RPO ⇒ frequent backups or replication; RPO = 0 ⇒ synchronous multi-site replication."
+        },
+        {
+          "id": "s3",
+          "label": "Failover",
+          "detail": "The standby site (warm standby) is activated from the last clean copy, after verifying it was not encrypted by ransomware.",
+          "callout": "Immutable/offline backups (3-2-1 rule) and regular restore tests are the only guarantee that the RPO is real."
+        },
+        {
+          "id": "s4",
+          "label": "Service Restored (RTO)",
+          "detail": "The service responds at 14:35: the RTO is 35 minutes between T0 and restoration. During that time, users were halted, even if no data was lost.",
+          "callout": "Short RTO ⇒ automatic failover and hot site. The two targets are independent: RPO 0 with RTO 2 h is possible."
+        },
+        {
+          "id": "s5",
+          "label": "Failback",
+          "detail": "Once the primary site is repaired, workload is moved back and resynchronized. This is a second risk window: writes can be lost again.",
+          "callout": "Never fail back before fixing the root cause, or you replay the incident on the healthy site."
+        },
+        {
+          "id": "s6",
+          "label": "Verification",
+          "detail": "Restored data is compared against expectations, actual variance from targets is documented, and the recovery plan is updated.",
+          "callout": "An RPO/RTO written on paper without a restore test is just an intention."
+        }
+      ],
+      "check": {
+        "q": "The plan states RPO = 5 min and RTO = 1 h. An outage destroys data at 10:00; service resumes at 10:45 with data from 09:30. What is the outcome?",
+        "options": [
+          "RPO 45 min (target missed) and RTO 30 min (target met): the two values are swapped.",
+          "Actual RPO of 30 min (5 min target missed) and actual RTO of 45 min (1 h target met).",
+          "RPO 5 min and RTO 1 h: the plan's targets are met.",
+          "RPO 30 min and RTO 45 min, but both targets are missed."
+        ],
+        "answer": 1,
+        "explain": "RPO is measured from the last usable copy (09:30) to the incident (10:00): 30 min of data lost, so the 5 min target is missed. RTO is measured from the incident (10:00) to restoration (10:45): 45 min, so the 1 h target is met. Option 1 swaps the metrics, option 3 ignores the facts, and option 4 confuses \"target\" with \"actual result.\""
+      },
+      "source": { "book": "DSH", "page": "3.4", "printed": 53 }
+    },
+    {
+      "id": "sim-ir-cycle",
+      "objective": "4.7",
+      "title": "Incident Response Cycle: The 7 Phases in Order",
+      "kind": "flow",
+      "intro": "An EDR alert flags a suspicious process on an accounting workstation. Before powering anything off, follow the incident response cycle.",
+      "steps": [
+        {
+          "id": "s1",
+          "label": "Preparation",
+          "detail": "Before the incident: roles, authorizations, playbooks, tools (EDR/SIEM), contacts, and tabletop exercises. Without this, you improvise under pressure.",
+          "callout": "This is the phase most often missing in lessons-learned reviews."
+        },
+        {
+          "id": "s2",
+          "label": "Identification",
+          "detail": "Triage the alert: true positive or false positive? Gather facts, open the ticket, and estimate severity.",
+          "callout": "Real incident blocked = true positive; alert with no incident = false positive; undetected incident = false negative."
+        },
+        {
+          "id": "s3",
+          "label": "Investigation",
+          "detail": "Correlate logs, EDR, and network data to answer what, when, where, how, and what scope, preserving evidence according to volatility.",
+          "callout": "Do not reboot the machine right away: RAM holds processes, connections, and ephemeral keys."
+        },
+        {
+          "id": "s4",
+          "label": "Containment",
+          "detail": "Isolate the workstation from the network, revoke sessions, and block IOCs. Goal: stop the spread without destroying evidence.",
+          "callout": "Short-term containment (isolation) and long-term containment (patching, hardening) are both necessary."
+        },
+        {
+          "id": "s5",
+          "label": "Eradication",
+          "detail": "Remove the malware, compromised accounts, and persistence mechanisms (scheduled tasks, registry keys), then repair or reimage.",
+          "callout": "Eradicating without understanding the root cause leaves the door open: the attacker returns with the same technique."
+        },
+        {
+          "id": "s6",
+          "label": "Notification",
+          "detail": "Notify stakeholders per obligations: leadership, legal, insurer, regulators (e.g., data protection authorities), and customers if data is exposed.",
+          "callout": "Timelines and recipients are defined in advance: you do not wait for the PIR when the law mandates notification."
+        },
+        {
+          "id": "s7",
+          "label": "Post-Incident / PIR",
+          "detail": "Reconstruct the timeline, identify root cause and gaps, then update playbooks and controls. This phase feeds into the next preparation.",
+          "callout": "The PIR (lessons learned) closes the incident: without it, the cycle repeats with the same weaknesses."
+        }
+      ],
+      "check": {
+        "q": "After detection, a technician reboots the infected workstation to \"clean it\" before any evidence collection. What is the main problem?",
+        "options": [
+          "Rebooting restarts the identification phase: the alert was therefore not a true positive.",
+          "Rebooting necessarily spreads the malware to the rest of the network.",
+          "Rebooting wipes volatile evidence (RAM, connections, processes) and weakens the investigation and PIR.",
+          "No problem: eradication must always precede investigation."
+        ],
+        "answer": 2,
+        "explain": "The order of volatility places memory before disk. Rebooting destroys processes, network connections, and in-memory keys, weakening investigation, targeted containment, and the PIR. Identification already occurred (the alert is a true positive); a reboot does not spread malware by itself; eradication comes after investigation and containment, never before."
+      },
+      "source": { "book": "DSH", "page": "4.7", "printed": 45 }
+    },
+    {
+      "id": "sim-iam-flow",
+      "objective": "4.5",
+      "title": "Access Lifecycle: From Onboarding to Offboarding",
+      "kind": "flow",
+      "intro": "A new hire joins the finance team. Poorly managed access here means privileges that survive departure.",
+      "steps": [
+        {
+          "id": "s1",
+          "label": "Provisioning",
+          "detail": "At hire, the identity is created in the IdP from an authoritative source (HR): name, department, manager. Start from a minimal baseline.",
+          "callout": "HR-driven provisioning avoids parallel accounts created manually."
+        },
+        {
+          "id": "s2",
+          "label": "MFA Authentication",
+          "detail": "The user proves their identity with a password and a second factor (authenticator, passkey/FIDO2): something they have or are, not just something they know.",
+          "callout": "NIST SP 800-63B: length and breach-list checks take priority over mandatory password rotation."
+        },
+        {
+          "id": "s3",
+          "label": "RBAC Assignment",
+          "detail": "Permissions follow the role: \"accountant\" opens payroll, not the entire IT environment. Apply least privilege and separation of duties.",
+          "callout": "Assign a role, not an ad-hoc list of permissions, to prevent privilege creep."
+        },
+        {
+          "id": "s4",
+          "label": "Access",
+          "detail": "The user accesses applications via SSO; policy checks identity, device, and context, then logs it. Elevations use JIT (just-in-time) access.",
+          "callout": "Standing admin access is attackers' #1 target: prefer temporary, approved elevation."
+        },
+        {
+          "id": "s5",
+          "label": "Access Review",
+          "detail": "Periodically, managers and resource owners validate that each entitlement remains justified; obsolete access is removed.",
+          "callout": "A review without actual revocation is just paperwork: it must produce tracked changes."
+        },
+        {
+          "id": "s6",
+          "label": "Deprovisioning",
+          "detail": "Upon departure, disable the account, revoke sessions and refresh tokens, transfer files to the manager, and remove access across all linked applications.",
+          "callout": "Disabling only the central account often leaves SSO tokens valid and orphaned SaaS accounts active."
+        }
+      ],
+      "check": {
+        "q": "An employee leaves the company and HR disables their account the same day. Why might access still be possible?",
+        "options": [
+          "Because RBAC automatically assigns roles to the former employee.",
+          "Because MFA continues to accept the employee's second factor.",
+          "Because the annual access review has not taken place yet.",
+          "Because sessions, refresh tokens, and linked SaaS accounts remain valid: revocation is not limited to disabling the central account."
+        ],
+        "answer": 3,
+        "explain": "Disabling the central account blocks initial authentication, but not an already-open session, a refresh token, or a federated account in a SaaS app. Deprovisioning must revoke sessions and tokens, disable connected accounts, and handle data ownership. RBAC does not assign anything after departure; MFA protects authentication without granting access; periodic reviews do not replace immediate revocation."
+      },
+      "source": { "book": "DSH", "page": "4.5", "printed": 137 }
+    }
+  ]
+}

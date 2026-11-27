@@ -1,0 +1,23 @@
+{
+  "id": "pbq-5.1-grc",
+  "objective": "5.1",
+  "type": "classify",
+  "title": "Classify GRC Artifacts",
+  "prompt": "For each description, choose the artifact category: Policy, Standard, Procedure, or Plan. Reason based on the question the document answers, not its title.",
+  "categories": ["Policy", "Standard", "Procedure", "Plan"],
+  "items": [
+    { "id": "i1", "label": "AUP: defines acceptable uses of workstations and the Internet", "cat": "Policy" },
+    { "id": "i2", "label": "BYOD: personal devices must be registered before any access", "cat": "Policy" },
+    { "id": "i3", "label": "Classification and retention: contracts are retained for 7 years", "cat": "Policy" },
+    { "id": "i4", "label": "Privacy: customer data is not sold to third parties", "cat": "Policy" },
+    { "id": "i5", "label": "All data at rest must be encrypted with AES-256", "cat": "Standard" },
+    { "id": "i6", "label": "Windows hardening baseline: unnecessary services disabled", "cat": "Standard" },
+    { "id": "i7", "label": "Minimum password length: 14 characters", "cat": "Standard" },
+    { "id": "i8", "label": "SOP: steps to revoke an account upon employee departure", "cat": "Procedure" },
+    { "id": "i9", "label": "Runbook: restart the messaging service and check the queue", "cat": "Procedure" },
+    { "id": "i10", "label": "SOP: handling a temporary access request and its review", "cat": "Procedure" },
+    { "id": "i11", "label": "BCP: maintaining critical operations during a disruption", "cat": "Plan" },
+    { "id": "i12", "label": "DRP: restoring systems at the hot recovery site", "cat": "Plan" }
+  ],
+  "explain": "Policy = high-level mandatory intent; standard = measurable minimum requirement; procedure = repeatable step-by-step instructions; plan = organizing continuity or recovery. A baseline is a configuration standard, not just a recommendation."
+}

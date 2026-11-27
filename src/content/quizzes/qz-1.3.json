@@ -1,0 +1,216 @@
+{
+  "id": "qz-1.3",
+  "objective": "1.3",
+  "title": "Quiz — Cryptography and PKI",
+  "questions": [
+    {
+      "id": "q-1.3-01",
+      "type": "single",
+      "q": "Why does TLS combine asymmetric and symmetric encryption?",
+      "options": [
+        "Because symmetric encryption is required to sign certificates",
+        "Because asymmetric encryption is used to negotiate a session key, and then symmetric encryption encrypts traffic more efficiently",
+        "Because asymmetric encryption is faster for large volumes",
+        "Because symmetric encryption guarantees non-repudiation"
+      ],
+      "answer": [1],
+      "explain": "Asymmetric encryption authenticates and negotiates the key; symmetric encryption transports data at lower computational cost. Symmetric encryption does not provide non-repudiation.",
+      "ref": "1.3-01"
+    },
+    {
+      "id": "q-1.3-02",
+      "type": "single",
+      "q": "Which algorithm is symmetric?",
+      "options": [
+        "RSA",
+        "ECDSA",
+        "AES-256",
+        "Diffie-Hellman"
+      ],
+      "answer": [2],
+      "explain": "AES is symmetric. RSA and ECDSA are asymmetric; Diffie-Hellman is a key exchange mechanism.",
+      "ref": "1.3-01"
+    },
+    {
+      "id": "q-1.3-03",
+      "type": "single",
+      "q": "Alice wants to send a confidential message to Bob. Which key should she use to encrypt it?",
+      "options": [
+        "Her private key",
+        "Her public key",
+        "Bob's public key",
+        "Bob's private key"
+      ],
+      "answer": [2],
+      "explain": "You encrypt with the recipient's public key; only their private key can decrypt it. Encrypting with your own key does not protect confidentiality.",
+      "ref": "1.3-01"
+    },
+    {
+      "id": "q-1.3-04",
+      "type": "single",
+      "q": "Alice wants to prove to Bob that she is the author of the message. What does she do?",
+      "options": [
+        "She encrypts the message with Bob's public key",
+        "She signs the hash of the message with her private key",
+        "She encrypts the message with her public key",
+        "She sends her password to Bob"
+      ],
+      "answer": [1],
+      "explain": "A digital signature is the hash encrypted with the sender's private key. Bob verifies it using Alice's public key.",
+      "ref": "1.3-03"
+    },
+    {
+      "id": "q-1.3-05",
+      "type": "single",
+      "q": "What property does ECDHE provide in addition to key exchange?",
+      "options": [
+        "Non-repudiation",
+        "Forward secrecy",
+        "Traffic compression",
+        "Server authentication without a certificate"
+      ],
+      "answer": [1],
+      "explain": "With ECDHE, future compromise of the private key does not allow decrypting past sessions: this is forward secrecy.",
+      "ref": "1.3-01"
+    },
+    {
+      "id": "q-1.3-06",
+      "type": "single",
+      "q": "Which statement about hashing is accurate?",
+      "options": [
+        "A hash can be decrypted with the public key",
+        "A hash is reversible if you know the algorithm",
+        "A hash produces a fixed-size digest and cannot be decrypted",
+        "A hash guarantees message confidentiality"
+      ],
+      "answer": [2],
+      "explain": "Hashing is one-way: you do not 'decrypt' a hash. It is used for integrity, not confidentiality.",
+      "ref": "1.3-03"
+    },
+    {
+      "id": "q-1.3-07",
+      "type": "single",
+      "q": "Two users have the same password. Their hashes are different. Why?",
+      "options": [
+        "Because the algorithm is asymmetric",
+        "Because a random salt was added before hashing",
+        "Because SHA-256 produces random outputs",
+        "Because the passwords are encrypted"
+      ],
+      "answer": [1],
+      "explain": "A salt makes each hash unique. SHA-256 is deterministic: without a salt, the hashes would be identical.",
+      "ref": "1.3-03"
+    },
+    {
+      "id": "q-1.3-08",
+      "type": "single",
+      "q": "A developer stores secrets in Base64 in a public configuration file. What is the problem?",
+      "options": [
+        "Base64 is too slow to decode",
+        "Base64 is an encoding, not encryption: the secrets are in plaintext",
+        "Base64 uses a public key",
+        "Base64 modifies the secrets"
+      ],
+      "answer": [1],
+      "explain": "Base64 provides no confidentiality. An encoded secret is readable by anyone who accesses the file.",
+      "ref": "1.3-03"
+    },
+    {
+      "id": "q-1.3-09",
+      "type": "single",
+      "q": "What does a CSR contain?",
+      "options": [
+        "The requester's private key and password",
+        "The requester's public key, identity, and proof of possession",
+        "The CA's private key",
+        "An already-signed certificate"
+      ],
+      "answer": [1],
+      "explain": "A CSR contains the public key and identity, signed with the private key to prove possession. It never contains the private key.",
+      "ref": "1.3-02"
+    },
+    {
+      "id": "q-1.3-10",
+      "type": "single",
+      "q": "A client receives a valid server certificate, but the intermediate certificate in the chain is missing. What happens?",
+      "options": [
+        "The connection is encrypted but unauthenticated",
+        "The client cannot chain up to a trusted root and reports an error",
+        "The certificate is automatically revoked",
+        "The server is forced to use a self-signed certificate"
+      ],
+      "answer": [1],
+      "explain": "The chain must lead back to a root present in the trust store. A missing intermediate causes a validation error, even if the leaf certificate is valid.",
+      "ref": "1.3-02"
+    },
+    {
+      "id": "q-1.3-11",
+      "type": "single",
+      "q": "What is the main difference between CRL and OCSP?",
+      "options": [
+        "CRL is real-time; OCSP is a periodic list",
+        "CRL is a signed list downloaded periodically; OCSP queries status in real time",
+        "CRL signs certificates; OCSP encrypts them",
+        "Both are encryption algorithms"
+      ],
+      "answer": [1],
+      "explain": "CRL = list (with latency); OCSP = real-time response. OCSP stapling has the server deliver the response.",
+      "ref": "1.3-02"
+    },
+    {
+      "id": "q-1.3-12",
+      "type": "single",
+      "q": "A *.example.com certificate is presented for api.eu.example.com. Is it valid for this name?",
+      "options": [
+        "Yes, the wildcard covers all subdomains",
+        "Yes, if the certificate is not expired",
+        "No, a wildcard only covers a single subdomain level",
+        "No, wildcards are no longer accepted"
+      ],
+      "answer": [2],
+      "explain": "*.example.com covers api.example.com but not api.eu.example.com, which has two levels. The SAN should explicitly list this name.",
+      "ref": "1.3-02"
+    },
+    {
+      "id": "q-1.3-13",
+      "type": "single",
+      "q": "What is the primary purpose of key escrow?",
+      "options": [
+        "Speed up symmetric encryption",
+        "Allow recovery of a lost key, at the cost of an additional compromise risk",
+        "Make a self-signed certificate trusted",
+        "Replace CRL revocation"
+      ],
+      "answer": [1],
+      "explain": "Key escrow enables recovery or fulfills legal obligations, but the escrow agent becomes a target. It is an explicit trade-off.",
+      "ref": "1.3-02"
+    },
+    {
+      "id": "q-1.3-14",
+      "type": "match",
+      "q": "Match each algorithm to its family.",
+      "pairs": [
+        { "left": "AES-256", "right": "Symmetric" },
+        { "left": "RSA", "right": "Asymmetric" },
+        { "left": "SHA-256", "right": "Hashing" },
+        { "left": "ECDHE", "right": "Key exchange" }
+      ],
+      "explain": "AES = symmetric; RSA = asymmetric; SHA-256 = hashing; ECDHE = ephemeral key exchange. Do not confuse signing (ECDSA) with key exchange (ECDH).",
+      "ref": "1.3-01"
+    },
+    {
+      "id": "q-1.3-15",
+      "type": "multi",
+      "q": "Which algorithms are considered obsolete or deprecated today? (Select all that apply)",
+      "options": [
+        "MD5",
+        "SHA-1",
+        "RC4",
+        "AES-256"
+      ],
+      "answer": [0, 1, 2],
+      "explain": "MD5 and SHA-1 have known collisions; RC4 is deprecated. AES-256 remains a strong standard.",
+      "ref": "1.3-01"
+    }
+  ]
+}

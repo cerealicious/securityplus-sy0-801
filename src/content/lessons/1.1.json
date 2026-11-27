@@ -1,0 +1,430 @@
+[
+  {
+    "id": "1.1-01",
+    "objective": "1.1",
+    "order": 1,
+    "title": "CIA, AAA, and Non-Repudiation: The Principles That Underpin Everything Else",
+    "minutes": 14,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Before tools, there are three questions: is information protected, can we know who did what, and can we prove it? All of security rests on these answers."
+      },
+      {
+        "type": "h",
+        "text": "The CIA Triad"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-1.1-L01-cia"
+      },
+      {
+        "type": "p",
+        "text": "**Confidentiality**: only authorized individuals can access information. It is ensured through encryption, access control, classification, and segmentation."
+      },
+      {
+        "type": "p",
+        "text": "**Integrity**: information is neither modified nor altered in an undetected manner. It is ensured through hashing, signatures, version controls, and tamper-evident logs."
+      },
+      {
+        "type": "p",
+        "text": "**Availability**: information and services are accessible when needed. It is ensured through redundancy, backups, denial-of-service protection, and proper capacity planning."
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "title": "The Classic Trap",
+        "text": "Encrypting a disk protects **confidentiality**, not availability. Ransomware attacks **availability** by encrypting data: here, encryption becomes the weapon, not the defense. Always read the question by asking yourself **which pillar is targeted**."
+      },
+      {
+        "type": "h",
+        "text": "AAA: Authentication, Authorization, Accounting"
+      },
+      {
+        "type": "p",
+        "text": "**Authentication** answers \"who are you?\". **Authorization** answers \"do you have permission?\". **Accounting** (or auditing) answers \"what did you do?\". The order matters: you cannot authorize without having authenticated, nor trace without having identified."
+      },
+      {
+        "type": "term",
+        "en": "Authentication, Authorization, Accounting (AAA)",
+        "fr": "Authentication, Authorization, Accounting (AAA)",
+        "field": "Often referred to as the \"AAA framework\". Do not confuse it with the AAA network protocol (RADIUS, TACACS+) that implements these three functions."
+      },
+      {
+        "type": "table",
+        "head": [
+          "Function",
+          "Question Asked",
+          "Control Example",
+          "Typical Failure"
+        ],
+        "rows": [
+          [
+            "Authentication",
+            "Who are you?",
+            "Password + MFA, certificate, biometrics",
+            "Stolen credentials, MFA bypass"
+          ],
+          [
+            "Authorization",
+            "Do you have permission?",
+            "RBAC, ACL, least privilege",
+            "Privilege escalation, overly broad role"
+          ],
+          [
+            "Accounting",
+            "What did you do?",
+            "Logs, SIEM, timestamping",
+            "Incomplete or modifiable logs"
+          ]
+        ]
+      },
+      {
+        "type": "h",
+        "text": "Non-Repudiation"
+      },
+      {
+        "type": "p",
+        "text": "**Non-repudiation** ensures that a party cannot deny having performed an action. It relies on proof verifiable by a third party: digital signature with a private key, reliable timestamping, integrity-protected logging. A simple shared password proves nothing: anyone with the password could have acted."
+      },
+      {
+        "type": "term",
+        "en": "Non-repudiation",
+        "fr": "Non-repudiation",
+        "field": "In practice: qualified electronic signature, timestamping, write-once audit log. Non-repudiation is as much a **legal** requirement as a technical one."
+      },
+      {
+        "type": "callout",
+        "kind": "tip",
+        "title": "Signing ≠ Encrypting",
+        "text": "You **sign** with your private key to prove origin (authenticity, integrity, non-repudiation). You **encrypt** with the recipient's public key to protect confidentiality. Both operations can coexist on the same message."
+      },
+      {
+        "type": "h",
+        "text": "Least Privilege and Separation of Duties"
+      },
+      {
+        "type": "p",
+        "text": "**Least privilege** consists of giving each identity the minimum access necessary, for the duration necessary. **Separation of duties** prevents a single person from carrying out a critical action end-to-end: requesting, approving, and paying an expense, or developing and deploying to production without review."
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "page": 11,
+        "strength": "supporting",
+        "note": "CIA triad covered in detail"
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "11",
+        "page": 133,
+        "printed": 111,
+        "strength": "supporting",
+        "note": "Least privilege applied to accounts"
+      },
+      {
+        "type": "check",
+        "q": "A ransomware attack encrypts a service's files and makes them inaccessible. Which pillar is primarily affected?",
+        "options": [
+          "Confidentiality, because the data is encrypted",
+          "Availability, because the data is no longer accessible",
+          "Integrity, because the files have changed",
+          "Non-repudiation, because we don't know who encrypted them"
+        ],
+        "answer": 1,
+        "explain": "Ransomware uses encryption as a weapon, but the intended effect is unavailability. Integrity is also affected, but the goal of the attack is to block access to extort a payment."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "CIA: confidentiality, integrity, availability — three distinct pillars, three control families.",
+          "AAA: authenticate, authorize, account — in that order.",
+          "Non-repudiation requires third-party verifiable proof, not just a local log.",
+          "Least privilege and separation of duties reduce the blast radius of a compromised account."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1.1-02",
+    "objective": "1.1",
+    "order": 2,
+    "title": "Defense in Depth and Zero Trust: Two Answers to the Same Question",
+    "minutes": 15,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "No control is infallible. Defense in depth bets on layering; Zero Trust bets on continuous verification. Both are tested on the exam, and they are not mutually exclusive."
+      },
+      {
+        "type": "h",
+        "text": "Defense in Depth"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-1.1-L02-aaa"
+      },
+      {
+        "type": "p",
+        "text": "**Defense in depth** stacks independent controls so that a single failure is not enough to compromise the asset. A user clicks a link: the email filter could have blocked it, EDR can stop execution, segmentation limits lateral movement, and backups enable recovery."
+      },
+      {
+        "type": "p",
+        "text": "Depth is not the number of products. Three antivirus programs on the same workstation do not constitute defense in depth: they cover the same layer and the same failure mode. Depth comes from **layer diversity**: perimeter, network, host, application, data, identity, human, physical."
+      },
+      {
+        "type": "term",
+        "en": "Defense in depth",
+        "fr": "Defense in depth",
+        "field": "Also called \"layered defense\" or \"multi-layered defense\"."
+      },
+      {
+        "type": "list",
+        "items": [
+          "**Perimeter**: firewall, web gateway, email filtering.",
+          "**Network**: segmentation, IDS/IPS, network access control (NAC).",
+          "**Host**: hardening, EDR, application control.",
+          "**Application**: input validation, authentication, static analysis.",
+          "**Data**: classification, encryption, DLP, backups.",
+          "**Identity**: MFA, least privilege, access reviews.",
+          "**Human**: awareness training, procedures, separation of duties.",
+          "**Physical**: badge, mantrap, video surveillance."
+        ]
+      },
+      {
+        "type": "h",
+        "text": "Zero Trust"
+      },
+      {
+        "type": "p",
+        "text": "**Zero Trust** starts from the principle that no network zone is trustworthy by default, including the internal network. Every access is verified based on context: identity, device, application, data sensitivity, behavior. The slogan \"never trust, always verify\" sums up the idea; \"assume breach\" follows from it: you design as if the attacker is already inside."
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "Traditional Perimeter Approach",
+          "points": [
+            "A \"trusted\" intranet behind the firewall",
+            "Verification at entry, then implicit trust",
+            "Easy lateral movement once the perimeter is breached",
+            "VPN = broad access to the network"
+          ]
+        },
+        "right": {
+          "title": "Zero Trust",
+          "points": [
+            "No implicit trust, even inside",
+            "Verification on every request, based on context",
+            "Microsegmentation and application-level access, not network-level",
+            "ZTNA replaces the \"broad tunnel\" VPN"
+          ]
+        }
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "title": "Zero Trust Is Not a Product",
+        "text": "You don't \"deploy\" Zero Trust by buying an appliance. It is an **architecture**: identity policy, device inventory, segmentation, logging, strong authentication. A vendor claiming to sell \"the Zero Trust solution\" is selling a building block, not the architecture."
+      },
+      {
+        "type": "p",
+        "text": "The Zero Trust principles expected on the exam: verify explicitly, use least privilege, assume breach, continuously authenticate and authorize, segment access by application, and log every decision for auditing."
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "7",
+        "page": 230,
+        "printed": 210,
+        "strength": "supporting",
+        "note": "Zero Trust and monitoring"
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "page": 59,
+        "strength": "supporting",
+        "note": "Defense in depth: layered controls"
+      },
+      {
+        "type": "check",
+        "q": "A company adds a second antivirus to its workstations. Is this an improvement to defense in depth?",
+        "options": [
+          "Yes: two controls are better than one",
+          "No: both controls cover the same layer and the same failure mode",
+          "Yes, provided the two vendors are different",
+          "No: antivirus is never a security control"
+        ],
+        "answer": 1,
+        "explain": "Defense in depth relies on layer diversity. Two antivirus programs on the same host add little extra depth, can interfere with each other, and increase overhead. The question to ask is: what failure mode does this new control cover that the previous one does not?"
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Defense in depth = **diverse** layers, not stacking identical products.",
+          "Zero Trust = no implicit trust, continuous contextual verification.",
+          "Microsegmentation and ZTNA replace the \"trusted intranet + broad VPN\" model.",
+          "Both approaches complement each other: depth of controls, zero trust in access."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1.1-03",
+    "objective": "1.1",
+    "order": 3,
+    "title": "Control Categories and Types: The Matrix to Know by Heart",
+    "minutes": 16,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "The exam doesn't just ask you to name a control: it asks you to classify it. A single control has a category (how it acts) and a type (when and why it acts)."
+      },
+      {
+        "type": "p",
+        "text": "The **category** describes the nature of the control: technical/logical, managerial/administrative, physical/environmental, operational. The **type** describes its function over time: preventive, deterrent, corrective, detective, compensating, directive."
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-1.1-L03-controles"
+      },
+      {
+        "type": "term",
+        "en": "Control categories",
+        "fr": "Control categories",
+        "field": "Technical/logical, managerial/administrative, physical/environmental, operational. Books often use \"administrative\" where the exam says \"managerial\"."
+      },
+      {
+        "type": "term",
+        "en": "Control types",
+        "fr": "Control types",
+        "field": "Preventive, deterrent, corrective, detective, compensating, directive. Note: \"deterrent\" and \"directive\" are not synonymous."
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-controls-matrix"
+      },
+      {
+        "type": "h",
+        "text": "The Six Types, One by One"
+      },
+      {
+        "type": "list",
+        "items": [
+          "**Preventive**: stops the event. Firewall, MFA, lock, patch.",
+          "**Deterrent**: discourages through fear of consequences. Visible camera, warning banner, announced penalties.",
+          "**Corrective**: reduces impact after the event. Restoration, rollback, quarantine.",
+          "**Detective**: identifies the event. IDS, SIEM, smoke detector, log review.",
+          "**Compensating**: replaces an impossible or failing control. Enhanced monitoring of an unpatchable system.",
+          "**Directive**: guides behavior. Policy, procedure, \"Do Not Enter\" sign."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "title": "Confusions That Cost Points",
+        "text": "A **camera** is deterrent if visible, detective if footage is analyzed. An **IPS** is preventive (it blocks), an **IDS** is detective (it alerts). A **response plan** is directive before the incident, corrective during. The same object changes type depending on use: read the intent described in the scenario."
+      },
+      {
+        "type": "h",
+        "text": "The Four Categories"
+      },
+      {
+        "type": "p",
+        "text": "**Technical/logical**: implemented in a system (firewall, ACL, encryption). **Managerial/administrative**: defined by a rule or organization (policy, training, separation of duties). **Physical/environmental**: acts on the physical world (badge, mantrap, UPS). **Operational**: tied to daily operations (backup, monitoring, log review, maintenance)."
+      },
+      {
+        "type": "table",
+        "head": [
+          "Control",
+          "Category",
+          "Type",
+          "Why"
+        ],
+        "rows": [
+          [
+            "MFA on administrator access",
+            "Technical",
+            "Preventive",
+            "Prevents use of a password alone"
+          ],
+          [
+            "Password policy",
+            "Managerial",
+            "Directive",
+            "Sets the rule, does not enforce it"
+          ],
+          [
+            "Badge + access mantrap",
+            "Physical",
+            "Preventive",
+            "Prevents unauthorized entry and tailgating"
+          ],
+          [
+            "Tested daily backup",
+            "Operational",
+            "Corrective",
+            "Enables restoration after an incident"
+          ],
+          [
+            "Honeypot",
+            "Technical",
+            "Detective",
+            "Reveals abnormal activity"
+          ],
+          [
+            "Annual external audit",
+            "Managerial",
+            "Detective",
+            "Identifies gaps after the fact"
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "9",
+        "page": 93,
+        "printed": 71,
+        "strength": "supporting",
+        "note": "Concrete physical controls"
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "2",
+        "page": 61,
+        "printed": 41,
+        "strength": "supporting",
+        "note": "Written authorities: directive control"
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "The dual **categories × types** taxonomy is not presented in any of the four books. It is written here for the exam objectives, with verified examples."
+      },
+      {
+        "type": "check",
+        "q": "A critical system cannot receive a patch. The team adds enhanced network monitoring and a web application firewall in front of the application. How should this control be classified?",
+        "options": [
+          "Preventive only",
+          "Compensating",
+          "Directive",
+          "Deterrent"
+        ],
+        "answer": 1,
+        "explain": "The control compensates for a vulnerability that cannot be patched. It may also be preventive in its mechanics (the WAF blocks), but its **function** in the reasoning is compensating: it replaces the missing patch."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Category = nature of the control (technical, managerial, physical, operational).",
+          "Type = temporal function (preventive, deterrent, corrective, detective, compensating, directive).",
+          "The same control can change type depending on use: the scenario's intent decides.",
+          "Knowing how to classify matters more than knowing how to list: the exam tests classification."
+        ]
+      }
+    ]
+  }
+]

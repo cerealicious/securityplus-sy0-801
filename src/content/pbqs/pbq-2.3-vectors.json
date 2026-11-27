@@ -1,0 +1,42 @@
+{
+  "id": "pbq-2.3-vectors",
+  "objective": "2.3",
+  "type": "classify",
+  "title": "Classify Threat Vectors",
+  "prompt": "Classify each situation into the correct threat vector family (15 categories from objective §2.3).",
+  "categories": [
+    "APT",
+    "Message-based",
+    "Image-based",
+    "Attachment-based",
+    "Browser-based",
+    "Network-based",
+    "Remote access",
+    "Endpoint-based",
+    "Supply chain-based",
+    "External media-based",
+    "Human-based",
+    "IoT-based",
+    "OT-based",
+    "Physical-based",
+    "Signal-based"
+  ],
+  "items": [
+    { "id": "i1", "label": "Multi-month campaign with custom tools targeting a research laboratory", "cat": "APT" },
+    { "id": "i2", "label": "SMS smishing with a link to a fake banking portal", "cat": "Message-based" },
+    { "id": "i3", "label": "QR code stuck onto a payment terminal that opens a fake website", "cat": "Image-based" },
+    { "id": "i4", "label": "Office document with a macro enabled upon opening", "cat": "Attachment-based" },
+    { "id": "i5", "label": "Browser extension that exfiltrates session cookies", "cat": "Browser-based" },
+    { "id": "i6", "label": "Compromised branch router used as an entry point", "cat": "Network-based" },
+    { "id": "i7", "label": "Exposed RDP connection accessed with stolen credentials", "cat": "Remote access" },
+    { "id": "i8", "label": "PowerShell used to execute a command without dropping a file", "cat": "Endpoint-based" },
+    { "id": "i9", "label": "Compromised software update from a trusted vendor", "cat": "Supply chain-based" },
+    { "id": "i10", "label": "Malicious USB flash drive plugged into a workstation", "cat": "External media-based" },
+    { "id": "i11", "label": "Contractor posing as a technician to gain access to the office", "cat": "Human-based" },
+    { "id": "i12", "label": "Unpatched connected camera used to scan the network", "cat": "IoT-based" },
+    { "id": "i13", "label": "Industrial PLC / SCADA targeted via its control network", "cat": "OT-based" },
+    { "id": "i14", "label": "Tailgating behind an employee to pass through a mantrap", "cat": "Physical-based" },
+    { "id": "i15", "label": "NFC badge read remotely by a hostile phone", "cat": "Signal-based" }
+  ],
+  "explain": "Classify by entry path, not by the final tool: a QR code is image-based, cookie theft is browser-based, USB is external media-based, and an NFC badge is signal-based. Concepts like QR/RCS/Bluetooth/RF/NFC come from objective §2.3."
+}

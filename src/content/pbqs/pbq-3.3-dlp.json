@@ -1,0 +1,36 @@
+{
+  "id": "pbq-3.3-dlp",
+  "objective": "3.3",
+  "type": "classify",
+  "title": "Choose Data Protection",
+  "prompt": "For each data type, choose the most appropriate protection method.",
+  "categories": [
+    "Tokenization",
+    "Masking",
+    "Encryption",
+    "De-identification"
+  ],
+  "items": [
+    {
+      "id": "i1",
+      "label": "Card number stored in a payment database",
+      "cat": "Tokenization"
+    },
+    {
+      "id": "i2",
+      "label": "Displaying only the last 4 digits on screen",
+      "cat": "Masking"
+    },
+    {
+      "id": "i3",
+      "label": "Portable drive containing health records",
+      "cat": "Encryption"
+    },
+    {
+      "id": "i4",
+      "label": "Research dataset with personal identifiers removed",
+      "cat": "De-identification"
+    }
+  ],
+  "explain": "Tokenization = controlled reversible substitute; masking = hiding sensitive characters on display; encryption = key-based protection; de-identification = removing personal identifiers."
+}

@@ -1,0 +1,18 @@
+{
+  "id": "pbq-5.3-agreements",
+  "objective": "5.3",
+  "type": "match",
+  "title": "Agreement Type and Purpose",
+  "prompt": "Match each agreement type to its primary purpose.",
+  "pairs": [
+    { "left": "SLA", "right": "Bind the vendor to measurable service levels" },
+    { "left": "SLO", "right": "Define the quantified service performance target" },
+    { "left": "MOU", "right": "Formalize an intent to cooperate" },
+    { "left": "MOA", "right": "Formalize more binding obligations" },
+    { "left": "NDA", "right": "Protect exchanged information from disclosure" },
+    { "left": "MSA", "right": "Establish the general terms of the contractual relationship" },
+    { "left": "SOW", "right": "Describe a specific engagement, its deliverables, and timeline" },
+    { "left": "Rules of engagement", "right": "Scope and authorize a penetration test" }
+  ],
+  "explain": "SLA/SLO govern performance, NDA governs confidentiality, MOU/MOA govern the level of commitment, MSA/SOW govern the framework and specific work, and ROE govern authorization for testing."
+}

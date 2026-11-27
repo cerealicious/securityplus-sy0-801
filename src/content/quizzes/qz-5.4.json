@@ -1,0 +1,114 @@
+{
+  "id": "qz-5.4",
+  "objective": "5.4",
+  "title": "Quiz — Security Compliance",
+  "questions": [
+    {
+      "id": "q-5.4-01",
+      "type": "single",
+      "q": "Which element serves as proof that staff have read and understood a policy?",
+      "options": [
+        "A benchmark",
+        "An acknowledgement",
+        "An SLA",
+        "A baseline"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "An acknowledgement records awareness and acceptance of the policy. Concept from objective 5.4 (beyond textbooks).",
+      "ref": "5.4-01"
+    },
+    {
+      "id": "q-5.4-02",
+      "type": "multi",
+      "q": "Which trainings fall under compliance? (Select all that apply)",
+      "options": [
+        "Data handling training",
+        "AML / CTF training",
+        "Anti-bribery training",
+        "Rules of engagement"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "explain": "The first three are listed in objective 5.4. Rules of engagement belong to testing and third-party management (5.3, 5.5).",
+      "ref": "5.4-01"
+    },
+    {
+      "id": "q-5.4-03",
+      "type": "match",
+      "q": "Match each scenario to the corresponding non-compliance consequence.",
+      "pairs": [
+        {
+          "left": "Negative press campaign and customer loss",
+          "right": "Reputational damage"
+        },
+        {
+          "left": "Fine issued by the regulator",
+          "right": "Financial consequences"
+        },
+        {
+          "left": "Contract termination by a customer",
+          "right": "Contractual consequences"
+        },
+        {
+          "left": "Revocation of authorization to process cards",
+          "right": "Loss of license"
+        }
+      ],
+      "explain": "Distinguish image (reputation), money (financial), agreement (contractual), and accreditation (license).",
+      "ref": "5.4-01"
+    },
+    {
+      "id": "q-5.4-04",
+      "type": "single",
+      "q": "A judicial investigation is opened. Which rule applies to logs normally deleted after 30 days?",
+      "options": [
+        "Immediate deletion",
+        "Legal hold: retention suspended",
+        "Encryption then deletion",
+        "Transfer to a third-party vendor"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "A legal hold suspends normal retention: data relevant to the proceeding must be preserved intact.",
+      "ref": "5.4-02"
+    },
+    {
+      "id": "q-5.4-05",
+      "type": "single",
+      "q": "Who determines the purposes and means of processing personal data?",
+      "options": [
+        "The processor",
+        "The controller",
+        "The infrastructure provider",
+        "The end user"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "The controller determines the purposes and means; the processor acts on their behalf.",
+      "ref": "5.4-02"
+    },
+    {
+      "id": "q-5.4-06",
+      "type": "single",
+      "q": "A customer requests deletion of their data, with no ongoing legal proceeding. Which right are they exercising?",
+      "options": [
+        "Opt-out",
+        "Data correction",
+        "Right to be forgotten",
+        "Legal hold"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "The right to be forgotten targets erasure. Opt-out refuses processing, correction rectifies data, and legal hold prevents deletion.",
+      "ref": "5.4-02"
+    }
+  ]
+}

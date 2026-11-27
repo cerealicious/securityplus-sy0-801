@@ -1,0 +1,90 @@
+{
+  "id": "sc-1.2-emergency-patch",
+  "objective": "1.2",
+  "title": "Emergency Patch: Keeping Change Under Control",
+  "context": "A critical vulnerability is announced on an application server. The business demands an immediate patch before next week's CAB meeting.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "The business lead asks to apply the patch tonight without going through the CAB. What do you do first?",
+      "choices": [
+        {
+          "text": "Open an emergency ticket, assign an owner, and analyze the impact before any decision",
+          "next": "n2",
+          "score": 4,
+          "why": "Even when urgent, a change remains tracked: owner, scope, and impact must be established."
+        },
+        {
+          "text": "Apply the patch immediately to save time",
+          "next": "n2",
+          "score": 0,
+          "why": "Without impact analysis or approval, the patch itself can become the cause of an incident."
+        },
+        {
+          "text": "Wait for next week's CAB without doing anything",
+          "next": "n2",
+          "score": 1,
+          "why": "Leaving a critical vulnerability open is risky; emergency change procedures exist for this."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "The analysis reveals that the server depends on a legacy application and rebooting will interrupt a business service. What preparation is essential?",
+      "choices": [
+        {
+          "text": "Schedule a maintenance window, notify stakeholders, and prepare a tested backout plan",
+          "next": "n3",
+          "score": 4,
+          "why": "Dependencies, downtime, maintenance window, and backout plan are the key elements of a complete change request."
+        },
+        {
+          "text": "Reboot without warning: the downtime will only be a few minutes",
+          "next": "n3",
+          "score": 0,
+          "why": "An unannounced outage on a legacy application can have a major business impact."
+        },
+        {
+          "text": "Modify allow lists to work around the issue and avoid rebooting",
+          "next": "n3",
+          "score": 1,
+          "why": "Broadening an allow list weakens security and must be analyzed, not improvised."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "The patch is applied, but authentication fails. What is the best decision?",
+      "choices": [
+        {
+          "text": "Execute the backout within the window, document the failure, and resubmit the request to the CAB",
+          "next": "n4",
+          "score": 4,
+          "why": "The backout plan exists for this scenario; the failure should inform a new analysis."
+        },
+        {
+          "text": "Disable MFA to restore access quickly",
+          "next": "n4",
+          "score": 0,
+          "why": "Removing a security control under pressure increases risk."
+        },
+        {
+          "text": "Close the ticket and wait for the next patch cycle",
+          "next": "n4",
+          "score": 0,
+          "why": "A failed change must be documented and re-analyzed, never closed as successful."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "You maintained change traceability, analyzed dependencies, and used the backout plan as intended."
+    }
+  },
+  "debrief": [
+    "An emergency does not eliminate the process: ticket, owner, impact analysis, and approval remain necessary.",
+    "A maintenance window, announced downtime, and a tested backout plan protect both the business and security.",
+    "A failure is documented and returned to the CAB; it is never masked by weakening controls."
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "id": "sc-2.6-ai-incident",
+  "objective": "2.6",
+  "title": "AI Assistant: Behavioral Drift",
+  "context": "An internal assistant with access to the document repository begins returning excerpts of confidential contracts to unauthorized users.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "An injected document contained \"ignore confidentiality rules\". Which threat?",
+      "choices": [
+        {
+          "text": "Prompt injection",
+          "next": "n2",
+          "score": 4,
+          "why": "A hostile instruction in the content hijacks the system prompt."
+        },
+        {
+          "text": "Poisoning",
+          "next": "n2",
+          "score": 0,
+          "why": "Poisoning concerns training data, not an instruction in a document."
+        },
+        {
+          "text": "Hallucination",
+          "next": "n2",
+          "score": 0,
+          "why": "The leak is real; it is not a model fabrication."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "To limit data exposure, which measure is most direct?",
+      "choices": [
+        {
+          "text": "Increase the length of the system prompt",
+          "next": "n3",
+          "score": 0,
+          "why": "Lengthening an instruction does not replace access control."
+        },
+        {
+          "text": "Restrict document search by identity and log access",
+          "next": "n3",
+          "score": 4,
+          "why": "Least privilege and traceability are the effective controls."
+        },
+        {
+          "text": "Disable database encryption",
+          "next": "n3",
+          "score": 0,
+          "why": "That would weaken data protection."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "The assistant has a connector that executes scripts. What additional risk?",
+      "choices": [
+        {
+          "text": "Unauthorized code execution",
+          "next": "n4",
+          "score": 4,
+          "why": "A tool-enabled agent can be hijacked to execute commands."
+        },
+        {
+          "text": "Sampling bias",
+          "next": "n4",
+          "score": 0,
+          "why": "Bias concerns output quality, not command execution."
+        },
+        {
+          "text": "Insufficient explainability",
+          "next": "n4",
+          "score": 1,
+          "why": "Explainability is important, but does not describe the execution risk."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "You identified the injection, applied least privilege, and anticipated the execution risk."
+    }
+  },
+  "debrief": [
+    "Prompt injection arrives through processed content, not through training.",
+    "An AI assistant must be treated as an identity with minimal privileges.",
+    "Tool-enabled agent = code execution surface to control."
+  ]
+}

@@ -1,0 +1,216 @@
+{
+  "id": "qz-5.2",
+  "objective": "5.2",
+  "title": "Quiz — Risk Management",
+  "questions": [
+    {
+      "id": "q-5.2-01",
+      "type": "single",
+      "q": "What is the first step of risk management?",
+      "options": [
+        "Risk treatment",
+        "Identifying assets and risks",
+        "Calculating ALE",
+        "Risk acceptance"
+      ],
+      "answer": [1],
+      "explain": "You start by identifying assets, their owners, threats, and vulnerabilities. Without an inventory, the analysis has no foundation.",
+      "ref": "5.2-01"
+    },
+    {
+      "id": "q-5.2-02",
+      "type": "single",
+      "q": "What is the role of a risk register?",
+      "options": [
+        "List past incidents",
+        "Document each risk, its owner, score, treatment, and review",
+        "Replace the security policy",
+        "Automatically calculate ALE"
+      ],
+      "answer": [1],
+      "explain": "The register is a living tool for tracking and communication. Each row has an owner and a review date.",
+      "ref": "5.2-01"
+    },
+    {
+      "id": "q-5.2-03",
+      "type": "single",
+      "q": "Which analysis method uses a likelihood × impact matrix?",
+      "options": [
+        "Quantitative analysis",
+        "Qualitative analysis",
+        "ALE calculation",
+        "BIA"
+      ],
+      "answer": [1],
+      "explain": "A matrix and low/medium/high scales belong to qualitative analysis. Quantitative analysis uses monetary values (SLE, ALE).",
+      "ref": "5.2-01"
+    },
+    {
+      "id": "q-5.2-04",
+      "type": "single",
+      "q": "An asset is worth €100,000. An incident destroys 40% of its value. What is the SLE?",
+      "options": [
+        "€4,000",
+        "€40,000",
+        "€100,000",
+        "€400,000"
+      ],
+      "answer": [1],
+      "explain": "SLE = Asset Value × EF = 100,000 × 0.4 = €40,000. EF describes the magnitude of loss for a single event.",
+      "ref": "5.2-02"
+    },
+    {
+      "id": "q-5.2-05",
+      "type": "single",
+      "q": "An asset is worth €200,000. An incident destroys 25% of its value and occurs twice a year. What is the ALE?",
+      "options": [
+        "€50,000",
+        "€100,000",
+        "€200,000",
+        "€400,000"
+      ],
+      "answer": [1],
+      "explain": "SLE = 200,000 × 0.25 = €50,000. ALE = 50,000 × 2 = €100,000/year. €50,000 is the SLE, not the ALE.",
+      "ref": "5.2-02"
+    },
+    {
+      "id": "q-5.2-06",
+      "type": "single",
+      "q": "An incident occurs on average once every five years. What is the ARO?",
+      "options": [
+        "0.2",
+        "0.5",
+        "1",
+        "5"
+      ],
+      "answer": [0],
+      "explain": "ARO = number of events per year. Once every five years = 1/5 = 0.2.",
+      "ref": "5.2-02"
+    },
+    {
+      "id": "q-5.2-07",
+      "type": "single",
+      "q": "A control costs €25,000/year and reduces ALE from €30,000 to €8,000. What can be concluded?",
+      "options": [
+        "The control is cost-effective: it saves €30,000",
+        "The control is not cost-effective as-is: it saves €22,000 for a cost of €25,000",
+        "The control is cost-effective: it saves €8,000",
+        "You cannot compare a cost and an ALE"
+      ],
+      "answer": [1],
+      "explain": "Savings = 30,000 − 8,000 = €22,000/year, which is less than the €25,000 cost. You should negotiate, choose another control, or accept the risk with documentation.",
+      "ref": "5.2-02"
+    },
+    {
+      "id": "q-5.2-08",
+      "type": "single",
+      "q": "A company purchases cyber insurance. Which risk treatment is it applying?",
+      "options": [
+        "Mitigation",
+        "Transfer",
+        "Avoidance",
+        "Acceptance"
+      ],
+      "answer": [1],
+      "explain": "Insurance transfers part of the financial loss to a third party. It does not remove legal responsibility or reputational risk.",
+      "ref": "5.2-02"
+    },
+    {
+      "id": "q-5.2-09",
+      "type": "single",
+      "q": "An organization decides to stop collecting data it does not need. Which risk treatment is this?",
+      "options": [
+        "Mitigation",
+        "Transfer",
+        "Avoidance",
+        "Acceptance"
+      ],
+      "answer": [2],
+      "explain": "Eliminating the risky activity is avoidance. Data minimization is a form of structural avoidance.",
+      "ref": "5.2-02"
+    },
+    {
+      "id": "q-5.2-10",
+      "type": "single",
+      "q": "After deploying controls, a risk drops from a score of 20 to 6 out of 25. What is the score of 6 called?",
+      "options": [
+        "Inherent risk",
+        "Residual risk",
+        "Risk appetite",
+        "Gross impact"
+      ],
+      "answer": [1],
+      "explain": "The score remaining after controls is residual risk. It must be formally accepted by an authority.",
+      "ref": "5.2-01"
+    },
+    {
+      "id": "q-5.2-11",
+      "type": "single",
+      "q": "What is risk appetite?",
+      "options": [
+        "The risk remaining after controls",
+        "The level of risk an organization is willing to pursue to achieve its objectives",
+        "The maximum tolerable loss for a service",
+        "The number of incidents per year"
+      ],
+      "answer": [1],
+      "explain": "Appetite is a leadership decision, translated into thresholds. Maximum tolerable downtime relates to MTD in a BIA.",
+      "ref": "5.2-01"
+    },
+    {
+      "id": "q-5.2-12",
+      "type": "single",
+      "q": "In a BIA, what does RTO represent?",
+      "options": [
+        "Acceptable data loss",
+        "Target time to restore the service",
+        "Maximum tolerable downtime",
+        "Number of events per year"
+      ],
+      "answer": [1],
+      "explain": "RTO = Recovery Time Objective, the target time to restore service. RPO is acceptable data loss; MTD is maximum tolerable downtime.",
+      "ref": "5.2-02"
+    },
+    {
+      "id": "q-5.2-13",
+      "type": "single",
+      "q": "Which relationship must always hold between RTO and MTD?",
+      "options": [
+        "RTO > MTD",
+        "RTO = MTD",
+        "RTO < MTD",
+        "No relationship is necessary"
+      ],
+      "answer": [2],
+      "explain": "Recovery must be faster than the maximum tolerable downtime. RTO < MTD, otherwise continuity planning is flawed.",
+      "ref": "5.2-02"
+    },
+    {
+      "id": "q-5.2-14",
+      "type": "match",
+      "q": "Match each risk treatment to its example.",
+      "pairs": [
+        { "left": "Mitigation", "right": "Deploy EDR and MFA" },
+        { "left": "Transfer", "right": "Purchase cyber insurance" },
+        { "left": "Avoidance", "right": "Do not collect unnecessary data" },
+        { "left": "Acceptance", "right": "Assume a low risk, documented and reviewed" }
+      ],
+      "explain": "All four treatments can coexist. Acceptance must be authorized and dated; transfer does not eliminate reputational risk.",
+      "ref": "5.2-02"
+    },
+    {
+      "id": "q-5.2-15",
+      "type": "multi",
+      "q": "Which statements about quantitative analysis are accurate? (Select all that apply)",
+      "options": [
+        "It expresses risk in monetary value",
+        "It allows comparing risk to the cost of a control",
+        "It depends on no assumptions",
+        "It requires reliable historical data to be credible"
+      ],
+      "answer": [0, 1, 3],
+      "explain": "Quantitative analysis provides comparable figures, but relies on assumptions and data. It is never free of uncertainty.",
+      "ref": "5.2-02"
+    }
+  ]
+}

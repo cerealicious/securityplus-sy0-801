@@ -1,0 +1,90 @@
+{
+  "id": "sc-4.6-playbook",
+  "objective": "4.6",
+  "title": "Securing an IP-Blocking Playbook",
+  "context": "You must automate the response to scans coming from an external IP. The playbook will run hundreds of times per day: three decisions will determine its reliability.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "An alert reports an external IP scanning multiple servers. What is the first step of the playbook?",
+      "choices": [
+        {
+          "text": "Qualify the alert and enrich context (reputation, history, targeted assets)",
+          "next": "n2",
+          "score": 4,
+          "why": "Automation must act only after qualification: otherwise it amplifies false positives."
+        },
+        {
+          "text": "Immediately block the entire address without verification",
+          "next": "n2",
+          "score": 0,
+          "why": "Without qualification, the playbook may block a legitimate partner."
+        },
+        {
+          "text": "Classify the alert as a false positive by default",
+          "next": "n2",
+          "score": 0,
+          "why": "That turns automation into a false-negative generator."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "The risk score exceeds the threshold. How do you design the blocking action?",
+      "choices": [
+        {
+          "text": "Guardrails: scope limited to the IP, bounded duration, logging, ticket, and planned reversibility",
+          "next": "n3",
+          "score": 4,
+          "why": "Guardrails prevent a qualification error from spreading across the entire network."
+        },
+        {
+          "text": "Block a /0 to be sure to cover the attacker",
+          "next": "n3",
+          "score": 0,
+          "why": "That would cut off all traffic: the action is disproportionate and practically irreversible."
+        },
+        {
+          "text": "Execute the block without logging to save time",
+          "next": "n3",
+          "score": 0,
+          "why": "Without logs, it is impossible to audit, understand, or roll back the action."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "The playbook is deployed. How do you ensure continuous improvement?",
+      "choices": [
+        {
+          "text": "Measure effects, monitor false positives, and adjust logic with rollback capability",
+          "next": "n4",
+          "score": 4,
+          "why": "Continuous improvement and reversibility are at the heart of automation considerations."
+        },
+        {
+          "text": "Never modify the playbook again to guarantee stability",
+          "next": "n4",
+          "score": 0,
+          "why": "An unadjusted playbook becomes ineffective when context changes."
+        },
+        {
+          "text": "Disable metrics to reduce load",
+          "next": "n4",
+          "score": 1,
+          "why": "Without measurement, you cannot detect playbook drift."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "Your playbook qualifies before acting, bounds its impact with guardrails, and improves through measurement."
+    }
+  },
+  "debrief": [
+    "Automation logic must be understood and documented before any deployment.",
+    "Guardrails, logging, and reversibility are mandatory for production actions.",
+    "Continuous improvement comes from measuring false positives and tuning rules."
+  ]
+}

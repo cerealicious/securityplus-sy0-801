@@ -1,0 +1,538 @@
+[
+  {
+    "id": "4.1-01",
+    "objective": "4.1",
+    "order": 1,
+    "title": "Segmentation, Hardening, Sandboxing, and Deception",
+    "minutes": 17,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Objective 4.1 is a catalog of controls. The exam does not ask you to recite products, but to **choose the right control for a given risk**. Start with the techniques that reduce the attack surface even before any detection."
+      },
+      {
+        "type": "h",
+        "text": "The Four Fundamental Techniques"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-4.1-L01-control-stack"
+      },
+      {
+        "type": "term",
+        "en": "Segmentation",
+        "fr": "Segmentation",
+        "field": "Dividing the network into zones to limit lateral movement. One compromised service must not grant access to all others.",
+        "gap": false
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 55,
+        "strength": "primary",
+        "note": "Trust / DMZ / Untrust zones and segmentation"
+      },
+      {
+        "type": "term",
+        "en": "Hardening",
+        "fr": "Hardening",
+        "field": "Reducing the attack surface: disabling unnecessary services, applying patches, configuring secure baselines, removing default accounts.",
+        "gap": false
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "—",
+        "page": 167,
+        "printed": 145,
+        "strength": "supporting",
+        "note": "System hardening and secure configuration"
+      },
+      {
+        "type": "term",
+        "en": "Access controls",
+        "fr": "Access controls",
+        "field": "Least privilege, separation of duties, and authentication before any access to a resource.",
+        "gap": false
+      },
+      {
+        "type": "term",
+        "en": "Sandboxing",
+        "fr": "Sandboxing",
+        "field": "Executing suspicious code or files in an isolated environment to observe behavior without risking production.",
+        "gap": false
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 13,
+        "strength": "primary",
+        "note": "System controls, endpoints, and isolated execution"
+      },
+      {
+        "type": "h",
+        "text": "Deception and Disruption Technologies"
+      },
+      {
+        "type": "p",
+        "text": "Deception does not protect by blocking, but by **early detection**: decoys are placed that have no legitimate reason to be touched. Any contact with them is a high-value signal."
+      },
+      {
+        "type": "term",
+        "en": "Honeypot",
+        "fr": "Honeypot",
+        "field": "Decoy system that simulates a vulnerable target to attract attackers and record their techniques.",
+        "gap": false
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "—",
+        "page": 211,
+        "printed": 189,
+        "strength": "primary",
+        "note": "Honeypots and decoy monitoring"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Decoy",
+          "Nature",
+          "Detected Signal"
+        ],
+        "rows": [
+          [
+            "Honeynet",
+            "Entire network of decoys",
+            "Reconnaissance and lateral movement"
+          ],
+          [
+            "Honeyfile",
+            "Bait file (fake plan, fake database)",
+            "Opening or copying of the file"
+          ],
+          [
+            "Honeytoken",
+            "Fake credential or token",
+            "Use of the token"
+          ],
+          [
+            "Canary account",
+            "Nonexistent but plausible user account",
+            "Login attempt to the account"
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "chapter": "—",
+        "page": "4.1",
+        "strength": "primary",
+        "note": "Official objectives — honeynet, honeyfile, honeytoken, and canary absent from the 4 books"
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "Honeynet, honeyfile, honeytoken, and canary account are required in **§4.1**; only honeypot is described in the provided books. These variants are written from the objectives, without attribution to a book."
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "—",
+        "page": 359,
+        "printed": 339,
+        "strength": "supporting",
+        "note": "Deception and application controls in the SOC"
+      },
+      {
+        "type": "check",
+        "q": "An attacker attempts to use a fake credential planted in a configuration file. Which technique is this?",
+        "options": [
+          "Honeypot",
+          "Honeytoken",
+          "Sandboxing",
+          "Rate limiting"
+        ],
+        "answer": 1,
+        "explain": "A honeytoken is a fake credential or token: its use immediately reveals hostile activity."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Segmentation, hardening, access controls, and sandboxing reduce the surface before detection.",
+          "A honeypot is a decoy system; a honeynet is an entire network of decoys.",
+          "Honeyfile, honeytoken, and canary account detect use of specific baits.",
+          "Any interaction with a decoy is a high-confidence indicator."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "4.1-02",
+    "objective": "4.1",
+    "order": 2,
+    "title": "IDS/IPS, Firewalls, and Network Access Control",
+    "minutes": 17,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "The network control family is distinguished along two axes: **network vs. host** and **detection vs. prevention**. Once these two axes are mastered, the acronyms become obvious."
+      },
+      {
+        "type": "h",
+        "text": "Detect or Prevent: IDS vs. IPS"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-4.1-L02-detection-pipeline"
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "IDS — Intrusion Detection System",
+          "points": [
+            "Detects and alerts, without blocking.",
+            "Placed out-of-path (SPAN/tap).",
+            "NIDS = network; HIDS = host."
+          ]
+        },
+        "right": {
+          "title": "IPS — Intrusion Prevention System",
+          "points": [
+            "Detects **and blocks** in real time.",
+            "Placed inline in the traffic path.",
+            "NIPS = network; HIPS = host."
+          ]
+        }
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "19",
+        "page": 237,
+        "printed": 215,
+        "strength": "primary",
+        "note": "IDS and IPS: detection, prevention, signatures, and anomalies"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Control",
+          "Scope",
+          "Position"
+        ],
+        "rows": [
+          [
+            "NIDS",
+            "Network traffic, copies",
+            "Out-of-path"
+          ],
+          [
+            "NIPS",
+            "Network traffic, live",
+            "Inline"
+          ],
+          [
+            "HIDS",
+            "Files, logs, and processes of a host",
+            "Local agent"
+          ],
+          [
+            "HIPS",
+            "Behaviors of a host",
+            "Blocking local agent"
+          ],
+          [
+            "WIPS",
+            "Wireless networks, rogue access points",
+            "Dedicated WiFi sensors"
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 104,
+        "strength": "primary",
+        "note": "IDS/IPS, host agents, and security appliances"
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "Classic trap: **IDS = detective**, **IPS = preventive**. A WIPS acts on wireless and can block a rogue access point."
+      },
+      {
+        "type": "h",
+        "text": "Firewalls and Traffic Control"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Rule-based firewall**: explicit allow/deny rules on IP, port, and protocol.",
+          "**Layer 4 / Layer 7 firewall**: filtering by port (Layer 4) or application content (Layer 7).",
+          "**Rate-limiting requests**: limits request count to counter abuse and floods."
+        ]
+      },
+      {
+        "type": "term",
+        "en": "Web application firewall (WAF)",
+        "fr": "Web application firewall (WAF)",
+        "field": "Filters HTTP/HTTPS traffic at the application layer: SQL injection, cross-site scripting, request abuse. It protects the application, not the entire network.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Unified threat management (UTM)",
+        "fr": "Unified threat management (UTM)",
+        "field": "Device that combines multiple functions (firewall, IPS, antivirus, web filtering, VPN) into a single appliance.",
+        "gap": true
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "chapter": "—",
+        "page": "4.1",
+        "strength": "primary",
+        "note": "Official objectives — WAF and UTM absent from the 4 books"
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "WAF and UTM are required in **§4.1** but absent from the provided books. These definitions come from the objectives and industry practice."
+      },
+      {
+        "type": "h",
+        "text": "Network Access Control (NAC)"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Captive portals**: authentication before network access (guests, BYOD).",
+          "**802.1X**: port-level network authentication via a RADIUS server.",
+          "**Endpoint posture/compliance**: the device is accepted only if it complies with policy (patches, antivirus, encryption)."
+        ]
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "—",
+        "page": 217,
+        "printed": 197,
+        "strength": "supporting",
+        "note": "Detection tools, collection, and network controls"
+      },
+      {
+        "type": "check",
+        "q": "Which control blocks an HTTP request containing a SQL injection before it reaches the application?",
+        "options": [
+          "NIDS",
+          "HIDS",
+          "WAF",
+          "Captive portal"
+        ],
+        "answer": 2,
+        "explain": "The WAF inspects HTTP application content and blocks web attacks; a NIDS would only see network traffic and prevent nothing."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "IDS = out-of-path detection; IPS = inline prevention.",
+          "NIDS/NIPS = network; HIDS/HIPS = host; WIPS = wireless.",
+          "WAF = HTTP application filtering; UTM = multi-function appliance.",
+          "NAC: captive portal, 802.1X, and device compliance before access."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "4.1-03",
+    "objective": "4.1",
+    "order": 3,
+    "title": "Endpoint, DLP, Email, and Code Security",
+    "minutes": 18,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Modern controls go beyond the firewall: they protect the **endpoint**, **outbound data**, **email**, and **code**. This is also the part of §4.1 most absent from the provided books."
+      },
+      {
+        "type": "h",
+        "text": "Antivirus, EDR, and XDR"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-4.1-L03-control-matrix"
+      },
+      {
+        "type": "term",
+        "en": "Antivirus",
+        "fr": "Antivirus",
+        "field": "Detects and removes known malware using signatures, supplemented by heuristic analysis.",
+        "gap": false
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 13,
+        "strength": "primary",
+        "note": "Antivirus and endpoint security agents"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Technology",
+          "Scope",
+          "Key Function"
+        ],
+        "rows": [
+          [
+            "EDR",
+            "Endpoints (workstations, servers)",
+            "Detects behaviors, enables isolation and response"
+          ],
+          [
+            "XDR",
+            "Endpoints + network + cloud + identity",
+            "Multi-source correlation"
+          ],
+          [
+            "Agent-based DLP",
+            "User workstation",
+            "Blocks copying or sending of sensitive data"
+          ],
+          [
+            "Centralized proxy",
+            "Outbound web traffic",
+            "Content filtering and logging"
+          ]
+        ]
+      },
+      {
+        "type": "term",
+        "en": "Data loss prevention (DLP)",
+        "fr": "Data loss prevention (DLP)",
+        "field": "Identifies, monitors, and blocks sensitive data in motion, at rest, or on the endpoint based on content rules.",
+        "gap": true
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "chapter": "—",
+        "page": "4.1",
+        "strength": "primary",
+        "note": "Official objectives — DLP/EDR/XDR and DMARC/SPF/DKIM/BIMI written from objectives"
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "EDR/XDR and DLP are required in **§4.1** but absent from the four books. Watch out for the error noted in SOC Notes: **EDR is an endpoint agent, not a next-generation firewall**."
+      },
+      {
+        "type": "h",
+        "text": "Email Authentication and Reputation"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Mechanism",
+          "Role"
+        ],
+        "rows": [
+          [
+            "SPF",
+            "Authorizes servers allowed to send for a domain (DNS record)"
+          ],
+          [
+            "DKIM",
+            "Cryptographic signature of the message, verifiable via public key published in DNS"
+          ],
+          [
+            "DMARC",
+            "SPF/DKIM alignment policy and failure handling (none/quarantine/reject) + reporting"
+          ],
+          [
+            "BIMI",
+            "Displays the verified brand logo in the email client"
+          ]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "DMARC is **not a certificate**: it is a DNS policy record. It builds on SPF and DKIM. This corrects an error present in SOC Notes."
+      },
+      {
+        "type": "h",
+        "text": "Application and System Security"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Input validation**, **secure cookies**, and **static code analysis**: reduce application defects.",
+          "**Code signing**: sign binaries to guarantee origin and integrity.",
+          "**Secrets scanning**: detect hardcoded passwords and keys in repositories.",
+          "**Group Policy** (Windows): enforce passwords, lockout, and security settings.",
+          "**SELinux** (Linux): mandatory access control (MAC) that restricts even a compromised process."
+        ]
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "chapter": "—",
+        "page": "4.1",
+        "strength": "primary",
+        "note": "Official objectives — code signing, secrets scanning, and SELinux absent from the 4 books"
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "10",
+        "page": 125,
+        "printed": 103,
+        "strength": "supporting",
+        "note": "Windows infrastructure and system security policies"
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 181,
+        "strength": "supporting",
+        "note": "Application and email controls"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-4.1-controls"
+      },
+      {
+        "type": "check",
+        "q": "A developer committed an API key to a public repository. Which control should have stopped it?",
+        "options": [
+          "DMARC",
+          "Secrets scanning",
+          "WIPS",
+          "Rate limiting"
+        ],
+        "answer": 1,
+        "explain": "Secrets scanning analyzes code and repository history to spot hardcoded keys, tokens, and passwords."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "EDR = endpoint agent; XDR = multi-source correlation; DLP = sensitive data control.",
+          "SPF authorizes sender, DKIM signs, DMARC enforces policy, BIMI displays logo.",
+          "Code signing, secrets scanning, and SELinux are objectives concepts outside the books.",
+          "Choose the control by layer: network, endpoint, application, or email."
+        ]
+      }
+    ]
+  }
+]

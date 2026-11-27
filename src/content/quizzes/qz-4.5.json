@@ -1,0 +1,117 @@
+{
+  "id": "qz-4.5",
+  "objective": "4.5",
+  "title": "Quiz — Identity and Access Management",
+  "questions": [
+    {
+      "id": "q-4.5-01",
+      "type": "single",
+      "q": "Which action is part of deprovisioning an account?",
+      "options": [
+        "Keep active sessions to avoid disrupting the user",
+        "Revoke active sessions and tokens and transfer asset ownership",
+        "Delete the account's audit logs",
+        "Change only the password"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Revocation must be complete and immediate; audit logs are retained as evidence.",
+      "ref": "4.5-01"
+    },
+    {
+      "id": "q-4.5-02",
+      "type": "match",
+      "q": "Match each model or protocol to its definition.",
+      "pairs": [
+        {
+          "left": "RBAC",
+          "right": "Rights attached to a role inherited by the user"
+        },
+        {
+          "left": "DAC",
+          "right": "The resource owner decides access"
+        },
+        {
+          "left": "MAC",
+          "right": "Labels and central policy enforce the decision"
+        },
+        {
+          "left": "SAML",
+          "right": "Signed assertion between identity provider and service"
+        },
+        {
+          "left": "OAuth",
+          "right": "Delegated authorization with limited scopes"
+        }
+      ],
+      "explain": "Roles, owner, labels, federated authentication, and delegated authorization are five distinct concepts. SAML and OAuth are from objective 4.5 (beyond textbooks).",
+      "ref": "4.5-03"
+    },
+    {
+      "id": "q-4.5-03",
+      "type": "multi",
+      "q": "Which combinations truly constitute MFA? (Select all that apply)",
+      "options": [
+        "Password + hardware token",
+        "Password + PIN",
+        "Fingerprint + software token",
+        "Password + secondary password"
+      ],
+      "answer": [
+        0,
+        2
+      ],
+      "explain": "MFA requires two different factor categories: something you know, have, or are. Two memorized secrets are not enough.",
+      "ref": "4.5-02"
+    },
+    {
+      "id": "q-4.5-04",
+      "type": "single",
+      "q": "An administrator needs production access for two hours. Which model is most appropriate?",
+      "options": [
+        "Standing global privilege",
+        "Just-in-time access with approval and expiration",
+        "Shared service account",
+        "Discretionary access without review"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "JIT limits the exposure window to the required time and automatically revokes access.",
+      "ref": "4.5-03"
+    },
+    {
+      "id": "q-4.5-05",
+      "type": "single",
+      "q": "Which statement about passkeys is correct?",
+      "options": [
+        "The secret is sent to each site that uses it",
+        "The cryptographic key stays on the device and the site receives a signature",
+        "It is a longer password stored on the server",
+        "It is a type of hardware token that must be physical"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Passkeys rely on a key pair: the private key never leaves the device, making them phishing-resistant. Concept from objective 4.5 (beyond textbooks).",
+      "ref": "4.5-03"
+    },
+    {
+      "id": "q-4.5-06",
+      "type": "single",
+      "q": "Which practice should be avoided according to updated exam guidance?",
+      "options": [
+        "Checking credentials against breach databases",
+        "Enforcing sufficient password length",
+        "Requiring mandatory rotation every 30 days",
+        "Using MFA on privileged accounts"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Mandatory 30-day rotation is an outdated textbook recommendation: NIST SP 800-63B prioritizes length, breach checks, and MFA.",
+      "ref": "4.5-03"
+    }
+  ]
+}

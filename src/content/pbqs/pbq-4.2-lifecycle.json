@@ -1,0 +1,30 @@
+{
+  "id": "pbq-4.2-lifecycle",
+  "objective": "4.2",
+  "type": "order",
+  "title": "Order the Asset Lifecycle",
+  "prompt": "Put the steps of an asset's lifecycle in the correct chronological order, from defining the need to end-of-life.",
+  "items": [
+    {
+      "id": "s1",
+      "label": "Planning / scoping: define the need, criticality, and security requirements"
+    },
+    {
+      "id": "s2",
+      "label": "Acquisition / procurement: include encryption, support, and compliance in the specifications"
+    },
+    {
+      "id": "s3",
+      "label": "Assignment / accounting: assign the owner and record the asset in the inventory"
+    },
+    {
+      "id": "s4",
+      "label": "Monitoring / asset tracking: track patches, movements, and compliance in production"
+    },
+    {
+      "id": "s5",
+      "label": "Disposal / decommissioning: sanitize or destroy data, revoke access, and certify end-of-life"
+    }
+  ],
+  "explain": "Correct order: s1 -> s2 -> s3 -> s4 -> s5. Plan before purchasing, assign an owner before operating, track continuously, and finish with documented disposal. Skipping a step creates an unprotected shadow asset."
+}

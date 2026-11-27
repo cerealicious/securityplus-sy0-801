@@ -1,0 +1,90 @@
+{
+  "id": "sc-3.4-failover",
+  "objective": "3.4",
+  "title": "Failover: Choosing the Right Recovery",
+  "context": "A major power outage hits the primary site. You must decide on the recovery strategy in three steps.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "Before failing over, which metric must you know first?",
+      "choices": [
+        {
+          "text": "The RPO and RTO of critical services",
+          "next": "n2",
+          "score": 4,
+          "why": "Without quantified objectives, it is impossible to choose an appropriate site or strategy."
+        },
+        {
+          "text": "The server brand",
+          "next": "n2",
+          "score": 0,
+          "why": "The vendor alone does not determine the strategy."
+        },
+        {
+          "text": "The number of connected users",
+          "next": "n2",
+          "score": 1,
+          "why": "Useful for communication, not for choosing recovery."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "The payment service requires recovery in under 5 minutes and zero data loss. Which site?",
+      "choices": [
+        {
+          "text": "Cold site",
+          "next": "n3",
+          "score": 0,
+          "why": "A cold site takes days and implies data loss."
+        },
+        {
+          "text": "Synchronized hot site",
+          "next": "n3",
+          "score": 4,
+          "why": "Only a hot site offers near-zero RPO and failover in minutes."
+        },
+        {
+          "text": "Warm site",
+          "next": "n3",
+          "score": 1,
+          "why": "A warm site requires restoration: RPO and RTO are too high."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "After power is restored, which step is often forgotten?",
+      "choices": [
+        {
+          "text": "Failback and data integrity verification",
+          "next": "n4",
+          "score": 4,
+          "why": "Returning to the primary site and verifying consistency is essential."
+        },
+        {
+          "text": "Permanently shutting down the backup site",
+          "next": "n4",
+          "score": 0,
+          "why": "The backup site must remain available for the next recovery."
+        },
+        {
+          "text": "Deleting old backups",
+          "next": "n4",
+          "score": 0,
+          "why": "Backups are valuable, especially after an incident."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "You reasoned in terms of RTO/RPO, chose the right site, and planned for failback."
+    }
+  },
+  "debrief": [
+    "RTO/RPO objectives drive site selection.",
+    "Hot site = minutes and near-zero loss; warm site = hours; cold site = days.",
+    "Failback and restoration testing are part of resilience."
+  ]
+}

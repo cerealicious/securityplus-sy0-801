@@ -1,0 +1,358 @@
+[
+  {
+    "id": "2.4-01",
+    "objective": "2.4",
+    "order": 1,
+    "title": "System, Platform, and Application Vulnerabilities",
+    "minutes": 16,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "An **attack surface** is the set of points through which an attacker can interact with a system. Objective 2.4 does not ask you to run a scan: it asks you to **spot weaknesses before an attack** and name their exact category."
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-2.4-surface-matrix"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-2.4-L01-attack-surface"
+      },
+      {
+        "type": "h",
+        "text": "Unsupported, Unpatched, Obsolete, and Unmanaged Systems"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Term",
+          "Meaning",
+          "Typical Consequence"
+        ],
+        "rows": [
+          [
+            "Unsupported product",
+            "The vendor no longer provides any support or patches",
+            "No remediation available"
+          ],
+          [
+            "Unpatched system",
+            "Patches exist but have not been applied",
+            "Exploitation of a known CVE"
+          ],
+          [
+            "Obsolete system",
+            "Outdated technology, replaced by a newer version",
+            "Incompatibility with modern protocols, legacy dependencies"
+          ],
+          [
+            "Unmanaged system",
+            "Outside inventory, outside management and monitoring tools",
+            "No one knows it exists or patches it"
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "Vulnerability management / Patch management",
+        "page": 159,
+        "strength": "primary",
+        "note": "Unsupported products, patches, and unmanaged systems (pp. 159-164)"
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "Four very close terms: **unsupported** = no more vendor support; **unpatched** = patch available but not applied; **obsolete** = outdated; **unmanaged** = invisible to tools. The answer depends on the keyword in the scenario."
+      },
+      {
+        "type": "h",
+        "text": "Ports, Services, Operating System, and Virtualization"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Ports and services**: every open port is an exposed interface; a forgotten service (e.g., SMB, RDP) widens the surface.",
+          "**OS-based vulnerabilities**: kernel, system services, local privileges, default settings.",
+          "**Virtualization vulnerabilities**: hypervisor, unpatched VMs, lateral movement between guests, sandbox escape.",
+          "**Zero-day**: flaw unknown to the vendor with no patch — no scan detects it, hence the importance of behavioral defense.",
+          "**Cryptographic vulnerabilities**: weak algorithms (MD5, SHA-1, 3DES), short keys, obsolete TLS, poor key management."
+        ]
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "Network Infrastructure / Virtualization",
+        "page": 105,
+        "printed": 83,
+        "strength": "supporting",
+        "note": "Exposed services, virtualization, and network hardening (printed pp. 81-83)"
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Fundamentals",
+        "page": 35,
+        "printed": 15,
+        "strength": "supporting",
+        "note": "What we are protecting and asset exposure (printed p. 15)"
+      },
+      {
+        "type": "h",
+        "text": "Application and Code: The Race Between Check and Use"
+      },
+      {
+        "type": "term",
+        "en": "Race condition / TOC / TOU",
+        "fr": "Race condition / TOC / TOU",
+        "field": "The system checks a state (time-of-check) then uses it later (time-of-use); the attacker modifies the state in between to bypass the control.",
+        "gap": true
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "chapter": "2.4",
+        "page": "2.4",
+        "strength": "primary",
+        "note": "Official objectives — race conditions, TOC, and TOU absent from the 4 books"
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "Race conditions, **time-of-check**, and **time-of-use** are required in §2.4 but absent from the provided books. Classic example: a file verified as safe then replaced before it is opened (TOCTOU)."
+      },
+      {
+        "type": "term",
+        "en": "Hardcoded secrets",
+        "fr": "Hardcoded secrets",
+        "field": "Password, API key, or token written directly into code or configuration: accessible to anyone who reads the repository or binary."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "Development",
+        "page": 118,
+        "printed": 96,
+        "strength": "primary",
+        "note": "Hardcoded secrets and credential management in code (printed pp. 96-97)"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Malicious update**: a compromised update distributed through the legitimate channel — major supply chain risk.",
+          "**Unsafe exception handling**: verbose error messages that reveal paths, queries, or credentials.",
+          "**Hardcoded secrets**: to be replaced by a secrets vault and rotation."
+        ]
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "Development / Vulnerability Management",
+        "page": 126,
+        "printed": 104,
+        "strength": "supporting",
+        "note": "Code defects and security review (printed pp. 102-105)"
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "A zero-day cannot be fixed with a patch: respond with surface reduction, compensating controls, segmentation, and behavioral detection."
+      },
+      {
+        "type": "check",
+        "q": "A script verifies that a file is authorized, then opens it one second later; the attacker replaces it in between. Which vulnerability?",
+        "options": [
+          "Hardcoded secret",
+          "Race condition / time-of-check to time-of-use",
+          "Zero-day",
+          "Unsupported product"
+        ],
+        "answer": 1,
+        "explain": "The gap between verification and use is exploited: this is a race condition (TOCTOU)."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Unsupported ≠ unpatched ≠ obsolete ≠ unmanaged: four distinct states.",
+          "Ports, OS, virtualization, zero-day, and weak crypto widen the system surface.",
+          "TOC/TOU is an objectives gap: check then use modified in between.",
+          "Hardcoded secrets, malicious updates, and verbose exceptions are code weaknesses."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "2.4-02",
+    "objective": "2.4",
+    "order": 2,
+    "title": "Modern Surfaces: Identity, Configuration, Wireless, LLM, and Public Storage",
+    "minutes": 16,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "The modern attack surface is no longer limited to servers: it includes **forgotten credentials**, **unmanaged devices**, **shadow IT**, **connected objects**, **language models**, and **public repositories**."
+      },
+      {
+        "type": "h",
+        "text": "Identity, Devices, and Configuration"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-2.4-L02-vuln-tree"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Surface",
+          "Concrete Risk"
+        ],
+        "rows": [
+          [
+            "Unmanaged / stale credentials",
+            "Forgotten accounts, unrotated service credentials: persistent access for the attacker."
+          ],
+          [
+            "Rogue devices",
+            "Unauthorized device plugged into the network (WiFi Pineapple, Raspberry Pi)."
+          ],
+          [
+            "Shadow IT",
+            "Service or application used without security validation, outside inventory and monitoring."
+          ],
+          [
+            "Misconfiguration",
+            "Public bucket, open port, excessive permission, unchanged default value."
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Know What You Are Protecting",
+        "page": 165,
+        "printed": 145,
+        "strength": "supporting",
+        "note": "Shadow IT and uninventoried assets (printed p. 145)"
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "Vulnerability management / Hardening",
+        "page": 171,
+        "strength": "supporting",
+        "note": "Hardening, configuration, and human error (p. 171)"
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "Network Infrastructure",
+        "page": 167,
+        "printed": 145,
+        "strength": "supporting",
+        "note": "Network configuration and unmanaged devices (printed pp. 143-145)"
+      },
+      {
+        "type": "term",
+        "en": "Identity provider (IdP)",
+        "fr": "Identity provider (IdP)",
+        "field": "Central service that authenticates users and issues tokens to applications (SSO, federation). Critical surface: its compromise grants access to all connected applications.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Mobile device attack surface",
+        "fr": "Mobile device attack surface",
+        "field": "Apps, permissions, network, local storage, and MDM: an unmanaged work phone combines identity, data, and connectivity.",
+        "gap": true
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "chapter": "2.4",
+        "page": "2.4",
+        "strength": "primary",
+        "note": "Official objectives — IdP, mobile, and modern surfaces absent from the 4 books"
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "Identity providers, mobile devices, LLMs, public repositories, and public object storage are **required in §2.4** but not covered by the provided books. They are written from the official objectives."
+      },
+      {
+        "type": "h",
+        "text": "Wireless and Low-Power Communications"
+      },
+      {
+        "type": "p",
+        "text": "Wireless networks and low-power protocols (IoT, BLE, Zigbee) add a surface that is hard to inventory: rogue access points, WPS enabled, weak encryption, unmanaged devices. Segmentation and radio inventory are the key controls."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "Network Infrastructure",
+        "page": 103,
+        "printed": 81,
+        "strength": "supporting",
+        "note": "Wireless networks and segmentation (printed pp. 81-83)"
+      },
+      {
+        "type": "h",
+        "text": "LLMs, Repositories, and Public Storage"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Large language models (LLMs)**: prompt injection, data leakage in responses, dependency on plugins — the surface is the conversational interface itself.",
+          "**Public repositories**: public code repository exposing secrets, an API key, or internal system structure.",
+          "**Public object storage**: S3 bucket or object storage accessible without authentication, often due to a simple configuration error."
+        ]
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Select and Collect the Right Data",
+        "page": 225,
+        "printed": 205,
+        "strength": "supporting",
+        "note": "Exposed data and asset visibility (printed p. 205)"
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "Data / Vulnerabilities",
+        "page": 54,
+        "strength": "supporting",
+        "note": "Data exposure and perimeter (p. 54)"
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "In a \"public bucket\" or \"API key in GitHub\" scenario, look for **misconfiguration** and **public repository / public object storage** — not zero-day or malware."
+      },
+      {
+        "type": "check",
+        "q": "A developer publishes a GitHub repository containing a valid API key. Which attack surface category?",
+        "options": [
+          "Zero-day",
+          "Public repository / hardcoded secret",
+          "Rogue device",
+          "Virtualization vulnerability"
+        ],
+        "answer": 1,
+        "explain": "The public repository exposes a hardcoded secret: this is a modern public repository surface."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Identity: stale credentials, rogue devices, shadow IT, IdP, and mobile are surfaces in their own right.",
+          "Misconfiguration is the most common cause of exposure (public bucket, excessive permissions).",
+          "Wireless and low-power: rogue access points and uninventoried devices.",
+          "LLMs, public repositories, and public object storage are gaps: §2.4 objectives only."
+        ]
+      }
+    ]
+  }
+]

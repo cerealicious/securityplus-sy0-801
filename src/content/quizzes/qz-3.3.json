@@ -1,0 +1,216 @@
+{
+  "id": "qz-3.3",
+  "objective": "3.3",
+  "title": "Quiz — Data Protection",
+  "questions": [
+    {
+      "id": "q-3.3-01",
+      "type": "single",
+      "q": "Which of the following is unstructured data?",
+      "options": [
+        "A relational database table",
+        "A CSV file with a fixed schema",
+        "A corpus of emails and attachments",
+        "An ERP record"
+      ],
+      "answer": [2],
+      "explain": "Emails and attachments have no predefined schema: unstructured. Tables, CSVs, and ERP records are structured.",
+      "ref": "3.3-01"
+    },
+    {
+      "id": "q-3.3-02",
+      "type": "single",
+      "q": "A disk is encrypted at rest. An attacker steals the powered-off laptop. Is the data protected?",
+      "options": [
+        "No, encryption at rest never protects data",
+        "Yes, as long as the key is unavailable and the system is powered off",
+        "No, because the disk can be copied",
+        "Yes, but only if the disk is an SSD"
+      ],
+      "answer": [1],
+      "explain": "Encryption at rest protects a stolen or powered-off medium. It does not protect a booted and unlocked system.",
+      "ref": "3.3-01"
+    },
+    {
+      "id": "q-3.3-03",
+      "type": "single",
+      "q": "An attacker uses a compromised service account to exfiltrate data via a legitimate query. Why did encryption at rest not protect the data?",
+      "options": [
+        "Because encryption at rest is obsolete",
+        "Because the data was in use and accessible to the authorized account",
+        "Because the key was stored in an HSM",
+        "Because the database was not backed up"
+      ],
+      "answer": [1],
+      "explain": "The database decrypts data to answer the query: the attacker acts as an authorized user. Least privilege, DLP, and exfiltration detection are needed.",
+      "ref": "3.3-01"
+    },
+    {
+      "id": "q-3.3-04",
+      "type": "single",
+      "q": "To which data state does TLS encryption primarily apply?",
+      "options": [
+        "At rest",
+        "In transit",
+        "In use",
+        "At destruction"
+      ],
+      "answer": [1],
+      "explain": "TLS protects data moving across the network. At rest, disk encryption or TDE is used.",
+      "ref": "3.3-01"
+    },
+    {
+      "id": "q-3.3-05",
+      "type": "single",
+      "q": "A customer service operator must see the last four digits of a card, never the full number. Which method is most appropriate?",
+      "options": [
+        "Asymmetric encryption",
+        "Masking",
+        "Tokenization",
+        "Hashing"
+      ],
+      "answer": [1],
+      "explain": "Masking displays only part of the value (****1234) without exposing the full data. Tokenization would replace the entire value with a token.",
+      "ref": "3.3-02"
+    },
+    {
+      "id": "q-3.3-06",
+      "type": "single",
+      "q": "A merchant needs to reference cards for customer service without storing the real number. Which method should be chosen?",
+      "options": [
+        "Hashing the number",
+        "Tokenization via a token vault",
+        "Masking the last four digits",
+        "Transposing the digits"
+      ],
+      "answer": [1],
+      "explain": "Tokenization replaces the number with a token and stores the mapping in a protected vault. Hashing would prevent reuse; masking would not allow looking up the card.",
+      "ref": "3.3-02"
+    },
+    {
+      "id": "q-3.3-07",
+      "type": "single",
+      "q": "Which statement about de-identification is accurate?",
+      "options": [
+        "It is always irreversible",
+        "It can often be re-identified by cross-referencing datasets",
+        "It is equivalent to encryption",
+        "It removes all legal obligations"
+      ],
+      "answer": [1],
+      "explain": "De-identification removes or generalizes identifiers, but cross-referencing can re-identify individuals. True anonymization is irreversible and hard to prove.",
+      "ref": "3.3-02"
+    },
+    {
+      "id": "q-3.3-08",
+      "type": "single",
+      "q": "Who decides the classification of data and its associated permissions?",
+      "options": [
+        "The custodian",
+        "The owner",
+        "The steward",
+        "The operator"
+      ],
+      "answer": [1],
+      "explain": "The data owner is a business leader who decides classification and access. The custodian implements the controls.",
+      "ref": "3.3-02"
+    },
+    {
+      "id": "q-3.3-09",
+      "type": "single",
+      "q": "A system administrator applies backups and encryption to an HR database. What role do they play?",
+      "options": [
+        "Data owner",
+        "Data custodian",
+        "Data controller",
+        "Data steward"
+      ],
+      "answer": [1],
+      "explain": "They implement and maintain controls: they are a custodian. They do not decide who is allowed to read HR data.",
+      "ref": "3.3-02"
+    },
+    {
+      "id": "q-3.3-10",
+      "type": "single",
+      "q": "Which stage of the data lifecycle is the right time to classify data?",
+      "options": [
+        "At creation",
+        "After the first leak",
+        "During destruction",
+        "Only during an audit"
+      ],
+      "answer": [0],
+      "explain": "Classification must be decided at creation, as it triggers storage, access, and destruction controls.",
+      "ref": "3.3-02"
+    },
+    {
+      "id": "q-3.3-11",
+      "type": "single",
+      "q": "At which stage does an egress DLP primarily operate?",
+      "options": [
+        "Creation",
+        "Storage",
+        "Sharing",
+        "Destruction"
+      ],
+      "answer": [2],
+      "explain": "Egress DLP inspects data leaving the perimeter: this is the sharing stage. It can also act at storage, but egress is its primary enforcement point.",
+      "ref": "3.3-02"
+    },
+    {
+      "id": "q-3.3-12",
+      "type": "single",
+      "q": "A legal hold is issued. What happens to the 30-day destruction policy?",
+      "options": [
+        "It applies normally",
+        "It is suspended for the affected data",
+        "It becomes immediately mandatory",
+        "It is replaced by encryption"
+      ],
+      "answer": [1],
+      "explain": "A legal hold suspends destruction, even if the policy specifies 30 days. Destroying evidence after notification can result in sanctions.",
+      "ref": "3.3-02"
+    },
+    {
+      "id": "q-3.3-13",
+      "type": "single",
+      "q": "Which statement correctly distinguishes internal classification from regulatory category?",
+      "options": [
+        "'Confidential' is a legal obligation; 'health data' is an internal classification",
+        "'Confidential' is an internal classification; 'health data' is a regulatory category",
+        "The two terms are interchangeable",
+        "Only internal classification triggers controls"
+      ],
+      "answer": [1],
+      "explain": "Internal classification organizes the organization's rules; regulatory category triggers legal obligations (GDPR, HIPAA). Both complement each other.",
+      "ref": "3.3-01"
+    },
+    {
+      "id": "q-3.3-14",
+      "type": "match",
+      "q": "Match each method to its primary characteristic.",
+      "pairs": [
+        { "left": "Masking", "right": "Displays only a portion" },
+        { "left": "Tokenization", "right": "Reversible substitution via a vault" },
+        { "left": "Hashing", "right": "Irreversible digest" },
+        { "left": "Encryption", "right": "Reversible with the key" }
+      ],
+      "explain": "Four different levels of reversibility. The choice depends on the use case: display, referencing, integrity, or confidentiality.",
+      "ref": "3.3-02"
+    },
+    {
+      "id": "q-3.3-15",
+      "type": "multi",
+      "q": "Which controls relate to protecting data in use? (Select all that apply)",
+      "options": [
+        "Memory isolation and enclaves",
+        "Application least privilege",
+        "TLS stream encryption",
+        "DLP monitoring access to sensitive data"
+      ],
+      "answer": [0, 1, 3],
+      "explain": "Data in use: isolation, least privilege, DLP. TLS protects data in transit, not processing in memory.",
+      "ref": "3.3-01"
+    }
+  ]
+}

@@ -1,0 +1,359 @@
+[
+  {
+    "id": "3.4-01",
+    "objective": "3.4",
+    "order": 1,
+    "title": "Resilience: Recovery Sites, Diversity, and Redundancy",
+    "minutes": 16,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Resilience is not just \"having backups\". It answers a specific question: **how does the service continue, and then recover, after an outage or disaster?** The exam expects you to distinguish recovery sites, redundancy, and continuity mechanisms."
+      },
+      {
+        "type": "h",
+        "text": "Business Continuity and Disaster Recovery"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-3.4-L01-recovery-sites"
+      },
+      {
+        "type": "p",
+        "text": "The **Defensive Security Handbook** clearly separates the two: business continuity aims at overall business continuation, while disaster recovery refers to the IT processes that achieve the objectives set by continuity."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "7",
+        "page": 75,
+        "printed": 53,
+        "strength": "primary",
+        "note": "BCP / Disaster Recovery distinction"
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "Do not confuse: **BCP** = keep the organization operating; **DR** = restore systems and data. DR serves BCP."
+      },
+      {
+        "type": "h",
+        "text": "The Three Recovery Sites"
+      },
+      {
+        "type": "term",
+        "en": "Hot site",
+        "fr": "Hot site",
+        "field": "Fully operational site, data continuously synchronized. Recovery in minutes, highest cost.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Warm site",
+        "fr": "Warm site",
+        "field": "Equipment installed and configured, data restored from recent backups. Recovery in hours.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Cold site",
+        "fr": "Cold site",
+        "field": "Premises and power only; hardware and data must be installed. Recovery in days, lowest cost.",
+        "gap": true
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "The three site tiers are **required by the SY0-801 §3.4 objectives**, but none of the four provided books names them explicitly. The definitions above come from the objectives and industry practice, not from book attribution."
+      },
+      {
+        "type": "table",
+        "head": [
+          "Site",
+          "Data",
+          "Recovery Time",
+          "Cost"
+        ],
+        "rows": [
+          [
+            "Hot",
+            "Continuously synchronized",
+            "Minutes",
+            "Very high"
+          ],
+          [
+            "Warm",
+            "Recent restoration",
+            "Hours",
+            "Medium"
+          ],
+          [
+            "Cold",
+            "Must be brought in",
+            "Days / weeks",
+            "Low"
+          ]
+        ]
+      },
+      {
+        "type": "h",
+        "text": "Platform Diversity and Redundancy"
+      },
+      {
+        "type": "p",
+        "text": "**Diversity** reduces the risk that a single failure affects all environments: provider, hardware, virtualization. **Redundancy** eliminates single points of failure via load balancing, clustering, autoscaling, high availability, and multicloud."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "7",
+        "page": 78,
+        "printed": 56,
+        "strength": "primary",
+        "note": "Clustered high availability and alternative systems"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Load balancing**: distributes load across multiple servers.",
+          "**Clustering**: multiple nodes acting as a single service.",
+          "**Autoscaling**: automatically adjusts capacity to demand.",
+          "**High availability**: redundancy aiming for minimal interruption.",
+          "**Multicloud systems**: distributing services across multiple providers."
+        ]
+      },
+      {
+        "type": "h",
+        "text": "Electrical Power"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Element",
+          "Role"
+        ],
+        "rows": [
+          [
+            "UPS",
+            "Uninterruptible power supply, short autonomy, bridge time to generator"
+          ],
+          [
+            "RPS",
+            "Redundant power supply within a single device"
+          ],
+          [
+            "Power generator",
+            "Long autonomy during extended outage"
+          ],
+          [
+            "Surge protector",
+            "Protection against power surges"
+          ]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "UPS, RPS, generator, and surge protector are listed in **§3.4 objectives**; no book details them. Memorize as a list."
+      },
+      {
+        "type": "check",
+        "q": "A site has servers and networking, but data must be restored from the latest backup before restarting. Which site is this?",
+        "options": [
+          "Hot site",
+          "Warm site",
+          "Cold site",
+          "Clustered site"
+        ],
+        "answer": 1,
+        "explain": "A warm site is pre-equipped but requires data restoration. A hot site is continuously synchronized; a cold site also requires hardware installation."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "BCP = overall continuity; DR = IT restoration.",
+          "Hot = minutes, Warm = hours, Cold = days.",
+          "Redundancy: load balancing, clustering, autoscaling, HA, multicloud.",
+          "Power: UPS, RPS, generator, surge protector."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "3.4-02",
+    "objective": "3.4",
+    "order": 2,
+    "title": "RTO, RPO, MTTR, MTBF, and Recovery Testing",
+    "minutes": 15,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Recovery metrics turn a vague requirement (\"we must restore quickly\") into a measurable target. They are at the heart of exam scenario questions."
+      },
+      {
+        "type": "h",
+        "text": "Two Objectives, Two Different Questions"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-3.4-L02-recovery-timeline"
+      },
+      {
+        "type": "simulation",
+        "simId": "sim-rto-rpo"
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "RPO — Recovery Point Objective",
+          "points": [
+            "**How much data loss is acceptable?**",
+            "Measured in time, before the incident.",
+            "A 1-hour RPO requires backups or replication at least hourly."
+          ]
+        },
+        "right": {
+          "title": "RTO — Recovery Time Objective",
+          "points": [
+            "**How long to restore the service?**",
+            "Measured after the incident.",
+            "A 1-hour RTO requires a recovery mechanism under one hour."
+          ]
+        }
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "7",
+        "page": 76,
+        "printed": 54,
+        "strength": "primary",
+        "note": "RPO and RTO definitions, numerical example"
+      },
+      {
+        "type": "term",
+        "en": "MTTR — Mean Time To Repair",
+        "fr": "MTTR — Mean Time To Repair",
+        "field": "Average time required to repair a failed piece of equipment and return it to service.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "MTBF — Mean Time Between Failures",
+        "fr": "MTBF — Mean Time Between Failures",
+        "field": "Average operating time between two failures; measures reliability.",
+        "gap": true
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "MTTR and MTBF are required in **§3.4**; absent from the four books. Exact magnitudes matter less than the distinction between reliability (MTBF) vs. restoration time (MTTR), which is what is tested."
+      },
+      {
+        "type": "h",
+        "text": "The Dependency Trap"
+      },
+      {
+        "type": "p",
+        "text": "The book gives a striking example: an email server with a 1-hour RTO on a network whose RTO is 3 hours. The actual RTO of email is therefore **3 hours**: recovery cannot be faster than its slowest element."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "7",
+        "page": 79,
+        "printed": 57,
+        "strength": "primary",
+        "note": "Dependencies and effective RTO"
+      },
+      {
+        "type": "h",
+        "text": "Backups: What the Objectives Require"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Retention**: how long copies are kept.",
+          "**Immutability**: unmodifiable copies, even by a compromised administrator account — defense against ransomware.",
+          "**Scope**: exact scope of backed-up data.",
+          "**Restoration testing**: an untested backup is not a backup."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "An immutable backup is often the expected answer when a scenario mentions ransomware encrypting or deleting backups."
+      },
+      {
+        "type": "h",
+        "text": "Testing Recovery"
+      },
+      {
+        "type": "steps",
+        "items": [
+          {
+            "title": "Failover",
+            "text": "Actual switchover to the backup site or system, with named authorities."
+          },
+          {
+            "title": "Simulation",
+            "text": "Controlled exercise that validates the procedure without interrupting production."
+          },
+          {
+            "title": "Parallel processing",
+            "text": "Simultaneous processing on both sites to compare results."
+          },
+          {
+            "title": "Failback",
+            "text": "Return to the primary site once the incident is resolved — often forgotten!"
+          }
+        ]
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "7",
+        "page": 80,
+        "printed": 58,
+        "strength": "primary",
+        "note": "Failover, failback, authorities, and testing"
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "—",
+        "page": 116,
+        "printed": 96,
+        "strength": "supporting",
+        "note": "COOP: avoid over-engineering, plan for common occurrences"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-dr-timeline"
+      },
+      {
+        "type": "check",
+        "q": "An outage lasts 4 hours. Data was lost for the last 45 minutes. Which metrics describe this?",
+        "options": [
+          "RTO = 45 min, RPO = 4 h",
+          "RPO = 45 min, RTO = 4 h",
+          "MTBF = 45 min, MTTR = 4 h",
+          "RPO = 4 h, MTTR = 45 min"
+        ],
+        "answer": 1,
+        "explain": "RPO measures data loss (45 min); RTO measures service interruption (4 h). MTTR is the average repair duration, not the duration of this specific incident."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "RPO = acceptable data loss; RTO = acceptable outage duration.",
+          "MTTR = repair; MTBF = reliability.",
+          "A recovery chain is only as fast as its slowest link.",
+          "Immutability and restoration testing are indispensable."
+        ]
+      }
+    ]
+  }
+]

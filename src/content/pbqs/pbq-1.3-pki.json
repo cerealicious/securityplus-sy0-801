@@ -1,0 +1,18 @@
+{
+  "id": "pbq-1.3-pki",
+  "objective": "1.3",
+  "type": "order",
+  "title": "Reconstruct the Certificate Issuance Lifecycle",
+  "prompt": "Put the steps for obtaining and validating a server certificate in order, from key generation to revocation in case of compromise.",
+  "items": [
+    { "id": "s1", "label": "Generate the key pair locally and retain the private key", "order": 1 },
+    { "id": "s2", "label": "Create the CSR with the public key and identity (CN, SAN)", "order": 2 },
+    { "id": "s3", "label": "Submit the CSR to the Certificate Authority", "order": 3 },
+    { "id": "s4", "label": "The CA validates the requester's identity per its policy", "order": 4 },
+    { "id": "s5", "label": "The CA signs the certificate with its private key", "order": 5 },
+    { "id": "s6", "label": "Deploy the certificate and intermediate chain on the server", "order": 6 },
+    { "id": "s7", "label": "The client validates the chain, validity period, and hostname", "order": 7 },
+    { "id": "s8", "label": "In case of compromise, request revocation (CRL/OCSP)", "order": 8 }
+  ],
+  "explain": "The private key never leaves the requester: the CSR only carries the public key and proof of possession. The CA validates and then signs. The client walks the chain up to a trusted root and checks revocation. Revocation occurs after issuance, in case of compromise or departure."
+}

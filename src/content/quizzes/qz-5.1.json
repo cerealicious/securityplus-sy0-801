@@ -1,0 +1,115 @@
+{
+  "id": "qz-5.1",
+  "objective": "5.1",
+  "title": "Quiz — Governance, Risk, and Compliance Artifacts",
+  "questions": [
+    {
+      "id": "q-5.1-01",
+      "type": "single",
+      "q": "Which artifact sets a mandatory and measurable minimum level?",
+      "options": [
+        "Guideline",
+        "Standard",
+        "Advisory",
+        "Privacy policy"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "A standard enforces a verifiable level. A guideline or advisory recommends without mandating.",
+      "ref": "5.1-01"
+    },
+    {
+      "id": "q-5.1-02",
+      "type": "single",
+      "q": "A document describes the exact steps to revoke an account after an employee's departure. Which artifact is this?",
+      "options": [
+        "SOP",
+        "Standard",
+        "BCP",
+        "Baseline"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "An SOP is a repeatable sequence of steps. A standard sets a target state; a BCP organizes business continuity.",
+      "ref": "5.1-01"
+    },
+    {
+      "id": "q-5.1-03",
+      "type": "multi",
+      "q": "Which elements fall under guidelines? (Select all that apply)",
+      "options": [
+        "Benchmarks",
+        "Advisories",
+        "Implementation guides",
+        "Reference architecture"
+      ],
+      "answer": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explain": "All four are listed under Guidelines in objective 5.1: they guide decisions without imposing an obligation.",
+      "ref": "5.1-01"
+    },
+    {
+      "id": "q-5.1-04",
+      "type": "match",
+      "q": "Match each artifact to the question it answers.",
+      "pairs": [
+        {
+          "left": "Policy",
+          "right": "What must we comply with?"
+        },
+        {
+          "left": "Standard",
+          "right": "What minimum level is required?"
+        },
+        {
+          "left": "Procedure",
+          "right": "How to perform the action, step by step?"
+        },
+        {
+          "left": "Plan",
+          "right": "Who does what in an exceptional situation?"
+        }
+      ],
+      "explain": "The documentation pyramid reads from general intent (policy) to recovery organization (plan).",
+      "ref": "5.1-02"
+    },
+    {
+      "id": "q-5.1-05",
+      "type": "single",
+      "q": "Which policy defines the conditions for using a personal device to access the information system?",
+      "options": [
+        "Clean desk policy",
+        "BYOD policy",
+        "Disposal policy",
+        "DRP"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "A BYOD policy governs personal device usage: enrollment, compliance, access, and revocation.",
+      "ref": "5.1-02"
+    },
+    {
+      "id": "q-5.1-06",
+      "type": "single",
+      "q": "Which lifecycle stage grants a policy its formal authority?",
+      "options": [
+        "Drafting",
+        "Publishing on the intranet",
+        "Management approval",
+        "Version archiving"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Approval by executive leadership makes the document enforceable. Publication alone does not create an obligation.",
+      "ref": "5.1-02"
+    }
+  ]
+}

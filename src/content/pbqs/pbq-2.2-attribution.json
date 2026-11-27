@@ -1,0 +1,70 @@
+{
+  "id": "pbq-2.2-attribution",
+  "objective": "2.2",
+  "type": "classify",
+  "title": "Threat Actor <-> Motivation",
+  "prompt": "Classify each profile into the most likely threat actor category.",
+  "categories": [
+    "Organized crime",
+    "Terrorist",
+    "Unskilled attacker",
+    "Hacktivist",
+    "Insider",
+    "Accidental actor",
+    "Competitor",
+    "Nation-state actor"
+  ],
+  "items": [
+    {
+      "id": "i1",
+      "label": "Ransomware campaign with ransom demand and resale of stolen data",
+      "cat": "Organized crime"
+    },
+    {
+      "id": "i2",
+      "label": "Destructive attack intended to cause panic and paralyze a public service",
+      "cat": "Terrorist"
+    },
+    {
+      "id": "i3",
+      "label": "Using a script found online without technical understanding, to gain notoriety",
+      "cat": "Unskilled attacker"
+    },
+    {
+      "id": "i4",
+      "label": "Website defacement to protest an environmental policy",
+      "cat": "Hacktivist"
+    },
+    {
+      "id": "i5",
+      "label": "Disgruntled employee who exfiltrates data after being denied a promotion",
+      "cat": "Insider"
+    },
+    {
+      "id": "i6",
+      "label": "Accountant who enters the wrong email address and sends a confidential file to the wrong recipient",
+      "cat": "Accidental actor"
+    },
+    {
+      "id": "i7",
+      "label": "Theft of research blueprints before a rival product launch",
+      "cat": "Competitor"
+    },
+    {
+      "id": "i8",
+      "label": "Long-term campaign with custom tools, zero-days, and strategic intelligence objectives",
+      "cat": "Nation-state actor"
+    },
+    {
+      "id": "i9",
+      "label": "Scam via spoofed executive email requesting a wire transfer",
+      "cat": "Organized crime"
+    },
+    {
+      "id": "i10",
+      "label": "Administrator who modifies access permissions to benefit a rival company",
+      "cat": "Competitor"
+    }
+  ],
+  "explain": "Classify by motivation and attributes: legitimate access (insider/accidental), financial gain (organized crime/competitor), ideological cause (hacktivist/terrorist), and resources/sophistication (nation-state actor). The tool used does not define the category."
+}

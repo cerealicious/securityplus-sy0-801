@@ -1,0 +1,26 @@
+{
+  "id": "pbq-2.5-logs",
+  "objective": "2.5",
+  "type": "match",
+  "title": "Interpret Log Entries",
+  "prompt": "Match each log entry to its most likely interpretation.",
+  "pairs": [
+    {
+      "left": "Repeated 4625 events across 8 accounts within 2 minutes",
+      "right": "Password spraying"
+    },
+    {
+      "left": "Successful login from two countries within 30 minutes",
+      "right": "Impossible travel"
+    },
+    {
+      "left": "Timestamp modification on a system file",
+      "right": "Log tampering"
+    },
+    {
+      "left": "powershell.exe process with an encoded command string",
+      "right": "Fileless malware / living-off-the-land"
+    }
+  ],
+  "explain": "Context is key: multiple accounts with the same password = spraying; two incompatible locations = impossible travel; modified timestamps are an indicator of tampering."
+}

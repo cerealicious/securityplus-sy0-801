@@ -1,0 +1,90 @@
+{
+  "id": "qz-2.2",
+  "objective": "2.2",
+  "title": "Quiz — Threat Actors and Motivations",
+  "questions": [
+    {
+      "id": "q-2.2-01",
+      "type": "single",
+      "q": "Which actor already has legitimate access to the environment?",
+      "options": [
+        "Unskilled attacker",
+        "Insider",
+        "State-sponsored actor",
+        "Terrorist"
+      ],
+      "answer": [1],
+      "explain": "An insider is an authorized user: perimeter controls do not block them.",
+      "ref": "2.2-02"
+    },
+    {
+      "id": "q-2.2-02",
+      "type": "single",
+      "q": "A ransomware campaign demanding payment primarily falls under which motivation?",
+      "options": [
+        "Ideological motivation",
+        "Financial motivation / extortion",
+        "General curiosity",
+        "Ethical motivation"
+      ],
+      "answer": [1],
+      "explain": "Financial gain and extortion characterize organized crime, even if the tool can be reused by other actors.",
+      "ref": "2.2-01"
+    },
+    {
+      "id": "q-2.2-03",
+      "type": "match",
+      "q": "Match each actor to their most typical motivation.",
+      "pairs": [
+        { "left": "Hacktivist", "right": "Ideological / political motivation" },
+        { "left": "Competitor", "right": "Intellectual property" },
+        { "left": "State-sponsored actor", "right": "Espionage" },
+        { "left": "Unskilled attacker", "right": "Notoriety / curiosity" }
+      ],
+      "explain": "Motivation is the reliable classification criterion, regardless of the tool used.",
+      "ref": "2.2-01"
+    },
+    {
+      "id": "q-2.2-04",
+      "type": "multi",
+      "q": "Which attributes are used to characterize a threat actor? (Select all that apply)",
+      "options": [
+        "Internal / external",
+        "Resources / funding",
+        "Level of sophistication / capability",
+        "Color of their chat interface"
+      ],
+      "answer": [0, 1, 2],
+      "explain": "These are the three official attributes in objective 2.2.",
+      "ref": "2.2-02"
+    },
+    {
+      "id": "q-2.2-05",
+      "type": "single",
+      "q": "Which attribution approach is correct?",
+      "options": [
+        "Attribute based on a single IP address",
+        "Attribute based on a body of evidence, with a confidence level",
+        "Always attribute to an APT",
+        "Refuse any attribution, even with evidence"
+      ],
+      "answer": [1],
+      "explain": "Tools and infrastructure are shared: attribution is probabilistic and must be reassessed.",
+      "ref": "2.2-02"
+    },
+    {
+      "id": "q-2.2-06",
+      "type": "single",
+      "q": "A user clicks a phishing link with no intent to cause harm. Which actor best describes this profile?",
+      "options": [
+        "Malicious insider",
+        "Accidental / unintentional actor",
+        "Terrorist",
+        "Competitor"
+      ],
+      "answer": [1],
+      "explain": "The lack of intent qualifies an accidental actor, even if their action opens the door to another threat actor.",
+      "ref": "2.2-01"
+    }
+  ]
+}

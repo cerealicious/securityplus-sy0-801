@@ -1,0 +1,90 @@
+{
+  "id": "sc-4.4-alert-tuning",
+  "objective": "4.4",
+  "title": "Suppressing an Alert Without Going Blind",
+  "context": "Your SIEM generates 500 alerts per day. Analysts are overwhelmed and you must regain control of monitoring in three decisions.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "Before changing anything, what analysis do you conduct?",
+      "choices": [
+        {
+          "text": "Identify the rules producing the most false positives and understand their root cause",
+          "next": "n2",
+          "score": 4,
+          "why": "Tuning must target noisy rules and understand why they are noisy."
+        },
+        {
+          "text": "Disable all rules for one week",
+          "next": "n2",
+          "score": 0,
+          "why": "You would lose all detection during that period."
+        },
+        {
+          "text": "Hire more analysts to absorb the volume",
+          "next": "n2",
+          "score": 1,
+          "why": "That treats the symptom, not the cause, and remains costly."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "A \"failed login\" rule alerts 200 times a day due to a known backup job. What do you do?",
+      "choices": [
+        {
+          "text": "Precisely exclude the backup account, document the exclusion, and set a review date",
+          "next": "n3",
+          "score": 4,
+          "why": "Targeted exclusion removes noise without depriving the rule of its ability to detect real attacks."
+        },
+        {
+          "text": "Delete the entire rule",
+          "next": "n3",
+          "score": 0,
+          "why": "Real brute-force attempts would no longer be detected."
+        },
+        {
+          "text": "Ignore the alerts without written documentation",
+          "next": "n3",
+          "score": 1,
+          "why": "Without documentation, no one can understand or reassess the choice later."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "You now want to see east-west communications between servers. Which source do you add?",
+      "choices": [
+        {
+          "text": "NetFlow/IPFIX complemented by port mirroring to the SIEM",
+          "next": "n4",
+          "score": 4,
+          "why": "NetFlow reveals conversations and SPAN enables deeper inspection without disrupting traffic."
+        },
+        {
+          "text": "Only perimeter firewall logs",
+          "next": "n4",
+          "score": 1,
+          "why": "The perimeter firewall does not see internal server-to-server traffic."
+        },
+        {
+          "text": "Disable correlation to improve clarity",
+          "next": "n4",
+          "score": 0,
+          "why": "Disabling correlation reduces detection instead of improving visibility."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "You reduced noise through targeted, documented tuning, then enriched collection with the right network telemetry."
+    }
+  },
+  "debrief": [
+    "Tuning relies on analyzing false positives, not blindly deleting rules.",
+    "An exclusion must be precise, documented, and periodically reviewed.",
+    "NetFlow and port mirroring provide visibility into internal traffic."
+  ]
+}

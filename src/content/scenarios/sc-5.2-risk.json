@@ -1,0 +1,90 @@
+{
+  "id": "sc-5.2-risk",
+  "objective": "5.2",
+  "title": "A Risk to Address: Which Trade-off?",
+  "context": "A critical application server runs an unsupported version. A public exploit exists. You must conduct the risk analysis and propose a treatment.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "First step of the risk management process?",
+      "choices": [
+        {
+          "text": "Assess impact and likelihood before any decision",
+          "next": "n2",
+          "score": 4,
+          "why": "Identifying then analyzing (impact × likelihood) precedes choosing the treatment."
+        },
+        {
+          "text": "Accept the risk because no attack has been observed yet",
+          "next": "n2",
+          "score": 0,
+          "why": "The absence of an incident is not an analysis; acceptance must be a documented last resort."
+        },
+        {
+          "text": "Patch immediately without assessment",
+          "next": "n2",
+          "score": 1,
+          "why": "Remediation is likely justified, but without analysis you cannot prioritize or justify it."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "The incident would cost €40,000 and the annual likelihood is 3 occurrences. What is the ALE?",
+      "choices": [
+        {
+          "text": "€40,000",
+          "next": "n3",
+          "score": 0,
+          "why": "€40,000 is the SLE (loss per occurrence), not the annual ALE."
+        },
+        {
+          "text": "€120,000",
+          "next": "n3",
+          "score": 4,
+          "why": "ALE = SLE × ARO = 40,000 × 3 = €120,000 per year."
+        },
+        {
+          "text": "€13,333",
+          "next": "n3",
+          "score": 0,
+          "why": "That is division; ALE is the multiplication of loss by frequency."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "The patch costs €20,000 and reduces frequency to 1 occurrence/year. How do you classify the treatment?",
+      "choices": [
+        {
+          "text": "Mitigation: reducing likelihood or impact",
+          "next": "n4",
+          "score": 4,
+          "why": "The control reduces frequency: it is mitigation. The net benefit is €60,000/year."
+        },
+        {
+          "text": "Transference: purchasing insurance",
+          "next": "n4",
+          "score": 1,
+          "why": "Transference delegates the loss; it does not reduce incident frequency."
+        },
+        {
+          "text": "Avoidance: stopping the activity",
+          "next": "n4",
+          "score": 0,
+          "why": "Avoidance removes the activity causing the risk, which is not necessary here."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "You followed the process: analysis, SLE/ALE/ARO quantification, then treatment selection and benefit calculation."
+    }
+  },
+  "debrief": [
+    "Analysis: impact × likelihood, before choosing the treatment.",
+    "SLE = loss per incident; ALE = SLE × ARO (annual frequency).",
+    "Mitigation = reduce impact or likelihood; acceptance remains a documented, dated last resort."
+  ]
+}

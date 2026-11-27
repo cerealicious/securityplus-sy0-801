@@ -1,0 +1,77 @@
+{
+  "id": "pbq-3.1-models",
+  "objective": "3.1",
+  "type": "classify",
+  "title": "Classify Deployment Models",
+  "prompt": "For each situation, select the architecture model that best fits: Public cloud, Private cloud, Hybrid, On-premises, or Air-gapped/OT.",
+  "categories": [
+    "Public cloud",
+    "Private cloud",
+    "Hybrid",
+    "On-premises",
+    "Air-gapped/OT"
+  ],
+  "items": [
+    {
+      "id": "i1",
+      "label": "Customer configures identities and data with a provider; infrastructure remains with the provider",
+      "cat": "Public cloud"
+    },
+    {
+      "id": "i2",
+      "label": "Datacenter dedicated to a single organization, with patching and power managed internally",
+      "cat": "Private cloud"
+    },
+    {
+      "id": "i3",
+      "label": "Cloud application connected to an on-premises database via VPN and federated identity",
+      "cat": "Hybrid"
+    },
+    {
+      "id": "i4",
+      "label": "Servers, storage, and backups owned and administered entirely on-site",
+      "cat": "On-premises"
+    },
+    {
+      "id": "i5",
+      "label": "SCADA production line with no Internet connection; transfers via controlled media",
+      "cat": "Air-gapped/OT"
+    },
+    {
+      "id": "i6",
+      "label": "Lab network physically separated from the corporate office network",
+      "cat": "Air-gapped/OT"
+    },
+    {
+      "id": "i7",
+      "label": "On-demand workload running at a provider with no OS to maintain",
+      "cat": "Public cloud"
+    },
+    {
+      "id": "i8",
+      "label": "Infrastructure shared among multiple hospitals within the same group",
+      "cat": "Private cloud"
+    },
+    {
+      "id": "i9",
+      "label": "Sensitive data kept on-site, analytics hosted in the cloud",
+      "cat": "Hybrid"
+    },
+    {
+      "id": "i10",
+      "label": "Equipment and network cabling entirely dedicated to a critical environment",
+      "cat": "On-premises"
+    },
+    {
+      "id": "i11",
+      "label": "Recovery and patching entirely handled by the organization, with no infrastructure provider",
+      "cat": "On-premises"
+    },
+    {
+      "id": "i12",
+      "label": "Services distributed across two providers to reduce single-vendor lock-in",
+      "cat": "Public cloud"
+    }
+  ],
+  "explain": "Reason based on infrastructure ownership, control responsibility, and isolation level. Serverless and multicloud remain variants of public cloud; the junction point of a hybrid model is a distinct trust zone."
+}

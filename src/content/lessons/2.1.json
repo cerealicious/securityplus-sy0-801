@@ -1,0 +1,313 @@
+[
+  {
+    "id": "2.1-01",
+    "objective": "2.1",
+    "order": 1,
+    "title": "Threat, Vulnerability, Risk: The Intelligence Flow",
+    "minutes": 16,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "The exam does not ask you to memorize hacker group names, but to reason correctly: **a threat exploits a vulnerability, which creates a risk whose likelihood and impact are estimated**. That reasoning then drives prioritization."
+      },
+      {
+        "type": "h",
+        "text": "Threat, Vulnerability, Risk: Three Distinct Concepts"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-2.1-L01-intel-cycle"
+      },
+      {
+        "type": "term",
+        "en": "Threat",
+        "fr": "Threat",
+        "field": "Actor, event, or capability that can exploit a weakness to harm an asset. The threat exists even if the weakness is not yet exploitable."
+      },
+      {
+        "type": "term",
+        "en": "Vulnerability",
+        "fr": "Vulnerability",
+        "field": "Weakness in a system, process, or control that can be exploited. Without a threat to exploit it, a vulnerability remains a potential risk."
+      },
+      {
+        "type": "p",
+        "text": "The SOC notes summarize risk with a simple relationship the exam expects: **risk = vulnerability × threat** (often expressed as likelihood × impact). A critical flaw on an isolated system with no known threat does not carry the same risk as a medium flaw exposed on the Internet."
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "Risk / Threats",
+        "page": 19,
+        "strength": "primary",
+        "note": "Risk = vulnerability × threat relationship (pp. 18-19)"
+      },
+      {
+        "type": "h",
+        "text": "Likelihood and Impact"
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "Likelihood — Probability",
+          "points": [
+            "What is the chance that the threat materializes?",
+            "Depends on exposure, ease of exploitation, and actor activity.",
+            "A public exploit and an accessible target increase likelihood."
+          ]
+        },
+        "right": {
+          "title": "Impact — Consequence",
+          "points": [
+            "What happens if exploitation succeeds?",
+            "Depends on asset criticality, data, and affected services.",
+            "A domain compromise has a higher impact than an isolated workstation."
+          ]
+        }
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "Never reduce risk to technical severity (CVSS) alone. A \"critical\" flaw on an isolated test bench may be lower priority than a \"high\" flaw on an exposed domain controller."
+      },
+      {
+        "type": "h",
+        "text": "Intelligence Sources and Threat Lifecycle"
+      },
+      {
+        "type": "term",
+        "en": "Threat feed",
+        "fr": "Threat feed",
+        "field": "Continuous stream of indicators and intelligence (IOCs, TTPs, CVEs, trends) fed by internal, commercial, government, or community sources."
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Intelligence sources**: threat feeds, CERTs, ISACs, vendors, partners, internal logs, threat hunting.",
+          "**External sources**: vulnerability advisories, security bulletins, government intelligence.",
+          "**Internal sources**: EDR/SIEM telemetry, past incidents, asset inventory.",
+          "**Threat lifecycle**: reconnaissance → intrusion → exploitation → installation → command and control → actions on objectives (7-phase Cyber Kill Chain)."
+        ]
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Fundamentals",
+        "page": 43,
+        "printed": 23,
+        "strength": "supporting",
+        "note": "Understanding what you are protecting and lifecycle / intelligence (printed pp. 23-24)"
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Cyber Threat Intelligence",
+        "page": 171,
+        "printed": 151,
+        "strength": "supporting",
+        "note": "Intelligence sources and threat lifecycle (printed pp. 151-168)"
+      },
+      {
+        "type": "steps",
+        "items": [
+          {
+            "title": "1. Reconnaissance",
+            "text": "Gathering information about the target, often invisible in logs."
+          },
+          {
+            "title": "2. Intrusion / Delivery",
+            "text": "The vector reaches the target (email, attachment, browser, media)."
+          },
+          {
+            "title": "3. Exploitation",
+            "text": "The vulnerability is used to execute code or gain access."
+          },
+          {
+            "title": "4. Installation and Persistence",
+            "text": "The attacker establishes durable access."
+          },
+          {
+            "title": "5. Command & Control then Actions",
+            "text": "Communication with the attacker, lateral movement, exfiltration, or impact."
+          }
+        ]
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-2.1-risk-flow"
+      },
+      {
+        "type": "check",
+        "q": "A new flaw is published with a public exploit, but the affected service is not exposed and has a compensating control. What is the correct reasoning?",
+        "options": [
+          "Maximum priority: any CVE with an exploit is critical",
+          "Estimate likelihood and impact: reduced exposure and a compensating control lower the risk",
+          "Ignore the flaw because no incident has been observed",
+          "Wait for the next maintenance window without analysis"
+        ],
+        "answer": 1,
+        "explain": "Technical severity alone does not determine risk: likelihood and impact must be evaluated in context."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Risk = vulnerability × threat, or likelihood × impact.",
+          "Likelihood depends on exposure and ease of exploitation; impact depends on asset criticality.",
+          "Intelligence sources are internal and external; threat feeds fuel detection.",
+          "The threat lifecycle runs from reconnaissance to actions on objectives."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "2.1-02",
+    "objective": "2.1",
+    "order": 2,
+    "title": "CVSS, CVE, and Vulnerability Prioritization",
+    "minutes": 15,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Once risk is understood, it must be **measured and ranked**. That is the role of CVSS and CVE, two tools often confused — and often misquoted in the SOC notes, creating a recurring exam trap."
+      },
+      {
+        "type": "h",
+        "text": "CVSS: One Score, Three Metric Groups"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-2.1-L02-cvss-matrix"
+      },
+      {
+        "type": "term",
+        "en": "CVSS — Common Vulnerability Scoring System",
+        "fr": "CVSS — Common Vulnerability Scoring System",
+        "field": "Open standard that produces a score from 0 to 10 (0 = none, 10 = critical) from Base, Temporal, and Environmental metrics."
+      },
+      {
+        "type": "table",
+        "head": [
+          "Metric Group",
+          "What It Measures",
+          "Example"
+        ],
+        "rows": [
+          [
+            "Base",
+            "Intrinsic characteristics of the flaw",
+            "Attack vector, complexity, privileges required, CIA impact"
+          ],
+          [
+            "Temporal",
+            "State over time",
+            "Existence of an exploit, patch availability, report maturity"
+          ],
+          [
+            "Environmental",
+            "Organization-specific context",
+            "Asset criticality, deployed compensating controls"
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "Vulnerability management / CVSS",
+        "page": 162,
+        "strength": "primary",
+        "note": "CVSS, CVE, and vulnerability management (pp. 162-163)"
+      },
+      {
+        "type": "term",
+        "en": "CVE — Common Vulnerabilities and Exposures",
+        "fr": "CVE — Common Vulnerabilities and Exposures",
+        "field": "Public catalog that assigns a unique identifier (CVE-2024-xxxx) to a known vulnerability. It is an **enumeration**, not a severity measure."
+      },
+      {
+        "type": "callout",
+        "kind": "warning",
+        "text": "Common error in the SOC notes: presenting CVE as \"exposure\" and CWE as \"exploitation\". Correction to remember: **CVE = Common Vulnerabilities and Exposures** (flaw identifier); **CWE = Common Weakness Enumeration** (code weakness type, e.g., CWE-79 XSS)."
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "Vulnerability management",
+        "page": 163,
+        "strength": "primary",
+        "note": "CVE and CWE — correction of the book's mislabeling"
+      },
+      {
+        "type": "h",
+        "text": "Prioritizing: From Score to Decision"
+      },
+      {
+        "type": "p",
+        "text": "The CVSS score gives a **severity**, not a priority. Prioritization combines severity, exposure, asset criticality, exploit availability, patch availability, and compensating controls. The Defensive Security Handbook places this step in risk management: you address what combines high impact and high likelihood first."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "Creating a Security Program",
+        "page": 27,
+        "printed": 5,
+        "strength": "primary",
+        "note": "Risk assessment, impact, and likelihood (printed pp. 3-5)"
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "Vulnerability Management",
+        "page": 199,
+        "printed": 177,
+        "strength": "supporting",
+        "note": "Risk acceptance and remediation decisions (printed pp. 175-177)"
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Prioritize Incident Response",
+        "page": 149,
+        "printed": 129,
+        "strength": "supporting",
+        "note": "Business-impact-based prioritization (printed pp. 129-130)"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Internet-exposed + public exploit + critical asset** → immediate remediation.",
+          "**Internal network + no exploit + patch available** → normal scheduling.",
+          "**Isolated system + compensating control** → residual risk accepted, with monitoring.",
+          "Always re-evaluate after patching: a verification scan closes the loop."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "In a prioritization PBQ, do not rely on the CVSS number alone: look in the scenario for words like \"Internet-facing\", \"public exploit\", \"domain controller\", or \"no patch available\". Those determine priority."
+      },
+      {
+        "type": "check",
+        "q": "Which statement is accurate?",
+        "options": [
+          "CVE measures a flaw's severity out of 10",
+          "CVSS identifies a flaw with a CVE-2024-xxxx number",
+          "CVE is a unique identifier; CVSS is a severity score",
+          "CWE is a severity score used by the CAB"
+        ],
+        "answer": 2,
+        "explain": "CVE is an enumeration (identifier); CVSS is a scoring system. CWE classifies code weaknesses; it does not score severity."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "CVSS: 0-10 score with Base, Temporal, and Environmental metrics.",
+          "CVE = unique identifier; CWE = weakness type; do not confuse them.",
+          "Severity ≠ priority: exposure, exploit, criticality, and compensating controls matter.",
+          "Prioritization fits within the risk management lifecycle."
+        ]
+      }
+    ]
+  }
+]

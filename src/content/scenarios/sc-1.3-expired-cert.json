@@ -1,0 +1,90 @@
+{
+  "id": "sc-1.3-expired-cert",
+  "objective": "1.3",
+  "title": "Expired Certificate: What to Do?",
+  "context": "An internal site presents an expired self-signed certificate. Users see a warning and some are bypassing the control.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "First action before making any renewal decision?",
+      "choices": [
+        {
+          "text": "Disable certificate verification in the browser",
+          "next": "n2",
+          "score": 0,
+          "why": "Disabling validation removes the control and exposes users to on-path attacks."
+        },
+        {
+          "text": "Identify the certificate owner and the trust chain",
+          "next": "n2",
+          "score": 4,
+          "why": "You must first know who issues it, who holds the private key, and whether the CA is trusted."
+        },
+        {
+          "text": "Replace the certificate with a shared symmetric key",
+          "next": "n2",
+          "score": 0,
+          "why": "A symmetric key does not provide server authentication via a certificate."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "The certificate must be replaced with a third-party CA certificate. Which step comes before issuance?",
+      "choices": [
+        {
+          "text": "Generate a CSR and send the private key to the CA",
+          "next": "n3",
+          "score": 0,
+          "why": "The private key never leaves the server: only the CSR is sent."
+        },
+        {
+          "text": "Generate a CSR on the server and keep the private key locally",
+          "next": "n3",
+          "score": 4,
+          "why": "The CSR contains the public key; the private key stays on the server."
+        },
+        {
+          "text": "Purchase a new private key from the CA",
+          "next": "n3",
+          "score": 0,
+          "why": "A CA does not provide your private key."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "How can you quickly verify that a revoked certificate is no longer accepted?",
+      "choices": [
+        {
+          "text": "Via CRL or OCSP",
+          "next": "n4",
+          "score": 4,
+          "why": "CRL (list) and OCSP (online query) are the two certificate revocation checking mechanisms."
+        },
+        {
+          "text": "Via disk encryption",
+          "next": "n4",
+          "score": 0,
+          "why": "Disk encryption has no connection to certificate revocation."
+        },
+        {
+          "text": "Via password salting",
+          "next": "n4",
+          "score": 0,
+          "why": "Salting protects passwords, not certificates."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "You followed the chain: owner → CSR → local private key → CRL/OCSP verification."
+    }
+  },
+  "debrief": [
+    "The private key must never be transmitted to the CA.",
+    "CSR = certificate signing request containing the public key.",
+    "CRL and OCSP check revocation; a self-signed certificate does not provide third-party trust."
+  ]
+}

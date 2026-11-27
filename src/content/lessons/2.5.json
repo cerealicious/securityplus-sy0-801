@@ -1,0 +1,563 @@
+[
+  {
+    "id": "2.5-01",
+    "objective": "2.5",
+    "order": 1,
+    "title": "Indicators of Compromise: Reading the Traces",
+    "minutes": 16,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "An indicator is not a conclusion. It is an observable fact that becomes meaningful when correlated with context, a baseline, and a timeline."
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-2.5-ioc-flow"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-2.5-L01-malware-taxonomy"
+      },
+      {
+        "type": "simulation",
+        "simId": "sim-network-attack"
+      },
+      {
+        "type": "h",
+        "text": "IOC and IOA: Artifact and Behavior"
+      },
+      {
+        "type": "p",
+        "text": "An **IOC** (Indicator of Compromise) is an artifact observed after the fact: a malware hash, a command-and-control IP address, a domain, a registry key. An **IOA** (Indicator of Attack) describes a **behavior**: a process launching encoded PowerShell, an abnormal outbound connection, a sudden privilege escalation. IOCs are static and easy to block but quickly obsolete; IOAs are more durable but harder to detect."
+      },
+      {
+        "type": "term",
+        "en": "Indicator of Compromise (IOC)",
+        "fr": "Indicator of Compromise (IOC)",
+        "field": "Often exchanged via threat intelligence feeds (STIX/TAXII). An IOC alone proves nothing: it must be correlated."
+      },
+      {
+        "type": "term",
+        "en": "Indicator of Attack (IOA)",
+        "fr": "Indicator of Attack (IOA)",
+        "field": "Behavioral, aligned with MITRE ATT&CK. More resilient to changes in attacker infrastructure."
+      },
+      {
+        "type": "h",
+        "text": "The Twelve Official Indicators"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Indicator",
+          "What Is Observed",
+          "Concrete Example"
+        ],
+        "rows": [
+          [
+            "Hash",
+            "Digest of a malicious file",
+            "SHA-256 unknown to reputation database"
+          ],
+          [
+            "IP address",
+            "Communication to suspicious infrastructure",
+            "Repeated connection to a blocklisted IP"
+          ],
+          [
+            "Domain",
+            "DNS resolution to an algorithmically generated domain",
+            "`xj3k9q.example` resolved at 03:12"
+          ],
+          [
+            "Malicious process",
+            "Abnormal process, misleading name, unusual path",
+            "`svch0st.exe` launched from `%TEMP%`"
+          ],
+          [
+            "File system artifacts",
+            "Dropped files, inconsistent timestamps",
+            "File created at 02:00 then deleted"
+          ],
+          [
+            "Timestamp",
+            "Discrepancy between system time and logs",
+            "Log entry predating system installation"
+          ],
+          [
+            "Log manipulation",
+            "Clearing, truncation, disabling auditing",
+            "Event ID 1102: security log cleared"
+          ],
+          [
+            "Excessive resource consumption",
+            "Abnormal CPU, memory, disk, or network usage",
+            "Cryptomining: 100% CPU on an idle server"
+          ],
+          [
+            "Plaintext strings",
+            "Credentials or keys in a binary or script",
+            "Base64 password in a config file"
+          ],
+          [
+            "Account lockout",
+            "Repeated attempts on an account",
+            "20 failures in 2 minutes on `admin`"
+          ],
+          [
+            "Impossible travel",
+            "Two geographically incompatible logins",
+            "Paris 09:00, Singapore 09:20"
+          ],
+          [
+            "Concurrent sessions",
+            "Two active sessions for the same account",
+            "Two distinct IP addresses, same token"
+          ]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "title": "Impossible Travel and Concurrent Sessions",
+        "text": "The two look similar but do not say the same thing. **Impossible travel**: two authentications too far apart in time and space for physical travel. **Concurrent sessions**: the same account active from two locations at the same time. Both suggest credential or token theft, not necessarily a different attack."
+      },
+      {
+        "type": "h",
+        "text": "Why Correlation Changes Everything"
+      },
+      {
+        "type": "p",
+        "text": "One account lockout might be a user who forgot their password. Twenty lockouts across ten accounts in five minutes, followed by a successful login from an unknown IP, tell a different story: **password spraying** or a distributed brute-force attack. Analysis means moving from the isolated event to the **sequence**."
+      },
+      {
+        "type": "p",
+        "text": "**Log manipulation** is a particularly serious indicator: an attacker who clears logs is trying to destroy evidence. Watch for log-clearing events, audit service restarts, audit policy changes, and logs that \"skip\" a time period."
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "page": 191,
+        "strength": "primary",
+        "note": "IOC/IOA, logs, normalization, and correlation"
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "6",
+        "page": 67,
+        "printed": 45,
+        "strength": "supporting",
+        "note": "Detection and incident analysis"
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "7",
+        "page": 191,
+        "printed": 171,
+        "strength": "supporting",
+        "note": "Intrusion detection and network monitoring"
+      },
+      {
+        "type": "check",
+        "q": "An analyst sees an account log in from Paris at 09:00 and then from Singapore at 09:20. Which indicator is most directly involved?",
+        "options": [
+          "Excessive resource consumption",
+          "Impossible travel",
+          "Log manipulation",
+          "Plaintext strings"
+        ],
+        "answer": 1,
+        "explain": "The Paris–Singapore trip in 20 minutes is physically impossible. This suggests credential or session theft. You must then check whether these are two concurrent sessions, a VPN, or a proxy before concluding compromise."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "IOC = artifact (hash, IP, domain); IOA = behavior (process, sequence).",
+          "The twelve official indicators must be recognized in a scenario, not just recited.",
+          "An isolated indicator is not proof: correlation and timeline make the analysis.",
+          "Log clearing is an indicator of concealment, hence a strong signal."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "2.5-02",
+    "objective": "2.5",
+    "order": 2,
+    "title": "Malware and Network Attacks: Recognizing the Modus Operandi",
+    "minutes": 18,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "A malware's name often describes its propagation method or its effect. Knowing how to distinguish a worm from a virus, or a Trojan from a rootkit, changes the response required."
+      },
+      {
+        "type": "h",
+        "text": "The Ten Malware Families"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-2.5-L02-social-engineering"
+      },
+      {
+        "type": "list",
+        "items": [
+          "**Ransomware**: encrypts data and demands payment. Indicators: modified extensions, ransom notes, massive file access, shadow copy deletion.",
+          "**Trojan**: poses as legitimate software. It does not infect other files: it opens a door.",
+          "**Worm**: spreads on its own over the network without user action. Indicators: rapid internal scans, connection spikes.",
+          "**Spyware**: collects information (browsing, keystrokes, screen). Indicators: regular outbound traffic, sensor access.",
+          "**Adware**: displays ads, often bundled with free software. Indicators: redirects, browser extensions.",
+          "**Virus**: attaches to a file or boot sector and spreads upon execution. Indicators: modified files, abnormal size.",
+          "**Rootkit**: hides compromise at the kernel or firmware level. Indicators: discrepancies between tools, invisible processes.",
+          "**Keylogger**: records keystrokes. Indicators: keyboard hook, local log file, periodic exfiltration.",
+          "**Logic bomb**: triggers an action on a date or event. Indicators: conditional code, suspicious scheduled task.",
+          "**Fileless malware**: lives in memory, with no file on disk. Indicators: encoded PowerShell, process injection, WMI."
+        ]
+      },
+      {
+        "type": "term",
+        "en": "Fileless malware",
+        "fr": "Fileless malware",
+        "field": "Relies on native tools (PowerShell, WMI, mshta, regsvr32): this is \"living off the land\". Signature-based antivirus is blind; EDR and behavioral telemetry are required."
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "title": "Worm, Virus, Trojan: The Exact Distinction",
+        "text": "A **worm** spreads on its own over the network. A **virus** needs a host (file, boot sector) and execution. A **Trojan** does not self-propagate: it tricks the user into running it. A **rootkit** does not propagate either: it hides. A question may combine terms; go back to the definition of propagation."
+      },
+      {
+        "type": "h",
+        "text": "Network Attacks"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Attack",
+          "Mechanism",
+          "Observable Indicator"
+        ],
+        "rows": [
+          [
+            "DDoS",
+            "Saturation by volume or requests",
+            "Massive inbound traffic, latency, connection exhaustion"
+          ],
+          [
+            "Protocol downgrade",
+            "Forcing TLS to a weak version",
+            "TLS 1.0/1.1 negotiation, handshake alerts"
+          ],
+          [
+            "Rogue device",
+            "Unauthorized equipment on the network",
+            "New MAC address, unknown DHCP, active port"
+          ],
+          [
+            "Sniffing",
+            "Passive traffic capture",
+            "Interface in promiscuous mode, unauthorized port mirror"
+          ],
+          [
+            "Spoofing",
+            "IP, MAC, or DNS address spoofing",
+            "ARP conflict, inconsistent source IP"
+          ],
+          [
+            "On-path attack",
+            "Interception and relaying of traffic",
+            "Unexpected certificate, latency, poisoned ARP"
+          ],
+          [
+            "DNS attack",
+            "Cache poisoning, DNS tunneling",
+            "Inconsistent responses, large TXT queries"
+          ],
+          [
+            "Cache poisoning",
+            "Injecting forged entries into a cache",
+            "Persistent incorrect DNS or ARP response"
+          ]
+        ]
+      },
+      {
+        "type": "p",
+        "text": "An **on-path attack** (formerly called man-in-the-middle) places the attacker between two parties. They can read, modify, or replay traffic. Without encryption, they see everything; with properly validated TLS, they only see ciphertext — hence the importance of certificate validation and not \"clicking through the warning\"."
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "title": "Exam Terminology",
+        "text": "The books use **MITM** (man-in-the-middle). The SY0-801 objectives use **on-path attack**. On the exam, look for \"on-path\"; in the literature, \"MITM\" remains common."
+      },
+      {
+        "type": "h",
+        "text": "Physical Attacks"
+      },
+      {
+        "type": "p",
+        "text": "**Tailgating** is following an authorized person without a badge. **Shoulder surfing** is reading over someone's shoulder (screen, keyboard, PIN). **Skimming** copies a payment card's magnetic stripe. **Forced entry** is physical break-in. Corresponding controls are mantraps, zone separation, privacy screens, and badge verification."
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "page": 65,
+        "strength": "primary",
+        "note": "Kill Chain, MITM, lateral movement, alert severity"
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "19",
+        "page": 237,
+        "printed": 215,
+        "strength": "supporting",
+        "note": "Signature-based detection and noise reduction"
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "page": 249,
+        "strength": "supporting",
+        "note": "Malware investigation, drive-by download"
+      },
+      {
+        "type": "check",
+        "q": "A server shows 100% CPU usage outside business hours, regular outbound traffic to an unknown IP, and no suspicious files on disk. Which hypothesis is most likely?",
+        "options": [
+          "A classic virus attached to a system file",
+          "Fileless malware, possibly a cryptominer or in-memory implant",
+          "A firmware rootkit",
+          "An inbound denial-of-service attack"
+        ],
+        "answer": 1,
+        "explain": "The absence of files on disk, high CPU usage, and regular outbound traffic point to fileless malware (PowerShell, process injection) or a cryptominer. A virus would leave modified files; an inbound DDoS would saturate the network, not the CPU in this way."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Worm = autonomous propagation; virus = host + execution; Trojan = deception; rootkit = concealment.",
+          "Fileless = memory and native tools: EDR and telemetry take precedence over signatures.",
+          "On-path (MITM): interception; TLS validation is the key countermeasure.",
+          "Each network attack has an observable indicator: correlate traffic, logs, and configuration."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "2.5-03",
+    "objective": "2.5",
+    "order": 3,
+    "title": "Social Engineering, Application Attacks, and Credential Attacks",
+    "minutes": 17,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "The most effective attacks do not break cryptography: they convince a human, exploit unvalidated input, or reuse a stolen credential."
+      },
+      {
+        "type": "h",
+        "text": "Social Engineering"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-2.5-L03-ioc-correlation"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Attack",
+          "Channel",
+          "Warning Sign"
+        ],
+        "rows": [
+          [
+            "Phishing",
+            "Mass email",
+            "Urgency, deceptive link, lookalike domain"
+          ],
+          [
+            "Spear phishing",
+            "Targeted email",
+            "Knowledge of role, project, manager"
+          ],
+          [
+            "Whaling",
+            "Email targeting an executive",
+            "Wire transfer request, \"confidential\" attachment"
+          ],
+          [
+            "Vishing",
+            "Phone",
+            "Pressure, spoofed number, request for MFA code"
+          ],
+          [
+            "Smishing",
+            "SMS",
+            "Shortened link, package, fine, locked account"
+          ],
+          [
+            "Quishing",
+            "QR code",
+            "QR sticker on a terminal, payment link"
+          ],
+          [
+            "Impersonation",
+            "Any channel",
+            "Spoofed identity (support, bank, executive)"
+          ],
+          [
+            "Deepfake",
+            "Video or voice",
+            "Synthetic voice, lip-sync mismatches, urgency"
+          ]
+        ]
+      },
+      {
+        "type": "term",
+        "en": "Quishing",
+        "fr": "Quishing",
+        "field": "The QR code bypasses email filters that analyze text and URLs. It is often placed on a payment terminal or embedded in a PDF."
+      },
+      {
+        "type": "term",
+        "en": "Deepfake",
+        "fr": "Deepfake",
+        "field": "AI-generated video or voice. Used for executive fraud and extortion. Verification via a second channel remains the best defense."
+      },
+      {
+        "type": "p",
+        "text": "A **watering hole** is a variant: the attacker compromises a legitimate site frequented by the target (industry association, vendor portal) to infect its visitors. The indicator is a change in behavior of a trusted site, not a suspicious email."
+      },
+      {
+        "type": "h",
+        "text": "Application Attacks"
+      },
+      {
+        "type": "list",
+        "items": [
+          "**Injection** (SQL, command, LDAP): unvalidated input is interpreted as code. Indicator: SQL errors, abnormal queries, `' OR 1=1`.",
+          "**Buffer overflow**: writing beyond allocated memory, causing a crash or execution. Indicator: repeated crashes, memory corruption.",
+          "**Replay**: replaying a valid request or token. Indicator: same request repeated, token reused outside its window.",
+          "**Privilege escalation**: moving from a standard account to an administrator account. Indicator: addition to a privileged group, elevated token.",
+          "**Forgery** (CSRF, request forgery): action executed on behalf of the user without their consent. Indicator: POST requests without an anti-CSRF token.",
+          "**Directory traversal**: accessing a file outside the intended directory via `../`. Indicator: requests containing `../` or `%2e%2e`."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "title": "Injection: The Principle Before the Name",
+        "text": "Every injection relies on the same mistake: **mixing data and instructions**. The fix is structural (parameterized queries, strict validation, least privilege), not simple character filtering."
+      },
+      {
+        "type": "h",
+        "text": "Credential Attacks"
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "Brute Force",
+          "points": [
+            "Many attempts on **one** account",
+            "Visible account lockout",
+            "Detection: failure threshold per account"
+          ]
+        },
+        "right": {
+          "title": "Password Spraying",
+          "points": [
+            "One common password across **many** accounts",
+            "Avoids per-account lockout",
+            "Detection: distributed failures, same time window, same IP"
+          ]
+        }
+      },
+      {
+        "type": "p",
+        "text": "**User enumeration** determines which accounts exist (different error messages, response times). **Replay** reuses a captured token or authentication. **MFA bypass** exploits push fatigue (repeated notifications), intercepted OTP, or a poorly protected reset flow."
+      },
+      {
+        "type": "table",
+        "head": [
+          "Attack",
+          "What You See in Logs",
+          "Immediate Response"
+        ],
+        "rows": [
+          [
+            "Brute force",
+            "Burst of failures on one account",
+            "Lockout, IP block, notification"
+          ],
+          [
+            "Spraying",
+            "Failures across many accounts, same IP",
+            "Progressive blocking, MFA, behavioral detection"
+          ],
+          [
+            "Enumeration",
+            "Many nonexistent account names",
+            "Uniform responses, rate limiting"
+          ],
+          [
+            "Replay",
+            "Reused token, same request",
+            "Session invalidation, token rotation"
+          ],
+          [
+            "MFA bypass",
+            "Repeated pushes, code approved out of context",
+            "Number matching, FIDO2 keys, account lock"
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "page": 177,
+        "strength": "supporting",
+        "note": "OWASP, XSS, SQLi"
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "17",
+        "page": 201,
+        "printed": 179,
+        "strength": "supporting",
+        "note": "Secure coding and input validation"
+      },
+      {
+        "type": "source",
+        "book": "NET",
+        "page": 28,
+        "strength": "supporting",
+        "note": "Network alert triage"
+      },
+      {
+        "type": "check",
+        "q": "An attacker tests the password `Summer2026!` on 300 different accounts, once each, in five minutes. What attack is this?",
+        "options": [
+          "Brute force",
+          "Password spraying",
+          "User enumeration",
+          "Session replay"
+        ],
+        "answer": 1,
+        "explain": "A single password tried against many accounts at low frequency per account is password spraying. It bypasses per-account lockout and exploits password reuse. Brute force would concentrate attempts on one account."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Phishing, spear, whaling, vishing, smishing, quishing, deepfake: the channel and targeting change, not the principle.",
+          "Injection = data interpreted as instructions; the fix is structural.",
+          "Brute force = one account; spraying = one password across many accounts.",
+          "Responding to a credential attack starts with session invalidation and MFA hardening."
+        ]
+      }
+    ]
+  }
+]

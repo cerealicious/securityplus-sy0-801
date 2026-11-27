@@ -1,0 +1,38 @@
+{
+  "id": "pbq-4.7-order",
+  "objective": "4.7",
+  "type": "order",
+  "title": "Order Incident Response Phases",
+  "prompt": "Put the phases in the correct chronological order.",
+  "items": [
+    {
+      "id": "s1",
+      "label": "Preparation: playbooks, roles, exercises"
+    },
+    {
+      "id": "s2",
+      "label": "Identification: detection and triage"
+    },
+    {
+      "id": "s3",
+      "label": "Investigation: evidence and scope"
+    },
+    {
+      "id": "s4",
+      "label": "Containment: isolation"
+    },
+    {
+      "id": "s5",
+      "label": "Eradication and recovery"
+    },
+    {
+      "id": "s6",
+      "label": "Notification: stakeholders and authorities"
+    },
+    {
+      "id": "s7",
+      "label": "Post-incident: lessons learned and PIR"
+    }
+  ],
+  "explain": "The order is: Preparation -> Identification -> Investigation -> Containment -> Eradication/Recovery -> Notification -> Post-incident. Notification occurs after stabilization, unless immediate legal reporting is required."
+}

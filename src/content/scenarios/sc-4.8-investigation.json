@@ -1,0 +1,90 @@
+{
+  "id": "sc-4.8-investigation",
+  "objective": "4.8",
+  "title": "Investigating an Outbound Traffic Alert",
+  "context": "A workstation is sending data to an unknown external IP on an unusual port. You must preserve evidence and reconstruct the facts in three decisions.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "The host is still active. What is the first action?",
+      "choices": [
+        {
+          "text": "Capture memory and active connections before any isolation or shutdown",
+          "next": "n2",
+          "score": 4,
+          "why": "RAM and connections are the most volatile evidence: isolating or shutting down too quickly destroys them."
+        },
+        {
+          "text": "Immediately power off the workstation to stop exfiltration",
+          "next": "n2",
+          "score": 0,
+          "why": "Powering off erases keys, processes, and connections needed for the investigation."
+        },
+        {
+          "text": "Reboot the workstation to get a clean state",
+          "next": "n2",
+          "score": 0,
+          "why": "Rebooting destroys memory: it is the classic mistake."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "Which source will tell you which process initiated this connection?",
+      "choices": [
+        {
+          "text": "Endpoint logs cross-referenced with the memory capture and active connections",
+          "next": "n3",
+          "score": 4,
+          "why": "The offending process often lives in memory and has no file on disk (fileless)."
+        },
+        {
+          "text": "The aggregated dashboard only",
+          "next": "n3",
+          "score": 1,
+          "why": "The dashboard guides analysis, but does not identify the process."
+        },
+        {
+          "text": "Perimeter firewall logs alone",
+          "next": "n3",
+          "score": 1,
+          "why": "The firewall sees the destination, not the local process that issued the request."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "You must share the artifacts with stakeholders. How do you proceed?",
+      "choices": [
+        {
+          "text": "Hash each artifact, document chain of custody, restrict access, and involve HR/Legal if needed",
+          "next": "n4",
+          "score": 4,
+          "why": "Integrity, traceability, and legal framework make evidence usable."
+        },
+        {
+          "text": "Email the capture to the entire team",
+          "next": "n4",
+          "score": 0,
+          "why": "This breaks the chain of custody and exposes potentially sensitive data."
+        },
+        {
+          "text": "Post the artifacts on an open channel",
+          "next": "n4",
+          "score": 0,
+          "why": "Publicly disclosed evidence is no longer reliable or admissible."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "You preserved volatile evidence, identified the process through correlation, and maintained the evidentiary value of the artifacts."
+    }
+  },
+  "debrief": [
+    "Order of volatility takes precedence over the temptation to power off or reboot.",
+    "Cross-referencing endpoint + memory + network reveals what a single source cannot.",
+    "Hashing, chain of custody, and HR/Legal involvement govern how evidence can be used."
+  ]
+}

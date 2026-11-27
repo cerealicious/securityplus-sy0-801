@@ -1,0 +1,90 @@
+{
+  "id": "sc-2.1-triage",
+  "objective": "2.1",
+  "title": "Triaging a Wave of Vulnerabilities",
+  "context": "A vendor bulletin announces twelve CVEs. You have a maintenance window and must choose what to address first.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "Which element do you start the analysis with?",
+      "choices": [
+        {
+          "text": "The CVSS score and the exposure of the affected assets",
+          "next": "n2",
+          "score": 4,
+          "why": "You start from severity and exposure context before deciding."
+        },
+        {
+          "text": "Alphabetical order of the CVE identifiers",
+          "next": "n2",
+          "score": 0,
+          "why": "An identifier says nothing about severity or risk."
+        },
+        {
+          "text": "The publication date of the bulletin",
+          "next": "n2",
+          "score": 1,
+          "why": "The date helps track news but does not measure risk."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "A 9.8 CVE affects an isolated test bench; a 7.5 CVE affects a public server with a known exploit. Which do you prioritize?",
+      "choices": [
+        {
+          "text": "The 9.8 CVE, because the score is higher",
+          "next": "n3",
+          "score": 0,
+          "why": "A high score on an isolated asset does not create the most urgent risk."
+        },
+        {
+          "text": "The 7.5 CVE on the public server: exposure + public exploit outweigh the score",
+          "next": "n3",
+          "score": 4,
+          "why": "Likelihood and impact are higher despite a lower CVSS score."
+        },
+        {
+          "text": "Both, applying patches in the order they were received",
+          "next": "n3",
+          "score": 1,
+          "why": "Without prioritization, the window will be spent on non-critical assets."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "The patch for the public server is not yet available. Which measure reduces residual risk?",
+      "choices": [
+        {
+          "text": "Implement a compensating control and monitor for exploitation attempts",
+          "next": "n4",
+          "score": 4,
+          "why": "A compensating control reduces exploitability while waiting for the patch."
+        },
+        {
+          "text": "Disable logging to reduce load",
+          "next": "n4",
+          "score": 0,
+          "why": "On the contrary, monitoring must be strengthened."
+        },
+        {
+          "text": "Declare the risk accepted without documenting or monitoring",
+          "next": "n4",
+          "score": 0,
+          "why": "Risk acceptance is a documented, temporary decision, not an oversight."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "You combined CVSS, exposure, and criticality, then applied a compensating control while waiting for the patch."
+    }
+  },
+  "debrief": [
+    "Risk = vulnerability × threat; likelihood and impact take precedence over the score alone.",
+    "CVE identifies, CVSS measures; temporal and environmental metrics refine the score.",
+    "Without a patch, a compensating control and heightened monitoring reduce residual risk."
+  ]
+}

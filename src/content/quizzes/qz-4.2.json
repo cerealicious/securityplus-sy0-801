@@ -1,0 +1,114 @@
+{
+  "id": "qz-4.2",
+  "objective": "4.2",
+  "title": "Quiz — Asset Management",
+  "questions": [
+    {
+      "id": "q-4.2-01",
+      "type": "single",
+      "q": "What is the first stage of the asset lifecycle?",
+      "options": [
+        "Acquisition",
+        "Planning / scoping",
+        "Disposal",
+        "Assignment"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "You first define the need and security requirements before purchasing anything.",
+      "ref": "4.2-02"
+    },
+    {
+      "id": "q-4.2-02",
+      "type": "single",
+      "q": "Which item should be included in the requirements specification during acquisition?",
+      "options": [
+        "The color of the equipment",
+        "Support duration and certified erasure capability",
+        "The salesperson's name",
+        "The number of boxes"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Security requirements (support, encryption, compliance, end-of-life) must be written before purchasing.",
+      "ref": "4.2-02"
+    },
+    {
+      "id": "q-4.2-03",
+      "type": "multi",
+      "q": "Which information should an asset record contain? (Select all that apply)",
+      "options": [
+        "Owner and criticality",
+        "Software version and patch level",
+        "Classification of processed data",
+        "The equipment's administrator password"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "explain": "A password must never be stored in the inventory; the other items are essential for tracking.",
+      "ref": "4.2-01"
+    },
+    {
+      "id": "q-4.2-04",
+      "type": "match",
+      "q": "Match each stage to its primary action.",
+      "pairs": [
+        {
+          "left": "Planning",
+          "right": "Define need, criticality, and requirements"
+        },
+        {
+          "left": "Acquisition",
+          "right": "Purchase with requirements written into the specification"
+        },
+        {
+          "left": "Assignment",
+          "right": "Assign an owner and register the asset"
+        },
+        {
+          "left": "Disposal",
+          "right": "Sanitize, revoke, and certify end-of-life"
+        }
+      ],
+      "explain": "Each stage produces an artifact: formalized need, contract, inventory record, certificate of destruction.",
+      "ref": "4.2-02"
+    },
+    {
+      "id": "q-4.2-05",
+      "type": "single",
+      "q": "A disk leaves the company without being wiped. Which artifact is missing to prove proper disposal?",
+      "options": [
+        "A certificate of destruction",
+        "A purchase invoice",
+        "A backup plan",
+        "A list of open ports"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "A certificate of destruction (or erasure report) is the required proof at end-of-life.",
+      "ref": "4.2-02"
+    },
+    {
+      "id": "q-4.2-06",
+      "type": "single",
+      "q": "A service is used by a team without the security team's knowledge. What is this phenomenon called?",
+      "options": [
+        "Asset tracking",
+        "Shadow IT",
+        "Code signing",
+        "Failover"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Shadow IT escapes inventory and therefore misses patching, monitoring, and end-of-life controls.",
+      "ref": "4.2-01"
+    }
+  ]
+}

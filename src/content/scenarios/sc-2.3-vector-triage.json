@@ -1,0 +1,90 @@
+{
+  "id": "sc-2.3-vector-triage",
+  "objective": "2.3",
+  "title": "Which Entry Path?",
+  "context": "Three incidents are reported on the same day. You must identify the vector of each to guide controls.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "An employee scanned a QR code on a poster and entered their credentials on a spoofed page. Which vector?",
+      "choices": [
+        {
+          "text": "Image-based (quishing)",
+          "next": "n2",
+          "score": 4,
+          "why": "The QR code is an image that hides the URL: it is an image-based vector."
+        },
+        {
+          "text": "Attachment-based",
+          "next": "n2",
+          "score": 0,
+          "why": "No attachment is involved."
+        },
+        {
+          "text": "Signal-based",
+          "next": "n2",
+          "score": 1,
+          "why": "NFC/Bluetooth are signals; a QR code is visual content."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "The second incident: a SaaS provider hosting your email was compromised and its access was used against you. Which vector?",
+      "choices": [
+        {
+          "text": "Supply chain-based",
+          "next": "n3",
+          "score": 4,
+          "why": "The trusted third party is the entry path: it is the supply chain."
+        },
+        {
+          "text": "Network-based",
+          "next": "n3",
+          "score": 1,
+          "why": "The network is used afterward, but the origin is the vendor."
+        },
+        {
+          "text": "Human-based",
+          "next": "n3",
+          "score": 0,
+          "why": "No physical impersonation is involved here."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "Third incident: lateral movement via PowerShell on an already compromised server, with no new file. Which vector and which control?",
+      "choices": [
+        {
+          "text": "Endpoint-based (living-off-the-land): behavioral telemetry and restriction of native tools",
+          "next": "n4",
+          "score": 4,
+          "why": "Built-in tools are an endpoint-based vector: they are detected by behavior, not file signature."
+        },
+        {
+          "text": "External media-based: ban USB drives",
+          "next": "n4",
+          "score": 0,
+          "why": "No external media is involved."
+        },
+        {
+          "text": "Message-based: strengthen the anti-spam filter",
+          "next": "n4",
+          "score": 0,
+          "why": "The vector is already internal to the endpoint."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "You classified the three incidents by entry path and proposed controls suited to each vector."
+    }
+  },
+  "debrief": [
+    "The vector family depends on the entry path, not the final tool used.",
+    "QR code = image-based; compromised SaaS = supply chain; native tools = endpoint.",
+    "QR/RCS and Bluetooth/RF/NFC are framework vectors absent from the provided books."
+  ]
+}

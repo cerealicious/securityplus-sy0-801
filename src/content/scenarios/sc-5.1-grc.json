@@ -1,0 +1,90 @@
+{
+  "id": "sc-5.1-grc",
+  "objective": "5.1",
+  "title": "An Audit Requests Your GRC Artifacts",
+  "context": "An external auditor asks to see how your organization documents its security requirements. You must present the right artifacts and explain their role.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "The auditor asks: \"Which document states management's intent regarding acceptable use of resources?\"",
+      "choices": [
+        {
+          "text": "The Acceptable Use Policy (AUP), approved by management",
+          "next": "n2",
+          "score": 4,
+          "why": "A policy conveys general intent and derives its authority from executive approval."
+        },
+        {
+          "text": "The server reboot runbook",
+          "next": "n2",
+          "score": 0,
+          "why": "A runbook describes technical steps, not governance intent."
+        },
+        {
+          "text": "The configuration baseline",
+          "next": "n2",
+          "score": 1,
+          "why": "A baseline is a configuration standard, subordinate to policy."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "The auditor next asks for the verifiable technical rule that derives from it. What do you present?",
+      "choices": [
+        {
+          "text": "An encryption standard with a measurable minimum level",
+          "next": "n3",
+          "score": 4,
+          "why": "A standard turns intent into a measurable requirement verifiable in an audit."
+        },
+        {
+          "text": "A vendor advisory",
+          "next": "n3",
+          "score": 1,
+          "why": "An advisory is a guideline: it recommends without mandating."
+        },
+        {
+          "text": "The business continuity plan",
+          "next": "n3",
+          "score": 0,
+          "why": "A BCP organizes recovery; it does not set a day-to-day technical rule."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "Final question: how do you prove these documents are maintained and enforced?",
+      "choices": [
+        {
+          "text": "Named owner, approval, distribution with acknowledgment, and dated reviews",
+          "next": "n4",
+          "score": 4,
+          "why": "This is the complete lifecycle of a GRC artifact: authority, distribution, proof, and currency."
+        },
+        {
+          "text": "The files are on the intranet, that is enough",
+          "next": "n4",
+          "score": 0,
+          "why": "Publication alone proves neither approval, nor reading, nor review."
+        },
+        {
+          "text": "The documents are very long and detailed",
+          "next": "n4",
+          "score": 0,
+          "why": "Length is not proof of governance."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "You presented a coherent pyramid: approved policy, measurable standard, and proof of distribution and review."
+    }
+  },
+  "debrief": [
+    "Policy states intent and receives its authority from executive approval.",
+    "Standard converts intent into a measurable requirement; procedure describes the steps.",
+    "A credible GRC artifact has an owner, an approval date, and a review history."
+  ]
+}

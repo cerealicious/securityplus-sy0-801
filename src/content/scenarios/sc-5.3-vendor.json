@@ -1,0 +1,90 @@
+{
+  "id": "sc-5.3-vendor",
+  "objective": "5.3",
+  "title": "Selecting and Governing a Cloud Provider",
+  "context": "Your organization is outsourcing the hosting of a critical application. You must lead the selection, sign the right documents, and organize ongoing monitoring.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "Before contacting vendors, what do you do first?",
+      "choices": [
+        {
+          "text": "Define the requirements and conduct due diligence (security, compliance, jurisdiction)",
+          "next": "n2",
+          "score": 4,
+          "why": "Scoped requirements and due diligence govern all subsequent choices."
+        },
+        {
+          "text": "Immediately sign an NDA with the first vendor available",
+          "next": "n2",
+          "score": 0,
+          "why": "Confidentiality does not replace evaluating the candidate and the requirements."
+        },
+        {
+          "text": "Request an RFQ before knowing what is expected",
+          "next": "n2",
+          "score": 1,
+          "why": "A price quote requires a service that is already precisely defined."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "The selected vendor agrees to a master agreement. How do you describe the specific hosting engagement?",
+      "choices": [
+        {
+          "text": "In a SOW attached to the MSA, with deliverables, scope, and schedule",
+          "next": "n3",
+          "score": 4,
+          "why": "The MSA carries the general terms; the SOW describes each engagement."
+        },
+        {
+          "text": "In a single MOU, without deliverable details",
+          "next": "n3",
+          "score": 0,
+          "why": "An MOU expresses intent; it does not define an operational engagement."
+        },
+        {
+          "text": "In an RFI sent after signing",
+          "next": "n3",
+          "score": 0,
+          "why": "An RFI is an upstream information-gathering document, not a contractual document."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "Six months later, recovery times degrade. What is the best response?",
+      "choices": [
+        {
+          "text": "Measure SLAs, request an attestation, and plan an exit clause",
+          "next": "n4",
+          "score": 4,
+          "why": "Contractual tracking, compliance proof, and reversibility address the drift."
+        },
+        {
+          "text": "Increase the budget without modifying the contract",
+          "next": "n4",
+          "score": 0,
+          "why": "Paying more without contractual leverage does not fix the breach."
+        },
+        {
+          "text": "Terminate immediately without checking dependencies",
+          "next": "n4",
+          "score": 1,
+          "why": "Vendor lock-in can make an abrupt exit riskier than the drift."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "You scoped the selection, structured MSA/SOW, and implemented contractual monitoring with a controlled exit."
+    }
+  },
+  "debrief": [
+    "Selection starts with requirements and due diligence, not price.",
+    "MSA = general terms; SOW = specific engagement; SLA/SLO = expected performance.",
+    "Continuous monitoring and reversibility limit third-party risk over time."
+  ]
+}

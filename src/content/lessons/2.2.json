@@ -1,0 +1,322 @@
+[
+  {
+    "id": "2.2-01",
+    "objective": "2.2",
+    "order": 1,
+    "title": "Threat Actors and Motivations: The Official Matrix",
+    "minutes": 16,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Objective **2.2** expects a classification: **who attacks, why, and with what means**. The four provided books discuss actors and intelligence, but do not give the full matrix required by the exam objectives: it is therefore written here from the official objectives and flagged as such."
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-2.2-actors-flow"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-2.2-L01-actors"
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "chapter": "2.2",
+        "page": "2.2",
+        "strength": "primary",
+        "note": "Official objectives — none of the 4 books provides the full actors × motivations matrix"
+      },
+      {
+        "type": "term",
+        "en": "Threat actor",
+        "fr": "Threat actor",
+        "field": "Individual or group conducting malicious activity. The objectives distinguish eight categories, classified notably by motivation, resources, and level of sophistication.",
+        "gap": true
+      },
+      {
+        "type": "h",
+        "text": "The Eight Actor Categories"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Actor (Objectives)",
+          "Typical Profile",
+          "Dominant Motivation"
+        ],
+        "rows": [
+          [
+            "Crime syndicate / organized crime",
+            "Structured groups, often with a business model and professional tools",
+            "Financial motivation, extortion"
+          ],
+          [
+            "Terrorist",
+            "Violence or coercion for a cause",
+            "Fear / chaos, ideological motivation"
+          ],
+          [
+            "Unskilled attacker",
+            "Low skill, off-the-shelf scripts and tools",
+            "Notoriety, curiosity"
+          ],
+          [
+            "Hacktivist",
+            "Collective motivated by a cause",
+            "Ideological / political motivation, influence"
+          ],
+          [
+            "Insider",
+            "Authorized person with legitimate access",
+            "Revenge, financial motivation, espionage"
+          ],
+          [
+            "Accidental / unintentional actor",
+            "User who makes a mistake without intent",
+            "No intent: misconfiguration, clicking phishing"
+          ],
+          [
+            "Competitor",
+            "Rival company or economic agent",
+            "Intellectual property, espionage"
+          ],
+          [
+            "State-sponsored actor",
+            "State-backed group, often APT",
+            "Espionage, influence, intellectual property"
+          ]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "This matrix of eight actors and their motivations is **required in §2.2** of the SY0-801 objectives, but none of the four books presents it in this form. The examples above are educational applications of the objectives, not quotes from a book."
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Cyber Threat Intelligence",
+        "page": 181,
+        "printed": 161,
+        "strength": "supporting",
+        "note": "Actors, attribution, and threat intelligence (printed pp. 161-167) — partial source, not the official taxonomy"
+      },
+      {
+        "type": "h",
+        "text": "The Twelve Motivations"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Financial motivation**: monetary gain, fraud, selling stolen data.",
+          "**Influence**: shaping an opinion or behavior.",
+          "**Intellectual property**: theft of trade secrets or research.",
+          "**Notoriety**: gaining fame, claiming credit for an exploit.",
+          "**Espionage**: gathering information for a state or employer.",
+          "**Fear / chaos**: causing panic or paralysis.",
+          "**Extortion**: ransom, blackmail, threat of disclosure.",
+          "**General curiosity**: exploring without financial motive.",
+          "**Revenge**: retaliation against an employer or third party.",
+          "**Ideological motivation**: acting for a belief or movement.",
+          "**Political motivation**: serving a political or electoral goal.",
+          "**Ethical motivation**: \"testing\" or exposing without authorization — a motive often claimed by hacktivists."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "Motivation is the most reliable **classification criterion**: the same tool (ransomware) can be financial for organized crime or ideological for a hacktivist. The tool does not define the actor."
+      },
+      {
+        "type": "p",
+        "text": "The SOC notes and the Defensive Security Handbook provide useful landmarks — external attacker, insider threat, targeted campaigns — but they do not replace the official categories. Remember the **actor ↔ motivation** pairing rather than group names, which are explicitly excluded from the exam."
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "Threat actors",
+        "page": 19,
+        "strength": "supporting",
+        "note": "Concepts of actor and risk (p. 19)"
+      },
+      {
+        "type": "check",
+        "q": "A disgruntled employee exfiltrates customer data to harm their employer. Which actor ↔ motivation pairing is correct?",
+        "options": [
+          "Hacktivist / ideological motivation",
+          "Insider / revenge",
+          "Unskilled attacker / curiosity",
+          "Competitor / espionage"
+        ],
+        "answer": 1,
+        "explain": "Legitimate access qualifies the actor as an insider; revenge is the described motivation."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Eight actors: organized crime, terrorist, unskilled, hacktivist, insider, accidental, competitor, state-sponsored.",
+          "Twelve motivations, from money to ethics, including ideology and revenge.",
+          "Motivation classifies the actor, not the tool used.",
+          "Official matrix = §2.2 objectives, absent from the four books."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "2.2-02",
+    "objective": "2.2",
+    "order": 2,
+    "title": "Actor Attributes and Attribution",
+    "minutes": 15,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Identifying an actor is not limited to their name: the exam expects you to reason about **three attributes** — internal or external position, financial resources, and level of sophistication — and then about the **confidence** you can place in an attribution."
+      },
+      {
+        "type": "term",
+        "en": "Internal / external actor",
+        "fr": "Internal / external actor",
+        "field": "An internal actor has legitimate access to the environment; an external actor must first cross the boundary. The insider is the most dangerous case because they bypass perimeter controls.",
+        "gap": true
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-2.2-L02-attribution"
+      },
+      {
+        "type": "term",
+        "en": "Resources / funding",
+        "fr": "Resources / funding",
+        "field": "Financial and material capacity of the actor: it governs campaign duration, purchasing of tools or vulnerabilities, and use of third parties.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Level of sophistication / capability",
+        "fr": "Level of sophistication / capability",
+        "field": "From using off-the-shelf scripts to developing custom tools and exploiting zero-days. An APT stands out through persistence and adaptation.",
+        "gap": true
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "chapter": "2.2",
+        "page": "2.2",
+        "strength": "primary",
+        "note": "Official objectives — none of the 4 books gives the full attribute taxonomy"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Attribute",
+          "Question to Ask",
+          "Concrete Clue"
+        ],
+        "rows": [
+          [
+            "Internal / external",
+            "Does the actor already have authorized access?",
+            "Valid credentials, badge, internal VPN session"
+          ],
+          [
+            "Resources / funding",
+            "What budget and tools?",
+            "Dedicated infrastructure, commercial tools, long campaign"
+          ],
+          [
+            "Sophistication",
+            "Off-the-shelf scripts or custom tools?",
+            "Zero-day, evasion, stealthy lateral movement"
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Cyber Threat Intelligence",
+        "page": 187,
+        "printed": 167,
+        "strength": "supporting",
+        "note": "Attribution, associates, and actor characterization (printed pp. 161-167)"
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "MITRE ATT&CK",
+        "page": 67,
+        "strength": "supporting",
+        "note": "Tactics and techniques used to profile a campaign"
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "Introduction",
+        "page": 28,
+        "printed": 6,
+        "strength": "supporting",
+        "note": "Targeted threats and attacker profiles (printed pp. 6-7)"
+      },
+      {
+        "type": "h",
+        "text": "Building a Profile Without Over-Interpreting"
+      },
+      {
+        "type": "steps",
+        "items": [
+          {
+            "title": "1. Observe Techniques",
+            "text": "Observed tactics and techniques (phishing, lateral movement, exfiltration) rather than a single IOC."
+          },
+          {
+            "title": "2. Evaluate Attributes",
+            "text": "Internal or external, resources, sophistication: three axes of characterization."
+          },
+          {
+            "title": "3. Compare Against Motivations",
+            "text": "The targeted objective (money, espionage, ideology) points to the actor category."
+          },
+          {
+            "title": "4. Attribute Cautiously",
+            "text": "Express a confidence level and update the profile when new evidence arrives."
+          }
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "warning",
+        "text": "Trap: attributing an actor based on a single IP address or a single tool. Tools are shared and infrastructure can be rented. The exam favors a **body of evidence** and a coherent motivation."
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "Interview / SOC",
+        "page": 227,
+        "strength": "supporting",
+        "note": "Investigation stories: profiling without absolute certainty"
+      },
+      {
+        "type": "check",
+        "q": "Which element best distinguishes a state-sponsored actor from an unskilled attacker?",
+        "options": [
+          "The number of CVEs used",
+          "The level of sophistication and resources committed over a long campaign",
+          "The presence of a phishing email",
+          "The victim's browser type"
+        ],
+        "answer": 1,
+        "explain": "Attributes (resources and sophistication) distinguish a backed APT from an opportunist using off-the-shelf scripts."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Three attributes: internal/external, resources/funding, sophistication.",
+          "An insider already has legitimate access: perimeter controls do not block them.",
+          "Attribution relies on a body of evidence and is expressed as a confidence level.",
+          "The full taxonomy is provided by the §2.2 objectives, not by the books."
+        ]
+      }
+    ]
+  }
+]

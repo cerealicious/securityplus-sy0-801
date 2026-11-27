@@ -1,0 +1,46 @@
+{
+  "id": "pbq-2.5-triage",
+  "objective": "2.5",
+  "type": "classify",
+  "title": "Triage Indicators of Malicious Activity",
+  "prompt": "Classify each indicator into the corresponding attack family.",
+  "categories": [
+    "Malware",
+    "Network",
+    "Social engineering",
+    "Credentials"
+  ],
+  "items": [
+    {
+      "id": "i1",
+      "label": ".lockbit file extension and ransom note",
+      "cat": "Malware"
+    },
+    {
+      "id": "i2",
+      "label": "Outbound UDP traffic spike to a single IP address",
+      "cat": "Network"
+    },
+    {
+      "id": "i3",
+      "label": "SMS message urging the recipient to click a delivery link",
+      "cat": "Social engineering"
+    },
+    {
+      "id": "i4",
+      "label": "500 failed login attempts across 200 different accounts",
+      "cat": "Credentials"
+    },
+    {
+      "id": "i5",
+      "label": "Unknown process connecting to a newly registered domain",
+      "cat": "Malware"
+    },
+    {
+      "id": "i6",
+      "label": "DNS query to a high-entropy domain",
+      "cat": "Network"
+    }
+  ],
+  "explain": "The family is determined by the observed artifact, not by severity. A single incident can produce indicators across multiple families."
+}

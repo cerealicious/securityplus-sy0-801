@@ -1,0 +1,30 @@
+{
+  "id": "pbq-4.3-vuln-cycle",
+  "objective": "4.3",
+  "type": "order",
+  "title": "Order the Vulnerability Management Lifecycle",
+  "prompt": "Put the steps in logical order, from discovering a vulnerability to communicating the result.",
+  "items": [
+    {
+      "id": "s1",
+      "label": "Identification — scan assets (authenticated scan, IPAM, CSPM) and review source code"
+    },
+    {
+      "id": "s2",
+      "label": "Prioritization — assess severity (CVSS), exposure, criticality, and review the pentest report"
+    },
+    {
+      "id": "s3",
+      "label": "Remediation — apply the patch or implement a compensating control with documented risk acceptance if needed"
+    },
+    {
+      "id": "s4",
+      "label": "Verification — rescan using the same method to confirm closure"
+    },
+    {
+      "id": "s5",
+      "label": "Reporting — produce internal/external reports and manage bug bounty and responsible disclosure"
+    }
+  ],
+  "explain": "The official order is identification -> prioritization -> remediation -> verification, followed by reporting. A rescan precedes closure: without verification, there is no proof the patch worked. Reporting then feeds into prioritization for the next cycle."
+}

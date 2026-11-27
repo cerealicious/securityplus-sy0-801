@@ -1,0 +1,548 @@
+[
+  {
+    "id": "1.3-01",
+    "objective": "1.3",
+    "order": 1,
+    "title": "Symmetric, Asymmetric, and Key Exchange",
+    "minutes": 17,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Cryptography serves three different needs: keeping secrets, proving origin, and verifying integrity. Algorithms are not interchangeable — and the exam tests precisely that distinction."
+      },
+      {
+        "type": "h",
+        "text": "Symmetric Encryption"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-1.3-L01-hash-salt"
+      },
+      {
+        "type": "simulation",
+        "simId": "sim-tls"
+      },
+      {
+        "type": "p",
+        "text": "A **single key** is used to encrypt and decrypt. It is fast and suited for large volumes (disks, TLS streams, backups). The problem is not the algorithm, it is **key distribution**: how do you share it without it leaking?"
+      },
+      {
+        "type": "term",
+        "en": "Symmetric encryption",
+        "fr": "Symmetric encryption",
+        "field": "Also called \"secret-key\" or \"shared-key encryption\". AES is the de facto standard; ChaCha20 is used on mobile and in TLS 1.3."
+      },
+      {
+        "type": "p",
+        "text": "**AES** (Advanced Encryption Standard) encrypts in 128-bit blocks with 128-, 192-, or 256-bit keys. **3DES** is obsolete (64-bit block, slow) and **DES** is breakable. **RC4** is deprecated and prohibited in modern TLS: never present it as an acceptable choice."
+      },
+      {
+        "type": "h",
+        "text": "Asymmetric Encryption"
+      },
+      {
+        "type": "p",
+        "text": "Each party has a **key pair**: a freely distributed public key and a private key kept secret. What is encrypted with the public key can only be decrypted with the corresponding private key. It is slower, but it solves two problems symmetric encryption cannot: key exchange and digital signatures."
+      },
+      {
+        "type": "term",
+        "en": "Asymmetric encryption",
+        "fr": "Asymmetric encryption",
+        "field": "Also called \"public-key cryptography\". RSA, ECC (ECDSA, ECDH), Diffie-Hellman. Do not say \"encrypt with your private key\" to protect a message: that only protects authenticity."
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-crypto-compare"
+      },
+      {
+        "type": "h",
+        "text": "Why TLS Uses Both"
+      },
+      {
+        "type": "p",
+        "text": "Asymmetric encryption is too slow to encrypt a video stream. TLS therefore performs an **asymmetric handshake**: client and server authenticate with certificates and negotiate a session key. Traffic is then encrypted **symmetrically** with that ephemeral key. This is the hybrid model, and it is what the typical question \"how does TLS combine both?\" describes."
+      },
+      {
+        "type": "term",
+        "en": "Key exchange",
+        "fr": "Key exchange",
+        "field": "Diffie-Hellman (DH) and ECDHE derive a shared key without ever transmitting it. ECDHE provides \"forward secrecy\": later compromise of the private key does not decrypt past sessions."
+      },
+      {
+        "type": "table",
+        "head": [
+          "Algorithm",
+          "Family",
+          "Typical Use",
+          "Minimum Length Today"
+        ],
+        "rows": [
+          [
+            "AES-256",
+            "Symmetric",
+            "Data encryption, TLS",
+            "256 bits"
+          ],
+          [
+            "ChaCha20-Poly1305",
+            "Symmetric",
+            "TLS 1.3, mobile",
+            "256 bits"
+          ],
+          [
+            "RSA",
+            "Asymmetric",
+            "Signing, legacy key exchange",
+            "2048 bits (3072 recommended)"
+          ],
+          [
+            "ECC / ECDSA / ECDH",
+            "Asymmetric",
+            "TLS, code signing, mobile",
+            "256 bits (~3072 RSA equivalent)"
+          ],
+          [
+            "Diffie-Hellman / ECDHE",
+            "Key exchange",
+            "Session key negotiation",
+            "Group ≥ 2048 bits or P-256 curve"
+          ],
+          [
+            "SHA-256 / SHA-384",
+            "Hashing",
+            "Integrity, signatures, passwords",
+            "256 / 384-bit output"
+          ],
+          [
+            "MD5 / SHA-1",
+            "Hashing",
+            "**Obsolete**",
+            "Do not use"
+          ]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "title": "Three Phrases Never to Confuse",
+        "text": "**Encrypt** with the recipient's public key = confidentiality. **Sign** with your private key = authenticity, integrity, non-repudiation. **Hash** = irreversible digest, no decryption possible. A question proposing to \"decrypt a hash\" is wrong by design."
+      },
+      {
+        "type": "h",
+        "text": "Encryption Levels"
+      },
+      {
+        "type": "p",
+        "text": "Objective 1.3 also requires distinguishing **levels**: full disk, partition, volume, file, database (TDE), and record-level encryption. The finer the level, the greater the granularity — but the more complex the key management and performance impact."
+      },
+      {
+        "type": "list",
+        "items": [
+          "**Full disk**: protects a stolen or powered-off device; does not protect a booted and unlocked system.",
+          "**Partition / volume**: isolates storage spaces, useful for sensitive data.",
+          "**File**: allows sharing an encrypted file without encrypting the entire disk.",
+          "**Database (TDE)**: encrypts database files; does not protect against an authorized query.",
+          "**Record**: encrypts a field or record; maximum granularity, heaviest management."
+        ]
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "page": 172,
+        "strength": "supporting",
+        "note": "Symmetric/asymmetric, RC4, DES vs AES, key exchange"
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "13",
+        "page": 151,
+        "printed": 129,
+        "strength": "supporting",
+        "note": "Hashing, salting, and secret storage"
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "12",
+        "page": 141,
+        "printed": 119,
+        "strength": "supporting",
+        "note": "Full disk encryption"
+      },
+      {
+        "type": "check",
+        "q": "Why doesn't TLS use RSA alone to encrypt traffic?",
+        "options": [
+          "Because RSA cannot encrypt data",
+          "Because asymmetric encryption is too slow for large volumes, and a symmetric session key is more efficient",
+          "Because RSA is not considered secure",
+          "Because symmetric encryption also provides non-repudiation"
+        ],
+        "answer": 1,
+        "explain": "RSA can encrypt small amounts, but its cost is prohibitive for a stream. TLS therefore negotiates an ephemeral symmetric key via an asymmetric mechanism, then encrypts traffic with AES or ChaCha20. Symmetric encryption, however, provides no non-repudiation."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Symmetric = fast, one shared key, distribution problem.",
+          "Asymmetric = slow, key pair, solves key exchange and signing.",
+          "TLS is hybrid: asymmetric to negotiate, symmetric to transport.",
+          "AES-256, RSA ≥ 2048, ECC-256, SHA-256: the lengths to remember. MD5, SHA-1, DES, RC4 are obsolete."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1.3-02",
+    "objective": "1.3",
+    "order": 2,
+    "title": "The PKI Chain of Trust, End to End",
+    "minutes": 18,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "A certificate is never trusted \"just because it exists\". It is trusted because a chain of signatures leads back to an authority your system has decided to trust."
+      },
+      {
+        "type": "h",
+        "text": "Building Blocks of PKI"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-1.3-L02-cert-chain"
+      },
+      {
+        "type": "simulation",
+        "simId": "sim-crypto-compare"
+      },
+      {
+        "type": "p",
+        "text": "A **PKI** (Public Key Infrastructure) is the set of roles, policies, and systems that issue, distribute, verify, and revoke certificates. It relies on a **Certificate Authority (CA)** that signs certificates, optionally a **Registration Authority (RA)** that verifies the requester's identity, and a client-side **trust store**."
+      },
+      {
+        "type": "term",
+        "en": "Certificate Authority (CA)",
+        "fr": "Certificate Authority (CA)",
+        "field": "A root CA is kept offline; an intermediate CA signs certificates day-to-day. Compromising a root CA compromises the entire chain."
+      },
+      {
+        "type": "term",
+        "en": "Root of trust",
+        "fr": "Root of trust",
+        "field": "Also called \"trust anchor\". This is the root certificate present in the OS or browser store. If you add one manually, you create lasting trust: never do so lightly."
+      },
+      {
+        "type": "h",
+        "text": "The Complete Lifecycle"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-pki-chain"
+      },
+      {
+        "type": "p",
+        "text": "The requester generates their key pair **locally**, keeps the private key, and sends a **CSR** (Certificate Signing Request) containing their public key, identity, and proof of possession. The CA validates the identity, signs the certificate, and returns it. The client then verifies the chain, validity period, hostname, and revocation status."
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "title": "The CSR Never Contains the Private Key",
+        "text": "This is the most frequent PKI question. The CSR contains the **public** key and a signature produced with the private key. Sending your private key to a CA would defeat the entire purpose of the model."
+      },
+      {
+        "type": "h",
+        "text": "Certificate Types"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Type",
+          "What It Covers",
+          "Exam Point"
+        ],
+        "rows": [
+          [
+            "Self-signed",
+            "Signed by itself",
+            "Untrusted by default: browser warning, internal or lab use"
+          ],
+          [
+            "Third-party issued",
+            "Signed by a public CA",
+            "Automatic trust if the root is in the store"
+          ],
+          [
+            "Wildcard",
+            "`*.example.com`",
+            "Covers **one** subdomain level, not `a.b.example.com`"
+          ],
+          [
+            "SAN",
+            "Multiple names in one certificate",
+            "Replaces CN for modern hostname validation"
+          ],
+          [
+            "Server certificate",
+            "Authenticates the service",
+            "EKU: serverAuth"
+          ],
+          [
+            "Client certificate",
+            "Authenticates the user or device",
+            "EKU: clientAuth, often combined with mTLS"
+          ]
+        ]
+      },
+      {
+        "type": "h",
+        "text": "Revocation: CRL or OCSP"
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "CRL — Certificate Revocation List",
+          "points": [
+            "Signed list published periodically by the CA",
+            "Downloaded and cached by the client",
+            "Latency between revocation and taking effect",
+            "Can grow large"
+          ]
+        },
+        "right": {
+          "title": "OCSP — Online Certificate Status Protocol",
+          "points": [
+            "Real-time query to a responder",
+            "Status: good, revoked, unknown",
+            "Privacy leak to the CA (unless stapling is used)",
+            "Responder availability is critical"
+          ]
+        }
+      },
+      {
+        "type": "p",
+        "text": "**OCSP stapling** has the server itself carry the signed response: the client no longer queries the CA, improving privacy and latency. In practice, both mechanisms coexist; a revoked certificate must be rejected even if it has not expired."
+      },
+      {
+        "type": "h",
+        "text": "Key Escrow"
+      },
+      {
+        "type": "p",
+        "text": "**Key escrow** involves entrusting a copy of a key to a trusted third party to enable recovery if lost or to meet a legal obligation. It is a trade-off: you gain recovery, you accept an additional compromise risk. Distinguish it from **key backup**, which remains under the organization's control."
+      },
+      {
+        "type": "term",
+        "en": "Key escrow",
+        "fr": "Key escrow",
+        "field": "Common in enterprise encryption architectures and retention mandates. Never trivial: the escrow agent becomes a target."
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "PKI, certificates, revocation, and key escrow are **absent from the four provided books**. This lesson is written for the exam objectives; it cites no nonexistent source."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "14",
+        "page": 170,
+        "printed": 148,
+        "strength": "supporting",
+        "note": "Encrypted protocols (TLS, IPsec) — not PKI itself"
+      },
+      {
+        "type": "check",
+        "q": "Is a `*.example.com` certificate valid for `api.eu.example.com`?",
+        "options": [
+          "Yes, wildcard covers all subdomains",
+          "No, a wildcard only covers a single subdomain level",
+          "Yes, if the SAN contains `api.eu.example.com`",
+          "No, a wildcard covers no subdomains"
+        ],
+        "answer": 1,
+        "explain": "`*.example.com` covers `api.example.com` but not `api.eu.example.com`, which has two levels. Option 3 would be true if the SAN explicitly listed that name, but it contradicts the wildcard-only premise. This is a classic trap."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "CSR → CA validation → signed certificate → chain verification → revocation.",
+          "The CSR never contains the private key; the CA signs with its private key.",
+          "CRL = periodic list; OCSP = real-time status; stapling = server-carried response.",
+          "Wildcard = single level. Self-signed = untrusted by default. Key escrow = recovery vs. risk."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1.3-03",
+    "objective": "1.3",
+    "order": 3,
+    "title": "Hashing, Salting, Signatures, and Obfuscation",
+    "minutes": 16,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "A hash is not encryption. Encoding is not encryption. Obfuscation is not encryption. These four confusions explain a large share of exam mistakes."
+      },
+      {
+        "type": "h",
+        "text": "Hashing"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-1.3-L03-encryption-levels"
+      },
+      {
+        "type": "p",
+        "text": "A **hash function** transforms data of arbitrary length into a fixed-length digest. It is **one-way** (you cannot reverse it to the message), **deterministic** (same input, same output), and **sensitive to the slightest change** (avalanche effect). Two different inputs producing the same digest form a **collision**: that is what makes MD5 and SHA-1 unacceptable today."
+      },
+      {
+        "type": "term",
+        "en": "Hash function",
+        "fr": "Hash function",
+        "field": "SHA-256 and SHA-384 for integrity and signatures. For passwords, use slow, configurable functions: bcrypt, scrypt, Argon2 — not SHA-256 alone."
+      },
+      {
+        "type": "h",
+        "text": "Salting"
+      },
+      {
+        "type": "p",
+        "text": "A **salt** is a random value added to a password before hashing, stored alongside the hash. It renders **rainbow tables** useless: the same password produces different hashes for each user. Salting does not make a weak password strong; it only prevents precomputation and batch attacks."
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "Without Salt",
+          "points": [
+            "Two users with the same password have the same hash",
+            "A rainbow table cracks all accounts at once",
+            "The hash becomes a reusable identity signature"
+          ]
+        },
+        "right": {
+          "title": "With Salt",
+          "points": [
+            "Each hash is unique even for identical passwords",
+            "Precomputed tables become useless",
+            "Computation cost must be increased (bcrypt, Argon2)"
+          ]
+        }
+      },
+      {
+        "type": "h",
+        "text": "Digital Signatures"
+      },
+      {
+        "type": "p",
+        "text": "You do not sign the entire message: you sign its **hash**. The sender hashes the message, encrypts the hash with their **private key**, and attaches this signature. The recipient recalculates the hash and compares it to the one obtained by decrypting the signature with the sender's public key. If both match, the message has not been modified and comes from the private key holder."
+      },
+      {
+        "type": "list",
+        "items": [
+          "**Integrity**: any modification changes the hash.",
+          "**Authenticity**: only the corresponding private key can produce the signature.",
+          "**Non-repudiation**: the sender cannot deny signing, if their private key is properly protected.",
+          "**Code signing**: same mechanism for a binary or script; verified before execution."
+        ]
+      },
+      {
+        "type": "table",
+        "head": [
+          "Mechanism",
+          "Reversible?",
+          "Protects",
+          "Example"
+        ],
+        "rows": [
+          [
+            "Encryption",
+            "Yes, with the key",
+            "Confidentiality",
+            "AES, RSA"
+          ],
+          [
+            "Hashing",
+            "No",
+            "Integrity",
+            "SHA-256"
+          ],
+          [
+            "Encoding",
+            "Yes, without a key",
+            "Nothing (format)",
+            "Base64, hexadecimal"
+          ],
+          [
+            "Obfuscation",
+            "Difficult but not secure",
+            "Readability",
+            "Minification, packing"
+          ],
+          [
+            "Signature",
+            "No",
+            "Integrity + authenticity",
+            "ECDSA, RSA-PSS"
+          ]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "title": "Base64 Is Not Encryption",
+        "text": "Base64 is an **encoding**: anyone can decode it without a key. A secret \"hidden\" in Base64 in a configuration file is plaintext. This is a frequent source of secret leaks in public repositories."
+      },
+      {
+        "type": "h",
+        "text": "Obfuscation"
+      },
+      {
+        "type": "p",
+        "text": "**Obfuscation** makes code or data hard to read without encrypting it: renaming, minification, packing, partial string encryption. It slows analysis but does not withstand a motivated analyst. It never replaces access control or encryption."
+      },
+      {
+        "type": "p",
+        "text": "**Cryptographic tools** to know: OpenSSL for certificates and command-line encryption, GPG for file encryption and signing, hardware security modules (HSMs) to protect private keys, and secrets managers to avoid storing keys in code."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "13",
+        "page": 151,
+        "printed": 129,
+        "strength": "supporting",
+        "note": "Hashing and salting"
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "page": 173,
+        "strength": "supporting",
+        "note": "Digital signature and algorithms"
+      },
+      {
+        "type": "check",
+        "q": "A developer stores passwords with unsalted SHA-256. What is the main risk?",
+        "options": [
+          "Passwords can be decrypted with the private key",
+          "A rainbow table can quickly recover common passwords",
+          "SHA-256 is too slow for authentication",
+          "The hash can be forged without knowing the password"
+        ],
+        "answer": 1,
+        "explain": "SHA-256 is fast and deterministic: without a salt, hashes are identical for identical passwords and can be precomputed. The solution is not \"encrypt\" but to use a slow, salted function (bcrypt, Argon2) with an appropriate cost."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Hashing: irreversible, integrity, avoid collisions (MD5, SHA-1 obsolete).",
+          "Salt: renders rainbow tables useless; does not strengthen a weak password.",
+          "Signature = hash encrypted with private key; verified with public key.",
+          "Encoding and obfuscation do not protect confidentiality."
+        ]
+      }
+    ]
+  }
+]

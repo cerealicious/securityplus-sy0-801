@@ -1,0 +1,114 @@
+{
+  "id": "qz-4.1",
+  "objective": "4.1",
+  "title": "Quiz — Security Controls and Protection Techniques",
+  "questions": [
+    {
+      "id": "q-4.1-01",
+      "type": "single",
+      "q": "Which control detects without blocking and is placed out-of-path from traffic?",
+      "options": [
+        "IPS",
+        "NIDS",
+        "WAF",
+        "HIPS"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "A NIDS is detective: it receives a copy of traffic via SPAN/tap and does not interrupt the flow.",
+      "ref": "4.1-02"
+    },
+    {
+      "id": "q-4.1-02",
+      "type": "single",
+      "q": "Which mechanism verifies that an email was signed by the sending domain?",
+      "options": [
+        "SPF",
+        "DKIM",
+        "BIMI",
+        "Rate limiting"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "DKIM adds a cryptographic signature verifiable via the public key published in DNS. SPF lists authorized sending servers.",
+      "ref": "4.1-03"
+    },
+    {
+      "id": "q-4.1-03",
+      "type": "multi",
+      "q": "Which technologies fall under deception? (Select all that apply)",
+      "options": [
+        "Honeynet",
+        "Honeytoken",
+        "Canary account",
+        "HIDS"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "explain": "Honeynets, honeytokens, and canary accounts are decoys. A HIDS is a host-based detection agent.",
+      "ref": "4.1-01"
+    },
+    {
+      "id": "q-4.1-04",
+      "type": "match",
+      "q": "Match each control to the layer it protects.",
+      "pairs": [
+        {
+          "left": "WAF",
+          "right": "HTTP traffic / web application"
+        },
+        {
+          "left": "EDR",
+          "right": "Workstation and server (endpoint)"
+        },
+        {
+          "left": "DLP",
+          "right": "Sensitive outbound data"
+        },
+        {
+          "left": "DMARC",
+          "right": "Email authentication and policy"
+        }
+      ],
+      "explain": "Choosing the right control means identifying the layer and traffic flow affected by the risk.",
+      "ref": "4.1-03"
+    },
+    {
+      "id": "q-4.1-05",
+      "type": "single",
+      "q": "An attacker compromises a workstation and attempts to modify system files. Which host control can block the action?",
+      "options": [
+        "NIDS",
+        "HIPS",
+        "WAF",
+        "Captive portal"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "A HIPS is a preventive host agent: it blocks suspicious behavior locally. A HIDS would only alert.",
+      "ref": "4.1-02"
+    },
+    {
+      "id": "q-4.1-06",
+      "type": "single",
+      "q": "Which statement about EDR is correct?",
+      "options": [
+        "It is a next-generation firewall",
+        "It is an agent installed on the endpoint to detect and respond",
+        "It is an email DNS record",
+        "It is a centralized logging server"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "EDR is an endpoint agent. Calling it a 'next generation firewall' is a known error in SOC Notes that is corrected here.",
+      "ref": "4.1-03"
+    }
+  ]
+}

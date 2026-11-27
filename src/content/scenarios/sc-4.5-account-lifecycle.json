@@ -1,0 +1,90 @@
+{
+  "id": "sc-4.5-account-lifecycle",
+  "objective": "4.5",
+  "title": "An Identity from Creation to Revocation",
+  "context": "A new employee joins the team, needs occasional production access, and leaves the company six months later. You manage their identity in three decisions.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "The account must be created. What is the first step?",
+      "choices": [
+        {
+          "text": "Verify the requester's identity, validate the request, and assign minimum rights tied to their role",
+          "next": "n2",
+          "score": 4,
+          "why": "Identity proofing and least privilege precede any rights assignment."
+        },
+        {
+          "text": "Directly create an administrator account to avoid future requests",
+          "next": "n2",
+          "score": 0,
+          "why": "This is a permanent, unjustified expansion of the attack surface."
+        },
+        {
+          "text": "Share a colleague's account during onboarding",
+          "next": "n2",
+          "score": 0,
+          "why": "Account sharing destroys individual accountability."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "They must apply an urgent production patch for two hours. How do you organize access?",
+      "choices": [
+        {
+          "text": "Grant just-in-time access, approved, automatically expiring, and logged",
+          "next": "n3",
+          "score": 4,
+          "why": "JIT reduces the exposure window and leaves an audit trail of privilege elevation."
+        },
+        {
+          "text": "Add their account to the permanent administrators group",
+          "next": "n3",
+          "score": 0,
+          "why": "The privilege would remain active long after the work ends."
+        },
+        {
+          "text": "Give them the service account password",
+          "next": "n3",
+          "score": 1,
+          "why": "A service account is intended for an automated task, not human use."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "The employee leaves. Which revocation sequence is correct?",
+      "choices": [
+        {
+          "text": "Disable the account, revoke sessions and tokens, transfer assets, then retain logs",
+          "next": "n4",
+          "score": 4,
+          "why": "Complete revocation covers account, sessions, tokens, and resource ownership."
+        },
+        {
+          "text": "Wait until the end of the month to disable the account",
+          "next": "n4",
+          "score": 0,
+          "why": "Unnecessary access remains an attack surface for the entire period."
+        },
+        {
+          "text": "Delete audit logs to erase their traces",
+          "next": "n4",
+          "score": 0,
+          "why": "On the contrary, logs are evidence of activity and must be retained."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "You applied a complete lifecycle: proofing, least privilege, JIT elevation, and verifiable revocation."
+    }
+  },
+  "debrief": [
+    "The quality of identity proofing underpins the entire lifecycle.",
+    "JIT limits the duration of elevated privileges and is paired with approval and logging.",
+    "Deprovisioning covers account, sessions, tokens, assets, and evidence retention."
+  ]
+}

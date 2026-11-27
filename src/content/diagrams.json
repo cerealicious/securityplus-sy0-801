@@ -1,0 +1,840 @@
+{
+  "diagrams": [
+    {
+      "id": "d-controls-matrix",
+      "kind": "matrix",
+      "title": "Controls Matrix: 4 Categories × 6 Types",
+      "subtitle": "Each cell gives a concrete example. This is the official dual taxonomy for Objective 1.1.",
+      "matrix": {
+        "columns": [
+          "Preventive",
+          "Deterrent",
+          "Corrective",
+          "Detective",
+          "Compensating",
+          "Directive"
+        ],
+        "rows": [
+          {
+            "label": "Technical / Logical",
+            "cells": [
+              {
+                "text": "Firewall, MFA, patches",
+                "detail": "Prevents the event before it occurs. A preventive technical control acts on traffic, identity, or code."
+              },
+              {
+                "text": "Warning banner, visible honeypot",
+                "detail": "Deters through the perception of risk or monitoring. A \"visible\" honeypot discourages an attacker from proceeding."
+              },
+              {
+                "text": "Restore, rollback, automatic quarantine",
+                "detail": "Reduces impact after the event: the system is returned to a known state. Rollback is corrective, not preventive."
+              },
+              {
+                "text": "SIEM, IDS, audit logs",
+                "detail": "Detects without blocking. An IDS is detective; an IPS is preventive because it blocks."
+              },
+              {
+                "text": "Alternative control when the primary is not possible",
+                "detail": "Compensates for a gap: for example, enhanced monitoring of a server that cannot be patched."
+              },
+              {
+                "text": "Configuration standard, technical policy",
+                "detail": "Guides and mandates behavior. A directive control states what to do; it does not technically prevent it."
+              }
+            ]
+          },
+          {
+            "label": "Managerial / Administrative",
+            "cells": [
+              {
+                "text": "Policy, training, separation of duties",
+                "detail": "Reduces likelihood through organization and rules, before any technical measure."
+              },
+              {
+                "text": "Acceptable use policy, disciplinary sanctions",
+                "detail": "Deters through known and accepted consequences. An unenforced policy is not deterrent."
+              },
+              {
+                "text": "Response plan, revocation procedure",
+                "detail": "Organizes remediation: who decides, who acts, and within what timeframe."
+              },
+              {
+                "text": "Audit, access review, risk assessment",
+                "detail": "Detects gaps through periodic review rather than real-time sensors."
+              },
+              {
+                "text": "Manual control pending automation",
+                "detail": "Temporarily compensates for a missing capability, at higher cost and risk of error."
+              },
+              {
+                "text": "Security policy, mandatory procedure",
+                "detail": "Enforceable document that defines expected behavior and authority."
+              }
+            ]
+          },
+          {
+            "label": "Physical / Environmental",
+            "cells": [
+              {
+                "text": "Lock, badge, mantrap, fence",
+                "detail": "Prevents physical access. A mantrap (access control vestibule) prevents tailgating by enforcing single-person entry."
+              },
+              {
+                "text": "Visible camera, lighting, security guard",
+                "detail": "Deters through potential observation. The camera deters; reviewing the footage detects."
+              },
+              {
+                "text": "Fire extinguisher, UPS, generator",
+                "detail": "Corrects or sustains after an event: fire, power outage, power surge."
+              },
+              {
+                "text": "Smoke detector, door sensor, guard patrol",
+                "detail": "Detects the physical event. A door sensor is detective, not preventive."
+              },
+              {
+                "text": "Additional guard if a camera is down",
+                "detail": "Compensates for a technical failure with a human measure."
+              },
+              {
+                "text": "Evacuation plan, access signage",
+                "detail": "Directs behavior in normal or emergency situations."
+              }
+            ]
+          },
+          {
+            "label": "Operational",
+            "cells": [
+              {
+                "text": "Backup, preventive maintenance, hardening",
+                "detail": "Maintains operational capability and reduces the attack surface over time."
+              },
+              {
+                "text": "Announcement of penetration testing",
+                "detail": "Deters by making detection credible. The announcement does not replace the test."
+              },
+              {
+                "text": "Reboot, failover, restoration",
+                "detail": "Restores service. Failover is corrective when it occurs after an outage."
+              },
+              {
+                "text": "Monitoring, log review, scanning",
+                "detail": "Detects during ongoing operations. Log review is the most universal detective control."
+              },
+              {
+                "text": "Enhanced monitoring during an exception",
+                "detail": "Compensates for a temporary exception (shared account, open port) with increased oversight."
+              },
+              {
+                "text": "Runbook, SOP, continuity plan",
+                "detail": "Standardizes execution to reduce improvisation under pressure."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "d-pki-chain",
+      "kind": "flow",
+      "title": "The PKI Chain of Trust",
+      "subtitle": "From CSR to revocation: what travels, who signs, and what must never be transmitted.",
+      "modes": [
+        "explore",
+        "quiz",
+        "order"
+      ],
+      "quiz": {
+        "question": "Which item contains the requester's public key and identity, but never the private key?",
+        "answer": "csr"
+      },
+      "sequence": [
+        "csr",
+        "ca",
+        "cert",
+        "chain",
+        "revoke"
+      ],
+      "nodes": [
+        {
+          "id": "csr",
+          "label": "CSR",
+          "sub": "Certificate Signing Request",
+          "x": 8,
+          "y": 96,
+          "w": 142,
+          "h": 58,
+          "detail": "The requester generates a key pair locally, keeps the **private key**, and sends a CSR containing its **public key**, identity (CN, SAN), and a signature proving possession of the private key.",
+          "exam": "A CSR **never** contains the private key. If a question says \"send your private key to the CA,\" that is false."
+        },
+        {
+          "id": "ca",
+          "label": "Certificate Authority",
+          "sub": "CA · validation",
+          "x": 162,
+          "y": 96,
+          "w": 152,
+          "h": 58,
+          "detail": "The CA verifies the requester's identity according to its policy (DV, OV, EV), then signs the certificate with its own private key. A root CA is offline; an intermediate CA handles day-to-day signing.",
+          "exam": "A CA **issues** and **signs**. It does not encrypt user data."
+        },
+        {
+          "id": "cert",
+          "label": "X.509 Certificate",
+          "sub": "public key + identity",
+          "x": 326,
+          "y": 96,
+          "w": 148,
+          "h": 58,
+          "detail": "The certificate binds an identity to a public key, with a validity period, usages (EKU), and the CA's signature. The client verifies the signature using the CA's public key.",
+          "exam": "A **self-signed** certificate is not trusted by a CA: it triggers a warning unless manually added to the trust store."
+        },
+        {
+          "id": "chain",
+          "label": "Chain Validation",
+          "sub": "root → intermediate → leaf",
+          "x": 486,
+          "y": 96,
+          "w": 152,
+          "h": 58,
+          "detail": "The client walks the chain up to a **trusted root** in its trust store. It checks the signature, validity period, hostname (SAN), usages, and revocation.",
+          "exam": "An incomplete chain (missing intermediate) causes an error even if the certificate is valid. This is the most common PKI issue."
+        },
+        {
+          "id": "revoke",
+          "label": "Revocation",
+          "sub": "CRL / OCSP",
+          "x": 650,
+          "y": 96,
+          "w": 122,
+          "h": 58,
+          "detail": "If the private key is compromised or the certificate is no longer legitimate, the CA revokes it. **CRL** = signed list downloaded periodically; **OCSP** = real-time status query.",
+          "exam": "CRL is a **list** (latency); OCSP is a **response** (real-time). OCSP stapling has the server deliver the response."
+        }
+      ],
+      "edges": [
+        {
+          "from": "csr",
+          "to": "ca",
+          "label": "submitted to"
+        },
+        {
+          "from": "ca",
+          "to": "cert",
+          "label": "signs"
+        },
+        {
+          "from": "cert",
+          "to": "chain",
+          "label": "verified by"
+        },
+        {
+          "from": "chain",
+          "to": "revoke",
+          "label": "checks"
+        }
+      ]
+    },
+    {
+      "id": "d-crypto-compare",
+      "kind": "flow",
+      "title": "Symmetric, Asymmetric, Hashing: Three Different Functions",
+      "subtitle": "Click each block. The exam focus is not confusing confidentiality, key exchange, and integrity.",
+      "nodes": [
+        {
+          "id": "s1",
+          "label": "Plaintext Data",
+          "sub": "plaintext",
+          "x": 20,
+          "y": 30,
+          "w": 190,
+          "h": 52,
+          "kind": "neutral",
+          "detail": "Common starting point for all three mechanisms."
+        },
+        {
+          "id": "s2",
+          "label": "AES-256 · same key",
+          "sub": "symmetric encryption",
+          "x": 250,
+          "y": 30,
+          "w": 200,
+          "h": 52,
+          "detail": "A **single key** encrypts and decrypts. Fast, suited for bulk data. Problem: the key must be transmitted securely — that is the role of asymmetric encryption.",
+          "exam": "AES is **symmetric**. RSA, ECC, and Diffie-Hellman are **asymmetric**."
+        },
+        {
+          "id": "s3",
+          "label": "Encrypted Data",
+          "sub": "ciphertext",
+          "x": 490,
+          "y": 30,
+          "w": 180,
+          "h": 52,
+          "kind": "artifact",
+          "detail": "Without the key, the ciphertext should be unusable. Encryption alone does not protect integrity."
+        },
+        {
+          "id": "a1",
+          "label": "Plaintext Data",
+          "sub": "plaintext",
+          "x": 20,
+          "y": 120,
+          "w": 190,
+          "h": 52,
+          "kind": "neutral",
+          "detail": "Same starting point."
+        },
+        {
+          "id": "a2",
+          "label": "Recipient's Public Key",
+          "sub": "RSA / ECC",
+          "x": 250,
+          "y": 120,
+          "w": 200,
+          "h": 52,
+          "detail": "Each party has a key pair: public key shared, private key kept secret. What is encrypted with the public key can only be decrypted with the private key.",
+          "exam": "Encrypting with the **public** key = confidentiality. Signing with the **private** key = authenticity and non-repudiation."
+        },
+        {
+          "id": "a3",
+          "label": "Decryption with Private Key",
+          "sub": "asymmetric",
+          "x": 490,
+          "y": 120,
+          "w": 180,
+          "h": 52,
+          "kind": "artifact",
+          "detail": "Slow: not used to encrypt large volumes, but to exchange a symmetric key (TLS) or sign a hash."
+        },
+        {
+          "id": "h1",
+          "label": "Message",
+          "sub": "arbitrary length",
+          "x": 20,
+          "y": 210,
+          "w": 190,
+          "h": 52,
+          "kind": "neutral",
+          "detail": "Any data."
+        },
+        {
+          "id": "h2",
+          "label": "SHA-256",
+          "sub": "hash function",
+          "x": 250,
+          "y": 210,
+          "w": 200,
+          "h": 52,
+          "detail": "**One-way** function: produces a fixed-size digest, non-reversible. Sensitive to the slightest change (avalanche effect).",
+          "exam": "Hashing is **not** encryption: you do not \"decrypt\" a hash. A password hash is cracked by brute force or rainbow tables — hence **salting**."
+        },
+        {
+          "id": "h3",
+          "label": "256-bit Digest",
+          "sub": "digest",
+          "x": 490,
+          "y": 210,
+          "w": 180,
+          "h": 52,
+          "kind": "artifact",
+          "detail": "Used to verify integrity, store passwords, and build a digital signature (you sign the hash, not the message)."
+        }
+      ],
+      "edges": [
+        {
+          "from": "s1",
+          "to": "s2",
+          "label": ""
+        },
+        {
+          "from": "s2",
+          "to": "s3",
+          "label": ""
+        },
+        {
+          "from": "a1",
+          "to": "a2",
+          "label": ""
+        },
+        {
+          "from": "a2",
+          "to": "a3",
+          "label": ""
+        },
+        {
+          "from": "h1",
+          "to": "h2",
+          "label": ""
+        },
+        {
+          "from": "h2",
+          "to": "h3",
+          "label": ""
+        }
+      ]
+    },
+    {
+      "id": "d-data-lifecycle",
+      "kind": "flow",
+      "title": "Data Lifecycle and Controls by Stage",
+      "subtitle": "Create, store, use, share, destroy: each stage has its own controls and risks.",
+      "quiz": {
+        "question": "At which stage does network egress DLP primarily act?",
+        "answer": "share"
+      },
+      "nodes": [
+        {
+          "id": "create",
+          "label": "Creation",
+          "sub": "collection / generation",
+          "x": 8,
+          "y": 100,
+          "w": 142,
+          "h": 60,
+          "detail": "Classification at creation, minimization (collect only what is needed), automatic labeling, consent, and legal basis.",
+          "exam": "Classification must be decided **at creation**, not after a breach."
+        },
+        {
+          "id": "store",
+          "label": "Storage",
+          "sub": "at rest",
+          "x": 162,
+          "y": 100,
+          "w": 142,
+          "h": 60,
+          "detail": "Encryption at rest, access control, backup, data residency, and access logging.",
+          "exam": "Encryption at rest protects a stolen disk, not a compromised account."
+        },
+        {
+          "id": "use",
+          "label": "Use",
+          "sub": "in use",
+          "x": 316,
+          "y": 100,
+          "w": 142,
+          "h": 60,
+          "detail": "Least privilege, display masking, controlled execution environment, protection against exfiltration by a legitimate user.",
+          "exam": "Data **in use** is the blind spot of traditional encryption."
+        },
+        {
+          "id": "share",
+          "label": "Sharing",
+          "sub": "in transit",
+          "x": 470,
+          "y": 100,
+          "w": 142,
+          "h": 60,
+          "detail": "TLS, signing, network and email DLP, recipient controls, tokens instead of raw data.",
+          "exam": "Egress DLP and content filtering act primarily during **sharing**."
+        },
+        {
+          "id": "destroy",
+          "label": "Destruction",
+          "sub": "end of life",
+          "x": 624,
+          "y": 100,
+          "w": 148,
+          "h": 60,
+          "detail": "Certified erasure, physical destruction, access revocation, certificate of destruction, compliance with retention periods (legal hold).",
+          "exam": "A **legal hold** suspends destruction, even if policy specifies 30 days."
+        }
+      ],
+      "edges": [
+        {
+          "from": "create",
+          "to": "store",
+          "label": ""
+        },
+        {
+          "from": "store",
+          "to": "use",
+          "label": ""
+        },
+        {
+          "from": "use",
+          "to": "share",
+          "label": ""
+        },
+        {
+          "from": "share",
+          "to": "destroy",
+          "label": ""
+        }
+      ]
+    },
+    {
+      "id": "d-ir-cycle",
+      "kind": "flow",
+      "title": "The 7-Phase Incident Response Cycle",
+      "subtitle": "Prepare, detect, investigate, contain, eradicate, recover, learn. Test the order.",
+      "modes": [
+        "explore",
+        "order",
+        "quiz"
+      ],
+      "sequence": [
+        "prep",
+        "detect",
+        "investigate",
+        "contain",
+        "eradicate",
+        "recover",
+        "post"
+      ],
+      "quiz": {
+        "question": "Which phase decides to isolate a host from the network without powering it off?",
+        "answer": "contain"
+      },
+      "nodes": [
+        {
+          "id": "prep",
+          "label": "Preparation",
+          "sub": "plans, roles, tests",
+          "x": 10,
+          "y": 40,
+          "w": 172,
+          "h": 56,
+          "detail": "Playbooks, contact directory, tabletop exercises, pre-authorized access, ready forensic tools, roles and RACI matrix.",
+          "exam": "Preparation is judged before the incident. An untested playbook is not preparation."
+        },
+        {
+          "id": "detect",
+          "label": "Detection & Analysis",
+          "sub": "identify, triage",
+          "x": 202,
+          "y": 40,
+          "w": 172,
+          "h": 56,
+          "detail": "SIEM/EDR alert, internal or external report, threat hunting. Triage: true positive, false positive, severity, scope.",
+          "exam": "Detection does not decide the response yet: it establishes the facts."
+        },
+        {
+          "id": "investigate",
+          "label": "Investigation",
+          "sub": "evidence, scope",
+          "x": 394,
+          "y": 40,
+          "w": 172,
+          "h": 56,
+          "detail": "Collection of volatile evidence (memory, connections) then persistent evidence, timeline, chain of custody, e-discovery.",
+          "exam": "Order of volatility: memory → network → disk → backups. Do not reboot before capturing memory."
+        },
+        {
+          "id": "contain",
+          "label": "Containment",
+          "sub": "isolate, negotiate",
+          "x": 586,
+          "y": 40,
+          "w": 172,
+          "h": 56,
+          "detail": "Network isolation, account lockout, segmentation, taking offline. Tough call: containing too fast can alert the attacker and destroy evidence.",
+          "exam": "Containment ≠ powering off. Powering off destroys memory and can encrypt more data."
+        },
+        {
+          "id": "eradicate",
+          "label": "Eradication",
+          "sub": "remove root cause",
+          "x": 100,
+          "y": 160,
+          "w": 172,
+          "h": 56,
+          "detail": "Remove attacker access, patch the vulnerability, rebuild compromised systems, reset credentials.",
+          "exam": "Until the root cause is removed, recovery reintroduces the compromise."
+        },
+        {
+          "id": "recover",
+          "label": "Recovery",
+          "sub": "restore, monitor",
+          "x": 292,
+          "y": 160,
+          "w": 172,
+          "h": 56,
+          "detail": "Restore from a verified backup, phased return to service, enhanced monitoring during the risk window.",
+          "exam": "Restoring without verifying backup integrity can reinstall the ransomware."
+        },
+        {
+          "id": "post",
+          "label": "Post-Incident",
+          "sub": "lessons, PIR",
+          "x": 484,
+          "y": 160,
+          "w": 172,
+          "h": 56,
+          "detail": "Blameless review, root cause analysis, post-incident report (PIR), dated and tracked corrective actions.",
+          "exam": "The PIR is a deliverable. Without tracked corrective actions, the incident will recur."
+        }
+      ],
+      "edges": [
+        {
+          "from": "prep",
+          "to": "detect",
+          "label": ""
+        },
+        {
+          "from": "detect",
+          "to": "investigate",
+          "label": ""
+        },
+        {
+          "from": "investigate",
+          "to": "contain",
+          "label": ""
+        },
+        {
+          "from": "contain",
+          "to": "eradicate",
+          "label": ""
+        },
+        {
+          "from": "eradicate",
+          "to": "recover",
+          "label": ""
+        },
+        {
+          "from": "recover",
+          "to": "post",
+          "label": ""
+        }
+      ]
+    },
+    {
+      "id": "d-dr-timeline",
+      "kind": "flow",
+      "title": "RPO / RTO: Two Different Clocks",
+      "subtitle": "Click the steps to understand what each metric measures.",
+      "modes": [
+        "explore",
+        "quiz",
+        "order"
+      ],
+      "nodes": [
+        {
+          "id": "t0",
+          "label": "Incident",
+          "sub": "T0: outage detected",
+          "x": 40,
+          "y": 60,
+          "w": 150,
+          "h": 62,
+          "kind": "risk",
+          "detail": "The RTO clock starts at detection and stops when service is restored.",
+          "exam": "RTO = outage duration, not mean time to repair."
+        },
+        {
+          "id": "rpo",
+          "label": "RPO",
+          "sub": "Data loss",
+          "x": 250,
+          "y": 40,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Last available data copy before the incident. A 15-min RPO requires replication or backups at least every 15 min.",
+          "exam": "RPO is measured BEFORE the incident."
+        },
+        {
+          "id": "restore",
+          "label": "Restoration",
+          "sub": "Immutable copy",
+          "x": 250,
+          "y": 150,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Restoration relies on an immutable, tested backup. The restoration must be verified.",
+          "exam": "An untested backup is not proof of recoverability."
+        },
+        {
+          "id": "rto",
+          "label": "RTO",
+          "sub": "Service restored",
+          "x": 480,
+          "y": 95,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "The service is available again. Total elapsed time from T0 must not exceed the RTO.",
+          "exam": "RTO is measured AFTER the incident."
+        },
+        {
+          "id": "failback",
+          "label": "Failback",
+          "sub": "Return to primary",
+          "x": 680,
+          "y": 95,
+          "w": 150,
+          "h": 62,
+          "kind": "neutral",
+          "detail": "Return to the primary site after stabilization, with integrity checks.",
+          "exam": "Failback is often overlooked in exam scenarios."
+        }
+      ],
+      "edges": [
+        {
+          "from": "t0",
+          "to": "rpo",
+          "label": "loss"
+        },
+        {
+          "from": "rpo",
+          "to": "restore"
+        },
+        {
+          "from": "restore",
+          "to": "rto"
+        },
+        {
+          "from": "t0",
+          "to": "rto",
+          "label": "outage"
+        },
+        {
+          "from": "rto",
+          "to": "failback"
+        }
+      ],
+      "sequence": [
+        "t0",
+        "rpo",
+        "restore",
+        "rto",
+        "failback"
+      ],
+      "quiz": {
+        "question": "Which step measures acceptable data loss?",
+        "answer": "rpo"
+      }
+    },
+    {
+      "id": "d-ai-threats",
+      "kind": "flow",
+      "title": "Where AI-Related Threats Strike",
+      "subtitle": "Explore the attack points, then test your knowledge.",
+      "modes": [
+        "explore",
+        "quiz"
+      ],
+      "nodes": [
+        {
+          "id": "train",
+          "label": "Training Data",
+          "sub": "Corpus, labels",
+          "x": 30,
+          "y": 40,
+          "w": 170,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Corpus used to train the model.",
+          "exam": "Tainted data → poisoning."
+        },
+        {
+          "id": "model",
+          "label": "Model",
+          "sub": "Parameters, weights",
+          "x": 250,
+          "y": 40,
+          "w": 150,
+          "h": 62,
+          "kind": "step",
+          "detail": "The trained model and its parameters.",
+          "exam": "Unauthorized modification → model manipulation."
+        },
+        {
+          "id": "input",
+          "label": "User Input",
+          "sub": "Prompt, document",
+          "x": 250,
+          "y": 170,
+          "w": 150,
+          "h": 62,
+          "kind": "actor",
+          "detail": "What is submitted to the model: query, document, web page.",
+          "exam": "Hostile instruction in a document → prompt injection."
+        },
+        {
+          "id": "output",
+          "label": "Output",
+          "sub": "Response, action",
+          "x": 480,
+          "y": 105,
+          "w": 150,
+          "h": 62,
+          "kind": "neutral",
+          "detail": "Response generated or action triggered by an agent.",
+          "exam": "False but plausible → hallucination."
+        },
+        {
+          "id": "poison",
+          "label": "Poisoning",
+          "sub": "Upstream",
+          "x": 30,
+          "y": 160,
+          "w": 170,
+          "h": 62,
+          "kind": "risk",
+          "detail": "Training data falsified to bias the model.",
+          "exam": "Acts on training, not on inference."
+        },
+        {
+          "id": "guard",
+          "label": "Guardrails",
+          "sub": "Safety rules",
+          "x": 480,
+          "y": 210,
+          "w": 150,
+          "h": 62,
+          "kind": "risk",
+          "detail": "Restrictions imposed on the model.",
+          "exam": "Bypassing these rules = jailbreaking."
+        },
+        {
+          "id": "data",
+          "label": "Data Loss",
+          "sub": "Data leakage",
+          "x": 675,
+          "y": 105,
+          "w": 150,
+          "h": 62,
+          "kind": "risk",
+          "detail": "Confidential data returned or exposed.",
+          "exam": "Data loss and privacy are data risks."
+        }
+      ],
+      "edges": [
+        {
+          "from": "train",
+          "to": "model"
+        },
+        {
+          "from": "poison",
+          "to": "train",
+          "label": "poisons"
+        },
+        {
+          "from": "model",
+          "to": "output"
+        },
+        {
+          "from": "input",
+          "to": "model"
+        },
+        {
+          "from": "guard",
+          "to": "output",
+          "label": "bypassed"
+        },
+        {
+          "from": "output",
+          "to": "data",
+          "label": "leaks"
+        }
+      ],
+      "sequence": [],
+      "quiz": {
+        "question": "Which threat acts on the training data?",
+        "answer": "poison"
+      }
+    }
+  ]
+}

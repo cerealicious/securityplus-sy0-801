@@ -1,0 +1,114 @@
+{
+  "id": "qz-5.6",
+  "objective": "5.6",
+  "title": "Quiz — Security Awareness",
+  "questions": [
+    {
+      "id": "q-5.6-01",
+      "type": "single",
+      "q": "An employee clicks a link during a simulated phishing exercise. Which type of training is required?",
+      "options": [
+        "Onboarding",
+        "Ongoing",
+        "Targeted",
+        "Corrective"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "An observed mistake triggers corrective training. Targeted training addresses a role-specific risk.",
+      "ref": "5.6-01"
+    },
+    {
+      "id": "q-5.6-02",
+      "type": "single",
+      "q": "Which channel tracks courses, certifications, and employee progress?",
+      "options": [
+        "LMS",
+        "One-to-many delivery",
+        "Self-service portal",
+        "Managerial report"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "A learning management system (LMS) centralizes courses, tracking, and certifications. Concept from objective 5.6 (beyond textbooks).",
+      "ref": "5.6-01"
+    },
+    {
+      "id": "q-5.6-03",
+      "type": "match",
+      "q": "Match each scenario to the appropriate training type.",
+      "pairs": [
+        {
+          "left": "First week of a new hire",
+          "right": "Initial / onboarding"
+        },
+        {
+          "left": "Annual training for all employees",
+          "right": "Ongoing"
+        },
+        {
+          "left": "BEC session for the accounting department",
+          "right": "Targeted"
+        },
+        {
+          "left": "Mistake sending data to the wrong recipient",
+          "right": "Corrective"
+        }
+      ],
+      "explain": "The trigger determines the type: onboarding, schedule, role risk, or mistake.",
+      "ref": "5.6-01"
+    },
+    {
+      "id": "q-5.6-04",
+      "type": "multi",
+      "q": "Which topics are common security awareness themes? (Select all that apply)",
+      "options": [
+        "Social engineering",
+        "Password and credential management",
+        "Operational security",
+        "Vendor lock-in"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "explain": "Vendor lock-in belongs to third-party risk (5.3), not awareness topics in objective 5.6.",
+      "ref": "5.6-01"
+    },
+    {
+      "id": "q-5.6-05",
+      "type": "single",
+      "q": "Which metric shows that employees are actively reporting phishing attempts?",
+      "options": [
+        "Click rate",
+        "Reporting rate",
+        "Open rate",
+        "Vendor risk score"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "The reporting rate measures active vigilance. A low click rate does not prove that alerts are being reported.",
+      "ref": "5.6-02"
+    },
+    {
+      "id": "q-5.6-06",
+      "type": "single",
+      "q": "Which deliverable summarizes program trends for leadership?",
+      "options": [
+        "Managerial report",
+        "Rule of engagement",
+        "Audit charter",
+        "Sampling"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "The managerial report presents trends, risks, and decisions to be made based on metrics.",
+      "ref": "5.6-02"
+    }
+  ]
+}

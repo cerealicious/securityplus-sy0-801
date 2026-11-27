@@ -1,0 +1,51 @@
+{
+  "id": "pbq-3.4-dr",
+  "objective": "3.4",
+  "type": "table",
+  "title": "Choose the Recovery Site",
+  "prompt": "For each constraint, select the most appropriate recovery site: Hot, Warm, or Cold.",
+  "columns": [
+    "Site",
+    "Description"
+  ],
+  "rows": [
+    {
+      "id": "r1",
+      "cells": [
+        "Recovery in minutes, synchronized data",
+        "Critical trading server"
+      ],
+      "answer": "Hot"
+    },
+    {
+      "id": "r2",
+      "cells": [
+        "Recovery in hours, hardware ready",
+        "Office workstation"
+      ],
+      "answer": "Warm"
+    },
+    {
+      "id": "r3",
+      "cells": [
+        "Recovery in several days, minimal cost",
+        "Rarely accessed archives"
+      ],
+      "answer": "Cold"
+    },
+    {
+      "id": "r4",
+      "cells": [
+        "Near-zero RPO, very short RTO",
+        "Payment database"
+      ],
+      "answer": "Hot"
+    }
+  ],
+  "explain": "A hot site offers the lowest RTO/RPO at the highest cost; a warm site is a middle ground; a cold site is the least expensive and slowest. Always reason from the stated RTO/RPO objectives.",
+  "options": [
+    "Hot",
+    "Warm",
+    "Cold"
+  ]
+}

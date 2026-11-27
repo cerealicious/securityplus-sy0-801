@@ -1,0 +1,76 @@
+{
+  "id": "pbq-3.2-placement",
+  "objective": "3.2",
+  "type": "classify",
+  "title": "Place Controls in the Right Zones",
+  "prompt": "For each control, indicate the zone where it must be placed to be effective: Perimeter/DMZ, Internal network, Out-of-band management (OOB), or Endpoint/identity.",
+  "categories": [
+    "Perimeter/DMZ",
+    "Internal network",
+    "Out-of-band management (OOB)",
+    "Endpoint/identity"
+  ],
+  "items": [
+    {
+      "id": "i1",
+      "label": "Perimeter firewall filtering inbound traffic",
+      "cat": "Perimeter/DMZ"
+    },
+    {
+      "id": "i2",
+      "label": "NIDS sensor on a mirror port of the public server segment",
+      "cat": "Perimeter/DMZ"
+    },
+    {
+      "id": "i3",
+      "label": "Internal firewall between two user segments",
+      "cat": "Internal network"
+    },
+    {
+      "id": "i4",
+      "label": "802.1X access control on connection ports",
+      "cat": "Internal network"
+    },
+    {
+      "id": "i5",
+      "label": "Administration jump host (bastion) with MFA and session recording",
+      "cat": "Out-of-band management (OOB)"
+    },
+    {
+      "id": "i6",
+      "label": "Management network separated from production for network devices",
+      "cat": "Out-of-band management (OOB)"
+    },
+    {
+      "id": "i7",
+      "label": "EDR agent verifying the health of each workstation",
+      "cat": "Endpoint/identity"
+    },
+    {
+      "id": "i8",
+      "label": "Least privilege policy and periodic access reviews",
+      "cat": "Endpoint/identity"
+    },
+    {
+      "id": "i9",
+      "label": "VPN concentrator terminating remote worker tunnels",
+      "cat": "Perimeter/DMZ"
+    },
+    {
+      "id": "i10",
+      "label": "Device posture check before Zero Trust application access",
+      "cat": "Endpoint/identity"
+    },
+    {
+      "id": "i11",
+      "label": "Segmentation blocking lateral movement between departments",
+      "cat": "Internal network"
+    },
+    {
+      "id": "i12",
+      "label": "Dedicated logging of administrative sessions",
+      "cat": "Out-of-band management (OOB)"
+    }
+  ],
+  "explain": "Placement follows the flow to be protected: the perimeter filters ingress, internal controls limit lateral movement, out-of-band isolates administration, and the endpoint verifies identity and posture. A preventive control is inline; a detective sensor can be out-of-band."
+}

@@ -1,0 +1,76 @@
+{
+  "id": "pbq-4.4-tools",
+  "objective": "4.4",
+  "type": "classify",
+  "title": "Classify Tools by Role in the Monitoring Pipeline",
+  "prompt": "For each tool or protocol, indicate its primary role in the pipeline from data sources to the SIEM and alerting.",
+  "categories": [
+    "Collection and transport",
+    "Correlation and analysis",
+    "Detection and inspection",
+    "Visualization and reporting"
+  ],
+  "items": [
+    {
+      "id": "i1",
+      "label": "syslog",
+      "cat": "Collection and transport"
+    },
+    {
+      "id": "i2",
+      "label": "NetFlow / IPFIX",
+      "cat": "Collection and transport"
+    },
+    {
+      "id": "i3",
+      "label": "SNMP",
+      "cat": "Collection and transport"
+    },
+    {
+      "id": "i4",
+      "label": "Port mirroring (SPAN)",
+      "cat": "Collection and transport"
+    },
+    {
+      "id": "i5",
+      "label": "SIEM",
+      "cat": "Correlation and analysis"
+    },
+    {
+      "id": "i6",
+      "label": "Orchestration (SOAR)",
+      "cat": "Correlation and analysis"
+    },
+    {
+      "id": "i7",
+      "label": "Benchmarks / SCAP",
+      "cat": "Detection and inspection"
+    },
+    {
+      "id": "i8",
+      "label": "Packet analyzer",
+      "cat": "Detection and inspection"
+    },
+    {
+      "id": "i9",
+      "label": "Antivirus",
+      "cat": "Detection and inspection"
+    },
+    {
+      "id": "i10",
+      "label": "DLP",
+      "cat": "Detection and inspection"
+    },
+    {
+      "id": "i11",
+      "label": "Vulnerability scanner",
+      "cat": "Detection and inspection"
+    },
+    {
+      "id": "i12",
+      "label": "Dashboard / NMS",
+      "cat": "Visualization and reporting"
+    }
+  ],
+  "explain": "Protocols like syslog, NetFlow, SNMP, and SPAN transport or copy data to the platform. The SIEM correlates and orchestration chains actions together. Benchmarks/SCAP, antivirus, DLP, scanners, and packet analyzers produce detections or measurements. Dashboards and NMS present the results."
+}

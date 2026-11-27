@@ -1,0 +1,90 @@
+{
+  "id": "sc-4.2-decommission",
+  "objective": "4.2",
+  "title": "Server End-of-Life: Three Decisions",
+  "context": "A customer database server is reaching end-of-support. It contains personal data and some records are still under a legal retention obligation. You lead its replacement and decommissioning.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "Before replacing the server, what must be verified first?",
+      "choices": [
+        {
+          "text": "The criticality, owner, and dependencies of the asset in the inventory",
+          "next": "n2",
+          "score": 4,
+          "why": "Without an up-to-date inventory, you can neither plan the migration nor identify the affected data."
+        },
+        {
+          "text": "The brand of the new server",
+          "next": "n2",
+          "score": 0,
+          "why": "Hardware selection comes after analyzing requirements and dependencies."
+        },
+        {
+          "text": "The number of cables in the rack",
+          "next": "n2",
+          "score": 1,
+          "why": "Useful for physical relocation, but unrelated to data security."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "Some records are under a legal retention obligation. What do you decide?",
+      "choices": [
+        {
+          "text": "Retain the affected data for the legal duration before any erasure",
+          "next": "n3",
+          "score": 4,
+          "why": "A legal hold suspends destruction, even if policy specifies a shorter lifecycle."
+        },
+        {
+          "text": "Immediately wipe the entire disk to prevent any leak",
+          "next": "n3",
+          "score": 0,
+          "why": "Erasing data under legal hold creates a compliance violation."
+        },
+        {
+          "text": "Leave the disk in a cabinet without processing",
+          "next": "n3",
+          "score": 0,
+          "why": "Storage without inventory or control remains an exposed shadow asset."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "For the rest of the disk, which disposal method is acceptable?",
+      "choices": [
+        {
+          "text": "Secure erasure or physical destruction, access revocation, and a certificate of destruction",
+          "next": "n4",
+          "score": 4,
+          "why": "Proof of destruction and access revocation close the lifecycle."
+        },
+        {
+          "text": "Delete only the file names",
+          "next": "n4",
+          "score": 0,
+          "why": "Deleting file names does not make data unreadable: recovery remains possible."
+        },
+        {
+          "text": "Resell the disk with service credentials still active",
+          "next": "n4",
+          "score": 0,
+          "why": "Associated access must be revoked before any media leaves."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "You verified the inventory, respected legal retention, and produced proof of destruction with access revocation."
+    }
+  },
+  "debrief": [
+    "An end-of-life asset remains in the inventory until proof of its destruction.",
+    "Legal retention obligations override deletion policies.",
+    "Certified erasure, access revocation, and a certificate of destruction close the lifecycle."
+  ]
+}

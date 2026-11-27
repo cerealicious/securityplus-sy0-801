@@ -1,0 +1,105 @@
+{
+  "id": "qz-3.4",
+  "objective": "3.4",
+  "title": "Quiz — Resilience and Recovery",
+  "questions": [
+    {
+      "id": "q-3.4-01",
+      "type": "single",
+      "q": "Which recovery site requires installing hardware in addition to restoring data?",
+      "options": [
+        "Hot site",
+        "Warm site",
+        "Cold site",
+        "High-availability cluster"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "A cold site only provides the facility and utilities; both hardware and data must be installed.",
+      "ref": "3.4-01"
+    },
+    {
+      "id": "q-3.4-02",
+      "type": "single",
+      "q": "A company accepts losing up to 15 minutes of transactions. Which metric does this describe?",
+      "options": [
+        "RTO",
+        "RPO",
+        "MTBF",
+        "MTTR"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Acceptable data loss is RPO. RTO describes the acceptable duration of service interruption.",
+      "ref": "3.4-02"
+    },
+    {
+      "id": "q-3.4-03",
+      "type": "single",
+      "q": "Which measure best protects backups against ransomware that deletes copies?",
+      "options": [
+        "Backup encryption",
+        "Backup immutability",
+        "Backup compression",
+        "Password rotation"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "An immutable copy cannot be modified or deleted, even with administrator privileges.",
+      "ref": "3.4-02"
+    },
+    {
+      "id": "q-3.4-04",
+      "type": "multi",
+      "q": "Which elements represent redundancy? (Select all that apply)",
+      "options": [
+        "Load balancing",
+        "Clustering",
+        "Autoscaling",
+        "Air-gapped network"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "explain": "An air-gap is separation, not redundancy. The other three eliminate a single point of failure.",
+      "ref": "3.4-01"
+    },
+    {
+      "id": "q-3.4-05",
+      "type": "single",
+      "q": "A critical service has an RTO of 2 hours but depends on the network, which has an RTO of 6 hours. What is the realistic RTO?",
+      "options": [
+        "2 hours",
+        "4 hours",
+        "6 hours",
+        "8 hours"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Recovery cannot be faster than the slowest dependency: the network imposes 6 hours.",
+      "ref": "3.4-02"
+    },
+    {
+      "id": "q-3.4-06",
+      "type": "single",
+      "q": "Which metric measures the reliability of a piece of equipment?",
+      "options": [
+        "MTTR",
+        "MTBF",
+        "RPO",
+        "RTO"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "MTBF (Mean Time Between Failures) measures the average time between failures. MTTR measures repair time.",
+      "ref": "3.4-02"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "id": "pbq-2.1-prioritize",
+  "objective": "2.1",
+  "type": "table",
+  "title": "Prioritize Vulnerabilities",
+  "prompt": "For each situation, select the remediation priority: Critical, High, Medium, or Low.",
+  "columns": [
+    "Vulnerability context",
+    "Asset / exposure"
+  ],
+  "rows": [
+    {
+      "id": "r1",
+      "cells": [
+        "CVSS 9.8, public exploit, no patch available",
+        "Internet-facing payment server"
+      ],
+      "answer": "Critical"
+    },
+    {
+      "id": "r2",
+      "cells": [
+        "CVSS 8.1, internal access required, patch available",
+        "Internal file server"
+      ],
+      "answer": "High"
+    },
+    {
+      "id": "r3",
+      "cells": [
+        "CVSS 6.5, low-criticality application, no known exploit",
+        "Lab test workstation"
+      ],
+      "answer": "Medium"
+    },
+    {
+      "id": "r4",
+      "cells": [
+        "CVSS 3.1, isolated system, effective compensating control",
+        "Workshop printer"
+      ],
+      "answer": "Low"
+    },
+    {
+      "id": "r5",
+      "cells": [
+        "CVSS 7.8, unsupported product, lateral movement possible",
+        "Internal domain server"
+      ],
+      "answer": "High"
+    }
+  ],
+  "options": [
+    "Critical",
+    "High",
+    "Medium",
+    "Low"
+  ],
+  "explain": "CVSS severity is only one input: exposure, exploit availability, asset criticality, and compensating controls determine the actual priority. A critically rated flaw on an isolated test bench ranks behind a high-severity flaw on an exposed server."
+}

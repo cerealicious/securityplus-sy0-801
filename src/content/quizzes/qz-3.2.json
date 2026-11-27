@@ -1,0 +1,114 @@
+{
+  "id": "qz-3.2",
+  "objective": "3.2",
+  "title": "Quiz — Infrastructure Protection",
+  "questions": [
+    {
+      "id": "q-3.2-01",
+      "type": "single",
+      "q": "Which zone typically hosts public-facing servers while protecting the internal network?",
+      "options": [
+        "Untrust",
+        "DMZ",
+        "Trust",
+        "Management"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "The DMZ is the buffer zone where public services are exposed without directly exposing the internal zone.",
+      "ref": "3.2-01"
+    },
+    {
+      "id": "q-3.2-02",
+      "type": "single",
+      "q": "A control must observe traffic without ever blocking it. Which placement should be chosen?",
+      "options": [
+        "Inline",
+        "Out-of-path on a mirror port",
+        "In series after the firewall",
+        "On the server only"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "A detective IDS receives a copy of traffic via SPAN/tap: it is out-of-path and cannot block.",
+      "ref": "3.2-01"
+    },
+    {
+      "id": "q-3.2-03",
+      "type": "multi",
+      "q": "Which signals does a Zero Trust architecture verify before granting access? (Select all that apply)",
+      "options": [
+        "User authentication",
+        "Device health",
+        "Device membership in the asset inventory",
+        "The ISP's public IP address"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "explain": "Zero Trust verifies the user, device health, inventory status, and application control — not just network location.",
+      "ref": "3.2-02"
+    },
+    {
+      "id": "q-3.2-04",
+      "type": "single",
+      "q": "Which failure mode prioritizes service availability?",
+      "options": [
+        "Fail-closed",
+        "Fail-open",
+        "Fail-safe",
+        "Failover"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "In fail-open mode, traffic passes if the control fails: availability takes priority, at the risk of bypass.",
+      "ref": "3.2-01"
+    },
+    {
+      "id": "q-3.2-05",
+      "type": "match",
+      "q": "Match each mechanism to its role.",
+      "pairs": [
+        {
+          "left": "Bastion",
+          "right": "Single entry point for out-of-band administration"
+        },
+        {
+          "left": "VPN",
+          "right": "Encrypted tunnel for remote access"
+        },
+        {
+          "left": "gMSA",
+          "right": "Service account password automatically rotated"
+        },
+        {
+          "left": "SSE",
+          "right": "Cloud security services close to the user"
+        }
+      ],
+      "explain": "SSE and gMSA are exam-objective concepts absent from the provided textbooks.",
+      "ref": "3.2-02"
+    },
+    {
+      "id": "q-3.2-06",
+      "type": "single",
+      "q": "A user changes roles and retains their old administrative rights. What is this situation called?",
+      "options": [
+        "Privilege creep",
+        "Least privilege",
+        "Device drift",
+        "Fail-open"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Privilege creep is the accumulation of unrevoked rights; the countermeasure is periodic access reviews.",
+      "ref": "3.2-02"
+    }
+  ]
+}

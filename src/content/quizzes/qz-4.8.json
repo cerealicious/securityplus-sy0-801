@@ -1,0 +1,114 @@
+{
+  "id": "qz-4.8",
+  "objective": "4.8",
+  "title": "Quiz — Investigation and Evidence Analysis",
+  "questions": [
+    {
+      "id": "q-4.8-01",
+      "type": "single",
+      "q": "Which action should be performed first on a compromised host?",
+      "options": [
+        "Power it off to stop the attack",
+        "Capture memory and active connections",
+        "Reboot to get a clean state",
+        "Delete suspicious logs"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "RAM, processes, and connections are the most volatile evidence: rebooting or powering off destroys them.",
+      "ref": "4.8-02"
+    },
+    {
+      "id": "q-4.8-02",
+      "type": "match",
+      "q": "Match each artifact to its description.",
+      "pairs": [
+        {
+          "left": "Memory dump",
+          "right": "Copy of RAM containing keys and processes"
+        },
+        {
+          "left": "Bit-for-bit image",
+          "right": "Sector-by-sector copy preserving deleted files"
+        },
+        {
+          "left": "Snapshot",
+          "right": "Quick point-in-time capture of a state"
+        },
+        {
+          "left": "Metadata",
+          "right": "Timestamp, sender, size, and hash of data"
+        }
+      ],
+      "explain": "These four artifacts have different scopes: memory, full disk, point-in-time state, and descriptive data.",
+      "ref": "4.8-02"
+    },
+    {
+      "id": "q-4.8-03",
+      "type": "single",
+      "q": "Which source reveals the exact payload of a network request?",
+      "options": [
+        "NetFlow / IPFIX",
+        "A packet capture",
+        "A dashboard",
+        "A scan report"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "NetFlow only describes the conversation; packet capture preserves the bytes exchanged.",
+      "ref": "4.8-01"
+    },
+    {
+      "id": "q-4.8-04",
+      "type": "multi",
+      "q": "Which information must a chain of custody record? (Select all that apply)",
+      "options": [
+        "The hash of the artifact",
+        "The timestamp and source of collection",
+        "The collector's name and every transfer",
+        "The administrator account password"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "explain": "Chain of custody tracks the identity and integrity of evidence, never authentication secrets.",
+      "ref": "4.8-02"
+    },
+    {
+      "id": "q-4.8-05",
+      "type": "single",
+      "q": "A legal hold is in effect. What must be done?",
+      "options": [
+        "Delete data according to the 30-day policy",
+        "Suspend destruction and consult legal",
+        "Share evidence with as many people as possible",
+        "Stop logging"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "A legal hold overrides the retention policy and requires preserving the relevant data.",
+      "ref": "4.8-03"
+    },
+    {
+      "id": "q-4.8-06",
+      "type": "single",
+      "q": "Two sources show conflicting timestamps. Which check is the priority?",
+      "options": [
+        "Choose the most recent source",
+        "Check NTP, time zone, and origin of the timestamps",
+        "Discard the conflicting source",
+        "Conclude immediately"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "A reliable timeline requires synchronized clocks: NTP, UTC, and time zones must be verified before interpretation.",
+      "ref": "4.8-03"
+    }
+  ]
+}

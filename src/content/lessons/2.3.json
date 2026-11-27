@@ -1,0 +1,356 @@
+[
+  {
+    "id": "2.3-01",
+    "objective": "2.3",
+    "order": 1,
+    "title": "APT, Message, Image, Attachment, and Browser Vectors",
+    "minutes": 17,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "A **vector** is the path by which a threat reaches its target. Objective 2.3 requires recognizing fifteen vector families. Let's start with those that pass through communication and the workstation."
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-2.3-vectors-map"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-2.3-L01-vector-families"
+      },
+      {
+        "type": "simulation",
+        "simId": "sim-osi-layers"
+      },
+      {
+        "type": "term",
+        "en": "Advanced persistent threat (APT)",
+        "fr": "Advanced persistent threat (APT)",
+        "field": "Targeted, long-term campaign conducted by an organized, well-funded actor that combines multiple vectors and pursues a strategic objective rather than immediate gain."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "Introduction",
+        "page": 29,
+        "printed": 7,
+        "strength": "supporting",
+        "note": "Targeted attacks and persistent threats (printed pp. 6-7)"
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "An APT is not malware: it is a **campaign**. It is defined by persistence, targeting, and resources, not by a single tool."
+      },
+      {
+        "type": "h",
+        "text": "Message-Based Vectors"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Vector",
+          "Concrete Example",
+          "Watchpoint"
+        ],
+        "rows": [
+          [
+            "Email",
+            "Phishing with attachment or link to a fake portal",
+            "Spoofed sender, lookalike domain (typosquatting)"
+          ],
+          [
+            "SMS",
+            "Smishing: link to a fake bank site",
+            "Shortened link hides the real domain"
+          ],
+          [
+            "Instant messaging / collaboration tools",
+            "Direct message in Teams or Slack with a malicious link",
+            "Trust in the internal channel lowers vigilance"
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "Phishing / social engineering",
+        "page": 83,
+        "strength": "primary",
+        "note": "Phishing and message-based social engineering (pp. 83-85)"
+      },
+      {
+        "type": "term",
+        "en": "RCS — Rich Communication Services",
+        "fr": "RCS — Rich Communication Services",
+        "field": "Successor to SMS in mobile messaging. Vector for phishing via rich messages, attachments, and links, difficult to filter with traditional email controls.",
+        "gap": true
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "**RCS** is listed in §2.3 of the objectives; none of the four books covers it. Remember it as a mobile variant of message-based phishing."
+      },
+      {
+        "type": "h",
+        "text": "Images, QR Codes, and Attachments"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**QR codes / quishing**: scanning a code opens a fake payment or login site — the QR code hides the URL, neutralizing human inspection.",
+          "**Embedded content**: active content hidden inside an apparently harmless image or document.",
+          "**CAPTCHA**: fake \"I am not a robot\" check that masks a download or redirects to a booby-trapped site.",
+          "**Embedded macros**: Office macro executed when opening a document, often after clicking \"Enable Content\".",
+          "**RTF and PDF**: formats capable of embedding objects, scripts, or links exploiting an unpatched reader."
+        ]
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "chapter": "2.3",
+        "page": "2.3",
+        "strength": "primary",
+        "note": "Official objectives — QR codes / quishing, RCS, and embedded content absent from the 4 books"
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "Quishing, QR codes, malicious embedded content, and deepfakes are vectors **required by the objectives** but not covered by the provided books. The definitions above come from the objectives and industry practice."
+      },
+      {
+        "type": "h",
+        "text": "Browser-Based Vectors"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Element",
+          "Risk"
+        ],
+        "rows": [
+          [
+            "Browser extensions",
+            "A compromised extension reads pages, cookies, and sessions."
+          ],
+          [
+            "JavaScript",
+            "Hostile script on a page or via an ad (malvertising)."
+          ],
+          [
+            "Password managers",
+            "Vault targeted by phishing or a malicious extension; the master password becomes a single point of failure."
+          ],
+          [
+            "Cookies / session tokens",
+            "Session hijacking: the attacker takes over a valid session without password or MFA."
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "Web attacks",
+        "page": 113,
+        "strength": "supporting",
+        "note": "Web attacks and session hijacking (p. 113)"
+      },
+      {
+        "type": "check",
+        "q": "A user scans a QR code on a poster and enters their credentials on a convincing fake login page. Which vector?",
+        "options": [
+          "Attachment-based",
+          "Image-based (quishing)",
+          "Network-based",
+          "OT-based"
+        ],
+        "answer": 1,
+        "explain": "A QR code is classified as an image-based vector; quishing is its phishing variant."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "An APT is a durable, targeted campaign, not simple malware.",
+          "Message: email, SMS, RCS, instant messaging, collaboration tools.",
+          "Image and attachment: QR/quishing, embedded content, CAPTCHA, macros, RTF, PDF.",
+          "Browser: extensions, JavaScript, password managers, cookies, and session tokens."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "2.3-02",
+    "objective": "2.3",
+    "order": 2,
+    "title": "Network, Remote Access, Endpoint, Supply Chain, and Signal Vectors",
+    "minutes": 17,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "The remaining vectors no longer go through the user: they exploit infrastructure, devices, trusted third parties, or radio waves. Here the exam tests the distinction between **network, endpoint, human, IoT, OT, and signals**."
+      },
+      {
+        "type": "h",
+        "text": "Network and Remote Access"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-2.3-L02-supply-chain"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Vector",
+          "Example"
+        ],
+        "rows": [
+          [
+            "Network-based",
+            "Compromised router, switch, firewall, or virtualized appliance; session key theft."
+          ],
+          [
+            "Remote access",
+            "Exposed RDP, VNC without strong authentication, VPN with stolen credentials."
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Select and Collect the Right Data",
+        "page": 224,
+        "printed": 204,
+        "strength": "supporting",
+        "note": "Network visibility and infrastructure vectors (printed p. 204)"
+      },
+      {
+        "type": "h",
+        "text": "Endpoint and Living-Off-the-Land"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Mobile devices / tablets / workstations / servers**: each device type has its own vectors (mobile app, firmware, exposed service).",
+          "**Trusted devices**: an already-trusted device is an effective vector because it bypasses perimeter detection.",
+          "**Built-in tools / living-off-the-land**: PowerShell, WMI, certutil, or cmd used to execute without dropping a binary — hence the importance of behavioral telemetry."
+        ]
+      },
+      {
+        "type": "h",
+        "text": "Supply Chain and External Media"
+      },
+      {
+        "type": "p",
+        "text": "The **supply chain** vector goes through a trusted third party: software vendor, MSP, logistics provider, or SaaS. A malicious software update is more dangerous than a direct attack because it is signed and distributed through the legitimate channel. External media (malicious USB) remains a major physical vector."
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Know What You Are Protecting",
+        "page": 251,
+        "printed": 231,
+        "strength": "supporting",
+        "note": "Third-party dependencies, vendors, and supply chain (printed pp. 231-233)"
+      },
+      {
+        "type": "h",
+        "text": "Human Factor, IoT, OT, and Physical"
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "User Education",
+        "page": 62,
+        "printed": 40,
+        "strength": "supporting",
+        "note": "Social engineering, impersonation, and visitors (printed pp. 37-42)"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Vector",
+          "Example"
+        ],
+        "rows": [
+          [
+            "Human-based",
+            "Impersonation, contractor, visitor, spoofed biometrics, watering hole."
+          ],
+          [
+            "IoT-based",
+            "Compromised camera, sensor, or printer serving as an entry point."
+          ],
+          [
+            "OT-based",
+            "Operational network / SCADA: industrial controllers and systems."
+          ],
+          [
+            "Physical-based",
+            "Lock and key, access mantrap, badges: bypass via tailgating or lost badge."
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "Network Infrastructure",
+        "page": 145,
+        "printed": 123,
+        "strength": "supporting",
+        "note": "OT / SCADA and network equipment (printed p. 123)"
+      },
+      {
+        "type": "h",
+        "text": "Signals: Bluetooth, RF, and NFC"
+      },
+      {
+        "type": "term",
+        "en": "Signal-based vector",
+        "fr": "Signal-based vector",
+        "field": "Exploitation of short-range wireless communications: Bluetooth (hostile pairing, bluebugging), radio frequency (interception or injection), and NFC (proximity read/write, payment or badge).",
+        "gap": true
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "chapter": "2.3",
+        "page": "2.3",
+        "strength": "primary",
+        "note": "Official objectives — none of the 4 books covers Bluetooth / RF / NFC as vectors"
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "Bluetooth, radio frequency, and NFC are **required in §2.3** but absent from the provided books. Remember the logic: proximity + wireless channel + device trust = vector."
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "An NFC badge read by a hostile phone, a compromised IoT printer, and an MSP suffering a breach are three different vectors: **signal**, **IoT**, and **supply chain**."
+      },
+      {
+        "type": "check",
+        "q": "A provider hosting your email is compromised and its admin credentials are used against you. Which vector?",
+        "options": [
+          "External media-based",
+          "Supply chain-based",
+          "Signal-based",
+          "Image-based"
+        ],
+        "answer": 1,
+        "explain": "The trusted third party (SaaS/MSP) is the supply chain-based vector, even if the attacker subsequently uses credentials."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Network: infrastructure, virtualized devices, session keys; remote access: RDP, VNC, VPN.",
+          "Endpoint: trusted devices and built-in tools (living-off-the-land).",
+          "Supply chain: vendors, MSPs, logistics, SaaS; external media: malicious USB.",
+          "Human, IoT, OT, physical, and signals (Bluetooth/RF/NFC — gap relative to the books)."
+        ]
+      }
+    ]
+  }
+]

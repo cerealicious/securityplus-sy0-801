@@ -1,0 +1,19 @@
+{
+  "id": "pbq-1.1-classify",
+  "objective": "1.1",
+  "type": "classify",
+  "title": "Classify Eight Controls by Type",
+  "prompt": "For each control, choose the type that best describes its function over time. Note: the same tool can change type depending on how its use is described. Read the exact wording carefully.",
+  "categories": ["Preventive", "Detective", "Corrective", "Deterrent"],
+  "items": [
+    { "id": "i1", "label": "Web application firewall that blocks a malicious request", "cat": "Preventive" },
+    { "id": "i2", "label": "MFA required for administrator access", "cat": "Preventive" },
+    { "id": "i3", "label": "Network IDS that alerts without blocking", "cat": "Detective" },
+    { "id": "i4", "label": "Daily review of authentication logs", "cat": "Detective" },
+    { "id": "i5", "label": "Restoring a server from a verified backup", "cat": "Corrective" },
+    { "id": "i6", "label": "Rolling back a configuration after a failed change", "cat": "Corrective" },
+    { "id": "i7", "label": "Visible surveillance camera at the entrance", "cat": "Deterrent" },
+    { "id": "i8", "label": "Warning banner displayed before login", "cat": "Deterrent" }
+  ],
+  "explain": "Preventive = stops an action before it happens (firewall, MFA). Detective = identifies an event (IDS, log review). Corrective = restores after the event (backup restore, rollback). Deterrent = discourages through fear of consequences (visible camera, warning banner). A camera reviewed after the fact would be detective: the described use determines the category."
+}

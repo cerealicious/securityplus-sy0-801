@@ -1,0 +1,91 @@
+{
+  "id": "qz-1.2",
+  "objective": "1.2",
+  "title": "Quiz — Change Management",
+  "questions": [
+    {
+      "id": "q-1.2-01",
+      "type": "single",
+      "q": "Which body grants formal approval for a high-impact change?",
+      "options": [
+        "The Change Advisory Board (CAB)",
+        "The software vendor",
+        "The billing department",
+        "The last logged-in administrator"
+      ],
+      "answer": [0],
+      "explain": "The CAB brings together stakeholders and arbitrates risk before production deployment.",
+      "ref": "1.2-01"
+    },
+    {
+      "id": "q-1.2-02",
+      "type": "single",
+      "q": "A patch fails immediately after deployment. What decision is expected first?",
+      "options": [
+        "Wait for the next CAB meeting",
+        "Execute the backout plan during the maintenance window",
+        "Completely reinstall the system without a backup",
+        "Close the ticket as resolved"
+      ],
+      "answer": [1],
+      "explain": "Backout planning allows returning to a known-good state; it must be executable within the scheduled window.",
+      "ref": "1.2-01"
+    },
+    {
+      "id": "q-1.2-03",
+      "type": "multi",
+      "q": "Which elements must be analyzed before approving a change? (Select all that apply)",
+      "options": [
+        "Impact on services and dependencies",
+        "Test results",
+        "Effect on allow/deny lists and security controls",
+        "The color of the ticket in the tool"
+      ],
+      "answer": [0, 1, 2],
+      "explain": "Impact analysis covers availability, dependencies, and security, and relies on documented test results.",
+      "ref": "1.2-01"
+    },
+    {
+      "id": "q-1.2-04",
+      "type": "single",
+      "q": "When rolling back is impossible because data has already been migrated, which strategy is appropriate?",
+      "options": [
+        "Backout planning",
+        "Fail forward",
+        "Deny list",
+        "Service restart"
+      ],
+      "answer": [1],
+      "explain": "Fail forward involves moving ahead with a hotfix or workaround when rolling back is riskier.",
+      "ref": "1.2-01"
+    },
+    {
+      "id": "q-1.2-05",
+      "type": "single",
+      "q": "Which action is part of closing a change request?",
+      "options": [
+        "Deleting the ticket",
+        "Updating diagrams and version control",
+        "Disabling logging",
+        "Canceling the maintenance window"
+      ],
+      "answer": [1],
+      "explain": "Diagrams, policies/procedures, and version control must reflect the actual post-change state.",
+      "ref": "1.2-02"
+    },
+    {
+      "id": "q-1.2-06",
+      "type": "single",
+      "q": "What risk is specifically associated with legacy applications in a change analysis?",
+      "options": [
+        "They are always encrypted",
+        "They depend on older protocols or ports that a change might remove",
+        "They never produce logs",
+        "They cannot be inventoried"
+      ],
+      "answer": [1],
+      "explain": "An unsupported application is often the only component still relying on a legacy protocol or port, making it a critical dependency.",
+      "ref": "1.2-02"
+    }
+  ]
+}

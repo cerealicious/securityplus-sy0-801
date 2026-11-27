@@ -1,0 +1,114 @@
+{
+  "id": "qz-3.1",
+  "objective": "3.1",
+  "title": "Quiz — Architecture Models",
+  "questions": [
+    {
+      "id": "q-3.1-01",
+      "type": "single",
+      "q": "In a public cloud, who remains responsible for configuring access to the company's data?",
+      "options": [
+        "The cloud provider",
+        "The customer",
+        "The telecom operator",
+        "No one; the cloud eliminates this risk"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "The provider secures the underlying infrastructure; the customer retains responsibility for their data, identities, and configurations.",
+      "ref": "3.1-01"
+    },
+    {
+      "id": "q-3.1-02",
+      "type": "single",
+      "q": "Which concept describes infrastructure defined in versioned files and deployed via a pipeline?",
+      "options": [
+        "Serverless",
+        "IaC",
+        "Multicloud",
+        "Air-gap"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Infrastructure as Code (IaC): the desired state is defined in code; the risk is propagating a misconfigured template.",
+      "ref": "3.1-01"
+    },
+    {
+      "id": "q-3.1-03",
+      "type": "multi",
+      "q": "Which criteria fall under business considerations in objective 3.1? (Select all that apply)",
+      "options": [
+        "Data sovereignty",
+        "Cost",
+        "Compute",
+        "Scalability"
+      ],
+      "answer": [
+        0,
+        1,
+        3
+      ],
+      "explain": "Data sovereignty, cost, ownership, and scalability are business criteria. Compute and power requirements are technical criteria.",
+      "ref": "3.1-02"
+    },
+    {
+      "id": "q-3.1-04",
+      "type": "match",
+      "q": "Match each model to its defining characteristic.",
+      "pairs": [
+        {
+          "left": "On-premises",
+          "right": "Full control, full maintenance burden"
+        },
+        {
+          "left": "Community cloud",
+          "right": "Infrastructure shared by a community of organizations"
+        },
+        {
+          "left": "Air-gapped",
+          "right": "No Internet connection; transfers via controlled media"
+        },
+        {
+          "left": "Hybrid",
+          "right": "On-premises / cloud junction to secure"
+        }
+      ],
+      "explain": "Each model shifts responsibility and the attack surface; the hybrid junction is often the weak point.",
+      "ref": "3.1-02"
+    },
+    {
+      "id": "q-3.1-05",
+      "type": "single",
+      "q": "Why should active vulnerability scanning be avoided on an industrial OT network?",
+      "options": [
+        "Because OT systems never have vulnerabilities",
+        "Because it can disrupt equipment that controls physical processes",
+        "Because encryption is prohibited there",
+        "Because scans detect nothing on the network"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "In OT, availability and safety come first: an intrusive scan can halt a production line. Passive inspection is preferred.",
+      "ref": "3.1-02"
+    },
+    {
+      "id": "q-3.1-06",
+      "type": "single",
+      "q": "Which separation provides the strongest isolation but at the highest cost?",
+      "options": [
+        "VLAN",
+        "Software-defined micro-segmentation",
+        "Physical segmentation",
+        "Router ACL"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Physical segmentation (dedicated hardware and cabling) provides the strongest isolation, at the cost of expense and complexity.",
+      "ref": "3.1-02"
+    }
+  ]
+}

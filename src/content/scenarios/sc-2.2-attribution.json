@@ -1,0 +1,90 @@
+{
+  "id": "sc-2.2-attribution",
+  "objective": "2.2",
+  "title": "Attributing a Campaign Without Mistakes",
+  "context": "A campaign targets your organization: deceptive emails, custom tools, persistence, and collection of research documents. Management wants to know \"who\".",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "Which element do you start profiling with?",
+      "choices": [
+        {
+          "text": "Observed techniques and attributes: access, resources, sophistication",
+          "next": "n2",
+          "score": 4,
+          "why": "Profiling relies on behavioral and technical indicators, not intuition."
+        },
+        {
+          "text": "The name of a known group mentioned in an article",
+          "next": "n2",
+          "score": 0,
+          "why": "Group names are out of scope and tools are shared."
+        },
+        {
+          "text": "The IP address of the phishing server",
+          "next": "n2",
+          "score": 1,
+          "why": "An isolated IOC is not enough to classify an actor."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "The attackers target trade secrets with custom tools and a multi-month campaign. Which category is most likely?",
+      "choices": [
+        {
+          "text": "Unskilled actor motivated by curiosity",
+          "next": "n3",
+          "score": 0,
+          "why": "The sophistication and duration rule out an opportunist."
+        },
+        {
+          "text": "State-sponsored actor or competitor, motivated by espionage / intellectual property",
+          "next": "n3",
+          "score": 4,
+          "why": "Resources, sophistication, and motivation converge toward espionage."
+        },
+        {
+          "text": "Hacktivist motivated by notoriety",
+          "next": "n3",
+          "score": 1,
+          "why": "A hacktivist primarily seeks visibility, not quiet theft of research."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "How do you present this conclusion to management?",
+      "choices": [
+        {
+          "text": "With a confidence level and the list of indicators, remaining ready to reassess",
+          "next": "n4",
+          "score": 4,
+          "why": "Attribution is probabilistic: it is expressed with a confidence level and evolves with evidence."
+        },
+        {
+          "text": "As a definitive certainty",
+          "next": "n4",
+          "score": 0,
+          "why": "Certain attribution based on partial indicators is a classic mistake."
+        },
+        {
+          "text": "Say nothing, because attribution has no operational value",
+          "next": "n4",
+          "score": 1,
+          "why": "The profile guides prioritization and which controls to strengthen."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "You profiled techniques and attributes, identified a consistent motivation, and expressed cautious attribution."
+    }
+  },
+  "debrief": [
+    "Classify the actor by motivation and attributes, not by the tool used.",
+    "Internal/external, resources, and sophistication are the three official axes.",
+    "Attribution is expressed with a confidence level and can be reassessed."
+  ]
+}

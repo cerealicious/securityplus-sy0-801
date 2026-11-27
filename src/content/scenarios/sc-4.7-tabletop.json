@@ -1,0 +1,90 @@
+{
+  "id": "sc-4.7-tabletop",
+  "objective": "4.7",
+  "title": "Tabletop: Customer Data Leak",
+  "context": "You are facilitating a tabletop exercise. The scenario: a developer exposed a customer data export in a public repository.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "First question to ask the group before any technical action?",
+      "choices": [
+        {
+          "text": "Who decides and what are the pre-established authorities?",
+          "next": "n2",
+          "score": 4,
+          "why": "Preparation defines roles and authorities: it is the first phase."
+        },
+        {
+          "text": "Which antivirus is installed?",
+          "next": "n2",
+          "score": 0,
+          "why": "A late technical detail in a process exercise."
+        },
+        {
+          "text": "What is the price of the repository?",
+          "next": "n2",
+          "score": 0,
+          "why": "Unrelated to incident response."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "The repository is public. Which containment action is most appropriate?",
+      "choices": [
+        {
+          "text": "Wait for an automatic notification from the provider",
+          "next": "n3",
+          "score": 0,
+          "why": "Waiting prolongs exposure."
+        },
+        {
+          "text": "Remove the secret, revoke tokens, and restrict repository access",
+          "next": "n3",
+          "score": 4,
+          "why": "Containment aims to stop exposure quickly and reversibly."
+        },
+        {
+          "text": "Immediately delete all developer logs",
+          "next": "n3",
+          "score": 0,
+          "why": "Destroying evidence compromises the investigation."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "After stabilization, what must be done as a priority?",
+      "choices": [
+        {
+          "text": "Close the ticket without a report",
+          "next": "n4",
+          "score": 0,
+          "why": "Closing without lessons learned is a process failure."
+        },
+        {
+          "text": "Document the facts, analyze root cause, and schedule a PIR",
+          "next": "n4",
+          "score": 4,
+          "why": "The post-incident phase captures lessons and feeds playbooks."
+        },
+        {
+          "text": "Replace the entire team",
+          "next": "n4",
+          "score": 0,
+          "why": "The response must be systemic, not punitive."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "A good tabletop identifies gaps in roles, tools, and processes — not a perfect execution."
+    }
+  },
+  "debrief": [
+    "Preparation (roles, authorities, playbooks) underpins the entire response.",
+    "Containment must be fast and preserve evidence.",
+    "PIR and root cause analysis are mandatory before closure."
+  ]
+}

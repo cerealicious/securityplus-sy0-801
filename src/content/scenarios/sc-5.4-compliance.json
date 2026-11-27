@@ -1,0 +1,90 @@
+{
+  "id": "sc-5.4-compliance",
+  "objective": "5.4",
+  "title": "A Compliance Gap to Address",
+  "context": "An internal audit reveals that employees never confirmed reading the data handling policy. Shortly after, a legal proceeding is opened on a customer file.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "Which evidence do you request first to demonstrate staff training?",
+      "choices": [
+        {
+          "text": "Recorded attestations and acknowledgments",
+          "next": "n2",
+          "score": 4,
+          "why": "Attestations and acknowledgments are the expected evidence during an audit."
+        },
+        {
+          "text": "A verbal statement from team leads",
+          "next": "n2",
+          "score": 1,
+          "why": "A verbal statement is not traceable evidence."
+        },
+        {
+          "text": "The page count of the policy",
+          "next": "n2",
+          "score": 0,
+          "why": "Document length says nothing about its actual distribution."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "A legal proceeding begins: however, policy calls for deleting logs after 30 days. What do you decide?",
+      "choices": [
+        {
+          "text": "Place a legal hold and suspend automatic destruction",
+          "next": "n3",
+          "score": 4,
+          "why": "A legal hold overrides standard retention and preserves evidence."
+        },
+        {
+          "text": "Enforce the 30-day policy without exception",
+          "next": "n3",
+          "score": 0,
+          "why": "Destroying data relevant to a legal proceeding is a serious violation."
+        },
+        {
+          "text": "Encrypt the logs and then delete them",
+          "next": "n3",
+          "score": 0,
+          "why": "Encryption does not replace legally mandated retention."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "The regulator ultimately revokes the payment processing license. How do you classify this consequence?",
+      "choices": [
+        {
+          "text": "Loss of license",
+          "next": "n4",
+          "score": 4,
+          "why": "Revoking an operating authorization is precisely a loss of license."
+        },
+        {
+          "text": "Reputational damage only",
+          "next": "n4",
+          "score": 1,
+          "why": "Reputation is also affected, but the direct consequence is the loss of authorization."
+        },
+        {
+          "text": "Financial consequences only",
+          "next": "n4",
+          "score": 1,
+          "why": "There is a financial impact, but loss of license is more precise."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "You produced training evidence, preserved data under legal hold, and identified the loss of license."
+    }
+  },
+  "debrief": [
+    "Without attestations or acknowledgments, training remains unverifiable in an audit.",
+    "A legal hold suspends retention policy and overrides any automated deletion.",
+    "Revocation of an authorization is classified as loss of license, not merely a financial consequence."
+  ]
+}

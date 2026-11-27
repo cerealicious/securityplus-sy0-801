@@ -1,0 +1,90 @@
+{
+  "id": "sc-4.1-control-choice",
+  "objective": "4.1",
+  "title": "Web Attack: Selecting Controls",
+  "context": "A public web application is suffering from SQL injections and customer data exfiltration attempts. You must deploy three relevant controls and justify their limits.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "Which control blocks SQL injections in HTTP traffic before reaching the application?",
+      "choices": [
+        {
+          "text": "A WAF placed in front of the web application",
+          "next": "n2",
+          "score": 4,
+          "why": "A WAF inspects the HTTP application layer and blocks injection patterns."
+        },
+        {
+          "text": "A NIDS in detection mode on the segment",
+          "next": "n2",
+          "score": 1,
+          "why": "A NIDS would alert, but would not block the request."
+        },
+        {
+          "text": "A honeypot in the DMZ",
+          "next": "n2",
+          "score": 0,
+          "why": "A decoy helps detect, not block an attack on the real application."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "Attackers are now attempting to exfiltrate customer files from an internal workstation. Which control best targets this risk?",
+      "choices": [
+        {
+          "text": "DLP on the endpoint agent and at network egress",
+          "next": "n3",
+          "score": 4,
+          "why": "DLP identifies sensitive data and blocks its egress, on the workstation or at the proxy."
+        },
+        {
+          "text": "HIPS on the web server only",
+          "next": "n3",
+          "score": 1,
+          "why": "HIPS protects the host, not outbound data flow from the workstation."
+        },
+        {
+          "text": "BIMI in email",
+          "next": "n3",
+          "score": 0,
+          "why": "BIMI displays a brand logo: unrelated to exfiltration."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "To detect an attacker searching for accounts early, which decoy should you deploy?",
+      "choices": [
+        {
+          "text": "A honeytoken and a canary account that are never used legitimately",
+          "next": "n4",
+          "score": 4,
+          "why": "Any use of these decoys is a high-confidence signal, with no business false positives."
+        },
+        {
+          "text": "A real administrator account with a weak password",
+          "next": "n4",
+          "score": 0,
+          "why": "A real weak account is a vulnerability, not a controlled decoy."
+        },
+        {
+          "text": "Disable logging to reduce noise",
+          "next": "n4",
+          "score": 0,
+          "why": "Without logs, you lose the very signal you need."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "You blocked the injection at the application layer, stopped exfiltration with DLP, and detected reconnaissance using decoys."
+    }
+  },
+  "debrief": [
+    "WAF protects the application layer; NIDS alerts without blocking.",
+    "DLP acts on outbound data; EDR/XDR acts on endpoint behavior.",
+    "Decoys (honeytoken, canary) produce high-value signals without false positives."
+  ]
+}

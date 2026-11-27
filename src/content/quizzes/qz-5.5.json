@@ -1,0 +1,110 @@
+{
+  "id": "qz-5.5",
+  "objective": "5.5",
+  "title": "Quiz — Audits and Assessments",
+  "questions": [
+    {
+      "id": "q-5.5-01",
+      "type": "single",
+      "q": "Which document defines the authority and scope of an audit engagement?",
+      "options": [
+        "An assertion",
+        "An audit charter",
+        "A sample",
+        "A kill chain"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "The audit charter defines authority, scope, responsibilities, and report recipients.",
+      "ref": "5.5-01"
+    },
+    {
+      "id": "q-5.5-02",
+      "type": "multi",
+      "q": "Which techniques belong to audit data collection? (Select all that apply)",
+      "options": [
+        "Sampling",
+        "Questionnaires",
+        "Interviews",
+        "Loss of license"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "explain": "Sampling, questionnaires, and interviews are data collection techniques. Loss of license is a non-compliance consequence (5.4).",
+      "ref": "5.5-01"
+    },
+    {
+      "id": "q-5.5-03",
+      "type": "single",
+      "q": "Which type of test provides the tester with all internal information about the system?",
+      "options": [
+        "Unknown environment",
+        "Partially known environment",
+        "Known environment",
+        "Passive reconnaissance"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Known-environment testing provides architecture, source code, and access; it is more targeted and faster.",
+      "ref": "5.5-02"
+    },
+    {
+      "id": "q-5.5-04",
+      "type": "single",
+      "q": "Which reconnaissance does not interact with the target and leaves no trace in its logs?",
+      "options": [
+        "Active reconnaissance",
+        "Passive reconnaissance",
+        "Physical testing",
+        "Defensive testing"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Passive reconnaissance uses public sources without contacting the target; active reconnaissance generates traces.",
+      "ref": "5.5-02"
+    },
+    {
+      "id": "q-5.5-05",
+      "type": "match",
+      "q": "Match each framework to its central question.",
+      "pairs": [
+        {
+          "left": "Cyber Kill Chain",
+          "right": "Which phase of the intrusion is the attack in?"
+        },
+        {
+          "left": "MITRE ATT&CK",
+          "right": "Which technique is the adversary using?"
+        },
+        {
+          "left": "Diamond Model",
+          "right": "Who is attacking whom, with what, and from where?"
+        }
+      ],
+      "explain": "Kill Chain = phases, ATT&CK = techniques, Diamond Model = relationship among four elements.",
+      "ref": "5.5-03"
+    },
+    {
+      "id": "q-5.5-06",
+      "type": "single",
+      "q": "How many tactics are in the current version of the MITRE ATT&CK Enterprise matrix?",
+      "options": [
+        "7",
+        "11",
+        "14",
+        "20"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "The Enterprise matrix has 14 tactics. The table in the 11 Strategies book shows 11: that is an older version that should not be reproduced.",
+      "ref": "5.5-03"
+    }
+  ]
+}

@@ -1,0 +1,348 @@
+[
+  {
+    "id": "3.2-01",
+    "objective": "3.2",
+    "order": 1,
+    "title": "Security Zones, Placement, and Attack Surface",
+    "minutes": 15,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "A well-chosen control placed in the wrong spot protects nothing. The exam tests your ability to say **where** to put each control, **what traffic** passes through it, and **what happens if it fails**."
+      },
+      {
+        "type": "h",
+        "text": "Trust Zones: Trust, DMZ, Untrust"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-3.2-L01-trust-zones"
+      },
+      {
+        "type": "simulation",
+        "simId": "sim-zero-trust"
+      },
+      {
+        "type": "p",
+        "text": "A secure architecture divides the network into zones of decreasing trust. Traffic flows from an **untrusted** zone (Internet) through a **buffer zone** (DMZ) before reaching the **internal** zone. Every crossing is a checkpoint."
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 55,
+        "strength": "primary",
+        "note": "Trust / DMZ / Untrust zones and device placement"
+      },
+      {
+        "type": "source",
+        "book": "NET",
+        "chapter": "—",
+        "page": 13,
+        "strength": "supporting",
+        "note": "DMZ and trust zones: network prerequisites"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Zone",
+          "Typical Controls",
+          "Objective"
+        ],
+        "rows": [
+          [
+            "Untrust (Internet)",
+            "Perimeter firewall, anti-DDoS, filtering",
+            "Block before entry"
+          ],
+          [
+            "DMZ",
+            "Proxy, WAF, IDS/IPS, public servers",
+            "Expose a service without exposing the internal network"
+          ],
+          [
+            "Trust (internal)",
+            "Internal firewall, segmentation, EDR",
+            "Limit lateral movement"
+          ],
+          [
+            "Management (OOB)",
+            "Bastion, MFA, dedicated logging",
+            "Administer without going through the user network"
+          ]
+        ]
+      },
+      {
+        "type": "term",
+        "en": "Device placement",
+        "fr": "Device placement",
+        "field": "Placement determines which packets a control sees. An IDS placed out-of-path will not see traffic; a control placed after the flaw cannot prevent it.",
+        "gap": false
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "Exam rule: a **preventive** control must be **in the path** of traffic (inline); a **detective** control can be **out-of-path** (SPAN/tap)."
+      },
+      {
+        "type": "h",
+        "text": "Reducing the Attack Surface"
+      },
+      {
+        "type": "term",
+        "en": "Attack surface",
+        "fr": "Attack surface",
+        "field": "Set of points through which an attacker can interact with a system: open ports, exposed services, accounts, APIs, interfaces. The fewer there are, the fewer targets exist.",
+        "gap": false
+      },
+      {
+        "type": "term",
+        "en": "Diversity",
+        "fr": "Diversity",
+        "field": "Using different vendors, systems, and mechanisms so that a single flaw or outage does not affect the entire infrastructure.",
+        "gap": false
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "—",
+        "page": 55,
+        "printed": 35,
+        "strength": "primary",
+        "note": "Knowing what you are protecting and why: inventory and criticality"
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "—",
+        "page": 78,
+        "printed": 56,
+        "strength": "supporting",
+        "note": "Hardening and reducing exposed surface"
+      },
+      {
+        "type": "h",
+        "text": "Failure Modes: Fail-Open or Fail-Closed"
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "Fail-Open",
+          "points": [
+            "If the control fails, traffic passes.",
+            "Prioritizes availability.",
+            "Risk: silent bypass of the control."
+          ]
+        },
+        "right": {
+          "title": "Fail-Closed",
+          "points": [
+            "If the control fails, traffic is blocked.",
+            "Prioritizes confidentiality and integrity.",
+            "Risk: service interruption."
+          ]
+        }
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "—",
+        "page": 243,
+        "printed": 223,
+        "strength": "supporting",
+        "note": "Failure mode decisions for network controls"
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "A scenario saying \"the service must remain available even if authentication fails\" expects **fail-open**. A scenario \"never allow unauthenticated access\" expects **fail-closed**."
+      },
+      {
+        "type": "check",
+        "q": "An intrusion sensor must see all traffic on a segment without being able to block it. Where should it be placed?",
+        "options": [
+          "Inline in the traffic path",
+          "Out-of-path on a mirror port (SPAN/tap)",
+          "On the user workstation only",
+          "In the DMZ after the firewall, in blocking mode"
+        ],
+        "answer": 1,
+        "explain": "An IDS is detective: a mirror port or tap gives it a copy of traffic without interrupting it. An IPS would be placed inline."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "DMZ = buffer zone between the Internet and the internal network.",
+          "A preventive control is inline; a detective control can be out-of-path.",
+          "Reducing the attack surface means closing unnecessary ports, services, and accounts.",
+          "Fail-open prioritizes availability; fail-closed prioritizes security."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "3.2-02",
+    "objective": "3.2",
+    "order": 2,
+    "title": "Zero Trust, Remote Access, and Service Identities",
+    "minutes": 16,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "The **Zero Trust** model replaces implicit trust tied to network location with continuous verification: **never trust, always verify**. The exam expects you to know which signals to verify before granting access."
+      },
+      {
+        "type": "h",
+        "text": "The Four Verified Pillars"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-3.2-L02-zero-trust-decision"
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "—",
+        "page": 250,
+        "printed": 230,
+        "strength": "primary",
+        "note": "Zero Trust: identity, device, inventory, and application access control"
+      },
+      {
+        "type": "steps",
+        "items": [
+          {
+            "title": "User authentication",
+            "text": "Verify the user's identity (MFA, federation), not just their presence on a network."
+          },
+          {
+            "title": "Device health",
+            "text": "Check device state: patches up to date, active antivirus, encryption, compliant posture."
+          },
+          {
+            "title": "Device inventory",
+            "text": "Verify that the device is known and inventoried; an unknown device is denied or quarantined."
+          },
+          {
+            "title": "Application access control",
+            "text": "Grant minimal rights to the requested resource, session by session, with continuous re-evaluation."
+          }
+        ]
+      },
+      {
+        "type": "term",
+        "en": "Zero Trust",
+        "fr": "Zero Trust",
+        "field": "Model where no user, device, or traffic flow is trusted by default, even inside the network. Access is granted after verifying identity, device health, and inventory.",
+        "gap": false
+      },
+      {
+        "type": "h",
+        "text": "Remote Access, Tunneling, and Out-of-Band Management"
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 31,
+        "strength": "primary",
+        "note": "VPN and secure remote access"
+      },
+      {
+        "type": "term",
+        "en": "Virtual private network (VPN)",
+        "fr": "Virtual private network (VPN)",
+        "field": "Encrypts traffic between a remote user and the internal network. It authenticates the tunnel, not automatically each application.",
+        "gap": false
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Remote access**: remote user access with MFA and posture checking.",
+          "**Tunneling**: encrypted encapsulation of traffic between two endpoints.",
+          "**End-to-end encrypted messaging**: end-to-end encryption of communications.",
+          "**File transfer**: dedicated, logged channel with content inspection.",
+          "**Out-of-band management**: separate administration network; the **bastion** (jump host) is its single entry point, with MFA and recorded sessions."
+        ]
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "—",
+        "page": 170,
+        "printed": 148,
+        "strength": "primary",
+        "note": "Bastion and out-of-band management"
+      },
+      {
+        "type": "h",
+        "text": "SSE and Group Managed Service Accounts"
+      },
+      {
+        "type": "term",
+        "en": "Security Service Edge (SSE)",
+        "fr": "Security Service Edge (SSE)",
+        "field": "Set of security services delivered from the cloud near users (proxy, web filtering, DLP, access control) to replace or complement the enterprise VPN.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Group Managed Service Account (gMSA)",
+        "fr": "Group Managed Service Account (gMSA)",
+        "field": "Service account whose password is automatically managed by the directory and rotated without manual intervention: it avoids hardcoded passwords and forgotten service accounts.",
+        "gap": true
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "chapter": "—",
+        "page": "3.2",
+        "strength": "primary",
+        "note": "Official objectives — SSE and gMSA absent from the 4 books"
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "SSE and gMSA are required in **§3.2** but do not appear in any of the four provided books. The definitions above come from the objectives and industry practice."
+      },
+      {
+        "type": "p",
+        "text": "**Privilege creep** occurs when a user accumulates rights across role changes without old rights being removed. The fix: **least privilege** accounts, periodic access reviews, and controlled emergency accounts."
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 132,
+        "strength": "supporting",
+        "note": "Access control, privileges, and rights review"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-3.2-zero-trust"
+      },
+      {
+        "type": "check",
+        "q": "An uninventoried personal device requests access to an internal application. What should a Zero Trust architecture do?",
+        "options": [
+          "Allow because the user is authenticated",
+          "Deny or quarantine until device inventory and health are verified",
+          "Allow only outside business hours",
+          "Defer the decision to the VPN provider"
+        ],
+        "answer": 1,
+        "explain": "Zero Trust verifies the user AND the device (health + inventory) before granting minimal application access."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Zero Trust = verify user, device health, inventory, and application access.",
+          "Bastion and out-of-band management isolate administration from the user network.",
+          "SSE and gMSA are objectives concepts absent from the books.",
+          "Counter privilege creep with least privilege and access reviews."
+        ]
+      }
+    ]
+  }
+]

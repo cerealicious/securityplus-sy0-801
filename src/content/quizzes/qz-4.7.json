@@ -1,0 +1,216 @@
+{
+  "id": "qz-4.7",
+  "objective": "4.7",
+  "title": "Quiz — Incident Response",
+  "questions": [
+    {
+      "id": "q-4.7-01",
+      "type": "single",
+      "q": "What is the first phase of the incident response lifecycle?",
+      "options": [
+        "Detection",
+        "Preparation",
+        "Containment",
+        "Eradication"
+      ],
+      "answer": [1],
+      "explain": "Preparation precedes the incident: playbooks, roles, tools, exercises. Without it, subsequent phases are improvised.",
+      "ref": "4.7-01"
+    },
+    {
+      "id": "q-4.7-02",
+      "type": "single",
+      "q": "A workstation hosts an in-memory implant. The team wants to power it off immediately. What is the main risk?",
+      "options": [
+        "The workstation will reboot too quickly",
+        "Volatile memory will be lost, along with the primary evidence",
+        "The firewall will block the reboot",
+        "The antivirus will delete the implant"
+      ],
+      "answer": [1],
+      "explain": "Powering off erases memory and therefore the fileless implant, connections, and execution artifacts. You should isolate the network and then capture memory.",
+      "ref": "4.7-01"
+    },
+    {
+      "id": "q-4.7-03",
+      "type": "single",
+      "q": "What is the deliverable of the detection and analysis phase?",
+      "options": [
+        "A deployed patch",
+        "A qualified ticket with severity and initial scope",
+        "A restored backup",
+        "A post-incident report"
+      ],
+      "answer": [1],
+      "explain": "Detection establishes facts and qualifies the incident: true/false positive, severity, scope, escalation. It does not yet decide the full response.",
+      "ref": "4.7-01"
+    },
+    {
+      "id": "q-4.7-04",
+      "type": "single",
+      "q": "Which phase removes the root cause and the attacker's access?",
+      "options": [
+        "Containment",
+        "Eradication",
+        "Recovery",
+        "Post-incident"
+      ],
+      "answer": [1],
+      "explain": "Eradication removes access, patches the vulnerability, and rebuilds compromised systems. Containment limits spread.",
+      "ref": "4.7-01"
+    },
+    {
+      "id": "q-4.7-05",
+      "type": "single",
+      "q": "Why verify the integrity of a backup before restoring?",
+      "options": [
+        "To speed up restoration",
+        "Because a compromised backup could reinstall the ransomware or implant",
+        "Because the law always requires it",
+        "To reduce disk size"
+      ],
+      "answer": [1],
+      "explain": "Restoring without checking can reintroduce the compromise. The backup must be tested and its integrity confirmed.",
+      "ref": "4.7-01"
+    },
+    {
+      "id": "q-4.7-06",
+      "type": "single",
+      "q": "Which role coordinates the incident, arbitrates priorities, and handles communication?",
+      "options": [
+        "Forensic analyst",
+        "Incident commander",
+        "Business owner",
+        "DPO"
+      ],
+      "answer": [1],
+      "explain": "The incident commander coordinates and arbitrates. Without them, decisions conflict and actions are duplicated.",
+      "ref": "4.7-02"
+    },
+    {
+      "id": "q-4.7-07",
+      "type": "single",
+      "q": "What is a tabletop exercise?",
+      "options": [
+        "A full technical simulation on live systems",
+        "A guided discussion of a scenario without touching systems",
+        "A vulnerability scan",
+        "A backup restoration"
+      ],
+      "answer": [1],
+      "explain": "A tabletop tests decisions and coordination through discussion. A simulation executes actions and tests tools.",
+      "ref": "4.7-02"
+    },
+    {
+      "id": "q-4.7-08",
+      "type": "single",
+      "q": "What is the most important deliverable of a tabletop exercise?",
+      "options": [
+        "A technical vulnerability report",
+        "A list of unverified assumptions and ambiguous decisions",
+        "Proof that the team responded well",
+        "A newly configured firewall"
+      ],
+      "answer": [1],
+      "explain": "A tabletop reveals gaps in understanding and unclear roles. These findings become dated corrective actions.",
+      "ref": "4.7-02"
+    },
+    {
+      "id": "q-4.7-09",
+      "type": "single",
+      "q": "What is the correct order of volatility for evidence collection?",
+      "options": [
+        "Disk, memory, network, backups",
+        "Memory, network, disk, backups",
+        "Backups, disk, network, memory",
+        "Network, backups, memory, disk"
+      ],
+      "answer": [1],
+      "explain": "Capture what disappears fastest first: memory, then network, then disk, then backups.",
+      "ref": "4.7-03"
+    },
+    {
+      "id": "q-4.7-10",
+      "type": "single",
+      "q": "What does the chain of custody document?",
+      "options": [
+        "The cost of the incident",
+        "Who collected and handled each piece of evidence, when, and with what hash",
+        "Administrator credentials",
+        "Firewall configuration"
+      ],
+      "answer": [1],
+      "explain": "Chain of custody tracks collection and handling. A break in the chain can make evidence contestable.",
+      "ref": "4.7-03"
+    },
+    {
+      "id": "q-4.7-11",
+      "type": "single",
+      "q": "A personal data breach is discovered on Monday at 10:00. What is the GDPR deadline to notify the supervisory authority?",
+      "options": [
+        "24 hours",
+        "72 hours",
+        "7 days",
+        "30 days"
+      ],
+      "answer": [1],
+      "explain": "GDPR requires notification within 72 hours of awareness, unless there is no risk. You notify with available information without waiting for the investigation to finish.",
+      "ref": "4.7-03"
+    },
+    {
+      "id": "q-4.7-12",
+      "type": "single",
+      "q": "What does a legal hold mean in the context of an incident?",
+      "options": [
+        "Freezing user accounts",
+        "Suspending the destruction of potentially relevant data",
+        "Blocking the network",
+        "Quarantining emails"
+      ],
+      "answer": [1],
+      "explain": "A legal hold suspends automatic deletions and destruction as soon as litigation or an investigation is foreseeable.",
+      "ref": "4.7-03"
+    },
+    {
+      "id": "q-4.7-13",
+      "type": "single",
+      "q": "What is the difference between an immediate cause and a root cause?",
+      "options": [
+        "None, they are synonyms",
+        "The immediate cause is the visible event; the root cause is the condition that made it possible",
+        "The root cause is always technical",
+        "The immediate cause is legal"
+      ],
+      "answer": [1],
+      "explain": "'The server was encrypted' is immediate. 'A service account without MFA allowed exposed RDP access' is the root condition.",
+      "ref": "4.7-03"
+    },
+    {
+      "id": "q-4.7-14",
+      "type": "match",
+      "q": "Match each phase to its primary deliverable.",
+      "pairs": [
+        { "left": "Preparation", "right": "Tested playbooks and roles" },
+        { "left": "Containment", "right": "Isolated hosts and blocked accounts" },
+        { "left": "Recovery", "right": "Verified restoration and enhanced monitoring" },
+        { "left": "Post-incident", "right": "PIR report and dated action items" }
+      ],
+      "explain": "Each phase produces a verifiable artifact. A PIR without dated action items is just a story.",
+      "ref": "4.7-01"
+    },
+    {
+      "id": "q-4.7-15",
+      "type": "multi",
+      "q": "Which elements must appear in a post-incident report? (Select all that apply)",
+      "options": [
+        "A timestamped and sourced timeline",
+        "The root cause",
+        "Corrective actions with owner and due date",
+        "The names of people to discipline"
+      ],
+      "answer": [0, 1, 2],
+      "explain": "The PIR documents facts, root cause, and actions. It is not meant to assign blame: searching for individual fault blocks lessons learned.",
+      "ref": "4.7-03"
+    }
+  ]
+}

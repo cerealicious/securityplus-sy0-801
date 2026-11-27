@@ -1,0 +1,17 @@
+{
+  "id": "pbq-5.5-audit-order",
+  "objective": "5.5",
+  "type": "order",
+  "title": "Order the Phases of an Audit and Penetration Test",
+  "prompt": "Put the steps in the correct chronological order, from the audit charter to corrective follow-up.",
+  "items": [
+    { "id": "s1", "label": "Audit charter, frequency, and scope definition" },
+    { "id": "s2", "label": "Data collection: sampling, questionnaires, interviews, assertions" },
+    { "id": "s3", "label": "Gap analysis and benchmarking against the target framework" },
+    { "id": "s4", "label": "Engagement scoping: test type and rules of engagement" },
+    { "id": "s5", "label": "Passive reconnaissance followed by active reconnaissance" },
+    { "id": "s6", "label": "Penetration testing and controlled exploitation of vulnerabilities" },
+    { "id": "s7", "label": "Reporting, recommendations, and tracking corrective actions" }
+  ],
+  "explain": "First scope (charter, scope), then collect and compare (gap analysis), define the engagement and ROE, perform passive then active reconnaissance, test, and finally report and track remediation. Corrective follow-up closes the improvement loop."
+}

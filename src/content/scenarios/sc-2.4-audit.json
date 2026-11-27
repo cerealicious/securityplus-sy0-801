@@ -1,0 +1,90 @@
+{
+  "id": "sc-2.4-audit",
+  "objective": "2.4",
+  "title": "Auditing a Porous Architecture",
+  "context": "You are reviewing an architecture before a penetration test. Several weaknesses are visible: an unsupported server, a public repository, a misconfigured cloud, and an internal AI assistant.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "An old Windows server is no longer supported by the vendor and no updates are possible. What is the best action?",
+      "choices": [
+        {
+          "text": "Assume nothing can be done since no patch exists",
+          "next": "n2",
+          "score": 0,
+          "why": "On the contrary, the lack of patches increases risk: you must reduce the attack surface."
+        },
+        {
+          "text": "Reduce the exposed surface, segment the server, and implement compensating controls",
+          "next": "n2",
+          "score": 4,
+          "why": "For an unsupported system, segmentation and traffic restriction are the expected response."
+        },
+        {
+          "text": "Apply the last available patch from three years ago",
+          "next": "n2",
+          "score": 1,
+          "why": "An old patch does not cover recent vulnerabilities."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "A developer published a public repository containing a valid API key. Which category and action?",
+      "choices": [
+        {
+          "text": "Public repository / hardcoded secret: revoke the key, replace it with a secrets vault, and clean the history",
+          "next": "n3",
+          "score": 4,
+          "why": "The key must be considered compromised: revocation and rotation come first."
+        },
+        {
+          "text": "Zero-day: wait for a vendor patch",
+          "next": "n3",
+          "score": 0,
+          "why": "This is not an unknown flaw, but an exposed secret."
+        },
+        {
+          "text": "Rogue device: disconnect the developer's workstation",
+          "next": "n3",
+          "score": 0,
+          "why": "The issue comes from the public repository, not an unauthorized device."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "Finally, the internal AI assistant executes instructions contained in an uploaded document. Which attack surface?",
+      "choices": [
+        {
+          "text": "LLM: prompt injection via external content — filter and separate instructions from data",
+          "next": "n4",
+          "score": 4,
+          "why": "The LLM is a modern framework surface: the document becomes a vector for hostile instructions."
+        },
+        {
+          "text": "Cryptographic vulnerability: change the hashing algorithm",
+          "next": "n4",
+          "score": 0,
+          "why": "No cryptographic mechanism is involved."
+        },
+        {
+          "text": "Virtualization vulnerability: reboot the hypervisor",
+          "next": "n4",
+          "score": 0,
+          "why": "The vector is the conversational interface, not virtualization."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "You identified system, code, and modern attack surfaces, with measures suited to each category."
+    }
+  },
+  "debrief": [
+    "An unsupported system is handled through segmentation, attack surface reduction, and compensating controls.",
+    "A secret in a public repository is compromised: immediate revocation and rotation.",
+    "LLMs, IdPs, public repositories, and public storage are framework surfaces absent from older books."
+  ]
+}

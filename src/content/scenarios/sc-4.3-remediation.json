@@ -1,0 +1,90 @@
+{
+  "id": "sc-4.3-remediation",
+  "objective": "4.3",
+  "title": "A Vulnerability Alert to Handle",
+  "context": "The weekly scanner reports 214 findings, including a critical flaw on an exposed payment server and a flaw on an old unpatchable internal server. You must drive remediation in three decisions.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "214 findings just arrived. What is the first action?",
+      "choices": [
+        {
+          "text": "Prioritize by severity, exposure, and asset criticality",
+          "next": "n2",
+          "score": 4,
+          "why": "You do not remediate 214 findings in scanner order: context determines the work order."
+        },
+        {
+          "text": "Apply all patches in the order they are listed",
+          "next": "n2",
+          "score": 1,
+          "why": "Without prioritization, you risk breaking production for minor flaws."
+        },
+        {
+          "text": "Close low-severity findings without review",
+          "next": "n2",
+          "score": 0,
+          "why": "Dismissing findings without analysis can hide a flaw exploitable in a chain."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "The internal server is end-of-life: no patch exists. What do you decide?",
+      "choices": [
+        {
+          "text": "Document the exception, isolate the server, apply enhanced monitoring, and get owner sign-off",
+          "next": "n3",
+          "score": 4,
+          "why": "This is a compensated, time-bound risk acceptance: the only defensible response."
+        },
+        {
+          "text": "Declare a false positive to lighten the report",
+          "next": "n3",
+          "score": 0,
+          "why": "The flaw is real: classifying it as a false positive is falsification."
+        },
+        {
+          "text": "Do nothing until a patch exists",
+          "next": "n3",
+          "score": 1,
+          "why": "The lack of a patch does not eliminate the risk: you must at least contain it."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "The payment server patch is applied. How do you close the ticket?",
+      "choices": [
+        {
+          "text": "Rescan with the same method, verify the finding is gone, then report",
+          "next": "n4",
+          "score": 4,
+          "why": "Verification by rescan is the proof of closure before reporting."
+        },
+        {
+          "text": "Mark the ticket complete immediately after rebooting",
+          "next": "n4",
+          "score": 0,
+          "why": "Rebooting does not prove the vulnerability is gone."
+        },
+        {
+          "text": "Wait for the next annual scan to verify",
+          "next": "n4",
+          "score": 1,
+          "why": "Such a long delay leaves the exposure window open."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "You executed the full loop: contextual prioritization, compensated risk acceptance, rescan verification, and reporting."
+    }
+  },
+  "debrief": [
+    "Prioritization combines severity, exposure, criticality, and known exploit.",
+    "An unpatchable asset requires a documented exception and a compensating control.",
+    "Without a rescan using the same method, closure is not proven."
+  ]
+}

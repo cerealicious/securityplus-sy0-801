@@ -1,0 +1,90 @@
+{
+  "id": "sc-1.1-control-choice",
+  "objective": "1.1",
+  "title": "Choosing the Right Control",
+  "context": "You are the security lead at an SMB. Three situations arrive simultaneously. At each step, choose the response that best aligns with the framework.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "An employee attempts to access financial data they are not authorized to view. What do you implement as a priority?",
+      "choices": [
+        {
+          "text": "A warning banner on the workstation",
+          "next": "n2",
+          "score": 0,
+          "why": "A banner is a deterrent, but it does not prevent access."
+        },
+        {
+          "text": "Least privilege and role-based access control",
+          "next": "n2",
+          "score": 4,
+          "why": "Least privilege prevents unauthorized access upfront: it is a preventive technical control."
+        },
+        {
+          "text": "A quarterly log review",
+          "next": "n2",
+          "score": 1,
+          "why": "A log review is detective: it identifies what happened, but does not prevent it."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "Legal requires that administrator actions cannot be denied. Which security property are you targeting?",
+      "choices": [
+        {
+          "text": "Availability",
+          "next": "n3",
+          "score": 0,
+          "why": "Availability concerns access to the service, not proof of the action."
+        },
+        {
+          "text": "Non-repudiation",
+          "next": "n3",
+          "score": 4,
+          "why": "Non-repudiation ensures an action cannot be denied, through logging and digital signatures."
+        },
+        {
+          "text": "Integrity alone",
+          "next": "n3",
+          "score": 1,
+          "why": "Integrity protects against modification, but does not provide proof of origin."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "An incident reveals that the existing SIEM does not cover endpoints. You deploy an EDR in the meantime. How do you classify this control?",
+      "choices": [
+        {
+          "text": "Compensating: it partially covers a missing control",
+          "next": "n4",
+          "score": 4,
+          "why": "A compensating control bridges a temporary coverage gap."
+        },
+        {
+          "text": "Directive: it enforces a procedure",
+          "next": "n4",
+          "score": 0,
+          "why": "An EDR is a technical control, not a written policy or rule."
+        },
+        {
+          "text": "Physical: it acts on the environment",
+          "next": "n4",
+          "score": 0,
+          "why": "EDR is a technical/logical control on the endpoint."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "You distinguished preventive, non-repudiation, and compensating controls — the three key reflexes expected for objective 1.1."
+    }
+  },
+  "debrief": [
+    "Least privilege is a preventive technical control.",
+    "Non-repudiation is achieved through reliable logging and digital signatures, not encryption alone.",
+    "A compensating control temporarily covers a gap."
+  ]
+}

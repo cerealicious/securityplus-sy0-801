@@ -1,0 +1,114 @@
+{
+  "id": "qz-4.4",
+  "objective": "4.4",
+  "title": "Quiz — Monitoring and Alerting",
+  "questions": [
+    {
+      "id": "q-4.4-01",
+      "type": "single",
+      "q": "Which platform aggregates, correlates, and alerts on logs from across the entire organization?",
+      "options": [
+        "A packet analyzer",
+        "A SIEM",
+        "An NMS",
+        "A vulnerability scanner"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "The SIEM is the convergence point for logs: aggregation, correlation, alerting, and archiving.",
+      "ref": "4.4-02"
+    },
+    {
+      "id": "q-4.4-02",
+      "type": "match",
+      "q": "Match each protocol to what it provides.",
+      "pairs": [
+        {
+          "left": "syslog",
+          "right": "Device event messages"
+        },
+        {
+          "left": "NetFlow",
+          "right": "Network conversation statistics"
+        },
+        {
+          "left": "SNMP",
+          "right": "Device counters and traps"
+        },
+        {
+          "left": "SCAP",
+          "right": "Standardized compliance measurements"
+        }
+      ],
+      "explain": "Each protocol carries a distinct type of data: events, flows, counters, compliance. SCAP is from objective 4.4 (beyond textbooks).",
+      "ref": "4.4-02"
+    },
+    {
+      "id": "q-4.4-03",
+      "type": "single",
+      "q": "A real incident occurred, but no alert was generated. How is this case classified?",
+      "options": [
+        "True positive",
+        "False positive",
+        "False negative",
+        "True negative"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "False negative = actual malicious activity that went undetected. This is the most dangerous case.",
+      "ref": "4.4-03"
+    },
+    {
+      "id": "q-4.4-04",
+      "type": "multi",
+      "q": "Which actions represent proper alert tuning? (Select all that apply)",
+      "options": [
+        "Precisely excluding a legitimate source",
+        "Documenting the modification",
+        "Measuring the impact on alert volume",
+        "Deleting the entire rule"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "explain": "Tuning is targeted, documented, and measured. Deleting the rule also destroys detection of real attacks.",
+      "ref": "4.4-03"
+    },
+    {
+      "id": "q-4.4-05",
+      "type": "single",
+      "q": "Which mechanism copies traffic from a switch port to a sensor without interrupting traffic flow?",
+      "options": [
+        "Port mirroring (SPAN)",
+        "TLS encryption",
+        "Log archiving",
+        "SCAP"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "SPAN replicates traffic to an analyzer; unlike a tap, it depends on the switch and can become saturated.",
+      "ref": "4.4-02"
+    },
+    {
+      "id": "q-4.4-06",
+      "type": "single",
+      "q": "Which activity is a prerequisite for multi-source event correlation?",
+      "options": [
+        "Reporting",
+        "Log aggregation and normalization",
+        "Immutable archiving",
+        "Firewall tuning"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "You can only correlate events that have been collected, timestamped, and normalized beforehand.",
+      "ref": "4.4-01"
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "id": "qz-4.3",
+  "objective": "4.3",
+  "title": "Quiz — Vulnerability Management",
+  "questions": [
+    {
+      "id": "q-4.3-01",
+      "type": "single",
+      "q": "Which scan accurately checks for missing patches on a host?",
+      "options": [
+        "Unauthenticated scan",
+        "Authenticated scan",
+        "Passive discovery scan",
+        "Port scan only"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "An authenticated scan uses credentials to read the actual system state. An unauthenticated scan only sees the network surface.",
+      "ref": "4.3-01"
+    },
+    {
+      "id": "q-4.3-02",
+      "type": "single",
+      "q": "Which tool answers the question 'does the detected IP address belong to an authorized asset?'",
+      "options": [
+        "CSPM",
+        "IPAM",
+        "CVSS",
+        "SIEM"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "IPAM manages the address inventory and assignments. CSPM covers cloud configuration, not IP addressing. Concept from objective 4.3 (beyond textbooks).",
+      "ref": "4.3-01"
+    },
+    {
+      "id": "q-4.3-03",
+      "type": "multi",
+      "q": "Which elements should be factored into vulnerability prioritization? (Select all that apply)",
+      "options": [
+        "CVSS score",
+        "Asset exposure",
+        "Business criticality of the asset",
+        "Alphabetical order of the hostname"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "explain": "Prioritization combines technical severity, exposure, and criticality. Alphabetical order has no bearing on risk.",
+      "ref": "4.3-01"
+    },
+    {
+      "id": "q-4.3-04",
+      "type": "single",
+      "q": "An EOL product can no longer be patched. What action is expected?",
+      "options": [
+        "Close the ticket without follow-up",
+        "Declare a false positive",
+        "Document the exception with a compensating control and owner approval",
+        "Wait for the next annual scan"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Risk acceptance is an explicit, compensated, and reviewed decision. A false positive is a detection error, not a choice.",
+      "ref": "4.3-02"
+    },
+    {
+      "id": "q-4.3-05",
+      "type": "match",
+      "q": "Match each phase to its characteristic action.",
+      "pairs": [
+        {
+          "left": "Identification",
+          "right": "Authenticated scan, IPAM, CSPM, code review"
+        },
+        {
+          "left": "Prioritization",
+          "right": "Severity assessment and pentest report review"
+        },
+        {
+          "left": "Remediation",
+          "right": "Patching, hardening, compensating control"
+        },
+        {
+          "left": "Verification",
+          "right": "Re-scan using the same method"
+        }
+      ],
+      "explain": "Each phase has a distinct deliverable: discovery, ranking, remediation, and proof of closure.",
+      "ref": "4.3-02"
+    },
+    {
+      "id": "q-4.3-06",
+      "type": "single",
+      "q": "Which practice describes responsible disclosure?",
+      "options": [
+        "Publishing the exploit immediately after discovery",
+        "Reporting through a dedicated channel and allowing a remediation window before publication",
+        "Selling the flaw to the highest bidder without notifying the vendor",
+        "Deleting the scan report"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Responsible disclosure structures reporting, protects the researcher, and gives time to patch before any publication. Concept from objective 4.3 (beyond textbooks).",
+      "ref": "4.3-02"
+    }
+  ]
+}

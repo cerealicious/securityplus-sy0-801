@@ -1,0 +1,90 @@
+{
+  "id": "qz-2.3",
+  "objective": "2.3",
+  "title": "Quiz — Threat Vectors and Sources",
+  "questions": [
+    {
+      "id": "q-2.3-01",
+      "type": "single",
+      "q": "A QR code displayed on a kiosk leads to a spoofed login page. Which threat vector is this?",
+      "options": [
+        "Attachment-based",
+        "Image-based",
+        "Network-based",
+        "Supply chain-based"
+      ],
+      "answer": [1],
+      "explain": "QR codes and visual content are classified as image-based; quishing is the phishing variant.",
+      "ref": "2.3-01"
+    },
+    {
+      "id": "q-2.3-02",
+      "type": "single",
+      "q": "An attacker uses PowerShell and WMI already present on the system without dropping any files. Which vector is this?",
+      "options": [
+        "External media-based",
+        "Endpoint-based (living-off-the-land)",
+        "Signal-based",
+        "Image-based"
+      ],
+      "answer": [1],
+      "explain": "Native endpoint tools represent an endpoint-based vector, detectable through behavioral telemetry.",
+      "ref": "2.3-02"
+    },
+    {
+      "id": "q-2.3-03",
+      "type": "multi",
+      "q": "Which vectors belong to the supply chain? (Select all that apply)",
+      "options": [
+        "Compromised managed service provider (MSP)",
+        "Software vendor whose update is malicious",
+        "SaaS hosting your data",
+        "USB drive left in the parking lot"
+      ],
+      "answer": [0, 1, 2],
+      "explain": "MSPs, software vendors, and SaaS providers are trusted third parties: supply chain-based. A USB drive is an external media-based vector.",
+      "ref": "2.3-02"
+    },
+    {
+      "id": "q-2.3-04",
+      "type": "match",
+      "q": "Match each scenario to its threat vector.",
+      "pairs": [
+        { "left": "NFC badge read by a hostile phone", "right": "Signal-based" },
+        { "left": "Compromised IP camera", "right": "IoT-based" },
+        { "left": "Exposed RDP with a weak password", "right": "Remote access" },
+        { "left": "Fake CAPTCHA downloading an executable", "right": "Image-based" }
+      ],
+      "explain": "The vector family is determined by the entry path, not the final tool used.",
+      "ref": "2.3-01"
+    },
+    {
+      "id": "q-2.3-05",
+      "type": "single",
+      "q": "An APT is primarily distinguished by:",
+      "options": [
+        "A single highly destructive piece of malware",
+        "A targeted, persistent, and well-resourced campaign",
+        "A simple mass phishing email",
+        "An attack via USB only"
+      ],
+      "answer": [1],
+      "explain": "APT describes the campaign (targeting, duration, resources), not a specific tool.",
+      "ref": "2.3-01"
+    },
+    {
+      "id": "q-2.3-06",
+      "type": "single",
+      "q": "Which vector applies to an industrial controller / SCADA system?",
+      "options": [
+        "OT-based",
+        "Browser-based",
+        "Message-based",
+        "Signal-based"
+      ],
+      "answer": [0],
+      "explain": "Industrial operational technology systems fall under the OT-based vector, distinct from physical and IoT.",
+      "ref": "2.3-02"
+    }
+  ]
+}

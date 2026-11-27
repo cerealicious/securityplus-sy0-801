@@ -1,0 +1,371 @@
+[
+  {
+    "id": "3.3-01",
+    "objective": "3.3",
+    "order": 1,
+    "title": "Data Types, States, and Classifications",
+    "minutes": 15,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "You do not protect \"data\": you protect identified, classified data in a specific state. Classification is the decision that triggers all other controls."
+      },
+      {
+        "type": "h",
+        "text": "Structured and Unstructured"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-3.3-L01-data-lifecycle"
+      },
+      {
+        "type": "p",
+        "text": "**Structured** data follows a schema: tables, columns, records. It lives in databases, ERPs, and CSV files. **Unstructured** data has no predefined schema: documents, emails, images, videos, logs, source code. It represents the majority of volume and is the hardest to classify automatically."
+      },
+      {
+        "type": "term",
+        "en": "Unstructured data",
+        "fr": "Unstructured data",
+        "field": "Most leaks involve unstructured data: a misconfigured file share, a mailbox, a code repository."
+      },
+      {
+        "type": "h",
+        "text": "The Three States"
+      },
+      {
+        "type": "table",
+        "head": [
+          "State",
+          "Definition",
+          "Typical Controls",
+          "Limitation"
+        ],
+        "rows": [
+          [
+            "At rest",
+            "Stored on media",
+            "Disk encryption, TDE, access control, backup",
+            "Does not protect a compromised account"
+          ],
+          [
+            "In transit (in motion)",
+            "Traveling over a network",
+            "TLS, IPsec, VPN, signing",
+            "Does not protect the endpoints"
+          ],
+          [
+            "In use",
+            "Loaded in memory, being processed",
+            "Isolation, enclaves, minimal access, DLP",
+            "Blind spot of traditional encryption"
+          ]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "title": "Encryption at Rest Does Not Protect Everything",
+        "text": "An encrypted disk protects data if the disk is stolen or the system is powered off. Once the system is booted and the user is authenticated, data is plaintext to authorized processes — and to an attacker who compromised that account. That is why \"in use\" exists as a separate category."
+      },
+      {
+        "type": "h",
+        "text": "Official Classifications"
+      },
+      {
+        "type": "p",
+        "text": "The objectives list: **sensitive, secret, critical, confidential, public, top secret, restricted**. These labels do not form a universal hierarchy: each organization defines its own scheme. What is tested is knowing that a classification **triggers controls** (encryption, access, retention, destruction) and must be **consistent** across systems."
+      },
+      {
+        "type": "list",
+        "items": [
+          "**Public**: unrestricted distribution (press release, public documentation).",
+          "**Confidential / Restricted**: access limited to a defined group (HR, finance, project).",
+          "**Secret / Top secret**: very restricted access, often with compartmentalization and need-to-know.",
+          "**Sensitive**: personal or business data whose disclosure causes harm.",
+          "**Critical**: data whose unavailability or alteration threatens the organization."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "tip",
+        "title": "Classification ≠ Regulatory Category",
+        "text": "\"Health data\" is a **regulatory category** (GDPR, HIPAA). \"Confidential\" is an **internal classification**. Health data will generally be classified as confidential, but the two concepts do not replace each other: one triggers legal obligations, the other internal rules."
+      },
+      {
+        "type": "h",
+        "text": "Regulated Categories"
+      },
+      {
+        "type": "p",
+        "text": "The objective explicitly cites: health data, personal information, financial data, minors' data, intellectual property, legal data. Each imposes specific obligations for retention, localization, consent, or breach notification."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "2",
+        "page": 35,
+        "printed": 13,
+        "strength": "primary",
+        "note": "Information classification and lifecycle"
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "page": 50,
+        "strength": "supporting",
+        "note": "Data classification"
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "1",
+        "page": 47,
+        "printed": 27,
+        "strength": "supporting",
+        "note": "Knowing critical data"
+      },
+      {
+        "type": "check",
+        "q": "A customer database is encrypted at rest. An attacker obtains a service account's credentials and exfiltrates data via a legitimate query. Did encryption at rest protect the data?",
+        "options": [
+          "Yes, because the data was encrypted",
+          "No, because the data was in use and accessible to the compromised account",
+          "Yes, if the key was in an HSM",
+          "No, because encryption at rest does not work on databases"
+        ],
+        "answer": 1,
+        "explain": "Encryption at rest protects the storage media, not authorized application access. Here, the database decrypts to answer the query: the attacker uses the application like a legitimate user. Mitigations belong to least privilege, exfiltration detection, and DLP."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Structured = schema; unstructured = documents, emails, code — the largest and most exposed.",
+          "Three states: at rest, in transit, in use — three different control sets.",
+          "Classification triggers controls; it must be applied at creation.",
+          "Internal classification and regulatory category are two distinct concepts."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "3.3-02",
+    "objective": "3.3",
+    "order": 2,
+    "title": "Protection Methods, Roles, and Lifecycle",
+    "minutes": 17,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Masking, tokenizing, encrypting, hashing, pseudonymizing: five operations often confused, five different levels of reversibility. The choice depends on use, not fashion."
+      },
+      {
+        "type": "h",
+        "text": "The Eight Official Methods"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-3.3-L02-data-roles"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Method",
+          "Principle",
+          "Reversible?",
+          "Typical Use"
+        ],
+        "rows": [
+          [
+            "Masking",
+            "Replaces part of the value",
+            "No (or via secure table)",
+            "Displaying `****1234` to an operator"
+          ],
+          [
+            "Hashing",
+            "Irreversible digest",
+            "No",
+            "Passwords, integrity"
+          ],
+          [
+            "Filtering",
+            "Blocks or removes certain fields/streams",
+            "No",
+            "DLP, logs without sensitive data"
+          ],
+          [
+            "Tokenization",
+            "Replaces data with a valueless token",
+            "Yes, via the token vault",
+            "Payment card numbers"
+          ],
+          [
+            "Encryption",
+            "Makes data unreadable without a key",
+            "Yes, with the key",
+            "Disks, streams, databases"
+          ],
+          [
+            "Transposition",
+            "Reorders characters according to a rule",
+            "Yes, with the rule",
+            "Classical cryptography, exercises"
+          ],
+          [
+            "De-identification",
+            "Removes or generalizes identifiers",
+            "Partial",
+            "Analytics datasets, research"
+          ],
+          [
+            "Obfuscation",
+            "Makes reading difficult",
+            "Often",
+            "Code protection, not strong confidentiality"
+          ]
+        ]
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "Masking",
+          "points": [
+            "Real data is not stored in the viewed system",
+            "Format preserved for display",
+            "Often irreversible on the user side"
+          ]
+        },
+        "right": {
+          "title": "Tokenization",
+          "points": [
+            "A token replaces the data; the vault keeps it",
+            "The business system never sees the real data",
+            "Reversible only via the vault, which is heavily protected"
+          ]
+        }
+      },
+      {
+        "type": "term",
+        "en": "Tokenization",
+        "fr": "Tokenization",
+        "field": "Widely used in payments (PCI DSS): the merchant stores a token, not the card number. Reversibility depends on a token vault, a prime target for an attacker."
+      },
+      {
+        "type": "term",
+        "en": "De-identification",
+        "fr": "De-identification",
+        "field": "Different from anonymization: de-identified data can often be re-identified by cross-referencing. True anonymization is irreversible and hard to prove."
+      },
+      {
+        "type": "h",
+        "text": "The Six Protection Roles"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Role",
+          "Responsibility",
+          "Question to Ask"
+        ],
+        "rows": [
+          [
+            "Owner",
+            "Decides classification and access",
+            "Who is the business owner of this data?"
+          ],
+          [
+            "Custodian",
+            "Implements and maintains controls",
+            "Who operates the system and backups?"
+          ],
+          [
+            "Steward",
+            "Quality, metadata, usage compliance",
+            "Who ensures the data is accurate and properly described?"
+          ],
+          [
+            "Operator",
+            "Processes data day-to-day",
+            "Who enters, corrects, exports?"
+          ],
+          [
+            "Controller",
+            "Determines purpose and means",
+            "Who decides why and how data is processed?"
+          ],
+          [
+            "Processor / subprocessor",
+            "Processes on behalf of the controller",
+            "Who hosts or processes for us, and under what contract?"
+          ]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "title": "Owner, Custodian, Steward: The Most Tested Distinction",
+        "text": "The **owner** decides (classification, authorization). The **custodian** executes (backup, encryption, physical access). The **steward** oversees quality and usage compliance. A system administrator is a custodian, not an owner: they do not decide who is allowed to read HR data."
+      },
+      {
+        "type": "h",
+        "text": "The Lifecycle"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-data-lifecycle"
+      },
+      {
+        "type": "p",
+        "text": "Each stage has its controls. At **creation**: classification and minimization. At **storage**: encryption, access, localization. At **use**: least privilege, masking. At **sharing**: TLS, DLP, recipient control. At **destruction**: certified erasure, proof, compliance with legal retention periods."
+      },
+      {
+        "type": "p",
+        "text": "**Marking and labeling** make classification visible and actionable by tools: document header, sensitivity label, metadata. **Geofencing** restricts access or processing based on location, addressing data residency requirements."
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "Tokenization, masking, de-identification, geofencing, and the six official roles are **absent or very partial in the four books**. This lesson is written for the exam objectives."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "2",
+        "page": 35,
+        "printed": 13,
+        "strength": "primary",
+        "note": "Lifecycle and classification"
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "7",
+        "page": 81,
+        "printed": 59,
+        "strength": "supporting",
+        "note": "Data at rest and in transit"
+      },
+      {
+        "type": "check",
+        "q": "A merchant must store card references for customer service without keeping the actual number in its database. Which method is most suitable?",
+        "options": [
+          "Hashing the card number",
+          "Tokenization via a token vault",
+          "Masking the last four digits",
+          "Transposing the digits"
+        ],
+        "answer": 1,
+        "explain": "Hashing would prevent any reuse; masking would not allow retrieving the card; transposition is reversible but weak. Tokenization replaces the number with a token, keeps the mapping in a heavily protected vault, and reduces PCI DSS scope."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Masking = partial display; tokenization = substitution with vault; encryption = reversible with key.",
+          "Owner decides, custodian executes, steward ensures quality, controller sets purpose.",
+          "The lifecycle runs from creation to destruction, with controls at each stage.",
+          "Marking, labeling, and geofencing make policy enforceable in tools."
+        ]
+      }
+    ]
+  }
+]

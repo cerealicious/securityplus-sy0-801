@@ -1,0 +1,270 @@
+[
+  {
+    "id": "4.2-01",
+    "objective": "4.2",
+    "order": 1,
+    "title": "Asset Inventory: Prerequisite for All Security",
+    "minutes": 14,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "You can only protect what you know exists. A forgotten asset is unpatched, unmonitored, and unrestored. Objective 4.2 is less about tools than about **inventory discipline**."
+      },
+      {
+        "type": "h",
+        "text": "Hardware, Software, Data: Three Asset Categories"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-4.2-L01-asset-lifecycle"
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "2",
+        "page": 35,
+        "printed": 13,
+        "strength": "primary",
+        "note": "Asset Management chapter: inventorying hardware, software, and data"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Category",
+          "Examples",
+          "Risk If Uninventoried"
+        ],
+        "rows": [
+          [
+            "Hardware",
+            "Servers, workstations, mobile devices, network equipment",
+            "Forgotten patching, unmonitored entry point"
+          ],
+          [
+            "Software",
+            "OS, applications, libraries, licenses",
+            "Unsupported version, unpatched vulnerability"
+          ],
+          [
+            "Data",
+            "Databases, files, backups",
+            "Unknown owner, missing classification, leak"
+          ]
+        ]
+      },
+      {
+        "type": "term",
+        "en": "Asset inventory",
+        "fr": "Asset inventory",
+        "field": "Registry of assets with owner, location, version, criticality, and status. It feeds patching, incident response, and recovery.",
+        "gap": false
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "—",
+        "page": 56,
+        "printed": 36,
+        "strength": "supporting",
+        "note": "Knowing what you are protecting and why: composite inventory"
+      },
+      {
+        "type": "p",
+        "text": "A **composite inventory** is not just a list of machines: it links the asset to its **owner**, its **business criticality**, the **data** it processes, and the **dependencies** it relies on. That relationship is what enables proper remediation prioritization."
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 104,
+        "strength": "supporting",
+        "note": "Endpoint inventory and system tracking"
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "When a scenario mentions an unpatched \"forgotten server\" at the root of a breach, the root cause is almost always **lack of inventory** (including shadow IT)."
+      },
+      {
+        "type": "h",
+        "text": "What an Asset Record Should Contain"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "Unique identifier, type, make/model, and serial number.",
+          "Owner and custodian: who decides and who operates.",
+          "Physical or logical location, environment (prod/test).",
+          "Software version, patch level, end-of-support date.",
+          "Classification of processed data and business criticality.",
+          "Lifecycle status and planned decommissioning date."
+        ]
+      },
+      {
+        "type": "check",
+        "q": "An unlisted server exposes an old version of an application. What is the most likely root cause?",
+        "options": [
+          "Encryption is too weak",
+          "Lack of inventory and lifecycle tracking",
+          "The firewall is miswired",
+          "Backups are too frequent"
+        ],
+        "answer": 1,
+        "explain": "An uninventoried asset escapes patching, monitoring, and end-of-life controls: this is an asset management failure."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Hardware, software, and data must all be inventoried.",
+          "A composite inventory links asset, owner, criticality, and dependencies.",
+          "Without inventory: no targeted patching, no effective response, no reliable recovery.",
+          "The asset record follows the equipment through decommissioning."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "4.2-02",
+    "objective": "4.2",
+    "order": 2,
+    "title": "The Lifecycle: From Acquisition to Decommissioning",
+    "minutes": 15,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "The objectives describe a staged lifecycle: **planning, acquisition, assignment, monitoring, decommissioning**. Each stage introduces specific security controls — and the final stage is often the most neglected."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "2",
+        "page": 37,
+        "printed": 15,
+        "strength": "primary",
+        "note": "Asset lifecycle and secure destruction"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-4.2-L02-inventory-sources"
+      },
+      {
+        "type": "steps",
+        "items": [
+          {
+            "title": "Planning / scoping",
+            "text": "Define the need, criticality, security requirements, and expected lifespan before any purchase."
+          },
+          {
+            "title": "Acquisition / procurement",
+            "text": "Build security requirements into the specification: encryption, support, compliance, end-of-life terms."
+          },
+          {
+            "title": "Assignment / accounting",
+            "text": "Assign an owner, record the asset in inventory, label it, and document authorized use."
+          },
+          {
+            "title": "Monitoring / asset tracking",
+            "text": "Track status, patches, movements, and usage; detect ghost assets and shadow IT."
+          },
+          {
+            "title": "Disposal / decommissioning",
+            "text": "Wipe or destroy data, revoke access, and certify the asset's end of life."
+          }
+        ]
+      },
+      {
+        "type": "term",
+        "en": "Decommissioning",
+        "fr": "Decommissioning",
+        "field": "Final lifecycle process: wiping or destroying media, revoking access and licenses, then obtaining certified proof of the asset's end of life.",
+        "gap": false
+      },
+      {
+        "type": "h",
+        "text": "During Acquisition and Assignment"
+      },
+      {
+        "type": "p",
+        "text": "Security requirements must be written **before** purchase: support duration, guaranteed updates, native encryption, certified erasure capability. Assignment creates accountability: without a named owner, no one monitors the asset."
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 159,
+        "strength": "supporting",
+        "note": "Tracking, hardening, and managing acquired systems"
+      },
+      {
+        "type": "h",
+        "text": "During Operations"
+      },
+      {
+        "type": "p",
+        "text": "Tracking combines passive inventory (network discovery, MDM, CMDB) and active checks (periodic reviews). A discrepancy between inventory and reality signals **shadow IT** or a rogue device to investigate."
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "—",
+        "page": 431,
+        "printed": 411,
+        "strength": "supporting",
+        "note": "Inventory, tracking, and asset visibility"
+      },
+      {
+        "type": "h",
+        "text": "Decommissioning: The Stage That Leaks Most"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "Secure erasure or physical destruction of media.",
+          "Revocation of associated accounts, certificates, tokens, and licenses.",
+          "Retention of evidence and certificate of destruction.",
+          "Compliance with legal retention periods before erasure."
+        ]
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 241,
+        "strength": "supporting",
+        "note": "Tracking and end-of-life handling of equipment"
+      },
+      {
+        "type": "callout",
+        "kind": "warning",
+        "text": "A disk leaving the company without certified erasure is a data leak. Decommissioning must always produce **proof**: certificate of destruction or erasure report."
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-4.2-asset-lifecycle"
+      },
+      {
+        "type": "check",
+        "q": "In what order should you proceed for new equipment?",
+        "options": [
+          "Assign, plan, purchase, track, destroy",
+          "Plan, purchase, assign, track, decommission",
+          "Purchase, destroy, plan, assign, track",
+          "Track, purchase, plan, assign, destroy"
+        ],
+        "answer": 1,
+        "explain": "Planning → acquisition → assignment/inventory → tracking → decommissioning. Purchasing without planning or an owner escapes all control."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Plan, acquire, assign, track, decommission: five ordered stages.",
+          "Security requirements are written into specifications before purchase.",
+          "Every asset receives an owner and an inventory identifier.",
+          "Decommissioning requires certified erasure, access revocation, and proof of destruction."
+        ]
+      }
+    ]
+  }
+]
