@@ -15,6 +15,10 @@
         "text": "Continuité d'activité et reprise après sinistre"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-3.4-L01-recovery-sites"
+      },
+      {
         "type": "p",
         "text": "Le **Defensive Security Handbook** sépare clairement les deux : la continuité d'activité vise la poursuite globale des affaires, tandis que la reprise après sinistre désigne les processus informatiques qui permettent d'atteindre les objectifs fixés par la continuité."
       },
@@ -190,6 +194,10 @@
       {
         "type": "h",
         "text": "Deux objectifs, deux questions différentes"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-3.4-L02-recovery-timeline"
       },
       {
         "type": "simulation",

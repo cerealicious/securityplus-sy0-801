@@ -15,6 +15,10 @@
         "text": "Structuré et non structuré"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-3.3-L01-data-lifecycle"
+      },
+      {
         "type": "p",
         "text": "Les données **structurées** suivent un schéma : tables, colonnes, enregistrements. Elles se trouvent dans les bases de données, les ERP, les fichiers CSV. Les données **non structurées** n'ont pas de schéma prédéfini : documents, e-mails, images, vidéos, journaux, code source. Elles représentent la majorité du volume et sont les plus difficiles à classifier automatiquement."
       },
@@ -30,11 +34,31 @@
       },
       {
         "type": "table",
-        "head": ["État", "Définition", "Contrôles typiques", "Limite"],
+        "head": [
+          "État",
+          "Définition",
+          "Contrôles typiques",
+          "Limite"
+        ],
         "rows": [
-          ["Au repos (at rest)", "Stockée sur un support", "Chiffrement de disque, TDE, contrôle d'accès, sauvegarde", "Ne protège pas un compte compromis"],
-          ["En transit (in motion)", "Circule sur un réseau", "TLS, IPsec, VPN, signature", "Ne protège pas les extrémités"],
-          ["En cours d'utilisation (in use)", "Chargée en mémoire, en cours de traitement", "Isolation, enclaves, accès minimal, DLP", "Point aveugle du chiffrement classique"]
+          [
+            "Au repos (at rest)",
+            "Stockée sur un support",
+            "Chiffrement de disque, TDE, contrôle d'accès, sauvegarde",
+            "Ne protège pas un compte compromis"
+          ],
+          [
+            "En transit (in motion)",
+            "Circule sur un réseau",
+            "TLS, IPsec, VPN, signature",
+            "Ne protège pas les extrémités"
+          ],
+          [
+            "En cours d'utilisation (in use)",
+            "Chargée en mémoire, en cours de traitement",
+            "Isolation, enclaves, accès minimal, DLP",
+            "Point aveugle du chiffrement classique"
+          ]
         ]
       },
       {
@@ -139,17 +163,66 @@
         "text": "Les huit méthodes officielles"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-3.3-L02-data-roles"
+      },
+      {
         "type": "table",
-        "head": ["Méthode", "Principe", "Réversible ?", "Usage typique"],
+        "head": [
+          "Méthode",
+          "Principe",
+          "Réversible ?",
+          "Usage typique"
+        ],
         "rows": [
-          ["Masquage (masking)", "Remplace une partie de la valeur", "Non (ou via table sécurisée)", "Afficher `****1234` à un opérateur"],
-          ["Hachage", "Empreinte irréversible", "Non", "Mots de passe, intégrité"],
-          ["Filtrage", "Bloque ou retire certains champs/flux", "Non", "DLP, journaux sans données sensibles"],
-          ["Tokenisation", "Remplace la donnée par un jeton sans valeur", "Oui, via le coffre de jetons", "Numéros de carte bancaire"],
-          ["Chiffrement", "Rend la donnée illisible sans clé", "Oui, avec la clé", "Disques, flux, bases"],
-          ["Transposition", "Réordonne les caractères selon une règle", "Oui, avec la règle", "Cryptographie classique, exercices"],
-          ["Dé-identification", "Retire ou généralise les identifiants", "Partielle", "Jeux de données d'analyse, recherche"],
-          ["Obfuscation", "Rend la lecture difficile", "Souvent", "Protection de code, pas de confidentialité forte"]
+          [
+            "Masquage (masking)",
+            "Remplace une partie de la valeur",
+            "Non (ou via table sécurisée)",
+            "Afficher `****1234` à un opérateur"
+          ],
+          [
+            "Hachage",
+            "Empreinte irréversible",
+            "Non",
+            "Mots de passe, intégrité"
+          ],
+          [
+            "Filtrage",
+            "Bloque ou retire certains champs/flux",
+            "Non",
+            "DLP, journaux sans données sensibles"
+          ],
+          [
+            "Tokenisation",
+            "Remplace la donnée par un jeton sans valeur",
+            "Oui, via le coffre de jetons",
+            "Numéros de carte bancaire"
+          ],
+          [
+            "Chiffrement",
+            "Rend la donnée illisible sans clé",
+            "Oui, avec la clé",
+            "Disques, flux, bases"
+          ],
+          [
+            "Transposition",
+            "Réordonne les caractères selon une règle",
+            "Oui, avec la règle",
+            "Cryptographie classique, exercices"
+          ],
+          [
+            "Dé-identification",
+            "Retire ou généralise les identifiants",
+            "Partielle",
+            "Jeux de données d'analyse, recherche"
+          ],
+          [
+            "Obfuscation",
+            "Rend la lecture difficile",
+            "Souvent",
+            "Protection de code, pas de confidentialité forte"
+          ]
         ]
       },
       {
@@ -189,14 +262,42 @@
       },
       {
         "type": "table",
-        "head": ["Rôle", "Responsabilité", "Question à poser"],
+        "head": [
+          "Rôle",
+          "Responsabilité",
+          "Question à poser"
+        ],
         "rows": [
-          ["Propriétaire (owner)", "Décide de la classification et des accès", "Qui est responsable métier de cette donnée ?"],
-          ["Dépositaire (custodian)", "Met en œuvre et maintient les contrôles", "Qui exploite le système et les sauvegardes ?"],
-          ["Intendant (steward)", "Qualité, métadonnées, conformité d'usage", "Qui garantit que la donnée est correcte et bien décrite ?"],
-          ["Opérateur", "Traite la donnée au quotidien", "Qui saisit, corrige, exporte ?"],
-          ["Responsable de traitement (controller)", "Détermine la finalité et les moyens", "Qui décide pourquoi et comment la donnée est traitée ?"],
-          ["Sous-traitant (processor / subprocessor)", "Traite pour le compte du responsable", "Qui héberge ou traite pour nous, et sous quel contrat ?"]
+          [
+            "Propriétaire (owner)",
+            "Décide de la classification et des accès",
+            "Qui est responsable métier de cette donnée ?"
+          ],
+          [
+            "Dépositaire (custodian)",
+            "Met en œuvre et maintient les contrôles",
+            "Qui exploite le système et les sauvegardes ?"
+          ],
+          [
+            "Intendant (steward)",
+            "Qualité, métadonnées, conformité d'usage",
+            "Qui garantit que la donnée est correcte et bien décrite ?"
+          ],
+          [
+            "Opérateur",
+            "Traite la donnée au quotidien",
+            "Qui saisit, corrige, exporte ?"
+          ],
+          [
+            "Responsable de traitement (controller)",
+            "Détermine la finalité et les moyens",
+            "Qui décide pourquoi et comment la donnée est traitée ?"
+          ],
+          [
+            "Sous-traitant (processor / subprocessor)",
+            "Traite pour le compte du responsable",
+            "Qui héberge ou traite pour nous, et sous quel contrat ?"
+          ]
         ]
       },
       {

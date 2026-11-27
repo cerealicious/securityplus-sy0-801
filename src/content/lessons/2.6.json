@@ -16,6 +16,10 @@
         "text": "Les livres mentionnent l'IA/ML uniquement comme **outil défensif** (détection comportementale, UEBA, EDR — SOC Notes p.109, 196 ; 11 Strategies p.193, 264). Ils ne décrivent aucune menace liée à l'usage de l'IA."
       },
       {
+        "type": "diagram",
+        "diagramId": "d-2.6-L01-ai-upstream"
+      },
+      {
         "type": "source",
         "book": "OBJ",
         "page": "2.6",
@@ -135,6 +139,10 @@
       {
         "type": "h",
         "text": "Injection de prompt et jailbreaking"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-2.6-L02-ai-downstream"
       },
       {
         "type": "term",

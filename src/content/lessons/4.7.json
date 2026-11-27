@@ -15,6 +15,10 @@
         "text": "Pourquoi un cycle et pas une liste"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-4.7-L01-ir-preparedness"
+      },
+      {
         "type": "simulation",
         "simId": "sim-ir-cycle"
       },
@@ -198,6 +202,10 @@
         "text": "Les rôles de l'équipe de réponse"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-4.7-L02-containment-tree"
+      },
+      {
         "type": "table",
         "head": [
           "Rôle",
@@ -370,6 +378,10 @@
       {
         "type": "h",
         "text": "Investigation et preuves"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-4.7-L03-post-incident-loop"
       },
       {
         "type": "p",

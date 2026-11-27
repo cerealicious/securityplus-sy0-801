@@ -15,6 +15,10 @@
         "diagramId": "d-2.4-surface-matrix"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-2.4-L01-attack-surface"
+      },
+      {
         "type": "h",
         "text": "Systèmes non supportés, non patchés, obsolètes, non gérés"
       },
@@ -193,6 +197,10 @@
       {
         "type": "h",
         "text": "Identité, appareils et configuration"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-2.4-L02-vuln-tree"
       },
       {
         "type": "table",

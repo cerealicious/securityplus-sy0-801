@@ -15,6 +15,10 @@
         "text": "Cloud, on-premises, hybride : qui porte quoi ?"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-3.1-L01-cloud-models"
+      },
+      {
         "type": "p",
         "text": "Dans le **cloud public**, le fournisseur sécurise l'infrastructure (datacenter, réseau, hyperviseur) tandis que le client reste responsable de ses données, de ses identités, de ses configurations et de ses applications. C'est le principe de **responsabilité partagée** : le cloud déplace le risque, il ne le supprime pas."
       },
@@ -180,6 +184,10 @@
       {
         "type": "h",
         "text": "Operational technology (OT)"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-3.1-L02-iac-drift"
       },
       {
         "type": "term",

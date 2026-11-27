@@ -15,6 +15,10 @@
         "text": "Les quatre techniques fondamentales"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-4.1-L01-control-stack"
+      },
+      {
         "type": "term",
         "en": "Segmentation",
         "fr": "Segmentation",
@@ -180,6 +184,10 @@
       {
         "type": "h",
         "text": "Détecter ou empêcher : IDS contre IPS"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-4.1-L02-detection-pipeline"
       },
       {
         "type": "compare",
@@ -356,6 +364,10 @@
       {
         "type": "h",
         "text": "Antivirus, EDR et XDR"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-4.1-L03-control-matrix"
       },
       {
         "type": "term",

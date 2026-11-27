@@ -15,6 +15,10 @@
         "text": "La due diligence avant tout engagement"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-5.3-L01-parcours-fournisseur"
+      },
+      {
         "type": "p",
         "text": "La diligence raisonnable consiste à vérifier la santé financière, les certifications, les antécédents d'incidents, la localisation des données et les pratiques de sécurité du candidat **avant** la signature."
       },
@@ -170,6 +174,10 @@
       {
         "type": "h",
         "text": "SLA et SLO : mesurer le service"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-5.3-L02-accords"
       },
       {
         "type": "term",
@@ -337,6 +345,10 @@
       {
         "type": "h",
         "text": "Les mécanismes de surveillance"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-5.3-L03-limites-tierce-partie"
       },
       {
         "type": "term",

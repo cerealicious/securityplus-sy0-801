@@ -20,6 +20,10 @@
         "note": "Gestion des comptes et de l'infrastructure Windows"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-4.5-L01-account-lifecycle"
+      },
+      {
         "type": "simulation",
         "simId": "sim-iam-flow"
       },
@@ -191,6 +195,10 @@
         "printed": 38,
         "strength": "supporting",
         "note": "Identité fédérée et gestion centralisée des accès"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-4.5-L02-identity-federation"
       },
       {
         "type": "term",
@@ -366,6 +374,10 @@
       {
         "type": "diagram",
         "diagramId": "d-access-models"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-4.5-L03-access-models"
       },
       {
         "type": "term",

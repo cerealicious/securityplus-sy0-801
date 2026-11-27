@@ -15,6 +15,10 @@
         "text": "Zones de confiance : Trust, DMZ, Untrust"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-3.2-L01-trust-zones"
+      },
+      {
         "type": "simulation",
         "simId": "sim-zero-trust"
       },
@@ -190,6 +194,10 @@
       {
         "type": "h",
         "text": "Les quatre piliers vérifiés"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-3.2-L02-zero-trust-decision"
       },
       {
         "type": "source",

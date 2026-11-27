@@ -15,6 +15,10 @@
         "text": "Un chapitre entier consacré au sujet"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-4.3-L01-vuln-pipeline"
+      },
+      {
         "type": "source",
         "book": "DSH",
         "chapter": "16",
@@ -188,6 +192,10 @@
       {
         "type": "h",
         "text": "De la découverte au correctif"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-4.3-L02-scan-auth"
       },
       {
         "type": "steps",

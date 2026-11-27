@@ -3,18 +3,18 @@ import type { Diagram } from '../lib/types'
 import { Rich } from '../components/ui'
 
 const KIND_FILL: Record<string, string> = {
-  artifact: '#eef3ff',
-  actor: '#f4eeff',
-  step: '#eaf8f2',
-  risk: '#fff0f3',
-  neutral: '#f5f3ee',
+  artifact: '#142a49',
+  actor: '#252045',
+  step: '#10312a',
+  risk: '#35202d',
+  neutral: '#1b293d',
 }
 const KIND_STROKE: Record<string, string> = {
-  artifact: '#3b6fe8',
-  actor: '#7c3aed',
-  step: '#0e9f8c',
-  risk: '#e11d48',
-  neutral: '#94a3b8',
+  artifact: '#38bdf8',
+  actor: '#a78bfa',
+  step: '#2dd4bf',
+  risk: '#fb7185',
+  neutral: '#7c93b3',
 }
 
 export default function DiagramView({ diagram }: { diagram: Diagram }) {
@@ -62,9 +62,9 @@ export default function DiagramView({ diagram }: { diagram: Diagram }) {
                           style={{
                             width: '100%',
                             textAlign: 'left',
-                            background: selected === `${r.label}|${i}` ? '#e4edff' : '#ffffff',
-                            border: `1px solid ${selected === `${r.label}|${i}` ? '#4f46e5' : '#e3ddd0'}`,
-                            color: '#37475a',
+                            background: selected === `${r.label}|${i}` ? '#153955' : '#111c2f',
+                            border: `1px solid ${selected === `${r.label}|${i}` ? '#22d3ee' : '#243854'}`,
+                            color: '#cbd9ea',
                             borderRadius: 7,
                             padding: '8px 9px',
                             fontSize: 11.8,

@@ -1,0 +1,601 @@
+{
+  "diagrams": [
+    {
+      "id": "d-1.1-L01-cia",
+      "kind": "flow",
+      "title": "La triade CIA : trois piliers, un actif",
+      "subtitle": "Cliquez sur un pilier puis sur son contrôle : confidentialité, intégrité et disponibilité protègent ensemble la donnée.",
+      "modes": ["explore", "quiz"],
+      "nodes": [
+        {"id":"conf","label":"Confidentialité","sub":"confidentiality","x":40,"y":45,"w":160,"h":60,"kind":"artifact","detail":"Seules les personnes autorisées accèdent à la donnée : chiffrement, MFA, ACL et segmentation.","exam":"CIA : C = confidentiality, pas 'contrôle'."},
+        {"id":"integ","label":"Intégrité","sub":"integrity","x":310,"y":45,"w":160,"h":60,"kind":"artifact","detail":"La donnée n'est pas modifiée sans autorisation : hash, signature numérique, contrôle de version.","exam":"Un hash détecte la modification ; la signature prouve aussi l'origine."},
+        {"id":"disp","label":"Disponibilité","sub":"availability","x":580,"y":45,"w":160,"h":60,"kind":"artifact","detail":"Accès fiable et continu : redondance, sauvegardes, SLA et protection DDoS.","exam":"Un ransomware attaque surtout disponibilité et confidentialité."},
+        {"id":"cconf","label":"Contrôles","sub":"chiffrement · MFA · ACL","x":40,"y":175,"w":160,"h":60,"kind":"step","detail":"Les contrôles préventifs limitent la lecture : chiffrement au repos/en transit, MFA, listes de contrôle d'accès.","exam":"Classifiez la donnée avant de choisir le contrôle."},
+        {"id":"cinteg","label":"Contrôles","sub":"hash · signature · ACL","x":310,"y":175,"w":160,"h":60,"kind":"step","detail":"Empreintes, signatures, journalisation et contrôle d'accès garantissent l'intégrité.","exam":"Un hash seul ne prouve pas l'origine : ajoutez une signature."},
+        {"id":"cdisp","label":"Contrôles","sub":"redondance · backup · SLA","x":580,"y":175,"w":160,"h":60,"kind":"step","detail":"Cluster, sauvegardes testées, alimentation redondée et surveillance maintiennent le service.","exam":"Une sauvegarde non testée n'est pas une preuve de disponibilité."},
+        {"id":"actif","label":"Actif protégé","sub":"données · systèmes · identités","x":310,"y":305,"w":160,"h":60,"kind":"neutral","detail":"Les trois piliers s'appliquent à un actif identifié : donnée, système ou identité.","exam":"Commencez toujours par identifier et classer l'actif."},
+        {"id":"equil","label":"Arbitrage CIA","sub":"selon le contexte métier","x":310,"y":425,"w":160,"h":60,"kind":"risk","detail":"On arbitre selon le contexte : un système militaire privilégie la confidentialité, une banque l'intégrité.","exam":"L'examen teste l'arbitrage CIA dans des scénarios concrets."}
+      ],
+      "edges": [
+        {"from":"conf","to":"cconf","label":"protège"},
+        {"from":"integ","to":"cinteg","label":"protège"},
+        {"from":"disp","to":"cdisp","label":"protège"},
+        {"from":"cconf","to":"actif","label":"appliqué à"},
+        {"from":"cinteg","to":"actif","label":"appliqué à"},
+        {"from":"cdisp","to":"actif","label":"appliqué à"},
+        {"from":"actif","to":"equil","label":"nécessite"}
+      ],
+      "quiz": {"question":"Quel pilier garantit qu'une donnée n'a pas été modifiée sans autorisation ?","answer":"integ"}
+    },
+    {
+      "id": "d-1.1-L02-aaa",
+      "kind": "flow",
+      "title": "Le flux AAA : identité, preuve, droits, traces",
+      "subtitle": "Suivez la chaîne d'accès : l'authentification précède l'autorisation, et la comptabilisation rend l'action auditable.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {"id":"ident","label":"Identité","sub":"compte / sujet","x":30,"y":60,"w":160,"h":60,"kind":"actor","detail":"Établir qui demande l'accès : compte utilisateur, service account, certificat ou identité fédérée.","exam":"L'identité est déclarée avant toute preuve."},
+        {"id":"authn","label":"Authentification","sub":"preuve d'identité","x":225,"y":60,"w":160,"h":60,"kind":"step","detail":"Vérifier l'identité avec un facteur connu (mot de passe), possédé (jeton) ou inhérent (biométrie).","exam":"MFA = deux facteurs de catégories différentes."},
+        {"id":"authz","label":"Autorisation","sub":"droits / RBAC","x":420,"y":60,"w":160,"h":60,"kind":"step","detail":"Décider des droits après authentification : RBAC, ABAC, moindre privilège et approbation.","exam":"L'autorisation vient toujours après l'authentification."},
+        {"id":"acct","label":"Comptabilisation","sub":"logs / accounting","x":615,"y":60,"w":160,"h":60,"kind":"artifact","detail":"Enregistrer qui a fait quoi, quand et depuis où : journaux, horodatage, SIEM.","exam":"Accounting = traçabilité, pas comptabilité financière."},
+        {"id":"audit","label":"Audit","sub":"traçabilité","x":615,"y":210,"w":160,"h":60,"kind":"neutral","detail":"Exploiter les traces pour détecter les abus et reconstruire un incident.","exam":"Sans NTP, la corrélation des journaux est impossible."},
+        {"id":"policy","label":"Politique","sub":"least privilege","x":420,"y":210,"w":160,"h":60,"kind":"artifact","detail":"La politique définit les règles d'accès appliquées par les contrôles techniques.","exam":"La règle précède l'outil : policy avant technology."},
+        {"id":"mfa","label":"MFA","sub":"facteurs multiples","x":225,"y":210,"w":160,"h":60,"kind":"step","detail":"Ajouter un second facteur pour résister au vol de mot de passe et au phishing.","exam":"Une clé FIDO2 est plus forte qu'un code SMS."},
+        {"id":"monitor","label":"Surveillance","sub":"SIEM / revue","x":30,"y":210,"w":160,"h":60,"kind":"step","detail":"Surveiller les écarts : alertes, UEBA et revue périodique des droits.","exam":"La revue d'accès détecte le privilege creep."}
+      ],
+      "edges": [
+        {"from":"ident","to":"authn","label":"déclare"},
+        {"from":"authn","to":"authz","label":"prouve"},
+        {"from":"authz","to":"acct","label":"décision"},
+        {"from":"acct","to":"audit","label":"trace"},
+        {"from":"audit","to":"policy","label":"retour"},
+        {"from":"policy","to":"authz","label":"contraint"},
+        {"from":"authn","to":"mfa","label":"renforce"},
+        {"from":"audit","to":"monitor","label":"corréle"}
+      ],
+      "sequence": ["ident","authn","authz","acct","audit","monitor"],
+      "quiz": {"question":"Quelle étape AAA enregistre qui a fait quoi et quand ?","answer":"acct"}
+    },
+    {
+      "id": "d-1.1-L03-controles",
+      "kind": "matrix",
+      "title": "Grille des contrôles : catégorie × type",
+      "subtitle": "Cliquez une case : la ligne donne la catégorie, la colonne donne le type de contrôle.",
+      "matrix": {
+        "columns": ["Administratif", "Technique", "Physique"],
+        "rows": [
+          {"label":"Préventif","cells":[
+            {"text":"Politique, formation, procédures","detail":"Empêche l'action avant qu'elle arrive : politiques de sécurité, sensibilisation, séparation des tâches."},
+            {"text":"Firewall, chiffrement, ACL","detail":"Bloque ou rend illisible l'accès non autorisé : contrôles techniques préventifs classiques."},
+            {"text":"Serrure, badge, garde","detail":"Empêche physiquement l'accès aux zones sensibles : contrôle d'accès physique."}
+          ]},
+          {"label":"Détectif","cells":[
+            {"text":"Revue des journaux, audit","detail":"Découvre après coup une anomalie grâce aux procès-verbaux et aux revues périodiques."},
+            {"text":"IDS, SIEM, EDR","detail":"Détecte les signaux d'attaque et corréle les événements en temps réel."},
+            {"text":"Caméra, détecteur de mouvement","detail":"Signalise une intrusion physique et fournit des preuves vidéo."}
+          ]},
+          {"label":"Correctif","cells":[
+            {"text":"Plan de réponse, procédure IR","detail":"Organise la remédiation : incident response, communication, leçons apprises."},
+            {"text":"Patch, antimalware, restauration","detail":"Corrige ou nettoie après l'incident : mise à jour, quarantine, restauration de sauvegarde."},
+            {"text":"Extincteur, alarme incendie","detail":"Limite et corrige les dommages physiques après l'événement."}
+          ]},
+          {"label":"Compensatoire","cells":[
+            {"text":"Exception documentée, dérogation","detail":"Compense l'impossibilité d'appliquer un contrôle standard par une mesure équivalente et approuvée."},
+            {"text":"Segmentation, sandbox","detail":"Isole la ressource non protégeable pour réduire l'impact d'une exploitation."},
+            {"text":"Escorte des visiteurs","detail":"Remplace un contrôle d'accès absent par une surveillance humaine temporaire."}
+          ]}
+        ]
+      }
+    },
+    {
+      "id": "d-1.2-L01-change-window",
+      "kind": "flow",
+      "title": "Fenêtre de changement : du ticket à la clôture",
+      "subtitle": "Une fenêtre de changement est encadrée dans le temps : demande, CAB, préparation, gel, exécution et vérification.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {"id":"ticket","label":"Demande RFC","sub":"J-7 · ticket","x":30,"y":55,"w":160,"h":60,"kind":"artifact","detail":"Documenter la portée, les risques, le plan de retour arrière et les critères de réussite.","exam":"Un changement sans plan de rollback est refusé en CAB."},
+        {"id":"cab","label":"CAB","sub":"J-5 · comité","x":225,"y":55,"w":160,"h":60,"kind":"actor","detail":"Le Change Advisory Board valide, reporte ou rejette la demande après analyse d'impact.","exam":"Le CAB réunit IT, sécurité et représentants métier."},
+        {"id":"plan","label":"Planification","sub":"J-3 · préparation","x":420,"y":55,"w":160,"h":60,"kind":"step","detail":"Définir les étapes, dépendances, ressources, tests et critères de réussite.","exam":"Fixez les critères de succès avant l'exécution."},
+        {"id":"notify","label":"Communication","sub":"J-1 · parties prenantes","x":615,"y":55,"w":160,"h":60,"kind":"step","detail":"Informer les utilisateurs et les équipes de la fenêtre et des perturbations attendues.","exam":"Une bonne communication réduit l'impact perçu."},
+        {"id":"freeze","label":"Gel","sub":"Jour J · change freeze","x":615,"y":215,"w":160,"h":60,"kind":"neutral","detail":"Suspendre les autres changements pour éviter les collisions pendant la fenêtre.","exam":"Un change freeze est souvent appliqué en fin d'exercice."},
+        {"id":"impl","label":"Exécution","sub":"Jour J · dans la fenêtre","x":420,"y":215,"w":160,"h":60,"kind":"step","detail":"Appliquer le changement avec sauvegarde préalable et supervision continue.","exam":"Dépasser la fenêtre impose de demander une extension."},
+        {"id":"verify","label":"Vérification","sub":"J+0 · tests","x":225,"y":215,"w":160,"h":60,"kind":"step","detail":"Contrôler les tests fonctionnels, les journaux et les critères de réussite.","exam":"La vérification précède toujours la clôture."},
+        {"id":"close","label":"Clôture","sub":"J+1 · CMDB","x":30,"y":215,"w":160,"h":60,"kind":"artifact","detail":"Fermer le ticket, mettre à jour la documentation et l'inventaire CMDB.","exam":"La CMDB doit refléter l'état réel après changement."}
+      ],
+      "edges": [
+        {"from":"ticket","to":"cab","label":"soumis à"},
+        {"from":"cab","to":"plan","label":"approuvé"},
+        {"from":"plan","to":"notify","label":"puis"},
+        {"from":"notify","to":"freeze","label":"J-1 → J"},
+        {"from":"freeze","to":"impl","label":"ouvre"},
+        {"from":"impl","to":"verify","label":"puis"},
+        {"from":"verify","to":"close","label":"clôt"}
+      ],
+      "sequence": ["ticket","cab","plan","notify","freeze","impl","verify","close"],
+      "quiz": {"question":"Qui valide ou rejette une demande de changement en comité ?","answer":"cab"}
+    },
+    {
+      "id": "d-1.2-L02-rollback",
+      "kind": "flow",
+      "title": "Rollback raté : l'effet domino",
+      "subtitle": "Un retour arrière mal préparé peut provoquer plus de dégâts que le changement initial.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {"id":"change","label":"Changement","sub":"appliqué","x":30,"y":35,"w":150,"h":58,"kind":"step","detail":"Le changement est déployé et les premières vérifications échouent.","exam":"Détecter tôt limite la portée du retour arrière."},
+        {"id":"fail","label":"Anomalie","sub":"erreur / panne","x":150,"y":95,"w":150,"h":58,"kind":"risk","detail":"Une erreur applicative ou une panne de service apparaît pendant la fenêtre.","exam":"Définissez un seuil de décision avant de commencer."},
+        {"id":"decision","label":"Décision","sub":"annuler le changement","x":270,"y":155,"w":150,"h":58,"kind":"actor","detail":"Le responsable décide d'annuler, idéalement dans la fenêtre initiale.","exam":"Un rollback tardif augmente le risque de perte de données."},
+        {"id":"restore","label":"Restauration","sub":"sauvegarde précédente","x":390,"y":215,"w":150,"h":58,"kind":"step","detail":"On restaure l'ancienne configuration ou la sauvegarde d'avant-changement.","exam":"Testez la restauration avant le changement, pas pendant."},
+        {"id":"state","label":"État incohérent","sub":"schéma / dépendances","x":510,"y":275,"w":150,"h":58,"kind":"risk","detail":"La version restaurée ne correspond plus aux données ni aux dépendances actuelles.","exam":"Le delta entre deux versions est le piège classique."},
+        {"id":"data","label":"Perte de données","sub":"écritures écrasées","x":510,"y":390,"w":150,"h":58,"kind":"risk","detail":"Les données créées après le changement sont perdues ou corrompues par la restauration.","exam":"Une restauration écrase les écritures récentes."},
+        {"id":"impact","label":"Interruption","sub":"service indisponible","x":330,"y":390,"w":150,"h":58,"kind":"risk","detail":"Le service reste indisponible : l'impact dépasse celui du changement initial.","exam":"Un rollback raté transforme un incident mineur en majeur."},
+        {"id":"post","label":"Post-mortem","sub":"retour d'expérience","x":150,"y":390,"w":150,"h":58,"kind":"neutral","detail":"Identifier la cause, réviser le plan de retour arrière et communiquer.","exam":"Le retour d'expérience alimente le prochain CAB."}
+      ],
+      "edges": [
+        {"from":"change","to":"fail","label":"déclenche"},
+        {"from":"fail","to":"decision","label":"impose"},
+        {"from":"decision","to":"restore","label":"exécute"},
+        {"from":"restore","to":"state","label":"produit"},
+        {"from":"state","to":"data","label":"entraîne"},
+        {"from":"state","to":"impact","label":"aggrave"},
+        {"from":"impact","to":"post","label":"puis"}
+      ],
+      "sequence": ["change","fail","decision","restore","state","data","impact","post"],
+      "quiz": {"question":"Quelle étape provoque la perte des écritures récentes ?","answer":"restore"}
+    },
+    {
+      "id": "d-1.3-L01-hash-salt",
+      "kind": "flow",
+      "title": "Du mot de passe au hash : sel et fonction lente",
+      "subtitle": "Le mot de passe n'est jamais stocké en clair : on le sale, on le hache avec un KDF lent, puis on vérifie.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {"id":"pw","label":"Mot de passe","sub":"secret saisi","x":40,"y":50,"w":165,"h":62,"kind":"artifact","detail":"Le mot de passe est un secret saisi par l'utilisateur ; il ne doit jamais être stocké en clair.","exam":"Stockage en clair = échec critique de confidentialité."},
+        {"id":"salt","label":"Sel aléatoire","sub":"unique par compte","x":40,"y":170,"w":165,"h":62,"kind":"artifact","detail":"Valeur aléatoire unique générée par compte et conservée avec le hash.","exam":"Le sel n'est pas secret : il déjoue les rainbow tables."},
+        {"id":"concat","label":"Combinaison","sub":"mot de passe + sel","x":40,"y":290,"w":165,"h":62,"kind":"step","detail":"On concatène le secret et le sel avant d'appliquer la fonction de dérivation.","exam":"Le sel doit être unique par utilisateur, pas global."},
+        {"id":"hash","label":"KDF lent","sub":"bcrypt · Argon2 · PBKDF2","x":300,"y":290,"w":165,"h":62,"kind":"step","detail":"Une fonction avec coût en CPU/mémoire produit le hash : bcrypt, Argon2 ou PBKDF2.","exam":"N'utilisez pas un hash rapide comme SHA-256 pour les mots de passe."},
+        {"id":"store","label":"Hash stocké","sub":"base + sel + coût","x":300,"y":170,"w":165,"h":62,"kind":"artifact","detail":"On enregistre le hash, le sel et les paramètres de coût dans la base d'identités.","exam":"Sel et paramètres sont nécessaires à la vérification."},
+        {"id":"verify","label":"Vérification","sub":"recalcul + comparaison","x":300,"y":50,"w":165,"h":62,"kind":"step","detail":"À la connexion, on recalcule le hash avec le sel stocké puis on compare.","exam":"La comparaison doit être à temps constant."},
+        {"id":"kdf","label":"Coût de calcul","sub":"itérations · mémoire","x":560,"y":170,"w":165,"h":62,"kind":"neutral","detail":"Itérations et mémoire ralentissent les attaques hors ligne sur les hash volés.","exam":"Argon2 résiste mieux aux GPU/ASIC grâce à son coût mémoire."},
+        {"id":"attack","label":"Attaque offline","sub":"dictionnaire · rainbow table","x":560,"y":290,"w":165,"h":62,"kind":"risk","detail":"Sans sel unique, les rainbow tables et les listes de mots de passe accélèrent le craquage.","exam":"Un sel unique rend deux mots de passe identiques distincts."}
+      ],
+      "edges": [
+        {"from":"pw","to":"concat","label":"secret"},
+        {"from":"salt","to":"concat","label":"ajouté"},
+        {"from":"concat","to":"hash","label":"dérive"},
+        {"from":"hash","to":"store","label":"enregistré"},
+        {"from":"store","to":"verify","label":"utilisé"},
+        {"from":"hash","to":"kdf","label":"paramétré"},
+        {"from":"kdf","to":"attack","label":"ralentit"},
+        {"from":"salt","to":"attack","label":"bloque"}
+      ],
+      "sequence": ["pw","salt","concat","hash","store","verify"],
+      "quiz": {"question":"Quel élément, non secret, empêche les attaques par rainbow table ?","answer":"salt"}
+    },
+    {
+      "id": "d-1.3-L02-cert-chain",
+      "kind": "flow",
+      "title": "Chaîne de certificats : racine, feuille, révocation",
+      "subtitle": "Le client valide une chaîne de confiance jusqu'à une racine, puis vérifie que la feuille n'est pas révoquée.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {"id":"root","label":"Root CA","sub":"auto-signée · hors ligne","x":30,"y":55,"w":160,"h":60,"kind":"artifact","detail":"Autorité racine auto-signée, conservée hors ligne : ancre de confiance de la PKI.","exam":"Compromettre la racine invalide toute la chaîne."},
+        {"id":"inter","label":"Intermediate CA","sub":"signe les feuilles","x":220,"y":55,"w":160,"h":60,"kind":"artifact","detail":"Autorité intermédiaire qui signe les certificats feuille et limite l'exposition de la racine.","exam":"Une chaîne courte est plus simple à valider."},
+        {"id":"leaf","label":"Certificat feuille","sub":"serveur · SAN","x":410,"y":55,"w":160,"h":60,"kind":"artifact","detail":"Certificat d'un serveur : nom (SAN), clé publique, dates de validité et usage.","exam":"Vérifiez le SAN, pas seulement le CN."},
+        {"id":"client","label":"Client","sub":"navigateur · validation","x":600,"y":55,"w":160,"h":60,"kind":"actor","detail":"Le client vérifie la chaîne, le nom, la date et le statut de révocation.","exam":"Un certificat expiré est rejeté même si la chaîne est valide."},
+        {"id":"trust","label":"Trust store","sub":"racines approuvées","x":600,"y":215,"w":160,"h":60,"kind":"neutral","detail":"Magasin de confiance contenant les autorités racines acceptées par le système.","exam":"Ajouter une racine arbitraire détruit la confiance."},
+        {"id":"revoke","label":"Révocation","sub":"CRL / OCSP","x":410,"y":215,"w":160,"h":60,"kind":"risk","detail":"Vérifier que le certificat n'a pas été annulé avant sa date d'expiration.","exam":"CRL = liste téléchargée ; OCSP = requête en ligne."},
+        {"id":"ocsp","label":"OCSP stapling","sub":"réponse mise en cache","x":220,"y":215,"w":160,"h":60,"kind":"step","detail":"Le serveur fournit lui-même une réponse OCSP récente et signée.","exam":"Le stapling réduit la charge du serveur OCSP."},
+        {"id":"pin","label":"Épinglage","sub":"certificate pinning","x":30,"y":215,"w":160,"h":60,"kind":"step","detail":"L'application n'accepte qu'une clé ou une autorité attendue à l'avance.","exam":"Le pinning protège contre une CA compromise mais complique le renouvellement."}
+      ],
+      "edges": [
+        {"from":"root","to":"inter","label":"signe"},
+        {"from":"inter","to":"leaf","label":"signe"},
+        {"from":"leaf","to":"client","label":"présenté"},
+        {"from":"root","to":"trust","label":"préinstallée"},
+        {"from":"trust","to":"client","label":"ancre"},
+        {"from":"client","to":"revoke","label":"vérifie"},
+        {"from":"revoke","to":"ocsp","label":"optimisé"},
+        {"from":"leaf","to":"pin","label":"contraint"}
+      ],
+      "sequence": ["root","inter","leaf","client","revoke"],
+      "quiz": {"question":"Quel mécanisme vérifie en ligne qu'un certificat n'a pas été annulé ?","answer":"revoke"}
+    },
+    {
+      "id": "d-1.3-L03-encryption-levels",
+      "kind": "flow",
+      "title": "Niveaux de chiffrement : du disque au champ",
+      "subtitle": "Pile verticale des couches où appliquer le chiffrement, avec un point commun : la gestion des clés.",
+      "modes": ["explore", "quiz"],
+      "nodes": [
+        {"id":"disque","label":"Disque / FDE","sub":"BitLocker · LUKS","x":305,"y":35,"w":170,"h":58,"kind":"artifact","detail":"Chiffrement intégral du disque : protège les données au repos en cas de vol du support.","exam":"FDE ne protège pas contre un utilisateur déjà authentifié."},
+        {"id":"partition","label":"Partition","sub":"chiffrement par partition","x":305,"y":98,"w":170,"h":58,"kind":"artifact","detail":"Une partition chiffrée isole un espace logique avec sa propre clé.","exam":"Préférez FDE plutôt que des partitions partielles oubliées."},
+        {"id":"volume","label":"Volume","sub":"couche bloc / logique","x":305,"y":161,"w":170,"h":58,"kind":"step","detail":"Le chiffrement de volume agit sous le système de fichiers (LUKS, BitLocker).","exam":"Volume = couche bloc ; fichier = couche utilisateur."},
+        {"id":"fichier","label":"Fichier / EFS","sub":"par utilisateur","x":305,"y":224,"w":170,"h":58,"kind":"artifact","detail":"EFS chiffre des fichiers par utilisateur, avec un contrôle fin mais plus de complexité.","exam":"Le chiffrement fichier protège contre les autres comptes locaux."},
+        {"id":"base","label":"Base de données","sub":"TDE · colonnes","x":305,"y":287,"w":170,"h":58,"kind":"artifact","detail":"TDE chiffre la base au repos ; le chiffrement de colonnes protège des champs sensibles.","exam":"TDE est transparent : l'application ne change pas."},
+        {"id":"record","label":"Enregistrement","sub":"champ par champ · PII","x":305,"y":350,"w":170,"h":58,"kind":"artifact","detail":"Le chiffrement au niveau de l'enregistrement protège chaque champ (PII, secret).","exam":"Plus la granularité est fine, plus la gestion des clés est complexe."},
+        {"id":"keys","label":"Gestion des clés","sub":"KMS · HSM · rotation","x":305,"y":413,"w":170,"h":58,"kind":"neutral","detail":"Clés protégées par KMS/HSM avec rotation et séparation des rôles.","exam":"Sans gestion des clés, le chiffrement n'apporte aucune protection."}
+      ],
+      "edges": [
+        {"from":"disque","to":"partition","label":"contient"},
+        {"from":"partition","to":"volume","label":"structure"},
+        {"from":"volume","to":"fichier","label":"héberge"},
+        {"from":"fichier","to":"base","label":"stocke"},
+        {"from":"base","to":"record","label":"affine"},
+        {"from":"keys","to":"fichier","label":"clés"},
+        {"from":"keys","to":"base","label":"clés"},
+        {"from":"keys","to":"record","label":"clés"}
+      ],
+      "quiz": {"question":"Quelle couche chiffre un champ individuel comme un numéro de carte ?","answer":"record"}
+    },
+    {
+      "id": "d-2.1-L01-intel-cycle",
+      "kind": "flow",
+      "title": "Cycle du renseignement sur les menaces",
+      "subtitle": "Un cycle continu : planifier, collecter, analyser, diffuser et évaluer, avec stockage et priorisation.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {"id":"plan","label":"Planifier","sub":"besoins · PIR","x":300,"y":35,"w":170,"h":60,"kind":"step","detail":"Définir les besoins (PIR), les actifs critiques et les questions auxquelles répondre.","exam":"Le cycle commence par une question, pas par une collecte aveugle."},
+        {"id":"collect","label":"Collecter","sub":"OSINT · feeds · logs","x":540,"y":120,"w":165,"h":60,"kind":"artifact","detail":"Collecter logs internes, OSINT, threat feeds et renseignement humain.","exam":"Évaluez la pertinence et la fiabilité de chaque source."},
+        {"id":"analyze","label":"Analyser","sub":"corrélation · TTP","x":540,"y":330,"w":165,"h":60,"kind":"step","detail":"Corréler les indicateurs, reconstituer les TTP et qualifier la menace.","exam":"MITRE ATT&CK structure l'analyse des tactiques."},
+        {"id":"disseminate","label":"Diffuser","sub":"brief · STIX/TAXII","x":300,"y":420,"w":170,"h":60,"kind":"step","detail":"Restituer sous forme de brief, rapport ou flux structuré STIX/TAXII.","exam":"Le bon destinataire reçoit le bon niveau de détail."},
+        {"id":"evaluate","label":"Évaluer","sub":"feedback · lacunes","x":60,"y":330,"w":170,"h":60,"kind":"neutral","detail":"Mesurer l'utilité du renseignement et corriger les lacunes du cycle.","exam":"Le retour d'information est obligatoire pour clore la boucle."},
+        {"id":"store","label":"Stocker","sub":"base IOC · provenance","x":60,"y":120,"w":170,"h":60,"kind":"artifact","detail":"Conserver IOC et rapports avec horodatage, provenance et niveau de confiance.","exam":"Sans provenance, un indicateur perd sa valeur."},
+        {"id":"priorit","label":"Prioriser","sub":"confiance · urgence","x":305,"y":225,"w":170,"h":60,"kind":"risk","detail":"Pondérer les informations selon la confiance, la pertinence et l'urgence métier.","exam":"Toutes les menaces ne méritent pas la même attention."}
+      ],
+      "edges": [
+        {"from":"plan","to":"collect","label":"guide"},
+        {"from":"collect","to":"analyze","label":"données"},
+        {"from":"analyze","to":"disseminate","label":"restitution"},
+        {"from":"disseminate","to":"evaluate","label":"feedback"},
+        {"from":"evaluate","to":"plan","label":"boucle"},
+        {"from":"collect","to":"store","label":"archive"},
+        {"from":"store","to":"priorit","label":"pondère"},
+        {"from":"priorit","to":"analyze","label":"filtre"}
+      ],
+      "sequence": ["plan","collect","analyze","disseminate","evaluate"],
+      "quiz": {"question":"Quelle étape reconstitue les tactiques et techniques d'un adversaire ?","answer":"analyze"}
+    },
+    {
+      "id": "d-2.1-L02-cvss-matrix",
+      "kind": "matrix",
+      "title": "CVSS : sévérité × exposition",
+      "subtitle": "Cliquez une case : le score CVSS donne la gravité, l'exposition et le contexte décident de la priorité.",
+      "matrix": {
+        "columns": ["Exposition faible", "Exposition forte"],
+        "rows": [
+          {"label":"Low (0,1–3,9)","cells":[
+            {"text":"Surveiller ; traiter plus tard","detail":"Gravité faible, souvent impact limité. On suit la faille sans mobiliser d'urgence."},
+            {"text":"Documenter et corriger","detail":"Même un score faible devient préoccupant sur Internet ou en cas de cumul de failles."}
+          ]},
+          {"label":"Medium (4,0–6,9)","cells":[
+            {"text":"Planifier la remédiation","detail":"Gravité modérée : intégrer le correctif à la prochaine fenêtre de changement."},
+            {"text":"Corriger rapidement","detail":"Une exposition publique augmente la probabilité d'exploitation automatisée."}
+          ]},
+          {"label":"High (7,0–8,9)","cells":[
+            {"text":"Traitement à SLA court","detail":"Impact sérieux : prévoir un correctif prioritaire et une surveillance renforcée."},
+            {"text":"Priorité haute","detail":"Exposition Internet + exploit connu = fenêtre d'exploitation très courte."}
+          ]},
+          {"label":"Critical (9,0–10,0)","cells":[
+            {"text":"Action urgente","detail":"Préparer patch, isolation ou contrôle compensatoire ; prévenir les parties prenantes."},
+            {"text":"Action immédiate","detail":"Correctif d'urgence ou retrait du service : le risque est critique et exploitable."}
+          ]}
+        ]
+      }
+    },
+    {
+      "id": "d-2.2-L01-actors",
+      "kind": "flow",
+      "title": "Acteurs malveillants et motivations",
+      "subtitle": "Reliez chaque acteur à sa motivation, puis aux attributs utiles à l'analyse.",
+      "modes": ["explore", "quiz"],
+      "nodes": [
+        {"id":"apt","label":"APT / État","sub":"espionnage","x":30,"y":50,"w":160,"h":60,"kind":"actor","detail":"Groupe soutenu par un État, patient et très ciblé, souvent actif pendant des années.","exam":"APT = Advanced Persistent Threat : cible précise et longue durée."},
+        {"id":"cybercrime","label":"Cybercriminel","sub":"gain financier","x":30,"y":160,"w":160,"h":60,"kind":"actor","detail":"Acteur motivé par le profit : fraude, ransomware, vol et revente de données.","exam":"Le cybercriminel cherche un retour sur investissement."},
+        {"id":"hacktivist","label":"Hacktiviste","sub":"idéologie","x":30,"y":270,"w":160,"h":60,"kind":"actor","detail":"Acteur animé par une cause politique ou sociale : defacement, fuite, DDoS.","exam":"Hacktivisme ≠ espionnage : la visibilité prime."},
+        {"id":"insider","label":"Initié","sub":"accès légitime","x":30,"y":380,"w":160,"h":60,"kind":"actor","detail":"Personne autorisée qui abuse de son accès, par revanche, argent ou contrainte.","exam":"L'initié est souvent détecté par UEBA, pas par le firewall."},
+        {"id":"espion","label":"Vol de données","sub":"confidentialité","x":330,"y":50,"w":170,"h":60,"kind":"risk","detail":"Objectif : soutirer des secrets, de la propriété intellectuelle ou des informations stratégiques.","exam":"L'espionnage vise d'abord la confidentialité."},
+        {"id":"ransom","label":"Extorsion","sub":"ransomware","x":330,"y":160,"w":170,"h":60,"kind":"risk","detail":"Chiffrement ou exfiltration contre rançon, avec double extorsion.","exam":"Double extorsion = chiffrement + menace de publication."},
+        {"id":"deface","label":"Nuisance","sub":"DDoS · defacement","x":330,"y":270,"w":170,"h":60,"kind":"risk","detail":"Objectif : perturber le service et diffuser un message politique.","exam":"Un DDoS vise la disponibilité."},
+        {"id":"attrs","label":"Attributs","sub":"TTP · infra · cibles","x":330,"y":380,"w":170,"h":60,"kind":"neutral","detail":"Indices d'attribution : TTP, infrastructure, langues, fuseaux horaires et cibles.","exam":"Les attributs aident à corréler, jamais à prouver à eux seuls."}
+      ],
+      "edges": [
+        {"from":"apt","to":"espion","label":"cherche"},
+        {"from":"cybercrime","to":"ransom","label":"cherche"},
+        {"from":"hacktivist","to":"deface","label":"cherche"},
+        {"from":"insider","to":"espion","label":"peut"},
+        {"from":"insider","to":"ransom","label":"peut"},
+        {"from":"espion","to":"attrs","label":"renseigne"},
+        {"from":"ransom","to":"attrs","label":"renseigne"},
+        {"from":"deface","to":"attrs","label":"renseigne"}
+      ],
+      "quiz": {"question":"Quel acteur agit avant tout pour une cause idéologique ou politique ?","answer":"hacktivist"}
+    },
+    {
+      "id": "d-2.2-L02-attribution",
+      "kind": "flow",
+      "title": "Attribution : de l'association à la certitude",
+      "subtitle": "Une corrélation d'indicateurs n'est pas une preuve : la certitude exige plusieurs sources indépendantes.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {"id":"traces","label":"Traces techniques","sub":"IP · hash · IOC","x":300,"y":40,"w":170,"h":60,"kind":"artifact","detail":"Premiers indicateurs collectés : adresses IP, hash de fichiers, domaines et journaux.","exam":"Un IOC isolé ne prouve rien."},
+        {"id":"match","label":"Association","sub":"corrélation faible","x":300,"y":120,"w":170,"h":60,"kind":"step","detail":"Relier des indicateurs similaires à une campagne ou un groupe déjà connu.","exam":"Association ≠ attribution."},
+        {"id":"infra","label":"Infrastructure","sub":"C2 · certificats · DNS","x":90,"y":205,"w":170,"h":60,"kind":"artifact","detail":"Réutilisation d'infrastructure : serveurs de commande, certificats, hébergements.","exam":"Une infrastructure peut être partagée ou louée."},
+        {"id":"ttp","label":"TTP","sub":"MITRE ATT&CK","x":480,"y":205,"w":170,"h":60,"kind":"neutral","detail":"Les tactiques, techniques et procédés sont plus durables que les indicateurs simples.","exam":"Comparez le modus operandi, pas seulement les hash."},
+        {"id":"confidence","label":"Niveau de confiance","sub":"faible → élevé","x":300,"y":295,"w":170,"h":60,"kind":"risk","detail":"Exprimer un degré de confiance selon la qualité et l'indépendance des sources.","exam":"Un rapport doit expliciter le doute."},
+        {"id":"attrib","label":"Attribution certaine","sub":"preuves convergentes","x":300,"y":390,"w":170,"h":60,"kind":"artifact","detail":"Attribution retenue quand plusieurs sources indépendantes concordent.","exam":"L'attribution publique est politique autant que technique."},
+        {"id":"caveat","label":"Faux drapeau","sub":"leurre / usurpation","x":30,"y":390,"w":170,"h":60,"kind":"risk","detail":"Un adversaire peut laisser de faux indicateurs pour orienter l'enquête vers un autre acteur.","exam":"Ne concluez jamais sur un seul indicateur."},
+        {"id":"public","label":"Communication","sub":"rapport · partage","x":570,"y":390,"w":170,"h":60,"kind":"step","detail":"Restituer le résultat sous forme de rapport et le partager avec les pairs.","exam":"Le partage renforce la défense collective."}
+      ],
+      "edges": [
+        {"from":"traces","to":"match","label":"corréle"},
+        {"from":"match","to":"infra","label":"examine"},
+        {"from":"match","to":"ttp","label":"compare"},
+        {"from":"infra","to":"confidence","label":"alimente"},
+        {"from":"ttp","to":"confidence","label":"alimente"},
+        {"from":"caveat","to":"confidence","label":"doute"},
+        {"from":"confidence","to":"attrib","label":"conclut"},
+        {"from":"attrib","to":"public","label":"restitue"}
+      ],
+      "sequence": ["traces","match","infra","ttp","confidence","attrib"],
+      "quiz": {"question":"Quelle notion classe la fiabilité d'une attribution avant de la publier ?","answer":"confidence"}
+    },
+    {
+      "id": "d-2.3-L01-vector-families",
+      "kind": "flow",
+      "title": "Familles de vecteurs d'attaque",
+      "subtitle": "Les vecteurs sont des points d'entrée : cliquez une famille pour voir son mode opératoire.",
+      "modes": ["explore", "quiz"],
+      "nodes": [
+        {"id":"message","label":"Message","sub":"phishing · spear","x":30,"y":40,"w":160,"h":60,"kind":"risk","detail":"Phishing, spear-phishing, SMiShing ou vishing : le message porte l'appât.","exam":"Spear-phishing = ciblé ; whaling = dirigeants."},
+        {"id":"image","label":"Image / fichier","sub":"stéganographie · EXIF","x":30,"y":145,"w":160,"h":60,"kind":"artifact","detail":"Images, documents et pièces jointes peuvent dissimuler du code ou des métadonnées.","exam":"Une image peut contenir un payload (polyglot)."},
+        {"id":"reseau","label":"Réseau","sub":"MitM · DNS · SMB","x":30,"y":250,"w":160,"h":60,"kind":"risk","detail":"Interception, empoisonnement DNS, protocoles faibles et services exposés.","exam":"Le vecteur réseau exploite la confiance entre machines."},
+        {"id":"endpoint","label":"Endpoint","sub":"USB · navigateur · macros","x":30,"y":355,"w":160,"h":60,"kind":"risk","detail":"Clé USB, navigateur vulnérable, macros Office et applications locales.","exam":"Les macros restent un vecteur classique à l'examen."},
+        {"id":"hub","label":"Point d'entrée","sub":"vecteur + vulnérabilité","x":300,"y":240,"w":170,"h":60,"kind":"neutral","detail":"Un vecteur devient une voie d'intrusion seulement s'il rencontre une faiblesse exploitable.","exam":"Vecteur seul ≠ incident : il faut une vulnérabilité."},
+        {"id":"supply","label":"Supply chain","sub":"dépendance · update","x":540,"y":145,"w":165,"h":60,"kind":"risk","detail":"Dépendances compromises, mises à jour signées et tiers de confiance.","exam":"SolarWinds illustre l'attaque par mise à jour signée."},
+        {"id":"cloud","label":"Cloud / identité","sub":"OAuth · token · API","x":540,"y":250,"w":165,"h":60,"kind":"risk","detail":"OAuth mal configuré, tokens volés, API exposées et buckets publics.","exam":"Une mauvaise configuration cloud est un vecteur, pas une faille de code."},
+        {"id":"signal","label":"Signaux humains","sub":"prétexte · réseaux sociaux","x":540,"y":355,"w":165,"h":60,"kind":"actor","detail":"Ingénierie sociale : prétexte, appels, messages et information publique.","exam":"Le vecteur humain contourne les contrôles techniques."}
+      ],
+      "edges": [
+        {"from":"message","to":"hub","label":"livre"},
+        {"from":"image","to":"hub","label":"cache"},
+        {"from":"reseau","to":"hub","label":"exploite"},
+        {"from":"endpoint","to":"hub","label":"exécute"},
+        {"from":"supply","to":"hub","label":"distribue"},
+        {"from":"cloud","to":"hub","label":"expose"},
+        {"from":"signal","to":"hub","label":"persuade"}
+      ],
+      "quiz": {"question":"Quelle famille regroupe les attaques via une mise à jour logicielle compromise ?","answer":"supply"}
+    },
+    {
+      "id": "d-2.3-L02-supply-chain",
+      "kind": "flow",
+      "title": "Attaque supply chain : du fournisseur au client",
+      "subtitle": "Le code malveillant est introduit en amont puis distribué par un canal que le client considère comme fiable.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {"id":"vendor","label":"Fournisseur","sub":"éditeur · tiers","x":30,"y":55,"w":160,"h":60,"kind":"actor","detail":"L'éditeur ou le fournisseur est la source de confiance attaquée en amont.","exam":"Un tiers de confiance élargit la surface d'attaque."},
+        {"id":"build","label":"Chaîne de build","sub":"CI/CD · dépôt","x":220,"y":55,"w":160,"h":60,"kind":"risk","detail":"Le pipeline d'intégration ou le dépôt est compromis : du code malveillant y est injecté.","exam":"Protégez par signature des commits, MFA et revue de code."},
+        {"id":"update","label":"Mise à jour","sub":"package signé","x":410,"y":55,"w":160,"h":60,"kind":"artifact","detail":"Le paquet est signé et diffusé via le canal officiel de distribution.","exam":"Une signature valide ne garantit pas un code sain."},
+        {"id":"client","label":"Client","sub":"télécharge · installe","x":600,"y":55,"w":160,"h":60,"kind":"actor","detail":"Le client installe la mise à jour sans soupçon, car le canal est attendu.","exam":"La confiance dans le canal est l'exploit."},
+        {"id":"trust","label":"Confiance implicite","sub":"signature · auto-update","x":600,"y":215,"w":160,"h":60,"kind":"neutral","detail":"Le mécanisme de confiance lève les soupçons et accélère le déploiement.","exam":"Contrôlez l'origine et l'intégrité, pas seulement la signature."},
+        {"id":"compromise","label":"Compromission","sub":"code exécuté","x":410,"y":215,"w":160,"h":60,"kind":"risk","detail":"Le code malveillant s'exécute avec les privilèges de l'application mise à jour.","exam":"Une seule update compromise tous les clients en même temps."},
+        {"id":"spread","label":"Propagation","sub":"mouvement latéral","x":220,"y":215,"w":160,"h":60,"kind":"risk","detail":"Persistance et déplacement latéral étendent l'impact au-delà du poste initial.","exam":"Surveillez les connexions sortantes inhabituelles."},
+        {"id":"detect","label":"Détection","sub":"SBOM · EDR · diff","x":30,"y":215,"w":160,"h":60,"kind":"step","detail":"SBOM, analyse de différences de version, EDR et threat hunting révèlent l'anomalie.","exam":"SBOM = inventaire des composants logiciels."}
+      ],
+      "edges": [
+        {"from":"vendor","to":"build","label":"alimente"},
+        {"from":"build","to":"update","label":"publie"},
+        {"from":"update","to":"client","label":"distribue"},
+        {"from":"client","to":"trust","label":"fait confiance"},
+        {"from":"trust","to":"compromise","label":"masque"},
+        {"from":"compromise","to":"spread","label":"étend"},
+        {"from":"spread","to":"detect","label":"découvert"},
+        {"from":"detect","to":"vendor","label":"retour"}
+      ],
+      "sequence": ["vendor","build","update","client","trust","compromise","spread","detect"],
+      "quiz": {"question":"Quelle étape explique que le client accepte sans vérifier une mise à jour malveillante ?","answer":"trust"}
+    },
+    {
+      "id": "d-2.4-L01-attack-surface",
+      "kind": "flow",
+      "title": "Surface d'attaque d'un système",
+      "subtitle": "Tout point d'entrée compte : réseau, code, identités, configuration et données.",
+      "modes": ["explore", "quiz"],
+      "nodes": [
+        {"id":"sys","label":"Système cible","sub":"exposition","x":310,"y":225,"w":170,"h":60,"kind":"neutral","detail":"La surface d'attaque regroupe tous les points par lesquels un adversaire peut interagir.","exam":"Réduire la surface = désactiver l'inutile."},
+        {"id":"ports","label":"Ports ouverts","sub":"TCP / UDP","x":30,"y":40,"w":160,"h":60,"kind":"risk","detail":"Chaque port ouvert est une porte d'entrée potentielle découverte par scan.","exam":"Un scan réseau commence par les ports."},
+        {"id":"services","label":"Services","sub":"versions · bannières","x":590,"y":40,"w":160,"h":60,"kind":"risk","detail":"Services exposés, versions obsolètes et bannières qui révèlent la technologie.","exam":"Un service non patché est une vulnérabilité connue."},
+        {"id":"code","label":"Code applicatif","sub":"API · formulaires","x":30,"y":225,"w":160,"h":60,"kind":"risk","detail":"Applications, API et formulaires : entrées utilisateur et logique métier.","exam":"Toute entrée est hostile (OWASP)."},
+        {"id":"ids","label":"Identifiants","sub":"comptes · tokens · clés","x":590,"y":225,"w":160,"h":60,"kind":"risk","detail":"Comptes, jetons et clés : identifiants faibles, volés ou trop privilégiés.","exam":"Un compte avec droits excessifs augmente l'impact."},
+        {"id":"config","label":"Configuration","sub":"défauts · erreurs","x":30,"y":400,"w":160,"h":60,"kind":"risk","detail":"Paramètres par défaut, mode debug actif et listes de contrôle trop larges.","exam":"Misconfiguration = cause majeure des incidents cloud."},
+        {"id":"data","label":"Données / partages","sub":"buckets · exports","x":590,"y":400,"w":160,"h":60,"kind":"risk","detail":"Partages réseau, buckets et exports accessibles sans contrôle adéquat.","exam":"Vérifiez les permissions, pas seulement l'existence."},
+        {"id":"reduce","label":"Réduction","sub":"durcissement","x":310,"y":400,"w":170,"h":60,"kind":"step","detail":"Fermer les ports, désactiver les services inutiles et appliquer le moindre privilège.","exam":"Le durcissement est un contrôle préventif."}
+      ],
+      "edges": [
+        {"from":"ports","to":"sys","label":"expose"},
+        {"from":"services","to":"sys","label":"expose"},
+        {"from":"code","to":"sys","label":"interagit"},
+        {"from":"ids","to":"sys","label":"ouvre"},
+        {"from":"config","to":"sys","label":"affaiblit"},
+        {"from":"data","to":"sys","label":"fuit"},
+        {"from":"sys","to":"reduce","label":"cible"}
+      ],
+      "quiz": {"question":"Quel élément regroupe comptes, jetons et clés dans la surface d'attaque ?","answer":"ids"}
+    },
+    {
+      "id": "d-2.4-L02-vuln-tree",
+      "kind": "flow",
+      "title": "Arbre des vulnérabilités par couche",
+      "subtitle": "Racine unique, cinq branches techniques, un impact commun : classer la faiblesse avant de la noter.",
+      "modes": ["explore", "quiz"],
+      "nodes": [
+        {"id":"root","label":"Vulnérabilités","sub":"faiblesses exploitables","x":305,"y":35,"w":170,"h":60,"kind":"neutral","detail":"Les vulnérabilités se classent par couche technique pour orienter la remédiation.","exam":"CWE classe, CVE identifie, CVSS note."},
+        {"id":"os","label":"Système / OS","sub":"noyau · privilèges · patch","x":30,"y":140,"w":160,"h":60,"kind":"risk","detail":"Noyau, services système, privilèges excessifs et correctifs manquants.","exam":"Un patch OS corrige la cause, pas le symptôme."},
+        {"id":"network","label":"Réseau","sub":"ports · MitM · DNS","x":220,"y":140,"w":160,"h":60,"kind":"risk","detail":"Ports exposés, protocoles non chiffrés, interception et DNS faible.","exam":"Le sniffing exploite l'absence de chiffrement."},
+        {"id":"app","label":"Application","sub":"injection · XSS · CSRF","x":410,"y":140,"w":160,"h":60,"kind":"risk","detail":"Injection SQL, XSS, CSRF et téléversements de fichiers non contrôlés.","exam":"L'OWASP Top 10 est incontournable à l'examen."},
+        {"id":"code","label":"Code","sub":"CWE · mémoire · secrets","x":600,"y":140,"w":160,"h":60,"kind":"risk","detail":"Débordement mémoire, désérialisation et secrets codés en dur.","exam":"Les secrets en dur sont une faiblesse CWE-798."},
+        {"id":"cloud","label":"Cloud / config","sub":"IAM · bucket · SSRF","x":310,"y":280,"w":170,"h":60,"kind":"risk","detail":"IAM trop large, bucket public, SSRF via metadata et secrets exposés.","exam":"Le modèle de responsabilité partagée ne supprime pas vos obligations."},
+        {"id":"impact","label":"Impact","sub":"CVE · CVSS · exploit","x":310,"y":420,"w":170,"h":60,"kind":"risk","detail":"Une faiblesse devient un risque concret lorsqu'une menace peut l'exploiter.","exam":"Exposition + exploit public = priorité haute."}
+      ],
+      "edges": [
+        {"from":"root","to":"os","label":"branche"},
+        {"from":"root","to":"network","label":"branche"},
+        {"from":"root","to":"app","label":"branche"},
+        {"from":"root","to":"code","label":"branche"},
+        {"from":"root","to":"cloud","label":"branche"},
+        {"from":"os","to":"impact","label":"impacte"},
+        {"from":"network","to":"impact","label":"impacte"},
+        {"from":"app","to":"impact","label":"impacte"},
+        {"from":"code","to":"impact","label":"impacte"},
+        {"from":"cloud","to":"impact","label":"impacte"}
+      ],
+      "quiz": {"question":"Quelle branche couvre un bucket de stockage public malveillant ?","answer":"cloud"}
+    },
+    {
+      "id": "d-2.5-L01-malware-taxonomy",
+      "kind": "flow",
+      "title": "Taxonomie des malwares",
+      "subtitle": "Virus, ver, cheval de Troie, ransomware, rootkit et fileless : distinguez le mode de propagation et de dissimulation.",
+      "modes": ["explore", "quiz"],
+      "nodes": [
+        {"id":"malware","label":"Malware","sub":"code malveillant","x":305,"y":30,"w":170,"h":58,"kind":"neutral","detail":"Catégorie générique : tout logiciel conçu pour nuire, se propager ou obtenir un accès.","exam":"Malware est le terme générique ; les autres sont des sous-types."},
+        {"id":"virus","label":"Virus","sub":"infecte un hôte","x":30,"y":105,"w":160,"h":58,"kind":"risk","detail":"S'attache à un fichier ou un secteur et s'active quand l'hôte est exécuté.","exam":"Le virus a besoin d'un hôte, contrairement au ver."},
+        {"id":"worm","label":"Ver / Worm","sub":"auto-propagation","x":590,"y":105,"w":160,"h":58,"kind":"risk","detail":"Se propage seul sur le réseau sans interaction ni fichier hôte.","exam":"Ver = auto-propagation, comme WannaCry."},
+        {"id":"trojan","label":"Cheval de Troie","sub":"se déguise","x":30,"y":200,"w":160,"h":58,"kind":"risk","detail":"Se présente comme un logiciel légitime mais dissimule une charge utile.","exam":"Le trojan n'infecte pas : il trompe l'utilisateur."},
+        {"id":"ransom","label":"Ransomware","sub":"chiffrement + rançon","x":590,"y":200,"w":160,"h":58,"kind":"risk","detail":"Chiffre les fichiers ou exfiltre les données contre paiement d'une rançon.","exam":"Sauvegardes hors ligne et MFA sont les meilleures défenses."},
+        {"id":"rootkit","label":"Rootkit","sub":"masque sa présence","x":30,"y":295,"w":160,"h":58,"kind":"risk","detail":"Cache processus, fichiers et connexions, souvent au niveau du noyau.","exam":"Détection : analyse mémoire et intégrité du noyau."},
+        {"id":"fileless","label":"Fileless","sub":"mémoire · PowerShell","x":590,"y":295,"w":160,"h":58,"kind":"risk","detail":"Vit en mémoire et abuse d'outils légitimes comme PowerShell ou WMI.","exam":"Peu d'IOC disque : surveillez le comportement."},
+        {"id":"ioc","label":"Analyse","sub":"hash · TTP · mémoire","x":305,"y":410,"w":170,"h":60,"kind":"step","detail":"Recherche de hash, IOC réseau, comportements et empreintes mémoire.","exam":"Les TTP sont plus durables que les simples hash."}
+      ],
+      "edges": [
+        {"from":"malware","to":"virus","label":"type"},
+        {"from":"malware","to":"worm","label":"type"},
+        {"from":"malware","to":"trojan","label":"type"},
+        {"from":"malware","to":"ransom","label":"type"},
+        {"from":"malware","to":"rootkit","label":"type"},
+        {"from":"malware","to":"fileless","label":"type"},
+        {"from":"virus","to":"ioc","label":"analysé"},
+        {"from":"worm","to":"ioc","label":"analysé"},
+        {"from":"trojan","to":"ioc","label":"analysé"},
+        {"from":"ransom","to":"ioc","label":"analysé"},
+        {"from":"rootkit","to":"ioc","label":"analysé"},
+        {"from":"fileless","to":"ioc","label":"analysé"}
+      ],
+      "quiz": {"question":"Quel malware se propage seul sans infecter de fichier hôte ?","answer":"worm"}
+    },
+    {
+      "id": "d-2.5-L02-social-engineering",
+      "kind": "flow",
+      "title": "Ingénierie sociale : du courriel à la compromission",
+      "subtitle": "Le vecteur humain contourne les contrôles techniques : du lien piégé au vol de session.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {"id":"email","label":"Courriel","sub":"urgence · usurpation","x":30,"y":55,"w":160,"h":60,"kind":"risk","detail":"Message usurpé créant un sentiment d'urgence avec un lien ou une pièce jointe.","exam":"Vérifiez l'expéditeur et le domaine, pas le texte."},
+        {"id":"link","label":"Lien piégé","sub":"site clone · typo","x":230,"y":55,"w":160,"h":60,"kind":"risk","detail":"Lien vers un site contrefait ou un domaine proche (typosquatting).","exam":"Survolez le lien avant de cliquer."},
+        {"id":"creds","label":"Saisie identifiants","sub":"formulaire volé","x":430,"y":55,"w":160,"h":60,"kind":"step","detail":"La victime saisit son mot de passe dans un formulaire contrefait.","exam":"Ces formulaires capturent aussi les codes MFA."},
+        {"id":"mfa","label":"Contournement MFA","sub":"AiTM · fatigue push","x":600,"y":215,"w":160,"h":60,"kind":"risk","detail":"Attaque par intermédiaire ou saturation de notifications pour valider une connexion.","exam":"FIDO2/WebAuthn résiste au phishing, contrairement au SMS."},
+        {"id":"session","label":"Vol de session","sub":"cookie · token","x":400,"y":215,"w":160,"h":60,"kind":"risk","detail":"Le cookie de session est volé puis rejoué pour accéder au compte.","exam":"Un token volé rend le mot de passe inutile."},
+        {"id":"compromise","label":"Compromission","sub":"fraude · latéral","x":200,"y":215,"w":160,"h":60,"kind":"risk","detail":"Accès à la boîte mail, fraude financière et mouvement latéral.","exam":"Révoquez les sessions et faites tourner les tokens."},
+        {"id":"report","label":"Signalement","sub":" SOC · réponse","x":30,"y":375,"w":160,"h":60,"kind":"step","detail":"Signaler rapidement au SOC pour limiter le temps de séjour de l'attaquant.","exam":"Le signalement réduit drastiquement l'impact."},
+        {"id":"controls","label":"Contrôles","sub":"DMARC · FIDO2 · formation","x":400,"y":375,"w":160,"h":60,"kind":"step","detail":"SPF, DKIM, DMARC, filtres, formation et authentification résistante au phishing.","exam":"La formation est un contrôle administratif."}
+      ],
+      "edges": [
+        {"from":"email","to":"link","label":"contient"},
+        {"from":"link","to":"creds","label":"amène"},
+        {"from":"creds","to":"mfa","label":"contourne"},
+        {"from":"mfa","to":"session","label":"donne"},
+        {"from":"session","to":"compromise","label":"permet"},
+        {"from":"compromise","to":"report","label":"déclenche"},
+        {"from":"report","to":"controls","label":"améliore"},
+        {"from":"controls","to":"email","label":"prévient"}
+      ],
+      "sequence": ["email","link","creds","mfa","session","compromise","report"],
+      "quiz": {"question":"Quel mécanisme permet de voler une session même quand la MFA est activée ?","answer":"session"}
+    },
+    {
+      "id": "d-2.5-L03-ioc-correlation",
+      "kind": "flow",
+      "title": "Corrélation des IOC : des indices au verdict",
+      "subtitle": "IP, hash, domaine et horodatage sont enrichis, corrélés puis traduits en verdict et en action.",
+      "modes": ["explore", "quiz"],
+      "nodes": [
+        {"id":"ip","label":"Adresse IP","sub":"C2 · scanning","x":30,"y":50,"w":160,"h":60,"kind":"artifact","detail":"Adresse d'un serveur de commande ou d'un scanner.","exam":"Une IP publique peut être partagée : corroborez toujours."},
+        {"id":"hash","label":"Hash SHA-256","sub":"fichier malveillant","x":30,"y":150,"w":160,"h":60,"kind":"artifact","detail":"Empreinte d'un fichier malveillant permettant une détection précise.","exam":"Un hash change dès qu'un seul octet change."},
+        {"id":"domain","label":"Domaine","sub":"DGA · exfiltration","x":30,"y":250,"w":160,"h":60,"kind":"artifact","detail":"Domaine généré algorithmiquement, de phishing ou utilisé pour l'exfiltration.","exam":"Corrélez DNS, WHOIS et historique des requêtes."},
+        {"id":"time","label":"Horodatage","sub":"UTC · chronologie","x":30,"y":350,"w":160,"h":60,"kind":"artifact","detail":"Dates UTC des événements permettant de reconstituer la chaîne causale.","exam":"Synchronisez les horloges (NTP) avant de corréler."},
+        {"id":"enrich","label":"Enrichissement","sub":"TI · réputation","x":290,"y":200,"w":170,"h":60,"kind":"step","detail":"Ajouter contexte, réputation, provenance et niveau de confiance aux indicateurs.","exam":"Une threat intelligence obsolète génère des faux positifs."},
+        {"id":"siem","label":"Corrélation SIEM","sub":"règles · score","x":530,"y":200,"w":165,"h":60,"kind":"step","detail":"Appliquer des règles de corrélation et produire un score d'alerte.","exam":"Une règle trop large génère du bruit et fatigue l'analyste."},
+        {"id":"verdict","label":"Verdict","sub":"incident · faux positif","x":530,"y":380,"w":165,"h":60,"kind":"risk","detail":"Qualifier : incident confirmé, suspect ou faux positif, avec justification.","exam":"Un verdict doit être documenté et réversible."},
+        {"id":"action","label":"Action","sub":"isolement · blocklist","x":290,"y":380,"w":170,"h":60,"kind":"step","detail":"Réponse proportionnée : isolement, blocage, rotation des identifiants.","exam":"Adaptez la réponse au niveau de confiance."}
+      ],
+      "edges": [
+        {"from":"ip","to":"enrich","label":"indicateur"},
+        {"from":"hash","to":"enrich","label":"indicateur"},
+        {"from":"domain","to":"enrich","label":"indicateur"},
+        {"from":"time","to":"enrich","label":"contexte"},
+        {"from":"enrich","to":"siem","label":"normalisé"},
+        {"from":"siem","to":"verdict","label":"qualifie"},
+        {"from":"verdict","to":"action","label":"déclenche"}
+      ],
+      "quiz": {"question":"Quel système applique des règles pour transformer des IOC en alerte scorée ?","answer":"siem"}
+    },
+    {
+      "id": "d-2.6-L01-ai-upstream",
+      "kind": "flow",
+      "title": "Menaces IA amont : attaquer avant l'usage",
+      "subtitle": "Avant le déploiement, le modèle peut être empoisonné, piégé par une backdoor ou contaminé via ses dépendances.",
+      "modes": ["explore", "quiz"],
+      "nodes": [
+        {"id":"poison","label":"Data poisoning","sub":"données d'entraînement","x":30,"y":50,"w":165,"h":60,"kind":"risk","detail":"Altérer les données d'entraînement pour biaiser durablement le comportement du modèle.","exam":"Amont = avant ou pendant l'entraînement."},
+        {"id":"backdoor","label":"Backdoor","sub":"déclencheur caché","x":220,"y":50,"w":165,"h":60,"kind":"risk","detail":"Injecter un déclencheur improbable qui active un comportement précis.","exam":"Difficile à détecter avec des tests standards."},
+        {"id":"supply","label":"Modèles tiers","sub":"poids · bibliothèques","x":410,"y":50,"w":165,"h":60,"kind":"risk","detail":"Modèles pré-entraînés ou bibliothèques compromises téléchargés depuis un dépôt.","exam":"Vérifiez provenance et empreinte des modèles."},
+        {"id":"label","label":"Étiquetage","sub":"labels manipulés","x":600,"y":50,"w":160,"h":60,"kind":"risk","detail":"Falsifier les étiquettes pour corrompre l'apprentissage supervisé.","exam":"La qualité des labels est une question de sécurité."},
+        {"id":"train","label":"Entraînement","sub":"pipeline ML","x":310,"y":190,"w":170,"h":60,"kind":"step","detail":"Le pipeline agrège données, code, hyperparamètres et bibliothèques.","exam":"Sécurisez chaque étape du pipeline ML."},
+        {"id":"model","label":"Modèle compromis","sub":"sorties biaisées","x":310,"y":300,"w":170,"h":60,"kind":"risk","detail":"Le modèle entraîné produit des réponses biaisées ou malveillantes une fois déployé.","exam":"Un modèle empoisonné reste dangereux après déploiement."},
+        {"id":"validate","label":"Validation","sub":"tests · empreinte","x":30,"y":300,"w":170,"h":60,"kind":"step","detail":"Jeux de test indépendants, empreinte du modèle et revue du pipeline.","exam":"Un jeu de test unique ne suffit pas."},
+        {"id":"monitor","label":"Surveillance","sub":"drift · anomalies","x":600,"y":300,"w":160,"h":60,"kind":"step","detail":"Surveillance continue de la dérive et des comportements inattendus.","exam":"La dérive peut être naturelle ou hostile."}
+      ],
+      "edges": [
+        {"from":"poison","to":"train","label":"contamine"},
+        {"from":"backdoor","to":"train","label":"injecte"},
+        {"from":"supply","to":"train","label":"fournit"},
+        {"from":"label","to":"train","label":"falsifie"},
+        {"from":"validate","to":"train","label":"contrôle"},
+        {"from":"train","to":"model","label":"produit"},
+        {"from":"model","to":"monitor","label":"surveille"}
+      ],
+      "quiz": {"question":"Quelle menace modifie les données d'apprentissage pour biaiser le modèle ?","answer":"poison"}
+    },
+    {
+      "id": "d-2.6-L02-ai-downstream",
+      "kind": "flow",
+      "title": "Menaces IA aval : de l'invite à la fuite",
+      "subtitle": "Après déploiement, prompt injection, jailbreak et abus d'outils menacent la confidentialité et la fiabilité.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {"id":"prompt","label":"Prompt injection","sub":"instructions cachées","x":30,"y":55,"w":160,"h":60,"kind":"risk","detail":"Instructions malveillantes dissimulées dans l'entrée ou un document ingéré.","exam":"Le LLM ne distingue pas toujours données et instructions."},
+        {"id":"jailbreak","label":"Jailbreak","sub":"contourne les garde-fous","x":220,"y":55,"w":160,"h":60,"kind":"risk","detail":"Formulation, rôles ou encodage destinés à contourner les restrictions.","exam":"Les garde-fous ne sont pas une garantie absolue."},
+        {"id":"context","label":"Contexte RAG","sub":"mémoire contaminée","x":410,"y":55,"w":165,"h":60,"kind":"risk","detail":"Empoisonnement des sources de recherche ou de la mémoire conversationnelle.","exam":"Une source contaminée infecte les réponses futures."},
+        {"id":"exfil","label":"Fuite de données","sub":"secrets · PII","x":600,"y":55,"w":160,"h":60,"kind":"risk","detail":"Divulgation de secrets, données personnelles ou informations confidentielles.","exam":"Le DLP s'applique aussi aux sorties LLM."},
+        {"id":"hallu","label":"Hallucination","sub":"faux plausible","x":30,"y":215,"w":160,"h":60,"kind":"risk","detail":"Réponse fausse mais convaincante, avec citations inventées.","exam":"Vérifiez toujours faits et sources."},
+        {"id":"tools","label":"Abus d'outils","sub":"plugins · actions","x":220,"y":215,"w":160,"h":60,"kind":"risk","detail":"Appels d'outils non prévus déclenchant des actions sensibles.","exam":"Appliquez le moindre privilège aux outils du LLM."},
+        {"id":"guard","label":"Garde-fous","sub":"filtre · sandbox · DLP","x":410,"y":215,"w":165,"h":60,"kind":"step","detail":"Filtres d'entrée/sortie, sandbox et contrôles DLP autour du modèle.","exam":"Défense en profondeur : filtre + sandbox + revue."},
+        {"id":"human","label":"Revue humaine","sub":"human in the loop","x":600,"y":215,"w":160,"h":60,"kind":"step","detail":"Validation humaine avant d'agir sur une sortie critique.","exam":"Humain dans la boucle pour toute action à impact."}
+      ],
+      "edges": [
+        {"from":"prompt","to":"jailbreak","label":"amorce"},
+        {"from":"jailbreak","to":"context","label":"exploite"},
+        {"from":"context","to":"exfil","label":"provoque"},
+        {"from":"jailbreak","to":"hallu","label":"sortie non fiable"},
+        {"from":"jailbreak","to":"tools","label":"débloque"},
+        {"from":"tools","to":"exfil","label":"exécute"},
+        {"from":"guard","to":"prompt","label":"filtre"},
+        {"from":"guard","to":"jailbreak","label":"bloque"},
+        {"from":"human","to":"exfil","label":"empêche"}
+      ],
+      "sequence": ["prompt","jailbreak","tools","exfil"],
+      "quiz": {"question":"Quelle menace utilise des instructions cachées pour détourner le comportement du LLM ?","answer":"prompt"}
+    }
+  ]
+}

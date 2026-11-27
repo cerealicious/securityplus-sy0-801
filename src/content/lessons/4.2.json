@@ -15,6 +15,10 @@
         "text": "Matériel, logiciel, données : trois catégories d'actifs"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-4.2-L01-asset-lifecycle"
+      },
+      {
         "type": "source",
         "book": "DSH",
         "chapter": "2",
@@ -139,6 +143,10 @@
         "printed": 15,
         "strength": "primary",
         "note": "Cycle de vie des actifs et destruction sécurisée"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-4.2-L02-inventory-sources"
       },
       {
         "type": "steps",

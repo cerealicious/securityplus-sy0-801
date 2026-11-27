@@ -15,6 +15,10 @@
         "text": "La charte d'audit et le périmètre"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-5.5-L01-processus-audit"
+      },
+      {
         "type": "term",
         "en": "Audit charter",
         "fr": "Charte d'audit",
@@ -183,6 +187,10 @@
         "text": "Trois degrés de connaissance"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-5.5-L02-frameworks"
+      },
+      {
         "type": "table",
         "head": [
           "Type",
@@ -348,6 +356,10 @@
       {
         "type": "h",
         "text": "Cyber Kill Chain : sept phases successives"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-5.5-L03-types-pentest"
       },
       {
         "type": "steps",

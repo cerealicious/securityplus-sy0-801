@@ -15,6 +15,10 @@
         "diagramId": "d-5.2-risk-flow"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-5.2-L01-registre-risques"
+      },
+      {
         "type": "h",
         "text": "De l'actif au registre"
       },
@@ -175,6 +179,10 @@
       {
         "type": "h",
         "text": "Les trois grandeurs"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-5.2-L02-quantitatif-qualitatif"
       },
       {
         "type": "table",

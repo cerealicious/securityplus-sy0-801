@@ -20,6 +20,10 @@
         "note": "Rôle de l'automatisation dans les opérations de sécurité"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-4.6-L01-soar-workflow"
+      },
+      {
         "type": "h",
         "text": "Cinq cas d'usage"
       },
@@ -168,6 +172,10 @@
         "page": 196,
         "strength": "supporting",
         "note": "Automatisation, SOAR et apports du machine learning défensif"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-4.6-L02-automation-chain"
       },
       {
         "type": "h",

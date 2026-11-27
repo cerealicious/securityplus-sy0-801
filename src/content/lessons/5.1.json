@@ -15,6 +15,10 @@
         "text": "Les lignes directrices : conseiller sans imposer"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-5.1-L01-grc-pyramide"
+      },
+      {
         "type": "term",
         "en": "Guidelines",
         "fr": "Lignes directrices",
@@ -188,6 +192,10 @@
       {
         "type": "h",
         "text": "Les dix politiques du référentiel"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-5.1-L02-politiques"
       },
       {
         "type": "list",

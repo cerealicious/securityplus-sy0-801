@@ -15,6 +15,10 @@
         "text": "Le changement comme cause d'incident"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-1.2-L01-change-window"
+      },
+      {
         "type": "p",
         "text": "Les notes SOC consacrent deux pages à la **change request** et au **CAB** : un changement peut être technique (correctif, configuration, application) ou organisationnel (processus, rôle), mais dans tous les cas il doit être **demandé, évalué, approuvé, planifié, testé et documenté**. C'est cette traçabilité que l'examen cherche à vérifier, pas la maîtrise d'un outil de ticketing."
       },
@@ -165,6 +169,10 @@
       {
         "type": "h",
         "text": "Listes d'autorisation, activités restreintes et redémarrages"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-1.2-L02-rollback"
       },
       {
         "type": "term",

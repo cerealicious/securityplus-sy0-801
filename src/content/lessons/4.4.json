@@ -15,6 +15,10 @@
         "text": "Trois niveaux de ressources"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-4.4-L01-log-flow"
+      },
+      {
         "type": "p",
         "text": "Les *11 Strategies* rappellent qu'un SOC doit d'abord savoir **ce qu'il protège et pourquoi**, puis collecter les bonnes données. On distingue la supervision des **systèmes** (CPU, mémoire, disque, services), des **applications** (erreurs, latence, transactions) et de l'**infrastructure** (routeurs, pare-feu, flux réseau)."
       },
@@ -156,6 +160,10 @@
         "printed": 243,
         "strength": "primary",
         "note": "Leverage Tools : SIEM et outils d'analyse"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-4.4-L02-alert-tuning"
       },
       {
         "type": "term",
@@ -328,6 +336,10 @@
       {
         "type": "h",
         "text": "De l'événement à l'alerte"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-4.4-L03-monitoring-protocols"
       },
       {
         "type": "steps",

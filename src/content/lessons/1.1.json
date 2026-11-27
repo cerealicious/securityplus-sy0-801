@@ -15,6 +15,10 @@
         "text": "La triade CIA"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-1.1-L01-cia"
+      },
+      {
         "type": "p",
         "text": "**Confidentiality** (confidentialité) : seules les personnes autorisées accèdent à l'information. Elle se garantit par le chiffrement, le contrôle d'accès, la classification et la segmentation."
       },
@@ -48,11 +52,31 @@
       },
       {
         "type": "table",
-        "head": ["Fonction", "Question posée", "Exemple de contrôle", "Échec typique"],
+        "head": [
+          "Fonction",
+          "Question posée",
+          "Exemple de contrôle",
+          "Échec typique"
+        ],
         "rows": [
-          ["Authentication", "Qui êtes-vous ?", "Mot de passe + MFA, certificat, biométrie", "Identifiants volés, MFA contournée"],
-          ["Authorization", "Avez-vous le droit ?", "RBAC, ACL, moindre privilège", "Élévation de privilèges, rôle trop large"],
-          ["Accounting", "Qu'avez-vous fait ?", "Journaux, SIEM, horodatage", "Journaux incomplets ou modifiables"]
+          [
+            "Authentication",
+            "Qui êtes-vous ?",
+            "Mot de passe + MFA, certificat, biométrie",
+            "Identifiants volés, MFA contournée"
+          ],
+          [
+            "Authorization",
+            "Avez-vous le droit ?",
+            "RBAC, ACL, moindre privilège",
+            "Élévation de privilèges, rôle trop large"
+          ],
+          [
+            "Accounting",
+            "Qu'avez-vous fait ?",
+            "Journaux, SIEM, horodatage",
+            "Journaux incomplets ou modifiables"
+          ]
         ]
       },
       {
@@ -136,6 +160,10 @@
       {
         "type": "h",
         "text": "Défense en profondeur"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-1.1-L02-aaa"
       },
       {
         "type": "p",
@@ -258,6 +286,10 @@
         "text": "La **catégorie** décrit la nature du contrôle : technique/logique, managérial/administratif, physique/environnemental, opérationnel. Le **type** décrit sa fonction dans le temps : préventif, dissuasif, correctif, détectif, compensatoire, directif."
       },
       {
+        "type": "diagram",
+        "diagramId": "d-1.1-L03-controles"
+      },
+      {
         "type": "term",
         "en": "Control categories",
         "fr": "Catégories de contrôles",
@@ -304,14 +336,49 @@
       },
       {
         "type": "table",
-        "head": ["Contrôle", "Catégorie", "Type", "Pourquoi"],
+        "head": [
+          "Contrôle",
+          "Catégorie",
+          "Type",
+          "Pourquoi"
+        ],
         "rows": [
-          ["MFA sur l'accès administrateur", "Technique", "Préventif", "Empêche l'usage d'un mot de passe seul"],
-          ["Politique de mot de passe", "Managérial", "Directif", "Fixe la règle, ne l'applique pas"],
-          ["Badge + sas d'accès", "Physique", "Préventif", "Empêche l'entrée non autorisée et le tailgating"],
-          ["Sauvegarde quotidienne testée", "Opérationnel", "Correctif", "Permet la restauration après incident"],
-          ["Honeypot", "Technique", "Détectif", "Révèle une activité anormale"],
-          ["Audit externe annuel", "Managérial", "Détectif", "Constate les écarts a posteriori"]
+          [
+            "MFA sur l'accès administrateur",
+            "Technique",
+            "Préventif",
+            "Empêche l'usage d'un mot de passe seul"
+          ],
+          [
+            "Politique de mot de passe",
+            "Managérial",
+            "Directif",
+            "Fixe la règle, ne l'applique pas"
+          ],
+          [
+            "Badge + sas d'accès",
+            "Physique",
+            "Préventif",
+            "Empêche l'entrée non autorisée et le tailgating"
+          ],
+          [
+            "Sauvegarde quotidienne testée",
+            "Opérationnel",
+            "Correctif",
+            "Permet la restauration après incident"
+          ],
+          [
+            "Honeypot",
+            "Technique",
+            "Détectif",
+            "Révèle une activité anormale"
+          ],
+          [
+            "Audit externe annuel",
+            "Managérial",
+            "Détectif",
+            "Constate les écarts a posteriori"
+          ]
         ]
       },
       {

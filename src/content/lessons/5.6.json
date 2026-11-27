@@ -15,6 +15,10 @@
         "text": "Quatre types de formation"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-5.6-L01-programme-sensibilisation"
+      },
+      {
         "type": "term",
         "en": "Initial / onboarding training",
         "fr": "Formation initiale / intégration",
@@ -198,6 +202,10 @@
       {
         "type": "h",
         "text": "Les trois livrables de mesure"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-5.6-L02-phishing-simule"
       },
       {
         "type": "term",

@@ -20,7 +20,7 @@ Application de bureau **100 % hors ligne** couvrant l'intégralité des **27 obj
 | Quiz corrigés avec explication et source | **27** (6 questions chacun) |
 | Exercices pratiques (PBQ : classement, ordre, association, tableau, calcul) | **28** |
 | Scénarios d'évaluation à 3 niveaux de décision | **27** |
-| Schémas interactifs SVG (Explorer / Quiz / Ordre) | **28** |
+| Schémas interactifs SVG (Explorer / Quiz / Ordre) | **92** — au moins un dans chacune des 64 leçons, deux dans 28 d'entre elles |
 | Simulations animées (TLS, crypto, attaque réseau, OSI, Zero Trust, RTO/RPO, IR, IAM) | **8** |
 
 Chaque notion est rattachée à une **référence réelle** (livre, chapitre, page) ou, lorsqu'aucun des quatre livres ne la contient, au **référentiel officiel** avec un badge explicite « Hors livres ». Aucune attribution mensongère.
@@ -55,7 +55,9 @@ src/content/pbqs/*.json            # 28 exercices pratiques
 src/content/scenarios/*.json       # 27 scénarios
 src/content/diagrams.json          # Schémas du prototype initial
 src/content/diagrams-extra/*.json  # Schémas des objectifs de production
+src/content/diagrams-extra/        # Schémas interactifs par objectif et par lot
 src/content/simulations.json       # 8 simulations animées
+tools/insert_diagrams.py           # Insertion et validation des schémas dans les leçons
 src/engines/                       # Moteurs de rendu leçons, schémas, simulations, lecteur par étapes
 src/routes/                        # Écrans (dashboard, objectif, leçon, quiz, lab, scénario…)
 src/lib/learning.ts                # Insights pédagogiques (recommandations, faiblesses, déblocage)

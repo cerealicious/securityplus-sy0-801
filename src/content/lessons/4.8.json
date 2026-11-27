@@ -20,6 +20,10 @@
         "note": "Sélectionner et collecter les bonnes données d'investigation"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-4.8-L01-volatility-pyramid"
+      },
+      {
         "type": "h",
         "text": "Les familles de journaux"
       },
@@ -158,6 +162,10 @@
         "printed": 348,
         "strength": "primary",
         "note": "Forensique numérique et collecte d'artefacts"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-4.8-L02-evidence-sources"
       },
       {
         "type": "diagram",
@@ -305,6 +313,10 @@
             "Base légale de la collecte, durée de conservation, obligation de notification, legal hold"
           ]
         ]
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-4.8-L03-chain-of-custody"
       },
       {
         "type": "source",

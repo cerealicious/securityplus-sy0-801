@@ -15,6 +15,10 @@
         "diagramId": "d-2.2-actors-flow"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-2.2-L01-actors"
+      },
+      {
         "type": "source",
         "book": "OBJ",
         "chapter": "2.2",
@@ -176,6 +180,10 @@
         "fr": "Acteur interne / externe",
         "field": "Un acteur interne possède un accès légitime à l'environnement ; un acteur externe doit d'abord franchir la frontière. L'insider est le cas le plus dangereux car il contourne les contrôles périmétriques.",
         "gap": true
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-2.2-L02-attribution"
       },
       {
         "type": "term",

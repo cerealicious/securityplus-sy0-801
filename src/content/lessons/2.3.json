@@ -15,6 +15,10 @@
         "diagramId": "d-2.3-vectors-map"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-2.3-L01-vector-families"
+      },
+      {
         "type": "simulation",
         "simId": "sim-osi-layers"
       },
@@ -189,6 +193,10 @@
       {
         "type": "h",
         "text": "Réseau et accès distant"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-2.3-L02-supply-chain"
       },
       {
         "type": "table",

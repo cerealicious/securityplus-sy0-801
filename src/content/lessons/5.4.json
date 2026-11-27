@@ -15,6 +15,10 @@
         "text": "Pourquoi la conformité structure la sécurité"
       },
       {
+        "type": "diagram",
+        "diagramId": "d-5.4-L01-formation-conformite"
+      },
+      {
         "type": "p",
         "text": "Le **Defensive Security Handbook** consacre un chapitre à la conformité : lois, réglementations sectorielles et frameworks définissent des exigences minimales que l'organisation doit démontrer, pas seulement respecter."
       },
@@ -179,6 +183,10 @@
       {
         "type": "h",
         "text": "Droits des personnes et choix de traitement"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-5.4-L02-droits-personne"
       },
       {
         "type": "term",
