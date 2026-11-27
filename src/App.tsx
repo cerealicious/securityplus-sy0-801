@@ -40,7 +40,7 @@ class Boundary extends Component<{ children: ReactNode }, { error: Error | null 
   }
 }
 
-function Sidebar({ segs }: { segs: string[] }) {
+function Sidebar({ segs, mobileOpen }: { segs: string[]; mobileOpen: boolean }) {
   const { progress } = useProgress()
   const currentObj = segs[0] === 'objective' ? segs[1] : null
   const currentDomain = currentObj ? objectiveById.get(currentObj)?.domain : null
@@ -56,7 +56,7 @@ function Sidebar({ segs }: { segs: string[] }) {
   const due = totalDue(progress)
 
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${mobileOpen ? 'open' : ''}`}>
       <div className="brand">
         <div className="brand-mark">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
@@ -286,7 +286,7 @@ function SearchOverlay({ onClose }: { onClose: () => void }) {
   )
 }
 
-function Topbar({ segs, onSearch }: { segs: string[]; onSearch: () => void }) {
+function Topbar({ segs, onSearch, onMenu }: { segs: string[]; onSearch: () => void; onMenu: () => void }) {
   const { progress } = useProgress()
   const stats = computeStats(progress)
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -299,6 +299,7 @@ function Topbar({ segs, onSearch }: { segs: string[]; onSearch: () => void }) {
   }, [theme])
   return (
     <header className="topbar">
+      <button className="mobile-menu-btn" onClick={onMenu} aria-label="Open menu">☰</button>
       <Breadcrumbs segs={segs} />
       <div className="topbar-right">
         <div className="xp-pill" title={`${formatXp(stats.xp)} total XP · ${levelTitle(stats.level)}`}>
@@ -372,6 +373,7 @@ function Router({ segs }: { segs: string[] }) {
 function Shell() {
   const segs = useRoute()
   const [search, setSearch] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [msg, setMsg] = useState<string | null>(null)
   const { setLastLocation, progress, importData } = useProgress()
   const progressRef = useRef(progress)
@@ -396,6 +398,7 @@ function Shell() {
   }, [])
 
   useEffect(() => {
+    setMobileMenuOpen(false)
     const loc = window.location.hash.replace(/^#\/?/, '')
     if (loc) setLastLocation(loc)
   }, [segs.join('/')])
@@ -422,9 +425,10 @@ function Shell() {
 
   return (
     <div className="app">
-      <Sidebar segs={segs} />
+      {mobileMenuOpen && <div className="sidebar-backdrop" onClick={() => setMobileMenuOpen(false)} />}
+      <Sidebar segs={segs} mobileOpen={mobileMenuOpen} />
       <div className="main">
-        <Topbar segs={segs} onSearch={() => setSearch(true)} />
+        <Topbar segs={segs} onSearch={() => setSearch(true)} onMenu={() => setMobileMenuOpen((v) => !v)} />
         <div className="content">
           <div className="fade-in" key={segs.join('/')}>
             <Router segs={segs} />
