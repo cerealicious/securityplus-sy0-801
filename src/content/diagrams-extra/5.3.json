@@ -1,0 +1,84 @@
+{
+  "diagrams": [
+    {
+      "id": "d-5.3-vendor-flow",
+      "kind": "flow",
+      "title": "From Need to Vendor Monitoring",
+      "subtitle": "Selection → agreement → monitoring: each step produces an auditable artifact.",
+      "modes": ["explore", "quiz", "order"],
+      "sequence": ["need", "select", "agreement", "monitor", "exit"],
+      "quiz": {
+        "question": "At which step does the right-to-audit clause apply?",
+        "answer": "monitor"
+      },
+      "nodes": [
+        {
+          "id": "need",
+          "label": "Scoped need",
+          "sub": "scope, risks",
+          "x": 20,
+          "y": 100,
+          "w": 150,
+          "h": 62,
+          "kind": "neutral",
+          "detail": "Define what is outsourced to the third party, the data involved, jurisdiction, and internal constraints before any solicitation.",
+          "exam": "An unclear need makes due diligence impossible: it is the starting point of the entire process."
+        },
+        {
+          "id": "select",
+          "label": "Selection",
+          "sub": "EOI · RFI · RFP · RFQ",
+          "x": 190,
+          "y": 100,
+          "w": 160,
+          "h": 62,
+          "kind": "actor",
+          "detail": "Gauge interest (EOI), gather information (RFI), request a proposal (RFP), then a price quote (RFQ). Due diligence verifies security and compliance.",
+          "exam": "RFP = proposal, RFQ = quote. These documents are not in the provided books."
+        },
+        {
+          "id": "agreement",
+          "label": "Agreement",
+          "sub": "MSA · SOW · SLA · NDA",
+          "x": 370,
+          "y": 100,
+          "w": 170,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "The MSA sets general terms, the SOW defines the engagement, the SLA sets service levels, the NDA covers confidentiality, and MOU/MOA defines the level of commitment.",
+          "exam": "Rules of Engagement (ROE) bound any penetration test conducted by or for the vendor."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitoring",
+          "sub": "right to audit · attestation",
+          "x": 560,
+          "y": 100,
+          "w": 170,
+          "h": 62,
+          "kind": "step",
+          "detail": "SLA tracking, periodic evaluation, compliance attestation, and right to audit. The third-party register centralizes responsibilities.",
+          "exam": "Right to audit and the third-party register are §5.3 concepts absent from the books."
+        },
+        {
+          "id": "exit",
+          "label": "Limits & exit",
+          "sub": "lock-in · jurisdiction",
+          "x": 750,
+          "y": 100,
+          "w": 160,
+          "h": 62,
+          "kind": "risk",
+          "detail": "Document headcount, resources, environment, jurisdiction, ROI, insurance, and vendor lock-in. Plan exit clauses and exportable formats.",
+          "exam": "An abrupt exit without a migration plan is riskier than monitored contractual drift."
+        }
+      ],
+      "edges": [
+        { "from": "need", "to": "select", "label": "solicit" },
+        { "from": "select", "to": "agreement", "label": "contract" },
+        { "from": "agreement", "to": "monitor", "label": "verify" },
+        { "from": "monitor", "to": "exit", "label": "plan ahead" }
+      ]
+    }
+  ]
+}

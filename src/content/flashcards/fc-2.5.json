@@ -1,0 +1,151 @@
+{
+  "id": "fc-2.5",
+  "objective": "2.5",
+  "title": "Threats, Vulnerabilities, and Indicators",
+  "cards": [
+    {
+      "id": "c-2.5-01",
+      "front": "IOC — Indicator of Compromise",
+      "back": "Observable artifact of a compromise: malware hash, C2 IP address, domain, registry key. Static, easy to block, quickly outdated.",
+      "tag": "Detection"
+    },
+    {
+      "id": "c-2.5-02",
+      "front": "IOA — Indicator of Attack",
+      "back": "Characteristic behavior of an attack: encoded PowerShell, anomalous outbound connection, sudden privilege escalation. More durable than an IOC, harder to detect.",
+      "tag": "Detection"
+    },
+    {
+      "id": "c-2.5-03",
+      "front": "Impossible travel",
+      "back": "Two authentications too far apart in time and space for physical travel. Suggests credential or session theft; check VPN and proxy before concluding.",
+      "tag": "Indicator"
+    },
+    {
+      "id": "c-2.5-04",
+      "front": "Concurrent sessions",
+      "back": "The same account active from two locations at the same time. Distinct from impossible travel: here sessions are concurrent, suggesting sharing or token theft.",
+      "tag": "Indicator"
+    },
+    {
+      "id": "c-2.5-05",
+      "front": "Log manipulation",
+      "back": "Clearing, truncating, or disabling auditing by an attacker to destroy evidence. Serious signal: Windows Event ID 1102 (security log cleared).",
+      "tag": "Indicator"
+    },
+    {
+      "id": "c-2.5-06",
+      "front": "Ransomware",
+      "back": "Encrypts data and demands payment. Indicators: changed file extensions, ransom notes, mass file access, deletion of shadow copies.",
+      "tag": "Malware"
+    },
+    {
+      "id": "c-2.5-07",
+      "front": "Worm vs virus",
+      "back": "A worm self-propagates over the network without user action. A virus requires a host (file, boot sector) and execution.",
+      "tag": "Malware"
+    },
+    {
+      "id": "c-2.5-08",
+      "front": "Trojan",
+      "back": "Disguises itself as legitimate software to be executed. It does not self-propagate or infect other files: it opens a backdoor.",
+      "tag": "Malware"
+    },
+    {
+      "id": "c-2.5-09",
+      "front": "Rootkit",
+      "back": "Hides compromise at the kernel or firmware level. Indicators: discrepancies between tools, hidden processes, persistence after reinstallation.",
+      "tag": "Malware"
+    },
+    {
+      "id": "c-2.5-10",
+      "front": "Fileless malware",
+      "back": "Lives in memory with no file on disk. Relies on native tools (PowerShell, WMI, mshta, regsvr32): \"living off the land.\" EDR and behavioral telemetry are required.",
+      "tag": "Malware"
+    },
+    {
+      "id": "c-2.5-11",
+      "front": "Logic bomb",
+      "back": "Code that triggers an action on a specific date or event. Indicators: conditional code, suspicious scheduled task, trigger account or file.",
+      "tag": "Malware"
+    },
+    {
+      "id": "c-2.5-12",
+      "front": "Spyware vs adware",
+      "back": "Spyware collects information (browsing, keystrokes, screen). Adware displays ads, often bundled with free software. Both can exfiltrate data.",
+      "tag": "Malware"
+    },
+    {
+      "id": "c-2.5-13",
+      "front": "On-path attack (MITM)",
+      "back": "Attacker intercepts between two parties to read, modify, or replay traffic. Without encryption they see everything; with properly validated TLS they only see ciphertext.",
+      "tag": "Network"
+    },
+    {
+      "id": "c-2.5-14",
+      "front": "Protocol downgrade",
+      "back": "Forces negotiation down to a weak version (TLS 1.0/1.1). Indicators: handshake alerts, abnormally low negotiated version.",
+      "tag": "Network"
+    },
+    {
+      "id": "c-2.5-15",
+      "front": "DNS attack / cache poisoning",
+      "back": "Cache poisoning or DNS tunneling. Indicators: inconsistent responses, large TXT queries, resolution to an unexpected IP.",
+      "tag": "Network"
+    },
+    {
+      "id": "c-2.5-16",
+      "front": "Rogue device",
+      "back": "Unauthorized equipment on the network: rogue access point, switch, unauthorized DHCP. Indicators: new MAC address, active port, unknown DHCP lease.",
+      "tag": "Network"
+    },
+    {
+      "id": "c-2.5-17",
+      "front": "Tailgating vs shoulder surfing",
+      "back": "Tailgating: following an authorized person without badging (countermeasure: mantrap). Shoulder surfing: reading over someone's shoulder (countermeasure: privacy screen, positioning).",
+      "tag": "Physical"
+    },
+    {
+      "id": "c-2.5-18",
+      "front": "Phishing, spear phishing, whaling",
+      "back": "Phishing = mass email. Spear = targeted at a person or department. Whaling = targets an executive (wire transfer, confidential attachment).",
+      "tag": "Social Engineering"
+    },
+    {
+      "id": "c-2.5-19",
+      "front": "Vishing, smishing, quishing",
+      "back": "Vishing = phone. Smishing = SMS. Quishing = QR code. The channel changes, the principle remains: obtain credentials, payment, or execution.",
+      "tag": "Social Engineering"
+    },
+    {
+      "id": "c-2.5-20",
+      "front": "Deepfake",
+      "back": "AI-generated video or voice used for BEC/CEO fraud or extortion. Defense: out-of-band verification, payment approval procedure.",
+      "tag": "Social Engineering"
+    },
+    {
+      "id": "c-2.5-21",
+      "front": "Watering hole",
+      "back": "Attacker compromises a legitimate site frequented by the target to infect its visitors. Indicator is a change in behavior of a trusted site.",
+      "tag": "Social Engineering"
+    },
+    {
+      "id": "c-2.5-22",
+      "front": "Injection (SQL, command, LDAP)",
+      "back": "Unvalidated input is interpreted as code. Principle: mixing data and instructions. Structural defense: parameterized queries, strict validation, least privilege.",
+      "tag": "Application"
+    },
+    {
+      "id": "c-2.5-23",
+      "front": "Brute force vs password spraying",
+      "back": "Brute force: many attempts on one account. Password spraying: one common password across many accounts, to avoid per-account lockout.",
+      "tag": "Credentials"
+    },
+    {
+      "id": "c-2.5-24",
+      "front": "Directory traversal",
+      "back": "Accessing a file outside the intended directory via ../ or %2e%2e. Indicator: requests containing these sequences; defense: canonicalization and allowlisting.",
+      "tag": "Application"
+    }
+  ]
+}

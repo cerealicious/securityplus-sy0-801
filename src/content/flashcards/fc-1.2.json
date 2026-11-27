@@ -1,0 +1,115 @@
+{
+  "id": "fc-1.2",
+  "objective": "1.2",
+  "title": "Change Management",
+  "cards": [
+    {
+      "id": "c-1.2-01",
+      "front": "CAB",
+      "back": "Change Advisory Board: committee of stakeholders that reviews, assesses impact, and approves or rejects a change before production.",
+      "tag": "Process"
+    },
+    {
+      "id": "c-1.2-02",
+      "front": "Change owner",
+      "back": "Person responsible for the request and its closure, from opening the ticket through final documentation.",
+      "tag": "Process"
+    },
+    {
+      "id": "c-1.2-03",
+      "front": "Stakeholders",
+      "back": "Affected or consulted parties: business units, support, security, operations, vendors.",
+      "tag": "Process"
+    },
+    {
+      "id": "c-1.2-04",
+      "front": "Order of change steps",
+      "back": "Ticket → owner and stakeholders → impact analysis → CAB/approval → maintenance window → testing → implementation → documentation.",
+      "tag": "Process"
+    },
+    {
+      "id": "c-1.2-05",
+      "front": "Impact analysis",
+      "back": "Evaluates effects on availability, security, and dependencies (services, legacy applications, controls).",
+      "tag": "Analysis"
+    },
+    {
+      "id": "c-1.2-06",
+      "front": "Test results",
+      "back": "Pre-deployment test outcomes recorded in the change ticket and presented to the CAB.",
+      "tag": "Analysis"
+    },
+    {
+      "id": "c-1.2-07",
+      "front": "Backout planning",
+      "back": "Plan to revert to the previous state if the change fails; must be tested and executable within the window.",
+      "tag": "Analysis"
+    },
+    {
+      "id": "c-1.2-08",
+      "front": "Fail forward",
+      "back": "Moving ahead with a fix or workaround rather than rolling back, when rollback is impossible or riskier.",
+      "tag": "Analysis"
+    },
+    {
+      "id": "c-1.2-09",
+      "front": "Maintenance window",
+      "back": "Scheduled low-impact time slot, announced to the business, during which the change and its backout can be performed.",
+      "tag": "Process"
+    },
+    {
+      "id": "c-1.2-10",
+      "front": "SOP",
+      "back": "Standard Operating Procedure: standardized procedure that makes execution repeatable and reduces improvisation.",
+      "tag": "Documentation"
+    },
+    {
+      "id": "c-1.2-11",
+      "front": "Allow list / deny list",
+      "back": "Explicit control that permits or blocks addresses, applications, or commands; any modification must be analyzed.",
+      "tag": "Technical"
+    },
+    {
+      "id": "c-1.2-12",
+      "front": "Restricted activities",
+      "back": "Actions requiring heightened authorization: administrator access, production changes, sensitive operations.",
+      "tag": "Technical"
+    },
+    {
+      "id": "c-1.2-13",
+      "front": "Downtime",
+      "back": "Announced and accepted period of unavailability during the maintenance window.",
+      "tag": "Technical"
+    },
+    {
+      "id": "c-1.2-14",
+      "front": "Service restart vs application restart",
+      "back": "Restarting a service or the application; can break sessions, certificates, or processing queues.",
+      "tag": "Technical"
+    },
+    {
+      "id": "c-1.2-15",
+      "front": "Legacy application",
+      "back": "Old or unsupported application, often dependent on a protocol or port that a change may remove.",
+      "tag": "Technical"
+    },
+    {
+      "id": "c-1.2-16",
+      "front": "Dependencies",
+      "back": "Services the change relies on (DNS, database, directory, certificates): recovery is only as fast as the slowest link.",
+      "tag": "Technical"
+    },
+    {
+      "id": "c-1.2-17",
+      "front": "Post-change documentation",
+      "back": "Update diagrams, policies/procedures, and version control; otherwise the next impact analysis will be inaccurate.",
+      "tag": "Documentation"
+    },
+    {
+      "id": "c-1.2-18",
+      "front": "Version control",
+      "back": "Tracking versions of code, configurations, and policies: essential for auditing and rolling back.",
+      "tag": "Documentation"
+    }
+  ]
+}

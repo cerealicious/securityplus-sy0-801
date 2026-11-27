@@ -1,0 +1,121 @@
+{
+  "id": "fc-4.4",
+  "objective": "4.4",
+  "title": "Monitoring and Alerting",
+  "cards": [
+    {
+      "id": "c-4.4-01",
+      "front": "Three levels of monitored resources",
+      "back": "Systems (CPU, memory, services), applications (errors, latency), infrastructure (flows, interfaces, devices).",
+      "tag": "Basics"
+    },
+    {
+      "id": "c-4.4-02",
+      "front": "The six activities",
+      "back": "Log aggregation, alerting, scanning, archiving, reporting, alert tuning.",
+      "tag": "Basics"
+    },
+    {
+      "id": "c-4.4-03",
+      "front": "Aggregation vs correlation",
+      "back": "Aggregation = collecting and normalizing events; correlation = linking them to reveal a scenario. Aggregation comes first.",
+      "tag": "Basics"
+    },
+    {
+      "id": "c-4.4-04",
+      "front": "SIEM",
+      "back": "Security Information and Event Management: aggregates, normalizes, correlates, alerts, and archives. Platform, not a sensor.",
+      "tag": "Tools"
+    },
+    {
+      "id": "c-4.4-05",
+      "front": "Benchmarks",
+      "back": "Expected configuration baseline (CIS, STIG) used as a compliance comparator.",
+      "tag": "Tools"
+    },
+    {
+      "id": "c-4.4-06",
+      "front": "Agent / agentless",
+      "back": "Agent = local collection installed on the host; agentless = remote collection without installed software.",
+      "tag": "Tools"
+    },
+    {
+      "id": "c-4.4-07",
+      "front": "Antivirus, DLP, vulnerability scanner",
+      "back": "Antivirus = malware; DLP = data leaks; vulnerability scanner = measuring the vulnerability surface.",
+      "tag": "Tools"
+    },
+    {
+      "id": "c-4.4-08",
+      "front": "Orchestration and packet analyzer",
+      "back": "Orchestration = automated chaining of actions (SOAR); packet analyzer = deep traffic inspection.",
+      "tag": "Tools"
+    },
+    {
+      "id": "c-4.4-09",
+      "front": "syslog",
+      "back": "Transports event messages from devices and systems. Answers \"what happened?\".",
+      "tag": "Protocols"
+    },
+    {
+      "id": "c-4.4-10",
+      "front": "NetFlow / IPFIX",
+      "back": "Flow statistics: who talks to whom, port, duration, volume — without packet payloads.",
+      "tag": "Protocols"
+    },
+    {
+      "id": "c-4.4-11",
+      "front": "SNMP",
+      "back": "Simple Network Management Protocol: reading device counters and receiving traps.",
+      "tag": "Protocols"
+    },
+    {
+      "id": "c-4.4-12",
+      "front": "SCAP",
+      "back": "Security Content Automation Protocol: standardizes compliance/vulnerability measurement to automate benchmarks.",
+      "tag": "Protocols"
+    },
+    {
+      "id": "c-4.4-13",
+      "front": "Port mirroring (SPAN)",
+      "back": "Copies traffic from a port/VLAN to a sensor without interrupting flow; depends on the switch.",
+      "tag": "Protocols"
+    },
+    {
+      "id": "c-4.4-14",
+      "front": "Automated alerts",
+      "back": "Notification triggered by a rule, with severity, context, and recipient: it must be actionable.",
+      "tag": "Alerts"
+    },
+    {
+      "id": "c-4.4-15",
+      "front": "True positive",
+      "back": "A real incident occurred and the alert fired (correct detection).",
+      "tag": "Alerts"
+    },
+    {
+      "id": "c-4.4-16",
+      "front": "False positive / false negative",
+      "back": "False positive = alert without a real incident; false negative = real incident without an alert (the most dangerous).",
+      "tag": "Alerts"
+    },
+    {
+      "id": "c-4.4-17",
+      "front": "Alert tuning",
+      "back": "Adjusting thresholds and exclusions in a targeted, documented way, measuring the effect on noise and detection.",
+      "tag": "Alerts"
+    },
+    {
+      "id": "c-4.4-18",
+      "front": "Why not disable an entire rule?",
+      "back": "You would also remove detection of real attacks: prefer a precise, justified exclusion.",
+      "tag": "Alerts"
+    },
+    {
+      "id": "c-4.4-19",
+      "front": "Dashboard and NMS",
+      "back": "Dashboard = summary view of alerts and metrics; NMS = consolidation of device status. These are outputs, not sources.",
+      "tag": "Reporting"
+    }
+  ]
+}

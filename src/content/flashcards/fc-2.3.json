@@ -1,0 +1,115 @@
+{
+  "id": "fc-2.3",
+  "objective": "2.3",
+  "title": "Threat Vectors and Attack Surfaces",
+  "cards": [
+    {
+      "id": "c-2.3-01",
+      "front": "APT",
+      "back": "Advanced Persistent Threat: targeted, long-term, well-funded campaign combining multiple vectors. A campaign, not a single malware.",
+      "tag": "APT"
+    },
+    {
+      "id": "c-2.3-02",
+      "front": "Message-based vector",
+      "back": "Email, SMS, RCS, instant messaging, and collaboration tools: phishing, smishing, links, and attachments.",
+      "tag": "Message"
+    },
+    {
+      "id": "c-2.3-03",
+      "front": "RCS",
+      "back": "Rich Communication Services: successor to SMS, enriched phishing vector — exam objective concept.",
+      "tag": "Message"
+    },
+    {
+      "id": "c-2.3-04",
+      "front": "Quishing",
+      "back": "QR code phishing: the code hides the malicious URL. Classified as image-based.",
+      "tag": "Image"
+    },
+    {
+      "id": "c-2.3-05",
+      "front": "Image-based: other examples",
+      "back": "Content embedded in an image, fake CAPTCHA, deepfake — exam objective concepts.",
+      "tag": "Image"
+    },
+    {
+      "id": "c-2.3-06",
+      "front": "Attachment-based",
+      "back": "Embedded macros, RTF and PDF documents: code execution or links exploiting an unpatched reader.",
+      "tag": "Attachment"
+    },
+    {
+      "id": "c-2.3-07",
+      "front": "Browser-based",
+      "back": "Extensions, JavaScript, password managers, cookies, and session tokens.",
+      "tag": "Browser"
+    },
+    {
+      "id": "c-2.3-08",
+      "front": "Session hijacking",
+      "back": "Stolen cookies / session tokens: the attacker takes over a valid session without password or MFA.",
+      "tag": "Browser"
+    },
+    {
+      "id": "c-2.3-09",
+      "front": "Network-based",
+      "back": "Compromised infrastructure and virtualized devices, stolen session keys.",
+      "tag": "Network"
+    },
+    {
+      "id": "c-2.3-10",
+      "front": "Remote access",
+      "back": "Remote desktop (RDP), VNC, VPN: remote access with weak credentials or misconfiguration.",
+      "tag": "Network"
+    },
+    {
+      "id": "c-2.3-11",
+      "front": "Endpoint-based",
+      "back": "Mobile devices, workstations, servers, tablets, trusted devices, native tools, and living-off-the-land.",
+      "tag": "Endpoint"
+    },
+    {
+      "id": "c-2.3-12",
+      "front": "Living-off-the-land",
+      "back": "Using system tools (PowerShell, WMI) to operate without dropping malware: detected by behavior.",
+      "tag": "Endpoint"
+    },
+    {
+      "id": "c-2.3-13",
+      "front": "Supply chain-based",
+      "back": "Third-party providers, MSPs, logistics providers, and SaaS: compromising a trusted third party.",
+      "tag": "Third-Party"
+    },
+    {
+      "id": "c-2.3-14",
+      "front": "External media-based",
+      "back": "Malicious USB: autorun, keylogger, or data theft on a workstation.",
+      "tag": "Physical"
+    },
+    {
+      "id": "c-2.3-15",
+      "front": "Human-based",
+      "back": "Impersonation, contractor, visitor, spoofed biometrics, watering hole.",
+      "tag": "Human"
+    },
+    {
+      "id": "c-2.3-16",
+      "front": "IoT-based",
+      "back": "Cameras, sensors, printers: connected devices that are often unmanaged and unpatched.",
+      "tag": "IoT / OT"
+    },
+    {
+      "id": "c-2.3-17",
+      "front": "OT-based and physical-based",
+      "back": "Industrial OT / SCADA; physical = lock and key, access control vestibule, badges (tailgating).",
+      "tag": "IoT / OT"
+    },
+    {
+      "id": "c-2.3-18",
+      "front": "Signal-based",
+      "back": "Bluetooth, radio frequency (RF), and NFC: proximity wireless vectors.",
+      "tag": "Signals"
+    }
+  ]
+}

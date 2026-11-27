@@ -1,0 +1,1358 @@
+{
+  "diagrams": [
+    {
+      "id": "d-5.1-L01-grc-pyramide",
+      "kind": "flow",
+      "title": "The GRC Pyramid: From Intent to Execution",
+      "subtitle": "From top to bottom, each level answers a different question. Click a tier to see its exact role.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "guidelines",
+          "label": "Guidelines",
+          "sub": "recommendations",
+          "x": 560,
+          "y": 45,
+          "w": 160,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "Non-binding advice and best practices: they guide policy drafting without creating an obligation. They are cited as a reference, not as a rule."
+        },
+        {
+          "id": "policy",
+          "label": "Policy",
+          "sub": "What to comply with?",
+          "x": 295,
+          "y": 30,
+          "w": 150,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "High-level intent approved by leadership and enforceable across the entire organization (AUP, BYOD, IR, privacy...). Its authority comes from executive approval, not its publication."
+        },
+        {
+          "id": "standard",
+          "label": "Standard",
+          "sub": "Minimum level",
+          "x": 288,
+          "y": 120,
+          "w": 165,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Measurable and verifiable requirement: password length, mandatory encryption, configuration baseline. This is the level that is technically enforced."
+        },
+        {
+          "id": "procedure",
+          "label": "Procedure / SOP",
+          "sub": "How to do it?",
+          "x": 282,
+          "y": 210,
+          "w": 175,
+          "h": 60,
+          "kind": "step",
+          "detail": "Ordered sequence of repeatable steps for a given task: account revocation, restoration, alert handling. It reduces improvisation under pressure."
+        },
+        {
+          "id": "runbook",
+          "label": "Runbook",
+          "sub": "Execution guide",
+          "x": 282,
+          "y": 300,
+          "w": 175,
+          "h": 60,
+          "kind": "step",
+          "detail": "Very concrete operational guide, often specific to a system or incident scenario. It is the lowest and most immediately actionable form in the pyramid."
+        },
+        {
+          "id": "plans",
+          "label": "BCP / DRP",
+          "sub": "Who does what in a crisis?",
+          "x": 560,
+          "y": 250,
+          "w": 160,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "Business Continuity and Disaster Recovery Plans: roles, timeframes (RTO/RPO), and resources. An untested plan demonstrates no recovery capability."
+        }
+      ],
+      "edges": [
+        { "from": "guidelines", "to": "policy", "label": "inspires" },
+        { "from": "policy", "to": "standard", "label": "breaks down into" },
+        { "from": "standard", "to": "procedure", "label": "operationalizes" },
+        { "from": "procedure", "to": "runbook", "label": "details" },
+        { "from": "policy", "to": "plans", "label": "plans" },
+        { "from": "runbook", "to": "plans", "label": "executes" }
+      ],
+      "sequence": ["guidelines", "policy", "standard", "procedure", "runbook", "plans"],
+      "quiz": {
+        "question": "Which artifact describes the repeatable steps of a task, such as revoking an account?",
+        "answer": "procedure"
+      }
+    },
+    {
+      "id": "d-5.1-L02-politiques",
+      "kind": "matrix",
+      "title": "Security Policies to Know by Heart",
+      "subtitle": "Eight policies from the §5.1 syllabus. Click a cell to separate the purpose, key rule, and exam trap.",
+      "matrix": {
+        "columns": ["Purpose", "Key Rule", "On the Exam"],
+        "rows": [
+          {
+            "label": "BYOD",
+            "cells": [
+              { "text": "Personal devices at work", "detail": "Governs the use of a personal device: connection conditions, separation of work and personal data (container), remote wipe." },
+              { "text": "Inventory, MDM, consent", "detail": "Requires device registration, MDM policy enforcement, and explicit user agreement before access." },
+              { "text": "BYOD ≠ lack of control", "detail": "Always look for the remote wipe and access revocation clause upon employee departure." }
+            ]
+          },
+          {
+            "label": "AUP (Acceptable Use Policy)",
+            "cells": [
+              { "text": "Acceptable use of resources", "detail": "Defines what is allowed or prohibited: browsing, email, installed software, data copying." },
+              { "text": "Read and acknowledged", "detail": "Must be distributed and accepted, usually during employee onboarding." },
+              { "text": "Policy, not standard", "detail": "It says 'what', not 'how': the technical baseline comes in the standard." }
+            ]
+          },
+          {
+            "label": "Clean Desk",
+            "cells": [
+              { "text": "No exposed data at the workstation", "detail": "Requires putting away papers, locking screens, and no visible passwords." },
+              { "text": "Locking and destruction", "detail": "Enforces automatic screen lock and use of secure bins or shredders for paper." },
+              { "text": "Physical control", "detail": "One of the few GRC artifacts with a direct physical effect: link it to a physical control, not a logical one." }
+            ]
+          },
+          {
+            "label": "IR (Incident Response)",
+            "cells": [
+              { "text": "Roles and responsibilities in a crisis", "detail": "Defines who triggers, who coordinates, notification timeframes, and escalation channels." },
+              { "text": "Thresholds and playbooks", "detail": "Points to runbooks and the recovery plan; specifies criteria for declaring an incident." },
+              { "text": "IR policy vs. IR plan", "detail": "The policy grants authority, the plan gives the course of action: classic multiple-choice distinction." }
+            ]
+          },
+          {
+            "label": "Classification / Retention",
+            "cells": [
+              { "text": "Sensitivity and lifespan", "detail": "Classifies data (public, internal, confidential, restricted) and sets retention duration." },
+              { "text": "Labeling and owner", "detail": "Each category has a data owner and an end-of-life rule (return, archiving, destruction)." },
+              { "text": "Retention ≠ backup", "detail": "A backup does not authorize keeping data beyond the legal or contractual duration." }
+            ]
+          },
+          {
+            "label": "Access Control",
+            "cells": [
+              { "text": "Who accesses what, and why", "detail": "States least privilege, need to know, and the rights approval process." },
+              { "text": "Periodic rights review", "detail": "Requires access reviews and revocation upon role change or departure." },
+              { "text": "Rule ≠ rights list", "detail": "The list of rights lives in the system; the policy sets the general principle." }
+            ]
+          },
+          {
+            "label": "Disposal",
+            "cells": [
+              { "text": "Secure media destruction", "detail": "Defines purging, secure erasure, or physical destruction of drives, USB sticks, and paper documents." },
+              { "text": "Proof of destruction", "detail": "Requires a certificate and an approved vendor, with traceability up to final destruction." },
+              { "text": "Explicitly listed policy", "detail": "Disposal is among the policies cited in the SY0-801 §5.1 syllabus." }
+            ]
+          },
+          {
+            "label": "Privacy",
+            "cells": [
+              { "text": "Personal data and rights", "detail": "Sets minimal collection, purpose, retention, and data subject rights." },
+              { "text": "Consent and notification", "detail": "Provides for opt-in/opt-out, access, rectification, erasure, and portability (expanded in §5.4)." },
+              { "text": "Privacy ≠ security", "detail": "Privacy concerns personal data; security covers all assets, including non-personal ones." }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "d-5.2-L01-registre-risques",
+      "kind": "flow",
+      "title": "The Risk Register, Thread of the Process",
+      "subtitle": "Five steps that feed a central artifact: the risk register. Follow the loop to see what is recorded at each pass.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "ident",
+          "label": "Identification",
+          "sub": "risk identification",
+          "x": 20,
+          "y": 70,
+          "w": 150,
+          "h": 62,
+          "kind": "step",
+          "detail": "Lists threats and vulnerabilities that can hit an asset: workshop, inventory, past incident analysis, and threat monitoring.",
+          "exam": "An unidentified risk cannot be treated: the most expensive step to miss is the first."
+        },
+        {
+          "id": "analyse",
+          "label": "Analysis",
+          "sub": "impact × likelihood",
+          "x": 170,
+          "y": 70,
+          "w": 150,
+          "h": 62,
+          "kind": "step",
+          "detail": "Estimates impact and likelihood to obtain a risk level, qualitative or quantitative (SLE × ARO = ALE).",
+          "exam": "Impact and likelihood are two distinct axes: high likelihood with low impact may remain acceptable."
+        },
+        {
+          "id": "traitement",
+          "label": "Treatment",
+          "sub": "avoid / reduce / transfer / accept",
+          "x": 320,
+          "y": 70,
+          "w": 150,
+          "h": 62,
+          "kind": "step",
+          "detail": "Selects a response: avoid, reduce (mitigation), transfer (insurance, outsourcing), or accept the risk.",
+          "exam": "Acceptance remains valid only if the risk is below the appetite defined by leadership."
+        },
+        {
+          "id": "surveillance",
+          "label": "Monitoring",
+          "sub": "monitoring",
+          "x": 470,
+          "y": 70,
+          "w": 150,
+          "h": 62,
+          "kind": "step",
+          "detail": "Verifies that chosen controls remain effective and that the environment does not create new risks.",
+          "exam": "A control can become obsolete: monitoring detects drift, not just attacks."
+        },
+        {
+          "id": "revue",
+          "label": "Review",
+          "sub": "risk review",
+          "x": 620,
+          "y": 70,
+          "w": 150,
+          "h": 62,
+          "kind": "step",
+          "detail": "Periodically revisits scores with business owners and approves treatment changes.",
+          "exam": "A review is periodic or triggered by a major change, not only after an incident."
+        },
+        {
+          "id": "registre",
+          "label": "Risk Register",
+          "sub": "risk register",
+          "x": 310,
+          "y": 320,
+          "w": 170,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Central artifact recording ID, description, owner, score, chosen treatment, associated controls, and residual risk. Serves as the single source for review and BIA.",
+          "exam": "Risk register, SLE/ALE/ARO, and residual risk: SY0-801 §5.2 syllabus — absent from the 4 provided books."
+        }
+      ],
+      "edges": [
+        { "from": "ident", "to": "analyse", "label": "qualify" },
+        { "from": "analyse", "to": "traitement", "label": "decide" },
+        { "from": "traitement", "to": "surveillance", "label": "deploy" },
+        { "from": "surveillance", "to": "revue", "label": "inform" },
+        { "from": "revue", "to": "registre", "label": "record" },
+        { "from": "registre", "to": "ident", "label": "new cycle" }
+      ],
+      "sequence": ["ident", "analyse", "traitement", "surveillance", "revue", "registre"],
+      "quiz": {
+        "question": "Which artifact centralizes the owner, score, and chosen treatment for each risk?",
+        "answer": "registre"
+      }
+    },
+    {
+      "id": "d-5.2-L02-quantitatif-qualitatif",
+      "kind": "flow",
+      "title": "Quantitative vs. Qualitative: Two Ways to Quantify Risk",
+      "subtitle": "Two columns, two logics, one final decision. Click each step to see what it brings to the trade-off.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "quant",
+          "label": "Quantitative",
+          "sub": "numbers and dollars",
+          "x": 20,
+          "y": 30,
+          "w": 160,
+          "h": 58,
+          "kind": "neutral",
+          "detail": "Numerical approach: assign a monetary value and frequency to the risk to obtain an estimated annual loss.",
+          "exam": "SLE, ARO, and ALE: SY0-801 §5.2 syllabus — none of the 4 provided books."
+        },
+        {
+          "id": "qual",
+          "label": "Qualitative",
+          "sub": "expert judgment",
+          "x": 430,
+          "y": 30,
+          "w": 160,
+          "h": 58,
+          "kind": "neutral",
+          "detail": "Relative approach: rank the risk on a scale (low, medium, high) based on expert judgment and the risk matrix.",
+          "exam": "This is the most common approach when reliable financial data is lacking."
+        },
+        {
+          "id": "sle",
+          "label": "SLE",
+          "sub": "Single Loss Expectancy",
+          "x": 20,
+          "y": 120,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Single Loss Expectancy: asset value multiplied by exposure factor (EF). How much does a single incident cost?",
+          "exam": "SLE = asset value × exposure factor."
+        },
+        {
+          "id": "aro",
+          "label": "ARO",
+          "sub": "Annual Rate of Occurrence",
+          "x": 20,
+          "y": 210,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Estimated annual frequency of the scenario: number of expected occurrences over one year. An ARO of 0.1 means one incident every ten years.",
+          "exam": "ARO is a frequency, not a single-occurrence probability."
+        },
+        {
+          "id": "ale",
+          "label": "ALE",
+          "sub": "SLE × ARO",
+          "x": 20,
+          "y": 300,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Annualized Loss Expectancy: SLE × ARO. It gives the maximum rational budget to spend on the control that reduces this risk.",
+          "exam": "If a control costs more than the avoided ALE, ROI is negative: classic calculation question."
+        },
+        {
+          "id": "echelle",
+          "label": "Scale",
+          "sub": "low / medium / high",
+          "x": 430,
+          "y": 120,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Rating grid shared by stakeholders: it makes risks of very different natures comparable.",
+          "exam": "A scale without written definitions of levels produces non-reproducible scores."
+        },
+        {
+          "id": "matrice",
+          "label": "Risk Matrix",
+          "sub": "impact × likelihood",
+          "x": 430,
+          "y": 210,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Two-way table crossing impact and likelihood to place each risk in a zone (green, yellow, red).",
+          "exam": "The red zone generally triggers priority treatment and escalation to leadership."
+        },
+        {
+          "id": "experts",
+          "label": "Experts / Workshop",
+          "sub": "short, workshop, intel",
+          "x": 430,
+          "y": 300,
+          "w": 160,
+          "h": 62,
+          "kind": "actor",
+          "detail": "Asset owners, CISO, business units, and legal compare judgments to reduce individual bias.",
+          "exam": "Qualitative depends on participant quality: involve the asset owner."
+        },
+        {
+          "id": "arbitrage",
+          "label": "Trade-off",
+          "sub": "treatment decision",
+          "x": 225,
+          "y": 420,
+          "w": 170,
+          "h": 62,
+          "kind": "step",
+          "detail": "Both approaches converge in the decision: accept, reduce, avoid, or transfer, comparing control cost and residual risk.",
+          "exam": "Risk appetite and residual risk: §5.2 syllabus — absent from the 4 provided books."
+        }
+      ],
+      "edges": [
+        { "from": "quant", "to": "sle", "label": "unit loss" },
+        { "from": "sle", "to": "aro", "label": "frequency" },
+        { "from": "aro", "to": "ale", "label": "SLE × ARO" },
+        { "from": "qual", "to": "echelle", "label": "rate" },
+        { "from": "echelle", "to": "matrice", "label": "cross" },
+        { "from": "matrice", "to": "experts", "label": "validate" },
+        { "from": "ale", "to": "arbitrage", "label": "ROI" },
+        { "from": "experts", "to": "arbitrage", "label": "priority" }
+      ],
+      "sequence": ["quant", "sle", "aro", "ale", "qual", "echelle", "matrice", "experts", "arbitrage"],
+      "quiz": {
+        "question": "Which formula gives the Annualized Loss Expectancy (ALE)?",
+        "answer": "ale"
+      }
+    },
+    {
+      "id": "d-5.3-L01-parcours-fournisseur",
+      "kind": "flow",
+      "title": "A Third Party's Journey, From Selection to Exit",
+      "subtitle": "A vendor is never 'done' after signing: follow the seven steps and the reassessment loop.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "select",
+          "label": "Selection",
+          "sub": "RFP / RFI / RFQ / EOI",
+          "x": 20,
+          "y": 60,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Formalizes the need and consults the market: RFI for information, RFP for a proposal, RFQ for pricing, EOI to gauge interest.",
+          "exam": "RFP/RFI/RFQ/EOI: SY0-801 §5.3 syllabus — absent from the 4 provided books."
+        },
+        {
+          "id": "due",
+          "label": "Due Diligence",
+          "sub": "verify before signing",
+          "x": 200,
+          "y": 60,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Assesses security, financial health, certifications, subcontractors, and jurisdiction of the provider before any commitment.",
+          "exam": "Due diligence covers the vendor AND its subcontracting chain (fourth party)."
+        },
+        {
+          "id": "contract",
+          "label": "Contract",
+          "sub": "SLA, NDA, MSA, SOW",
+          "x": 380,
+          "y": 60,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Sets in writing the scope, service levels, confidentiality, right to audit, incident notification, and exit.",
+          "exam": "Without an audit or notification clause, an SLA provides no real means of control."
+        },
+        {
+          "id": "access",
+          "label": "Access",
+          "sub": "third-party privileges",
+          "x": 560,
+          "y": 60,
+          "w": 160,
+          "h": 62,
+          "kind": "risk",
+          "detail": "Creates the necessary accounts and links for the provider with least privilege, limited duration, and dedicated logging.",
+          "exam": "Vendor access must be revoked at the end of the engagement, not just at the end of the contract."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitoring",
+          "sub": "continuous monitoring",
+          "x": 560,
+          "y": 300,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Track SLAs, review audit reports, verify patches, and reassess third-party risks throughout the relationship.",
+          "exam": "Continuous monitoring beats a single annual review: third-party risk evolves between reviews."
+        },
+        {
+          "id": "exit",
+          "label": "Exit",
+          "sub": "third-party offboarding",
+          "x": 380,
+          "y": 300,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Revokes access, retrieves and destroys data per the contract, and verifies the return of assets and secrets.",
+          "exam": "The exit clause must provide for reversibility before the need even arises."
+        },
+        {
+          "id": "registre",
+          "label": "Third-Party Register",
+          "sub": "third-party register",
+          "x": 200,
+          "y": 300,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Single inventory of providers, consumed services, internal owners, contracts, and criticality level.",
+          "exam": "Third-party register and vendor lock-in: SY0-801 §5.3 syllabus — absent from the 4 provided books."
+        }
+      ],
+      "edges": [
+        { "from": "select", "to": "due", "label": "selected candidate" },
+        { "from": "due", "to": "contract", "label": "acceptable risk" },
+        { "from": "contract", "to": "access", "label": "implementation" },
+        { "from": "access", "to": "monitor", "label": "operations" },
+        { "from": "monitor", "to": "exit", "label": "end of engagement" },
+        { "from": "exit", "to": "registre", "label": "archive" },
+        { "from": "registre", "to": "select", "label": "reassessment" }
+      ],
+      "sequence": ["select", "due", "contract", "access", "monitor", "exit", "registre"],
+      "quiz": {
+        "question": "Which step verifies controls, financial health, and subcontractors before signing?",
+        "answer": "due"
+      }
+    },
+    {
+      "id": "d-5.3-L02-accords",
+      "kind": "matrix",
+      "title": "Seven Agreements, Seven Purposes",
+      "subtitle": "SLA, SLO, MOU, MOA, NDA, MSA, SOW: click a cell to distinguish scope, legal force, and the right use case.",
+      "matrix": {
+        "columns": ["Scope", "Legal Force", "Use Case"],
+        "rows": [
+          {
+            "label": "SLA — Service Level Agreement",
+            "cells": [
+              { "text": "Availability, response time, penalties", "detail": "Measures the expected service level and provides remedies (service credits) if the target is not met." },
+              { "text": "Contractual and measurable", "detail": "This is the agreement where quantified metrics are checked and stipulated penalties are enforced." },
+              { "text": "Critical provider", "detail": "On the exam, look first for metrics and remedies, not just the advertised percentage." }
+            ]
+          },
+          {
+            "label": "SLO — Service Level Objective",
+            "cells": [
+              { "text": "Quantified target (e.g., 99.9% uptime)", "detail": "Internal or contractual service objective, more flexible than the legal commitment of an SLA." },
+              { "text": "Objective, without its own penalty", "detail": "An SLO alone does not provide penalties: it becomes enforceable when embedded in an SLA." },
+              { "text": "Define the target before signing", "detail": "Set the SLO before negotiating the SLA that will bind the vendor." }
+            ]
+          },
+          {
+            "label": "MOU — Memorandum of Understanding",
+            "cells": [
+              { "text": "Intent to cooperate", "detail": "Understanding document describing the spirit of a partnership and envisioned responsibilities." },
+              { "text": "Generally non-binding", "detail": "Less formal than a contract, unless expressly stated otherwise in the text." },
+              { "text": "Exploratory partnership", "detail": "Used to frame discussion before a formal agreement, not to make financial commitments." }
+            ]
+          },
+          {
+            "label": "MOA — Memorandum of Agreement",
+            "cells": [
+              { "text": "Cooperation with defined responsibilities", "detail": "More structured agreement than an MOU, with explicit roles, commitments, and collaboration terms." },
+              { "text": "Can be binding", "detail": "Its force depends on the wording: unlike an MOU, it can create obligations." },
+              { "text": "Inter-organizational agreement", "detail": "Typically used between government agencies or institutional partners." }
+            ]
+          },
+          {
+            "label": "NDA — Non-Disclosure Agreement",
+            "cells": [
+              { "text": "Confidentiality of exchanges", "detail": "Prohibits disclosure of sensitive information and defines what is considered confidential." },
+              { "text": "Binding, often bilateral", "detail": "Can be unilateral or mutual (mutual NDA) depending on whether both parties share data." },
+              { "text": "Due diligence and sensitive data", "detail": "Sign before sharing architectures, logs, or personal data with a candidate." }
+            ]
+          },
+          {
+            "label": "MSA — Master Service Agreement",
+            "cells": [
+              { "text": "General terms of the relationship", "detail": "Framework contract setting responsibilities, payment, intellectual property, confidentiality, and termination." },
+              { "text": "Binding framework contract", "detail": "Specific agreements (SOWs) attach to it without renegotiating general terms." },
+              { "text": "Repeated engagements with a vendor", "detail": "MSA/SOW: SY0-801 §5.3 syllabus — absent from the 4 provided books." }
+            ]
+          },
+          {
+            "label": "SOW — Statement of Work",
+            "cells": [
+              { "text": "Deliverables, schedule, price of an engagement", "detail": "Describes the exact scope of a project: tasks, deliverables, milestones, resources, and acceptance criteria." },
+              { "text": "Binding, attached to the MSA", "detail": "The SOW is subordinate to the MSA: in case of conflict, the master agreement often prevails." },
+              { "text": "Each specific project", "detail": "A single MSA can carry several distinct SOWs for different engagements." }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "d-5.3-L03-limites-tierce-partie",
+      "kind": "flow",
+      "title": "Third-Party Limits and Dependencies",
+      "subtitle": "Signing does not eliminate risk: these six factors decide whether you can actually exit and be indemnified.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "juridiction",
+          "label": "Jurisdiction",
+          "sub": "governing law",
+          "x": 20,
+          "y": 70,
+          "w": 160,
+          "h": 62,
+          "kind": "risk",
+          "detail": "Country where the vendor and data are based: determines governing law, notification obligations, and cross-border transfers.",
+          "exam": "A foreign jurisdiction clause can make an audit right theoretical: check it before signing."
+        },
+        {
+          "id": "assurance",
+          "label": "Insurance",
+          "sub": "coverage and limits",
+          "x": 200,
+          "y": 70,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Checks the policy type, caps, exclusions, and proof of coverage (certificate of insurance) of the provider.",
+          "exam": "Transferring risk does not erase liability: insurance has caps and exclusions."
+        },
+        {
+          "id": "roi",
+          "label": "ROI",
+          "sub": "return on investment",
+          "x": 380,
+          "y": 70,
+          "w": 160,
+          "h": 62,
+          "kind": "neutral",
+          "detail": "Compares the cost of the control or migration with the expected benefit and accepted residual risk.",
+          "exam": "If the exit cost exceeds the migration benefit, the organization is already in a lock-in situation."
+        },
+        {
+          "id": "lockin",
+          "label": "Vendor Lock-in",
+          "sub": "proprietary dependency",
+          "x": 560,
+          "y": 70,
+          "w": 160,
+          "h": 62,
+          "kind": "risk",
+          "detail": "Dependency on proprietary formats, APIs, or identities that makes switching vendors long and expensive.",
+          "exam": "Vendor lock-in: SY0-801 §5.3 syllabus — absent from the 4 provided books."
+        },
+        {
+          "id": "sortie",
+          "label": "Reversibility",
+          "sub": "exit clause",
+          "x": 380,
+          "y": 300,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Provides for data return in an open format, deletion of copies, and a realistic transition period.",
+          "exam": "Demand proof of deletion, not just a contractual promise."
+        },
+        {
+          "id": "tiers",
+          "label": "Third-Party Residual Risk",
+          "sub": "retained dependency",
+          "x": 200,
+          "y": 300,
+          "w": 160,
+          "h": 62,
+          "kind": "risk",
+          "detail": "Even with a good contract, part of the risk remains with the organization: it remains the owner and must bear it.",
+          "exam": "Outsourcing a task does not transfer ultimate responsibility to customers or regulators."
+        }
+      ],
+      "edges": [
+        { "from": "juridiction", "to": "assurance", "label": "legal framework" },
+        { "from": "assurance", "to": "roi", "label": "coverage cost" },
+        { "from": "roi", "to": "lockin", "label": "evaluate" },
+        { "from": "lockin", "to": "sortie", "label": "plan" },
+        { "from": "sortie", "to": "tiers", "label": "mitigate" },
+        { "from": "tiers", "to": "juridiction", "label": "new review" }
+      ],
+      "sequence": ["juridiction", "assurance", "roi", "lockin", "sortie", "tiers"],
+      "quiz": {
+        "question": "Which risk describes the inability to switch vendors without prohibitive cost?",
+        "answer": "lockin"
+      }
+    },
+    {
+      "id": "d-5.4-L01-formation-conformite",
+      "kind": "flow",
+      "title": "From Training to Consequence: The Compliance Loop",
+      "subtitle": "A policy without proof of reading or follow-up demonstrates no compliance. Follow the cycle and its remediation loop.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "politique",
+          "label": "Policy",
+          "sub": "approved rule",
+          "x": 20,
+          "y": 70,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "The written rule, approved by leadership and distributed: training, legal compliance, privacy, acceptable use.",
+          "exam": "An unapproved or undistributed policy is hard to enforce in case of a violation."
+        },
+        {
+          "id": "formation",
+          "label": "Training",
+          "sub": "security training",
+          "x": 200,
+          "y": 70,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Conveys expected behaviors via LMS, in-person sessions, micro-learning, or targeted campaigns depending on the audience.",
+          "exam": "LMS, initial/ongoing/targeted/corrective typologies: §5.6 syllabus — absent from the 4 provided books."
+        },
+        {
+          "id": "attestation",
+          "label": "Attestation",
+          "sub": "acknowledgment of reading",
+          "x": 380,
+          "y": 70,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Dated signature or acknowledgment proving the person has read and accepted the policy.",
+          "exam": "Attestations: SY0-801 §5.4 syllabus — absent from the 4 provided books."
+        },
+        {
+          "id": "monitoring",
+          "label": "Monitoring",
+          "sub": "compliance check",
+          "x": 560,
+          "y": 70,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Periodically verifies actual enforcement: audits, access reviews, tests, logs, and training metrics.",
+          "exam": "Monitoring detects the gap between the written rule and actual practice."
+        },
+        {
+          "id": "sanction",
+          "label": "Consequences",
+          "sub": "sanctions, loss of license",
+          "x": 560,
+          "y": 300,
+          "w": 160,
+          "h": 62,
+          "kind": "risk",
+          "detail": "In case of non-compliance: disciplinary action, privilege revocation, loss of license, legal liability, or regulatory fine.",
+          "exam": "Consequences and legal hold: §5.4 syllabus — absent from the 4 provided books."
+        },
+        {
+          "id": "correctif",
+          "label": "Corrective Training",
+          "sub": "targeted refresher",
+          "x": 200,
+          "y": 300,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Targeted training after a gap or incident, with effectiveness tracking and policy update if needed.",
+          "exam": "Corrective training should be proportionate to the observed gap, not automatically company-wide."
+        }
+      ],
+      "edges": [
+        { "from": "politique", "to": "formation", "label": "distribute" },
+        { "from": "formation", "to": "attestation", "label": "validate" },
+        { "from": "attestation", "to": "monitoring", "label": "track" },
+        { "from": "monitoring", "to": "sanction", "label": "gap" },
+        { "from": "sanction", "to": "correctif", "label": "remediate" },
+        { "from": "correctif", "to": "formation", "label": "retrain" }
+      ],
+      "sequence": ["politique", "formation", "attestation", "monitoring", "sanction", "correctif"],
+      "quiz": {
+        "question": "Which proof formalizes that the employee has read and accepted the policy?",
+        "answer": "attestation"
+      }
+    },
+    {
+      "id": "d-5.4-L02-droits-personne",
+      "kind": "flow",
+      "title": "Data Subject Rights",
+      "subtitle": "Privacy grants enforceable rights against the organization. Click the central role then each right to see what it implies.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "personne",
+          "label": "Data Subject",
+          "sub": "data subject",
+          "x": 210,
+          "y": 190,
+          "w": 170,
+          "h": 64,
+          "kind": "actor",
+          "detail": "Any identifiable person whose data is processed. They are the one exercising the rights, not the internal data owner.",
+          "exam": "The data subject is the individual; the data owner is the internal party responsible for processing."
+        },
+        {
+          "id": "optin",
+          "label": "Opt-in / Opt-out",
+          "sub": "consent",
+          "x": 20,
+          "y": 60,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Opt-in: explicit prior agreement before collection. Opt-out: the person refuses after being informed, depending on the legal context.",
+          "exam": "Opt-in/opt-out: SY0-801 §5.4 syllabus — none of the 4 provided books."
+        },
+        {
+          "id": "acces",
+          "label": "Access",
+          "sub": "right of access",
+          "x": 20,
+          "y": 180,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "The person can ask whether their data is being processed, obtain a copy, and know the purposes and recipients.",
+          "exam": "Responding within the required timeframe is part of compliance, not just the substance of the response."
+        },
+        {
+          "id": "rectif",
+          "label": "Rectification",
+          "sub": "correction",
+          "x": 20,
+          "y": 300,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Correct inaccurate data or complete incomplete data, then propagate the correction to copies and recipients.",
+          "exam": "The correction must be propagated downstream, otherwise the error persists in backups and third-party systems."
+        },
+        {
+          "id": "oubli",
+          "label": "Right to Be Forgotten",
+          "sub": "erasure",
+          "x": 430,
+          "y": 60,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Erasure of data when processing is no longer necessary or consent is withdrawn, subject to legal retention obligations.",
+          "exam": "Right to be forgotten: §5.4 syllabus — absent from the 4 provided books; a legal hold can override it."
+        },
+        {
+          "id": "restriction",
+          "label": "Restriction",
+          "sub": "limitation of processing",
+          "x": 430,
+          "y": 180,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Temporarily suspend processing while retaining the data, for example during verification of a dispute.",
+          "exam": "Restricting does not erase: the data remains stored but is no longer used."
+        },
+        {
+          "id": "portabilite",
+          "label": "Portability",
+          "sub": "data portability",
+          "x": 430,
+          "y": 300,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Provide the data in a structured, commonly used, and machine-readable format for transmission to another controller.",
+          "exam": "Open format is key: an image PDF is not a machine-readable format."
+        }
+      ],
+      "edges": [
+        { "from": "personne", "to": "optin", "label": "consent" },
+        { "from": "personne", "to": "acces", "label": "request" },
+        { "from": "personne", "to": "rectif", "label": "correct" },
+        { "from": "personne", "to": "oubli", "label": "erase" },
+        { "from": "personne", "to": "restriction", "label": "suspend" },
+        { "from": "personne", "to": "portabilite", "label": "transfer" }
+      ],
+      "sequence": ["personne", "optin", "acces", "rectif", "oubli", "restriction", "portabilite"],
+      "quiz": {
+        "question": "Which right allows retrieving one's data in a structured, commonly used, and machine-readable format?",
+        "answer": "portabilite"
+      }
+    },
+    {
+      "id": "d-5.5-L01-processus-audit",
+      "kind": "flow",
+      "title": "The Flow of a Security Audit",
+      "subtitle": "From scoping to action tracking: six steps that turn evidence collection into verifiable improvement.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "cadrage",
+          "label": "Scoping",
+          "sub": "scope and objectives",
+          "x": 20,
+          "y": 70,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Defines the scope, objectives, criteria (framework, policy), stakeholders, and rules of engagement.",
+          "exam": "An audit without a written scope drifts: the first question is 'what exactly are we verifying?'."
+        },
+        {
+          "id": "collecte",
+          "label": "Collection",
+          "sub": "evidence gathering",
+          "x": 200,
+          "y": 70,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Gathers evidence: logs, configurations, interviews, documents, and scan results, while preserving their integrity.",
+          "exam": "Chain of custody and timestamping make the evidence defensible."
+        },
+        {
+          "id": "echantillon",
+          "label": "Sampling",
+          "sub": "sampling",
+          "x": 380,
+          "y": 70,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Selects a representative subset when the entire population is too large: random, systematic, or risk-targeted.",
+          "exam": "A biased sample invalidates the conclusion: always document the selection method."
+        },
+        {
+          "id": "tests",
+          "label": "Testing",
+          "sub": "functional / behavioral",
+          "x": 560,
+          "y": 70,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Executes controls: configuration inspection, functional testing, behavioral testing, vulnerability scanning, or interviews.",
+          "exam": "A functional test checks what is expected; a behavioral test checks the reaction to an anomaly."
+        },
+        {
+          "id": "rapport",
+          "label": "Report",
+          "sub": "findings and recommendations",
+          "x": 560,
+          "y": 300,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Presents findings, their criticality, associated evidence, impacts, and prioritized recommendations.",
+          "exam": "A finding without evidence and an owner is not actionable."
+        },
+        {
+          "id": "suivi",
+          "label": "Follow-up",
+          "sub": "remediation tracking",
+          "x": 380,
+          "y": 300,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Assigns an owner and due date to each action, then verifies remediation during a follow-up audit.",
+          "exam": "Follow-up closes the loop: without reassessment, the report remains a snapshot."
+        }
+      ],
+      "edges": [
+        { "from": "cadrage", "to": "collecte", "label": "delimit" },
+        { "from": "collecte", "to": "echantillon", "label": "narrow down" },
+        { "from": "echantillon", "to": "tests", "label": "verify" },
+        { "from": "tests", "to": "rapport", "label": "document findings" },
+        { "from": "rapport", "to": "suivi", "label": "remediate" },
+        { "from": "suivi", "to": "cadrage", "label": "new audit" }
+      ],
+      "sequence": ["cadrage", "collecte", "echantillon", "tests", "rapport", "suivi"],
+      "quiz": {
+        "question": "Which step selects a representative subset of evidence to test?",
+        "answer": "echantillon"
+      }
+    },
+    {
+      "id": "d-5.5-L02-frameworks",
+      "kind": "flow",
+      "title": "Three Frameworks, Three Questions About Intrusion",
+      "subtitle": "An alert signal feeds three complementary perspectives: phases, techniques, and attribution. Click a column to compare.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "signal",
+          "label": "Signal / IOC",
+          "sub": "alert, log, observable",
+          "x": 290,
+          "y": 30,
+          "w": 160,
+          "h": 58,
+          "kind": "neutral",
+          "detail": "Common starting point: an alert, indicator of compromise, or anomalous behavior collected by monitoring.",
+          "exam": "An isolated indicator does not tell the whole intrusion story: it must be put into context."
+        },
+        {
+          "id": "kc",
+          "label": "Cyber Kill Chain",
+          "sub": "progression in phases",
+          "x": 20,
+          "y": 130,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Sequential seven-phase model: reconnaissance, weaponization, delivery, exploitation, installation, C2, actions on objectives.",
+          "exam": "Key question: 'what phase is the attacker in?'."
+        },
+        {
+          "id": "kcphase",
+          "label": "Break the Chain",
+          "sub": "defense by phase",
+          "x": 20,
+          "y": 260,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Each phase offers an opportunity for detection or blocking: the earlier you intervene, the smaller the impact.",
+          "exam": "Blocking delivery or exploitation is more effective than waiting for actions on objectives."
+        },
+        {
+          "id": "attack",
+          "label": "MITRE ATT&CK",
+          "sub": "tactics × techniques",
+          "x": 290,
+          "y": 130,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Reference matrix of adversary behaviors: the Enterprise matrix has 14 tactics in its current version.",
+          "exam": "Key question: 'what technique is the attacker using?'."
+        },
+        {
+          "id": "attackmatrix",
+          "label": "Detection Coverage",
+          "sub": "mapping and gaps",
+          "x": 290,
+          "y": 260,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Maps rules and sensors onto the matrix to spot blind spots and prioritize new detections.",
+          "exam": "The table in the 11 Strategies book shows 11 tactics: that is an older version."
+        },
+        {
+          "id": "diamond",
+          "label": "Diamond Model",
+          "sub": "four vertices",
+          "x": 560,
+          "y": 130,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Represents the intrusion with four vertices: adversary, victim, capability, and infrastructure, linked by metadata.",
+          "exam": "Key question: 'who is attacking what, with what, and from where?'."
+        },
+        {
+          "id": "diamondnode",
+          "label": "Pivot / Attribution",
+          "sub": "linking vertices",
+          "x": 560,
+          "y": 260,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Allows pivoting from a technical indicator to infrastructure and adversary, then retaining common vertices across incidents.",
+          "exam": "Detailed structure not covered by the provided books: remember the four vertices."
+        }
+      ],
+      "edges": [
+        { "from": "signal", "to": "kc", "label": "situate" },
+        { "from": "signal", "to": "attack", "label": "name" },
+        { "from": "signal", "to": "diamond", "label": "pivot" },
+        { "from": "kc", "to": "kcphase", "label": "block" },
+        { "from": "attack", "to": "attackmatrix", "label": "measure" },
+        { "from": "diamond", "to": "diamondnode", "label": "attribute" }
+      ],
+      "sequence": ["signal", "kc", "kcphase", "attack", "attackmatrix", "diamond", "diamondnode"],
+      "quiz": {
+        "question": "Which model links adversary, victim, capability, and infrastructure?",
+        "answer": "diamond"
+      }
+    },
+    {
+      "id": "d-5.5-L03-types-pentest",
+      "kind": "flow",
+      "title": "Pentest Types and Reconnaissance Modes",
+      "subtitle": "Knowledge level first, interaction mode second: everything starts with the rules of engagement.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "rules",
+          "label": "Rules of Engagement",
+          "sub": "scope and window",
+          "x": 560,
+          "y": 180,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Authorization document setting scope, time window, contacts, limits (e.g., no DoS), and escalation procedure.",
+          "exam": "Without written authorization, a test becomes unauthorized activity: recurring exam question."
+        },
+        {
+          "id": "white",
+          "label": "White Box",
+          "sub": "full knowledge",
+          "x": 20,
+          "y": 60,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "The tester knows the architecture, code, and credentials: simulates an insider or an in-depth configuration audit.",
+          "exam": "White box = full knowledge; it is the fastest and most targeted scenario."
+        },
+        {
+          "id": "gray",
+          "label": "Gray Box",
+          "sub": "partial knowledge",
+          "x": 200,
+          "y": 60,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Partial knowledge (documents, user access): reproduces an attacker who has already gained an initial foothold.",
+          "exam": "Gray box = compromise between realism and efficiency, often the default scenario."
+        },
+        {
+          "id": "black",
+          "label": "Black Box",
+          "sub": "zero knowledge",
+          "x": 380,
+          "y": 60,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "No prior information: the tester acts like an external attacker, from reconnaissance to exploitation.",
+          "exam": "Black box = zero knowledge; the longest and closest to a real attack."
+        },
+        {
+          "id": "passif",
+          "label": "Passive",
+          "sub": "no interaction",
+          "x": 20,
+          "y": 300,
+          "w": 160,
+          "h": 62,
+          "kind": "neutral",
+          "detail": "Reconnaissance without contacting the target: OSINT, public search, DNS records, social media, data leaks.",
+          "exam": "Passive = no requests to the target system, so no logs on the victim side."
+        },
+        {
+          "id": "actif",
+          "label": "Active",
+          "sub": "scanning and exploitation",
+          "x": 200,
+          "y": 300,
+          "w": 160,
+          "h": 62,
+          "kind": "risk",
+          "detail": "Direct interaction: port scanning, fingerprinting, enumeration, vulnerability verification, and controlled exploitation.",
+          "exam": "Active = the target sees the activity: hence the importance of the time window and contacts."
+        }
+      ],
+      "edges": [
+        { "from": "rules", "to": "white", "label": "authorizes" },
+        { "from": "rules", "to": "gray", "label": "authorizes" },
+        { "from": "rules", "to": "black", "label": "authorizes" },
+        { "from": "white", "to": "gray", "label": "less info" },
+        { "from": "gray", "to": "black", "label": "zero info" },
+        { "from": "white", "to": "passif", "label": "recon" },
+        { "from": "passif", "to": "actif", "label": "then scan" },
+        { "from": "black", "to": "actif", "label": "exploits" }
+      ],
+      "sequence": ["rules", "white", "gray", "black", "passif", "actif"],
+      "quiz": {
+        "question": "Which pentest type gives the tester full knowledge of the system?",
+        "answer": "white"
+      }
+    },
+    {
+      "id": "d-5.6-L01-programme-sensibilisation",
+      "kind": "flow",
+      "title": "Building a Security Awareness Program",
+      "subtitle": "A program measures first, delivers second, then adjusts. Click each step to see how the loop feeds itself.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "objectifs",
+          "label": "Objectives",
+          "sub": "target behaviors",
+          "x": 20,
+          "y": 60,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Define what you want to change: reporting phishing, locking screens, protecting data, adopting MFA.",
+          "exam": "A measurable objective is better than 'general security awareness'."
+        },
+        {
+          "id": "baseline",
+          "label": "Baseline",
+          "sub": "initial measurement",
+          "x": 200,
+          "y": 60,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Starting measurement (quiz, click rate, reporting rate) used as a reference to judge progress.",
+          "exam": "Without a baseline, you cannot demonstrate improvement: it is the program's first deliverable."
+        },
+        {
+          "id": "canaux",
+          "label": "Channels",
+          "sub": "LMS, intranet, in-person",
+          "x": 200,
+          "y": 300,
+          "w": 160,
+          "h": 62,
+          "kind": "neutral",
+          "detail": "Choose delivery vectors based on the audience: LMS, e-learning, newsletter, posters, workshops, micro-learning.",
+          "exam": "LMS and initial/ongoing/targeted typologies: §5.6 syllabus — absent from the 4 provided books."
+        },
+        {
+          "id": "formation",
+          "label": "Training",
+          "sub": "initial / ongoing / targeted",
+          "x": 380,
+          "y": 60,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Tailor content to risk and role: initial, ongoing, role-targeted, or corrective training after an incident.",
+          "exam": "Targeted training is more effective than a single module forced on everyone."
+        },
+        {
+          "id": "gamification",
+          "label": "Gamification",
+          "sub": "challenges, badges",
+          "x": 560,
+          "y": 60,
+          "w": 160,
+          "h": 62,
+          "kind": "neutral",
+          "detail": "Game-like mechanisms (leaderboards, badges, challenges) that boost engagement and retention of behaviors.",
+          "exam": "Gamification serves the behavioral objective: it is not an end in itself."
+        },
+        {
+          "id": "metriques",
+          "label": "Metrics",
+          "sub": "security KPIs",
+          "x": 560,
+          "y": 300,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Track participation rate, pass rate, click rate, reporting rate, and time-to-report to measure real effectiveness.",
+          "exam": "Reporting rate is a better indicator than click rate alone."
+        },
+        {
+          "id": "ajustement",
+          "label": "Adjustment",
+          "sub": "continuous improvement",
+          "x": 380,
+          "y": 300,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Revise modules, channels, and targets based on results: an iterative program, not a one-off campaign.",
+          "exam": "An effective program is data-driven, not driven by the number of sessions delivered."
+        }
+      ],
+      "edges": [
+        { "from": "objectifs", "to": "baseline", "label": "measure" },
+        { "from": "baseline", "to": "formation", "label": "target" },
+        { "from": "canaux", "to": "formation", "label": "deliver" },
+        { "from": "formation", "to": "gamification", "label": "engage" },
+        { "from": "gamification", "to": "metriques", "label": "observe" },
+        { "from": "metriques", "to": "ajustement", "label": "analyze" },
+        { "from": "ajustement", "to": "formation", "label": "loop" }
+      ],
+      "sequence": ["objectifs", "baseline", "canaux", "formation", "gamification", "metriques", "ajustement"],
+      "quiz": {
+        "question": "Which element measures the starting level before the first training?",
+        "answer": "baseline"
+      }
+    },
+    {
+      "id": "d-5.6-L02-phishing-simule",
+      "kind": "flow",
+      "title": "Simulated Phishing Campaign: From Click to Measurement",
+      "subtitle": "A simulation only has value if it leads to immediate learning and actionable metrics.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "cible",
+          "label": "Target List",
+          "sub": "audience and scenario",
+          "x": 20,
+          "y": 70,
+          "w": 160,
+          "h": 62,
+          "kind": "neutral",
+          "detail": "Choose the audience, scenario (BEC, fake portal, quishing), and difficulty based on the baseline and business risk.",
+          "exam": "BEC and remote work/OPSEC: SY0-801 §5.6 syllabus — absent from the 4 provided books."
+        },
+        {
+          "id": "envoi",
+          "label": "Delivery",
+          "sub": "simulated phishing",
+          "x": 200,
+          "y": 70,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Controlled message delivery with technical tracking: open, click, credential entry, and reporting.",
+          "exam": "The simulation must be authorized and scoped like a test, with an escalation contact."
+        },
+        {
+          "id": "clic",
+          "label": "Click",
+          "sub": "susceptibility",
+          "x": 380,
+          "y": 70,
+          "w": 160,
+          "h": 62,
+          "kind": "risk",
+          "detail": "Measured risky behavior: clicking the link, opening an attachment, or entering credentials on a fake page.",
+          "exam": "A click is not a real incident, but it reveals a human vulnerability to address."
+        },
+        {
+          "id": "signal",
+          "label": "Reporting",
+          "sub": "user reporting",
+          "x": 560,
+          "y": 70,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "The employee uses the report button or notifies the SOC: this is the expected behavior the campaign should reinforce.",
+          "exam": "A good program rewards reporting, even when the employee clicked before realizing."
+        },
+        {
+          "id": "correctif",
+          "label": "Corrective Training",
+          "sub": "just-in-time training",
+          "x": 560,
+          "y": 300,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Immediate explanation page after a click, or short micro-training after reporting, reminding of good habits.",
+          "exam": "Just-in-time remediation is more effective than a module delayed by several weeks."
+        },
+        {
+          "id": "metriques",
+          "label": "Metrics",
+          "sub": "click / report rate",
+          "x": 380,
+          "y": 300,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Calculates click rate, reporting rate, and time-to-report, then compares with the previous campaign and baseline.",
+          "exam": "Rising reporting rate and falling click rate = effective program."
+        }
+      ],
+      "edges": [
+        { "from": "cible", "to": "envoi", "label": "prepare" },
+        { "from": "envoi", "to": "clic", "label": "message received" },
+        { "from": "clic", "to": "signal", "label": "detection" },
+        { "from": "signal", "to": "correctif", "label": "learn" },
+        { "from": "correctif", "to": "metriques", "label": "measure" },
+        { "from": "metriques", "to": "cible", "label": "new campaign" }
+      ],
+      "sequence": ["cible", "envoi", "clic", "signal", "correctif", "metriques"],
+      "quiz": {
+        "question": "Which action turns an accidental click into immediate learning?",
+        "answer": "correctif"
+      }
+    }
+  ]
+}

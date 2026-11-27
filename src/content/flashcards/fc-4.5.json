@@ -1,0 +1,127 @@
+{
+  "id": "fc-4.5",
+  "objective": "4.5",
+  "title": "Identity and Access Management",
+  "cards": [
+    {
+      "id": "c-4.5-01",
+      "front": "Provisioning / deprovisioning",
+      "back": "Create the identity with proper rights, then disable the account, revoke sessions and tokens, and transfer asset ownership when no longer needed.",
+      "tag": "Lifecycle"
+    },
+    {
+      "id": "c-4.5-02",
+      "front": "Identity proofing",
+      "back": "Verifying that the real person matches the claimed identity before issuing credentials. MFA does not protect against a fake identity.",
+      "tag": "Lifecycle"
+    },
+    {
+      "id": "c-4.5-03",
+      "front": "The six account types",
+      "back": "User, privileged global, privileged local, service, third-party, emergency access.",
+      "tag": "Accounts"
+    },
+    {
+      "id": "c-4.5-04",
+      "front": "Service account vs emergency account",
+      "back": "Service = automated task, dedicated and least privilege; emergency = break-glass access locked day-to-day with a logged procedure.",
+      "tag": "Accounts"
+    },
+    {
+      "id": "c-4.5-05",
+      "front": "Federation",
+      "back": "Trust between distinct domains: an identity provider authenticates and the service accepts the assertion without creating a local account.",
+      "tag": "Federation"
+    },
+    {
+      "id": "c-4.5-06",
+      "front": "SSO",
+      "back": "Single Sign-On: one authentication for multiple applications. Convenient, but centralizes risk if the identity account is compromised.",
+      "tag": "Federation"
+    },
+    {
+      "id": "c-4.5-07",
+      "front": "LDAP",
+      "back": "Lightweight Directory Access Protocol: querying a directory of accounts, groups, and attributes. It is not a federation protocol.",
+      "tag": "Federation"
+    },
+    {
+      "id": "c-4.5-08",
+      "front": "SAML",
+      "back": "Signed assertions exchanged between IdP and service provider: federated authentication.",
+      "tag": "Federation"
+    },
+    {
+      "id": "c-4.5-09",
+      "front": "OAuth",
+      "back": "Delegating authorization to a third-party app with limited scopes, without sharing the password. Authorization ≠ authentication.",
+      "tag": "Federation"
+    },
+    {
+      "id": "c-4.5-10",
+      "front": "The three MFA factors",
+      "back": "Something you know (password, PIN), something you have (token, OTP), something you are (biometrics). Two factors from the same category are not MFA.",
+      "tag": "MFA"
+    },
+    {
+      "id": "c-4.5-11",
+      "front": "Hard token / soft token / OTP",
+      "back": "Dedicated hardware token; software token in an app; one-time password (TOTP/HOTP).",
+      "tag": "MFA"
+    },
+    {
+      "id": "c-4.5-12",
+      "front": "Biometrics and backup code",
+      "back": "Biometrics = \"something you are\" factor, irrevocable data; backup code = single-use recovery factor, stored offline.",
+      "tag": "MFA"
+    },
+    {
+      "id": "c-4.5-13",
+      "front": "RBAC",
+      "back": "Role-Based Access Control: permissions attached to a role, inherited by users. Easy to audit and revoke.",
+      "tag": "Models"
+    },
+    {
+      "id": "c-4.5-14",
+      "front": "Rule-based / time-based",
+      "back": "Explicit rules applied to all (ACL, IP range); allowed time window (hours, expiration).",
+      "tag": "Models"
+    },
+    {
+      "id": "c-4.5-15",
+      "front": "DAC",
+      "back": "Discretionary Access Control: the resource owner decides who has access. Flexible, but permission sprawl is hard to track.",
+      "tag": "Models"
+    },
+    {
+      "id": "c-4.5-16",
+      "front": "MAC",
+      "back": "Mandatory Access Control: security labels and central policy enforce the decision, even against the owner.",
+      "tag": "Models"
+    },
+    {
+      "id": "c-4.5-17",
+      "front": "JIT",
+      "back": "Just-in-time access: elevated privilege granted for a short duration, often approved, with automatic revocation.",
+      "tag": "Models"
+    },
+    {
+      "id": "c-4.5-18",
+      "front": "Access review",
+      "back": "Periodic review by the resource owner: every permission must remain justified and revocations must be logged.",
+      "tag": "Management"
+    },
+    {
+      "id": "c-4.5-19",
+      "front": "Passkey / passwordless",
+      "back": "Passkey = phishing-resistant cryptographic credential; passwordless = authentication without a memorized secret.",
+      "tag": "Passwords"
+    },
+    {
+      "id": "c-4.5-20",
+      "front": "30-day rotation",
+      "back": "Outdated recommendation: length, breach-checking, and MFA take priority per NIST SP 800-63B.",
+      "tag": "Exam Trap"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "diagrams": [
+    {
+      "id": "d-5.1-grc-pyramid",
+      "kind": "matrix",
+      "title": "GRC Artifacts Pyramid",
+      "subtitle": "Four categories, four different questions. Click a cell to see the exact role of each artifact.",
+      "matrix": {
+        "columns": ["Policy", "Standard", "Procedure / SOP", "Plan"],
+        "rows": [
+          {
+            "label": "Key question",
+            "cells": [
+              { "text": "What must we comply with?", "detail": "A policy states a high-level intent, approved by leadership, that applies to the entire organization." },
+              { "text": "What minimum level?", "detail": "A standard sets a measurable, verifiable requirement: encryption, password length, baseline." },
+              { "text": "How to do it?", "detail": "A procedure describes repeatable steps for a task: account revocation, restoration, runbook." },
+              { "text": "Who does what in a crisis?", "detail": "A plan organizes continuity or recovery: BCP for business operations, DRP for systems." }
+            ]
+          },
+          {
+            "label": "Nature",
+            "cells": [
+              { "text": "Mandatory and directive", "detail": "Enforceable across all personnel; its authority comes from executive approval, not publication." },
+              { "text": "Mandatory and technical", "detail": "Applicable and measurable: compliance can be verified through a control or scan." },
+              { "text": "Operational and repeatable", "detail": "Follows a validated sequence of steps to reduce improvisation under pressure." },
+              { "text": "Strategic and exceptional", "detail": "Activated during a disruption; it defines roles, timelines, and resources." }
+            ]
+          },
+          {
+            "label": "Example in §5.1",
+            "cells": [
+              { "text": "AUP, BYOD, clean desk, privacy", "detail": "Ten policies are listed in the objectives: AUP, BYOD, clean desk, information security, IR, classification/retention, access control, disposal, vulnerability disclosure, privacy." },
+              { "text": "Baseline, password, encryption", "detail": "The objectives also cite physical standards and RFCs as external references." },
+              { "text": "SOPs and runbooks", "detail": "Standard operating procedures and execution guides for operations." },
+              { "text": "BCP and DRP", "detail": "Business continuity plan and disaster recovery plan." }
+            ]
+          },
+          {
+            "label": "Maintenance evidence",
+            "cells": [
+              { "text": "Owner + approval + review", "detail": "A read acknowledgement completes distribution." },
+              { "text": "Compliance check", "detail": "The baseline is compared against the actual system configuration." },
+              { "text": "Execution and logging", "detail": "The procedure is kept up to date when the environment changes." },
+              { "text": "Tests and exercises", "detail": "An untested plan demonstrates no recovery capability." }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

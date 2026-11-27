@@ -1,0 +1,121 @@
+{
+  "id": "fc-4.3",
+  "objective": "4.3",
+  "title": "Vulnerability Management",
+  "cards": [
+    {
+      "id": "c-4.3-01",
+      "front": "The 5 steps of the loop",
+      "back": "Identify → prioritize → remediate → verify → report.",
+      "tag": "Basics"
+    },
+    {
+      "id": "c-4.3-02",
+      "front": "Authenticated scan",
+      "back": "With credentials: sees installed versions and patches, far fewer false positives.",
+      "tag": "Identification"
+    },
+    {
+      "id": "c-4.3-03",
+      "front": "Unauthenticated scan",
+      "back": "Without credentials: attacker's view, only exposed services and banners.",
+      "tag": "Identification"
+    },
+    {
+      "id": "c-4.3-04",
+      "front": "IPAM",
+      "back": "Internet Protocol Address Management: inventory of IP ranges and addresses, knowing which asset owns an IP.",
+      "tag": "Identification"
+    },
+    {
+      "id": "c-4.3-05",
+      "front": "CSPM",
+      "back": "Cloud Security Posture Management: continuously detects cloud misconfigurations (public buckets, overly broad IAM).",
+      "tag": "Identification"
+    },
+    {
+      "id": "c-4.3-06",
+      "front": "Source code review",
+      "back": "Code review (SAST/DAST) to find hardcoded secrets, injections, and vulnerable dependencies before production.",
+      "tag": "Identification"
+    },
+    {
+      "id": "c-4.3-07",
+      "front": "Severity assessment",
+      "back": "Severity evaluation: CVSS, exposure, asset criticality, and known exploit combined.",
+      "tag": "Prioritization"
+    },
+    {
+      "id": "c-4.3-08",
+      "front": "Role of a pentest report",
+      "back": "It proves a vulnerability is actually exploitable in context, which a scanner only assumes.",
+      "tag": "Prioritization"
+    },
+    {
+      "id": "c-4.3-09",
+      "front": "Critical CVSS vs non-critical asset",
+      "back": "A critical CVSS on an isolated asset may rank below an exposed high on a critical asset: prioritize in context.",
+      "tag": "Exam Trap"
+    },
+    {
+      "id": "c-4.3-10",
+      "front": "CVSS / CVE",
+      "back": "CVSS = severity score; CVE = enumeration reference for a public vulnerability.",
+      "tag": "Prioritization"
+    },
+    {
+      "id": "c-4.3-11",
+      "front": "Remediation",
+      "back": "Patch, update, hardening, disabling service, segmentation, or replacing an EOL product.",
+      "tag": "Remediation"
+    },
+    {
+      "id": "c-4.3-12",
+      "front": "Compensating control",
+      "back": "Alternative measure when patching is impossible: WAF, segmentation, enhanced monitoring.",
+      "tag": "Remediation"
+    },
+    {
+      "id": "c-4.3-13",
+      "front": "Risk acceptance",
+      "back": "Documented decision by the asset owner, with compensating control and review date — never simply forgetting.",
+      "tag": "Remediation"
+    },
+    {
+      "id": "c-4.3-14",
+      "front": "Verification",
+      "back": "Rescan with the same method after remediation, before closing the ticket.",
+      "tag": "Verification"
+    },
+    {
+      "id": "c-4.3-15",
+      "front": "Why rescan with the same method?",
+      "back": "If the method changes, the disappearance of the finding may come from the scanner, not the fix.",
+      "tag": "Verification"
+    },
+    {
+      "id": "c-4.3-16",
+      "front": "Internal reporting",
+      "back": "Dashboards, remediation timelines, trends: drives prioritization and SLAs.",
+      "tag": "Reporting"
+    },
+    {
+      "id": "c-4.3-17",
+      "front": "External reporting",
+      "back": "Customers, partners, regulators: contractual or legal obligations, approved disclosure.",
+      "tag": "Reporting"
+    },
+    {
+      "id": "c-4.3-18",
+      "front": "Bug bounty program",
+      "back": "Public reward program for discovering flaws, with defined scope and rules.",
+      "tag": "Reporting"
+    },
+    {
+      "id": "c-4.3-19",
+      "front": "Responsible disclosure",
+      "back": "Reporting channel, safe harbor for the researcher, and remediation window before publication.",
+      "tag": "Reporting"
+    }
+  ]
+}

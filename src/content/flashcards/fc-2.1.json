@@ -1,0 +1,115 @@
+{
+  "id": "fc-2.1",
+  "objective": "2.1",
+  "title": "Threat and Vulnerability Characteristics",
+  "cards": [
+    {
+      "id": "c-2.1-01",
+      "front": "Threat",
+      "back": "Actor, event, or capability that can exploit a weakness to harm an asset.",
+      "tag": "Basics"
+    },
+    {
+      "id": "c-2.1-02",
+      "front": "Vulnerability",
+      "back": "Weakness in a system, process, or control that can be exploited by a threat.",
+      "tag": "Basics"
+    },
+    {
+      "id": "c-2.1-03",
+      "front": "Risk (formula)",
+      "back": "Vulnerability × threat, or likelihood × impact.",
+      "tag": "Basics"
+    },
+    {
+      "id": "c-2.1-04",
+      "front": "Likelihood",
+      "back": "Probability that a threat materializes: exposure, ease of exploitation, threat actor activity.",
+      "tag": "Assessment"
+    },
+    {
+      "id": "c-2.1-05",
+      "front": "Impact",
+      "back": "Consequence if exploitation succeeds: depends on asset criticality and affected services.",
+      "tag": "Assessment"
+    },
+    {
+      "id": "c-2.1-06",
+      "front": "Threat feed",
+      "back": "Continuous stream of IOCs, TTPs, and vulnerability advisories feeding detection and threat monitoring.",
+      "tag": "Intelligence"
+    },
+    {
+      "id": "c-2.1-07",
+      "front": "Intelligence sources",
+      "back": "Internal (logs, EDR, SIEM, past incidents) and external (feeds, CERT/ISAC, vendors, agencies).",
+      "tag": "Intelligence"
+    },
+    {
+      "id": "c-2.1-08",
+      "front": "Cyber Kill Chain: 7 phases",
+      "back": "Reconnaissance, weaponization, delivery, exploitation, installation, command & control, actions on objectives.",
+      "tag": "Lifecycle"
+    },
+    {
+      "id": "c-2.1-09",
+      "front": "First phase of the kill chain",
+      "back": "Reconnaissance: gathering information on the target, often invisible in logs.",
+      "tag": "Lifecycle"
+    },
+    {
+      "id": "c-2.1-10",
+      "front": "CVSS",
+      "back": "Common Vulnerability Scoring System: 0 to 10 score of a flaw's intrinsic severity.",
+      "tag": "CVSS/CVE"
+    },
+    {
+      "id": "c-2.1-11",
+      "front": "The 3 CVSS metric groups",
+      "back": "Base (intrinsic), Temporal (exploit/patch), Environmental (context and controls).",
+      "tag": "CVSS/CVE"
+    },
+    {
+      "id": "c-2.1-12",
+      "front": "CVSS score 9.8",
+      "back": "Critical — but severity alone does not dictate priority without exposure context.",
+      "tag": "CVSS/CVE"
+    },
+    {
+      "id": "c-2.1-13",
+      "front": "CVE",
+      "back": "Common Vulnerabilities and Exposures: unique public identifier (CVE-2024-xxxx), not a score.",
+      "tag": "CVSS/CVE"
+    },
+    {
+      "id": "c-2.1-14",
+      "front": "CWE",
+      "back": "Common Weakness Enumeration: classification of code weakness types (e.g., CWE-79 = XSS).",
+      "tag": "CVSS/CVE"
+    },
+    {
+      "id": "c-2.1-15",
+      "front": "Highest priority",
+      "back": "Internet-exposed + public exploit + critical asset: immediate remediation.",
+      "tag": "Prioritization"
+    },
+    {
+      "id": "c-2.1-16",
+      "front": "Compensating control",
+      "back": "Measure that reduces exploitability when patching is impossible; lowers residual risk.",
+      "tag": "Prioritization"
+    },
+    {
+      "id": "c-2.1-17",
+      "front": "Severity vs priority",
+      "back": "Severity is technical (CVSS); priority incorporates exposure, criticality, exploit availability, and patch status.",
+      "tag": "Prioritization"
+    },
+    {
+      "id": "c-2.1-18",
+      "front": "Post-remediation verification",
+      "back": "A rescan or verification is required to close the vulnerability management loop.",
+      "tag": "Prioritization"
+    }
+  ]
+}

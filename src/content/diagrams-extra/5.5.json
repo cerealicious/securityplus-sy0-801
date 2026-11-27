@@ -1,0 +1,84 @@
+{
+  "diagrams": [
+    {
+      "id": "d-5.5-frameworks",
+      "kind": "flow",
+      "title": "Three Frameworks for Analyzing an Intrusion",
+      "subtitle": "From attack phase to technique, then to attribution: each framework answers a different question.",
+      "modes": ["explore", "quiz", "order"],
+      "sequence": ["observe", "killchain", "attack", "diamond", "detect"],
+      "quiz": {
+        "question": "Which framework links adversary, victim, capability, and infrastructure?",
+        "answer": "diamond"
+      },
+      "nodes": [
+        {
+          "id": "observe",
+          "label": "Observed indicator",
+          "sub": "alert, IOC, log",
+          "x": 20,
+          "y": 110,
+          "w": 150,
+          "h": 62,
+          "kind": "neutral",
+          "detail": "Starting point: an alert, an IOC, or suspicious behavior collected by monitoring.",
+          "exam": "An indicator alone does not tell the story of the intrusion: it must be placed in context."
+        },
+        {
+          "id": "killchain",
+          "label": "Cyber Kill Chain",
+          "sub": "7 sequential phases",
+          "x": 190,
+          "y": 110,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Reconnaissance, weaponization, delivery, exploitation, installation, command and control, actions on objectives.",
+          "exam": "The Kill Chain describes a phased progression; it does not catalog techniques."
+        },
+        {
+          "id": "attack",
+          "label": "MITRE ATT&CK",
+          "sub": "tactics × techniques",
+          "x": 370,
+          "y": 110,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Matrix of adversary tactics and techniques: Enterprise includes 14 tactics in its current version.",
+          "exam": "The table in the 11 Strategies book shows 11: that is an older version."
+        },
+        {
+          "id": "diamond",
+          "label": "Diamond Model",
+          "sub": "4 vertices + metadata",
+          "x": 550,
+          "y": 110,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Adversary, victim, capability, infrastructure. Enables pivoting from an indicator to the threat actor.",
+          "exam": "Detailed structure not covered by the provided books: remember the four vertices."
+        },
+        {
+          "id": "detect",
+          "label": "Improved detection",
+          "sub": "coverage, CTI, purple team",
+          "x": 730,
+          "y": 110,
+          "w": 160,
+          "h": 62,
+          "kind": "neutral",
+          "detail": "Use these frameworks to identify detection blind spots, guide CTI, and prepare exercises.",
+          "exam": "ATT&CK is widely used to measure detection coverage and prioritize rules."
+        }
+      ],
+      "edges": [
+        { "from": "observe", "to": "killchain", "label": "locate" },
+        { "from": "killchain", "to": "attack", "label": "name" },
+        { "from": "attack", "to": "diamond", "label": "pivot" },
+        { "from": "diamond", "to": "detect", "label": "improve" }
+      ]
+    }
+  ]
+}

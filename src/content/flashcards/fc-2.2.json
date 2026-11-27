@@ -1,0 +1,115 @@
+{
+  "id": "fc-2.2",
+  "objective": "2.2",
+  "title": "Threat Actors and Motivations",
+  "cards": [
+    {
+      "id": "c-2.2-01",
+      "front": "Crime syndicate / organized crime",
+      "back": "Structured group for profit: fraud, ransomware, data theft and resale.",
+      "tag": "Actors"
+    },
+    {
+      "id": "c-2.2-02",
+      "front": "Terrorist",
+      "back": "Actor using violence or coercion for a cause: fear / chaos, ideological motivation.",
+      "tag": "Actors"
+    },
+    {
+      "id": "c-2.2-03",
+      "front": "Unskilled attacker",
+      "back": "Low skill level, public scripts and tools; notoriety or curiosity.",
+      "tag": "Actors"
+    },
+    {
+      "id": "c-2.2-04",
+      "front": "Hacktivist",
+      "back": "Collective motivated by an ideological or political cause; influence and notoriety.",
+      "tag": "Actors"
+    },
+    {
+      "id": "c-2.2-05",
+      "front": "Insider",
+      "back": "Authorized person with legitimate access: revenge, money, or espionage.",
+      "tag": "Actors"
+    },
+    {
+      "id": "c-2.2-06",
+      "front": "Accidental / unintentional actor",
+      "back": "User who makes a mistake without intent: misconfiguration, clicking on phishing.",
+      "tag": "Actors"
+    },
+    {
+      "id": "c-2.2-07",
+      "front": "Competitor",
+      "back": "Economic rival: intellectual property theft and espionage.",
+      "tag": "Actors"
+    },
+    {
+      "id": "c-2.2-08",
+      "front": "State-sponsored actor",
+      "back": "Nation-state-backed group, often an APT: espionage, influence, intellectual property.",
+      "tag": "Actors"
+    },
+    {
+      "id": "c-2.2-09",
+      "front": "Financial motivation",
+      "back": "Monetary gain: fraud, ransom, data resale — typical of organized crime.",
+      "tag": "Motivations"
+    },
+    {
+      "id": "c-2.2-10",
+      "front": "Extortion",
+      "back": "Blackmail or ransom: threat of disclosure or destruction.",
+      "tag": "Motivations"
+    },
+    {
+      "id": "c-2.2-11",
+      "front": "Espionage / intellectual property",
+      "back": "Gathering secret information; IP = theft of trade secrets or research.",
+      "tag": "Motivations"
+    },
+    {
+      "id": "c-2.2-12",
+      "front": "Fear / chaos",
+      "back": "Causing panic and disruption; typical of terrorism or destructive campaigns.",
+      "tag": "Motivations"
+    },
+    {
+      "id": "c-2.2-13",
+      "front": "Notoriety / curiosity",
+      "back": "Seeking recognition or exploring without financial gain: profile of the unskilled attacker.",
+      "tag": "Motivations"
+    },
+    {
+      "id": "c-2.2-14",
+      "front": "Revenge",
+      "back": "Retaliation against an employer or third party; classic insider motivation.",
+      "tag": "Motivations"
+    },
+    {
+      "id": "c-2.2-15",
+      "front": "Ideological / political / ethical motivation",
+      "back": "Acting for a cause, political goal, or unauthorized whistleblowing.",
+      "tag": "Motivations"
+    },
+    {
+      "id": "c-2.2-16",
+      "front": "Influence",
+      "back": "Shaping opinion or behavior, often through disinformation.",
+      "tag": "Motivations"
+    },
+    {
+      "id": "c-2.2-17",
+      "front": "Attribute 1: internal / external",
+      "back": "Internal = already holds legitimate access; external = must cross the perimeter.",
+      "tag": "Attributes"
+    },
+    {
+      "id": "c-2.2-18",
+      "front": "Attributes 2 and 3",
+      "back": "Resources / funding (budget, tools) and sophistication / capability (scripts to zero-days).",
+      "tag": "Attributes"
+    }
+  ]
+}

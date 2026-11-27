@@ -1,0 +1,132 @@
+{
+  "diagrams": [
+    {
+      "id": "d-vuln-loop",
+      "kind": "flow",
+      "title": "The Vulnerability Management Loop",
+      "subtitle": "Identification → prioritization → remediation → verification → reporting. Click a step then test the order.",
+      "modes": [
+        "explore",
+        "order",
+        "quiz"
+      ],
+      "nodes": [
+        {
+          "id": "scan",
+          "label": "Identification",
+          "sub": "scanner, IPAM, CSPM, code",
+          "x": 12,
+          "y": 80,
+          "w": 152,
+          "h": 66,
+          "kind": "step",
+          "detail": "Authenticated or unauthenticated scan, IPAM inventory, cloud posture CSPM, and source code review. Produces a list of candidate vulnerabilities, not a decision.",
+          "exam": "IPAM and CSPM are outside the books: objective §4.3."
+        },
+        {
+          "id": "prioritize",
+          "label": "Prioritization",
+          "sub": "severity, context, pentest",
+          "x": 180,
+          "y": 80,
+          "w": 152,
+          "h": 66,
+          "kind": "step",
+          "detail": "Combines CVSS, exposure, asset criticality, and exploit availability. The pentest report provides proof of exploitability.",
+          "exam": "A critical on an isolated asset may come after an exposed high: reason in context."
+        },
+        {
+          "id": "remediate",
+          "label": "Remediation",
+          "sub": "patch, hardening, compensation",
+          "x": 348,
+          "y": 80,
+          "w": 160,
+          "h": 66,
+          "kind": "step",
+          "detail": "Patch, update, disable service, segment. If patching is impossible: compensating control and risk acceptance documented by the owner.",
+          "exam": "'We cannot patch' never justifies ignoring it: a written, dated exception is required."
+        },
+        {
+          "id": "verify",
+          "label": "Verification",
+          "sub": "re-scan, same method",
+          "x": 524,
+          "y": 80,
+          "w": 150,
+          "h": 66,
+          "kind": "step",
+          "detail": "Re-scan with the same parameters to prove the vulnerability is gone before closing the ticket.",
+          "exam": "Changing the scan method can make a finding disappear without fixing anything."
+        },
+        {
+          "id": "report",
+          "label": "Reporting",
+          "sub": "internal, external, bounty",
+          "x": 524,
+          "y": 188,
+          "w": 150,
+          "h": 66,
+          "kind": "artifact",
+          "detail": "Internal reports to track SLAs, external reports for compliance obligations, bug bounty program and responsible disclosure to collaborate with researchers.",
+          "exam": "Reporting feeds the prioritization of the next cycle: the loop is closed."
+        },
+        {
+          "id": "risk",
+          "label": "Accepted risk",
+          "sub": "compensated exception",
+          "x": 348,
+          "y": 188,
+          "w": 160,
+          "h": 66,
+          "kind": "risk",
+          "detail": "Alternative exit from remediation: the owner formally accepts the risk, with a compensating control and review date.",
+          "exam": "An acceptance without a compensating control or expiration date is invalid."
+        }
+      ],
+      "edges": [
+        {
+          "from": "scan",
+          "to": "prioritize",
+          "label": "findings"
+        },
+        {
+          "from": "prioritize",
+          "to": "remediate",
+          "label": "work order"
+        },
+        {
+          "from": "remediate",
+          "to": "verify",
+          "label": "fix applied"
+        },
+        {
+          "from": "verify",
+          "to": "report",
+          "label": "closure evidence"
+        },
+        {
+          "from": "remediate",
+          "to": "risk",
+          "label": "if fix impossible"
+        },
+        {
+          "from": "risk",
+          "to": "report",
+          "label": "documented exception"
+        }
+      ],
+      "sequence": [
+        "scan",
+        "prioritize",
+        "remediate",
+        "verify",
+        "report"
+      ],
+      "quiz": {
+        "question": "Which step precedes verification and also precedes any risk acceptance?",
+        "answer": "remediate"
+      }
+    }
+  ]
+}

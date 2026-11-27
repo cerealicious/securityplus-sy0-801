@@ -1,0 +1,107 @@
+{
+  "diagrams": [
+    {
+      "id": "d-5.2-risk-flow",
+      "kind": "flow",
+      "title": "The Risk Management Process",
+      "subtitle": "Click a step, then try to reconstruct the order.",
+      "modes": [
+        "explore",
+        "quiz",
+        "order"
+      ],
+      "nodes": [
+        {
+          "id": "identify",
+          "label": "Identify",
+          "sub": "Assets + stakeholders",
+          "x": 25,
+          "y": 45,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Inventory of assets and owners: you can only protect what you know exists.",
+          "exam": "Without asset identification, no analysis is reliable."
+        },
+        {
+          "id": "assess",
+          "label": "Assess",
+          "sub": "Scoring, categories",
+          "x": 225,
+          "y": 45,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Classify risks by category and assign a score.",
+          "exam": "Assessment ≠ analysis: assessment classifies, analysis goes deeper."
+        },
+        {
+          "id": "analyze",
+          "label": "Analyze",
+          "sub": "Impact × likelihood",
+          "x": 425,
+          "y": 45,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Qualitative (experts) or quantitative (SLE × ARO = ALE).",
+          "exam": "Impact × likelihood gives criticality; ALE gives annual financial loss."
+        },
+        {
+          "id": "treat",
+          "label": "Treat",
+          "sub": "Avoid / Transfer / Mitigate / Accept",
+          "x": 625,
+          "y": 45,
+          "w": 160,
+          "h": 62,
+          "kind": "risk",
+          "detail": "Four options: avoid, transfer, mitigate, accept. Acceptance is a dated last resort.",
+          "exam": "Accepting does not eliminate the risk: it is a \"fix\" on paper."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor",
+          "sub": "Register + reviews",
+          "x": 425,
+          "y": 190,
+          "w": 160,
+          "h": 62,
+          "kind": "neutral",
+          "detail": "Risk register, communication, periodic reviews, and residual risk.",
+          "exam": "Residual risk always remains after treatment."
+        }
+      ],
+      "edges": [
+        {
+          "from": "identify",
+          "to": "assess"
+        },
+        {
+          "from": "assess",
+          "to": "analyze"
+        },
+        {
+          "from": "analyze",
+          "to": "treat"
+        },
+        {
+          "from": "treat",
+          "to": "monitor",
+          "label": "loop"
+        }
+      ],
+      "sequence": [
+        "identify",
+        "assess",
+        "analyze",
+        "treat",
+        "monitor"
+      ],
+      "quiz": {
+        "question": "Which step includes purchasing insurance?",
+        "answer": "treat"
+      }
+    }
+  ]
+}

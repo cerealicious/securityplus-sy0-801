@@ -1,0 +1,115 @@
+{
+  "id": "fc-2.6",
+  "objective": "2.6",
+  "title": "AI-Related Threats",
+  "cards": [
+    {
+      "id": "c-2.6-01",
+      "front": "Model manipulation",
+      "back": "Unauthorized modification of a model's behavior or parameters.",
+      "tag": "Model"
+    },
+    {
+      "id": "c-2.6-02",
+      "front": "Poisoning",
+      "back": "Training data poisoning: the model learns deceptive behavior. Acts upstream.",
+      "tag": "Model"
+    },
+    {
+      "id": "c-2.6-03",
+      "front": "Evasion (AI)",
+      "back": "Adversarial inputs crafted to bypass detection at inference time. Acts downstream.",
+      "tag": "Model"
+    },
+    {
+      "id": "c-2.6-04",
+      "front": "Prompt injection",
+      "back": "Hostile instruction hidden in processed content that hijacks the original prompt.",
+      "tag": "Usage"
+    },
+    {
+      "id": "c-2.6-05",
+      "front": "Jailbreaking",
+      "back": "Bypassing the model's safety guardrails to obtain prohibited content.",
+      "tag": "Usage"
+    },
+    {
+      "id": "c-2.6-06",
+      "front": "Hallucination",
+      "back": "Fluent response that is factually false or fabricated.",
+      "tag": "Output"
+    },
+    {
+      "id": "c-2.6-07",
+      "front": "Bias (AI)",
+      "back": "Systematic bias in data or model producing discriminatory outcomes.",
+      "tag": "Output"
+    },
+    {
+      "id": "c-2.6-08",
+      "front": "Explainability",
+      "back": "Ability to justify why the model produced a given output.",
+      "tag": "Governance"
+    },
+    {
+      "id": "c-2.6-09",
+      "front": "Data loss (AI)",
+      "back": "Confidential data disclosed, retained, or leaked through the AI system.",
+      "tag": "Data"
+    },
+    {
+      "id": "c-2.6-10",
+      "front": "Privacy (AI)",
+      "back": "Personal data collected or processed without legal basis or control.",
+      "tag": "Data"
+    },
+    {
+      "id": "c-2.6-11",
+      "front": "Ethical considerations",
+      "back": "Fairness, transparency, accountability, and societal impact of AI systems.",
+      "tag": "Governance"
+    },
+    {
+      "id": "c-2.6-12",
+      "front": "Session hijacking (AI)",
+      "back": "Stealing or reusing a user's or AI agent's session to act with their privileges.",
+      "tag": "Usage"
+    },
+    {
+      "id": "c-2.6-13",
+      "front": "Code execution (AI)",
+      "back": "A tool-enabled agent tricked into executing unauthorized code or commands.",
+      "tag": "Usage"
+    },
+    {
+      "id": "c-2.6-14",
+      "front": "Poisoning vs evasion",
+      "back": "Poisoning = training (upstream); evasion = inference (downstream).",
+      "tag": "Exam Trap"
+    },
+    {
+      "id": "c-2.6-15",
+      "front": "Prompt injection vs jailbreaking",
+      "back": "Injection = hostile content; jailbreaking = bypassing model rules.",
+      "tag": "Exam Trap"
+    },
+    {
+      "id": "c-2.6-16",
+      "front": "AI agents and privileges",
+      "back": "Treat an AI agent like a privileged account: least privilege, logs, guardrails, reversibility.",
+      "tag": "Defense"
+    },
+    {
+      "id": "c-2.6-17",
+      "front": "Why this chapter is \"beyond textbooks\"",
+      "back": "Textbooks discuss AI as a defensive tool (EDR, UEBA), never as a threat vector. Source: exam objective §2.6.",
+      "tag": "Source"
+    },
+    {
+      "id": "c-2.6-18",
+      "front": "Number of concepts in §2.6",
+      "back": "13 official concepts: manipulation, poisoning, prompt injection, data loss, bias, explainability, hallucinations, jailbreaking, evasion, privacy, ethics, session hijacking, code execution.",
+      "tag": "Syllabus"
+    }
+  ]
+}

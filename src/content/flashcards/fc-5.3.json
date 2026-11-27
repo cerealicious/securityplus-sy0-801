@@ -1,0 +1,115 @@
+{
+  "id": "fc-5.3",
+  "objective": "5.3",
+  "title": "Third-Party Vendor Risk",
+  "cards": [
+    {
+      "id": "c-5.3-01",
+      "front": "Due diligence",
+      "back": "Structured vetting of a vendor before engagement: security, compliance, viability, references, and background.",
+      "tag": "Selection"
+    },
+    {
+      "id": "c-5.3-02",
+      "front": "EOI vs RFI",
+      "back": "EOI gauges market interest upfront; RFI requests general information on capabilities.",
+      "tag": "Selection"
+    },
+    {
+      "id": "c-5.3-03",
+      "front": "RFP vs RFQ",
+      "back": "RFP requests a solution proposal; RFQ requests a price for an already-defined service.",
+      "tag": "Selection"
+    },
+    {
+      "id": "c-5.3-04",
+      "front": "Conflict of interest",
+      "back": "Personal interest or another engagement that influences vendor selection: must be disclosed and addressed.",
+      "tag": "Selection"
+    },
+    {
+      "id": "c-5.3-05",
+      "front": "Vendor register",
+      "back": "Centralized inventory of third parties, their access, contracts, and internal/external owners.",
+      "tag": "Gap"
+    },
+    {
+      "id": "c-5.3-06",
+      "front": "SLA",
+      "back": "Service-level agreement: contractual commitment to measurable service levels with remedies for breach.",
+      "tag": "Agreements"
+    },
+    {
+      "id": "c-5.3-07",
+      "front": "SLO",
+      "back": "Service-level objective: numerical target (availability, latency) serving as the benchmark for the SLA.",
+      "tag": "Agreements"
+    },
+    {
+      "id": "c-5.3-08",
+      "front": "NDA",
+      "back": "Non-disclosure agreement: prohibits disclosure of exchanged information and restricts its use.",
+      "tag": "Agreements"
+    },
+    {
+      "id": "c-5.3-09",
+      "front": "MOU vs MOA",
+      "back": "MOU = intent to cooperate, low commitment; MOA = more binding obligations and responsibilities.",
+      "tag": "Agreements"
+    },
+    {
+      "id": "c-5.3-10",
+      "front": "MSA",
+      "back": "Master services agreement: enduring general terms applicable to all engagements.",
+      "tag": "Gap"
+    },
+    {
+      "id": "c-5.3-11",
+      "front": "SOW",
+      "back": "Statement of work: describes a specific engagement — scope, deliverables, schedule, pricing. Attaches to the MSA.",
+      "tag": "Gap"
+    },
+    {
+      "id": "c-5.3-12",
+      "front": "Rules of engagement",
+      "back": "Signed rules bounding a test: scope, techniques, hours, contacts, and emergency stop.",
+      "tag": "Agreements"
+    },
+    {
+      "id": "c-5.3-13",
+      "front": "Right to audit",
+      "back": "Clause authorizing verification of the vendor's controls via documentation or on-site.",
+      "tag": "Gap"
+    },
+    {
+      "id": "c-5.3-14",
+      "front": "Compliance attestation",
+      "back": "Formal declaration accompanied by a report (SOC 2, ISO 27001) proving adherence to a framework.",
+      "tag": "Monitoring"
+    },
+    {
+      "id": "c-5.3-15",
+      "front": "Service-level monitoring",
+      "back": "Continuous measurement of contractual metrics: availability, latency, recovery times.",
+      "tag": "Monitoring"
+    },
+    {
+      "id": "c-5.3-16",
+      "front": "Vendor assessment",
+      "back": "Periodic review of the security, compliance, and performance of a selected vendor.",
+      "tag": "Monitoring"
+    },
+    {
+      "id": "c-5.3-17",
+      "front": "Vendor lock-in",
+      "back": "Dependency making exit costly or impossible in the short term; addressed via exit clauses and open formats.",
+      "tag": "Gap"
+    },
+    {
+      "id": "c-5.3-18",
+      "front": "Third-party constraints",
+      "back": "Staffing, resource availability, environment, jurisdiction, ROI, insurance, lock-in, and ROE.",
+      "tag": "Limits"
+    }
+  ]
+}

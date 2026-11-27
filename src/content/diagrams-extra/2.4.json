@@ -1,0 +1,147 @@
+{
+  "diagrams": [
+    {
+      "id": "d-2.4-surface-matrix",
+      "kind": "matrix",
+      "title": "Vulnerabilities ↔ Impact Matrix",
+      "subtitle": "Each cell shows the most likely impact. Click a cell to understand the exploitation path.",
+      "modes": ["explore"],
+      "matrix": {
+        "columns": [
+          "Code execution",
+          "Data exfiltration",
+          "Access bypass",
+          "Denial of service",
+          "Persistence"
+        ],
+        "rows": [
+          {
+            "label": "Unsupported / unpatched system",
+            "cells": [
+              {
+                "text": "Known CVE with public exploit",
+                "detail": "A patch exists or existed: the attacker uses a public exploit against an exposed service."
+              },
+              {
+                "text": "Access to server files",
+                "detail": "An arbitrary read flaw allows retrieving data stored on the host."
+              },
+              {
+                "text": "Local privilege escalation",
+                "detail": "An unpatched kernel or system service grants administrator privileges."
+              },
+              {
+                "text": "Crash of vulnerable service",
+                "detail": "A memory management flaw causes the process to terminate."
+              },
+              {
+                "text": "Installation of a hidden service",
+                "detail": "The attacker installs persistent access on an unmonitored host."
+              }
+            ]
+          },
+          {
+            "label": "Application and code",
+            "cells": [
+              {
+                "text": "TOC/TOU, macros, secrets",
+                "detail": "The window between check and use is exploited; a macro or hardcoded secret triggers execution."
+              },
+              {
+                "text": "Verbose errors, exposed queries",
+                "detail": "An unhandled exception reveals data or credentials."
+              },
+              {
+                "text": "Injection / logic bypass",
+                "detail": "Input validation is insufficient or bypassed by malicious input."
+              },
+              {
+                "text": "Loop or excessive consumption",
+                "detail": "Unbounded input exhausts application CPU or memory."
+              },
+              {
+                "text": "Malicious update",
+                "detail": "A trusted update channel drops a persistent component."
+              }
+            ]
+          },
+          {
+            "label": "Identity and configuration",
+            "cells": [
+              {
+                "text": "Stolen service credentials",
+                "detail": "Stale or unrotated credentials allow running commands under a legitimate identity."
+              },
+              {
+                "text": "Excessive data permissions",
+                "detail": "A permission misconfiguration grants access to out-of-scope data."
+              },
+              {
+                "text": "Shadow IT / compromised IdP",
+                "detail": "An unapproved service or identity provider issues valid tokens to the attacker."
+              },
+              {
+                "text": "Lockout via configuration change",
+                "detail": "A rogue device or modified setting makes the service unavailable."
+              },
+              {
+                "text": "Forgotten unrevoked account",
+                "detail": "An ownerless account remains a permanent access path."
+              }
+            ]
+          },
+          {
+            "label": "Network and virtualization",
+            "cells": [
+              {
+                "text": "Compromised hypervisor / appliance",
+                "detail": "A hypervisor flaw allows code execution on the host."
+              },
+              {
+                "text": "Traffic interception, session keys",
+                "detail": "A rogue access point or compromised device captures traffic."
+              },
+              {
+                "text": "Segmentation bypass",
+                "detail": "An open port or overly permissive firewall rule crosses the zone."
+              },
+              {
+                "text": "Saturate a link or service",
+                "detail": "An unfiltered exposed service is overwhelmed by traffic."
+              },
+              {
+                "text": "Unmanaged VM as relay",
+                "detail": "An unpatched guest serves as a persistent foothold."
+              }
+            ]
+          },
+          {
+            "label": "Modern surfaces",
+            "cells": [
+              {
+                "text": "Prompt injection via LLM",
+                "detail": "An external document or instruction pushes the model to execute an action."
+              },
+              {
+                "text": "Public repo / open bucket",
+                "detail": "Publicly accessible secrets or objects are retrieved without authentication."
+              },
+              {
+                "text": "Misconfigured IdP / federation",
+                "detail": "Tokens or excessive roles grant access to multiple applications."
+              },
+              {
+                "text": "External service dependency",
+                "detail": "A compromised or unavailable third party blocks the service."
+              },
+              {
+                "text": "LLM plugin or persistent object",
+                "detail": "A component added to the model or storage maintains access."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

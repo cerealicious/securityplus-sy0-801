@@ -1,0 +1,1430 @@
+{
+  "diagrams": [
+    {
+      "id": "d-3.1-L01-cloud-models",
+      "kind": "flow",
+      "title": "Cloud: Four Models in Two Columns",
+      "subtitle": "Compare each model on the left with its security trait on the right, then reconstruct the sequence.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "pub",
+          "label": "Public Cloud",
+          "sub": "Multi-tenant",
+          "x": 30,
+          "y": 45,
+          "w": 165,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Shared infrastructure provided by a third party. The customer retains data, identities, applications, and configuration: this is shared responsibility.",
+          "exam": "Customer misconfiguration (open bucket, overly broad IAM) remains the number one cause of cloud exposure."
+        },
+        {
+          "id": "pubT",
+          "label": "Shared Responsibility",
+          "sub": "Data = customer",
+          "x": 420,
+          "y": 45,
+          "w": 165,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "The provider secures the infrastructure; the customer secures everything they place in it, including IAM permissions and serverless functions.",
+          "exam": "On the exam, always delineate who owns which layer before proposing a control."
+        },
+        {
+          "id": "priv",
+          "label": "Private Cloud",
+          "sub": "Dedicated infrastructure",
+          "x": 30,
+          "y": 155,
+          "w": 165,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Infrastructure dedicated to a single organization, hosted on-premises or by a third party. Stronger control and compliance, but higher cost.",
+          "exam": "Private does not mean on-premises: a private cloud can be hosted by an external provider."
+        },
+        {
+          "id": "privT",
+          "label": "Stronger Control",
+          "sub": "Higher cost",
+          "x": 420,
+          "y": 155,
+          "w": 165,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "Isolation facilitates governance and customization, but patching and backup overhead remains with the customer.",
+          "exam": "Private cloud does not transfer data responsibility to the provider."
+        },
+        {
+          "id": "comm",
+          "label": "Community Cloud",
+          "sub": "Industry peers",
+          "x": 30,
+          "y": 265,
+          "w": 165,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Infrastructure shared by multiple organizations with similar requirements (healthcare, finance, research). Peer trust becomes a distinct control.",
+          "exam": "Community cloud = trust between organizations in the same consortium, with shared governance."
+        },
+        {
+          "id": "commT",
+          "label": "Peer Trust",
+          "sub": "Shared governance",
+          "x": 420,
+          "y": 265,
+          "w": 165,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "Each peer must define who accesses what and how data is separated, often through a neutral operator.",
+          "exam": "In a community scenario, look for data separation and governance, not just encryption."
+        },
+        {
+          "id": "hyb",
+          "label": "Hybrid",
+          "sub": "On-prem + cloud",
+          "x": 30,
+          "y": 375,
+          "w": 165,
+          "h": 60,
+          "kind": "risk",
+          "detail": "Bridge between local environments and the cloud via VPN, dedicated interconnect, and federated identity. This bridge adds a trust boundary.",
+          "exam": "In a hybrid scenario, secure the bridge (SSO, VPN, logging on both sides), not just the cloud."
+        },
+        {
+          "id": "hybT",
+          "label": "Bridge to Secure",
+          "sub": "Federated identity",
+          "x": 420,
+          "y": 375,
+          "w": 165,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "Traffic crosses an additional boundary: identity federation, encryption in transit, and log correlation.",
+          "exam": "Federated SSO (SAML/OIDC) is not just password synchronization."
+        }
+      ],
+      "edges": [
+        {"from": "pub", "to": "pubT", "label": "responsibility"},
+        {"from": "priv", "to": "privT", "label": "isolation"},
+        {"from": "comm", "to": "commT", "label": "peers"},
+        {"from": "hyb", "to": "hybT", "label": "bridge"},
+        {"from": "pub", "to": "priv", "label": "less sharing"},
+        {"from": "priv", "to": "comm", "label": "governed sharing"},
+        {"from": "comm", "to": "hyb", "label": "adds local site"}
+      ],
+      "sequence": ["pub", "pubT", "priv", "privT", "comm", "commT", "hyb", "hybT"],
+      "quiz": {
+        "question": "Which model shares infrastructure among organizations in the same sector?",
+        "answer": "comm"
+      }
+    },
+    {
+      "id": "d-3.1-L02-iac-drift",
+      "kind": "flow",
+      "title": "IaC, Cloud Resources, and Configuration Drift",
+      "subtitle": "Follow the code to the cloud, then the drift detection and remediation loop.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "code",
+          "label": "IaC Repository",
+          "sub": "Versioned files",
+          "x": 30,
+          "y": 55,
+          "w": 165,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Infrastructure is described in versioned files (Terraform, CloudFormation). Every change goes through code review and a commit.",
+          "exam": "IaC turns a network control into a code control: review, signing, and commit history matter."
+        },
+        {
+          "id": "pipe",
+          "label": "CI/CD Pipeline",
+          "sub": "Plan then apply",
+          "x": 215,
+          "y": 55,
+          "w": 165,
+          "h": 60,
+          "kind": "step",
+          "detail": "The pipeline runs the plan, displays differences, and applies changes after approval. This is where policy-as-code is enforced.",
+          "exam": "A plan showing an open '0.0.0.0/0' rule must be blocked before apply."
+        },
+        {
+          "id": "apply",
+          "label": "Apply",
+          "sub": "Provisioning",
+          "x": 400,
+          "y": 55,
+          "w": 165,
+          "h": 60,
+          "kind": "step",
+          "detail": "The IaC engine creates or modifies resources to match the declared state. Pipeline credentials become service identities to protect.",
+          "exam": "An IaC service account with unlimited permissions is a major point of failure."
+        },
+        {
+          "id": "cloud",
+          "label": "Cloud Resources",
+          "sub": "Actual deployed state",
+          "x": 585,
+          "y": 55,
+          "w": 165,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "VMs, buckets, databases, and network rules make up the actual state, which can diverge from the state declared in the repository.",
+          "exam": "The source of truth is the versioned code, not the cloud console edited by hand."
+        },
+        {
+          "id": "drift",
+          "label": "Configuration Drift",
+          "sub": "Configuration drift",
+          "x": 585,
+          "y": 225,
+          "w": 165,
+          "h": 60,
+          "kind": "risk",
+          "detail": "A manual change, emergency hotfix, or forgotten script moves the environment away from the expected state: controls are no longer guaranteed.",
+          "exam": "Drift is a compliance risk: it reintroduces open ports and access removed in code."
+        },
+        {
+          "id": "detect",
+          "label": "Continuous Detection",
+          "sub": "Drift detection",
+          "x": 400,
+          "y": 225,
+          "w": 165,
+          "h": 60,
+          "kind": "step",
+          "detail": "Periodic scans compare the actual state to code and baselines. Detection must also cover resources created outside the pipeline.",
+          "exam": "Detecting drift is not enough: it must be correlated with an owner and a timestamp."
+        },
+        {
+          "id": "fix",
+          "label": "Remediation",
+          "sub": "Return to expected state",
+          "x": 215,
+          "y": 225,
+          "w": 165,
+          "h": 60,
+          "kind": "step",
+          "detail": "Remediate either by reapplying the code or by updating the repository if the manual change was legitimate: code becomes the source of truth again.",
+          "exam": "Do not reapply blindly: an emergency fix may be legitimate and must be versioned."
+        },
+        {
+          "id": "guard",
+          "label": "Guardrails as-code",
+          "sub": "Automated policies",
+          "x": 30,
+          "y": 225,
+          "w": 165,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "Automated rules (policy as code) reject non-compliant configurations before deployment: prevention rather than correction.",
+          "exam": "Preventive = block before apply; detective = scan after deployment."
+        }
+      ],
+      "edges": [
+        {"from": "code", "to": "pipe", "label": "commit"},
+        {"from": "pipe", "to": "apply", "label": "approved plan"},
+        {"from": "apply", "to": "cloud", "label": "provisions"},
+        {"from": "cloud", "to": "drift", "label": "manual change"},
+        {"from": "drift", "to": "detect", "label": "continuous scan"},
+        {"from": "detect", "to": "fix", "label": "remediation"},
+        {"from": "fix", "to": "code", "label": "versioned re-apply"},
+        {"from": "guard", "to": "apply", "label": "blocks if non-compliant"}
+      ],
+      "sequence": ["code", "pipe", "apply", "cloud", "drift", "detect", "fix", "guard"],
+      "quiz": {
+        "question": "Which event creates configuration drift in an IaC environment?",
+        "answer": "drift"
+      }
+    },
+    {
+      "id": "d-3.2-L01-trust-zones",
+      "kind": "flow",
+      "title": "Cascading Trust Zones",
+      "subtitle": "Traffic flows down from the Internet toward critical assets; each boundary crossing is a control point.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "internet",
+          "label": "Internet / Untrust",
+          "sub": "Untrusted zone",
+          "x": 290,
+          "y": 30,
+          "w": 170,
+          "h": 60,
+          "kind": "risk",
+          "detail": "All traffic here is considered hostile by default: no trust is granted based on source address or network location.",
+          "exam": "Untrust = Internet; never allow direct access from this zone to the critical zone."
+        },
+        {
+          "id": "fw",
+          "label": "Firewall / WAF",
+          "sub": "Traffic filtering",
+          "x": 550,
+          "y": 30,
+          "w": 150,
+          "h": 60,
+          "kind": "step",
+          "detail": "The firewall filters ports and addresses; the WAF filters HTTP at the application layer. They enforce policy at the zone boundary.",
+          "exam": "WAF = Layer 7; NIPS = inline blocking; NIDS = out-of-band detection."
+        },
+        {
+          "id": "dmz",
+          "label": "DMZ",
+          "sub": "Buffer zone",
+          "x": 290,
+          "y": 115,
+          "w": 170,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Buffer zone hosting exposed services (web, SMTP, proxy). A compromised server in the DMZ must not be able to reach the internal network directly.",
+          "exam": "DMZ = buffer zone between the Internet (Untrust) and the internal network (Trust)."
+        },
+        {
+          "id": "users",
+          "label": "User Network",
+          "sub": "Trust zone",
+          "x": 290,
+          "y": 200,
+          "w": 170,
+          "h": 60,
+          "kind": "actor",
+          "detail": "Workstations and internal users: a zone of relative trust, yet a frequent source of phishing and lateral movement.",
+          "exam": "'Trust' is relative: segmentation limits lateral movement between workstations."
+        },
+        {
+          "id": "ids",
+          "label": "NIDS / EDR",
+          "sub": "Internal monitoring",
+          "x": 550,
+          "y": 200,
+          "w": 150,
+          "h": 60,
+          "kind": "step",
+          "detail": "NIDS analyzes a copy of internal traffic; EDR monitors behavior on hosts. They detect what the firewall cannot see.",
+          "exam": "An additional trust zone without monitoring becomes a blind spot."
+        },
+        {
+          "id": "servers",
+          "label": "Internal Servers",
+          "sub": "Business services",
+          "x": 290,
+          "y": 285,
+          "w": 170,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Internal applications and databases: access filtered by identity and need-to-know, with centralized logs and OS hardening.",
+          "exam": "Apply least privilege between zones, not just from the Internet."
+        },
+        {
+          "id": "bastion",
+          "label": "Bastion Host",
+          "sub": "Controlled admin access",
+          "x": 550,
+          "y": 285,
+          "w": 150,
+          "h": 60,
+          "kind": "step",
+          "detail": "Single entry point for administration: MFA, recorded sessions, and temporary access to the critical zone.",
+          "exam": "A bastion reduces the administrative surface and provides a centralized audit trail."
+        },
+        {
+          "id": "critical",
+          "label": "Critical Zone",
+          "sub": "Sensitive assets",
+          "x": 290,
+          "y": 370,
+          "w": 170,
+          "h": 60,
+          "kind": "risk",
+          "detail": "Most sensitive data and vital systems: named access, encryption, enhanced logging, and no direct path from the Internet.",
+          "exam": "The shortest path to critical data must always pass through multiple controls."
+        }
+      ],
+      "edges": [
+        {"from": "internet", "to": "fw", "label": "filtering"},
+        {"from": "fw", "to": "dmz", "label": "allowed traffic"},
+        {"from": "dmz", "to": "users", "label": "buffer zone crossed"},
+        {"from": "users", "to": "servers", "label": "internal access"},
+        {"from": "ids", "to": "servers", "label": "monitors"},
+        {"from": "servers", "to": "critical", "label": "sensitive assets"},
+        {"from": "bastion", "to": "critical", "label": "admin access"}
+      ],
+      "sequence": ["internet", "fw", "dmz", "users", "ids", "servers", "bastion", "critical"],
+      "quiz": {
+        "question": "Which buffer zone hosts exposed services before the internal network?",
+        "answer": "dmz"
+      }
+    },
+    {
+      "id": "d-3.2-L02-zero-trust-decision",
+      "kind": "flow",
+      "title": "Zero Trust Decision: Identity, Device, Policy, Access",
+      "subtitle": "Never trust, always verify: no access is granted without continuous verification.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "user",
+          "label": "User",
+          "sub": "Access request",
+          "x": 30,
+          "y": 55,
+          "w": 165,
+          "h": 60,
+          "kind": "actor",
+          "detail": "A person or service identity requests a resource. Network location is no longer proof of trust.",
+          "exam": "Zero Trust verifies BOTH the user AND the device, regardless of the originating network."
+        },
+        {
+          "id": "id",
+          "label": "Identity + MFA",
+          "sub": "Strong authentication",
+          "x": 215,
+          "y": 55,
+          "w": 165,
+          "h": 60,
+          "kind": "step",
+          "detail": "The identity provider verifies the account, additional factor, and context (location, time, risk) before issuing a token.",
+          "exam": "MFA is the expected control when a password is compromised."
+        },
+        {
+          "id": "dev",
+          "label": "Device Health",
+          "sub": "Device health",
+          "x": 400,
+          "y": 55,
+          "w": 165,
+          "h": 60,
+          "kind": "step",
+          "detail": "Posture, patches, active antivirus, and encryption are evaluated by the EDR/MDM agent before authorizing the resource.",
+          "exam": "An uninventoried personal device must be denied or placed in limited access."
+        },
+        {
+          "id": "inv",
+          "label": "Inventory / MDM",
+          "sub": "Known asset?",
+          "x": 585,
+          "y": 55,
+          "w": 165,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "The decision queries the inventory: is the device registered, does it have an owner, and does it meet compliance policy?",
+          "exam": "Without a reliable inventory, Zero Trust policy cannot distinguish a known device from a rogue device."
+        },
+        {
+          "id": "pol",
+          "label": "Adaptive Policy",
+          "sub": "Contextual rules",
+          "x": 585,
+          "y": 225,
+          "w": 165,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "Policy combines identity, posture, resource sensitivity, and risk: it defines the authorized access level.",
+          "exam": "A policy is 'adaptive' when it accounts for context, not just a user list."
+        },
+        {
+          "id": "dec",
+          "label": "Continuous Decision",
+          "sub": "Policy engine",
+          "x": 400,
+          "y": 225,
+          "w": 165,
+          "h": 60,
+          "kind": "step",
+          "detail": "The engine evaluates the request on every access and can revoke a session if context changes: verification is not only at login.",
+          "exam": "Zero Trust is continuous: a session valid at the start can be revoked later."
+        },
+        {
+          "id": "grant",
+          "label": "Minimal Access",
+          "sub": "Just enough, just in time",
+          "x": 215,
+          "y": 225,
+          "w": 165,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Access is limited to the requested resource, at the minimal level and for a fixed duration, with session logging.",
+          "exam": "Look for 'least privilege' and 'just-in-time' in exam answers."
+        },
+        {
+          "id": "deny",
+          "label": "Deny / Remediation",
+          "sub": "Block then fix",
+          "x": 400,
+          "y": 365,
+          "w": 165,
+          "h": 60,
+          "kind": "risk",
+          "detail": "A non-compliant device is denied or isolated; remediation (patching, MDM, inventory) precedes a new attempt.",
+          "exam": "Denial must be explicit and logged: silent failures complicate investigation."
+        }
+      ],
+      "edges": [
+        {"from": "user", "to": "id", "label": "authenticates"},
+        {"from": "id", "to": "dev", "label": "token issued"},
+        {"from": "dev", "to": "inv", "label": "known device?"},
+        {"from": "inv", "to": "pol", "label": "context"},
+        {"from": "pol", "to": "dec", "label": "evaluates"},
+        {"from": "dec", "to": "grant", "label": "compliant"},
+        {"from": "dec", "to": "deny", "label": "non-compliant"},
+        {"from": "deny", "to": "dev", "label": "fix then retry"}
+      ],
+      "sequence": ["user", "id", "dev", "inv", "pol", "dec", "grant", "deny"],
+      "quiz": {
+        "question": "Which signal, in addition to identity, is checked before granting access to an internal application?",
+        "answer": "dev"
+      }
+    },
+    {
+      "id": "d-3.3-L01-data-lifecycle",
+      "kind": "flow",
+      "title": "Data Lifecycle",
+      "subtitle": "From creation to destruction, each stage triggers its own controls.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "create",
+          "label": "Creation",
+          "sub": "Data creation",
+          "x": 30,
+          "y": 60,
+          "w": 165,
+          "h": 60,
+          "kind": "step",
+          "detail": "Data originates from a form, sensor, or process. This is the least expensive moment to decide its classification and minimize collected fields.",
+          "exam": "Classify as early as possible: unclassified data triggers no controls."
+        },
+        {
+          "id": "classify",
+          "label": "Classification",
+          "sub": "Public to top secret",
+          "x": 215,
+          "y": 60,
+          "w": 165,
+          "h": 60,
+          "kind": "step",
+          "detail": "The classification level (public, confidential, sensitive, secret, critical, restricted, top secret) determines encryption, access, retention, and destruction.",
+          "exam": "Internal classification and regulatory category (healthcare, finance) are two distinct concepts."
+        },
+        {
+          "id": "store",
+          "label": "Management / Storage",
+          "sub": "At rest",
+          "x": 400,
+          "y": 60,
+          "w": 165,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Encryption at rest, access control, known location, and backups. Structured and unstructured data are not protected the same way.",
+          "exam": "Encryption at rest does not protect against a compromised account reading data in plaintext."
+        },
+        {
+          "id": "share",
+          "label": "Distribution",
+          "sub": "In motion",
+          "x": 585,
+          "y": 60,
+          "w": 165,
+          "h": 60,
+          "kind": "step",
+          "detail": "Internal or external sharing: TLS, IPsec, DLP, recipient control, and file labeling to limit spread.",
+          "exam": "In transit = channel encryption; DLP monitors content, not just transport."
+        },
+        {
+          "id": "retain",
+          "label": "Retention",
+          "sub": "Legal duration",
+          "x": 585,
+          "y": 255,
+          "w": 165,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "A retention policy sets how long data is kept, based on law, contract, or business need, then triggers archiving.",
+          "exam": "Keeping data too long increases the exposure surface: retention is a security control."
+        },
+        {
+          "id": "archive",
+          "label": "Archiving",
+          "sub": "Reduced access",
+          "x": 400,
+          "y": 255,
+          "w": 165,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Data leaves active use but remains available for audit or legal obligation, with encryption and access control maintained.",
+          "exam": "Archiving is not deleting: controls remain active on archives."
+        },
+        {
+          "id": "destroy",
+          "label": "Certified Destruction",
+          "sub": "Sanitization",
+          "x": 215,
+          "y": 255,
+          "w": 165,
+          "h": 60,
+          "kind": "risk",
+          "detail": "Secure erasure, media destruction, or crypto-shredding, with a certificate or proof of erasure. Access revocation accompanies end of life.",
+          "exam": "Proof of destruction is required: without a certificate, end of life is not demonstrable."
+        },
+        {
+          "id": "dlp",
+          "label": "Continuous Monitoring",
+          "sub": "DLP / logging",
+          "x": 30,
+          "y": 255,
+          "w": 165,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "DLP, logging, and access reviews span the entire lifecycle: detecting exfiltration, anomalous access, or data kept past its retention period.",
+          "exam": "Controls do not stop at deletion: copies and backups must also be addressed."
+        }
+      ],
+      "edges": [
+        {"from": "create", "to": "classify", "label": "classify immediately"},
+        {"from": "classify", "to": "store", "label": "appropriate controls"},
+        {"from": "store", "to": "share", "label": "TLS / DLP"},
+        {"from": "share", "to": "retain", "label": "defined duration"},
+        {"from": "retain", "to": "archive", "label": "end of active use"},
+        {"from": "archive", "to": "destroy", "label": "end of retention"},
+        {"from": "destroy", "to": "create", "label": "cycle restarts"},
+        {"from": "dlp", "to": "share", "label": "monitors"},
+        {"from": "dlp", "to": "store", "label": "protects"}
+      ],
+      "sequence": ["create", "classify", "store", "share", "retain", "archive", "destroy", "dlp"],
+      "quiz": {
+        "question": "At which stage must classification be decided so that controls apply?",
+        "answer": "classify"
+      }
+    },
+    {
+      "id": "d-3.3-L02-data-roles",
+      "kind": "matrix",
+      "title": "Six Data Roles",
+      "subtitle": "Click a cell to distinguish who decides, who executes, and who verifies quality.",
+      "modes": ["explore"],
+      "matrix": {
+        "columns": ["Key Responsibility", "Do Not Confuse With", "Question to Ask"],
+        "rows": [
+          {
+            "label": "Owner",
+            "cells": [
+              {"text": "Decides classification and access", "detail": "The owner is the business accountable party for the data: they authorize who can read or modify it and choose its sensitivity level."},
+              {"text": "System administrator", "detail": "An admin who applies controls is a custodian: they do not decide who has the right to read HR data."},
+              {"text": "Who is business-accountable for this data?", "detail": "If no one can answer, classification and authorizations have no credible owner."}
+            ]
+          },
+          {
+            "label": "Custodian",
+            "cells": [
+              {"text": "Implements and maintains controls", "detail": "Manages backups, encryption, technical permissions, and physical access on behalf of the owner."},
+              {"text": "The owner", "detail": "The custodian executes the policy defined by the owner; they do not define its purpose."},
+              {"text": "Who operates the system and backups?", "detail": "Infrastructure, storage, and security teams are typically custodians."}
+            ]
+          },
+          {
+            "label": "Steward",
+            "cells": [
+              {"text": "Quality, metadata, usage compliance", "detail": "Verifies that data is accurate, well-described, and used in accordance with governance rules."},
+              {"text": "The custodian", "detail": "The custodian ensures technical protection; the steward ensures data quality and meaning."},
+              {"text": "Who ensures the data is accurate and well-described?", "detail": "Key role for governance, de-identification, and data catalogs."}
+            ]
+          },
+          {
+            "label": "Operator",
+            "cells": [
+              {"text": "Processes data day-to-day", "detail": "Enters, corrects, exports, or views data as part of daily work, under the owner's control."},
+              {"text": "The controller", "detail": "The operator acts within a process defined by others; they do not set the purpose of processing."},
+              {"text": "Who handles the data day-to-day?", "detail": "Least privilege and action logging apply primarily to this role."}
+            ]
+          },
+          {
+            "label": "Controller",
+            "cells": [
+              {"text": "Determines purpose and means", "detail": "Decides why and how data is processed, often within a legal framework (such as GDPR)."},
+              {"text": "The processor", "detail": "The processor acts on behalf of the controller, according to the contract and its instructions."},
+              {"text": "Why is this data being processed?", "detail": "The answer identifies the data controller, not the hosting provider."}
+            ]
+          },
+          {
+            "label": "Processor / Subprocessor",
+            "cells": [
+              {"text": "Processes on behalf of the controller", "detail": "Cloud provider, host, or vendor: executes processing and must comply with the contract and subprocessor rules."},
+              {"text": "An autonomous owner", "detail": "The processor does not act on its own behalf: it remains bound to the controller's instructions."},
+              {"text": "Who processes for us, and under what contract?", "detail": "Review confidentiality clauses, data residency, and breach notification terms."}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "d-3.4-L01-recovery-sites",
+      "kind": "flow",
+      "title": "Hot, Warm, Cold Sites: RTO, RPO, and Cost",
+      "subtitle": "Three columns to compare: the faster the recovery, the higher the cost.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "hot",
+          "label": "Hot Site",
+          "sub": "Always operational",
+          "x": 30,
+          "y": 55,
+          "w": 165,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Fully equipped site with continuously or near-continuously synchronized data. Traffic can fail over in minutes.",
+          "exam": "Hot site = shortest RTO and highest cost: continuous replication."
+        },
+        {
+          "id": "hotR",
+          "label": "RTO minutes · RPO ~0",
+          "sub": "Near-zero loss",
+          "x": 30,
+          "y": 175,
+          "w": 165,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "Continuous synchronization limits data loss; failover is automated. This is the level required by the most critical services.",
+          "exam": "RPO measures data loss; RTO measures service downtime."
+        },
+        {
+          "id": "hotC",
+          "label": "Very High Cost",
+          "sub": "Duplicated infrastructure",
+          "x": 30,
+          "y": 295,
+          "w": 165,
+          "h": 60,
+          "kind": "risk",
+          "detail": "Two complete environments, replication, and frequent testing: cost is the main limitation of this model.",
+          "exam": "An unused hot site must still be tested: an untested recovery is not proven."
+        },
+        {
+          "id": "warm",
+          "label": "Warm Site",
+          "sub": "Equipment ready",
+          "x": 290,
+          "y": 55,
+          "w": 165,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Hardware is installed and configured, but data must be restored from recent backups before services restart.",
+          "exam": "Warm site = recovery in hours, a compromise between cost and speed."
+        },
+        {
+          "id": "warmR",
+          "label": "RTO hours · RPO hours",
+          "sub": "Restoration required",
+          "x": 290,
+          "y": 175,
+          "w": 165,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "RPO depends on backup frequency; RTO includes restoration time and service validation.",
+          "exam": "A 1-hour RPO requires backups or replication at least hourly."
+        },
+        {
+          "id": "warmC",
+          "label": "Medium Cost",
+          "sub": "Common compromise",
+          "x": 290,
+          "y": 295,
+          "w": 165,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "You pay for hardware and maintenance, but not full continuous duplication of all production.",
+          "exam": "A warm site is often the default choice when RTO is measured in hours."
+        },
+        {
+          "id": "cold",
+          "label": "Cold Site",
+          "sub": "Facility only",
+          "x": 550,
+          "y": 55,
+          "w": 165,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Space, power, and connectivity exist, but hardware, software, and data must be shipped and installed before recovery.",
+          "exam": "Cold site = recovery in days or weeks, lowest cost."
+        },
+        {
+          "id": "coldR",
+          "label": "RTO days · Long RPO",
+          "sub": "Data to be shipped",
+          "x": 550,
+          "y": 175,
+          "w": 165,
+          "h": 60,
+          "kind": "risk",
+          "detail": "Shipping and installation time dominate. This model suits low-criticality systems whose outage is acceptable.",
+          "exam": "A long RTO is acceptable only if the BCP justifies it for that function."
+        },
+        {
+          "id": "coldC",
+          "label": "Low Cost",
+          "sub": "Few upfront resources",
+          "x": 550,
+          "y": 295,
+          "w": 165,
+          "h": 60,
+          "kind": "step",
+          "detail": "Little equipment tied up, but heavy mobilization at the time of the incident and dependence on supply chains.",
+          "exam": "Low cost hides a risk: procurement lead time can exceed the stated RTO."
+        }
+      ],
+      "edges": [
+        {"from": "hot", "to": "hotR", "label": "performance"},
+        {"from": "hotR", "to": "hotC", "label": "price to pay"},
+        {"from": "warm", "to": "warmR", "label": "performance"},
+        {"from": "warmR", "to": "warmC", "label": "compromise"},
+        {"from": "cold", "to": "coldR", "label": "performance"},
+        {"from": "coldR", "to": "coldC", "label": "savings"},
+        {"from": "hot", "to": "warm", "label": "decreasing cost"},
+        {"from": "warm", "to": "cold", "label": "decreasing cost"}
+      ],
+      "sequence": ["hot", "hotR", "hotC", "warm", "warmR", "warmC", "cold", "coldR", "coldC"],
+      "quiz": {
+        "question": "Which site requires restoring data from a backup before restarting services?",
+        "answer": "warm"
+      }
+    },
+    {
+      "id": "d-3.4-L02-recovery-timeline",
+      "kind": "flow",
+      "title": "Disaster Recovery Timeline",
+      "subtitle": "T0, RPO, failover, RTO, validation, then failback: put the milestones in order.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "backup",
+          "label": "Active Backups",
+          "sub": "Before the incident",
+          "x": 30,
+          "y": 60,
+          "w": 165,
+          "h": 60,
+          "kind": "step",
+          "detail": "Replication and tested backups before the incident: their frequency determines RPO, and their restorability governs RTO.",
+          "exam": "A backup never restored is not a backup: test recovery regularly."
+        },
+        {
+          "id": "t0",
+          "label": "T0 · Incident",
+          "sub": "Trigger",
+          "x": 215,
+          "y": 60,
+          "w": 165,
+          "h": 60,
+          "kind": "risk",
+          "detail": "The outage or disaster is detected: the DR plan is activated, stakeholders are notified, and changes are frozen.",
+          "exam": "Incident detection and the failover decision are two distinct moments."
+        },
+        {
+          "id": "rpo",
+          "label": "RPO · Max Loss",
+          "sub": "Recovery Point Objective",
+          "x": 400,
+          "y": 60,
+          "w": 165,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "RPO sets the maximum age of restored data: a 4-hour RPO allows losing up to 4 hours of data.",
+          "exam": "RPO = acceptable data loss measured in time, not a restoration deadline."
+        },
+        {
+          "id": "switch",
+          "label": "Failover",
+          "sub": "To recovery site",
+          "x": 585,
+          "y": 60,
+          "w": 165,
+          "h": 60,
+          "kind": "step",
+          "detail": "Traffic is redirected to the recovery site: DNS, load balancer, or BGP route. Failover must be documented and tested.",
+          "exam": "An unrehearsed manual failover consumes an unpredictable share of the RTO."
+        },
+        {
+          "id": "rto",
+          "label": "RTO · Service Restored",
+          "sub": "Recovery Time Objective",
+          "x": 585,
+          "y": 245,
+          "w": 165,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "RTO sets the maximum acceptable service outage duration. It depends on the slowest element in the dependency chain.",
+          "exam": "If the network has a 3-hour RTO, email cannot have an effective 1-hour RTO."
+        },
+        {
+          "id": "verify",
+          "label": "Validation",
+          "sub": "Functions and data",
+          "x": 400,
+          "y": 245,
+          "w": 165,
+          "h": 60,
+          "kind": "step",
+          "detail": "Verify the integrity of restored data, dependencies, and performance before declaring the service restored to users.",
+          "exam": "A service that is 'up' with inconsistent data is not restored."
+        },
+        {
+          "id": "failback",
+          "label": "Failback",
+          "sub": "Return to primary site",
+          "x": 215,
+          "y": 245,
+          "w": 165,
+          "h": 60,
+          "kind": "step",
+          "detail": "Once the primary site is repaired, data and traffic are moved back under a controlled procedure, often during a maintenance window.",
+          "exam": "Failback is a second recovery: it must be planned and tested, not improvised."
+        },
+        {
+          "id": "lessons",
+          "label": "Lessons Learned",
+          "sub": "Post-incident review",
+          "x": 30,
+          "y": 245,
+          "w": 165,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "Document gaps between target and actual RTO/RPO, then adjust backups, procedures, and exercises.",
+          "exam": "Lessons learned feed into the BCP and training: it is a corrective and administrative control."
+        }
+      ],
+      "edges": [
+        {"from": "backup", "to": "t0", "label": "preparation"},
+        {"from": "t0", "to": "rpo", "label": "loss measurement"},
+        {"from": "rpo", "to": "switch", "label": "failover decision"},
+        {"from": "switch", "to": "rto", "label": "service restored"},
+        {"from": "rto", "to": "verify", "label": "quality check"},
+        {"from": "verify", "to": "failback", "label": "planned return"},
+        {"from": "failback", "to": "lessons", "label": "analysis"},
+        {"from": "lessons", "to": "backup", "label": "continuous improvement"}
+      ],
+      "sequence": ["backup", "t0", "rpo", "switch", "rto", "verify", "failback", "lessons"],
+      "quiz": {
+        "question": "Which objective sets the maximum acceptable data loss after an incident?",
+        "answer": "rpo"
+      }
+    },
+    {
+      "id": "d-4.1-L01-control-stack",
+      "kind": "flow",
+      "title": "Control Stack: From Network to Identity",
+      "subtitle": "Five stacked layers: a weak control at one layer is not compensated by a strong control at another.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "identite",
+          "label": "Identity",
+          "sub": "IAM, MFA, SSO",
+          "x": 300,
+          "y": 70,
+          "w": 175,
+          "h": 58,
+          "kind": "artifact",
+          "detail": "Strong authentication, least privilege, access reviews, and federation: identity is the new perimeter, especially in Zero Trust.",
+          "exam": "An over-privileged account bypasses all network controls: identity is a layer in its own right."
+        },
+        {
+          "id": "data",
+          "label": "Data",
+          "sub": "Encryption, DLP",
+          "x": 300,
+          "y": 155,
+          "w": 175,
+          "h": 58,
+          "kind": "artifact",
+          "detail": "Classification, encryption at rest and in transit, masking, tokenization, and DLP protect data regardless of location.",
+          "exam": "DLP acts on sensitive content; encryption acts on readability."
+        },
+        {
+          "id": "app",
+          "label": "Application",
+          "sub": "Validation, WAF",
+          "x": 300,
+          "y": 240,
+          "w": 175,
+          "h": 58,
+          "kind": "artifact",
+          "detail": "Input validation, session management, code signing, WAF, and security testing apply controls closest to business logic.",
+          "exam": "Validating inputs prevents injection; signing code guarantees origin and integrity."
+        },
+        {
+          "id": "host",
+          "label": "Host",
+          "sub": "Hardening, EDR",
+          "x": 300,
+          "y": 325,
+          "w": 175,
+          "h": 58,
+          "kind": "artifact",
+          "detail": "Secure baselines, patching, disabling unnecessary services, HIPS/EDR, and device control reduce the attack surface.",
+          "exam": "EDR = endpoint agent; XDR = multi-source correlation. Do not confuse either with a firewall."
+        },
+        {
+          "id": "reseau",
+          "label": "Network",
+          "sub": "Segmentation, firewall",
+          "x": 300,
+          "y": 410,
+          "w": 175,
+          "h": 58,
+          "kind": "artifact",
+          "detail": "Firewalls, NIPS/NIDS, VPNs, 802.1X, and segmentation separate zones and control traffic before it reaches a host.",
+          "exam": "IDS is detective; IPS is preventive because it blocks inline."
+        },
+        {
+          "id": "fw",
+          "label": "Firewall / NIPS",
+          "sub": "Network boundary",
+          "x": 30,
+          "y": 410,
+          "w": 170,
+          "h": 58,
+          "kind": "step",
+          "detail": "Network and transport layer control: explicit rules, logging of denied traffic, and no direct path to the critical zone.",
+          "exam": "A firewall does not protect against a vulnerable application allowed through port 443."
+        },
+        {
+          "id": "dlp",
+          "label": "DLP / Masking",
+          "sub": "Content control",
+          "x": 30,
+          "y": 155,
+          "w": 170,
+          "h": 58,
+          "kind": "step",
+          "detail": "DLP detects and blocks movement of sensitive data; masking limits exposure of fields displayed to users.",
+          "exam": "Masking = partially replaced value; tokenization = reversible token via a vault."
+        },
+        {
+          "id": "iam",
+          "label": "MFA / IAM",
+          "sub": "Access control",
+          "x": 550,
+          "y": 70,
+          "w": 170,
+          "h": 58,
+          "kind": "step",
+          "detail": "MFA, SAML/OIDC federation, and periodic account reviews enforce identity policy on every resource access.",
+          "exam": "A forgotten service account is an asset: it belongs in the inventory and access review."
+        }
+      ],
+      "edges": [
+        {"from": "reseau", "to": "host", "label": "segmentation"},
+        {"from": "host", "to": "app", "label": "hardening"},
+        {"from": "app", "to": "data", "label": "validation"},
+        {"from": "data", "to": "identite", "label": "least privilege"},
+        {"from": "fw", "to": "reseau", "label": "enforces"},
+        {"from": "dlp", "to": "data", "label": "enforces"},
+        {"from": "iam", "to": "identite", "label": "enforces"}
+      ],
+      "sequence": ["fw", "reseau", "host", "app", "data", "dlp", "identite", "iam"],
+      "quiz": {
+        "question": "In which layer do encryption, masking, and DLP operate?",
+        "answer": "data"
+      }
+    },
+    {
+      "id": "d-4.1-L02-detection-pipeline",
+      "kind": "flow",
+      "title": "From Detection to Response",
+      "subtitle": "Sensors, SIEM, correlation, alert, triage, and response form an improvement loop.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "log",
+          "label": "Sensors / Logs",
+          "sub": "Telemetry",
+          "x": 30,
+          "y": 65,
+          "w": 165,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "System, network, EDR, application, and cloud logs: without synchronized timestamps and complete sources, correlation is impossible.",
+          "exam": "NTP and clock synchronization are prerequisites often tested in investigations."
+        },
+        {
+          "id": "siem",
+          "label": "SIEM",
+          "sub": "Centralized collection",
+          "x": 215,
+          "y": 65,
+          "w": 165,
+          "h": 60,
+          "kind": "step",
+          "detail": "The SIEM aggregates, retains, and indexes events. It applies rules and correlations to surface weak signals.",
+          "exam": "SIEM = aggregation and analysis; syslog = simple log transport."
+        },
+        {
+          "id": "norm",
+          "label": "Normalization",
+          "sub": "Common schema",
+          "x": 400,
+          "y": 65,
+          "w": 165,
+          "h": 60,
+          "kind": "step",
+          "detail": "Heterogeneous formats are converted into common fields (user, IP, timestamp) to make events comparable.",
+          "exam": "Without normalization, equivalent events remain invisible to correlation rules."
+        },
+        {
+          "id": "corr",
+          "label": "Correlation",
+          "sub": "Multi-source rules",
+          "x": 585,
+          "y": 65,
+          "w": 165,
+          "h": 60,
+          "kind": "step",
+          "detail": "Cross-referencing multiple events (failed logins then success, then exfiltration) turns noise into a high-confidence signal.",
+          "exam": "XDR extends correlation to endpoints, network, and cloud beyond traditional SIEM."
+        },
+        {
+          "id": "alert",
+          "label": "Prioritized Alert",
+          "sub": "Actionable signal",
+          "x": 585,
+          "y": 235,
+          "w": 165,
+          "h": 60,
+          "kind": "risk",
+          "detail": "Alerts are ranked by criticality and asset context: one alert on a critical server outweighs a hundred alerts on a test workstation.",
+          "exam": "Too many unprioritized alerts = alert fatigue: prioritization is a control."
+        },
+        {
+          "id": "triage",
+          "label": "SOC Triage",
+          "sub": "Qualification",
+          "x": 400,
+          "y": 235,
+          "w": 165,
+          "h": 60,
+          "kind": "actor",
+          "detail": "The analyst verifies whether the alert is real, collects evidence, and decides to escalate, close, or gather more context.",
+          "exam": "Triage distinguishes false positive, true positive, and incident: do not escalate everything."
+        },
+        {
+          "id": "response",
+          "label": "Response",
+          "sub": "Containment, eradication",
+          "x": 215,
+          "y": 235,
+          "w": 165,
+          "h": 60,
+          "kind": "step",
+          "detail": "EDR isolation, session revocation, IP blocking, then eradication and recovery: response follows the incident playbook.",
+          "exam": "Contain first, investigate second: the goal is to stop the attack from progressing."
+        },
+        {
+          "id": "feedback",
+          "label": "Refined Rules",
+          "sub": "Feedback loop",
+          "x": 30,
+          "y": 235,
+          "w": 165,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "Lessons learned tune rules, add sources, and reduce false positives: detection improves after each incident.",
+          "exam": "An unmaintained rule becomes noise: tuning is an ongoing activity."
+        }
+      ],
+      "edges": [
+        {"from": "log", "to": "siem", "label": "collects"},
+        {"from": "siem", "to": "norm", "label": "parses and converts"},
+        {"from": "norm", "to": "corr", "label": "common fields"},
+        {"from": "corr", "to": "alert", "label": "signal"},
+        {"from": "alert", "to": "triage", "label": "escalates"},
+        {"from": "triage", "to": "response", "label": "confirmed incident"},
+        {"from": "response", "to": "feedback", "label": "lessons learned"},
+        {"from": "feedback", "to": "siem", "label": "improved rules"}
+      ],
+      "sequence": ["log", "siem", "norm", "corr", "alert", "triage", "response", "feedback"],
+      "quiz": {
+        "question": "Which step turns multiple isolated events into a high-confidence alert?",
+        "answer": "corr"
+      }
+    },
+    {
+      "id": "d-4.1-L03-control-matrix",
+      "kind": "matrix",
+      "title": "Control Matrix: Type × Category",
+      "subtitle": "Preventive, detective, and corrective crossed with technical, administrative, and physical.",
+      "modes": ["explore"],
+      "matrix": {
+        "columns": ["Preventive", "Detective", "Corrective"],
+        "rows": [
+          {
+            "label": "Technical",
+            "cells": [
+              {"text": "Firewall, IPS, hardening, encryption", "detail": "These technical controls prevent the action before it occurs: IPS blocks inline, hardening removes unnecessary services, and encryption renders data unusable without the key."},
+              {"text": "IDS, EDR, log analysis", "detail": "They reveal anomalous activity without necessarily stopping it: IDS works out-of-band, EDR detects behaviors on the host."},
+              {"text": "Quarantine, rollback, emergency patch", "detail": "They return the system to a healthy state: EDR isolates the host, quarantine neutralizes a file, and patching fixes the exploited vulnerability."}
+            ]
+          },
+          {
+            "label": "Administrative",
+            "cells": [
+              {"text": "Security policy, training, separation of duties", "detail": "Written rules and division of responsibilities reduce risk before action: training limits phishing and separation of duties prevents fraud."},
+              {"text": "Access review, audit, monitoring", "detail": "Periodic reviews of accounts and logs reveal excessive rights and compliance drift."},
+              {"text": "Incident plan, disciplinary action, procedure update", "detail": "After a deviation, the incident procedure is followed, policy is corrected, and teams are retrained."}
+            ]
+          },
+          {
+            "label": "Physical",
+            "cells": [
+              {"text": "Badge, lock, partition, access control", "detail": "These controls prevent physical access to rooms and media: badges and locks filter entry."},
+              {"text": "Camera, motion detector, visitor log", "detail": "They record or reveal unauthorized presence and provide evidence for investigation."},
+              {"text": "Lockdown, guard, media decommissioning", "detail": "Physical response consists of interrupting access, confiscating the media, or destroying it per procedure."}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "d-4.2-L01-asset-lifecycle",
+      "kind": "flow",
+      "title": "Asset Lifecycle",
+      "subtitle": "Planning, acquisition, assignment, inventory, monitoring, maintenance, then certified decommissioning.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "plan",
+          "label": "Planning",
+          "sub": "Needs and requirements",
+          "x": 30,
+          "y": 60,
+          "w": 165,
+          "h": 60,
+          "kind": "step",
+          "detail": "Define need, criticality, support duration, native encryption, and certified erasure capability before any purchase.",
+          "exam": "Writing security requirements before purchase avoids acquiring unsecurable equipment."
+        },
+        {
+          "id": "acquire",
+          "label": "Acquisition",
+          "sub": "Purchase / cloud",
+          "x": 215,
+          "y": 60,
+          "w": 165,
+          "h": 60,
+          "kind": "step",
+          "detail": "Purchase, lease, or creation of a cloud resource. Supply chain and vendor origin are part of the evaluation.",
+          "exam": "An asset bought without support or update requirements becomes an unpatchable asset."
+        },
+        {
+          "id": "assign",
+          "label": "Assignment",
+          "sub": "Named owner",
+          "x": 400,
+          "y": 60,
+          "w": 165,
+          "h": 60,
+          "kind": "actor",
+          "detail": "Name an owner, label the asset, document its authorized use, and record its business criticality.",
+          "exam": "Without an owner, no one monitors the asset: assignment creates accountability."
+        },
+        {
+          "id": "inventory",
+          "label": "Inventory",
+          "sub": "Asset register",
+          "x": 585,
+          "y": 60,
+          "w": 165,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "The asset record links identifier, owner, location, version, criticality, data processed, and dependencies: it is a composite inventory.",
+          "exam": "A composite inventory links asset, owner, criticality, and dependencies, not just a list of machines."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitoring",
+          "sub": "Continuous discovery",
+          "x": 585,
+          "y": 250,
+          "w": 165,
+          "h": 60,
+          "kind": "step",
+          "detail": "Network discovery, MDM, CMDB, and periodic reviews detect ghost assets, shadow IT, and rogue devices.",
+          "exam": "A gap between inventory and reality signals a device to investigate, not a simple data-entry error."
+        },
+        {
+          "id": "maintain",
+          "label": "Maintenance",
+          "sub": "Patches and tracking",
+          "x": 400,
+          "y": 250,
+          "w": 165,
+          "h": 60,
+          "kind": "step",
+          "detail": "Patching, controlled changes, movement tracking, and status: the asset stays compliant with the baseline throughout its use.",
+          "exam": "Patch prioritization depends on the criticality recorded in the inventory."
+        },
+        {
+          "id": "retire",
+          "label": "Decommissioning",
+          "sub": "Decommissioning",
+          "x": 215,
+          "y": 250,
+          "w": 165,
+          "h": 60,
+          "kind": "risk",
+          "detail": "Media erasure or destruction, revocation of access and licenses, then removal from inventory after validation.",
+          "exam": "A disk leaving without certified erasure is a potential data breach."
+        },
+        {
+          "id": "proof",
+          "label": "Proof of Destruction",
+          "sub": "Certificate / report",
+          "x": 30,
+          "y": 250,
+          "w": 165,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "The certificate of destruction or erasure report attests to the asset's end of life and closes the inventory record.",
+          "exam": "Without proof, end of life is not demonstrable during an audit."
+        }
+      ],
+      "edges": [
+        {"from": "plan", "to": "acquire", "label": "written requirements"},
+        {"from": "acquire", "to": "assign", "label": "receipt"},
+        {"from": "assign", "to": "inventory", "label": "registration"},
+        {"from": "inventory", "to": "monitor", "label": "continuous discovery"},
+        {"from": "monitor", "to": "maintain", "label": "gaps detected"},
+        {"from": "maintain", "to": "retire", "label": "end of support"},
+        {"from": "retire", "to": "proof", "label": "certification"},
+        {"from": "proof", "to": "plan", "label": "new cycle"}
+      ],
+      "sequence": ["plan", "acquire", "assign", "inventory", "monitor", "maintain", "retire", "proof"],
+      "quiz": {
+        "question": "Which step creates accountability by naming an owner for the asset?",
+        "answer": "assign"
+      }
+    },
+    {
+      "id": "d-4.2-L02-inventory-sources",
+      "kind": "flow",
+      "title": "Sources of a Composite Inventory",
+      "subtitle": "Five sources converge into a single source of truth, then into remediation.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "ad",
+          "label": "Active Directory",
+          "sub": "Accounts and machines",
+          "x": 30,
+          "y": 40,
+          "w": 165,
+          "h": 58,
+          "kind": "artifact",
+          "detail": "Directory: user accounts, service accounts, and computer objects. Links identity to the asset and helps identify owners.",
+          "exam": "An orphaned service account is a forgotten asset: it must appear in the inventory."
+        },
+        {
+          "id": "dhcp",
+          "label": "DHCP",
+          "sub": "Leases and MAC addresses",
+          "x": 30,
+          "y": 120,
+          "w": 165,
+          "h": 58,
+          "kind": "artifact",
+          "detail": "Leases reveal connected devices, even those not registered in the directory: a very useful passive source for shadow IT.",
+          "exam": "DHCP sees a device talking to the network, even if it is not in the directory."
+        },
+        {
+          "id": "edr",
+          "label": "EDR / MDM",
+          "sub": "Endpoint agents",
+          "x": 30,
+          "y": 200,
+          "w": 165,
+          "h": 58,
+          "kind": "artifact",
+          "detail": "Agents report OS, version, patches, posture, and location: the richest source for asset health.",
+          "exam": "Without an agent, a workstation's posture is invisible: EDR and MDM are complementary active sources."
+        },
+        {
+          "id": "scan",
+          "label": "Network Scanner",
+          "sub": "Active discovery",
+          "x": 30,
+          "y": 280,
+          "w": 165,
+          "h": 58,
+          "kind": "step",
+          "detail": "Active scans find forgotten hosts, open ports, and unauthorized services that passive sources miss.",
+          "exam": "An active scan discovers a ghost server; a poorly calibrated scan can disrupt a sensitive network (OT)."
+        },
+        {
+          "id": "cloud",
+          "label": "Cloud API",
+          "sub": "Ephemeral resources",
+          "x": 30,
+          "y": 360,
+          "w": 165,
+          "h": 58,
+          "kind": "artifact",
+          "detail": "Provider APIs inventory VMs, buckets, databases, and service identities, including resources created and then forgotten.",
+          "exam": "An ephemeral cloud resource may exist for only a few hours: inventory must be near real-time."
+        },
+        {
+          "id": "normalize",
+          "label": "Normalization / Dedup",
+          "sub": "Source correlation",
+          "x": 300,
+          "y": 150,
+          "w": 170,
+          "h": 60,
+          "kind": "step",
+          "detail": "Merge sources, deduplicate machines (MAC, hostname, cloud ID), and resolve conflicts before feeding the register.",
+          "exam": "Without deduplication, the same asset is counted three times and criticality is skewed."
+        },
+        {
+          "id": "cmdb",
+          "label": "Source of Truth",
+          "sub": "CMDB / inventory",
+          "x": 540,
+          "y": 150,
+          "w": 160,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "The single register holds owner, criticality, versions, data processed, and dependencies: it drives patching, incident response, and recovery.",
+          "exam": "A single, up-to-date source of truth is the prerequisite for any remediation prioritization."
+        },
+        {
+          "id": "action",
+          "label": "Prioritized Action",
+          "sub": "Patch, isolate, fix",
+          "x": 540,
+          "y": 320,
+          "w": 160,
+          "h": 60,
+          "kind": "step",
+          "detail": "The detected gap feeds patching, isolation of a rogue asset, or updating the record: the inventory becomes operational.",
+          "exam": "An inventory is useless if it does not trigger action: link it to patching and incident response."
+        }
+      ],
+      "edges": [
+        {"from": "ad", "to": "normalize", "label": "identities"},
+        {"from": "dhcp", "to": "normalize", "label": "MAC addresses"},
+        {"from": "edr", "to": "normalize", "label": "posture"},
+        {"from": "scan", "to": "normalize", "label": "discovery"},
+        {"from": "cloud", "to": "normalize", "label": "API"},
+        {"from": "normalize", "to": "cmdb", "label": "single register"},
+        {"from": "cmdb", "to": "action", "label": "prioritizes"},
+        {"from": "action", "to": "normalize", "label": "gap reported"}
+      ],
+      "sequence": ["ad", "dhcp", "edr", "scan", "cloud", "normalize", "cmdb", "action"],
+      "quiz": {
+        "question": "Which active source discovers a forgotten host plugged into the network?",
+        "answer": "scan"
+      }
+    }
+  ]
+}

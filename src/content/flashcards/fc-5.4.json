@@ -1,0 +1,115 @@
+{
+  "id": "fc-5.4",
+  "objective": "5.4",
+  "title": "Security Compliance",
+  "cards": [
+    {
+      "id": "c-5.4-01",
+      "front": "Three compliance trainings",
+      "back": "Data handling, AML/CTF (anti-money laundering / counter-terrorist financing), anti-bribery.",
+      "tag": "Training"
+    },
+    {
+      "id": "c-5.4-02",
+      "front": "Attestation",
+      "back": "Formal declaration confirming compliance status or fulfillment of an obligation.",
+      "tag": "Gap"
+    },
+    {
+      "id": "c-5.4-03",
+      "front": "Acknowledgement",
+      "back": "Recorded confirmation that a person has read and accepted a policy.",
+      "tag": "Gap"
+    },
+    {
+      "id": "c-5.4-04",
+      "front": "Reputational damage",
+      "back": "Loss of trust and damaged brand image among customers, partners, and the public.",
+      "tag": "Consequences"
+    },
+    {
+      "id": "c-5.4-05",
+      "front": "Financial consequences",
+      "back": "Fines, remediation costs, and lost revenue.",
+      "tag": "Consequences"
+    },
+    {
+      "id": "c-5.4-06",
+      "front": "Legal consequences",
+      "back": "Lawsuits, mandatory notification, and executive liability.",
+      "tag": "Consequences"
+    },
+    {
+      "id": "c-5.4-07",
+      "front": "Contractual consequences",
+      "back": "Contract termination and contractual penalties with customers or vendors.",
+      "tag": "Consequences"
+    },
+    {
+      "id": "c-5.4-08",
+      "front": "Sanctions",
+      "back": "Regulatory or disciplinary sanctions against the entity or individuals.",
+      "tag": "Consequences"
+    },
+    {
+      "id": "c-5.4-09",
+      "front": "Loss of license",
+      "back": "Revocation of a certification or authorization to operate, such as the ability to process payments.",
+      "tag": "Consequences"
+    },
+    {
+      "id": "c-5.4-10",
+      "front": "Right to be forgotten",
+      "back": "Right to obtain erasure of one's data when legal conditions are met.",
+      "tag": "Gap"
+    },
+    {
+      "id": "c-5.4-11",
+      "front": "Opt-in vs opt-out",
+      "back": "Opt-in = explicit prior consent; opt-out = ability to decline or withdraw.",
+      "tag": "Gap"
+    },
+    {
+      "id": "c-5.4-12",
+      "front": "Data correction and restrictions",
+      "back": "Rectifying inaccurate data; restricting or blocking processing that does not match consent.",
+      "tag": "Privacy"
+    },
+    {
+      "id": "c-5.4-13",
+      "front": "Controller vs processor",
+      "back": "Controller determines purposes and means; processor processes on its behalf per instructions.",
+      "tag": "Privacy"
+    },
+    {
+      "id": "c-5.4-14",
+      "front": "Data ownership",
+      "back": "Identifying the party that decides on the use and retention of the data.",
+      "tag": "Privacy"
+    },
+    {
+      "id": "c-5.4-15",
+      "front": "Legal hold",
+      "back": "Legal freeze that suspends destruction scheduled by the retention policy.",
+      "tag": "Gap"
+    },
+    {
+      "id": "c-5.4-16",
+      "front": "Legal orders",
+      "back": "Authority orders requiring production, preservation, or disclosure of data.",
+      "tag": "Legal"
+    },
+    {
+      "id": "c-5.4-17",
+      "front": "Data retention requirements",
+      "back": "Minimum or maximum retention periods defined by law, contract, or internal policy.",
+      "tag": "Legal"
+    },
+    {
+      "id": "c-5.4-18",
+      "front": "Retention priority rule",
+      "back": "A legal hold or legal order always overrides the standard 30-day retention.",
+      "tag": "Exam Trap"
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "diagrams": [
+    {
+      "id": "d-4.1-controls",
+      "kind": "matrix",
+      "title": "Controls Matrix: Which Control for Which Layer?",
+      "subtitle": "Each cell gives a control and its intended effect. Click cells to compare detection, prevention, and response.",
+      "matrix": {
+        "columns": [
+          "Network / perimeter",
+          "Endpoint / identity",
+          "Application / data",
+          "Email"
+        ],
+        "rows": [
+          {
+            "label": "Detection",
+            "cells": [
+              {
+                "text": "NIDS, WIPS",
+                "detail": "NIDS analyzes a copy of traffic out-of-band; WIPS monitors for rogue wireless access points. Neither blocks by itself."
+              },
+              {
+                "text": "HIDS, EDR, XDR",
+                "detail": "HIDS alerts on file changes; EDR detects behaviors on the agent; XDR correlates multiple sources."
+              },
+              {
+                "text": "Secrets scanning",
+                "detail": "Detects hardcoded keys and passwords in code and repository history. Exam objective control, absent from the books."
+              },
+              {
+                "text": "DMARC (reports)",
+                "detail": "DMARC reports reveal senders spoofing the domain and messages failing alignment."
+              }
+            ]
+          },
+          {
+            "label": "Prevention",
+            "cells": [
+              {
+                "text": "NIPS, WAF, 802.1X",
+                "detail": "NIPS blocks inline, WAF filters HTTP at the application layer, 802.1X denies access before authentication."
+              },
+              {
+                "text": "HIPS, MDM, SELinux",
+                "detail": "HIPS blocks locally, MDM enforces mobile policy, SELinux applies mandatory access control."
+              },
+              {
+                "text": "Input validation, code signing",
+                "detail": "Validating inputs prevents injection; signing code guarantees origin and integrity of binaries."
+              },
+              {
+                "text": "SPF, DKIM, DMARC",
+                "detail": "SPF lists authorized servers, DKIM signs the message, DMARC rejects or quarantines alignment failures."
+              }
+            ]
+          },
+          {
+            "label": "Response / remediation",
+            "cells": [
+              {
+                "text": "Rate limiting, IP blocking",
+                "detail": "Limits request abuse and reduces the impact of a flood without waiting for full analysis."
+              },
+              {
+                "text": "EDR isolation, quarantine",
+                "detail": "EDR isolates a compromised host from the network; quarantine blocks a suspicious file detected by antivirus."
+              },
+              {
+                "text": "DLP block, rollback",
+                "detail": "DLP blocks copying or sending sensitive data; rollback restores a known-good state."
+              },
+              {
+                "text": "BIMI, reject policy",
+                "detail": "BIMI displays the verified logo and DMARC with a reject policy blocks domain spoofing."
+              }
+            ]
+          },
+          {
+            "label": "Deception",
+            "cells": [
+              {
+                "text": "Honeynet",
+                "detail": "Entire network of decoys: reveals reconnaissance and lateral movement in the simulated zone."
+              },
+              {
+                "text": "Canary account, honeytoken",
+                "detail": "Decoy account or token: any use is a high-confidence signal."
+              },
+              {
+                "text": "Honeyfile",
+                "detail": "Bait file whose opening or copying betrays unauthorized access."
+              },
+              {
+                "text": "Bait address",
+                "detail": "A monitored decoy email address reveals address-harvesting campaigns."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

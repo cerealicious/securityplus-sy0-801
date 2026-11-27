@@ -1,0 +1,115 @@
+{
+  "id": "fc-3.2",
+  "objective": "3.2",
+  "title": "Infrastructure Protection and Zero Trust",
+  "cards": [
+    {
+      "id": "c-3.2-01",
+      "front": "DMZ zone",
+      "back": "Buffer zone between the Internet (Untrust) and the internal network (Trust): public servers are exposed there without exposing the internal network.",
+      "tag": "Zones"
+    },
+    {
+      "id": "c-3.2-02",
+      "front": "Device placement",
+      "back": "A preventive control is inline on the path; a detective control can be out-of-band via SPAN/tap.",
+      "tag": "Placement"
+    },
+    {
+      "id": "c-3.2-03",
+      "front": "Attack surface",
+      "back": "All interaction points with a system: ports, services, accounts, APIs. Reduce by closing what is unnecessary.",
+      "tag": "Basics"
+    },
+    {
+      "id": "c-3.2-04",
+      "front": "Diversity",
+      "back": "Varying vendors, hardware, and mechanisms so a single flaw does not affect the entire environment.",
+      "tag": "Basics"
+    },
+    {
+      "id": "c-3.2-05",
+      "front": "Fail-open",
+      "back": "If the control fails, traffic passes: availability prioritized, risk of bypass.",
+      "tag": "Failure"
+    },
+    {
+      "id": "c-3.2-06",
+      "front": "Fail-closed",
+      "back": "If the control fails, traffic is blocked: security prioritized, risk of outage.",
+      "tag": "Failure"
+    },
+    {
+      "id": "c-3.2-07",
+      "front": "Zero Trust — motto",
+      "back": "Never trust, always verify: no implicit trust, even inside the network.",
+      "tag": "Zero Trust"
+    },
+    {
+      "id": "c-3.2-08",
+      "front": "Four Zero Trust checks",
+      "back": "User authentication, device health, device inventory, application access control.",
+      "tag": "Zero Trust"
+    },
+    {
+      "id": "c-3.2-09",
+      "front": "Device health",
+      "back": "Device state: patches, antivirus, encryption, posture compliance.",
+      "tag": "Zero Trust"
+    },
+    {
+      "id": "c-3.2-10",
+      "front": "Device inventory in Zero Trust",
+      "back": "An uninventoried device is denied or quarantined before any application access.",
+      "tag": "Zero Trust"
+    },
+    {
+      "id": "c-3.2-11",
+      "front": "Role of a VPN",
+      "back": "Encrypts remote traffic and authenticates the tunnel; does not replace per-session application access control.",
+      "tag": "Remote Access"
+    },
+    {
+      "id": "c-3.2-12",
+      "front": "Tunneling",
+      "back": "Encrypted encapsulation of traffic between two points, used for remote access and interconnections.",
+      "tag": "Remote Access"
+    },
+    {
+      "id": "c-3.2-13",
+      "front": "Out-of-band management",
+      "back": "Administration network separated from production; a jump host/bastion is the single entry point with MFA and recorded sessions.",
+      "tag": "Administration"
+    },
+    {
+      "id": "c-3.2-14",
+      "front": "Security Service Edge (SSE)",
+      "back": "Cloud-delivered security services (proxy, filtering, DLP, access control) to replace or supplement a VPN.",
+      "tag": "Gap"
+    },
+    {
+      "id": "c-3.2-15",
+      "front": "gMSA",
+      "back": "Group Managed Service Account: service account password managed and automatically rotated by the directory.",
+      "tag": "Gap"
+    },
+    {
+      "id": "c-3.2-16",
+      "front": "Privilege creep",
+      "back": "Accumulation of permissions across role changes; countered by least privilege and periodic access reviews.",
+      "tag": "Identity"
+    },
+    {
+      "id": "c-3.2-17",
+      "front": "End-to-end encrypted messaging",
+      "back": "End-to-end encrypted messaging: the provider cannot read the contents of exchanges.",
+      "tag": "Communication"
+    },
+    {
+      "id": "c-3.2-18",
+      "front": "Secure file transfer",
+      "back": "Dedicated, logged channel with content inspection and authentication at both ends.",
+      "tag": "Communication"
+    }
+  ]
+}

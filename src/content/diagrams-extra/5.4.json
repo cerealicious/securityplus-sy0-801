@@ -1,0 +1,97 @@
+{
+  "diagrams": [
+    {
+      "id": "d-5.4-compliance-flow",
+      "kind": "flow",
+      "title": "From Training to Consequences of Non-Compliance",
+      "subtitle": "Train, prove, monitor, then measure the impact of a gap.",
+      "modes": ["explore", "quiz", "order"],
+      "sequence": ["training", "proof", "monitor", "gap", "consequences"],
+      "quiz": {
+        "question": "Which step produces attestations and acknowledgements?",
+        "answer": "proof"
+      },
+      "nodes": [
+        {
+          "id": "training",
+          "label": "Training",
+          "sub": "data · AML/CTF · anti-bribery",
+          "x": 20,
+          "y": 100,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Train personnel on applicable obligations: data handling, anti-money laundering and counter-terrorist financing, and anti-bribery.",
+          "exam": "Training covers business obligations, not just technical tools."
+        },
+        {
+          "id": "proof",
+          "label": "Evidence",
+          "sub": "attestations · acknowledgements",
+          "x": 200,
+          "y": 100,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Formal compliance statements and recorded confirmations of policy acknowledgement.",
+          "exam": "Both artifacts are required in §5.4 and absent from the provided books."
+        },
+        {
+          "id": "monitor",
+          "label": "Oversight",
+          "sub": "controls · reviews · reports",
+          "x": 380,
+          "y": 100,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Periodic controls, access and processing reviews, metric tracking, and reporting to leadership.",
+          "exam": "Compliance without oversight cannot be demonstrated over time."
+        },
+        {
+          "id": "gap",
+          "label": "Identified gap",
+          "sub": "audit · incident · regulator",
+          "x": 560,
+          "y": 100,
+          "w": 160,
+          "h": 62,
+          "kind": "risk",
+          "detail": "A deficiency is identified through an internal audit, an incident, or an external inspection.",
+          "exam": "The root cause must be tracked, not just the observed gap."
+        },
+        {
+          "id": "consequences",
+          "label": "Consequences",
+          "sub": "reputational · financial · license",
+          "x": 740,
+          "y": 100,
+          "w": 170,
+          "h": 62,
+          "kind": "risk",
+          "detail": "Reputational, financial, legal, contractual, sanctions, and loss of license.",
+          "exam": "Revocation of an operating permit is classified as loss of license, even if it also has a financial cost."
+        },
+        {
+          "id": "rights",
+          "label": "Rights & retention",
+          "sub": "privacy · legal hold",
+          "x": 380,
+          "y": 220,
+          "w": 220,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Right to be forgotten, opt-in/opt-out, correction, processing restrictions, controller/processor roles, and legal hold overriding normal retention.",
+          "exam": "A legal hold overrides a 30-day deletion policy."
+        }
+      ],
+      "edges": [
+        { "from": "training", "to": "proof", "label": "train" },
+        { "from": "proof", "to": "monitor", "label": "prove" },
+        { "from": "monitor", "to": "gap", "label": "detect" },
+        { "from": "gap", "to": "consequences", "label": "lead to" },
+        { "from": "monitor", "to": "rights", "label": "govern" }
+      ]
+    }
+  ]
+}

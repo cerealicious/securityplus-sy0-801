@@ -1,0 +1,145 @@
+{
+  "diagrams": [
+    {
+      "id": "d-3.2-zero-trust",
+      "kind": "flow",
+      "title": "Trust Zones and Zero Trust Path",
+      "subtitle": "From untrusted traffic to the resource: every crossing verifies identity, device, and privilege.",
+      "modes": [
+        "explore",
+        "quiz",
+        "order"
+      ],
+      "nodes": [
+        {
+          "id": "untrust",
+          "label": "Untrust",
+          "sub": "Internet / external",
+          "x": 20,
+          "y": 40,
+          "w": 140,
+          "h": 60,
+          "kind": "risk",
+          "detail": "No implicit trust: every inbound flow is suspect, even if it later originates from the internal network.",
+          "exam": "Zero Trust makes no trust distinction between 'inside' and 'outside'."
+        },
+        {
+          "id": "dmz",
+          "label": "DMZ",
+          "sub": "Buffer zone",
+          "x": 190,
+          "y": 40,
+          "w": 140,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "Perimeter firewall, proxy, and detective sensors. Public-facing servers are exposed there without exposing the internal network.",
+          "exam": "A detective IDS is placed out-of-band (SPAN/tap); a preventive IPS is inline."
+        },
+        {
+          "id": "identity",
+          "label": "Identity verification",
+          "sub": "User authentication",
+          "x": 360,
+          "y": 40,
+          "w": 150,
+          "h": 60,
+          "kind": "actor",
+          "detail": "MFA, federation, and least privilege: the user is authenticated on every session, not once and for all.",
+          "exam": "A VPN authenticates the tunnel; Zero Trust authenticates the user and the resource."
+        },
+        {
+          "id": "device",
+          "label": "Health & inventory",
+          "sub": "Device health / inventory",
+          "x": 540,
+          "y": 40,
+          "w": 150,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Patches, antivirus, encryption, and presence in inventory. An unknown device is denied or quarantined.",
+          "exam": "Device health and device inventory are two distinct controls in §3.2."
+        },
+        {
+          "id": "oob",
+          "label": "Out-of-band",
+          "sub": "Bastion / OOB",
+          "x": 190,
+          "y": 170,
+          "w": 160,
+          "h": 60,
+          "kind": "step",
+          "detail": "Separate management network, single bastion entry point with MFA and session recording.",
+          "exam": "Administration never traverses the user network in a mature architecture."
+        },
+        {
+          "id": "app",
+          "label": "Application access",
+          "sub": "Least privilege",
+          "x": 420,
+          "y": 170,
+          "w": 160,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Minimal access to the requested resource, continuously reassessed. gMSAs avoid hardcoded service passwords.",
+          "exam": "SSE and gMSA are from objective §3.2, absent from the four provided books."
+        },
+        {
+          "id": "internal",
+          "label": "Internal trust",
+          "sub": "Segmentation",
+          "x": 620,
+          "y": 170,
+          "w": 130,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "Internal firewall and segmentation limit lateral movement between departments.",
+          "exam": "The failure mode (fail-open / fail-closed) is decided based on service criticality."
+        }
+      ],
+      "edges": [
+        {
+          "from": "untrust",
+          "to": "dmz",
+          "label": "inbound traffic"
+        },
+        {
+          "from": "dmz",
+          "to": "identity",
+          "label": "authenticate"
+        },
+        {
+          "from": "identity",
+          "to": "device",
+          "label": "verify"
+        },
+        {
+          "from": "device",
+          "to": "app",
+          "label": "authorize"
+        },
+        {
+          "from": "oob",
+          "to": "app",
+          "label": "administer"
+        },
+        {
+          "from": "app",
+          "to": "internal",
+          "label": "minimal access"
+        }
+      ],
+      "sequence": [
+        "untrust",
+        "dmz",
+        "identity",
+        "device",
+        "app",
+        "internal"
+      ],
+      "quiz": {
+        "question": "Which node verifies that the device is known and healthy before application access?",
+        "answer": "device"
+      }
+    }
+  ]
+}

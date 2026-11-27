@@ -1,0 +1,138 @@
+{
+  "diagrams": [
+    {
+      "id": "d-access-models",
+      "kind": "matrix",
+      "title": "Access Control Models Matrix",
+      "subtitle": "Who decides, on what basis, and for how long? Six models from §4.5, five of which are outside the books.",
+      "matrix": {
+        "columns": [
+          "DAC",
+          "MAC",
+          "RBAC",
+          "Rule-based",
+          "Time-based",
+          "JIT"
+        ],
+        "rows": [
+          {
+            "label": "Who decides?",
+            "cells": [
+              {
+                "text": "The owner",
+                "detail": "The resource owner grants or revokes access at their discretion."
+              },
+              {
+                "text": "Central policy",
+                "detail": "An authority defines labels and rules: even the owner cannot override them."
+              },
+              {
+                "text": "Administrator via roles",
+                "detail": "Permissions are attached to a role and inherited by users assigned to it."
+              },
+              {
+                "text": "Administrator via rules",
+                "detail": "Explicit rules (ACL, IP range, allowlist) apply to everyone."
+              },
+              {
+                "text": "Time-based policy",
+                "detail": "A time window or expiration date determines authorization."
+              },
+              {
+                "text": "Approval workflow",
+                "detail": "An approved request triggers a time-limited elevation."
+              }
+            ]
+          },
+          {
+            "label": "Basis of decision",
+            "cells": [
+              {
+                "text": "Owner's discretion",
+                "detail": "Flexible but hard to audit: permissions propagate without central control."
+              },
+              {
+                "text": "Security labels",
+                "detail": "Classification and \"need to know\": a strict model suited to sensitive environments."
+              },
+              {
+                "text": "Role membership",
+                "detail": "Dominant enterprise model: easy to audit, grant, and revoke."
+              },
+              {
+                "text": "Explicit condition",
+                "detail": "Rule applied uniformly, regardless of identity or role."
+              },
+              {
+                "text": "Clock and calendar",
+                "detail": "Business hours, assignment duration, contract end date."
+              },
+              {
+                "text": "Immediate, approved need",
+                "detail": "Short duration, often a few hours, with automatic revocation."
+              }
+            ]
+          },
+          {
+            "label": "Exam point",
+            "cells": [
+              {
+                "text": "Uncontrolled propagation",
+                "detail": "DAC = flexibility, but the owner can pass permissions on without central visibility."
+              },
+              {
+                "text": "Non-overridable",
+                "detail": "MAC applies even against the owner: this is the criterion that distinguishes it from DAC."
+              },
+              {
+                "text": "Revocation by role",
+                "detail": "Removing the user from the role removes all their permissions: that is the strength of RBAC."
+              },
+              {
+                "text": "No case-by-case exceptions",
+                "detail": "Rule-based applies to everyone indiscriminately, unlike DAC."
+              },
+              {
+                "text": "Scheduled expiration",
+                "detail": "Time-based plans the end of access right from assignment."
+              },
+              {
+                "text": "Minimal exposure window",
+                "detail": "JIT reduces the time during which an elevated privilege is active."
+              }
+            ]
+          },
+          {
+            "label": "Book coverage",
+            "cells": [
+              {
+                "text": "Outside the books",
+                "detail": "Reference §4.5, none of the four provided books."
+              },
+              {
+                "text": "Outside the books",
+                "detail": "Reference §4.5, none of the four provided books."
+              },
+              {
+                "text": "Partially covered",
+                "detail": "Concept of roles and least privilege in the Defensive Security Handbook."
+              },
+              {
+                "text": "Outside the books",
+                "detail": "Reference §4.5, none of the four provided books."
+              },
+              {
+                "text": "Outside the books",
+                "detail": "Reference §4.5, none of the four provided books."
+              },
+              {
+                "text": "Outside the books",
+                "detail": "Reference §4.5, none of the four provided books."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

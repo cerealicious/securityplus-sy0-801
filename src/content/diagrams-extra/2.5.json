@@ -1,0 +1,107 @@
+{
+  "diagrams": [
+    {
+      "id": "d-2.5-ioc-flow",
+      "kind": "flow",
+      "title": "From Attack to Indicator",
+      "subtitle": "Click each step to see the definition and exam takeaway.",
+      "modes": [
+        "explore",
+        "quiz",
+        "order"
+      ],
+      "nodes": [
+        {
+          "id": "attack",
+          "label": "Attack",
+          "sub": "Vector + technique",
+          "x": 30,
+          "y": 50,
+          "w": 150,
+          "h": 62,
+          "kind": "risk",
+          "detail": "An attack always leaves traces: files, network, credentials, logs.",
+          "exam": "The vector is not the attack: it is the entry path."
+        },
+        {
+          "id": "trace",
+          "label": "Traces",
+          "sub": "Artifacts",
+          "x": 230,
+          "y": 50,
+          "w": 150,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Files, processes, connections, DNS queries, timestamps.",
+          "exam": "An isolated trace is not proof: correlate sources."
+        },
+        {
+          "id": "ioc",
+          "label": "IOC",
+          "sub": "IP, hash, domain",
+          "x": 430,
+          "y": 50,
+          "w": 150,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Indicator of Compromise: specific, shareable data used to detect or block.",
+          "exam": "A hash/IP is an IOC; a TTP is more durable."
+        },
+        {
+          "id": "detect",
+          "label": "Detection",
+          "sub": "SIEM / EDR",
+          "x": 630,
+          "y": 50,
+          "w": 150,
+          "h": 62,
+          "kind": "step",
+          "detail": "Correlation of IOCs with rules and enrichment.",
+          "exam": "False positives outnumber true positives: tuning is essential."
+        },
+        {
+          "id": "analyze",
+          "label": "Analysis",
+          "sub": "Scenario / hypothesis",
+          "x": 430,
+          "y": 190,
+          "w": 150,
+          "h": 62,
+          "kind": "neutral",
+          "detail": "Qualify the incident: attack family, scope, severity.",
+          "exam": "Answer WHO / WHERE / HOW / EVIDENCE."
+        }
+      ],
+      "edges": [
+        {
+          "from": "attack",
+          "to": "trace"
+        },
+        {
+          "from": "trace",
+          "to": "ioc"
+        },
+        {
+          "from": "ioc",
+          "to": "detect"
+        },
+        {
+          "from": "detect",
+          "to": "analyze",
+          "label": "qualification"
+        }
+      ],
+      "sequence": [
+        "attack",
+        "trace",
+        "ioc",
+        "detect",
+        "analyze"
+      ],
+      "quiz": {
+        "question": "Which element is an IOC?",
+        "answer": "ioc"
+      }
+    }
+  ]
+}

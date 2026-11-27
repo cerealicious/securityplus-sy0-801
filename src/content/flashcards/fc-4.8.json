@@ -1,0 +1,127 @@
+{
+  "id": "fc-4.8",
+  "objective": "4.8",
+  "title": "Investigation and Evidence Analysis",
+  "cards": [
+    {
+      "id": "c-4.8-01",
+      "front": "The first three log families",
+      "back": "Access/accounting, logical access, physical access: who accessed what, and who was physically present.",
+      "tag": "Logs"
+    },
+    {
+      "id": "c-4.8-02",
+      "front": "Device, server, application logs",
+      "back": "Device, system, and application events: identifies the component that changed or failed.",
+      "tag": "Logs"
+    },
+    {
+      "id": "c-4.8-03",
+      "front": "Authentication and audit logs",
+      "back": "Login successes/failures and sensitive actions: proves or rules out a successful brute-force attack.",
+      "tag": "Logs"
+    },
+    {
+      "id": "c-4.8-04",
+      "front": "Communication, network, and endpoint logs",
+      "back": "Flows, sessions, and host activity: which machine contacted which destination.",
+      "tag": "Logs"
+    },
+    {
+      "id": "c-4.8-05",
+      "front": "Metadata",
+      "back": "Data about data: timestamp, sender, recipient, size, hash. Often sufficient to build a timeline.",
+      "tag": "Logs"
+    },
+    {
+      "id": "c-4.8-06",
+      "front": "Seven data sources",
+      "back": "Vulnerability scans, automated reports, NetFlow/IPFIX, surveillance footage, security tools, dashboards, packet captures.",
+      "tag": "Sources"
+    },
+    {
+      "id": "c-4.8-07",
+      "front": "NetFlow vs packet capture",
+      "back": "NetFlow = conversations (who talks to whom); packet capture = exact packet contents.",
+      "tag": "Sources"
+    },
+    {
+      "id": "c-4.8-08",
+      "front": "Order of volatility",
+      "back": "Memory → connections/processes → caches and unwritten logs → disk → backups and archives.",
+      "tag": "Evidence"
+    },
+    {
+      "id": "c-4.8-09",
+      "front": "Why capture memory first?",
+      "back": "RAM holds keys, payloads, and fileless processes not found on disk. A reboot erases them.",
+      "tag": "Evidence"
+    },
+    {
+      "id": "c-4.8-10",
+      "front": "Memory dump",
+      "back": "Copy of RAM at a point in time: encryption keys, injections, established connections, fileless processes.",
+      "tag": "Artifacts"
+    },
+    {
+      "id": "c-4.8-11",
+      "front": "Bit-for-bit image",
+      "back": "Sector-by-sector copy of a disk: preserves deleted files, unallocated space, and metadata.",
+      "tag": "Artifacts"
+    },
+    {
+      "id": "c-4.8-12",
+      "front": "Snapshot",
+      "back": "Point-in-time capture of state (VM, storage, configuration): fast, but often less comprehensive than a full image.",
+      "tag": "Artifacts"
+    },
+    {
+      "id": "c-4.8-13",
+      "front": "System image",
+      "back": "Forensic copy of the system allowing offline analysis without altering the original.",
+      "tag": "Artifacts"
+    },
+    {
+      "id": "c-4.8-14",
+      "front": "Chain of custody",
+      "back": "Hash, timestamp, source, collector, and log of every transfer: proves evidence was not altered.",
+      "tag": "Integrity"
+    },
+    {
+      "id": "c-4.8-15",
+      "front": "File/log integrity",
+      "back": "Hash verification that files and logs were not tampered with between collection, storage, and presentation.",
+      "tag": "Integrity"
+    },
+    {
+      "id": "c-4.8-16",
+      "front": "Role of HR",
+      "back": "Employee status, leave, termination, disciplinary context, and support.",
+      "tag": "Stakeholders"
+    },
+    {
+      "id": "c-4.8-17",
+      "front": "Role of finance/accounting and legal",
+      "back": "Accounting = transactions and fraud evidence; legal = legal basis, notification, and legal hold.",
+      "tag": "Stakeholders"
+    },
+    {
+      "id": "c-4.8-18",
+      "front": "Legal hold",
+      "back": "Suspension of destruction even if retention is 30 days: check before any deletion.",
+      "tag": "Stakeholders"
+    },
+    {
+      "id": "c-4.8-19",
+      "front": "Parsing steps",
+      "back": "Normalize (UTC), filter (host, account, time), correlate (multiple sources), reconstruct the timeline.",
+      "tag": "Analysis"
+    },
+    {
+      "id": "c-4.8-20",
+      "front": "Timestamp trap",
+      "back": "Verify NTP, time zone, and clock source before concluding on the order of events.",
+      "tag": "Analysis"
+    }
+  ]
+}

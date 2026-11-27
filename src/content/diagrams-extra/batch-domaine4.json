@@ -1,0 +1,1591 @@
+{
+  "diagrams": [
+    {
+      "id": "d-4.3-L01-vuln-pipeline",
+      "kind": "flow",
+      "title": "Vulnerability Management Pipeline",
+      "subtitle": "Inventory → scan → prioritization → ticket → patch → verification. Skip one step and the loop never closes.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "inv",
+          "label": "Inventory",
+          "sub": "IPAM, assets, CSPM",
+          "x": 30,
+          "y": 130,
+          "w": 170,
+          "h": 64,
+          "kind": "artifact",
+          "detail": "Start from an asset repository: IPAM for addresses, hardware/software inventory, and CSPM for the cloud. Without an inventory, a scan covers an unknown scope and its results cannot be attributed.",
+          "exam": "IPAM and CSPM are §4.3 syllabus concepts: inventory always precedes scanning."
+        },
+        {
+          "id": "scan",
+          "label": "Scan",
+          "sub": "authenticated / unauthenticated",
+          "x": 230,
+          "y": 130,
+          "w": 170,
+          "h": 64,
+          "kind": "step",
+          "detail": "The scanner queries hosts and reports versions, ports, and configurations. Authenticated mode reads the actual state; unauthenticated mode gives the attacker's perspective.",
+          "exam": "The scan produces a LIST, not a decision: never confuse detection with prioritization."
+        },
+        {
+          "id": "prio",
+          "label": "Prioritization",
+          "sub": "CVSS, exposure, exploit",
+          "x": 430,
+          "y": 130,
+          "w": 170,
+          "h": 64,
+          "kind": "step",
+          "detail": "Combine CVSS severity, exposure, asset criticality, and the existence of a known exploit or one observed in a pentest. This step turns the list into a work order.",
+          "exam": "A critical on an isolated asset may come after an exposed high: reason in context."
+        },
+        {
+          "id": "ticket",
+          "label": "Ticket & SLA",
+          "sub": "assignment, due date",
+          "x": 430,
+          "y": 350,
+          "w": 170,
+          "h": 64,
+          "kind": "artifact",
+          "detail": "Each selected vulnerability becomes a ticket with an owner, priority, and remediation SLA. The ticket is the auditable record of handling, not proof that it has been fixed.",
+          "exam": "An open ticket without an owner or due date has no SLA: the exam likes this nuance."
+        },
+        {
+          "id": "patch",
+          "label": "Patch",
+          "sub": "fix, hardening",
+          "x": 230,
+          "y": 350,
+          "w": 170,
+          "h": 64,
+          "kind": "step",
+          "detail": "Apply the patch, update, hardening, service disablement, or segmentation. If patching is impossible, put a compensating control in place and document the exception.",
+          "exam": "\"We can't patch\" never authorizes ignoring it: you need a written, approved, and dated exception."
+        },
+        {
+          "id": "verify",
+          "label": "Verification",
+          "sub": "re-scan, same method",
+          "x": 30,
+          "y": 350,
+          "w": 170,
+          "h": 64,
+          "kind": "step",
+          "detail": "Re-scan the same scope with the same parameters to prove the vulnerability is gone before closing the ticket. This step closes the loop.",
+          "exam": "Changing the scan method can make a finding disappear without fixing anything at all."
+        }
+      ],
+      "edges": [
+        {"from": "inv", "to": "scan", "label": "known scope"},
+        {"from": "scan", "to": "prio", "label": "raw results"},
+        {"from": "prio", "to": "ticket", "label": "work order"},
+        {"from": "ticket", "to": "patch", "label": "SLA triggered"},
+        {"from": "patch", "to": "verify", "label": "fix applied"},
+        {"from": "verify", "to": "inv", "label": "continuous loop"}
+      ],
+      "sequence": ["inv", "scan", "prio", "ticket", "patch", "verify"],
+      "quiz": {
+        "question": "Which step turns the scanner's raw list into a prioritized work order?",
+        "answer": "prio"
+      }
+    },
+    {
+      "id": "d-4.3-L02-scan-auth",
+      "kind": "flow",
+      "title": "Authenticated vs. Unauthenticated Scan",
+      "subtitle": "Two columns, two perspectives: the actual state of the system or the view an attacker has of it.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "scanner",
+          "label": "Scanner",
+          "sub": "same tool, two modes",
+          "x": 370,
+          "y": 40,
+          "w": 160,
+          "h": 58,
+          "kind": "neutral",
+          "detail": "The same scanner can be launched with or without credentials. The chosen mode radically changes the scope and reliability of the results, without changing the tool.",
+          "exam": "The exam question is almost always about what the scanner SEES, not its speed."
+        },
+        {
+          "id": "auth-creds",
+          "label": "Credentials Provided",
+          "sub": "dedicated, protected account",
+          "x": 40,
+          "y": 170,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "The scanner receives a dedicated read-only account. This account must be protected, rotated, and limited to the scan scope.",
+          "exam": "An overly privileged scan account becomes a target itself: principle of least privilege."
+        },
+        {
+          "id": "auth-depth",
+          "label": "Internal View",
+          "sub": "patches, versions, config",
+          "x": 40,
+          "y": 280,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "From the inside, the scanner reads exact versions, installed patches, and local configuration. It confirms or eliminates most findings.",
+          "exam": "This is the mode to remember when you want to know if a patch is ACTUALLY missing."
+        },
+        {
+          "id": "auth-quality",
+          "label": "Fewer False Positives",
+          "sub": "reliable but heavier",
+          "x": 40,
+          "y": 390,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Accuracy is much better, at the cost of an account to manage and a more intrusive scan. It is the reference mode for remediation.",
+          "exam": "Fewer false positives = more confidence in prioritization, not fewer vulnerabilities."
+        },
+        {
+          "id": "noauth-none",
+          "label": "No Credentials",
+          "sub": "no privileges",
+          "x": 690,
+          "y": 170,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "The scanner hits services like any network visitor. No account is needed or disclosed.",
+          "exam": "No authentication also means: no visibility into the interior."
+        },
+        {
+          "id": "noauth-view",
+          "label": "Attacker View",
+          "sub": "ports, banners, services",
+          "x": 690,
+          "y": 280,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "It only sees what is exposed: open ports, version banners, exposed services. This is exactly the surface an adversary can touch before any login.",
+          "exam": "This is the best mode to measure external exposure, not to audit internal patches."
+        },
+        {
+          "id": "noauth-limit",
+          "label": "Fast but Blind",
+          "sub": "frequent false positives",
+          "x": 690,
+          "y": 390,
+          "w": 160,
+          "h": 62,
+          "kind": "risk",
+          "detail": "A banner can lie: the service may already be patched. Unauthenticated scanning therefore generates more false positives and does not prove exploitability.",
+          "exam": "False positive ≠ absent vulnerability: you must confirm before closing or escalating."
+        }
+      ],
+      "edges": [
+        {"from": "scanner", "to": "auth-creds", "label": "authenticated mode"},
+        {"from": "auth-creds", "to": "auth-depth", "label": "internal read"},
+        {"from": "auth-depth", "to": "auth-quality", "label": "confirmation"},
+        {"from": "scanner", "to": "noauth-none", "label": "unauthenticated mode"},
+        {"from": "noauth-none", "to": "noauth-view", "label": "from the network"},
+        {"from": "noauth-view", "to": "noauth-limit", "label": "banners only"}
+      ],
+      "sequence": ["scanner", "auth-creds", "auth-depth", "auth-quality"],
+      "quiz": {
+        "question": "Which scan mode sees missing patches and the local configuration of a host?",
+        "answer": "auth-depth"
+      }
+    },
+    {
+      "id": "d-4.4-L01-log-flow",
+      "kind": "flow",
+      "title": "The Log Flow to the Dashboard",
+      "subtitle": "Sources → collection → normalization → correlation → alert → dashboard. A vertical stack, with timestamping across it.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "sources",
+          "label": "Sources",
+          "sub": "hosts, network, cloud, apps",
+          "x": 80,
+          "y": 45,
+          "w": 160,
+          "h": 58,
+          "kind": "artifact",
+          "detail": "OSs, firewalls, web servers, databases, applications, and cloud services produce events in very different formats (Event Log, syslog, JSON, CSV).",
+          "exam": "If a source does not emit logs, no SIEM can correlate it: coverage first, tool second."
+        },
+        {
+          "id": "collect",
+          "label": "Collection",
+          "sub": "agent, syslog, syslog-ng",
+          "x": 80,
+          "y": 125,
+          "w": 160,
+          "h": 58,
+          "kind": "step",
+          "detail": "Agents or syslog forwarders centralize events. Transport must be reliable and timestamped: TLS and TCP are preferable to plain UDP.",
+          "exam": "syslog = message protocol; collector = centralization point. Do not confuse the two."
+        },
+        {
+          "id": "normalize",
+          "label": "Normalization",
+          "sub": "common schema, fields",
+          "x": 80,
+          "y": 205,
+          "w": 160,
+          "h": 58,
+          "kind": "step",
+          "detail": "Heterogeneous formats are converted into a single schema: timestamp, source, user, IP, severity. Without common fields, correlation is impossible.",
+          "exam": "Normalizing does not mean deleting: the original log is retained for evidence."
+        },
+        {
+          "id": "correlate",
+          "label": "Correlation",
+          "sub": "rules, IOCs, sequences",
+          "x": 80,
+          "y": 285,
+          "w": 160,
+          "h": 58,
+          "kind": "step",
+          "detail": "The engine links events together over time: failed logins followed by success, same hash on two hosts, traffic spikes. This is the core of the SIEM.",
+          "exam": "A single event is rarely an incident; correlation looks for sequences."
+        },
+        {
+          "id": "alert",
+          "label": "Alert",
+          "sub": "rule triggered",
+          "x": 80,
+          "y": 365,
+          "w": 160,
+          "h": 58,
+          "kind": "risk",
+          "detail": "When a rule matches, the SIEM creates an alert with severity and context. An uncontextualized alert becomes noise for the analyst.",
+          "exam": "Alert ≠ incident: it must be triaged before triggering a response."
+        },
+        {
+          "id": "dashboard",
+          "label": "Dashboard",
+          "sub": "visualization, KPIs",
+          "x": 80,
+          "y": 445,
+          "w": 160,
+          "h": 58,
+          "kind": "artifact",
+          "detail": "Dashboards and metrics for the SOC: volumes, trends, open alerts, SLAs. They make visible what correlation has detected.",
+          "exam": "The dashboard is for management; field verification is done in the raw log."
+        },
+        {
+          "id": "ntp",
+          "label": "NTP Timestamping",
+          "sub": "synchronized UTC",
+          "x": 420,
+          "y": 165,
+          "w": 160,
+          "h": 58,
+          "kind": "neutral",
+          "detail": "Without synchronized clocks, two logs from the same incident appear unrelated. NTP (in UTC) is the silent requirement for any reliable correlation.",
+          "exam": "Think NTP whenever an exam question mentions chronology or timeline."
+        }
+      ],
+      "edges": [
+        {"from": "sources", "to": "collect", "label": "events emitted"},
+        {"from": "collect", "to": "normalize", "label": "centralized stream"},
+        {"from": "normalize", "to": "correlate", "label": "common fields"},
+        {"from": "correlate", "to": "alert", "label": "rule matched"},
+        {"from": "alert", "to": "dashboard", "label": "made visible"},
+        {"from": "ntp", "to": "collect", "label": "reliable timestamp"},
+        {"from": "ntp", "to": "correlate", "label": "time window"}
+      ],
+      "sequence": ["sources", "collect", "normalize", "correlate", "alert", "dashboard"],
+      "quiz": {
+        "question": "Which step converts heterogeneous formats into common fields usable by the SIEM?",
+        "answer": "normalize"
+      }
+    },
+    {
+      "id": "d-4.4-L02-alert-tuning",
+      "kind": "flow",
+      "title": "Alert Tuning: From Noise to Signal",
+      "subtitle": "A funnel: reduce volume before enriching, to keep only actionable alerts.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "noise",
+          "label": "Noise",
+          "sub": "hundreds of alerts/day",
+          "x": 370,
+          "y": 40,
+          "w": 170,
+          "h": 60,
+          "kind": "risk",
+          "detail": "Overly broad rules, false positives, duplicates: the analyst drowns. A SOC that treats everything at the same level treats nothing effectively.",
+          "exam": "Tuning is not about disabling rules, but making them discriminating."
+        },
+        {
+          "id": "filter",
+          "label": "Filtering",
+          "sub": "suppression, thresholds, allowlist",
+          "x": 370,
+          "y": 145,
+          "w": 170,
+          "h": 60,
+          "kind": "step",
+          "detail": "Remove duplicates, set thresholds, and allowlist known, approved behaviors. Every exclusion must be justified and reviewed.",
+          "exam": "An overly broad allowlist hides a real signal: it is a compensating control, not an erasure."
+        },
+        {
+          "id": "falsepos",
+          "label": "False Positives",
+          "sub": "dismissed and documented",
+          "x": 70,
+          "y": 195,
+          "w": 160,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Dismissed alerts are kept with the reason for exclusion. This record avoids reopening the same debate at every review.",
+          "exam": "Documenting a false positive proves it was evaluated, not ignored."
+        },
+        {
+          "id": "enrich",
+          "label": "Enrichment",
+          "sub": "IOC, asset, CTI, user",
+          "x": 370,
+          "y": 250,
+          "w": 170,
+          "h": 60,
+          "kind": "step",
+          "detail": "Add context: asset criticality, owner identity, threat intelligence, geolocation, history. The alert becomes a verifiable hypothesis.",
+          "exam": "Enrichment precedes triage: you don't decide before having the context."
+        },
+        {
+          "id": "signal",
+          "label": "Signal",
+          "sub": "qualified alert",
+          "x": 370,
+          "y": 355,
+          "w": 170,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "A reduced volume of contextualized alerts remains, ready for the analyst or SOAR playbook. This is the goal of tuning.",
+          "exam": "Fewer alerts + more context = more time for real incidents."
+        },
+        {
+          "id": "analyst",
+          "label": "SOC Analyst",
+          "sub": "human validation",
+          "x": 670,
+          "y": 355,
+          "w": 160,
+          "h": 60,
+          "kind": "actor",
+          "detail": "The analyst validates the signal, opens an incident, and sends feedback on the rule. The feedback loop is what makes tuning sustainable.",
+          "exam": "The human stays in the loop: tuning is an iterative process, not a one-time setting."
+        }
+      ],
+      "edges": [
+        {"from": "noise", "to": "filter", "label": "volume reduction"},
+        {"from": "filter", "to": "falsepos", "label": "if known and approved"},
+        {"from": "filter", "to": "enrich", "label": "retained alerts"},
+        {"from": "enrich", "to": "signal", "label": "context added"},
+        {"from": "signal", "to": "analyst", "label": "triage"},
+        {"from": "analyst", "to": "filter", "label": "rule feedback"}
+      ],
+      "sequence": ["noise", "filter", "enrich", "signal"],
+      "quiz": {
+        "question": "Which step adds context (IOC, asset criticality, threat intel) before qualifying the signal?",
+        "answer": "enrich"
+      }
+    },
+    {
+      "id": "d-4.4-L03-monitoring-protocols",
+      "kind": "matrix",
+      "title": "Monitoring Protocols: NetFlow, SNMP, syslog, SCAP",
+      "subtitle": "Four families, four different questions. The classic trap is confusing flow, state, event, and compliance.",
+      "modes": ["explore"],
+      "matrix": {
+        "columns": ["NetFlow", "SNMP", "syslog", "SCAP"],
+        "rows": [
+          {
+            "label": "What it observes",
+            "cells": [
+              {"text": "Network flows (who talks to whom, when, how much)", "detail": "Layer 3/4 metadata: source/destination IP, ports, protocol, bytes. Ideal for spotting a scan, a traffic spike, or exfiltration."},
+              {"text": "Device state and health", "detail": "CPU, memory, interfaces, uptime. SNMP traps push a notification; polling queries at regular intervals."},
+              {"text": "Event messages (RFC 5424)", "detail": "Each device or application emits a message with facility and severity (0 = emergency … 7 = debug). It is the foundation of SIEM centralization."},
+              {"text": "Compliance and configuration", "detail": "XML framework: XCCDF for rules, OVAL for tests, CPE for naming products. Used to audit a benchmark (e.g., CIS) rather than detect in real time."}
+            ]
+          },
+          {
+            "label": "Typical source",
+            "cells": [
+              {"text": "Routers, switches, firewalls", "detail": "Traffic is seen in transit by the network device: a probe or flow collector (nfdump, Elastic, SIEM)."},
+              {"text": "Routers, switches, servers, printers", "detail": "SNMP agent on the device, community string or SNMPv3 account, MIB defining readable objects."},
+              {"text": "Hosts, servers, applications, firewalls", "detail": "Local agent or direct send to a syslog collector, often on UDP/514 or TCP/TLS for reliability."},
+              {"text": "Scanned workstations and servers", "detail": "A configuration scanner compares the actual state to the benchmark and produces a compliance score."}
+            ]
+          },
+          {
+            "label": "SOC usage",
+            "cells": [
+              {"text": "Detect exfiltration and scans", "detail": "Correlate abnormal outbound volume or a host contacting many ports: this is network detection, not content analysis."},
+              {"text": "Monitoring and outage alerts", "detail": "Interface down trap, CPU threshold exceeded. Complements logs: SNMP says the device is unwell, syslog says why."},
+              {"text": "Correlation and investigation", "detail": "Authentications, errors, configuration changes. It is the most universal source for reconstructing a timeline."},
+              {"text": "Hardening audit", "detail": "Prove that a configuration complies with policy: passwords, disabled services, encrypted settings."}
+            ]
+          },
+          {
+            "label": "Exam trap",
+            "cells": [
+              {"text": "No payload", "detail": "NetFlow sees metadata, not packet contents. To read the payload, you need DPI or a full packet capture."},
+              {"text": "v1/v2 read, v3 encrypts and authenticates", "detail": "SNMPv3 adds authentication and confidentiality. Community strings in earlier versions are in cleartext."},
+              {"text": "UDP can drop messages", "detail": "Transport reliability is not guaranteed over UDP: prefer TCP/TLS and check timestamping."},
+              {"text": "Compliance ≠ real-time detection", "detail": "SCAP answers 'are we configured as intended?', not 'are we being attacked right now?'."}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "d-4.5-L01-account-lifecycle",
+      "kind": "flow",
+      "title": "Account Lifecycle",
+      "subtitle": "Provisioning → MFA → role → access → review → deprovisioning → new need. A cycle, not a line.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "provision",
+          "label": "Provisioning",
+          "sub": "creation, identity",
+          "x": 300,
+          "y": 60,
+          "w": 160,
+          "h": 60,
+          "kind": "step",
+          "detail": "Account creation from an approved request, with a unique identifier, attributes, and owner. Provisioning must be tracked and automated (SCIM, IAM).",
+          "exam": "Never create an account 'as needed' without a request and an owner: that's the gateway to orphan accounts."
+        },
+        {
+          "id": "mfa",
+          "label": "MFA",
+          "sub": "authentication factors",
+          "x": 550,
+          "y": 60,
+          "w": 160,
+          "h": 60,
+          "kind": "step",
+          "detail": "Add a second factor (OTP, biometrics, FIDO2 key, push). The factor must be phishing-resistant for privileged accounts.",
+          "exam": "MFA ≠ 2FA: 2FA is two factors, MFA can be three or more."
+        },
+        {
+          "id": "role",
+          "label": "Role",
+          "sub": "RBAC, least privilege",
+          "x": 670,
+          "y": 200,
+          "w": 160,
+          "h": 60,
+          "kind": "step",
+          "detail": "Assign a role (RBAC) or attributes (ABAC) based on job function. Grant the minimum necessary, not 'just in case' rights.",
+          "exam": "The role is attached to a function, not a person: that's what makes reviews possible."
+        },
+        {
+          "id": "access",
+          "label": "Access",
+          "sub": "resources, privileges",
+          "x": 670,
+          "y": 360,
+          "w": 160,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "The account accesses authorized resources. Privileged access can be just-in-time and expire automatically after validation.",
+          "exam": "JIT = approved temporary access; it differs from permanent high-privilege access."
+        },
+        {
+          "id": "review",
+          "label": "Review",
+          "sub": "periodic recertification",
+          "x": 450,
+          "y": 450,
+          "w": 160,
+          "h": 60,
+          "kind": "step",
+          "detail": "The owner periodically reconfirms that rights remain necessary. This is where privilege creep is detected.",
+          "exam": "The review is periodic and tracked: a review without written proof does not exist for the auditor."
+        },
+        {
+          "id": "deprovision",
+          "label": "Deprovisioning",
+          "sub": "revocation, deletion",
+          "x": 240,
+          "y": 360,
+          "w": 160,
+          "h": 60,
+          "kind": "risk",
+          "detail": "Upon departure or role change, revoke sessions and tokens, disable the account, then delete data according to the retention policy.",
+          "exam": "Disabling is not deleting: revoking active tokens is the step everyone forgets."
+        },
+        {
+          "id": "need",
+          "label": "New Need",
+          "sub": "approved request",
+          "x": 120,
+          "y": 200,
+          "w": 160,
+          "h": 60,
+          "kind": "actor",
+          "detail": "A new need (hire, transfer, project) restarts the cycle. It is the controlled entry point that prevents ghost accounts.",
+          "exam": "The cycle closes: deprovisioning feeds the next need, it is not an isolated end."
+        }
+      ],
+      "edges": [
+        {"from": "provision", "to": "mfa", "label": "identity created"},
+        {"from": "mfa", "to": "role", "label": "strong authentication"},
+        {"from": "role", "to": "access", "label": "rights assigned"},
+        {"from": "access", "to": "review", "label": "observed usage"},
+        {"from": "review", "to": "deprovision", "label": "if need ended"},
+        {"from": "deprovision", "to": "need", "label": "tracked closure"},
+        {"from": "need", "to": "provision", "label": "approved request"}
+      ],
+      "sequence": ["provision", "mfa", "role", "access", "review", "deprovision"],
+      "quiz": {
+        "question": "Which step periodically verifies that an account's rights remain appropriate?",
+        "answer": "review"
+      }
+    },
+    {
+      "id": "d-4.5-L02-identity-federation",
+      "kind": "flow",
+      "title": "Identity Federation and SSO",
+      "subtitle": "User → IdP → SSO → SAML assertion / OAuth token → application. One identity, multiple services.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "user",
+          "label": "User",
+          "sub": "requests a service",
+          "x": 40,
+          "y": 220,
+          "w": 160,
+          "h": 62,
+          "kind": "actor",
+          "detail": "The user wants to access an application without creating yet another password. Their identity remains managed by their home organization.",
+          "exam": "Federation separates authentication (IdP) from authorization (application)."
+        },
+        {
+          "id": "idp",
+          "label": "IdP",
+          "sub": "Identity Provider",
+          "x": 270,
+          "y": 90,
+          "w": 170,
+          "h": 62,
+          "kind": "step",
+          "detail": "The Identity Provider verifies the user (password, MFA, policy) and issues a signed assertion. It is the trusted authority.",
+          "exam": "IdP = who proves identity; SP = who consumes the proof. Do not reverse them."
+        },
+        {
+          "id": "sso",
+          "label": "SSO",
+          "sub": "single session",
+          "x": 490,
+          "y": 90,
+          "w": 170,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Single Sign-On reuses the established session: the user does not re-enter credentials for each application.",
+          "exam": "SSO improves experience AND security: fewer passwords to remember, so less reuse."
+        },
+        {
+          "id": "saml",
+          "label": "SAML",
+          "sub": "signed XML assertion",
+          "x": 490,
+          "y": 270,
+          "w": 170,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "SAML 2.0 transmits a signed identity assertion to the service provider, typically for an enterprise portal. The SP verifies the signature.",
+          "exam": "SAML = federated authentication with assertion. Think 'browser + enterprise'."
+        },
+        {
+          "id": "oauth",
+          "label": "OAuth 2.0",
+          "sub": "delegation, consent",
+          "x": 270,
+          "y": 270,
+          "w": 170,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "OAuth 2.0 delegates limited access to a third-party application via tokens and consent. OpenID Connect adds an identity layer on top of OAuth.",
+          "exam": "OAuth = delegated authorization, not authentication. OIDC fills that exact gap."
+        },
+        {
+          "id": "app",
+          "label": "Application",
+          "sub": "Service Provider (SP)",
+          "x": 690,
+          "y": 180,
+          "w": 160,
+          "h": 62,
+          "kind": "neutral",
+          "detail": "The service provider trusts the IdP, verifies the assertion or token, and then applies its own local rights.",
+          "exam": "Federating identity does not transfer authorization: the application still decides what it allows."
+        }
+      ],
+      "edges": [
+        {"from": "user", "to": "idp", "label": "authentication + MFA"},
+        {"from": "idp", "to": "sso", "label": "session established"},
+        {"from": "sso", "to": "saml", "label": "signed assertion"},
+        {"from": "saml", "to": "app", "label": "SSO access"},
+        {"from": "sso", "to": "oauth", "label": "delegation"},
+        {"from": "oauth", "to": "app", "label": "access token"}
+      ],
+      "sequence": ["user", "idp", "sso", "saml", "app"],
+      "quiz": {
+        "question": "Which protocol provides a signed identity assertion to the service provider?",
+        "answer": "saml"
+      }
+    },
+    {
+      "id": "d-4.5-L03-access-models",
+      "kind": "matrix",
+      "title": "Access Control Models: DAC, MAC, RBAC, ABAC, JIT",
+      "subtitle": "Who decides, on what basis, and with what scope? This matrix complements the account lifecycle diagram.",
+      "modes": ["explore"],
+      "matrix": {
+        "columns": ["DAC", "MAC", "RBAC", "ABAC", "JIT"],
+        "rows": [
+          {
+            "label": "Who decides?",
+            "cells": [
+              {"text": "The resource owner", "detail": "Discretionary Access Control: the owner chooses and can delegate their rights to other users, at their discretion."},
+              {"text": "The administrator / central policy", "detail": "Mandatory Access Control: the user, even the owner, cannot transfer a right. Labels govern access."},
+              {"text": "The administrator via roles", "detail": "Role-Based Access Control: permissions are attached to a role, then users to the role. The decision is collective and predictable."},
+              {"text": "The policy engine", "detail": "Attribute-Based Access Control: the decision is computed dynamically from attributes, without individual manual assignment."},
+              {"text": "The approval workflow", "detail": "Just-In-Time: access is granted after a request is approved, often linked to a ticket, and expires automatically."}
+            ]
+          },
+          {
+            "label": "Basis of decision",
+            "cells": [
+              {"text": "Owner-defined ACL", "detail": "Access control lists and inherited rights. Risk: uncontrolled propagation of privileges between users."},
+              {"text": "Classification levels / labels", "detail": "Confidential, secret, top secret; Bell-LaPadula-type rules (no read up, no write down). Used in MLS environments."},
+              {"text": "Group or role membership", "detail": "Accountant, developer, administrator. Easy to audit: you check membership, not every permission."},
+              {"text": "User, resource, and context attributes", "detail": "Department, clearance, file type, time, IP address, device posture. Context is part of the rule."},
+              {"text": "Request + expiration + MFA", "detail": "Limited duration, limited scope, justification required. The goal is to reduce the exposure window of privileged accounts."}
+            ]
+          },
+          {
+            "label": "Typical example",
+            "cells": [
+              {"text": "Windows file share", "detail": "A user allows a colleague to read their folder: this is DAC, because the owner decides alone."},
+              {"text": "SELinux, classified government data", "detail": "A labeled process can only read an object at an authorized level, even if the user is root."},
+              {"text": "'Payroll' role accessing HR app", "detail": "Add the employee to the role, remove the employee from the role: individual permissions are never touched."},
+              {"text": "Access allowed only from corporate device during business hours", "detail": "The same person gets or is denied access depending on device, IP, and time: this is ABAC."},
+              {"text": "Admin access granted for 2 hours after approved ticket", "detail": "Temporary privilege automatically revoked, often with additional MFA and session recording."}
+            ]
+          },
+          {
+            "label": "Exam tip",
+            "cells": [
+              {"text": "Delegable = DAC", "detail": "As soon as the prompt says 'the owner can grant access to a colleague', the answer is DAC."},
+              {"text": "Non-delegable = MAC", "detail": "If the prompt emphasizes 'even the owner cannot share', it is MAC. Labels enforce it."},
+              {"text": "Role = RBAC", "detail": "Grouping rights by job function rather than by person is the RBAC reflex, the most common in enterprise."},
+              {"text": "Context = ABAC", "detail": "Time, location, device, department: multiple dynamic attributes signal ABAC rather than RBAC."},
+              {"text": "Temporary = JIT", "detail": "'Time-limited access, approved then expired' is the signature of Just-In-Time."}
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "d-4.6-L01-soar-workflow",
+      "kind": "flow",
+      "title": "SOAR Workflow: From Alert to Feedback Loop",
+      "subtitle": "A playbook orchestrates enrichment, decision, and action — then feeds results back into the loop.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "alert",
+          "label": "SIEM Alert",
+          "sub": "playbook trigger",
+          "x": 40,
+          "y": 130,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "A qualified alert or threat intelligence signal triggers the SOAR playbook. Initial context is attached to avoid starting from scratch.",
+          "exam": "SOAR does not replace the SIEM: the SIEM detects, SOAR orchestrates the response."
+        },
+        {
+          "id": "enrich",
+          "label": "Enrichment",
+          "sub": "IOC, IP, hash, asset",
+          "x": 250,
+          "y": 130,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "The playbook automatically queries CTI, inventory, and EDR to enrich indicators before any decision.",
+          "exam": "Enriching before acting avoids blocking a legitimate or shared IP."
+        },
+        {
+          "id": "decision",
+          "label": "Decision",
+          "sub": "playbook rules",
+          "x": 460,
+          "y": 130,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "The engine applies playbook conditions: severity, confidence, asset type. It chooses an action or requests human validation.",
+          "exam": "A playbook is deterministic: same input, same decision — unless explicitly escalated."
+        },
+        {
+          "id": "action",
+          "label": "Action",
+          "sub": "block, isolate, disable",
+          "x": 670,
+          "y": 130,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Execution via connectors: IP block, host isolation, account disablement, ticket creation. Actions are bounded by guardrails.",
+          "exam": "Every action must be reversible and logged: that is the condition for safe automation."
+        },
+        {
+          "id": "feedback",
+          "label": "Feedback Loop",
+          "sub": "result → rules",
+          "x": 670,
+          "y": 350,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "The action's result is sent back to the playbook: success, failure, false positive. This feedback tunes the rules for the next occurrence.",
+          "exam": "The feedback loop is what distinguishes a living playbook from a static script."
+        },
+        {
+          "id": "human",
+          "label": "Human Escalation",
+          "sub": "analyst validation",
+          "x": 460,
+          "y": 350,
+          "w": 160,
+          "h": 62,
+          "kind": "actor",
+          "detail": "If confidence is low or impact is high, the playbook pauses and requests validation. Humans keep control over irreversible actions.",
+          "exam": "High-impact actions (isolating production) often require approval: human-in-the-loop."
+        },
+        {
+          "id": "log",
+          "label": "SOAR Log",
+          "sub": "orchestration audit",
+          "x": 250,
+          "y": 350,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Every step of the playbook is logged: who decided, what action was taken, at what time. This is the evidence for audit and post-incident review.",
+          "exam": "Without a log, you cannot explain an automated action: auditing requires this traceability."
+        }
+      ],
+      "edges": [
+        {"from": "alert", "to": "enrich", "label": "initial context"},
+        {"from": "enrich", "to": "decision", "label": "enriched data"},
+        {"from": "decision", "to": "action", "label": "selected action"},
+        {"from": "action", "to": "feedback", "label": "observed result"},
+        {"from": "feedback", "to": "enrich", "label": "tuned rules"},
+        {"from": "decision", "to": "human", "label": "if low confidence"},
+        {"from": "human", "to": "decision", "label": "validation"},
+        {"from": "action", "to": "log", "label": "traceability"},
+        {"from": "feedback", "to": "log", "label": "outcome retained"}
+      ],
+      "sequence": ["alert", "enrich", "decision", "action", "feedback"],
+      "quiz": {
+        "question": "Which node feeds the action's result back to enrichment to improve future decisions?",
+        "answer": "feedback"
+      }
+    },
+    {
+      "id": "d-4.6-L02-automation-chain",
+      "kind": "flow",
+      "title": "Safe Automation Chain",
+      "subtitle": "Trigger → logic → guardrail → execution → verification. Automation without a guardrail is a risk, not a gain.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "trigger",
+          "label": "Trigger",
+          "sub": "webhook, schedule, event",
+          "x": 40,
+          "y": 100,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "An event launches the automation: webhook, schedule, new alert, or state change. The trigger must be authenticated.",
+          "exam": "An unauthenticated webhook lets anyone trigger your actions: that is a major risk."
+        },
+        {
+          "id": "logic",
+          "label": "Logic",
+          "sub": "if / then, conditions",
+          "x": 250,
+          "y": 100,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Logic decides the course of action based on conditions: thresholds, asset type, severity. It must be simple and testable.",
+          "exam": "An ambiguous condition produces unpredictable actions: logic is documented and tested."
+        },
+        {
+          "id": "guard",
+          "label": "Guardrail",
+          "sub": "approval, limits",
+          "x": 460,
+          "y": 100,
+          "w": 160,
+          "h": 62,
+          "kind": "risk",
+          "detail": "The guardrail bounds the action: maximum scope, host count, time window, dual approval. It prevents automation from stepping outside its boundaries.",
+          "exam": "This is THE node to cite when a question asks how to 'prevent an error from spreading to the entire fleet'."
+        },
+        {
+          "id": "exec",
+          "label": "Execution",
+          "sub": "API, script, connector",
+          "x": 670,
+          "y": 100,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "The action is performed via an API or script with a dedicated, least-privilege account and credentials stored in a vault.",
+          "exam": "Never hardcode credentials: it's a classic in code review and on the exam."
+        },
+        {
+          "id": "verify",
+          "label": "Verification",
+          "sub": "actual vs. expected result",
+          "x": 670,
+          "y": 330,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Re-read the state after the action: is the IP really blocked? Is the account actually disabled? A technically successful action can have no business effect.",
+          "exam": "Verifying means comparing expected and observed — not just checking the API return code."
+        },
+        {
+          "id": "rollback",
+          "label": "Rollback",
+          "sub": "revert changes",
+          "x": 460,
+          "y": 330,
+          "w": 160,
+          "h": 62,
+          "kind": "risk",
+          "detail": "If verification fails or the effect is too broad, undo the action and restore the known state. Every automated action must be reversible.",
+          "exam": "Irreversible automation without validation is a wrong exam answer, even if it is fast."
+        },
+        {
+          "id": "audit",
+          "label": "Audit",
+          "sub": "log + evidence",
+          "x": 250,
+          "y": 330,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Retain inputs, decision, action, and result. This log enables auditing, tuning, and recovery in case of an incident.",
+          "exam": "Auditing makes automation explainable: essential for compliance and post-incident review."
+        }
+      ],
+      "edges": [
+        {"from": "trigger", "to": "logic", "label": "authenticated event"},
+        {"from": "logic", "to": "guard", "label": "proposed action"},
+        {"from": "guard", "to": "exec", "label": "within limits"},
+        {"from": "exec", "to": "verify", "label": "action performed"},
+        {"from": "verify", "to": "rollback", "label": "if discrepancy found"},
+        {"from": "verify", "to": "audit", "label": "if result compliant"},
+        {"from": "rollback", "to": "audit", "label": "reversal logged"},
+        {"from": "guard", "to": "audit", "label": "decision logged"}
+      ],
+      "sequence": ["trigger", "logic", "guard", "exec", "verify"],
+      "quiz": {
+        "question": "Which element prevents an automation from acting outside a scope or without explicit validation?",
+        "answer": "guard"
+      }
+    },
+    {
+      "id": "d-4.7-L01-ir-preparedness",
+      "kind": "flow",
+      "title": "Incident Response Preparedness",
+      "subtitle": "Charter, roles, playbooks, tools, training, exercises, and communication: train before the incident.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "charter",
+          "label": "IR Charter",
+          "sub": "scope and authority",
+          "x": 360,
+          "y": 40,
+          "w": 175,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "The charter defines who is responsible, what the incident declaration criteria are, and how far the team can act (isolation, shutdown, communication).",
+          "exam": "Without a charter, the team hesitates at the critical moment: authority must be decided beforehand."
+        },
+        {
+          "id": "roles",
+          "label": "Roles",
+          "sub": "IR lead, analyst, comms",
+          "x": 60,
+          "y": 180,
+          "w": 160,
+          "h": 60,
+          "kind": "actor",
+          "detail": "Designate a lead, analysts, a communications lead, and a legal representative, with backups and an on-call directory.",
+          "exam": "Always plan a backup: preparedness also covers the primary person's absence."
+        },
+        {
+          "id": "playbooks",
+          "label": "Playbooks",
+          "sub": "procedures by scenario",
+          "x": 300,
+          "y": 180,
+          "w": 160,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Ransomware, phishing, account compromise: each scenario has its procedure, decision criteria, and contacts. A runbook is more technical, a playbook more decision-oriented.",
+          "exam": "The playbook reduces improvisation under pressure: that is the number one goal of preparedness."
+        },
+        {
+          "id": "tools",
+          "label": "Tools",
+          "sub": "EDR, SIEM, forensics",
+          "x": 540,
+          "y": 180,
+          "w": 160,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Verified access to EDR, SIEM, forensic imaging, and isolation tools. Access is tested before the incident, not during.",
+          "exam": "A tool whose password is only in the primary admin's head is unavailable in a crisis."
+        },
+        {
+          "id": "training",
+          "label": "Training",
+          "sub": "skill building",
+          "x": 540,
+          "y": 360,
+          "w": 160,
+          "h": 60,
+          "kind": "step",
+          "detail": "Ongoing team training and business awareness: knowing how to recognize and report an incident is part of preparedness.",
+          "exam": "Training also applies to users: human detection remains a key alert source."
+        },
+        {
+          "id": "exercises",
+          "label": "Exercises",
+          "sub": "tabletop, simulation",
+          "x": 300,
+          "y": 360,
+          "w": 160,
+          "h": 60,
+          "kind": "step",
+          "detail": "Tabletop exercises followed by technical simulations. They reveal playbook blind spots, outdated contacts, and stalled decisions.",
+          "exam": "Tabletops test decisions and communication; simulations test tools. Both are complementary."
+        },
+        {
+          "id": "comms",
+          "label": "Communication",
+          "sub": "on-call, stakeholders",
+          "x": 60,
+          "y": 360,
+          "w": 160,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Redundant crisis channels, list of internal contacts, legal, HR, vendors, and authorities, with pre-approved message templates.",
+          "exam": "A crisis channel that depends on the internal network may be unavailable during an attack: plan a fallback."
+        }
+      ],
+      "edges": [
+        {"from": "charter", "to": "roles", "label": "authority defined"},
+        {"from": "charter", "to": "playbooks", "label": "trigger criteria"},
+        {"from": "charter", "to": "tools", "label": "authorized means"},
+        {"from": "roles", "to": "playbooks", "label": "assigned owners"},
+        {"from": "playbooks", "to": "tools", "label": "required tools"},
+        {"from": "tools", "to": "training", "label": "onboarding"},
+        {"from": "training", "to": "exercises", "label": "skills acquired"},
+        {"from": "exercises", "to": "comms", "label": "communication gaps"},
+        {"from": "comms", "to": "charter", "label": "lessons learned"}
+      ],
+      "sequence": ["charter", "roles", "playbooks", "tools", "training", "exercises"],
+      "quiz": {
+        "question": "Which element defines the team's authority and scope before even writing playbooks?",
+        "answer": "charter"
+      }
+    },
+    {
+      "id": "d-4.7-L02-containment-tree",
+      "kind": "flow",
+      "title": "Containment Decision Tree",
+      "subtitle": "Isolate? Preserve evidence? Notify? Eradicate? A decision tree, not a single recipe.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "detect",
+          "label": "Incident Detected",
+          "sub": "qualified alert",
+          "x": 40,
+          "y": 50,
+          "w": 160,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "The alert has been qualified: we have an initial scope, severity, and initial time horizon. Decision-making starts here.",
+          "exam": "Do not confuse detection and containment: triage always precedes action."
+        },
+        {
+          "id": "decision",
+          "label": "Should We Isolate?",
+          "sub": "critical decision",
+          "x": 250,
+          "y": 50,
+          "w": 160,
+          "h": 60,
+          "kind": "risk",
+          "detail": "Assess the active threat, system criticality, and cost of an outage. If the host is actively destroying evidence, isolation may take priority.",
+          "exam": "The decision depends on business context: isolating a production server does not have the same cost as isolating a workstation."
+        },
+        {
+          "id": "preserve",
+          "label": "Preserve Evidence",
+          "sub": "RAM, connections, logs",
+          "x": 470,
+          "y": 40,
+          "w": 160,
+          "h": 60,
+          "kind": "step",
+          "detail": "If possible before isolation, capture volatile memory, connections, and logs: the order of volatility dictates the collection order.",
+          "exam": "Powering off a machine destroys RAM: it is an irreversible loss of evidence."
+        },
+        {
+          "id": "isolate",
+          "label": "Isolate Host",
+          "sub": "VLAN, EDR, network",
+          "x": 470,
+          "y": 160,
+          "w": 160,
+          "h": 60,
+          "kind": "step",
+          "detail": "Network disconnection or EDR quarantine to stop propagation, while keeping the machine powered on if acquisition is needed.",
+          "exam": "Isolate ≠ power off: network quarantine cuts communications without destroying memory."
+        },
+        {
+          "id": "notify",
+          "label": "Notify",
+          "sub": "CISO, legal, business",
+          "x": 250,
+          "y": 280,
+          "w": 160,
+          "h": 60,
+          "kind": "actor",
+          "detail": "Notify stakeholders per the charter: CISO, asset owner, legal, communications, and sometimes authorities or customers.",
+          "exam": "Notification follows the charter and legal obligations: it is not decided on a whim."
+        },
+        {
+          "id": "eradicate",
+          "label": "Eradicate",
+          "sub": "remove, rebuild, patch",
+          "x": 470,
+          "y": 280,
+          "w": 160,
+          "h": 60,
+          "kind": "step",
+          "detail": "Remove malware, rotate compromised credentials, rebuild from a clean image, and patch the entry vulnerability.",
+          "exam": "Cleaning without changing passwords leaves the attacker persistent access: rotation is essential."
+        },
+        {
+          "id": "recover",
+          "label": "Controlled Recovery",
+          "sub": "return to production",
+          "x": 690,
+          "y": 280,
+          "w": 160,
+          "h": 60,
+          "kind": "step",
+          "detail": "Restore service with heightened monitoring and verification that the entry vector is closed. Watch for recurrence.",
+          "exam": "Recovery without heightened monitoring risks leaving an undetected backdoor."
+        },
+        {
+          "id": "document",
+          "label": "Document",
+          "sub": "decisions and timestamps",
+          "x": 690,
+          "y": 160,
+          "w": 160,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Every decision, timestamp, and owner is recorded. This timeline will be used for the PIR, audit, and any legal proceedings.",
+          "exam": "Document during the incident, not after: human memory fades quickly under pressure."
+        }
+      ],
+      "edges": [
+        {"from": "detect", "to": "decision", "label": "triage completed"},
+        {"from": "decision", "to": "preserve", "label": "if volatile evidence"},
+        {"from": "decision", "to": "isolate", "label": "if active threat"},
+        {"from": "preserve", "to": "isolate", "label": "then contain"},
+        {"from": "isolate", "to": "notify", "label": "scope stabilized"},
+        {"from": "notify", "to": "eradicate", "label": "approval"},
+        {"from": "eradicate", "to": "recover", "label": "clean system"},
+        {"from": "isolate", "to": "document", "label": "decision logged"},
+        {"from": "recover", "to": "document", "label": "technical closure"}
+      ],
+      "sequence": ["detect", "decision", "preserve", "isolate", "notify", "eradicate", "recover"],
+      "quiz": {
+        "question": "Before isolating a machine, what should be preserved if acquisition is possible?",
+        "answer": "preserve"
+      }
+    },
+    {
+      "id": "d-4.7-L03-post-incident-loop",
+      "kind": "flow",
+      "title": "Post-Incident Loop: From PIR to Playbooks",
+      "subtitle": "Post-incident review → root cause → lessons → playbook updates → sharing → action tracking.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "pir",
+          "label": "PIR",
+          "sub": "post-incident review",
+          "x": 300,
+          "y": 60,
+          "w": 160,
+          "h": 60,
+          "kind": "step",
+          "detail": "Calm meeting with all parties: factual reconstruction of the timeline, without blame. Rely on logs, not memories.",
+          "exam": "The PIR is a blameless review: that is a prerequisite for honest feedback."
+        },
+        {
+          "id": "root",
+          "label": "Root Cause",
+          "sub": "5 Whys, Ishikawa",
+          "x": 540,
+          "y": 160,
+          "w": 160,
+          "h": 60,
+          "kind": "step",
+          "detail": "Look for the underlying cause, not just the symptom: why the patch was missing, why the alert was ignored, why the contact was outdated.",
+          "exam": "Treating only the symptom guarantees recurrence: the exam expects the root cause."
+        },
+        {
+          "id": "lessons",
+          "label": "Lessons Learned",
+          "sub": "corrective actions",
+          "x": 540,
+          "y": 350,
+          "w": 160,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Formalize what worked well and poorly, with assigned corrective actions: owner, due date, success criteria.",
+          "exam": "A lesson without an assigned action or due date remains just a lesson: it must become a task."
+        },
+        {
+          "id": "update",
+          "label": "Update",
+          "sub": "playbooks and controls",
+          "x": 300,
+          "y": 450,
+          "w": 160,
+          "h": 60,
+          "kind": "step",
+          "detail": "Playbooks, SIEM rules, controls, and policies are updated to incorporate feedback. This is where experience becomes reusable.",
+          "exam": "This step closes the loop with preparedness: post-incident feeds the next exercise."
+        },
+        {
+          "id": "share",
+          "label": "Sharing",
+          "sub": "teams and leadership",
+          "x": 60,
+          "y": 350,
+          "w": 160,
+          "h": 60,
+          "kind": "actor",
+          "detail": "A summary is shared with relevant teams and leadership. Sensitive details are filtered according to the communication policy.",
+          "exam": "Share lessons without exposing exploit details: distribution is controlled."
+        },
+        {
+          "id": "metrics",
+          "label": "Tracking",
+          "sub": "MTTD, MTTR, actions",
+          "x": 60,
+          "y": 160,
+          "w": 160,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Measure detection and response times (MTTD/MTTR) and track corrective actions until verified closure.",
+          "exam": "An action is only finished when its effect is verified, not when the box is checked."
+        }
+      ],
+      "edges": [
+        {"from": "pir", "to": "root", "label": "timeline established"},
+        {"from": "root", "to": "lessons", "label": "cause identified"},
+        {"from": "lessons", "to": "update", "label": "corrective actions"},
+        {"from": "update", "to": "share", "label": "revised procedures"},
+        {"from": "share", "to": "metrics", "label": "awareness"},
+        {"from": "metrics", "to": "pir", "label": "next incident"}
+      ],
+      "sequence": ["pir", "root", "lessons", "update", "share", "metrics"],
+      "quiz": {
+        "question": "Which step turns lessons learned into reusable procedures for the next crisis?",
+        "answer": "update"
+      }
+    },
+    {
+      "id": "d-4.8-L01-volatility-pyramid",
+      "kind": "flow",
+      "title": "Evidence Volatility Pyramid",
+      "subtitle": "From most volatile to most stable: collect what disappears fastest first. Collection order = order of volatility.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "cpu",
+          "label": "Registers / Cache",
+          "sub": "extremely volatile",
+          "x": 250,
+          "y": 40,
+          "w": 170,
+          "h": 58,
+          "kind": "risk",
+          "detail": "CPU registers, cache, and queues: nanoseconds to seconds. In practice, they are lost as soon as you touch the machine.",
+          "exam": "This is the top of the pyramid: if the prompt says 'immediately', think memory and CPU."
+        },
+        {
+          "id": "ram",
+          "label": "RAM",
+          "sub": "volatile memory",
+          "x": 250,
+          "y": 145,
+          "w": 170,
+          "h": 58,
+          "kind": "artifact",
+          "detail": "Processes, encryption keys, code injections, system tables. Memory acquisition is done before any power-off.",
+          "exam": "A disk image does NOT contain RAM: a separate memory acquisition is required."
+        },
+        {
+          "id": "network",
+          "label": "Network Connections",
+          "sub": "sockets, ARP, routes",
+          "x": 145,
+          "y": 250,
+          "w": 170,
+          "h": 58,
+          "kind": "artifact",
+          "detail": "Established connections, ARP table, DNS cache, routes. They change within minutes and often reveal active C2 or exfiltration.",
+          "exam": "netstat / ss and NetFlow streams should be captured early: a closed session does not come back."
+        },
+        {
+          "id": "process",
+          "label": "Processes",
+          "sub": "process table",
+          "x": 355,
+          "y": 250,
+          "w": 170,
+          "h": 58,
+          "kind": "artifact",
+          "detail": "Active processes, handles, loaded DLLs, threads. Their true state exists only in memory and must be captured with it.",
+          "exam": "Fileless malware exists only there: RAM is the only source that shows it."
+        },
+        {
+          "id": "disk",
+          "label": "Disk",
+          "sub": "file system",
+          "x": 40,
+          "y": 355,
+          "w": 170,
+          "h": 58,
+          "kind": "artifact",
+          "detail": "Files, metadata, logs, unallocated space. Stable, but modifiable: work on an image with write blockers.",
+          "exam": "Always acquire a bit-by-bit image and hash it: never analyze the original directly."
+        },
+        {
+          "id": "logs",
+          "label": "Logs",
+          "sub": "local and central logs",
+          "x": 250,
+          "y": 355,
+          "w": 170,
+          "h": 58,
+          "kind": "artifact",
+          "detail": "Event Logs, syslog, application logs. Central logs are more reliable than local logs, which the attacker can erase.",
+          "exam": "A skilled attacker erases local logs: also collect from the SIEM."
+        },
+        {
+          "id": "backup",
+          "label": "Backups",
+          "sub": "cold archives",
+          "x": 460,
+          "y": 355,
+          "w": 170,
+          "h": 58,
+          "kind": "neutral",
+          "detail": "Tapes, snapshots, off-site archives: the most stable and oldest. They allow pre-incident comparison and restoration.",
+          "exam": "Base of the pyramid: useful for restoration and history, but too late for volatile evidence."
+        }
+      ],
+      "edges": [
+        {"from": "cpu", "to": "ram", "label": "then memory"},
+        {"from": "ram", "to": "network", "label": "then network"},
+        {"from": "ram", "to": "process", "label": "then processes"},
+        {"from": "network", "to": "disk", "label": "then disk"},
+        {"from": "process", "to": "logs", "label": "then logs"},
+        {"from": "logs", "to": "backup", "label": "then archives"}
+      ],
+      "sequence": ["cpu", "ram", "network", "process", "disk", "logs", "backup"],
+      "quiz": {
+        "question": "Which source should be collected first according to the order of volatility?",
+        "answer": "cpu"
+      }
+    },
+    {
+      "id": "d-4.8-L02-evidence-sources",
+      "kind": "flow",
+      "title": "Evidence Sources and Unified Timeline",
+      "subtitle": "Host, network, cloud, and EDR converge toward correlation, then a horizontal, timestamped timeline.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "host",
+          "label": "Host Logs",
+          "sub": "Event Log, syslog, audit",
+          "x": 40,
+          "y": 50,
+          "w": 160,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Logins, executions, configuration changes. Most universal source, but vulnerable to erasure by the attacker.",
+          "exam": "Local logs are evidence; centralized logs are a more reliable copy."
+        },
+        {
+          "id": "network",
+          "label": "Network Logs",
+          "sub": "firewall, NetFlow, DNS",
+          "x": 40,
+          "y": 170,
+          "w": 160,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Flows, DNS queries, outbound connections. They show communications even when the compromised host no longer cooperates.",
+          "exam": "DNS is a goldmine: a newly resolved domain often reveals C2."
+        },
+        {
+          "id": "cloud",
+          "label": "Cloud Logs",
+          "sub": "CloudTrail, IAM audit",
+          "x": 40,
+          "y": 290,
+          "w": 160,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "API calls, IAM changes, storage object access. The cloud requires explicitly enabled and centralized logging.",
+          "exam": "In the cloud, 'who called which API and from which IP' often replaces the host log."
+        },
+        {
+          "id": "edr",
+          "label": "EDR Telemetry",
+          "sub": "processes, memory, behavior",
+          "x": 40,
+          "y": 410,
+          "w": 160,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "EDR records execution, injections, connections, and memory artifacts. It fills the gap of classic logs on fileless attacks.",
+          "exam": "EDR = behavioral visibility on the endpoint; it complements the SIEM, it does not replace it."
+        },
+        {
+          "id": "ntp",
+          "label": "UTC Timestamping",
+          "sub": "synchronized NTP",
+          "x": 330,
+          "y": 50,
+          "w": 160,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "Without synchronized clocks, the four sources cannot be aligned. Time zone and UTC must be normalized before correlation.",
+          "exam": "A drift of a few minutes can cause you to miss the entire attack chain."
+        },
+        {
+          "id": "correlate",
+          "label": "Correlation",
+          "sub": "IOCs, entities, sequences",
+          "x": 330,
+          "y": 190,
+          "w": 160,
+          "h": 60,
+          "kind": "step",
+          "detail": "Link sources by common entities: user, IP, hash, hostname. Correlation turns four independent streams into a single story.",
+          "exam": "Correlating means looking for the link, not adding up log volumes."
+        },
+        {
+          "id": "timeline",
+          "label": "Timeline",
+          "sub": "unified chronology",
+          "x": 330,
+          "y": 350,
+          "w": 160,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "The timeline orders events from oldest to newest with their sources. It is the backbone of the investigation report.",
+          "exam": "A timeline must state the source and confidence level of each event."
+        },
+        {
+          "id": "report",
+          "label": "Report",
+          "sub": "conclusions and evidence",
+          "x": 620,
+          "y": 270,
+          "w": 160,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Summary with scope, chronology, impacts, cited evidence, and recommendations. Facts are separated from hypotheses.",
+          "exam": "An investigation report always separates what is proven from what is assumed."
+        }
+      ],
+      "edges": [
+        {"from": "host", "to": "correlate", "label": "local events"},
+        {"from": "network", "to": "correlate", "label": "flows and DNS"},
+        {"from": "cloud", "to": "correlate", "label": "API and IAM"},
+        {"from": "edr", "to": "correlate", "label": "endpoint telemetry"},
+        {"from": "ntp", "to": "correlate", "label": "time reference"},
+        {"from": "correlate", "to": "timeline", "label": "links established"},
+        {"from": "timeline", "to": "report", "label": "validated chronology"}
+      ],
+      "sequence": ["host", "network", "cloud", "edr", "correlate", "timeline", "report"],
+      "quiz": {
+        "question": "Which source captures endpoint execution and memory at a behavioral level?",
+        "answer": "edr"
+      }
+    },
+    {
+      "id": "d-4.8-L03-chain-of-custody",
+      "kind": "flow",
+      "title": "Evidence Chain of Custody",
+      "subtitle": "Collection → hashing → sealing → register → transfer → analysis → report → storage. Every hand is tracked.",
+      "modes": ["explore", "quiz", "order"],
+      "nodes": [
+        {
+          "id": "collect",
+          "label": "Collection",
+          "sub": "legal acquisition",
+          "x": 40,
+          "y": 90,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Bit-by-bit acquisition of the source, with write blockers and scope documentation. Collection follows the order of volatility.",
+          "exam": "Acquiring the original alters the evidence: work on a forensic copy."
+        },
+        {
+          "id": "hash",
+          "label": "Hashing",
+          "sub": "SHA-256, integrity",
+          "x": 250,
+          "y": 90,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Compute a cryptographic digest of the image. An identical hash before and after transfer proves nothing was modified.",
+          "exam": "The hash does not prove authenticity, but integrity: it detects any modification, even unintentional."
+        },
+        {
+          "id": "seal",
+          "label": "Sealing",
+          "sub": "bag, numbered seal",
+          "x": 460,
+          "y": 90,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "The medium is placed in a sealed anti-static bag, with label, unique number, date, and collector's signature.",
+          "exam": "A broken or unnumbered seal makes the evidence contestable, even if the hash is good."
+        },
+        {
+          "id": "register",
+          "label": "Register",
+          "sub": "chain of custody log",
+          "x": 670,
+          "y": 90,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Every transfer is recorded: who hands over, who receives, when, where, and why. The register establishes unbroken continuity.",
+          "exam": "Chain of custody is a documented sequence of hands: a gap in the chain weakens the evidence."
+        },
+        {
+          "id": "transfer",
+          "label": "Transfer",
+          "sub": "secure delivery",
+          "x": 670,
+          "y": 300,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Transport to the lab or analyst, with encryption if the transfer is digital and a signed receipt.",
+          "exam": "Transferring an unencrypted image by email is a breach of confidentiality and traceability."
+        },
+        {
+          "id": "analyze",
+          "label": "Analysis",
+          "sub": "forensic image",
+          "x": 460,
+          "y": 300,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "The analyst works on a copy of the image, recalculates the hash, and records tools and methods so the analysis is reproducible.",
+          "exam": "Recalculating the hash upon opening proves the analysis is performed on the sealed evidence."
+        },
+        {
+          "id": "report",
+          "label": "Report",
+          "sub": "method and conclusions",
+          "x": 250,
+          "y": 300,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Conclusions are supported by specific artifacts with evidence references, method used, and limitations of the analysis.",
+          "exam": "A forensic report cites the evidence and method: a claim without reference is not admissible."
+        },
+        {
+          "id": "store",
+          "label": "Storage",
+          "sub": "archiving, retention",
+          "x": 40,
+          "y": 300,
+          "w": 160,
+          "h": 62,
+          "kind": "neutral",
+          "detail": "Evidence is stored according to the retention policy and legal obligations, in a controlled environment accessible only to authorized personnel.",
+          "exam": "Destroying evidence before the end of retention can turn negligence into obstruction."
+        }
+      ],
+      "edges": [
+        {"from": "collect", "to": "hash", "label": "image acquired"},
+        {"from": "hash", "to": "seal", "label": "digest recorded"},
+        {"from": "seal", "to": "register", "label": "evidence identified"},
+        {"from": "register", "to": "transfer", "label": "handover logged"},
+        {"from": "transfer", "to": "analyze", "label": "signed receipt"},
+        {"from": "analyze", "to": "report", "label": "results documented"},
+        {"from": "report", "to": "store", "label": "case filed"}
+      ],
+      "sequence": ["collect", "hash", "seal", "register", "transfer", "analyze", "report", "store"],
+      "quiz": {
+        "question": "Which step guarantees evidence integrity using a cryptographic digest?",
+        "answer": "hash"
+      }
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "diagrams": [
+    {
+      "id": "d-2.1-risk-flow",
+      "kind": "flow",
+      "title": "From Threat to Priority: The Risk Chain",
+      "subtitle": "Follow the path: a threat meets a vulnerability, risk is estimated, then scored and prioritized.",
+      "modes": ["explore", "order", "quiz"],
+      "nodes": [
+        {
+          "id": "threat",
+          "label": "Threat",
+          "sub": "Actor / event",
+          "x": 10,
+          "y": 40,
+          "w": 150,
+          "h": 60,
+          "kind": "actor",
+          "detail": "Actor or capability that can cause harm. Its activity is informed by threat feeds and internal or external intelligence.",
+          "exam": "A threat exists even if no vulnerability is exploitable yet."
+        },
+        {
+          "id": "vuln",
+          "label": "Vulnerability",
+          "sub": "Exploitable weakness",
+          "x": 185,
+          "y": 40,
+          "w": 160,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Weakness in a system, process, or control. It becomes a concrete risk when a threat can exploit it.",
+          "exam": "Do not confuse vulnerability (weakness) with threat (what exploits it)."
+        },
+        {
+          "id": "risk",
+          "label": "Risk",
+          "sub": "Likelihood × impact",
+          "x": 370,
+          "y": 40,
+          "w": 170,
+          "h": 60,
+          "kind": "risk",
+          "detail": "Risk = vulnerability × threat. Likelihood depends on exposure and exploitability; impact depends on asset criticality.",
+          "exam": "A critical flaw on an isolated test bench may be less risky than an exposed medium flaw."
+        },
+        {
+          "id": "cvss",
+          "label": "CVSS",
+          "sub": "Score 0-10",
+          "x": 565,
+          "y": 40,
+          "w": 150,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "Common Vulnerability Scoring System: severity calculated using base, temporal, and environmental metrics.",
+          "exam": "CVSS measures severity, not priority."
+        },
+        {
+          "id": "cve",
+          "label": "CVE",
+          "sub": "Unique identifier",
+          "x": 565,
+          "y": 150,
+          "w": 150,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Common Vulnerabilities and Exposures provides a public identifier (CVE-2024-xxxx). CWE, on the other hand, classifies the type of code weakness.",
+          "exam": "CVE = enumeration; CWE = weakness; CVSS = score. Three distinct concepts."
+        },
+        {
+          "id": "context",
+          "label": "Context",
+          "sub": "Exposure · asset · exploit",
+          "x": 370,
+          "y": 150,
+          "w": 170,
+          "h": 60,
+          "kind": "step",
+          "detail": "Expands the score: Internet exposure, existence of a public exploit, asset criticality, compensating controls.",
+          "exam": "CVSS environmental metrics capture part of this context."
+        },
+        {
+          "id": "priority",
+          "label": "Prioritization",
+          "sub": "Risk treatment",
+          "x": 185,
+          "y": 150,
+          "w": 160,
+          "h": 60,
+          "kind": "step",
+          "detail": "Mitigate, accept, transfer, or avoid the risk. Treatment is followed by verification (re-scan).",
+          "exam": "Risk acceptance must be documented and reassessed."
+        },
+        {
+          "id": "verify",
+          "label": "Verification",
+          "sub": "Re-scan / evidence",
+          "x": 10,
+          "y": 150,
+          "w": 150,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "After remediation, verify that the flaw is no longer exploitable and close the ticket.",
+          "exam": "Without verification, the vulnerability management loop is not closed."
+        }
+      ],
+      "edges": [
+        { "from": "threat", "to": "vuln", "label": "exploits" },
+        { "from": "vuln", "to": "risk", "label": "creates" },
+        { "from": "risk", "to": "cvss", "label": "measured by" },
+        { "from": "cvss", "to": "cve", "label": "referenced by" },
+        { "from": "cve", "to": "context", "label": "enriched by" },
+        { "from": "context", "to": "priority", "label": "drives" },
+        { "from": "priority", "to": "verify", "label": "then" }
+      ],
+      "sequence": ["threat", "vuln", "risk", "cvss", "cve", "context", "priority", "verify"],
+      "quiz": {
+        "question": "Which concept measures the severity of a vulnerability on a scale of 0 to 10?",
+        "answer": "cvss"
+      }
+    }
+  ]
+}

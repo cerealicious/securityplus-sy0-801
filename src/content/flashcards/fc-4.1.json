@@ -1,0 +1,127 @@
+{
+  "id": "fc-4.1",
+  "objective": "4.1",
+  "title": "Security Controls and Protection Techniques",
+  "cards": [
+    {
+      "id": "c-4.1-01",
+      "front": "Segmentation",
+      "back": "Dividing the network to limit lateral movement after a compromise.",
+      "tag": "Foundations"
+    },
+    {
+      "id": "c-4.1-02",
+      "front": "Hardening",
+      "back": "Disabling unnecessary services, patching, applying a secure baseline, and removing default accounts.",
+      "tag": "Foundations"
+    },
+    {
+      "id": "c-4.1-03",
+      "front": "Sandboxing",
+      "back": "Running a suspicious file in an isolated environment to observe its behavior safely.",
+      "tag": "Foundations"
+    },
+    {
+      "id": "c-4.1-04",
+      "front": "Honeypot",
+      "back": "Decoy system that attracts attackers and logs their techniques.",
+      "tag": "Deception"
+    },
+    {
+      "id": "c-4.1-05",
+      "front": "Honeynet",
+      "back": "Entire network of decoys to study lateral movement and reconnaissance.",
+      "tag": "Deception"
+    },
+    {
+      "id": "c-4.1-06",
+      "front": "Honeyfile / honeytoken",
+      "back": "Honeyfile = decoy file; honeytoken = fake credential or token. Any use is a hostile signal.",
+      "tag": "Deception"
+    },
+    {
+      "id": "c-4.1-07",
+      "front": "Canary account",
+      "back": "Non-existent but plausible account: any login attempt reveals the attacker.",
+      "tag": "Deception"
+    },
+    {
+      "id": "c-4.1-08",
+      "front": "NIDS vs NIPS",
+      "back": "NIDS = out-of-band network detection; NIPS = inline network prevention that blocks.",
+      "tag": "IDS/IPS"
+    },
+    {
+      "id": "c-4.1-09",
+      "front": "HIDS vs HIPS",
+      "back": "HIDS = host agent that alerts on files/logs; HIPS = host agent that blocks behaviors.",
+      "tag": "IDS/IPS"
+    },
+    {
+      "id": "c-4.1-10",
+      "front": "WIPS",
+      "back": "Wireless IPS: detects and blocks rogue access points and Wi-Fi attacks.",
+      "tag": "IDS/IPS"
+    },
+    {
+      "id": "c-4.1-11",
+      "front": "WAF",
+      "back": "Web Application Firewall: filters HTTP traffic at the application layer (SQLi, XSS).",
+      "tag": "Firewall"
+    },
+    {
+      "id": "c-4.1-12",
+      "front": "UTM",
+      "back": "Unified Threat Management: single appliance combining firewall, IPS, antivirus, filtering, and VPN.",
+      "tag": "Firewall"
+    },
+    {
+      "id": "c-4.1-13",
+      "front": "Layer 4 vs Layer 7 firewall",
+      "back": "Layer 4 = IP/port/protocol; Layer 7 = application content (HTTP, payload).",
+      "tag": "Firewall"
+    },
+    {
+      "id": "c-4.1-14",
+      "front": "Rate limiting",
+      "back": "Limits the number of requests per time period to counter abuse and floods.",
+      "tag": "Firewall"
+    },
+    {
+      "id": "c-4.1-15",
+      "front": "EDR",
+      "back": "Endpoint Detection and Response: agent that detects behaviors and can isolate the host. It is NOT a firewall.",
+      "tag": "Endpoint"
+    },
+    {
+      "id": "c-4.1-16",
+      "front": "XDR",
+      "back": "Extended Detection and Response: correlates endpoint, network, cloud, and identity.",
+      "tag": "Endpoint"
+    },
+    {
+      "id": "c-4.1-17",
+      "front": "DLP",
+      "back": "Data Loss Prevention: identifies and blocks sensitive data based on content rules, on the agent or network.",
+      "tag": "Data"
+    },
+    {
+      "id": "c-4.1-18",
+      "front": "SPF / DKIM / DMARC / BIMI",
+      "back": "SPF = authorized servers; DKIM = signature; DMARC = alignment policy; BIMI = verified logo.",
+      "tag": "Email"
+    },
+    {
+      "id": "c-4.1-19",
+      "front": "Secrets scanning and code signing",
+      "back": "Secrets scanning = detecting keys and passwords in code; code signing = signing binaries to prove origin and integrity.",
+      "tag": "Application"
+    },
+    {
+      "id": "c-4.1-20",
+      "front": "NAC: 802.1X and posture",
+      "back": "802.1X authenticates at the network port; endpoint posture checks patches/antivirus before granting access.",
+      "tag": "Network"
+    }
+  ]
+}

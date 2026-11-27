@@ -1,0 +1,188 @@
+{
+  "diagrams": [
+    {
+      "id": "d-log-flow",
+      "kind": "flow",
+      "title": "From Log Sources to SIEM and Alerting",
+      "subtitle": "Follow the flow: sources emit, protocols transport, the SIEM correlates, the analyst tunes.",
+      "modes": [
+        "explore",
+        "order",
+        "quiz"
+      ],
+      "nodes": [
+        {
+          "id": "systems",
+          "label": "Systems & applications",
+          "sub": "servers, services, OS",
+          "x": 12,
+          "y": 40,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "System logs, application events, performance counters, and errors. The richest source of local context.",
+          "exam": "Three levels: systems, applications, infrastructure."
+        },
+        {
+          "id": "network",
+          "label": "Network infrastructure",
+          "sub": "routers, switches, firewalls",
+          "x": 12,
+          "y": 140,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Interfaces, flows, sessions, and alarms from network devices.",
+          "exam": "Without network telemetry, east-west traffic remains invisible."
+        },
+        {
+          "id": "syslog",
+          "label": "syslog",
+          "sub": "event messages",
+          "x": 200,
+          "y": 40,
+          "w": 150,
+          "h": 62,
+          "kind": "step",
+          "detail": "Standard transport for event messages to the collector. Simple, widely adopted format.",
+          "exam": "syslog = event; NetFlow = conversation."
+        },
+        {
+          "id": "netflow",
+          "label": "NetFlow / SNMP",
+          "sub": "flows and counters",
+          "x": 200,
+          "y": 140,
+          "w": 150,
+          "h": 62,
+          "kind": "step",
+          "detail": "NetFlow describes who talks to whom and on which port; SNMP reads counters and receives traps.",
+          "exam": "SCAP, on the other hand, standardizes compliance — outside the books, §4.4."
+        },
+        {
+          "id": "span",
+          "label": "Port mirroring",
+          "sub": "SPAN / tap",
+          "x": 200,
+          "y": 232,
+          "w": 150,
+          "h": 62,
+          "kind": "step",
+          "detail": "Copies traffic to a sensor or packet analyzer for deep inspection without interrupting traffic.",
+          "exam": "SPAN depends on the switch and can drop packets under saturation."
+        },
+        {
+          "id": "siem",
+          "label": "SIEM",
+          "sub": "aggregation + correlation",
+          "x": 384,
+          "y": 108,
+          "w": 164,
+          "h": 70,
+          "kind": "actor",
+          "detail": "Normalizes, timestamps, stores, and correlates events. It is a platform, not a sensor.",
+          "exam": "Aggregation precedes correlation: you can only correlate what has been collected."
+        },
+        {
+          "id": "alert",
+          "label": "Alerts",
+          "sub": "severity + context",
+          "x": 584,
+          "y": 60,
+          "w": 150,
+          "h": 62,
+          "kind": "risk",
+          "detail": "Actionable notification: what to look at, why, and how urgent. A false negative remains an undetected incident.",
+          "exam": "True positive = real incident detected; false negative = real incident missed."
+        },
+        {
+          "id": "tuning",
+          "label": "Alert tuning",
+          "sub": "targeted exclusions",
+          "x": 584,
+          "y": 158,
+          "w": 150,
+          "h": 62,
+          "kind": "step",
+          "detail": "Documented adjustment of thresholds and exclusions to reduce noise without losing sensitivity.",
+          "exam": "Never disable an entire rule just to silence a legitimate source."
+        },
+        {
+          "id": "dash",
+          "label": "Dashboard / NMS",
+          "sub": "reporting",
+          "x": 584,
+          "y": 248,
+          "w": 150,
+          "h": 62,
+          "kind": "neutral",
+          "detail": "Summary views of alert status and device health. These are outputs, not sources.",
+          "exam": "A dashboard does not replace collection: it reflects it."
+        }
+      ],
+      "edges": [
+        {
+          "from": "systems",
+          "to": "syslog",
+          "label": "logs"
+        },
+        {
+          "from": "network",
+          "to": "netflow",
+          "label": "telemetry"
+        },
+        {
+          "from": "network",
+          "to": "span",
+          "label": "copy"
+        },
+        {
+          "from": "syslog",
+          "to": "siem",
+          "label": "collection"
+        },
+        {
+          "from": "netflow",
+          "to": "siem",
+          "label": "collection"
+        },
+        {
+          "from": "span",
+          "to": "siem",
+          "label": "inspection"
+        },
+        {
+          "from": "siem",
+          "to": "alert",
+          "label": "rules"
+        },
+        {
+          "from": "alert",
+          "to": "tuning",
+          "label": "triage"
+        },
+        {
+          "from": "tuning",
+          "to": "siem",
+          "label": "adjustment"
+        },
+        {
+          "from": "siem",
+          "to": "dash",
+          "label": "reporting"
+        }
+      ],
+      "sequence": [
+        "systems",
+        "syslog",
+        "siem",
+        "alert",
+        "tuning"
+      ],
+      "quiz": {
+        "question": "Which step normalizes and correlates events before alerts are generated?",
+        "answer": "siem"
+      }
+    }
+  ]
+}

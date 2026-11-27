@@ -1,0 +1,103 @@
+{
+  "id": "fc-4.2",
+  "objective": "4.2",
+  "title": "Asset Management: Hardware, Software, and Data",
+  "cards": [
+    {
+      "id": "c-4.2-01",
+      "front": "Why maintain an inventory?",
+      "back": "You can only protect, patch, or restore the assets you know about.",
+      "tag": "Basics"
+    },
+    {
+      "id": "c-4.2-02",
+      "front": "Three asset categories",
+      "back": "Hardware (servers, workstations, mobile), software (OS, applications, libraries), data (databases, files, backups).",
+      "tag": "Basics"
+    },
+    {
+      "id": "c-4.2-03",
+      "front": "Contents of an asset record",
+      "back": "Identifier, type, owner, location, version, criticality, data classification, lifecycle state.",
+      "tag": "Inventory"
+    },
+    {
+      "id": "c-4.2-04",
+      "front": "Composite inventory",
+      "back": "Links the asset to its owner, business criticality, processed data, and dependencies.",
+      "tag": "Inventory"
+    },
+    {
+      "id": "c-4.2-05",
+      "front": "Owner vs custodian",
+      "back": "The owner decides classification and access; the custodian manages the asset day-to-day (storage, backups, patches).",
+      "tag": "Roles"
+    },
+    {
+      "id": "c-4.2-06",
+      "front": "Lifecycle stage 1",
+      "back": "Planning / scoping: define need, criticality, and security requirements before purchase.",
+      "tag": "Lifecycle"
+    },
+    {
+      "id": "c-4.2-07",
+      "front": "Stage 2: procurement",
+      "back": "Procurement: include encryption, support duration, compliance, and secure erasure in requirements.",
+      "tag": "Lifecycle"
+    },
+    {
+      "id": "c-4.2-08",
+      "front": "Stage 3: assignment",
+      "back": "Assignment / accounting: assign an owner, register the asset, label, and document authorized use.",
+      "tag": "Lifecycle"
+    },
+    {
+      "id": "c-4.2-09",
+      "front": "Stage 4: monitoring",
+      "back": "Monitoring / asset tracking: patches, movements, usage; detect phantom assets and shadow IT.",
+      "tag": "Lifecycle"
+    },
+    {
+      "id": "c-4.2-10",
+      "front": "Stage 5: disposal",
+      "back": "Disposal / decommissioning: sanitize or destroy, revoke access and licenses, certify end-of-life.",
+      "tag": "Lifecycle"
+    },
+    {
+      "id": "c-4.2-11",
+      "front": "Full lifecycle order",
+      "back": "Planning → Procurement → Assignment → Monitoring → Disposal.",
+      "tag": "Lifecycle"
+    },
+    {
+      "id": "c-4.2-12",
+      "front": "Asset tracking tools",
+      "back": "Network discovery, MDM for mobile devices, CMDB, and periodic reviews.",
+      "tag": "Tracking"
+    },
+    {
+      "id": "c-4.2-13",
+      "front": "Shadow IT",
+      "back": "Asset or service used without the security team's knowledge: it bypasses inventory and controls.",
+      "tag": "Risk"
+    },
+    {
+      "id": "c-4.2-14",
+      "front": "Risk of a forgotten asset",
+      "back": "Unpatched, unmonitored, unrestored: a classic entry point and root cause of incidents.",
+      "tag": "Risk"
+    },
+    {
+      "id": "c-4.2-15",
+      "front": "Proof of destruction",
+      "back": "Certificate of destruction or sanitization report: essential to prove end-of-life of media.",
+      "tag": "End of Life"
+    },
+    {
+      "id": "c-4.2-16",
+      "front": "Legal retention and disposal",
+      "back": "Legal retention periods suspend erasure: an asset is not destroyed before the obligation expires.",
+      "tag": "End of Life"
+    }
+  ]
+}

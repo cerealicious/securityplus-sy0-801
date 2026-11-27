@@ -1,0 +1,227 @@
+{
+  "diagrams": [
+    {
+      "id": "d-2.3-vectors-map",
+      "kind": "flow",
+      "title": "The Map of 15 Threat Vectors",
+      "subtitle": "Click a branch: each vector is a different entry path. Highlighted concepts come from the exam objectives, not the books.",
+      "modes": ["explore", "quiz"],
+      "nodes": [
+        {
+          "id": "root",
+          "label": "Vector",
+          "sub": "Threat entry path",
+          "x": 10,
+          "y": 20,
+          "w": 830,
+          "h": 50,
+          "kind": "neutral",
+          "detail": "A vector describes HOW the threat reaches the target. The family is determined by the entry path, never by the final malware.",
+          "exam": "15 families: APT, message, image, attachment, browser, network, remote access, endpoint, supply chain, external media, human, IoT, OT, physical, signal."
+        },
+        {
+          "id": "apt",
+          "label": "APT",
+          "sub": "Persistent campaign",
+          "x": 10,
+          "y": 100,
+          "w": 150,
+          "h": 58,
+          "kind": "actor",
+          "detail": "Advanced Persistent Threat: targeted, persistent, and well-resourced campaign combining multiple vectors.",
+          "exam": "An APT is a campaign, not a single piece of malware."
+        },
+        {
+          "id": "message",
+          "label": "Message-based",
+          "sub": "Email · SMS · RCS · IM",
+          "x": 180,
+          "y": 100,
+          "w": 150,
+          "h": 58,
+          "kind": "artifact",
+          "detail": "Phishing and smishing via email, SMS, RCS, instant messaging, and collaboration tools.",
+          "exam": "RCS is in the exam objectives: no book covers it."
+        },
+        {
+          "id": "image",
+          "label": "Image-based",
+          "sub": "QR · content · CAPTCHA",
+          "x": 350,
+          "y": 100,
+          "w": 150,
+          "h": 58,
+          "kind": "artifact",
+          "detail": "QR code / quishing, embedded content, fake CAPTCHA, and deepfake: the visual hides the real action.",
+          "exam": "A QR code is image-based, not signal-based."
+        },
+        {
+          "id": "attachment",
+          "label": "Attachment-based",
+          "sub": "Macros · RTF · PDF",
+          "x": 520,
+          "y": 100,
+          "w": 150,
+          "h": 58,
+          "kind": "artifact",
+          "detail": "Office macros, RTF documents, and PDFs: execution upon opening or via a link exploiting an unpatched reader.",
+          "exam": "A PDF is not inherently safe."
+        },
+        {
+          "id": "browser",
+          "label": "Browser-based",
+          "sub": "Extensions · JS · cookies",
+          "x": 690,
+          "y": 100,
+          "w": 150,
+          "h": 58,
+          "kind": "artifact",
+          "detail": "Extensions, JavaScript, password managers, cookies, and session tokens.",
+          "exam": "Session hijacking bypasses MFA: the session is already authenticated."
+        },
+        {
+          "id": "network",
+          "label": "Network-based",
+          "sub": "Infrastructure · session keys",
+          "x": 10,
+          "y": 180,
+          "w": 150,
+          "h": 58,
+          "kind": "neutral",
+          "detail": "Compromised routers, switches, firewalls, and virtualized appliances; theft of session keys.",
+          "exam": "A trusted network device is an entry point."
+        },
+        {
+          "id": "remote",
+          "label": "Remote access",
+          "sub": "RDP · VNC · VPN",
+          "x": 180,
+          "y": 180,
+          "w": 150,
+          "h": 58,
+          "kind": "neutral",
+          "detail": "Remote Desktop, VNC, and VPN with stolen credentials or weak configuration.",
+          "exam": "An exposed VPN without MFA is a vector, not a sufficient control."
+        },
+        {
+          "id": "endpoint",
+          "label": "Endpoint-based",
+          "sub": "Devices · native tools",
+          "x": 350,
+          "y": 180,
+          "w": 150,
+          "h": 58,
+          "kind": "artifact",
+          "detail": "Mobile devices, workstations, servers, tablets, trusted devices, and living-off-the-land tools.",
+          "exam": "Native PowerShell = endpoint vector, detected by behavior."
+        },
+        {
+          "id": "supply",
+          "label": "Supply chain",
+          "sub": "Third parties · MSP · SaaS",
+          "x": 520,
+          "y": 180,
+          "w": 150,
+          "h": 58,
+          "kind": "actor",
+          "detail": "Compromised vendors, managed service providers, logistics providers, and trusted SaaS.",
+          "exam": "A signed update distributed by the vendor is a supply chain vector."
+        },
+        {
+          "id": "media",
+          "label": "External media",
+          "sub": "Malicious USB",
+          "x": 690,
+          "y": 180,
+          "w": 150,
+          "h": 58,
+          "kind": "artifact",
+          "detail": "Malicious USB drive: autorun, keylogger, or data theft on a workstation.",
+          "exam": "The control is locking down USB ports and maintaining a media inventory."
+        },
+        {
+          "id": "human",
+          "label": "Human-based",
+          "sub": "Impersonation · visitor",
+          "x": 10,
+          "y": 260,
+          "w": 150,
+          "h": 58,
+          "kind": "actor",
+          "detail": "Impersonation, contractor, visitor, spoofed biometrics, and watering hole.",
+          "exam": "A watering hole compromises a site the target already visits."
+        },
+        {
+          "id": "iot",
+          "label": "IoT-based",
+          "sub": "Cameras · sensors",
+          "x": 180,
+          "y": 260,
+          "w": 150,
+          "h": 58,
+          "kind": "artifact",
+          "detail": "Connected cameras, sensors, and printers, often unmanaged and unpatched.",
+          "exam": "A connected device can serve as a network entry point."
+        },
+        {
+          "id": "ot",
+          "label": "OT-based",
+          "sub": "Industrial SCADA",
+          "x": 350,
+          "y": 260,
+          "w": 150,
+          "h": 58,
+          "kind": "neutral",
+          "detail": "Operational systems and industrial networks: controllers, supervision, SCADA.",
+          "exam": "OT is distinct from IoT and physical."
+        },
+        {
+          "id": "physical",
+          "label": "Physical-based",
+          "sub": "Lock · mantrap · badge",
+          "x": 520,
+          "y": 260,
+          "w": 150,
+          "h": 58,
+          "kind": "neutral",
+          "detail": "Lock and key, access control vestibule, badges: tailgating, lost or cloned badge.",
+          "exam": "A mantrap (access control vestibule) prevents tailgating by enforcing single-person entry."
+        },
+        {
+          "id": "signal",
+          "label": "Signal-based",
+          "sub": "Bluetooth · RF · NFC",
+          "x": 690,
+          "y": 260,
+          "w": 150,
+          "h": 58,
+          "kind": "risk",
+          "detail": "Proximity wireless communications: hostile Bluetooth pairing, RF injection, NFC read/write.",
+          "exam": "Bluetooth, RF, and NFC are required in §2.3: none of the 4 books cover them."
+        }
+      ],
+      "edges": [
+        { "from": "root", "to": "apt", "label": "" },
+        { "from": "root", "to": "message", "label": "" },
+        { "from": "root", "to": "image", "label": "" },
+        { "from": "root", "to": "attachment", "label": "" },
+        { "from": "root", "to": "browser", "label": "" },
+        { "from": "root", "to": "network", "label": "" },
+        { "from": "root", "to": "remote", "label": "" },
+        { "from": "root", "to": "endpoint", "label": "" },
+        { "from": "root", "to": "supply", "label": "" },
+        { "from": "root", "to": "media", "label": "" },
+        { "from": "root", "to": "human", "label": "" },
+        { "from": "root", "to": "iot", "label": "" },
+        { "from": "root", "to": "ot", "label": "" },
+        { "from": "root", "to": "physical", "label": "" },
+        { "from": "root", "to": "signal", "label": "" }
+      ],
+      "sequence": ["root", "apt", "message", "image", "attachment", "browser", "network", "remote", "endpoint", "supply", "media", "human", "iot", "ot", "physical", "signal"],
+      "quiz": {
+        "question": "Which vector family covers an NFC badge read by a hostile phone?",
+        "answer": "signal"
+      }
+    }
+  ]
+}

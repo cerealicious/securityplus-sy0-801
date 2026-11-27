@@ -1,0 +1,151 @@
+{
+  "id": "fc-1.1",
+  "objective": "1.1",
+  "title": "Security Concepts and Controls",
+  "cards": [
+    {
+      "id": "c-1.1-01",
+      "front": "Confidentiality",
+      "back": "Only authorized individuals can access information. Controls: encryption, access control, classification, segmentation.",
+      "tag": "CIA"
+    },
+    {
+      "id": "c-1.1-02",
+      "front": "Integrity",
+      "back": "Information is neither modified nor altered in an undetected manner. Controls: hashing, signatures, version control, tamper-evident logs.",
+      "tag": "CIA"
+    },
+    {
+      "id": "c-1.1-03",
+      "front": "Availability",
+      "back": "Information and services are accessible when needed. Controls: redundancy, backups, anti-DDoS, capacity planning.",
+      "tag": "CIA"
+    },
+    {
+      "id": "c-1.1-04",
+      "front": "Ransomware encrypts a service's files. Which pillar is primarily targeted?",
+      "back": "Availability: the data is no longer accessible. Encryption is the weapon, not the defense. Integrity is also affected, but the goal is unavailability.",
+      "tag": "Exam Trap"
+    },
+    {
+      "id": "c-1.1-05",
+      "front": "Authentication",
+      "back": "\"Who are you?\" Verifies the claimed identity: password + MFA, certificate, biometrics, FIDO2 key.",
+      "tag": "AAA"
+    },
+    {
+      "id": "c-1.1-06",
+      "front": "Authorization",
+      "back": "\"Are you allowed?\" Determines permitted resources and actions: RBAC, ACL, least privilege. Comes after authentication.",
+      "tag": "AAA"
+    },
+    {
+      "id": "c-1.1-07",
+      "front": "Accounting (auditing)",
+      "back": "\"What did you do?\" Tracks actions: logs, SIEM, timestamps. Without traceability, there is no investigation or non-repudiation.",
+      "tag": "AAA"
+    },
+    {
+      "id": "c-1.1-08",
+      "front": "Non-repudiation",
+      "back": "A party cannot deny having acted. Relies on third-party verifiable proof: digital signature, trusted timestamp, integrity-protected log.",
+      "tag": "Proof"
+    },
+    {
+      "id": "c-1.1-09",
+      "front": "Least privilege",
+      "back": "Grant each identity the minimum access necessary, for the duration necessary. Reduces the blast radius of a compromised account.",
+      "tag": "Principle"
+    },
+    {
+      "id": "c-1.1-10",
+      "front": "Separation of duties",
+      "back": "No single person can complete a critical action end-to-end alone: requesting, approving, and executing are divided. Prevents fraud and undetected errors.",
+      "tag": "Principle"
+    },
+    {
+      "id": "c-1.1-11",
+      "front": "Defense in depth",
+      "back": "Layering independent controls across **diverse** layers (perimeter, network, host, application, data, identity, human, physical) so a single failure is not enough.",
+      "tag": "Architecture"
+    },
+    {
+      "id": "c-1.1-12",
+      "front": "Two antivirus programs on the same workstation: is that defense in depth?",
+      "back": "No. They cover the same layer and the same failure mode. Depth comes from the diversity of layers, not the number of products.",
+      "tag": "Exam Trap"
+    },
+    {
+      "id": "c-1.1-13",
+      "front": "Zero Trust",
+      "back": "No implicit trust, even inside the network. Every access is verified based on context: identity, device, application, data, behavior. \"Never trust, always verify.\"",
+      "tag": "Architecture"
+    },
+    {
+      "id": "c-1.1-14",
+      "front": "Is Zero Trust a product you buy?",
+      "back": "No. It is an architecture: identity policy, device inventory, segmentation, logging, strong authentication. A vendor sells a component, not the architecture.",
+      "tag": "Exam Trap"
+    },
+    {
+      "id": "c-1.1-15",
+      "front": "Technical / logical control",
+      "back": "Control implemented in a system: firewall, ACL, encryption, MFA, EDR. Category: \"how it acts.\"",
+      "tag": "Category"
+    },
+    {
+      "id": "c-1.1-16",
+      "front": "Managerial / administrative control",
+      "back": "Control defined by a rule or organization: policy, training, separation of duties, access review.",
+      "tag": "Category"
+    },
+    {
+      "id": "c-1.1-17",
+      "front": "Physical / environmental control",
+      "back": "Control acting on the physical world: badge, mantrap (access control vestibule), lock, fence, UPS, smoke detector.",
+      "tag": "Category"
+    },
+    {
+      "id": "c-1.1-18",
+      "front": "Operational control",
+      "back": "Control tied to daily operations: backup, monitoring, log review, preventive maintenance, runbook.",
+      "tag": "Category"
+    },
+    {
+      "id": "c-1.1-19",
+      "front": "Preventive control",
+      "back": "Stops the event before it happens: firewall, MFA, lock, patch. An IPS is preventive because it blocks.",
+      "tag": "Type"
+    },
+    {
+      "id": "c-1.1-20",
+      "front": "Deterrent control",
+      "back": "Discourages through fear of consequences: visible camera, warning banner, announced penalty, visible honeypot.",
+      "tag": "Type"
+    },
+    {
+      "id": "c-1.1-21",
+      "front": "Corrective control",
+      "back": "Reduces impact after the event: restore, rollback, quarantine, reboot, failover. Restores a known state.",
+      "tag": "Type"
+    },
+    {
+      "id": "c-1.1-22",
+      "front": "Detective control",
+      "back": "Identifies the event without preventing it: IDS, SIEM, smoke detector, log review, audit.",
+      "tag": "Type"
+    },
+    {
+      "id": "c-1.1-23",
+      "front": "Compensating control",
+      "back": "Replaces an impossible or failing control: enhanced monitoring of an unpatchable system, security guard if the camera is down.",
+      "tag": "Type"
+    },
+    {
+      "id": "c-1.1-24",
+      "front": "Directive control",
+      "back": "Guides and mandates behavior: policy, procedure, standard, \"do not enter\" sign. It tells you what to do; it does not technically prevent it.",
+      "tag": "Type"
+    }
+  ]
+}

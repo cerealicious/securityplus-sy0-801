@@ -1,0 +1,123 @@
+{
+  "diagrams": [
+    {
+      "id": "d-1.2-cab-flow",
+      "kind": "flow",
+      "title": "From Ticket to CAB: The Change Request Flow",
+      "subtitle": "Click each step to see what is required before moving to the next.",
+      "modes": ["explore", "order", "quiz"],
+      "nodes": [
+        {
+          "id": "ticket",
+          "label": "Ticket",
+          "sub": "Change request",
+          "x": 10,
+          "y": 40,
+          "w": 150,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "The request describes the change, its justification, the affected system, the owner, and the stakeholders. Without a ticket, there is no audit trail or accountability.",
+          "exam": "The ticket is not a formality: it is proof that the change was requested and scoped."
+        },
+        {
+          "id": "owner",
+          "label": "Owner & stakeholders",
+          "sub": "Responsibilities",
+          "x": 185,
+          "y": 40,
+          "w": 160,
+          "h": 60,
+          "kind": "actor",
+          "detail": "The owner carries the request through to closure. Stakeholders (business, support, security, vendors) are identified and consulted.",
+          "exam": "If a question asks 'who is responsible?', answer the change owner, not the CAB."
+        },
+        {
+          "id": "impact",
+          "label": "Impact analysis",
+          "sub": "Availability · security · dependencies",
+          "x": 370,
+          "y": 40,
+          "w": 170,
+          "h": 60,
+          "kind": "risk",
+          "detail": "Analysis of affected services, downtime, reboots, legacy applications, dependencies, and effects on allow/deny lists and security controls.",
+          "exam": "An incomplete impact analysis is the most common cause of change-related incidents."
+        },
+        {
+          "id": "cab",
+          "label": "CAB",
+          "sub": "Review and approval",
+          "x": 565,
+          "y": 40,
+          "w": 150,
+          "h": 60,
+          "kind": "actor",
+          "detail": "The Change Advisory Board decides: approved, rejected, or approved with conditions (additional testing, specific window). The decision is recorded.",
+          "exam": "The CAB does not implement the change: it evaluates and authorizes it."
+        },
+        {
+          "id": "window",
+          "label": "Window",
+          "sub": "Maintenance window",
+          "x": 565,
+          "y": 150,
+          "w": 150,
+          "h": 60,
+          "kind": "step",
+          "detail": "Low-impact time slot, announced to the business, with enough duration for deployment AND potential backout.",
+          "exam": "A window that is too short makes backout impractical."
+        },
+        {
+          "id": "tests",
+          "label": "Tests",
+          "sub": "Recorded results",
+          "x": 370,
+          "y": 150,
+          "w": 170,
+          "h": 60,
+          "kind": "step",
+          "detail": "Validation in a test environment and then in production, with results documented in the change record.",
+          "exam": "Successful tests do not eliminate the need for a backout plan."
+        },
+        {
+          "id": "backout",
+          "label": "Backout / fail forward",
+          "sub": "Fallback decision",
+          "x": 185,
+          "y": 150,
+          "w": 160,
+          "h": 60,
+          "kind": "risk",
+          "detail": "Backout: revert to the previous state. Fail forward: move ahead with a fix when reverting is impossible or riskier. The decision is explicit.",
+          "exam": "Fail forward does not mean 'improvising': it must be documented and approved."
+        },
+        {
+          "id": "docs",
+          "label": "Documentation",
+          "sub": "Diagrams · SOP · version control",
+          "x": 10,
+          "y": 150,
+          "w": 150,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Update diagrams, policies/procedures, and version control, then close the ticket.",
+          "exam": "An undocumented change makes the next impact analysis inaccurate."
+        }
+      ],
+      "edges": [
+        { "from": "ticket", "to": "owner", "label": "scope" },
+        { "from": "owner", "to": "impact", "label": "assess" },
+        { "from": "impact", "to": "cab", "label": "submit" },
+        { "from": "cab", "to": "window", "label": "approve" },
+        { "from": "window", "to": "tests", "label": "execute" },
+        { "from": "tests", "to": "backout", "label": "decide" },
+        { "from": "backout", "to": "docs", "label": "close" }
+      ],
+      "sequence": ["ticket", "owner", "impact", "cab", "window", "tests", "backout", "docs"],
+      "quiz": {
+        "question": "Which step formally decides on the approval of a change?",
+        "answer": "cab"
+      }
+    }
+  ]
+}

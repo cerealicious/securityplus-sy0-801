@@ -1,0 +1,115 @@
+{
+  "id": "fc-3.4",
+  "objective": "3.4",
+  "title": "Resilience and Recovery",
+  "cards": [
+    {
+      "id": "c-3.4-01",
+      "front": "Difference between BCP and DR",
+      "back": "BCP = overall business continuity; DR = IT processes that restore systems to meet BCP objectives.",
+      "tag": "Basics"
+    },
+    {
+      "id": "c-3.4-02",
+      "front": "Hot site",
+      "back": "Continuously operational, data synchronized, recovery in minutes, highest cost.",
+      "tag": "Sites"
+    },
+    {
+      "id": "c-3.4-03",
+      "front": "Warm site",
+      "back": "Hardware ready, data must be restored, recovery in hours.",
+      "tag": "Sites"
+    },
+    {
+      "id": "c-3.4-04",
+      "front": "Cold site",
+      "back": "Facility only, hardware and data must be installed, recovery in days, lowest cost.",
+      "tag": "Sites"
+    },
+    {
+      "id": "c-3.4-05",
+      "front": "RPO",
+      "back": "Recovery Point Objective: maximum acceptable data loss, measured backward from the incident.",
+      "tag": "Metrics"
+    },
+    {
+      "id": "c-3.4-06",
+      "front": "RTO",
+      "back": "Recovery Time Objective: maximum acceptable service outage duration.",
+      "tag": "Metrics"
+    },
+    {
+      "id": "c-3.4-07",
+      "front": "MTTR",
+      "back": "Mean Time To Repair: average time to repair a failed component.",
+      "tag": "Metrics"
+    },
+    {
+      "id": "c-3.4-08",
+      "front": "MTBF",
+      "back": "Mean Time Between Failures: average time between two failures; reliability indicator.",
+      "tag": "Metrics"
+    },
+    {
+      "id": "c-3.4-09",
+      "front": "RTO dependency example",
+      "back": "Server RTO 1 hr on a network with RTO 3 hr → effective server RTO = 3 hr.",
+      "tag": "Exam Trap"
+    },
+    {
+      "id": "c-3.4-10",
+      "front": "Four redundancy solutions",
+      "back": "Load balancing, clustering, autoscaling, high availability (plus multicloud).",
+      "tag": "Redundancy"
+    },
+    {
+      "id": "c-3.4-11",
+      "front": "UPS",
+      "back": "Uninterruptible Power Supply: battery backup, short runtime.",
+      "tag": "Power"
+    },
+    {
+      "id": "c-3.4-12",
+      "front": "RPS",
+      "back": "Redundant Power Supply: redundant power supply inside a device.",
+      "tag": "Power"
+    },
+    {
+      "id": "c-3.4-13",
+      "front": "Generator and surge protector",
+      "back": "Generator = long runtime; surge protector = protection against power surges.",
+      "tag": "Power"
+    },
+    {
+      "id": "c-3.4-14",
+      "front": "Immutable backup",
+      "back": "Copy that cannot be modified even by an administrator: key defense against ransomware.",
+      "tag": "Backup"
+    },
+    {
+      "id": "c-3.4-15",
+      "front": "Four backup attributes",
+      "back": "Retention, immutability, scope, restoration testing.",
+      "tag": "Backup"
+    },
+    {
+      "id": "c-3.4-16",
+      "front": "Failover vs failback",
+      "back": "Failover = switching to the backup site; failback = returning to the primary site.",
+      "tag": "Testing"
+    },
+    {
+      "id": "c-3.4-17",
+      "front": "Simulation and parallel processing",
+      "back": "Simulation = controlled exercise; parallel processing = running on both sites to compare.",
+      "tag": "Testing"
+    },
+    {
+      "id": "c-3.4-18",
+      "front": "Air-gapped / diversity",
+      "back": "Physical isolation and vendor, hardware, and virtualization diversity reduce shared risk.",
+      "tag": "Architecture"
+    }
+  ]
+}

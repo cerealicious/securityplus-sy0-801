@@ -1,0 +1,127 @@
+{
+  "id": "fc-3.3",
+  "objective": "3.3",
+  "title": "Data Protection and Lifecycle",
+  "cards": [
+    {
+      "id": "c-3.3-01",
+      "front": "Structured vs unstructured data",
+      "back": "Structured: defined schema (tables, columns, records). Unstructured: documents, emails, images, logs, code — the largest volume and most exposed to leaks.",
+      "tag": "Type"
+    },
+    {
+      "id": "c-3.3-02",
+      "front": "Data at rest",
+      "back": "Data stored on media. Controls: disk encryption, TDE, access control, backup. Limit: does not protect against a compromised account.",
+      "tag": "State"
+    },
+    {
+      "id": "c-3.3-03",
+      "front": "Data in transit",
+      "back": "Data moving over a network. Controls: TLS, IPsec, VPN, signatures. Limit: does not protect compromised endpoints.",
+      "tag": "State"
+    },
+    {
+      "id": "c-3.3-04",
+      "front": "Data in use",
+      "back": "Data loaded in memory and being processed. Blind spot of traditional encryption. Controls: isolation, enclaves, minimal access, DLP.",
+      "tag": "State"
+    },
+    {
+      "id": "c-3.3-05",
+      "front": "Does encryption at rest protect against an attacker using a compromised service account?",
+      "back": "No. The database decrypts to answer the query: the attacker acts like an authorized user. Least privilege, exfiltration detection, and DLP are needed.",
+      "tag": "Exam Trap"
+    },
+    {
+      "id": "c-3.3-06",
+      "front": "Data classification",
+      "back": "Internal labels: public, confidential, restricted, secret, top secret, sensitive, critical. Each organization defines its schema; classification triggers controls.",
+      "tag": "Classification"
+    },
+    {
+      "id": "c-3.3-07",
+      "front": "Internal classification vs regulatory category",
+      "back": "\"Confidential\" is an internal classification. \"Health data\" is a regulatory category (GDPR, HIPAA). One triggers internal rules, the other legal obligations.",
+      "tag": "Classification"
+    },
+    {
+      "id": "c-3.3-08",
+      "front": "Data masking",
+      "back": "Replaces part of the value (****1234). Format preserved for display, real data not exposed. Often irreversible on the user side.",
+      "tag": "Method"
+    },
+    {
+      "id": "c-3.3-09",
+      "front": "Tokenization",
+      "back": "Replaces data with a meaningless token; the mapping is kept in a highly protected vault. Reversible only via the vault. Widely used in payments (PCI DSS).",
+      "tag": "Method"
+    },
+    {
+      "id": "c-3.3-10",
+      "front": "Masking vs tokenization",
+      "back": "Masking hides part of the value and is generally not reversible. Tokenization substitutes the entire value and remains reversible via a token vault.",
+      "tag": "Method"
+    },
+    {
+      "id": "c-3.3-11",
+      "front": "De-identification",
+      "back": "Removes or generalizes identifiers. Partially reversible by cross-referencing data. Distinct from true anonymization, which is irreversible and hard to prove.",
+      "tag": "Method"
+    },
+    {
+      "id": "c-3.3-12",
+      "front": "Data obfuscation",
+      "back": "Makes reading difficult without encrypting. Useful for code, insufficient for confidentiality: does not replace encryption.",
+      "tag": "Method"
+    },
+    {
+      "id": "c-3.3-13",
+      "front": "Data owner",
+      "back": "Decides classification and authorizations. A business owner, not a system administrator.",
+      "tag": "Role"
+    },
+    {
+      "id": "c-3.3-14",
+      "front": "Data custodian",
+      "back": "Implements and maintains controls: backups, encryption, physical access. A system administrator is a custodian.",
+      "tag": "Role"
+    },
+    {
+      "id": "c-3.3-15",
+      "front": "Data steward",
+      "back": "Oversees quality, metadata, and compliant usage. Does not decide authorizations: ensures data is accurate and properly described.",
+      "tag": "Role"
+    },
+    {
+      "id": "c-3.3-16",
+      "front": "Controller vs processor",
+      "back": "The data controller determines the purpose and means. The processor processes on its behalf under contract. Central distinction in GDPR.",
+      "tag": "Role"
+    },
+    {
+      "id": "c-3.3-17",
+      "front": "Data lifecycle stages",
+      "back": "Creation, storage, use, sharing, destruction. Each stage has its controls: classification, encryption, least privilege, DLP, certified erasure.",
+      "tag": "Lifecycle"
+    },
+    {
+      "id": "c-3.3-18",
+      "front": "At which stage does network egress DLP act?",
+      "back": "At sharing (egress): it inspects data leaving the perimeter. DLP can also act at storage and use, but egress is its primary enforcement point.",
+      "tag": "Lifecycle"
+    },
+    {
+      "id": "c-3.3-19",
+      "front": "Labeling and geofencing",
+      "back": "Labeling: makes classification visible and actionable (sensitivity label, metadata). Geofencing: restricts access or processing by location, for data residency.",
+      "tag": "Control"
+    },
+    {
+      "id": "c-3.3-20",
+      "front": "Legal hold and destruction",
+      "back": "A legal hold suspends destruction, even if the retention policy specifies 30 days. Destroying evidence after litigation notice can result in sanctions.",
+      "tag": "Lifecycle"
+    }
+  ]
+}

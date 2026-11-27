@@ -1,0 +1,139 @@
+{
+  "id": "fc-5.2",
+  "objective": "5.2",
+  "title": "Risk Management",
+  "cards": [
+    {
+      "id": "c-5.2-01",
+      "front": "The 6 steps of risk management",
+      "back": "Identification, assessment, analysis, register, treatment, monitoring. Every risk has an owner and a review date.",
+      "tag": "Process"
+    },
+    {
+      "id": "c-5.2-02",
+      "front": "Risk register",
+      "back": "Living register: description, owner, score, planned treatment, due date, review date. Without a register, accepted risks are forgotten.",
+      "tag": "Process"
+    },
+    {
+      "id": "c-5.2-03",
+      "front": "Qualitative analysis",
+      "back": "Low/medium/high or 1–5 scales, likelihood × impact matrix. Fast and understandable, but subjective and imprecise financially.",
+      "tag": "Analysis"
+    },
+    {
+      "id": "c-5.2-04",
+      "front": "Quantitative analysis",
+      "back": "Monetary values: SLE, ALE, ARO. Allows comparing risk to control cost. Requires reliable historical data.",
+      "tag": "Analysis"
+    },
+    {
+      "id": "c-5.2-05",
+      "front": "SLE — Single Loss Expectancy",
+      "back": "Expected loss for a single event: asset value × exposure factor (EF). Example: $100,000 × 0.4 = $40,000.",
+      "tag": "Calculation"
+    },
+    {
+      "id": "c-5.2-06",
+      "front": "ARO — Annualized Rate of Occurrence",
+      "back": "Number of events per year. Once every two years = 0.5; twice a year = 2.",
+      "tag": "Calculation"
+    },
+    {
+      "id": "c-5.2-07",
+      "front": "ALE — Annualized Loss Expectancy",
+      "back": "Annualized loss: SLE × ARO. Example: $40,000 × 0.5 = $20,000/year. This is the figure to compare against a control's annual cost.",
+      "tag": "Calculation"
+    },
+    {
+      "id": "c-5.2-08",
+      "front": "Asset $200,000, EF 25%, ARO 2. What is the ALE?",
+      "back": "SLE = 200,000 × 0.25 = $50,000. ALE = 50,000 × 2 = $100,000/year. Do not forget EF: 200,000 × 2 = $400,000 is wrong.",
+      "tag": "Exam Trap"
+    },
+    {
+      "id": "c-5.2-09",
+      "front": "Exposure Factor (EF)",
+      "back": "Percentage of asset value lost in an event. Describes magnitude, not frequency (which is ARO).",
+      "tag": "Calculation"
+    },
+    {
+      "id": "c-5.2-10",
+      "front": "A control costs $25,000/yr and reduces ALE from $30,000 to $8,000. Is it cost-effective?",
+      "back": "Savings = $22,000/yr, cost = $25,000/yr. Not cost-effective as is: negotiate price, choose a cheaper control, or accept the risk with documentation.",
+      "tag": "Decision"
+    },
+    {
+      "id": "c-5.2-11",
+      "front": "Risk mitigation",
+      "back": "Reducing likelihood or impact: EDR, MFA, segmentation, backups, training. Most common treatment; its cost is compared to ALE.",
+      "tag": "Treatment"
+    },
+    {
+      "id": "c-5.2-12",
+      "front": "Risk transfer",
+      "back": "Shifting the loss to a third party: cyber insurance, contractual clause. Does not eliminate reputational risk or liability.",
+      "tag": "Treatment"
+    },
+    {
+      "id": "c-5.2-13",
+      "front": "Risk avoidance",
+      "back": "Eliminating the risky activity: not collecting unnecessary data, not opening a service. Effective, but sometimes impossible or too costly.",
+      "tag": "Treatment"
+    },
+    {
+      "id": "c-5.2-14",
+      "front": "Risk acceptance",
+      "back": "Assuming the risk, documented and authorized, with a review date. An unsigned acceptance is not an acceptance.",
+      "tag": "Treatment"
+    },
+    {
+      "id": "c-5.2-15",
+      "front": "Inherent risk vs residual risk",
+      "back": "Inherent (gross): before any controls. Residual: what remains after controls. Residual risk must be formally accepted.",
+      "tag": "Concept"
+    },
+    {
+      "id": "c-5.2-16",
+      "front": "Risk appetite",
+      "back": "Level of risk the organization is willing to pursue to achieve its objectives. Leadership decision, translated into concrete thresholds.",
+      "tag": "Concept"
+    },
+    {
+      "id": "c-5.2-17",
+      "front": "Risk tolerance",
+      "back": "Acceptable deviation around the target before triggering action. Distinct from appetite: appetite is the target level, tolerance is the margin.",
+      "tag": "Concept"
+    },
+    {
+      "id": "c-5.2-18",
+      "front": "BIA — Business Impact Analysis",
+      "back": "Identifies critical processes, their MTD, RTO, and RPO. Links technical risk to business continuity.",
+      "tag": "Continuity"
+    },
+    {
+      "id": "c-5.2-19",
+      "front": "MTD, RTO, RPO",
+      "back": "MTD: maximum tolerable downtime. RTO: target recovery time. RPO: acceptable data loss (backup frequency). Always RTO < MTD.",
+      "tag": "Continuity"
+    },
+    {
+      "id": "c-5.2-20",
+      "front": "Who decides risk acceptance?",
+      "back": "An identified authority, typically leadership or the risk owner, advised by the CISO. The CISO does not bear the risk alone: it is a governance decision.",
+      "tag": "Governance"
+    },
+    {
+      "id": "c-5.2-21",
+      "front": "Why review an accepted risk?",
+      "back": "Because the asset, threat, likelihood, or impact changes. An acceptance without a review date becomes an obsolete, dangerous decision.",
+      "tag": "Monitoring"
+    },
+    {
+      "id": "c-5.2-22",
+      "front": "Classic mistake in an ALE calculation",
+      "back": "Multiplying asset value directly by ARO while forgetting EF. Always two steps: SLE = value × EF, then ALE = SLE × ARO.",
+      "tag": "Exam Trap"
+    }
+  ]
+}

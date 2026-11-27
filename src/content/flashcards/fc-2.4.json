@@ -1,0 +1,115 @@
+{
+  "id": "fc-2.4",
+  "objective": "2.4",
+  "title": "Vulnerabilities and Attack Surfaces",
+  "cards": [
+    {
+      "id": "c-2.4-01",
+      "front": "Attack surface",
+      "back": "All points through which an attacker can interact with a system: ports, services, identities, code, third parties, exposed data.",
+      "tag": "Basics"
+    },
+    {
+      "id": "c-2.4-02",
+      "front": "Unsupported product",
+      "back": "Product no longer supported by the vendor: no patches, no security updates.",
+      "tag": "System"
+    },
+    {
+      "id": "c-2.4-03",
+      "front": "Unpatched system",
+      "back": "Patch available but not applied: known and exploitable flaw.",
+      "tag": "System"
+    },
+    {
+      "id": "c-2.4-04",
+      "front": "Obsolete system",
+      "back": "Technology superseded by a newer version, with incompatibilities and legacy dependencies.",
+      "tag": "System"
+    },
+    {
+      "id": "c-2.4-05",
+      "front": "Unmanaged system",
+      "back": "Outside inventory and management tools: no one patches or monitors it.",
+      "tag": "System"
+    },
+    {
+      "id": "c-2.4-06",
+      "front": "Ports and services",
+      "back": "Every open port is an exposed interface; a forgotten service widens the attack surface.",
+      "tag": "System"
+    },
+    {
+      "id": "c-2.4-07",
+      "front": "Virtualization vulnerability",
+      "back": "Hypervisor, unpatched VMs, lateral movement between guests, or sandbox escape.",
+      "tag": "System"
+    },
+    {
+      "id": "c-2.4-08",
+      "front": "Zero-day",
+      "back": "Flaw unknown to the vendor with no patch available: reduce attack surface and detect behavior.",
+      "tag": "System"
+    },
+    {
+      "id": "c-2.4-09",
+      "front": "Cryptographic vulnerability",
+      "back": "Weak algorithm (MD5, SHA-1, 3DES), short key, obsolete TLS, or poor key management.",
+      "tag": "System"
+    },
+    {
+      "id": "c-2.4-10",
+      "front": "Race condition / TOC / TOU",
+      "back": "Time of Check (TOC) and Time of Use (TOU) separated in time; the attacker alters state in between.",
+      "tag": "Code"
+    },
+    {
+      "id": "c-2.4-11",
+      "front": "Malicious update",
+      "back": "Compromised update distributed through the vendor's legitimate channel.",
+      "tag": "Code"
+    },
+    {
+      "id": "c-2.4-12",
+      "front": "Hardcoded secrets",
+      "back": "Password or API key written in code: replace with a secrets vault and rotation.",
+      "tag": "Code"
+    },
+    {
+      "id": "c-2.4-13",
+      "front": "Unsafe exception handling",
+      "back": "Verbose errors that expose paths, queries, or credentials.",
+      "tag": "Code"
+    },
+    {
+      "id": "c-2.4-14",
+      "front": "Stale credentials / rogue devices",
+      "back": "Forgotten accounts and unauthorized devices plugged into the network: persistent access.",
+      "tag": "Identity"
+    },
+    {
+      "id": "c-2.4-15",
+      "front": "Shadow IT",
+      "back": "Service used without security approval, outside inventory and monitoring.",
+      "tag": "Identity"
+    },
+    {
+      "id": "c-2.4-16",
+      "front": "Identity provider / mobile",
+      "back": "IdP = central authentication and token service; mobile = apps, permissions, and local storage.",
+      "tag": "Identity"
+    },
+    {
+      "id": "c-2.4-17",
+      "front": "Misconfiguration",
+      "back": "Public bucket, open port, excessive permissions, or unchanged default setting.",
+      "tag": "Modern"
+    },
+    {
+      "id": "c-2.4-18",
+      "front": "LLM / public repos / object storage",
+      "back": "LLM = prompt injection and data leakage; public repo = exposed secrets; public object storage = bucket accessible without auth.",
+      "tag": "Modern"
+    }
+  ]
+}

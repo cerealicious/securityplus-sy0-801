@@ -1,0 +1,110 @@
+{
+  "diagrams": [
+    {
+      "id": "d-2.2-actors-flow",
+      "kind": "flow",
+      "title": "Actor → Motivation → Attributes → Attribution",
+      "subtitle": "An attacker profile is built by cross-referencing three axes, never on a single indicator.",
+      "modes": ["explore", "quiz"],
+      "nodes": [
+        {
+          "id": "actors",
+          "label": "8 actors",
+          "sub": "Who is attacking?",
+          "x": 10,
+          "y": 40,
+          "w": 150,
+          "h": 60,
+          "kind": "actor",
+          "detail": "Organized crime, terrorist, unskilled attacker, hacktivist, insider, accidental, competitor, nation-state actor.",
+          "exam": "The complete taxonomy comes from objective §2.2: none of the 4 books provide it."
+        },
+        {
+          "id": "motives",
+          "label": "12 motivations",
+          "sub": "Why?",
+          "x": 185,
+          "y": 40,
+          "w": 160,
+          "h": 60,
+          "kind": "risk",
+          "detail": "Financial gain, influence, intellectual property, notoriety, espionage, fear/chaos, extortion, curiosity, revenge, ideology, political, ethical.",
+          "exam": "The same tool serves different motivations: the motive classifies the actor."
+        },
+        {
+          "id": "access",
+          "label": "Internal / external",
+          "sub": "Attribute 1",
+          "x": 370,
+          "y": 40,
+          "w": 170,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "An internal actor already has legitimate access; an external actor must cross the perimeter. The insider bypasses perimeter controls.",
+          "exam": "An authorized user who exfiltrates data is an insider, even without sophisticated tools."
+        },
+        {
+          "id": "resources",
+          "label": "Resources",
+          "sub": "Attribute 2 · funding",
+          "x": 565,
+          "y": 40,
+          "w": 150,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "Budget, tools, infrastructure, and persistence capability over a long campaign.",
+          "exam": "An APT has sustained resources, while an unskilled attacker reuses free scripts."
+        },
+        {
+          "id": "sophistication",
+          "label": "Sophistication",
+          "sub": "Attribute 3 · capability",
+          "x": 565,
+          "y": 150,
+          "w": 150,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "From off-the-shelf scripts to custom tools and zero-day exploitation, with evasion and stealthy lateral movement.",
+          "exam": "Sophistication is judged by techniques, not by the number of alerts."
+        },
+        {
+          "id": "profile",
+          "label": "Profile",
+          "sub": "Body of evidence",
+          "x": 370,
+          "y": 150,
+          "w": 170,
+          "h": 60,
+          "kind": "step",
+          "detail": "Observed techniques, motivations, and attributes are cross-referenced to propose an actor category.",
+          "exam": "A single IOC is never enough to attribute a campaign."
+        },
+        {
+          "id": "confidence",
+          "label": "Attribution",
+          "sub": "Confidence level",
+          "x": 185,
+          "y": 150,
+          "w": 160,
+          "h": 60,
+          "kind": "risk",
+          "detail": "Probabilistic conclusion, expressed with a confidence level and reassessed with each new piece of evidence.",
+          "exam": "The exam expects 'attribution with confidence', not 'certainty'."
+        }
+      ],
+      "edges": [
+        { "from": "actors", "to": "motives", "label": "motivated by" },
+        { "from": "motives", "to": "access", "label": "refined by" },
+        { "from": "access", "to": "resources", "label": "then" },
+        { "from": "resources", "to": "sophistication", "label": "then" },
+        { "from": "sophistication", "to": "profile", "label": "combined" },
+        { "from": "profile", "to": "confidence", "label": "leads to" }
+      ],
+      "sequence": ["actors", "motives", "access", "resources", "sophistication", "profile", "confidence"],
+      "quiz": {
+        "question": "Which attribute describes an actor who already has legitimate access?",
+        "answer": "access"
+      }
+    }
+  ]
+}

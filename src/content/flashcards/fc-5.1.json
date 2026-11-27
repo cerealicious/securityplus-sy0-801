@@ -1,0 +1,115 @@
+{
+  "id": "fc-5.1",
+  "objective": "5.1",
+  "title": "Governance, Risk, and Compliance Artifacts",
+  "cards": [
+    {
+      "id": "c-5.1-01",
+      "front": "Guideline",
+      "back": "Non-mandatory recommendation (benchmark, advisory, implementation guide, reference architecture).",
+      "tag": "Pyramid"
+    },
+    {
+      "id": "c-5.1-02",
+      "front": "Standard",
+      "back": "Mandatory, measurable requirement setting a minimum level: encryption, password length, physical configuration.",
+      "tag": "Pyramid"
+    },
+    {
+      "id": "c-5.1-03",
+      "front": "Baseline",
+      "back": "Known, approved minimum configuration serving as a compliance reference for a system.",
+      "tag": "Pyramid"
+    },
+    {
+      "id": "c-5.1-04",
+      "front": "SOP",
+      "back": "Standard operating procedure: documented, repeatable sequence of steps for an operational task.",
+      "tag": "Pyramid"
+    },
+    {
+      "id": "c-5.1-05",
+      "front": "Runbook",
+      "back": "Task-oriented execution guide for operations: restart, failover, restore, verification.",
+      "tag": "Pyramid"
+    },
+    {
+      "id": "c-5.1-06",
+      "front": "BCP vs DRP",
+      "back": "BCP = continuity of business functions; DRP = restoration of IT systems and data.",
+      "tag": "Plans"
+    },
+    {
+      "id": "c-5.1-07",
+      "front": "Acceptable Use Policy (AUP)",
+      "back": "Defines what is permitted or prohibited when using organizational resources and systems.",
+      "tag": "Policies"
+    },
+    {
+      "id": "c-5.1-08",
+      "front": "BYOD policy",
+      "back": "Sets conditions for using a personal device: enrollment, compliance, access, and revocation.",
+      "tag": "Policies"
+    },
+    {
+      "id": "c-5.1-09",
+      "front": "Clean desk policy",
+      "back": "Prohibits leaving sensitive documents or media exposed on an unattended workstation.",
+      "tag": "Policies"
+    },
+    {
+      "id": "c-5.1-10",
+      "front": "Information security policy",
+      "back": "Overarching policy stating management intent and general information security principles.",
+      "tag": "Policies"
+    },
+    {
+      "id": "c-5.1-11",
+      "front": "Incident response policy",
+      "back": "Defines authorities, reporting timelines, and obligations during an incident.",
+      "tag": "Policies"
+    },
+    {
+      "id": "c-5.1-12",
+      "front": "Data classification and retention policy",
+      "back": "Defines data sensitivity levels and their retention periods.",
+      "tag": "Policies"
+    },
+    {
+      "id": "c-5.1-13",
+      "front": "Access control policy",
+      "back": "States principles for granting, reviewing, and revoking access.",
+      "tag": "Policies"
+    },
+    {
+      "id": "c-5.1-14",
+      "front": "Data disposal policy",
+      "back": "Describes data destruction methods and required proof of destruction.",
+      "tag": "Policies"
+    },
+    {
+      "id": "c-5.1-15",
+      "front": "Vulnerability disclosure policy",
+      "back": "Specifies who and how to report a vulnerability, and within what timeframe.",
+      "tag": "Policies"
+    },
+    {
+      "id": "c-5.1-16",
+      "front": "Privacy policy",
+      "back": "Explains collection, use, retention, and individuals' rights over their data.",
+      "tag": "Policies"
+    },
+    {
+      "id": "c-5.1-17",
+      "front": "Artifact lifecycle",
+      "back": "Need/owner → drafting/review → approval → distribution/acknowledgment → review and versioning.",
+      "tag": "Governance"
+    },
+    {
+      "id": "c-5.1-18",
+      "front": "RFC (example of a standard)",
+      "back": "IETF specification document, cited in §5.1 as a de facto external standard.",
+      "tag": "Gap"
+    }
+  ]
+}

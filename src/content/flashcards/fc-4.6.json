@@ -1,0 +1,127 @@
+{
+  "id": "fc-4.6",
+  "objective": "4.6",
+  "title": "Automation and Orchestration",
+  "cards": [
+    {
+      "id": "c-4.6-01",
+      "front": "Automation vs orchestration",
+      "back": "Automation = executing a single task; orchestration = coordinating multiple tools and steps in a workflow.",
+      "tag": "Basics"
+    },
+    {
+      "id": "c-4.6-02",
+      "front": "The five use cases",
+      "back": "User provisioning, resource provisioning, desired state management, anomaly detection, ticket management.",
+      "tag": "Use Cases"
+    },
+    {
+      "id": "c-4.6-03",
+      "front": "Automated user provisioning",
+      "back": "Consistent, rapid creation, permission assignment, and revocation at onboarding and offboarding.",
+      "tag": "Use Cases"
+    },
+    {
+      "id": "c-4.6-04",
+      "front": "Resource provisioning",
+      "back": "Automated, reproducible creation of VMs, containers, or cloud accounts.",
+      "tag": "Use Cases"
+    },
+    {
+      "id": "c-4.6-05",
+      "front": "Desired state management",
+      "back": "Comparing actual state to expected state and automatically remediating any configuration drift.",
+      "tag": "Use Cases"
+    },
+    {
+      "id": "c-4.6-06",
+      "front": "Anomaly detection and ticket management",
+      "back": "Automated analysis of logs and baselines; creating, assigning, and closing tickets without manual entry.",
+      "tag": "Use Cases"
+    },
+    {
+      "id": "c-4.6-07",
+      "front": "The seven considerations",
+      "back": "Guardrails, automation logic, process engineering, complexity, financial considerations, process risks, deployment.",
+      "tag": "Considerations"
+    },
+    {
+      "id": "c-4.6-08",
+      "front": "Guardrail",
+      "back": "Limit that bounds the scope, duration, or impact of an automated action and requires approval when needed.",
+      "tag": "Considerations"
+    },
+    {
+      "id": "c-4.6-09",
+      "front": "Automation logic",
+      "back": "Conditions, step order, error handling, and edge cases of a playbook.",
+      "tag": "Considerations"
+    },
+    {
+      "id": "c-4.6-10",
+      "front": "Complexity and cost",
+      "back": "More tools and branches make troubleshooting harder; licensing, compute, and maintenance carry costs.",
+      "tag": "Considerations"
+    },
+    {
+      "id": "c-4.6-11",
+      "front": "Process risk and deployment",
+      "back": "Errors execute at machine speed: test, roll out gradually, monitor, and plan for rollback.",
+      "tag": "Considerations"
+    },
+    {
+      "id": "c-4.6-12",
+      "front": "Reversibility",
+      "back": "Every automated action in production must be reversible and must be logged.",
+      "tag": "Considerations"
+    },
+    {
+      "id": "c-4.6-13",
+      "front": "Chatbot",
+      "back": "Conversational assistant to query documentation or help draft analyses.",
+      "tag": "AI"
+    },
+    {
+      "id": "c-4.6-14",
+      "front": "Predictive analysis",
+      "back": "Anticipating incidents or outages from trends and weak signals.",
+      "tag": "AI"
+    },
+    {
+      "id": "c-4.6-15",
+      "front": "AI-augmented baselines",
+      "back": "Behavioral baselines enriched by machine learning to better detect anomalies.",
+      "tag": "AI"
+    },
+    {
+      "id": "c-4.6-16",
+      "front": "Agentic AI",
+      "back": "AI capable of planning and executing a sequence of actions autonomously; requires guardrails.",
+      "tag": "AI"
+    },
+    {
+      "id": "c-4.6-17",
+      "front": "Efficiency and baselines",
+      "back": "Time savings, continuous enforcement of expected configuration, fewer repetitive tasks.",
+      "tag": "Outcomes"
+    },
+    {
+      "id": "c-4.6-18",
+      "front": "Expected outcomes (six)",
+      "back": "Efficiency/time saving, enforcing baselines, continuous improvements, productivity, reduced downtime, increased proactivity.",
+      "tag": "Outcomes"
+    },
+    {
+      "id": "c-4.6-19",
+      "front": "CI/CD and integrations",
+      "back": "Continuous integration and deployment apply changes repeatably; integrations connect SIEM, SOAR, and ticketing.",
+      "tag": "Workflows"
+    },
+    {
+      "id": "c-4.6-20",
+      "front": "Steps of an IP-blocking playbook",
+      "back": "Trigger → enrichment → decision/approval → bounded action → verification and tuning.",
+      "tag": "Workflows"
+    }
+  ]
+}

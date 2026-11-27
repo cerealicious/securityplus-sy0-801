@@ -1,0 +1,115 @@
+{
+  "id": "fc-5.6",
+  "objective": "5.6",
+  "title": "Security Awareness",
+  "cards": [
+    {
+      "id": "c-5.6-01",
+      "front": "Initial / onboarding training",
+      "back": "Delivered upon arrival, before or during role onboarding.",
+      "tag": "Gap"
+    },
+    {
+      "id": "c-5.6-02",
+      "front": "Ongoing / recurring training",
+      "back": "Periodic organization-wide training that keeps knowledge up to date.",
+      "tag": "Gap"
+    },
+    {
+      "id": "c-5.6-03",
+      "front": "Targeted training",
+      "back": "Designed for a specific role or risk: finance, administrators, remote work.",
+      "tag": "Gap"
+    },
+    {
+      "id": "c-5.6-04",
+      "front": "Corrective training",
+      "back": "Triggered after a mistake or incident to correct behavior.",
+      "tag": "Gap"
+    },
+    {
+      "id": "c-5.6-05",
+      "front": "Criteria for choosing training type",
+      "back": "The trigger: onboarding, scheduled interval, role-based risk, or observed mistake.",
+      "tag": "Exam Trap"
+    },
+    {
+      "id": "c-5.6-06",
+      "front": "Learning management system (LMS)",
+      "back": "Platform for courses, tracking, and certifications.",
+      "tag": "Gap"
+    },
+    {
+      "id": "c-5.6-07",
+      "front": "Self-service portals",
+      "back": "Training resources accessible on demand by employees.",
+      "tag": "Channels"
+    },
+    {
+      "id": "c-5.6-08",
+      "front": "One-to-one vs one-to-many",
+      "back": "One-to-one = individual coaching; one-to-many = campaign or group presentation.",
+      "tag": "Channels"
+    },
+    {
+      "id": "c-5.6-09",
+      "front": "Social engineering",
+      "back": "Training topic: phishing, pretexting, and psychological manipulation.",
+      "tag": "Topics"
+    },
+    {
+      "id": "c-5.6-10",
+      "front": "Password and credential management",
+      "back": "Training topic: password managers, MFA, reuse, and credential leaks.",
+      "tag": "Topics"
+    },
+    {
+      "id": "c-5.6-11",
+      "front": "Business email compromise (BEC)",
+      "back": "Executive fraud and wire transfer hijacking.",
+      "tag": "Gap"
+    },
+    {
+      "id": "c-5.6-12",
+      "front": "Remote work / teleworking / hybrid",
+      "back": "Training topic: home network, video conferencing, devices, and workspace.",
+      "tag": "Gap"
+    },
+    {
+      "id": "c-5.6-13",
+      "front": "BYOD and removable media",
+      "back": "Personal devices, USB drives, and unapproved cables: awareness topics.",
+      "tag": "Topics"
+    },
+    {
+      "id": "c-5.6-14",
+      "front": "Situational awareness",
+      "back": "Environmental vigilance: propped doors, shoulder surfing, public places.",
+      "tag": "Topics"
+    },
+    {
+      "id": "c-5.6-15",
+      "front": "Operational security (OPSEC)",
+      "back": "Not inadvertently revealing exploitable information.",
+      "tag": "Gap"
+    },
+    {
+      "id": "c-5.6-16",
+      "front": "Metrics and managerial reports",
+      "back": "Program numerical indicators and periodic summaries for leadership.",
+      "tag": "Metrics"
+    },
+    {
+      "id": "c-5.6-17",
+      "front": "Personnel behavior risk scoring",
+      "back": "Behavioral risk score: aggregating signals to target training.",
+      "tag": "Metrics"
+    },
+    {
+      "id": "c-5.6-18",
+      "front": "Phishing: good indicator",
+      "back": "Decreasing click rate and increasing report rate = improved vigilance.",
+      "tag": "Metrics"
+    }
+  ]
+}

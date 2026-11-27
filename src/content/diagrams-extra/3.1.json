@@ -1,0 +1,128 @@
+{
+  "diagrams": [
+    {
+      "id": "d-3.1-arch-models",
+      "kind": "flow",
+      "title": "Deployment Models: Responsibility and Isolation",
+      "subtitle": "From on-premises to cloud, then IaC and OT: click each model to see what changes in security.",
+      "modes": [
+        "explore",
+        "quiz",
+        "order"
+      ],
+      "nodes": [
+        {
+          "id": "onprem",
+          "label": "On-premises",
+          "sub": "Owned infrastructure",
+          "x": 20,
+          "y": 40,
+          "w": 150,
+          "h": 62,
+          "kind": "neutral",
+          "detail": "The organization owns and administers servers, network, and storage. It bears the full burden: patching, power, backups, recovery.",
+          "exam": "Full control does not mean guaranteed security: the maintenance burden remains entirely yours."
+        },
+        {
+          "id": "public",
+          "label": "Public cloud",
+          "sub": "Shared responsibility",
+          "x": 200,
+          "y": 40,
+          "w": 150,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "The provider manages the infrastructure; the customer retains data, identities, applications, and configuration. Running without an OS to maintain is the serverless variant.",
+          "exam": "Customer misconfiguration remains the number one cause of cloud exposure."
+        },
+        {
+          "id": "private",
+          "label": "Private / community cloud",
+          "sub": "Dedicated infrastructure",
+          "x": 380,
+          "y": 40,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Infrastructure dedicated to one organization or shared by a community of peers. Stronger control, higher cost, peer trust governance.",
+          "exam": "Community cloud = trust between organizations in the same group."
+        },
+        {
+          "id": "hybrid",
+          "label": "Hybrid",
+          "sub": "Junction to secure",
+          "x": 560,
+          "y": 40,
+          "w": 150,
+          "h": 62,
+          "kind": "risk",
+          "detail": "Combination of on-premises and cloud connected via VPN, dedicated interconnect, or federated identity. The junction is an additional trust boundary.",
+          "exam": "In a hybrid scenario, look for controls at the junction, not just in the cloud."
+        },
+        {
+          "id": "iac",
+          "label": "IaC / microservices",
+          "sub": "Infrastructure as code",
+          "x": 200,
+          "y": 170,
+          "w": 190,
+          "h": 62,
+          "kind": "step",
+          "detail": "Infrastructure is described in versioned files; applications are split into services communicating via APIs. Control becomes code review and drift detection.",
+          "exam": "Concepts from objective §3.1, absent from the four provided books."
+        },
+        {
+          "id": "ot",
+          "label": "OT / air-gapped",
+          "sub": "Physical isolation",
+          "x": 470,
+          "y": 170,
+          "w": 170,
+          "h": 62,
+          "kind": "risk",
+          "detail": "Industrial systems isolated from the Internet: availability and safety come first, transfers via controlled media, active scans prohibited.",
+          "exam": "Physical segmentation offers the strongest isolation; logical segmentation depends on configuration."
+        }
+      ],
+      "edges": [
+        {
+          "from": "onprem",
+          "to": "public",
+          "label": "shift of burden"
+        },
+        {
+          "from": "public",
+          "to": "private",
+          "label": "dedicated"
+        },
+        {
+          "from": "private",
+          "to": "hybrid",
+          "label": "junction"
+        },
+        {
+          "from": "onprem",
+          "to": "iac",
+          "label": "automation"
+        },
+        {
+          "from": "hybrid",
+          "to": "ot",
+          "label": "isolation"
+        }
+      ],
+      "sequence": [
+        "onprem",
+        "public",
+        "private",
+        "hybrid",
+        "iac",
+        "ot"
+      ],
+      "quiz": {
+        "question": "Which model leaves data and configuration responsibility with the customer while delegating infrastructure?",
+        "answer": "public"
+      }
+    }
+  ]
+}

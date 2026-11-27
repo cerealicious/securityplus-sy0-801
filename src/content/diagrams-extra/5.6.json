@@ -1,0 +1,98 @@
+{
+  "diagrams": [
+    {
+      "id": "d-5.6-awareness-program",
+      "kind": "flow",
+      "title": "The Awareness Program Loop",
+      "subtitle": "Analyze, train, target, remediate, measure — then repeat with new data.",
+      "modes": ["explore", "quiz", "order"],
+      "sequence": ["analyse", "initial", "ongoing", "targeted", "corrective", "measure"],
+      "quiz": {
+        "question": "Which step is triggered by an observed individual mistake?",
+        "answer": "corrective"
+      },
+      "nodes": [
+        {
+          "id": "analyse",
+          "label": "Risk analysis",
+          "sub": "audiences and threats",
+          "x": 20,
+          "y": 60,
+          "w": 160,
+          "h": 62,
+          "kind": "neutral",
+          "detail": "Identify audiences, risky behaviors, and topics to cover: phishing, BEC, remote work, OPSEC.",
+          "exam": "The program starts from risks and roles, not from a course catalog."
+        },
+        {
+          "id": "initial",
+          "label": "Initial training",
+          "sub": "onboarding",
+          "x": 200,
+          "y": 60,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "New hire onboarding: policy, AUP, access, and baseline rules before starting the role.",
+          "exam": "Trigger = onboarding."
+        },
+        {
+          "id": "ongoing",
+          "label": "Ongoing training",
+          "sub": "LMS · portals · organization-wide",
+          "x": 380,
+          "y": 60,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Periodic modules for all staff via LMS, self-service portals, or one-to-many delivery.",
+          "exam": "Trigger = calendar schedule. LMS is a §5.6 concept absent from the books."
+        },
+        {
+          "id": "targeted",
+          "label": "Targeted training",
+          "sub": "specific role or risk",
+          "x": 560,
+          "y": 60,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "BEC for accounting, MFA for administrators, remote work for distributed teams.",
+          "exam": "Trigger = role- or context-specific risk."
+        },
+        {
+          "id": "corrective",
+          "label": "Corrective training",
+          "sub": "after mistake or incident",
+          "x": 740,
+          "y": 60,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Individual follow-up after clicking a simulated phishing link or misdirecting data.",
+          "exam": "Trigger = observed mistake."
+        },
+        {
+          "id": "measure",
+          "label": "Measurement & governance",
+          "sub": "metrics · reports · scoring",
+          "x": 380,
+          "y": 220,
+          "w": 240,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Participation and pass rates, click and reporting rates, behavioral risk score, and leadership reporting.",
+          "exam": "An increase in reporting is a sign of vigilance, not failure."
+        }
+      ],
+      "edges": [
+        { "from": "analyse", "to": "initial", "label": "onboarding" },
+        { "from": "initial", "to": "ongoing", "label": "continue" },
+        { "from": "ongoing", "to": "targeted", "label": "target" },
+        { "from": "targeted", "to": "corrective", "label": "remediate" },
+        { "from": "corrective", "to": "measure", "label": "evaluate" },
+        { "from": "measure", "to": "analyse", "label": "realign" }
+      ]
+    }
+  ]
+}

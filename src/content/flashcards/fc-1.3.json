@@ -1,0 +1,151 @@
+{
+  "id": "fc-1.3",
+  "objective": "1.3",
+  "title": "Cryptography and Public Key Infrastructure",
+  "cards": [
+    {
+      "id": "c-1.3-01",
+      "front": "Symmetric encryption",
+      "back": "A single shared key to encrypt and decrypt. Fast, suited for large volumes (AES, ChaCha20). Main challenge: key distribution.",
+      "tag": "Encryption"
+    },
+    {
+      "id": "c-1.3-02",
+      "front": "Asymmetric encryption",
+      "back": "Key pair: public key distributed, private key kept secret. Slow, but solves key exchange and signatures. RSA, ECC, Diffie-Hellman.",
+      "tag": "Encryption"
+    },
+    {
+      "id": "c-1.3-03",
+      "front": "Encrypting with the recipient's public key is used to…",
+      "back": "Ensure confidentiality: only the corresponding private key can decrypt.",
+      "tag": "Exam Trap"
+    },
+    {
+      "id": "c-1.3-04",
+      "front": "Signing with your private key is used to…",
+      "back": "Prove authenticity, integrity, and non-repudiation. It is not a confidentiality mechanism.",
+      "tag": "Exam Trap"
+    },
+    {
+      "id": "c-1.3-05",
+      "front": "TLS is hybrid: explain.",
+      "back": "Asymmetric handshake to authenticate parties and negotiate a session key, then symmetric encryption (AES or ChaCha20) for traffic. Asymmetric would be too slow for bulk data.",
+      "tag": "Protocol"
+    },
+    {
+      "id": "c-1.3-06",
+      "front": "Key exchange (Diffie-Hellman / ECDHE)",
+      "back": "Derives a shared key without ever transmitting it. ECDHE provides forward secrecy: later compromise of the private key does not decrypt past sessions.",
+      "tag": "Key"
+    },
+    {
+      "id": "c-1.3-07",
+      "front": "Minimum RSA key length today?",
+      "back": "2048 bits minimum, 3072 recommended. Below that, consider the algorithm weak.",
+      "tag": "Numbers"
+    },
+    {
+      "id": "c-1.3-08",
+      "front": "AES-256, ECC-256, SHA-256: which family for each?",
+      "back": "AES-256 = symmetric. ECC-256 = asymmetric (ECDSA/ECDH). SHA-256 = hashing. Do not mix up the families in an answer.",
+      "tag": "Numbers"
+    },
+    {
+      "id": "c-1.3-09",
+      "front": "Obsolete algorithms to never recommend",
+      "back": "DES, 3DES, RC4, MD5, SHA-1. They are broken or deprecated; an answer proposing them as a modern solution is wrong.",
+      "tag": "Numbers"
+    },
+    {
+      "id": "c-1.3-10",
+      "front": "Hash function",
+      "back": "Transforms data of any length into a fixed-length digest. One-way, deterministic, sensitive to the slightest change (avalanche effect).",
+      "tag": "Hashing"
+    },
+    {
+      "id": "c-1.3-11",
+      "front": "Can you decrypt a hash?",
+      "back": "No. A hash is irreversible. You can only attempt to find the input via brute force, dictionary, or precomputed table. An answer proposing to decrypt a hash is wrong.",
+      "tag": "Exam Trap"
+    },
+    {
+      "id": "c-1.3-12",
+      "front": "Salt",
+      "back": "Random value added to a password before hashing, stored alongside the hash. Renders rainbow tables useless and prevents identical passwords from having the same hash.",
+      "tag": "Hashing"
+    },
+    {
+      "id": "c-1.3-13",
+      "front": "Why bcrypt or Argon2 instead of SHA-256 for passwords?",
+      "back": "SHA-256 is designed to be fast, which favors brute-force attacks. bcrypt, scrypt, and Argon2 are slow and tunable: computational cost slows down the attack.",
+      "tag": "Hashing"
+    },
+    {
+      "id": "c-1.3-14",
+      "front": "How does a digital signature work?",
+      "back": "Hash the message, encrypt the hash with the sender's private key, attach the signature. The recipient recalculates the hash and compares it to the one decrypted with the public key.",
+      "tag": "Signature"
+    },
+    {
+      "id": "c-1.3-15",
+      "front": "Is Base64 encryption?",
+      "back": "No, it is encoding: anyone can decode it without a key. A secret in Base64 is in plaintext.",
+      "tag": "Exam Trap"
+    },
+    {
+      "id": "c-1.3-16",
+      "front": "Obfuscation",
+      "back": "Makes code or data hard to read (renaming, minification, packing). Slows analysis but does not replace encryption or access control.",
+      "tag": "Protection"
+    },
+    {
+      "id": "c-1.3-17",
+      "front": "PKI (Public Key Infrastructure)",
+      "back": "Set of roles, policies, and systems that issue, distribute, verify, and revoke certificates. Relies on a Certificate Authority and a trust store.",
+      "tag": "PKI"
+    },
+    {
+      "id": "c-1.3-18",
+      "front": "Certificate Authority (CA)",
+      "back": "Authority that verifies the requester's identity and signs the certificate with its private key. A root CA stays offline; an intermediate CA signs day-to-day.",
+      "tag": "PKI"
+    },
+    {
+      "id": "c-1.3-19",
+      "front": "CSR: what does it contain, and what does it never contain?",
+      "back": "It contains the public key, identity (CN, SAN), and proof of possession signed with the private key. It NEVER contains the private key.",
+      "tag": "PKI"
+    },
+    {
+      "id": "c-1.3-20",
+      "front": "CRL vs OCSP",
+      "back": "CRL = signed list published periodically, with latency. OCSP = real-time query for status (valid, revoked, unknown). OCSP stapling has the server deliver the response.",
+      "tag": "Revocation"
+    },
+    {
+      "id": "c-1.3-21",
+      "front": "Does a *.example.com certificate cover api.eu.example.com?",
+      "back": "No. A wildcard only covers a single subdomain level: api.example.com yes, api.eu.example.com no.",
+      "tag": "Exam Trap"
+    },
+    {
+      "id": "c-1.3-22",
+      "front": "Self-signed certificate",
+      "back": "Signed by itself, not trusted by default: browser warning. Used internally or in labs, unless manually added to the trust store.",
+      "tag": "PKI"
+    },
+    {
+      "id": "c-1.3-23",
+      "front": "Key escrow",
+      "back": "Depositing a copy of a key with a trusted third party to enable recovery or meet legal requirements. Trade-off: recovery vs additional compromise risk.",
+      "tag": "Key"
+    },
+    {
+      "id": "c-1.3-24",
+      "front": "Encryption at rest: what it does not protect",
+      "back": "It protects a stolen drive or powered-off system. It does not protect a compromised account or data in use.",
+      "tag": "Scope"
+    }
+  ]
+}

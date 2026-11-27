@@ -1,0 +1,149 @@
+{
+  "diagrams": [
+    {
+      "id": "d-soar-workflow",
+      "kind": "flow",
+      "title": "SOAR Workflow: From Alert to Bounded Action",
+      "subtitle": "A playbook coordinates SIEM, enrichment, decision, action, and verification. Guardrails bound every output.",
+      "modes": [
+        "explore",
+        "order",
+        "quiz"
+      ],
+      "nodes": [
+        {
+          "id": "detect",
+          "label": "Trigger",
+          "sub": "SIEM / EDR alert",
+          "x": 12,
+          "y": 96,
+          "w": 148,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "An alert or external signal launches the playbook. The trigger must be precise to avoid unnecessary executions.",
+          "exam": "A playbook without a qualified trigger amplifies false positives."
+        },
+        {
+          "id": "enrich",
+          "label": "Enrichment",
+          "sub": "context, reputation",
+          "x": 178,
+          "y": 96,
+          "w": 148,
+          "h": 62,
+          "kind": "step",
+          "detail": "Queries reputation databases, connection history, and the criticality of targeted assets.",
+          "exam": "Enrichment precedes decision: it reduces noise."
+        },
+        {
+          "id": "decide",
+          "label": "Decision",
+          "sub": "rules + threshold",
+          "x": 344,
+          "y": 96,
+          "w": 148,
+          "h": 62,
+          "kind": "step",
+          "detail": "Documented logic evaluates the risk score; above a threshold, human approval may be required.",
+          "exam": "Automation logic must be understood and tested before deployment."
+        },
+        {
+          "id": "guard",
+          "label": "Guardrails",
+          "sub": "scope, duration, reversibility",
+          "x": 344,
+          "y": 196,
+          "w": 148,
+          "h": 62,
+          "kind": "risk",
+          "detail": "Limits imposed on the action: reduced scope, bounded duration, logging, approval, and rollback capability.",
+          "exam": "Without guardrails, a triage mistake is applied at machine speed."
+        },
+        {
+          "id": "act",
+          "label": "Action",
+          "sub": "block, ticket, patch",
+          "x": 510,
+          "y": 96,
+          "w": 148,
+          "h": 62,
+          "kind": "actor",
+          "detail": "IP block on the firewall, configuration change, ticket creation: the action is reversible and logged.",
+          "exam": "Orchestration chains multiple tools; automation executes a task."
+        },
+        {
+          "id": "verify",
+          "label": "Verification",
+          "sub": "measure and adjust",
+          "x": 510,
+          "y": 196,
+          "w": 148,
+          "h": 62,
+          "kind": "step",
+          "detail": "Checks the effect, monitors false positives, then tunes the playbook — continuous improvement.",
+          "exam": "An unmeasured playbook drifts silently."
+        },
+        {
+          "id": "ai",
+          "label": "Agentic AI",
+          "sub": "autonomous capability",
+          "x": 178,
+          "y": 196,
+          "w": 148,
+          "h": 62,
+          "kind": "neutral",
+          "detail": "Agentic AI can plan and execute a sequence of actions; it requires explicit guardrails. Outside the books, §4.6.",
+          "exam": "Agentic AI ≠ chatbot: the agent acts, it doesn't just reply."
+        }
+      ],
+      "edges": [
+        {
+          "from": "detect",
+          "to": "enrich",
+          "label": "context"
+        },
+        {
+          "from": "enrich",
+          "to": "decide",
+          "label": "score"
+        },
+        {
+          "from": "decide",
+          "to": "act",
+          "label": "selected action"
+        },
+        {
+          "from": "guard",
+          "to": "act",
+          "label": "bounds action"
+        },
+        {
+          "from": "ai",
+          "to": "decide",
+          "label": "suggestion"
+        },
+        {
+          "from": "act",
+          "to": "verify",
+          "label": "outcome"
+        },
+        {
+          "from": "verify",
+          "to": "decide",
+          "label": "tuning"
+        }
+      ],
+      "sequence": [
+        "detect",
+        "enrich",
+        "decide",
+        "act",
+        "verify"
+      ],
+      "quiz": {
+        "question": "Which node limits the scope, duration, and reversibility of an automated action?",
+        "answer": "guard"
+      }
+    }
+  ]
+}

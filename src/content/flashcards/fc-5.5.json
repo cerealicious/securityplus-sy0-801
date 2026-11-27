@@ -1,0 +1,115 @@
+{
+  "id": "fc-5.5",
+  "objective": "5.5",
+  "title": "Audits, Assessments, and Intrusion Frameworks",
+  "cards": [
+    {
+      "id": "c-5.5-01",
+      "front": "Audit charter",
+      "back": "Document defining the authority, scope, responsibilities, and recipients of an audit engagement.",
+      "tag": "Scoping"
+    },
+    {
+      "id": "c-5.5-02",
+      "front": "Sampling",
+      "back": "Examining a representative sample of a control.",
+      "tag": "Gap"
+    },
+    {
+      "id": "c-5.5-03",
+      "front": "Assertion",
+      "back": "Verifiable statement submitted to audit, e.g., \"this control has been enforced since January.\"",
+      "tag": "Gap"
+    },
+    {
+      "id": "c-5.5-04",
+      "front": "Data collection",
+      "back": "Sampling, questionnaires/surveys, interviews, and assertions.",
+      "tag": "Collection"
+    },
+    {
+      "id": "c-5.5-05",
+      "front": "Gap analysis",
+      "back": "Comparison between current state and a target framework to identify gaps.",
+      "tag": "Engagements"
+    },
+    {
+      "id": "c-5.5-06",
+      "front": "Self-assessment vs independent audit",
+      "back": "Self-assessment = evaluation by the team; independent third-party audit = externalized, defensible assurance.",
+      "tag": "Engagements"
+    },
+    {
+      "id": "c-5.5-07",
+      "front": "Benchmarking",
+      "back": "Comparing the organization's practices against industry peers or an external framework.",
+      "tag": "Engagements"
+    },
+    {
+      "id": "c-5.5-08",
+      "front": "Known / unknown / partially known",
+      "back": "Levels of information provided to the tester: all, none, or part of the system.",
+      "tag": "Pentest"
+    },
+    {
+      "id": "c-5.5-09",
+      "front": "Offensive vs defensive vs integrated",
+      "back": "Offensive = attacking; defensive = verifying detection/response; integrated = collaborative work (purple team).",
+      "tag": "Pentest"
+    },
+    {
+      "id": "c-5.5-10",
+      "front": "Passive reconnaissance",
+      "back": "Collection without contacting the target: public sources, no logs generated on the victim.",
+      "tag": "Pentest"
+    },
+    {
+      "id": "c-5.5-11",
+      "front": "Active reconnaissance",
+      "back": "Direct interaction (scans, queries): leaves traces and must be authorized by the ROE.",
+      "tag": "Pentest"
+    },
+    {
+      "id": "c-5.5-12",
+      "front": "Physical penetration testing",
+      "back": "Authorized testing of physical controls: locks, badges, mantraps, tailgating.",
+      "tag": "Pentest"
+    },
+    {
+      "id": "c-5.5-13",
+      "front": "Cyber Kill Chain (7 phases)",
+      "back": "Reconnaissance, weaponization, delivery, exploitation, installation, command and control, actions on objectives.",
+      "tag": "Frameworks"
+    },
+    {
+      "id": "c-5.5-14",
+      "front": "MITRE ATT&CK",
+      "back": "Matrix of adversary tactics and techniques. Enterprise has 14 tactics (not 11).",
+      "tag": "Frameworks"
+    },
+    {
+      "id": "c-5.5-15",
+      "front": "Diamond Model: four vertices",
+      "back": "Adversary, victim, capability, infrastructure — with time and context metadata.",
+      "tag": "Gap"
+    },
+    {
+      "id": "c-5.5-16",
+      "front": "Kill Chain vs ATT&CK",
+      "back": "Kill Chain = progression phases; ATT&CK = techniques organized by tactic.",
+      "tag": "Exam Trap"
+    },
+    {
+      "id": "c-5.5-17",
+      "front": "Industry / international / region-specific standards",
+      "back": "Sectoral, international, or region-specific frameworks used as audit targets.",
+      "tag": "Frameworks"
+    },
+    {
+      "id": "c-5.5-18",
+      "front": "Functional vs behavioral testing",
+      "back": "Functional = does the feature do what is expected? Behavioral = does the system behave as expected in a scenario?",
+      "tag": "Testing"
+    }
+  ]
+}

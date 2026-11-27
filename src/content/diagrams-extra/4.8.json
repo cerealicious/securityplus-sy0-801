@@ -1,0 +1,161 @@
+{
+  "diagrams": [
+    {
+      "id": "d-forensic-sources",
+      "kind": "flow",
+      "title": "Forensic Sources and Order of Volatility",
+      "subtitle": "From memory to storage: the more volatile a source is, the earlier it must be captured.",
+      "modes": [
+        "explore",
+        "order",
+        "quiz"
+      ],
+      "nodes": [
+        {
+          "id": "ram",
+          "label": "Memory (RAM)",
+          "sub": "most volatile",
+          "x": 14,
+          "y": 90,
+          "w": 150,
+          "h": 64,
+          "kind": "risk",
+          "detail": "Encryption keys, payloads, fileless processes, connections. Lost on power-off and reboot.",
+          "exam": "Capture RAM before any isolation or shutdown."
+        },
+        {
+          "id": "network",
+          "label": "Network state",
+          "sub": "connections, ARP, sockets",
+          "x": 180,
+          "y": 90,
+          "w": 150,
+          "h": 64,
+          "kind": "step",
+          "detail": "Active connections, ARP table, sockets, and process state. Changes within seconds.",
+          "exam": "Network isolation can drop connections: capture first."
+        },
+        {
+          "id": "volatilelogs",
+          "label": "Caches & buffers",
+          "sub": "unwritten logs",
+          "x": 346,
+          "y": 90,
+          "w": 150,
+          "h": 64,
+          "kind": "step",
+          "detail": "Data pending write, application caches, logging system buffers.",
+          "exam": "This data is not yet in the log files on disk."
+        },
+        {
+          "id": "disk",
+          "label": "Disk & images",
+          "sub": "bit-level, snapshot",
+          "x": 512,
+          "y": 90,
+          "w": 150,
+          "h": 64,
+          "kind": "artifact",
+          "detail": "Files, registry, persistent logs. A bit-level image also preserves deleted files and unallocated space.",
+          "exam": "System image = working copy; bit-level copy = exact copy."
+        },
+        {
+          "id": "backups",
+          "label": "Backups",
+          "sub": "least volatile",
+          "x": 680,
+          "y": 90,
+          "w": 150,
+          "h": 64,
+          "kind": "artifact",
+          "detail": "Archives and offline storage. Stable over time, but must be protected against ransomware and tampering.",
+          "exam": "An unverified backup is not reliable evidence."
+        },
+        {
+          "id": "logs",
+          "label": "Logs & NetFlow",
+          "sub": "complementary sources",
+          "x": 14,
+          "y": 196,
+          "w": 150,
+          "h": 64,
+          "kind": "neutral",
+          "detail": "Access, authentication, audit, device, endpoint, network logs and metadata. NetFlow shows conversations.",
+          "exam": "NetFlow = who talks to whom; packet capture = exact content."
+        },
+        {
+          "id": "hash",
+          "label": "Integrity",
+          "sub": "hash + chain of custody",
+          "x": 346,
+          "y": 196,
+          "w": 150,
+          "h": 64,
+          "kind": "step",
+          "detail": "Hash immediately upon collection; record source, timestamp, collector, and every transfer. Details outside the books, §4.8.",
+          "exam": "Without a hash and transfer log, evidence loses its value."
+        },
+        {
+          "id": "stake",
+          "label": "Stakeholders",
+          "sub": "HR, finance, legal",
+          "x": 680,
+          "y": 196,
+          "w": 150,
+          "h": 64,
+          "kind": "actor",
+          "detail": "HR provides human context, finance provides financial records, legal provides legal basis and legal hold.",
+          "exam": "A legal hold suspends destruction even if retention is short."
+        }
+      ],
+      "edges": [
+        {
+          "from": "ram",
+          "to": "network",
+          "label": "next"
+        },
+        {
+          "from": "network",
+          "to": "volatilelogs",
+          "label": "next"
+        },
+        {
+          "from": "volatilelogs",
+          "to": "disk",
+          "label": "next"
+        },
+        {
+          "from": "disk",
+          "to": "backups",
+          "label": "next"
+        },
+        {
+          "from": "logs",
+          "to": "disk",
+          "label": "correlation"
+        },
+        {
+          "from": "disk",
+          "to": "hash",
+          "label": "sealed"
+        },
+        {
+          "from": "hash",
+          "to": "stake",
+          "label": "reporting"
+        }
+      ],
+      "sequence": [
+        "ram",
+        "network",
+        "volatilelogs",
+        "disk",
+        "backups"
+      ],
+      "quiz": {
+        "question": "Which source must be captured before shutting down the host?",
+        "answer": "ram"
+      }
+    }
+  ]
+}

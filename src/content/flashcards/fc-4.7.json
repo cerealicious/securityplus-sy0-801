@@ -1,0 +1,127 @@
+{
+  "id": "fc-4.7",
+  "objective": "4.7",
+  "title": "Incident Response",
+  "cards": [
+    {
+      "id": "c-4.7-01",
+      "front": "The 7 phases of incident response",
+      "back": "Preparation, detection and analysis, investigation, containment, eradication, recovery, post-incident. Each phase has a deliverable and a gate criterion.",
+      "tag": "Lifecycle"
+    },
+    {
+      "id": "c-4.7-02",
+      "front": "Preparation phase deliverable",
+      "back": "Tested playbooks, contact directory, roles and RACI matrix, pre-authorized access, ready forensic tools, completed exercises.",
+      "tag": "Phase"
+    },
+    {
+      "id": "c-4.7-03",
+      "front": "Detection and analysis deliverable",
+      "back": "A qualified ticket: true or false positive, severity, initial scope, escalation level. Detection establishes facts; it does not yet decide the response.",
+      "tag": "Phase"
+    },
+    {
+      "id": "c-4.7-04",
+      "front": "Containment: why not power off the machine?",
+      "back": "Powering off destroys volatile memory: fileless implants, active connections, plaintext keys. Isolate the network while keeping the machine powered on for analysis.",
+      "tag": "Exam Trap"
+    },
+    {
+      "id": "c-4.7-05",
+      "front": "Eradication",
+      "back": "Remove the root cause: revoke attacker access, patch the vulnerability, rebuild compromised systems, reset credentials.",
+      "tag": "Phase"
+    },
+    {
+      "id": "c-4.7-06",
+      "front": "Recovery",
+      "back": "Restore from a verified backup, bring back into service gradually, monitor closely during the risk window. Restoring without verifying can reintroduce ransomware.",
+      "tag": "Phase"
+    },
+    {
+      "id": "c-4.7-07",
+      "front": "Post-incident: expected deliverable",
+      "back": "The PIR (Post-Incident Report): timeline, root cause, impact, decisions, effectiveness, corrective actions with owner and due date.",
+      "tag": "Phase"
+    },
+    {
+      "id": "c-4.7-08",
+      "front": "Incident Commander",
+      "back": "One person coordinates, arbitrates, and communicates. Without an IC, decisions conflict and actions are duplicated.",
+      "tag": "Role"
+    },
+    {
+      "id": "c-4.7-09",
+      "front": "RACI matrix",
+      "back": "Responsible for execution (R), Accountable for final decision (A), Consulted (C), Informed (I). Avoids the trap \"everyone is informed, no one is responsible.\"",
+      "tag": "Role"
+    },
+    {
+      "id": "c-4.7-10",
+      "front": "Tabletop vs simulation",
+      "back": "Tabletop: guided discussion of a scenario, tests decisions and coordination. Simulation: controlled live execution, tests tools and procedures.",
+      "tag": "Exercise"
+    },
+    {
+      "id": "c-4.7-11",
+      "front": "Tabletop deliverable",
+      "back": "List of unverified assumptions, unclear roles, and ambiguous decisions, turned into dated corrective actions.",
+      "tag": "Exercise"
+    },
+    {
+      "id": "c-4.7-12",
+      "front": "Order of volatility of evidence",
+      "back": "Memory, then network, then disk, then backups and archives. Capture what disappears fastest first.",
+      "tag": "Forensics"
+    },
+    {
+      "id": "c-4.7-13",
+      "front": "Chain of custody",
+      "back": "Traceability of each piece of evidence: who collected it, when, where, with what tool, what hash, who handled it. A break can make evidence inadmissible.",
+      "tag": "Forensics"
+    },
+    {
+      "id": "c-4.7-14",
+      "front": "How do you prove evidence integrity?",
+      "back": "With a hash computed at collection and recomputed before analysis. A bit-for-bit image preserves unallocated space and metadata.",
+      "tag": "Forensics"
+    },
+    {
+      "id": "c-4.7-15",
+      "front": "Legal hold",
+      "back": "Suspension of automatic deletions and destruction as soon as litigation or an investigation is reasonably foreseeable. Preserves mailboxes, logs, and versions.",
+      "tag": "Legal"
+    },
+    {
+      "id": "c-4.7-16",
+      "front": "E-discovery",
+      "back": "Search and production of electronic evidence in a legal context. Requires preservation, traceability, and reproducible methods.",
+      "tag": "Legal"
+    },
+    {
+      "id": "c-4.7-17",
+      "front": "GDPR supervisory authority notification deadline",
+      "back": "72 hours after becoming aware of a personal data breach, unless there is no risk to rights and freedoms. Notify with available information.",
+      "tag": "Notification"
+    },
+    {
+      "id": "c-4.7-18",
+      "front": "Who to notify, and in what order?",
+      "back": "Leadership and CISO, business owner, legal/DPO, customers or partners per obligation, regulators per threshold, law enforcement for crimes, insurer per policy.",
+      "tag": "Notification"
+    },
+    {
+      "id": "c-4.7-19",
+      "front": "Should you pay a ransom?",
+      "back": "Legal and ethical decision, not technical. Paying funds the criminal ecosystem, does not guarantee recovery, and may violate sanctions. Leadership decides on legal advice, and the decision is documented.",
+      "tag": "Legal"
+    },
+    {
+      "id": "c-4.7-20",
+      "front": "Root cause analysis",
+      "back": "Distinguish the immediate cause (\"the server was encrypted\") from the root cause (\"a service account without MFA allowed exposed RDP access\"). RCA seeks the condition that enabled the attack.",
+      "tag": "Post-Incident"
+    }
+  ]
+}

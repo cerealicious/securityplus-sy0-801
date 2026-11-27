@@ -1,0 +1,110 @@
+{
+  "diagrams": [
+    {
+      "id": "d-4.2-asset-lifecycle",
+      "kind": "flow",
+      "title": "Asset Lifecycle: Procure → Deploy → Manage → Decommission",
+      "subtitle": "Click each step to see the controls to apply and the evidence it produces.",
+      "modes": [
+        "explore",
+        "quiz",
+        "order"
+      ],
+      "nodes": [
+        {
+          "id": "plan",
+          "label": "Plan / scope",
+          "sub": "Need and criticality",
+          "x": 20,
+          "y": 45,
+          "w": 140,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "Define the need, business criticality, security requirements, and expected lifespan before any spending.",
+          "exam": "Without planning, purchasing creates a shadow asset."
+        },
+        {
+          "id": "procure",
+          "label": "Procure",
+          "sub": "Acquisition / purchase",
+          "x": 180,
+          "y": 45,
+          "w": 140,
+          "h": 60,
+          "kind": "step",
+          "detail": "Include encryption, support duration, compliance, and certified sanitization capability in the procurement requirements.",
+          "exam": "Security requirements are written before purchase, not after."
+        },
+        {
+          "id": "deploy",
+          "label": "Deploy",
+          "sub": "Assign / accounting",
+          "x": 340,
+          "y": 45,
+          "w": 140,
+          "h": 60,
+          "kind": "step",
+          "detail": "Assign an owner, register the asset in inventory, label it, and document authorized use.",
+          "exam": "The asset record links owner, criticality, version, and processed data."
+        },
+        {
+          "id": "manage",
+          "label": "Manage",
+          "sub": "Monitor / tracking",
+          "x": 500,
+          "y": 45,
+          "w": 140,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Track patches, movements, and usage via network discovery, MDM, and CMDB; detect shadow IT.",
+          "exam": "A discrepancy between inventory and reality signals a rogue device to investigate."
+        },
+        {
+          "id": "decommission",
+          "label": "Decommission",
+          "sub": "Disposal / destruction",
+          "x": 660,
+          "y": 45,
+          "w": 150,
+          "h": 60,
+          "kind": "risk",
+          "detail": "Sanitize or destroy media, revoke accounts and licenses, respect legal holds, and produce a certificate of destruction.",
+          "exam": "Disposal without evidence leaves the asset exposed to data theft."
+        }
+      ],
+      "edges": [
+        {
+          "from": "plan",
+          "to": "procure",
+          "label": "need approved"
+        },
+        {
+          "from": "procure",
+          "to": "deploy",
+          "label": "asset received"
+        },
+        {
+          "from": "deploy",
+          "to": "manage",
+          "label": "inventoried"
+        },
+        {
+          "from": "manage",
+          "to": "decommission",
+          "label": "end of support"
+        }
+      ],
+      "sequence": [
+        "plan",
+        "procure",
+        "deploy",
+        "manage",
+        "decommission"
+      ],
+      "quiz": {
+        "question": "Which step produces a certificate of destruction and revokes associated access?",
+        "answer": "decommission"
+      }
+    }
+  ]
+}

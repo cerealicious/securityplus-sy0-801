@@ -1,0 +1,115 @@
+{
+  "id": "fc-3.1",
+  "objective": "3.1",
+  "title": "Architecture Models and Security Implications",
+  "cards": [
+    {
+      "id": "c-3.1-01",
+      "front": "Cloud shared responsibility",
+      "back": "The provider secures the infrastructure; the customer remains responsible for their data, identities, applications, and configurations.",
+      "tag": "Cloud"
+    },
+    {
+      "id": "c-3.1-02",
+      "front": "Public cloud",
+      "back": "Infrastructure owned by the provider, consumed on demand. Dominant risk: customer misconfiguration.",
+      "tag": "Cloud"
+    },
+    {
+      "id": "c-3.1-03",
+      "front": "Private cloud",
+      "back": "Infrastructure dedicated to one organization. Maximum control, but cost and maintenance remain.",
+      "tag": "Cloud"
+    },
+    {
+      "id": "c-3.1-04",
+      "front": "Community cloud",
+      "back": "Infrastructure shared among organizations in the same community; trust and isolation between peers must be governed.",
+      "tag": "Cloud"
+    },
+    {
+      "id": "c-3.1-05",
+      "front": "Hybrid deployment model",
+      "back": "Mix of on-premises and cloud. The junction (VPN, federated identity) is an attack surface in its own right.",
+      "tag": "Cloud"
+    },
+    {
+      "id": "c-3.1-06",
+      "front": "Multicloud",
+      "back": "Services spread across multiple providers: increased resilience, but governance and identity complexity.",
+      "tag": "Cloud"
+    },
+    {
+      "id": "c-3.1-07",
+      "front": "On-premises",
+      "back": "Infrastructure owned and operated by the organization: full control, full burden of patching and recovery.",
+      "tag": "Architecture"
+    },
+    {
+      "id": "c-3.1-08",
+      "front": "Serverless",
+      "back": "Functions executed without managing the OS: the customer secures code, credentials, and triggers.",
+      "tag": "Modern"
+    },
+    {
+      "id": "c-3.1-09",
+      "front": "Microservices",
+      "back": "Application split into services communicating via APIs: the attack surface is the number of interfaces.",
+      "tag": "Modern"
+    },
+    {
+      "id": "c-3.1-10",
+      "front": "Infrastructure as Code (IaC)",
+      "back": "Infrastructure described in versioned files; reproducible, but a faulty template propagates everywhere.",
+      "tag": "Modern"
+    },
+    {
+      "id": "c-3.1-11",
+      "front": "Configuration drift",
+      "back": "Gap between the state declared in IaC and the actual state; must be detected continuously.",
+      "tag": "Modern"
+    },
+    {
+      "id": "c-3.1-12",
+      "front": "Operational technology (OT)",
+      "back": "SCADA/ICS systems controlling physical processes: availability and safety come first; avoid active scans.",
+      "tag": "OT"
+    },
+    {
+      "id": "c-3.1-13",
+      "front": "Air-gapped network",
+      "back": "Network physically isolated from the Internet; transfers via controlled media, updates are difficult.",
+      "tag": "Isolation"
+    },
+    {
+      "id": "c-3.1-14",
+      "front": "Physical vs logical segmentation",
+      "back": "Physical = separate hardware and cabling; logical = VLANs, ACLs, and firewalls (less costly, depends on configuration).",
+      "tag": "Isolation"
+    },
+    {
+      "id": "c-3.1-15",
+      "front": "Data sovereignty",
+      "back": "Requirement that data must remain within a given jurisdiction; influences cloud selection.",
+      "tag": "Business"
+    },
+    {
+      "id": "c-3.1-16",
+      "front": "Availability vs resilience",
+      "back": "Availability = service accessible; resilience = ability to absorb and recover after a failure.",
+      "tag": "Criteria"
+    },
+    {
+      "id": "c-3.1-17",
+      "front": "Proprietary vs open source",
+      "back": "Open source = auditability and no vendor lock-in; proprietary = built-in support but vendor dependency.",
+      "tag": "Criteria"
+    },
+    {
+      "id": "c-3.1-18",
+      "front": "Ease of recovery",
+      "back": "Selection criterion: speed and simplicity with which an environment can be restored after an incident.",
+      "tag": "Criteria"
+    }
+  ]
+}
