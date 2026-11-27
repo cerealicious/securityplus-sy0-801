@@ -5,6 +5,9 @@ import { navigate } from '../lib/router'
 import type { Pbq } from '../lib/types'
 import { Empty, ProgressBar } from '../components/ui'
 import { toast } from '../lib/toast'
+import { computeStats, xpForActivity } from '../lib/gamification'
+import { playLevelUp, playSuccess } from '../lib/sound'
+import Celebration from '../components/Celebration'
 
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5)
@@ -59,7 +62,8 @@ export default function LabView({
 }
 
 function PbqRunner({ pbq }: { pbq: Pbq }) {
-  const { completePbq } = useProgress()
+  const { completePbq, progress } = useProgress()
+  const [celebration, setCelebration] = useState<{ kind: 'xp' | 'level'; amount?: number; level?: number } | null>(null)
   const [submitted, setSubmitted] = useState(false)
   const [placement, setPlacement] = useState<Record<string, string>>({})
   const [selectedToken, setSelectedToken] = useState<string | null>(null)
@@ -120,8 +124,18 @@ function PbqRunner({ pbq }: { pbq: Pbq }) {
   function submit() {
     setSubmitted(true)
     if (score >= 70) {
+      const before = computeStats(progress)
+      const gain = xpForActivity('pbq')
       completePbq(pbq.objective, pbq.id, 15)
-      toast(`Exercice réussi à ${score}% — enregistré dans votre progression.`)
+      const afterLevel = Math.floor((before.xp + gain) / 100) + 1
+      if (afterLevel > before.level) {
+        playLevelUp()
+        setCelebration({ kind: 'level', level: afterLevel })
+      } else {
+        playSuccess()
+        setCelebration({ kind: 'xp', amount: gain })
+      }
+      toast(`Exercice réussi à ${score}% · +${gain} XP`)
     } else {
       toast(`Score ${score}% — révisez le corrigé puis réessayez.`)
     }
@@ -443,6 +457,15 @@ function PbqRunner({ pbq }: { pbq: Pbq }) {
           </button>
         )}
       </div>
+
+      {celebration && (
+        <Celebration
+          kind={celebration.kind}
+          amount={celebration.amount}
+          level={celebration.level}
+          onDone={() => setCelebration(null)}
+        />
+      )}
     </div>
   )
 }

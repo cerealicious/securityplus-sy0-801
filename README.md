@@ -25,6 +25,15 @@ Application de bureau **100 % hors ligne** couvrant l'intégralité des **27 obj
 
 Chaque notion est rattachée à une **référence réelle** (livre, chapitre, page) ou, lorsqu'aucun des quatre livres ne la contient, au **référentiel officiel** avec un badge explicite « Hors livres ». Aucune attribution mensongère.
 
+## Gamification façon Duolingo
+
+- **XP réels** : leçon +20, quiz jusqu'à +40 (selon le score), exercice +25, scénario +30, carte +3 (plafond 40 XP/jour). Tout est calculé depuis l'historique de progression — aucun score fictif.
+- **Niveaux** : 100 XP par niveau, titre évolutif (Novice → Maître), barre d'XP animée dans la barre supérieure et sur le tableau de bord.
+- **Série et objectif du jour** : jours consécutifs, objectif quotidien en minutes, compteur animé.
+- **8 badges** débloqués automatiquement (premier pas, 10 leçons, quiz parfait, 100 cartes, série de 7 jours, 500 XP, tous domaines, niveau 5).
+- **Célébrations** : superposition animée avec confettis et « +20 XP » lors d'une leçon, d'un quiz, d'un exercice ou d'un scénario ; écran de montée de niveau et sons doux activables/désactivables.
+- **Interface épurée** : tableau de bord en parcours à cinq domaines, mascotte animée, grandes typographies, peu de bordures, cibles tactiles larges.
+
 ## Expérience d'apprentissage interactive
 
 - **Tableau de bord = centre de formation** : progression globale pondérée, cinq domaines cliquables, taux de maîtrise par domaine, objectifs maîtrisés, reprise de la dernière activité, recommandations calculées depuis la progression réelle, résultats récents, temps d'apprentissage, série de révision et activité des 7 derniers jours.

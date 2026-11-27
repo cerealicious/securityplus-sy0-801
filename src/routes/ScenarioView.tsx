@@ -3,6 +3,9 @@ import { objectiveById, scenarioById, scenarios } from '../lib/content'
 import { useProgress } from '../lib/progress'
 import { navigate } from '../lib/router'
 import { Empty } from '../components/ui'
+import { computeStats, xpForActivity } from '../lib/gamification'
+import { playLevelUp, playSuccess } from '../lib/sound'
+import Celebration from '../components/Celebration'
 
 export default function ScenarioView({
   objectiveId,
@@ -14,7 +17,8 @@ export default function ScenarioView({
   const o = objectiveById.get(objectiveId)
   const list = scenarios.filter((s) => s.objective === objectiveId)
   const sc = scenarioId ? scenarioById.get(scenarioId) : list[0]
-  const { completeScenario } = useProgress()
+  const { completeScenario, progress } = useProgress()
+  const [celebration, setCelebration] = useState<{ kind: 'xp' | 'level'; amount?: number; level?: number } | null>(null)
   const [nodeId, setNodeId] = useState(sc?.start ?? '')
   const [log, setLog] = useState<{ text: string; score: number; why: string }[]>([])
   const [saved, setSaved] = useState(false)
@@ -33,8 +37,18 @@ export default function ScenarioView({
 
   useEffect(() => {
     if (ended && !saved && sc) {
+      const before = computeStats(progress)
+      const gain = xpForActivity('scenario')
       completeScenario(sc.objective, sc.id, 12)
       setSaved(true)
+      const afterLevel = Math.floor((before.xp + gain) / 100) + 1
+      if (afterLevel > before.level) {
+        playLevelUp()
+        setCelebration({ kind: 'level', level: afterLevel })
+      } else {
+        playSuccess()
+        setCelebration({ kind: 'xp', amount: gain })
+      }
     }
   }, [ended, saved, sc, completeScenario])
 
@@ -146,6 +160,15 @@ export default function ScenarioView({
             </button>
           </div>
         </div>
+      )}
+
+      {celebration && (
+        <Celebration
+          kind={celebration.kind}
+          amount={celebration.amount}
+          level={celebration.level}
+          onDone={() => setCelebration(null)}
+        />
       )}
     </div>
   )

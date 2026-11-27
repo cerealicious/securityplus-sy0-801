@@ -1,226 +1,168 @@
-import { useState, type ReactNode } from 'react'
-import { domainById, objectiveById, objectives, totalSubtopics } from '../lib/content'
+import { useEffect, useState } from 'react'
+import { domainById, objectiveById, objectives } from '../lib/content'
+import { domainPercent, objectivePercent, readiness, streak, totalDue, useProgress } from '../lib/progress'
 import {
-  domainPercent,
-  objectivePercent,
-  readiness,
-  streak,
-  totalDue,
-  useProgress,
-} from '../lib/progress'
-import {
-  masteredObjectives,
-  nextActivities,
-  recentResults,
-  resumeActivity,
-  totalMinutes,
-  weeklyMinutes,
-  type Suggestion,
+  masteredObjectives, nextActivities, recentResults, resumeActivity,
+  totalMinutes, weeklyMinutes, type Suggestion,
 } from '../lib/learning'
+import { computeStats, formatXp, levelTitle } from '../lib/gamification'
 import { navigate } from '../lib/router'
 import { ProgressBar, Ring } from '../components/ui'
+import Mascot from '../components/Mascot'
 
 const KIND_ICON: Record<Suggestion['kind'], string> = {
   lesson: '▤', quiz: '✓', pbq: '◇', scenario: '◈', flashcards: '▦', review: '↺',
 }
 
-function SectionHead({ title, sub, action }: { title: string; sub?: string; action?: ReactNode }) {
-  return (
-    <div className="spread" style={{ marginBottom: 12 }}>
-      <div>
-        <div className="section-title">{title}</div>
-        {sub && <div className="faint small" style={{ marginTop: 2 }}>{sub}</div>}
-      </div>
-      {action}
-    </div>
-  )
+function useAnimatedNumber(target: number, duration = 700) {
+  const [value, setValue] = useState(target)
+  useEffect(() => {
+    const start = performance.now()
+    const from = value
+    let frame = 0
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / duration)
+      const ease = 1 - Math.pow(1 - t, 3)
+      setValue(Math.round(from + (target - from) * ease))
+      if (t < 1) frame = requestAnimationFrame(tick)
+    }
+    frame = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(frame)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [target])
+  return value
+}
+
+function greeting() {
+  const h = new Date().getHours()
+  if (h < 12) return 'Bonjour'
+  if (h < 18) return 'Bel après-midi'
+  return 'Bonsoir'
 }
 
 export default function Dashboard() {
   const { progress } = useProgress()
-  const [showAll, setShowAll] = useState(false)
+  const stats = computeStats(progress)
+  const animatedXp = useAnimatedNumber(stats.xp)
   const ready = readiness(progress)
-  const days = streak(progress)
-  const minutes = totalMinutes(progress)
-  const due = totalDue(progress)
-  const resume = resumeActivity(progress)
-  const suggestions = nextActivities(progress, showAll ? 10 : 5)
-  const results = recentResults(progress, 4)
+  const suggestions = nextActivities(progress, 4)
+  const results = recentResults(progress, 3)
   const mastered = masteredObjectives(progress)
   const week = weeklyMinutes(progress)
-  const maxWeek = Math.max(10, ...week.map((w) => w.minutes))
+  const resume = resumeActivity(progress)
+  const due = totalDue(progress)
 
   return (
-    <div className="content-inner wide dashboard">
-      <section className="hero dash-hero">
-        <div className="hero-copy">
-          <div className="eyebrow">COMPTIA SECURITY+ · SY0-801 V8 · 27 OBJECTIFS OFFICIELS</div>
-          <h1>Votre parcours Security+ commence ici.</h1>
-          <p>Apprenez par l'action : leçons interactives, simulations, exercices et révisions espacées. Chaque notion est reliée au référentiel officiel.</p>
-          <div className="row" style={{ marginTop: 20, flexWrap: 'wrap' }}>
-            {resume && (
-              <button className="btn btn-primary" onClick={() => navigate(resume.path)}>
-                Continuer · {resume.title.length > 38 ? resume.title.slice(0, 38) + '…' : resume.title} →
-              </button>
-            )}
-            <button className="btn" onClick={() => navigate('flashcards')}>Réviser les cartes</button>
+    <div className="content-inner wide duo-dashboard">
+      <section className="duo-hero">
+        <div className="duo-hero-left">
+          <Mascot size={104} mood={stats.todayXp > 0 ? 'cheer' : 'happy'} />
+          <div>
+            <div className="eyebrow">{greeting()} · Niveau {stats.level} · {levelTitle(stats.level)}</div>
+            <h1>Prêt à apprendre quelque chose de nouveau ?</h1>
+            <p>De petites étapes, de grandes victoires. Chaque activité vous rapporte de l'XP.</p>
           </div>
         </div>
-        <div className="hero-stats dash-stats">
-          <div className="dash-stat-main">
-            <Ring value={ready} size={78} stroke={6} color="#22d3ee" />
+        <div className="duo-hero-right">
+          <div className="duo-xp-main">
+            <span className="duo-xp-badge">{stats.level}</span>
             <div>
-              <div className="stat-label">Préparation globale</div>
-              <div className="stat-value">{ready}%</div>
-              <div className="faint small">pondérée par les domaines</div>
+              <div className="duo-xp-value"><span>{formatXp(animatedXp)}</span> XP</div>
+              <div className="duo-xp-sub">Niveau {stats.level} · {stats.xpInLevel}/100 XP</div>
             </div>
           </div>
-          <div className="dash-stat-grid">
-            <div className="stat"><span className="stat-value">{days}</span><span className="stat-label">jours de série</span></div>
-            <div className="stat"><span className="stat-value">{Math.round(minutes)}</span><span className="stat-label">minutes apprises</span></div>
-            <div className="stat"><span className="stat-value">{mastered.length}</span><span className="stat-label">objectifs maîtrisés</span></div>
-            <div className="stat"><span className="stat-value">{due}</span><span className="stat-label">cartes dues</span></div>
+          <div className="duo-xp-track"><span style={{ width: `${stats.xpInLevel}%` }} /></div>
+          <div className="duo-hero-metrics">
+            <div className="duo-metric"><span>🔥</span><strong>{stats.streak}</strong><small>jours de série</small></div>
+            <div className="duo-metric"><span>🎯</span><strong>{stats.goalPercent}%</strong><small>objectif du jour</small></div>
+            <div className="duo-metric"><span>🃏</span><strong>{due}</strong><small>cartes dues</small></div>
           </div>
+          {resume && (
+            <button className="duo-cta" onClick={() => navigate(resume.path)}>
+              Continuer · {resume.title.length > 34 ? resume.title.slice(0, 34) + '…' : resume.title} →
+            </button>
+          )}
         </div>
       </section>
 
-      {resume && (
-        <button className="resume-banner" onClick={() => navigate(resume.path)}>
-          <span className="resume-icon">▶</span>
-          <span className="resume-body">
-            <span className="eyebrow">Reprendre là où vous en étiez</span>
-            <strong>{resume.title}</strong>
-            <small>{resume.reason}</small>
-          </span>
-          <span className="resume-arrow">→</span>
-        </button>
-      )}
+      <section className="duo-section">
+        <div className="duo-section-head">
+          <div>
+            <div className="section-title">Votre parcours</div>
+            <div className="faint small">Cinq domaines, une case à la fois.</div>
+          </div>
+          <div className="duo-ready">{ready}% de préparation</div>
+        </div>
+        <div className="duo-path">
+          {[1, 2, 3, 4, 5].map((id) => {
+            const d = domainById.get(id)!
+            const pct = domainPercent(id, progress)
+            const objs = d.objectives.map((x) => objectiveById.get(x)!).filter(Boolean)
+            const done = objs.filter((o) => objectivePercent(o, progress) >= 85).length
+            return (
+              <button key={id} className="duo-node" onClick={() => navigate(`domain/${id}`)} style={{ ['--dc' as any]: d.color }}>
+                <span className="duo-node-ring" style={{ background: `conic-gradient(${d.color} ${pct}%, rgba(255,255,255,.08) 0)` }}>
+                  <span className="duo-node-inner">{done}/{objs.length}</span>
+                </span>
+                <strong>{d.short ?? d.fr}</strong>
+                <small>{d.weight} % de l'examen</small>
+              </button>
+            )
+          })}
+        </div>
+      </section>
 
-      <div className="dash-columns">
-        <div className="dash-main">
-          <SectionHead
-            title="Les cinq domaines officiels"
-            sub="La pondération reflète le poids réel à l'examen."
-            action={<button className="btn btn-sm btn-ghost" onClick={() => navigate('progress')}>Voir ma progression →</button>}
-          />
-          <div className="grid grid-2 domain-grid">
-            {[1, 2, 3, 4, 5].map((id) => {
-              const d = domainById.get(id)!
-              const pct = domainPercent(id, progress)
-              const objs = d.objectives.map((x) => objectiveById.get(x)!).filter(Boolean)
-              const done = objs.filter((o) => objectivePercent(o, progress) >= 85).length
-              return (
-                <button key={id} className="domain-card card hover" style={{ ['--dc' as any]: d.color }} onClick={() => navigate(`domain/${id}`)}>
-                  <div className="spread" style={{ alignItems: 'flex-start' }}>
-                    <div style={{ textAlign: 'left' }}>
-                      <div className="row" style={{ gap: 7 }}>
-                        <span className="domain-dot" style={{ background: d.color }} />
-                        <span className="eyebrow" style={{ color: d.color }}>Domaine {id}</span>
-                        <span className="badge neutral">{d.weight} %</span>
-                      </div>
-                      <div className="d-title" style={{ marginTop: 8 }}>{d.name}</div>
-                      <div className="d-fr">{d.fr}</div>
-                    </div>
-                    <Ring value={pct} size={46} stroke={4} color={d.color} />
-                  </div>
-                  <div className="faint small" style={{ margin: '10px 0', textAlign: 'left', lineHeight: 1.45 }}>{d.blurb}</div>
-                  <div className="spread small faint" style={{ marginBottom: 6 }}>
-                    <span>{objs.length} objectifs · {objs.reduce((n, o) => n + o.itemCount, 0)} sous-thèmes</span>
-                    <span>{done}/{objs.length} maîtrisés</span>
-                  </div>
-                  <ProgressBar value={pct} color={d.color} />
-                  <span className="domain-open">Ouvrir le parcours →</span>
-                </button>
-              )
-            })}
-            <div className="card overview-card">
-              <div className="eyebrow">Vue d'ensemble</div>
-              <div className="stat-value" style={{ marginTop: 8 }}>{objectives.length}</div>
-              <div className="stat-label">objectifs officiels</div>
-              <div className="faint small" style={{ margin: '10px 0' }}>{totalSubtopics} sous-thèmes cartographiés, 5 domaines.</div>
-              <div style={{ display: 'flex', height: 10, borderRadius: 99, overflow: 'hidden', marginBottom: 12 }}>
-                {[1, 2, 3, 4, 5].map((id) => (
-                  <div key={id} style={{ width: `${domainById.get(id)!.weight}%`, background: domainById.get(id)!.color }} title={`Domaine ${id} — ${domainById.get(id)!.weight} %`} />
-                ))}
-              </div>
-              <div className="stack-sm" style={{ fontSize: 11.5 }}>
-                {[1, 2, 3, 4, 5].map((id) => {
-                  const d = domainById.get(id)!
-                  return (
-                    <div key={id} className="spread">
-                      <span className="row" style={{ gap: 7 }}><span style={{ width: 7, height: 7, borderRadius: 2, background: d.color }} /><span className="muted">{d.fr}</span></span>
-                      <span className="mono-sm">{d.weight} %</span>
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
+      <div className="duo-columns">
+        <div>
+          <div className="duo-section-head">
+            <div className="section-title">À faire maintenant</div>
+          </div>
+          <div className="duo-list">
+            {suggestions.length ? suggestions.map((s, i) => (
+              <button key={i} className="duo-item" onClick={() => navigate(s.path)}>
+                <span className="duo-item-icon" style={{ color: s.color }}>{KIND_ICON[s.kind]}</span>
+                <span className="duo-item-body"><strong>{s.title}</strong><small>{s.reason}</small></span>
+                <span className="duo-item-arrow">→</span>
+              </button>
+            )) : <div className="faint small">Tout est à jour pour le moment.</div>}
           </div>
 
-          <div style={{ marginTop: 26 }}>
-            <SectionHead title="Objectifs maîtrisés" sub="Score d'objectif supérieur à 85 %." />
-            {mastered.length ? (
-              <div className="pill-row">
-                {mastered.map((o) => (
-                  <button key={o.id} className="mastered-pill" onClick={() => navigate(`objective/${o.id}`)}>
-                    <span className="mono-sm">{o.id}</span> {o.titleFr}
-                  </button>
-                ))}
+          <div className="duo-section-head" style={{ marginTop: 24 }}>
+            <div className="section-title">Vos badges</div>
+            <button className="btn btn-sm btn-ghost" onClick={() => navigate('progress')}>Tout voir →</button>
+          </div>
+          <div className="duo-badges">
+            {stats.badges.map((b) => (
+              <div key={b.id} className={`duo-badge ${b.earned ? 'earned' : ''}`} title={b.detail}>
+                <span>{b.icon}</span><small>{b.label}</small>
               </div>
-            ) : (
-              <div className="card empty small">Aucun objectif maîtrisé pour l'instant — terminez un objectif pour le voir apparaître ici.</div>
-            )}
+            ))}
           </div>
         </div>
 
-        <aside className="dash-side">
-          <div className="card side-card">
-            <SectionHead title="À faire ensuite" sub="Recommandé d'après votre progression" />
-            <div className="stack-sm">
-              {suggestions.length ? suggestions.map((s, i) => (
-                <button key={i} className="suggestion" onClick={() => navigate(s.path)}>
-                  <span className="suggestion-icon" style={{ color: s.color }}>{KIND_ICON[s.kind]}</span>
-                  <span style={{ minWidth: 0, flex: 1, textAlign: 'left' }}>
-                    <strong>{s.title}</strong>
-                    <small>{s.reason}</small>
-                  </span>
-                  <span className="faint">→</span>
-                </button>
-              )) : <div className="faint small">Tout est à jour.</div>}
-            </div>
-            <button className="btn btn-sm btn-ghost" style={{ marginTop: 10 }} onClick={() => setShowAll(!showAll)}>
-              {showAll ? 'Réduire' : 'Voir plus d’activités'}
-            </button>
-          </div>
-
-          <div className="card side-card">
-            <SectionHead title="Résultats récents" sub="Scores enregistrés localement" />
-            {results.length ? (
-              <div className="stack-sm">
-                {results.map((r, i) => (
-                  <div key={i} className="result-row">
-                    <span className={`result-score ${r.score! >= 80 ? 'ok' : r.score! >= 60 ? 'warn' : 'bad'}`}>{r.score}%</span>
-                    <span style={{ minWidth: 0 }}>
-                      <strong>{r.title}</strong>
-                      <small>{r.kind === 'quiz' ? 'Quiz' : r.kind === 'card' ? 'Flashcards' : r.kind} · {new Date(r.date).toLocaleDateString('fr-FR')}</small>
-                    </span>
-                  </div>
-                ))}
+        <aside>
+          <div className="duo-section-head"><div className="section-title">Derniers résultats</div></div>
+          <div className="duo-panel">
+            {results.length ? results.map((r, i) => (
+              <div key={i} className="duo-result">
+                <span className={`duo-result-score ${r.score! >= 80 ? 'ok' : r.score! >= 60 ? 'warn' : 'bad'}`}>{r.score}%</span>
+                <span><strong>{objectiveById.get(r.objectiveId)?.titleFr ?? r.objectiveId}</strong><small>{new Date(r.date).toLocaleDateString('fr-FR')}</small></span>
               </div>
-            ) : (
-              <div className="faint small">Aucun résultat pour l'instant. Un quiz enregistrera votre premier score.</div>
-            )}
+            )) : <div className="faint small">Vos premiers scores apparaîtront ici.</div>}
           </div>
 
-          <div className="card side-card">
-            <SectionHead title="Activité sur 7 jours" sub={`${Math.round(minutes)} minutes au total`} />
-            <div className="week-bars">
+          <div className="duo-section-head" style={{ marginTop: 24 }}><div className="section-title">7 derniers jours</div></div>
+          <div className="duo-panel">
+            <div className="duo-week">
               {week.map((w) => (
-                <div key={w.day} className="week-col" title={`${w.minutes} min`}>
-                  <div className="week-bar" style={{ height: `${Math.max(4, (w.minutes / maxWeek) * 76)}px` }} />
-                  <span>{w.label}</span>
+                <div key={w.day} className="duo-week-col" title={`${w.minutes} min`}>
+                  <span style={{ height: `${Math.max(6, (w.minutes / Math.max(10, ...week.map((x) => x.minutes))) * 70)}px` }} />
+                  <small>{w.label}</small>
                 </div>
               ))}
+            </div>
+            <div className="faint small" style={{ textAlign: 'center', marginTop: 8 }}>
+              {Math.round(totalMinutes(progress))} minutes apprises · {mastered.length} objectifs maîtrisés
             </div>
           </div>
         </aside>

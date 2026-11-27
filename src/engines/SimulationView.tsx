@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { Simulation } from '../lib/types'
 import { Rich } from '../components/ui'
+import { playSuccess } from '../lib/sound'
 
 function Check({ sim }: { sim: Simulation }) {
   const [picked, setPicked] = useState<number | null>(null)
@@ -17,7 +18,7 @@ function Check({ sim }: { sim: Simulation }) {
             else if (i === picked) cls += ' wrong'
           }
           return (
-            <button key={i} className={cls} onClick={() => picked === null && setPicked(i)} disabled={picked !== null}>
+            <button key={i} className={cls} onClick={() => { if (picked !== null) return; if (i === sim.check.answer) playSuccess(); setPicked(i) }} disabled={picked !== null}>
               <span className="sim-check-letter">{String.fromCharCode(65 + i)}</span>
               <span>{opt}</span>
             </button>
@@ -26,7 +27,7 @@ function Check({ sim }: { sim: Simulation }) {
       </div>
       {picked !== null && (
         <div className={`sim-check-feedback ${correct ? 'ok' : 'bad'}`}>
-          <strong>{correct ? 'Exact. ' : 'Pas tout à fait. '}</strong>
+          <strong className={correct ? 'bravo-word' : ''}>{correct ? 'Bravo ! Exact. ' : 'Pas tout à fait. '}</strong>
           <Rich text={sim.check.explain} />
         </div>
       )}

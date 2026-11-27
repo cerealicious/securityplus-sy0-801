@@ -4,6 +4,9 @@ import { useProgress } from '../lib/progress'
 import { navigate } from '../lib/router'
 import type { QuizQuestion } from '../lib/types'
 import { Empty, ProgressBar } from '../components/ui'
+import { computeStats, xpForActivity } from '../lib/gamification'
+import { playLevelUp, playSuccess } from '../lib/sound'
+import Celebration from '../components/Celebration'
 
 function isCorrect(q: QuizQuestion, ans: any): boolean {
   if (q.type === 'single') return ans === q.answer?.[0]
@@ -87,9 +90,10 @@ export default function QuizView({ objectiveId }: { objectiveId: string }) {
   const [results, setResults] = useState<boolean[]>([])
   const [finished, setFinished] = useState(false)
   const [saved, setSaved] = useState(false)
+  const [celebration, setCelebration] = useState<{ kind: 'xp' | 'level'; amount?: number; level?: number } | null>(null)
 
   useEffect(() => {
-    setIdx(0); setAns(undefined); setLocked(false); setResults([]); setFinished(false); setSaved(false)
+    setIdx(0); setAns(undefined); setLocked(false); setResults([]); setFinished(false); setSaved(false); setCelebration(null)
   }, [objectiveId])
 
   if (!o || !quiz) {
@@ -108,11 +112,21 @@ export default function QuizView({ objectiveId }: { objectiveId: string }) {
   const op = progress.objectives[o.id]
 
   useEffect(() => {
-    if (finished && !saved) {
+    if (finished && !saved && o) {
+      const before = computeStats(progress)
+      const gain = xpForActivity('quiz', score)
       recordQuiz(o.id, score, 10)
       setSaved(true)
+      const afterLevel = Math.floor((before.xp + gain) / 100) + 1
+      if (afterLevel > before.level) {
+        playLevelUp()
+        setCelebration({ kind: 'level', level: afterLevel })
+      } else {
+        playSuccess()
+        setCelebration({ kind: 'xp', amount: gain })
+      }
     }
-  }, [finished, saved, score, o.id, recordQuiz])
+  }, [finished, saved, score, o, progress, recordQuiz])
 
   if (finished) {
     const wrong = quiz.questions.filter((_, i) => !results[i])
@@ -166,6 +180,15 @@ export default function QuizView({ objectiveId }: { objectiveId: string }) {
               ))}
             </div>
           </div>
+        )}
+
+        {celebration && (
+          <Celebration
+            kind={celebration.kind}
+            amount={celebration.amount}
+            level={celebration.level}
+            onDone={() => setCelebration(null)}
+          />
         )}
       </div>
     )
@@ -256,6 +279,7 @@ export default function QuizView({ objectiveId }: { objectiveId: string }) {
               className="btn btn-primary"
               disabled={!canValidate}
               onClick={() => {
+                if (isCorrect(q, ans)) playSuccess()
                 setLocked(true)
                 setResults((r) => [...r, isCorrect(q, ans)])
               }}

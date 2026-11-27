@@ -1,11 +1,16 @@
+import { useState } from 'react'
 import { lessonById, lessonsFor, objectiveById, domainById } from '../lib/content'
 import { useProgress } from '../lib/progress'
+import { computeStats, xpForActivity } from '../lib/gamification'
+import { playLevelUp, playSuccess } from '../lib/sound'
+import Celebration from '../components/Celebration'
 import { navigate } from '../lib/router'
 import StepLesson from '../engines/StepLesson'
 import { toast } from '../lib/toast'
 
 export default function LessonView({ objectiveId, lessonId }: { objectiveId: string; lessonId?: string }) {
   const { progress, completeLesson } = useProgress()
+  const [celebration, setCelebration] = useState<{ kind: 'xp' | 'level'; amount?: number; level?: number } | null>(null)
   const o = objectiveById.get(objectiveId)
   const lesson = lessonId ? lessonById.get(lessonId) : undefined
   if (!o || !lesson) {
@@ -25,6 +30,22 @@ export default function LessonView({ objectiveId, lessonId }: { objectiveId: str
   const next = idx < ls.length - 1 ? ls[idx + 1] : null
   const done = progress.objectives[o.id]?.lessonsDone.includes(lesson.id)
   const interactive = lesson.blocks.filter((b) => b.type === 'simulation' || b.type === 'diagram' || b.type === 'check').length
+
+  const award = () => {
+    if (done) return
+    const before = computeStats(progress)
+    const gain = xpForActivity('lesson')
+    completeLesson(o.id, lesson.id, lesson.minutes)
+    const afterLevel = Math.floor((before.xp + gain) / 100) + 1
+    if (afterLevel > before.level) {
+      playLevelUp()
+      setCelebration({ kind: 'level', level: afterLevel })
+    } else {
+      playSuccess()
+      setCelebration({ kind: 'xp', amount: gain })
+    }
+    toast(`Leçon terminée · +${gain} XP`)
+  }
 
   return (
     <div className="content-inner">
@@ -51,12 +72,7 @@ export default function LessonView({ objectiveId, lessonId }: { objectiveId: str
       <StepLesson
         blocks={lesson.blocks}
         completed={done}
-        onComplete={() => {
-          if (!done) {
-            completeLesson(o.id, lesson.id, lesson.minutes)
-            toast('Leçon terminée — progression enregistrée.')
-          }
-        }}
+        onComplete={award}
       />
 
       <div className="lesson-nav">
@@ -69,21 +85,28 @@ export default function LessonView({ objectiveId, lessonId }: { objectiveId: str
         )}
         <div className="row">
           {!done && (
-            <button className="btn" onClick={() => { completeLesson(o.id, lesson.id, lesson.minutes); toast('Leçon marquée comme terminée.') }}>
-              Marquer comme terminée
-            </button>
+            <button className="btn" onClick={award}>Marquer comme terminée</button>
           )}
           {next ? (
-            <button className="btn btn-primary" onClick={() => { if (!done) completeLesson(o.id, lesson.id, lesson.minutes); navigate(`objective/${o.id}/lesson/${next.id}`) }}>
+            <button className="btn btn-primary" onClick={() => { award(); navigate(`objective/${o.id}/lesson/${next.id}`) }}>
               Leçon suivante →
             </button>
           ) : (
-            <button className="btn btn-primary" onClick={() => { if (!done) completeLesson(o.id, lesson.id, lesson.minutes); navigate(`objective/${o.id}/quiz`) }}>
+            <button className="btn btn-primary" onClick={() => { award(); navigate(`objective/${o.id}/quiz`) }}>
               Évaluation de l'objectif →
             </button>
           )}
         </div>
       </div>
+
+      {celebration && (
+        <Celebration
+          kind={celebration.kind}
+          amount={celebration.amount}
+          level={celebration.level}
+          onDone={() => setCelebration(null)}
+        />
+      )}
     </div>
   )
 }

@@ -6,6 +6,8 @@ import { searchAll, type SearchDoc } from './lib/search'
 import { toast } from './lib/toast'
 import { exportProgressFile, importProgressFile } from './lib/io'
 import { StatusDots } from './components/ui'
+import { computeStats, levelTitle, formatXp } from './lib/gamification'
+import { isMuted, setMuted } from './lib/sound'
 import Dashboard from './routes/Dashboard'
 import DomainView from './routes/DomainView'
 import ObjectiveView from './routes/ObjectiveView'
@@ -286,9 +288,11 @@ function SearchOverlay({ onClose }: { onClose: () => void }) {
 
 function Topbar({ segs, onSearch }: { segs: string[]; onSearch: () => void }) {
   const { progress } = useProgress()
+  const stats = computeStats(progress)
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     try { return (localStorage.getItem('sp801-theme') as 'light' | 'dark') || 'dark' } catch { return 'dark' }
   })
+  const [muted, setMutedState] = useState(() => isMuted())
   useEffect(() => {
     document.documentElement.dataset.theme = theme
     try { localStorage.setItem('sp801-theme', theme) } catch { /* stockage indisponible */ }
@@ -297,6 +301,24 @@ function Topbar({ segs, onSearch }: { segs: string[]; onSearch: () => void }) {
     <header className="topbar">
       <Breadcrumbs segs={segs} />
       <div className="topbar-right">
+        <div className="xp-pill" title={`${formatXp(stats.xp)} XP au total · ${levelTitle(stats.level)}`}>
+          <span className="xp-level">{stats.level}</span>
+          <span className="xp-pill-body">
+            <span className="xp-pill-label">{levelTitle(stats.level)} · {formatXp(stats.xp)} XP</span>
+            <span className="xp-mini-bar"><span style={{ width: `${stats.xpInLevel}%` }} /></span>
+          </span>
+        </div>
+        <div className={`streak-pill ${stats.streak > 0 ? 'hot' : ''}`} title={`${stats.streak} jours d'affilée`}>
+          <span>🔥</span><strong>{stats.streak}</strong>
+        </div>
+        <button
+          className="icon-btn"
+          onClick={() => { const v = !muted; setMuted(v); setMutedState(v) }}
+          title={muted ? 'Activer les sons' : 'Couper les sons'}
+          aria-label="Sons"
+        >
+          {muted ? '🔇' : '🔊'}
+        </button>
         <button
           className="theme-toggle"
           onClick={() => setTheme((t) => (t === 'light' ? 'dark' : 'light'))}
@@ -319,9 +341,6 @@ function Topbar({ segs, onSearch }: { segs: string[]; onSearch: () => void }) {
           <span>Rechercher…</span>
           <kbd style={{ marginLeft: 'auto' }}>Ctrl K</kbd>
         </button>
-        <div className="badge info" title="Estimation pédagogique de préparation">
-          {readiness(progress)}% prêt
-        </div>
       </div>
     </header>
   )

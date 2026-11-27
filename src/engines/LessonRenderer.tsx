@@ -4,6 +4,7 @@ import type { Block } from '../lib/types'
 import DiagramView from './DiagramView'
 import SimulationView from './SimulationView'
 import { Rich } from '../components/ui'
+import { playSuccess } from '../lib/sound'
 
 const BOOK_NAMES: Record<string, string> = {
   DSH: 'Defensive Security Handbook',
@@ -31,7 +32,11 @@ function CheckBlock({ block }: { block: Block }) {
           <button
             key={i}
             className={cls}
-            onClick={() => !done && setPicked(i)}
+            onClick={() => {
+              if (done) return
+              if (i === block.answer) playSuccess()
+              setPicked(i)
+            }}
             disabled={done}
           >
             <span className="mono-sm" style={{ opacity: 0.6 }}>{String.fromCharCode(65 + i)}</span>
@@ -40,9 +45,9 @@ function CheckBlock({ block }: { block: Block }) {
         )
       })}
       {done && (
-        <div className="check-explain">
-          <strong style={{ color: correct ? 'var(--ok)' : 'var(--bad)' }}>
-            {correct ? 'Correct. ' : 'Réponse incorrecte. '}
+        <div className={`check-explain ${correct ? 'bravo' : ''}`}>
+          <strong className={correct ? 'bravo-word' : ''} style={{ color: correct ? 'var(--ok)' : 'var(--bad)' }}>
+            {correct ? 'Bravo ! ' : 'Pas tout à fait. '}
           </strong>
           <Rich text={block.explain} />
         </div>
