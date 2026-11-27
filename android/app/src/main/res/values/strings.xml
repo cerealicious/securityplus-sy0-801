@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Security+ SY0-801</string>
+    <string name="title_activity_main">Security+ SY0-801</string>
+    <string name="package_name">com.secplus.sy0801</string>
+    <string name="custom_url_scheme">com.secplus.sy0801</string>
+</resources>
