@@ -20,7 +20,7 @@ Application de bureau **100 % hors ligne** couvrant l'intégralité des **27 obj
 | Quiz corrigés avec explication et source | **27** (6 questions chacun) |
 | Exercices pratiques (PBQ : classement, ordre, association, tableau, calcul) | **28** |
 | Scénarios d'évaluation à 3 niveaux de décision | **27** |
-| Schémas interactifs SVG (Explorer / Quiz / Ordre) | **92** — au moins un dans chacune des 64 leçons, deux dans 28 d'entre elles |
+| Schémas interactifs SVG (Explorer / Quiz / Ordre) | **92** — au moins un dans chacune des 64 leçons, deux dans 28 d'entre elles ; bouton **Agrandir** pour un affichage plein écran |
 | Simulations animées (TLS, crypto, attaque réseau, OSI, Zero Trust, RTO/RPO, IR, IAM) | **8** |
 
 Chaque notion est rattachée à une **référence réelle** (livre, chapitre, page) ou, lorsqu'aucun des quatre livres ne la contient, au **référentiel officiel** avec un badge explicite « Hors livres ». Aucune attribution mensongère.

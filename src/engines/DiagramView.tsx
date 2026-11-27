@@ -29,16 +29,22 @@ export default function DiagramView({ diagram }: { diagram: Diagram }) {
   const [answer, setAnswer] = useState<string | null>(null)
   const [order, setOrder] = useState<string[]>([])
   const [orderError, setOrderError] = useState(false)
+  const [expanded, setExpanded] = useState(false)
 
   if (diagram.kind === 'matrix' && diagram.matrix) {
     return (
-      <div className="diagram-wrap">
+      <div className={`diagram-wrap ${expanded ? 'expanded' : ''}`}>
         <div className="diagram-head">
           <div>
             <div className="diagram-title">{diagram.title}</div>
             {diagram.subtitle && <div className="faint small">{diagram.subtitle}</div>}
           </div>
-          <span className="badge neutral">Cliquez sur une case</span>
+          <div className="row" style={{ gap: 6 }}>
+            <span className="badge neutral">Cliquez sur une case</span>
+            <button className="btn btn-sm btn-ghost" onClick={() => setExpanded(!expanded)} title="Agrandir le schéma">
+              {expanded ? 'Réduire' : '⤢ Agrandir'}
+            </button>
+          </div>
         </div>
         <div style={{ padding: 16 }}>
           <div style={{ overflowX: 'auto' }}>
@@ -108,8 +114,8 @@ export default function DiagramView({ diagram }: { diagram: Diagram }) {
   const nodes = diagram.nodes ?? []
   const edges = diagram.edges ?? []
   const nodeById = new Map(nodes.map((n) => [n.id, n]))
-  const width = 780
-  const height = Math.max(300, ...nodes.map((n) => n.y + (n.h ?? 54) + 20))
+  const width = Math.max(800, ...nodes.map((n) => n.x + (n.w ?? 158) + 40))
+  const height = Math.max(300, ...nodes.map((n) => n.y + (n.h ?? 54) + 30))
 
   const sel = selected ? nodeById.get(selected) : null
   const orderDone = order.length === (diagram.sequence?.length ?? 0)
@@ -142,13 +148,16 @@ export default function DiagramView({ diagram }: { diagram: Diagram }) {
   }
 
   return (
-    <div className="diagram-wrap">
+    <div className={`diagram-wrap ${expanded ? 'expanded' : ''}`}>
       <div className="diagram-head">
         <div>
           <div className="diagram-title">{diagram.title}</div>
           {diagram.subtitle && <div className="faint small">{diagram.subtitle}</div>}
         </div>
         <div className="row" style={{ gap: 4 }}>
+          <button className="btn btn-sm btn-ghost" onClick={() => setExpanded(!expanded)} title="Agrandir le schéma">
+            {expanded ? 'Réduire' : '⤢ Agrandir'}
+          </button>
           {modes.map((m) => (
             <button
               key={m}
