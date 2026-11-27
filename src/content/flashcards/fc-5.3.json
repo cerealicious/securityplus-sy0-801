@@ -1,0 +1,115 @@
+{
+  "id": "fc-5.3",
+  "objective": "5.3",
+  "title": "Risques liés aux prestataires tiers",
+  "cards": [
+    {
+      "id": "c-5.3-01",
+      "front": "Due diligence",
+      "back": "Vérification structurée d'un fournisseur avant engagement : sécurité, conformité, viabilité, références et antécédents.",
+      "tag": "Sélection"
+    },
+    {
+      "id": "c-5.3-02",
+      "front": "EOI vs RFI",
+      "back": "EOI sonde l'intérêt du marché en amont ; RFI demande des informations générales sur les capacités.",
+      "tag": "Sélection"
+    },
+    {
+      "id": "c-5.3-03",
+      "front": "RFP vs RFQ",
+      "back": "RFP demande une proposition de solution ; RFQ demande un prix pour une prestation déjà définie.",
+      "tag": "Sélection"
+    },
+    {
+      "id": "c-5.3-04",
+      "front": "Conflit d'intérêt",
+      "back": "Intérêt personnel ou autre mission qui influence le choix du fournisseur : doit être déclaré et traité.",
+      "tag": "Sélection"
+    },
+    {
+      "id": "c-5.3-05",
+      "front": "Registre des fournisseurs",
+      "back": "Inventaire centralisé des tiers, de leurs accès, contrats et responsables interne/externe. Notion du §5.3 absente des livres.",
+      "tag": "Lacune"
+    },
+    {
+      "id": "c-5.3-06",
+      "front": "SLA",
+      "back": "Service-level agreement : engagement contractuel sur des niveaux de service mesurables avec recours en cas de manquement.",
+      "tag": "Accords"
+    },
+    {
+      "id": "c-5.3-07",
+      "front": "SLO",
+      "back": "Service-level objective : cible chiffrée (disponibilité, délai) qui sert de référence au SLA.",
+      "tag": "Accords"
+    },
+    {
+      "id": "c-5.3-08",
+      "front": "NDA",
+      "back": "Non-disclosure agreement : interdit la divulgation des informations échangées et limite leur usage.",
+      "tag": "Accords"
+    },
+    {
+      "id": "c-5.3-09",
+      "front": "MOU vs MOA",
+      "back": "MOU = intention de coopération, engagement faible ; MOA = obligations et responsabilités plus contraignantes.",
+      "tag": "Accords"
+    },
+    {
+      "id": "c-5.3-10",
+      "front": "MSA",
+      "back": "Master services agreement : conditions générales durables applicables à toutes les missions. Notion du §5.3 absente des livres.",
+      "tag": "Lacune"
+    },
+    {
+      "id": "c-5.3-11",
+      "front": "SOW",
+      "back": "Statement of work : décrit une mission précise — périmètre, livrables, calendrier, prix. Se rattache au MSA.",
+      "tag": "Lacune"
+    },
+    {
+      "id": "c-5.3-12",
+      "front": "Rules of engagement",
+      "back": "Règles signées qui bornent un test : périmètre, techniques, horaires, contacts et arrêt d'urgence.",
+      "tag": "Accords"
+    },
+    {
+      "id": "c-5.3-13",
+      "front": "Droit d'audit",
+      "back": "Clause autorisant une vérification des contrôles du fournisseur sur pièces ou sur site. Notion du §5.3 absente des livres.",
+      "tag": "Lacune"
+    },
+    {
+      "id": "c-5.3-14",
+      "front": "Attestation de conformité",
+      "back": "Déclaration formelle accompagnée d'un rapport (SOC 2, ISO 27001) prouvant le respect d'un référentiel.",
+      "tag": "Monitoring"
+    },
+    {
+      "id": "c-5.3-15",
+      "front": "Service-level monitoring",
+      "back": "Mesure continue des indicateurs contractuels : disponibilité, latence, délais de rétablissement.",
+      "tag": "Monitoring"
+    },
+    {
+      "id": "c-5.3-16",
+      "front": "Vendor assessment",
+      "back": "Revue périodique de la sécurité, de la conformité et de la performance d'un prestataire retenu.",
+      "tag": "Monitoring"
+    },
+    {
+      "id": "c-5.3-17",
+      "front": "Vendor lock-in",
+      "back": "Dépendance rendant la sortie coûteuse ou impossible à court terme ; se traite par clauses de sortie et formats ouverts.",
+      "tag": "Lacune"
+    },
+    {
+      "id": "c-5.3-18",
+      "front": "Contraintes d'un tiers",
+      "back": "Effectif, disponibilité des ressources, environnement, juridiction, ROI, assurance, lock-in et ROE.",
+      "tag": "Limites"
+    }
+  ]
+}

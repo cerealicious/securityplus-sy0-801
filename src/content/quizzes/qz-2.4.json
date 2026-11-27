@@ -1,0 +1,90 @@
+{
+  "id": "qz-2.4",
+  "objective": "2.4",
+  "title": "Quiz — Vulnérabilités et surfaces d'attaque",
+  "questions": [
+    {
+      "id": "q-2.4-01",
+      "type": "single",
+      "q": "Un serveur n'est plus dans l'inventaire et aucun outil ne le supervise. Quel terme ?",
+      "options": [
+        "Unsupported",
+        "Unpatched",
+        "Unmanaged",
+        "Obsolete"
+      ],
+      "answer": [2],
+      "explain": "Unmanaged signifie hors gestion et hors inventaire. Unsupported signifie que l'éditeur ne fournit plus de support.",
+      "ref": "2.4-01"
+    },
+    {
+      "id": "q-2.4-02",
+      "type": "single",
+      "q": "Un fichier est vérifié comme sûr puis remplacé avant son ouverture. Quelle vulnérabilité ?",
+      "options": [
+        "Race condition / TOCTOU",
+        "Zero-day",
+        "Hardcoded secret",
+        "Misconfiguration"
+      ],
+      "answer": [0],
+      "explain": "L'écart entre time-of-check et time-of-use est exploité : c'est une condition de course.",
+      "ref": "2.4-01"
+    },
+    {
+      "id": "q-2.4-03",
+      "type": "multi",
+      "q": "Quelles surfaces relèvent de l'identité ou de la configuration ? (plusieurs réponses)",
+      "options": [
+        "Stale credentials",
+        "Rogue devices",
+        "Shadow IT",
+        "Bucket de stockage public"
+      ],
+      "answer": [0, 1, 2, 3],
+      "explain": "Les quatre éléments sont des surfaces d'attaque : identité oubliée, appareil non autorisé, service non validé et mauvaise configuration d'un stockage public.",
+      "ref": "2.4-02"
+    },
+    {
+      "id": "q-2.4-04",
+      "type": "match",
+      "q": "Associez chaque situation à la catégorie de vulnérabilité.",
+      "pairs": [
+        { "left": "Clé API dans un dépôt public", "right": "Public repository / hardcoded secret" },
+        { "left": "Faille sans correctif connu de l'éditeur", "right": "Zero-day" },
+        { "left": "Utilisateur connecté sur un service non approuvé", "right": "Shadow IT" },
+        { "left": "Réseau sans fil avec point d'accès rogue", "right": "Wireless / misconfiguration" }
+      ],
+      "explain": "La catégorie dépend de la nature de la faiblesse, pas de l'outil de l'attaquant.",
+      "ref": "2.4-02"
+    },
+    {
+      "id": "q-2.4-05",
+      "type": "single",
+      "q": "Quel contrôle est le plus adapté face à un zero-day ?",
+      "options": [
+        "Attendre le prochain correctif",
+        "Réduire la surface, segmenter et détecter les comportements anormaux",
+        "Désactiver la journalisation",
+        "Ajouter le CVE à une liste d'exclusion"
+      ],
+      "answer": [1],
+      "explain": "Sans correctif ni signature connue, la réduction de surface, la segmentation et la détection comportementale restent possibles.",
+      "ref": "2.4-01"
+    },
+    {
+      "id": "q-2.4-06",
+      "type": "single",
+      "q": "Quelle notion est absente des quatre livres mais exigée au §2.4 ?",
+      "options": [
+        "Patch management",
+        "Hardcoded secrets",
+        "Large language models (LLM) comme surface d'attaque",
+        "Réseau sans fil"
+      ],
+      "answer": [2],
+      "explain": "Les LLM, IdP, dépôts publics et stockage objet public sont des lacunes : référentiel officiel uniquement.",
+      "ref": "2.4-02"
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "id": "fc-3.2",
+  "objective": "3.2",
+  "title": "Protection de l'infrastructure et Zero Trust",
+  "cards": [
+    {
+      "id": "c-3.2-01",
+      "front": "Zone DMZ",
+      "back": "Zone tampon entre Internet (Untrust) et le réseau interne (Trust) : on y expose les serveurs publics sans exposer l'interne.",
+      "tag": "Zones"
+    },
+    {
+      "id": "c-3.2-02",
+      "front": "Device placement",
+      "back": "Un contrôle préventif est inline sur le chemin ; un contrôle détectif peut être hors chemin via SPAN/tap.",
+      "tag": "Placement"
+    },
+    {
+      "id": "c-3.2-03",
+      "front": "Attack surface",
+      "back": "Ensemble des points d'interaction avec un système : ports, services, comptes, API. À réduire en fermant l'inutile.",
+      "tag": "Bases"
+    },
+    {
+      "id": "c-3.2-04",
+      "front": "Diversity",
+      "back": "Varier fournisseurs, matériels et mécanismes pour éviter qu'une même faille touche tout l'environnement.",
+      "tag": "Bases"
+    },
+    {
+      "id": "c-3.2-05",
+      "front": "Fail-open",
+      "back": "Si le contrôle tombe, le trafic passe : disponibilité prioritaire, risque de contournement.",
+      "tag": "Défaillance"
+    },
+    {
+      "id": "c-3.2-06",
+      "front": "Fail-closed",
+      "back": "Si le contrôle tombe, le trafic est bloqué : sécurité prioritaire, risque d'interruption.",
+      "tag": "Défaillance"
+    },
+    {
+      "id": "c-3.2-07",
+      "front": "Zero Trust — devise",
+      "back": "Never trust, always verify : aucune confiance implicite, même à l'intérieur du réseau.",
+      "tag": "Zero Trust"
+    },
+    {
+      "id": "c-3.2-08",
+      "front": "Quatre vérifications Zero Trust",
+      "back": "User authentication, device health, device inventory, application access control.",
+      "tag": "Zero Trust"
+    },
+    {
+      "id": "c-3.2-09",
+      "front": "Device health",
+      "back": "État de l'appareil : patchs, antivirus, chiffrement, conformité de posture.",
+      "tag": "Zero Trust"
+    },
+    {
+      "id": "c-3.2-10",
+      "front": "Device inventory en Zero Trust",
+      "back": "Un appareil non inventorié est refusé ou mis en quarantaine avant tout accès applicatif.",
+      "tag": "Zero Trust"
+    },
+    {
+      "id": "c-3.2-11",
+      "front": "Rôle d'un VPN",
+      "back": "Chiffre le trafic distant et authentifie le tunnel ; ne remplace pas le contrôle applicatif par session.",
+      "tag": "Accès distant"
+    },
+    {
+      "id": "c-3.2-12",
+      "front": "Tunneling",
+      "back": "Encapsulation chiffrée d'un flux entre deux points, utilisée pour l'accès distant et les interconnexions.",
+      "tag": "Accès distant"
+    },
+    {
+      "id": "c-3.2-13",
+      "front": "Out-of-band management",
+      "back": "Réseau d'administration séparé de la production ; le bastion en est le point d'entrée unique avec MFA et sessions enregistrées.",
+      "tag": "Administration"
+    },
+    {
+      "id": "c-3.2-14",
+      "front": "Security Service Edge (SSE)",
+      "back": "Services de sécurité livrés depuis le cloud (proxy, filtrage, DLP, contrôle d'accès) pour remplacer ou compléter le VPN.",
+      "tag": "Lacune"
+    },
+    {
+      "id": "c-3.2-15",
+      "front": "gMSA",
+      "back": "Group Managed Service Account : mot de passe de compte de service géré et renouvelé automatiquement par l'annuaire.",
+      "tag": "Lacune"
+    },
+    {
+      "id": "c-3.2-16",
+      "front": "Privilege creep",
+      "back": "Accumulation de droits au fil des changements de poste ; combattue par le moindre privilège et la revue d'accès périodique.",
+      "tag": "Identité"
+    },
+    {
+      "id": "c-3.2-17",
+      "front": "End-to-end encrypted messaging",
+      "back": "Messagerie chiffrée de bout en bout : le fournisseur ne peut pas lire le contenu des échanges.",
+      "tag": "Communication"
+    },
+    {
+      "id": "c-3.2-18",
+      "front": "File transfer sécurisé",
+      "back": "Canal dédié et journalisé avec contrôle du contenu et authentification des deux extrémités.",
+      "tag": "Communication"
+    }
+  ]
+}

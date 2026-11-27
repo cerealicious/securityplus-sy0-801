@@ -1,0 +1,123 @@
+{
+  "diagrams": [
+    {
+      "id": "d-2.1-risk-flow",
+      "kind": "flow",
+      "title": "De la menace à la priorité : la chaîne du risque",
+      "subtitle": "Suivez le chemin : une menace rencontre une vulnérabilité, le risque est estimé, puis noté et priorisé.",
+      "modes": ["explore", "order", "quiz"],
+      "nodes": [
+        {
+          "id": "threat",
+          "label": "Menace",
+          "sub": "Acteur / événement",
+          "x": 10,
+          "y": 40,
+          "w": 150,
+          "h": 60,
+          "kind": "actor",
+          "detail": "Acteur ou capacité qui peut nuire. Son activité est renseignée par les threat feeds et le renseignement interne ou externe.",
+          "exam": "Une menace existe même si aucune vulnérabilité n'est encore exploitable."
+        },
+        {
+          "id": "vuln",
+          "label": "Vulnérabilité",
+          "sub": "Faiblesse exploitable",
+          "x": 185,
+          "y": 40,
+          "w": 160,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Faiblesse d'un système, d'un processus ou d'un contrôle. Elle devient un risque concret lorsqu'une menace peut l'exploiter.",
+          "exam": "Ne confondez pas vulnérabilité (faiblesse) et menace (ce qui l'exploite)."
+        },
+        {
+          "id": "risk",
+          "label": "Risque",
+          "sub": "Probabilité × impact",
+          "x": 370,
+          "y": 40,
+          "w": 170,
+          "h": 60,
+          "kind": "risk",
+          "detail": "Risque = vulnérabilité × menace. La probabilité dépend de l'exposition et de l'exploitabilité ; l'impact dépend de la criticité de l'actif.",
+          "exam": "Une faille critique sur un banc isolé peut être moins risquée qu'une faille moyenne exposée."
+        },
+        {
+          "id": "cvss",
+          "label": "CVSS",
+          "sub": "Score 0-10",
+          "x": 565,
+          "y": 40,
+          "w": 150,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "Common Vulnerability Scoring System : gravité calculée avec des métriques base, temporal et environmental.",
+          "exam": "CVSS mesure la gravité, pas la priorité."
+        },
+        {
+          "id": "cve",
+          "label": "CVE",
+          "sub": "Identifiant unique",
+          "x": 565,
+          "y": 150,
+          "w": 150,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Common Vulnerabilities and Exposures fournit un identifiant public (CVE-2024-xxxx). CWE, lui, classe le type de faiblesse de code.",
+          "exam": "CVE = énumération ; CWE = faiblesse ; CVSS = score. Trois notions distinctes."
+        },
+        {
+          "id": "context",
+          "label": "Contexte",
+          "sub": "Exposition · actif · exploit",
+          "x": 370,
+          "y": 150,
+          "w": 170,
+          "h": 60,
+          "kind": "step",
+          "detail": "Élargit le score : exposition Internet, existence d'un exploit public, criticité de l'actif, contrôles compensatoires.",
+          "exam": "Les métriques environmental du CVSS capturent une partie de ce contexte."
+        },
+        {
+          "id": "priority",
+          "label": "Priorisation",
+          "sub": "Traitement du risque",
+          "x": 185,
+          "y": 150,
+          "w": 160,
+          "h": 60,
+          "kind": "step",
+          "detail": "Traiter, accepter, transférer ou éviter le risque. Le traitement est suivi d'une vérification (re-scan).",
+          "exam": "Une acceptation de risque doit être documentée et réévaluée."
+        },
+        {
+          "id": "verify",
+          "label": "Vérification",
+          "sub": "Re-scan / preuve",
+          "x": 10,
+          "y": 150,
+          "w": 150,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Après remédiation, on vérifie que la faille n'est plus exploitable et on clôt le dossier.",
+          "exam": "Sans vérification, la boucle de gestion des vulnérabilités n'est pas fermée."
+        }
+      ],
+      "edges": [
+        { "from": "threat", "to": "vuln", "label": "exploite" },
+        { "from": "vuln", "to": "risk", "label": "crée" },
+        { "from": "risk", "to": "cvss", "label": "mesuré par" },
+        { "from": "cvss", "to": "cve", "label": "référencé par" },
+        { "from": "cve", "to": "context", "label": "complété par" },
+        { "from": "context", "to": "priority", "label": "décide" },
+        { "from": "priority", "to": "verify", "label": "puis" }
+      ],
+      "sequence": ["threat", "vuln", "risk", "cvss", "cve", "context", "priority", "verify"],
+      "quiz": {
+        "question": "Quelle notion mesure la gravité d'une vulnérabilité sur une échelle de 0 à 10 ?",
+        "answer": "cvss"
+      }
+    }
+  ]
+}

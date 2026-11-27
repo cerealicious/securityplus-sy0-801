@@ -1,0 +1,19 @@
+{
+  "id": "pbq-1.1-classify",
+  "objective": "1.1",
+  "type": "classify",
+  "title": "Classer huit contrôles par type",
+  "prompt": "Pour chaque contrôle, choisissez le type qui décrit le mieux sa fonction dans le temps. Attention : un même outil peut changer de type selon l'usage décrit. Lisez la formulation exacte.",
+  "categories": ["Préventif", "Détectif", "Correctif", "Dissuasif"],
+  "items": [
+    { "id": "i1", "label": "Pare-feu applicatif qui bloque une requête malveillante", "cat": "Préventif" },
+    { "id": "i2", "label": "MFA exigée sur l'accès administrateur", "cat": "Préventif" },
+    { "id": "i3", "label": "IDS réseau qui alerte sans bloquer", "cat": "Détectif" },
+    { "id": "i4", "label": "Revue quotidienne des journaux d'authentification", "cat": "Détectif" },
+    { "id": "i5", "label": "Restauration d'un serveur depuis une sauvegarde vérifiée", "cat": "Correctif" },
+    { "id": "i6", "label": "Rollback d'une configuration après un changement défaillant", "cat": "Correctif" },
+    { "id": "i7", "label": "Caméra de surveillance visible à l'entrée", "cat": "Dissuasif" },
+    { "id": "i8", "label": "Bannière d'avertissement avant connexion", "cat": "Dissuasif" }
+  ],
+  "explain": "Préventif = empêche (pare-feu, MFA). Détectif = constate (IDS, revue de journaux). Correctif = rétablit après l'événement (restauration, rollback). Dissuasif = décourage par la crainte (caméra visible, bannière). Une caméra analysée a posteriori serait détective : c'est l'usage décrit qui tranche."
+}

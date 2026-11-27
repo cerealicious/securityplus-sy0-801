@@ -1,0 +1,147 @@
+{
+  "diagrams": [
+    {
+      "id": "d-2.4-surface-matrix",
+      "kind": "matrix",
+      "title": "Matrice vulnérabilités ↔ impact",
+      "subtitle": "Chaque case montre l'impact le plus probable. Cliquez une cellule pour comprendre le chemin de l'exploitation.",
+      "modes": ["explore"],
+      "matrix": {
+        "columns": [
+          "Exécution de code",
+          "Exfiltration de données",
+          "Contournement d'accès",
+          "Déni de service",
+          "Persistance"
+        ],
+        "rows": [
+          {
+            "label": "Système non supporté / non patché",
+            "cells": [
+              {
+                "text": "CVE connue avec exploit public",
+                "detail": "Un correctif existe ou existait : l'attaquant utilise un exploit public contre un service exposé."
+              },
+              {
+                "text": "Accès aux fichiers du serveur",
+                "detail": "Une faille de lecture arbitraire permet de récupérer des données stockées sur l'hôte."
+              },
+              {
+                "text": "Élévation de privilèges locaux",
+                "detail": "Le noyau ou un service système non patché accorde des droits administrateur."
+              },
+              {
+                "text": "Crash du service vulnérable",
+                "detail": "Une faille de gestion mémoire provoque un arrêt du processus."
+              },
+              {
+                "text": "Installation d'un service caché",
+                "detail": "L'attaquant installe un accès durable sur un hôte non supervisé."
+              }
+            ]
+          },
+          {
+            "label": "Application et code",
+            "cells": [
+              {
+                "text": "TOC/TOU, macros, secrets",
+                "detail": "La fenêtre entre vérification et usage est exploitée ; une macro ou un secret codé en dur déclenche l'exécution."
+              },
+              {
+                "text": "Erreurs verbeuses, requêtes exposées",
+                "detail": "Une exception non sécurisée révèle des données ou des identifiants."
+              },
+              {
+                "text": "Injection / contournement de logique",
+                "detail": "La validation est insuffisante ou contournée par une entrée hostile."
+              },
+              {
+                "text": "Boucle ou consommation excessive",
+                "detail": "Une entrée non bornée épuise CPU ou mémoire de l'application."
+              },
+              {
+                "text": "Mise à jour malveillante",
+                "detail": "Un canal de mise à jour de confiance dépose un composant persistant."
+              }
+            ]
+          },
+          {
+            "label": "Identité et configuration",
+            "cells": [
+              {
+                "text": "Identifiants de service volés",
+                "detail": "Des credentials stale ou non renouvelés permettent d'exécuter des commandes sous une identité légitime."
+              },
+              {
+                "text": "Droits excessifs sur les données",
+                "detail": "Une mauvaise configuration de permissions donne accès à des données hors périmètre."
+              },
+              {
+                "text": "Shadow IT / IdP compromis",
+                "detail": "Un service non validé ou un fournisseur d'identité donne des jetons valides à l'attaquant."
+              },
+              {
+                "text": "Verrouillage par changement de configuration",
+                "detail": "Un rogue device ou un paramètre modifié rend le service indisponible."
+              },
+              {
+                "text": "Compte oublié non révoqué",
+                "detail": "Un compte sans propriétaire reste un accès permanent."
+              }
+            ]
+          },
+          {
+            "label": "Réseau et virtualisation",
+            "cells": [
+              {
+                "text": "Hyperviseur / appliance compromise",
+                "detail": "Une faille de l'hyperviseur permet d'exécuter du code sur l'hôte."
+              },
+              {
+                "text": "Interception du trafic, clés de session",
+                "detail": "Un point d'accès rogue ou un équipement compromis capture les flux."
+              },
+              {
+                "text": "Contournement de segmentation",
+                "detail": "Un port ouvert ou une règle de pare-feu trop large franchit la zone."
+              },
+              {
+                "text": "Saturer un lien ou un service",
+                "detail": "Un service exposé non filtré est submergé par le trafic."
+              },
+              {
+                "text": "VM non gérée comme relais",
+                "detail": "Une invité non patché sert de point de présence durable."
+              }
+            ]
+          },
+          {
+            "label": "Surfaces modernes",
+            "cells": [
+              {
+                "text": "Prompt injection via LLM",
+                "detail": "Un document ou une instruction externe pousse le modèle à exécuter une action."
+              },
+              {
+                "text": "Dépôt public / bucket ouvert",
+                "detail": "Des secrets ou des objets accessibles publiquement sont récupérés sans authentification."
+              },
+              {
+                "text": "IdP / fédération mal configurée",
+                "detail": "Des jetons ou des rôles excessifs donnent accès à plusieurs applications."
+              },
+              {
+                "text": "Dépendance de service externe",
+                "detail": "Un tiers compromis ou indisponible bloque le service."
+              },
+              {
+                "text": "Plugin LLM ou objet persistant",
+                "detail": "Un composant ajouté au modèle ou au stockage maintient l'accès."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

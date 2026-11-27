@@ -1,0 +1,90 @@
+{
+  "id": "sc-5.1-grc",
+  "objective": "5.1",
+  "title": "Un audit demande vos artefacts GRC",
+  "context": "Un auditeur externe demande à voir comment votre organisation documente ses exigences de sécurité. Vous devez présenter les bons artefacts et expliquer leur rôle.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "L'auditeur demande : « Quel document énonce l'intention de votre direction en matière d'usage acceptable des ressources ? »",
+      "choices": [
+        {
+          "text": "L'acceptable use policy (AUP), approuvée par la direction",
+          "next": "n2",
+          "score": 4,
+          "why": "La politique porte l'intention générale et tire son autorité de l'approbation dirigeante."
+        },
+        {
+          "text": "Le runbook de redémarrage du serveur",
+          "next": "n2",
+          "score": 0,
+          "why": "Un runbook décrit des étapes techniques, pas une intention gouvernance."
+        },
+        {
+          "text": "La baseline de configuration",
+          "next": "n2",
+          "score": 1,
+          "why": "La baseline est un standard de configuration, subordonné à la politique."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "L'auditeur demande ensuite la règle technique vérifiable qui en découle. Que présentez-vous ?",
+      "choices": [
+        {
+          "text": "Un standard de chiffrement avec un niveau minimal mesurable",
+          "next": "n3",
+          "score": 4,
+          "why": "Le standard transforme l'intention en exigence mesurable et vérifiable en audit."
+        },
+        {
+          "text": "Une advisories de l'éditeur",
+          "next": "n3",
+          "score": 1,
+          "why": "Un advisory est une ligne directrice : il conseille sans imposer."
+        },
+        {
+          "text": "Le plan de continuité d'activité",
+          "next": "n3",
+          "score": 0,
+          "why": "Le BCP organisationne la reprise, il ne fixe pas une règle technique courante."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "Dernière question : comment prouvez-vous que ces documents sont maintenus et appliqués ?",
+      "choices": [
+        {
+          "text": "Propriétaire nommé, approbation, diffusion avec accusé de réception et revues datées",
+          "next": "n4",
+          "score": 4,
+          "why": "C'est le cycle de vie complet d'un artefact GRC : autorité, diffusion, preuve et actualité."
+        },
+        {
+          "text": "Les fichiers sont présents sur l'intranet, cela suffit",
+          "next": "n4",
+          "score": 0,
+          "why": "La publication seule ne prouve ni l'approbation, ni la lecture, ni la revue."
+        },
+        {
+          "text": "Les documents sont très longs et détaillés",
+          "next": "n4",
+          "score": 0,
+          "why": "La longueur n'est pas une preuve de gouvernance."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "Vous avez présenté une pyramide cohérente : politique approuvée, standard mesurable, preuve de diffusion et de revue."
+    }
+  },
+  "debrief": [
+    "La politique énonce l'intention et reçoit son autorité de l'approbation dirigeante.",
+    "Le standard convertit l'intention en exigence mesurable ; la procédure décrit les étapes.",
+    "Un artefact GRC crédible a un propriétaire, une date d'approbation et un historique de revues."
+  ]
+}

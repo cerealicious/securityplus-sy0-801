@@ -1,0 +1,90 @@
+{
+  "id": "sc-3.2-zt-access",
+  "objective": "3.2",
+  "title": "Accès critique : où placer le contrôle ?",
+  "context": "Un administrateur doit accéder à un serveur critique depuis l'extérieur. Vous devez concevoir le chemin d'accès et décider du comportement en cas de panne du contrôle.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "Quelle première vérification faut-il exiger avant d'accorder l'accès ?",
+      "choices": [
+        {
+          "text": "Authentifier l'utilisateur (MFA) et vérifier la santé/inventaire de l'appareil",
+          "next": "n2",
+          "score": 4,
+          "why": "Zero Trust vérifie identité et appareil avant tout accès, même depuis l'extérieur."
+        },
+        {
+          "text": "Accepter la connexion si elle vient d'une IP connue",
+          "next": "n2",
+          "score": 0,
+          "why": "La localisation réseau n'est pas une preuve d'identité en Zero Trust."
+        },
+        {
+          "text": "Demander simplement un mot de passe",
+          "next": "n2",
+          "score": 1,
+          "why": "Un mot de passe seul ne couvre ni la santé de l'appareil ni le moindre privilège."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "Par quel chemin l'administration doit-elle passer ?",
+      "choices": [
+        {
+          "text": "Un bastion en réseau hors-bande, session MFA et enregistrée",
+          "next": "n3",
+          "score": 4,
+          "why": "Le bastion impose un point d'entrée unique, tracé et séparé du réseau utilisateur."
+        },
+        {
+          "text": "Directement en RDP depuis le poste de l'administrateur",
+          "next": "n3",
+          "score": 0,
+          "why": "L'accès direct contourne le contrôle centralisé et la journalisation."
+        },
+        {
+          "text": "Par un partage de fichiers temporaire",
+          "next": "n3",
+          "score": 0,
+          "why": "Ce n'est pas un canal d'administration contrôlé."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "Le service d'authentification tombe pendant l'intervention. Quel mode de défaillance choisir pour ce serveur critique ?",
+      "choices": [
+        {
+          "text": "Fail-closed : bloquer l'accès tant que l'authentification n'est pas disponible",
+          "next": "n4",
+          "score": 4,
+          "why": "Pour un serveur critique, le refus d'accès non authentifié prime sur la continuité."
+        },
+        {
+          "text": "Fail-open : laisser passer pour ne pas interrompre l'intervention",
+          "next": "n4",
+          "score": 0,
+          "why": "Fail-open autoriserait un accès non vérifié sur un système critique."
+        },
+        {
+          "text": "Désactiver la journalisation pendant la panne",
+          "next": "n4",
+          "score": 0,
+          "why": "La panne n'est pas une raison de supprimer la traçabilité."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "Vous avez vérifié identité et appareil, imposé le bastion hors-bande et choisi le fail-closed sur un actif critique."
+    }
+  },
+  "debrief": [
+    "Zero Trust vérifie l'utilisateur, l'appareil et l'accès applicatif, pas seulement le réseau.",
+    "Le bastion hors-bande centralise et trace l'administration.",
+    "Le mode de défaillance se décide selon la criticité : disponibilité ou refus d'accès non vérifié."
+  ]
+}

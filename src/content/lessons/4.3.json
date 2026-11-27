@@ -1,0 +1,346 @@
+[
+  {
+    "id": "4.3-01",
+    "objective": "4.3",
+    "order": 1,
+    "title": "Identifier et prioriser les vulnérabilités",
+    "minutes": 16,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "La gestion des vulnérabilités n'est pas « lancer un scanner ». C'est une **boucle continue** : identifier, prioriser, remédier, vérifier, reporter. L'examen teste votre capacité à remettre chaque action à sa place dans cette boucle."
+      },
+      {
+        "type": "h",
+        "text": "Un chapitre entier consacré au sujet"
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "16",
+        "page": 191,
+        "printed": 169,
+        "strength": "primary",
+        "note": "Chapitre 16 — Vulnerability Management (scan, évaluation, correction, suivi)"
+      },
+      {
+        "type": "h",
+        "text": "Le scanning : authentifié ou non"
+      },
+      {
+        "type": "term",
+        "en": "Vulnerability scanning",
+        "fr": "Analyse de vulnérabilités",
+        "field": "Interrogation automatisée d'hôtes pour repérer des versions vulnérables, des ports exposés ou des mauvaises configurations. Un scan **authentifié** utilise des identifiants et voit les patchs locaux ; un scan **non authentifié** ne voit que ce qui est visible depuis le réseau.",
+        "gap": false
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "Scan authentifié",
+          "points": [
+            "Fournit des identifiants au scanner.",
+            "Voit les versions exactes, les correctifs manquants, la configuration locale.",
+            "Beaucoup de faux positifs en moins, mais nécessite un compte dédié et protégé."
+          ]
+        },
+        "right": {
+          "title": "Scan non authentifié",
+          "points": [
+            "Aucun identifiant : vue « depuis l'attaquant ».",
+            "Repère surtout les services exposés et les bannières.",
+            "Rapide et sans privilèges, mais aveugle sur l'intérieur du système."
+          ]
+        }
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "16",
+        "page": 192,
+        "printed": 170,
+        "strength": "primary",
+        "note": "Scans authentifiés vs non authentifiés"
+      },
+      {
+        "type": "h",
+        "text": "Les autres méthodes d'identification"
+      },
+      {
+        "type": "term",
+        "en": "IPAM — Internet Protocol Address Management",
+        "fr": "Gestion de l'espace d'adressage IP",
+        "field": "Inventaire centralisé des plages, adresses et leur affectation. Il répond à « quel actif possède cette IP ? » et permet de savoir si un hôte découvert est légitime avant de le scanner ou de le corriger.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "CSPM — Cloud Security Posture Management",
+        "fr": "Gestion de la posture de sécurité cloud",
+        "field": "Détection continue des mauvaises configurations cloud : buckets publics, IAM trop large, chiffrement absent, régions non autorisées. C'est le pendant du scan pour les ressources cloud.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Source code review",
+        "fr": "Revue de code source",
+        "field": "Examen du code (manuel ou automatisé, SAST/DAST) pour trouver secrets codés en dur, injections, dépendances vulnérables et erreurs de logique avant la mise en production.",
+        "gap": false
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "**IPAM** et **CSPM** sont exigés par le référentiel officiel §4.3 (Identification methods) mais ne sont pas traités dans les quatre livres fournis. Les définitions ci-dessus viennent du référentiel et des usages de la discipline, pas d'une attribution à un livre."
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "page": "4.3",
+        "strength": "primary",
+        "note": "Référentiel officiel — IPAM et CSPM : aucun des 4 livres"
+      },
+      {
+        "type": "h",
+        "text": "Priorisation : ne pas traiter les 200 résultats de la même façon"
+      },
+      {
+        "type": "p",
+        "text": "Un scan produit une liste, pas une décision. La **severity assessment** combine la sévérité technique (CVSS), l'exposabilité, la criticité de l'actif et l'existence d'un exploit connu. Le rapport de **penetration test** apporte la preuve qu'une vulnérabilité est réellement exploitable dans votre contexte."
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Strategy 5",
+        "page": 149,
+        "printed": 129,
+        "strength": "supporting",
+        "note": "Prioriser en fonction du risque et des actifs critiques"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Critère",
+          "Question posée",
+          "Effet sur la priorité"
+        ],
+        "rows": [
+          [
+            "Sévérité (CVSS)",
+            "Quel est le score intrinsèque de la faille ?",
+            "Élevé = traité plus tôt"
+          ],
+          [
+            "Exposabilité",
+            "Le service est-il accessible depuis Internet ?",
+            "Exposé = priorité accrue"
+          ],
+          [
+            "Criticité de l'actif",
+            "L'actif est-il critique pour le métier ?",
+            "Critique = priorité accrue"
+          ],
+          [
+            "Exploit connu",
+            "Existe-t-il un exploit public ou observé ?",
+            "Oui = traitement immédiat"
+          ]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "Un CVSS **critical** sur un actif isolé peut passer après un CVSS **high** sur un serveur exposé et critique : l'examen raisonne toujours en **contexte**, pas uniquement en score."
+      },
+      {
+        "type": "check",
+        "q": "Un scan authentifié rapporte beaucoup moins de faux positifs qu'un scan non authentifié. Pourquoi ?",
+        "options": [
+          "Il scanne plus vite",
+          "Il dispose d'identifiants et voit l'état réel du système",
+          "Il ne teste que les ports ouverts",
+          "Il supprime les vulnérabilités de faible sévérité"
+        ],
+        "answer": 1,
+        "explain": "Les identifiants permettent de lire les versions et les correctifs réellement installés, donc de confirmer ou d'éliminer les résultats. La vitesse et la portée ne changent pas la fiabilité."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Boucle : identifier → prioriser → remédier → vérifier → reporter.",
+          "Scan authentifié = fiable et détaillé ; non authentifié = vue attaquant.",
+          "IPAM et CSPM complètent le scanning (notions hors livres, §4.3).",
+          "Prioriser = sévérité + exposabilité + criticité + exploit connu."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "4.3-02",
+    "objective": "4.3",
+    "order": 2,
+    "title": "Remédier, vérifier et reporter",
+    "minutes": 15,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Une vulnérabilité non traitée reste une dette de sécurité. La remédiation ne se limite pas au patch : elle inclut le durcissement, le contrôle compensatoire et l'**acceptation documentée du risque** quand la correction est impossible."
+      },
+      {
+        "type": "h",
+        "text": "De la découverte au correctif"
+      },
+      {
+        "type": "steps",
+        "items": [
+          {
+            "title": "Qualifier",
+            "text": "Confirmer que le résultat est un vrai positif et écarter les faux positifs du scanner."
+          },
+          {
+            "title": "Prioriser",
+            "text": "Classer selon la sévérité, l'exposition et la criticité de l'actif."
+          },
+          {
+            "title": "Remédier",
+            "text": "Appliquer le correctif, durcir la configuration ou poser un contrôle compensatoire."
+          },
+          {
+            "title": "Vérifier",
+            "text": "Rescanner le même périmètre avec la même méthode pour confirmer la fermeture."
+          },
+          {
+            "title": "Reporter",
+            "text": "Alimenter les rapports internes, les obligations externes et le retour aux chercheurs."
+          }
+        ]
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "16",
+        "page": 195,
+        "printed": 173,
+        "strength": "primary",
+        "note": "Remédiation, suivi et décisions après le scan"
+      },
+      {
+        "type": "term",
+        "en": "Remediation",
+        "fr": "Remédiation",
+        "field": "Action qui supprime ou réduit la vulnérabilité : patch, mise à jour, désactivation d'un service, durcissement, segmentation ou remplacement d'un produit non supporté.",
+        "gap": false
+      },
+      {
+        "type": "term",
+        "en": "Verification",
+        "fr": "Vérification",
+        "field": "Re-scanner après correction avec les mêmes paramètres pour prouver que la vulnérabilité a disparu, et non seulement que le ticket a été marqué « terminé ».",
+        "gap": false
+      },
+      {
+        "type": "p",
+        "text": "Quand le correctif est impossible (produit **EOL**, application métier incompatible), le livre préconise une solution de substitution : **contrôle compensatoire** (segmentation, WAF, surveillance renforcée) et **acceptation formelle du risque** par le propriétaire de l'actif, avec une date de révision."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "16",
+        "page": 199,
+        "printed": 177,
+        "strength": "primary",
+        "note": "Contrôles compensatoires et acceptation du risque"
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "« On ne peut pas patcher » n'est **jamais** une raison d'ignorer une vulnérabilité. La réponse attendue est : documenter l'exception, poser un contrôle compensatoire, faire valider par le propriétaire et fixer une échéance."
+      },
+      {
+        "type": "h",
+        "text": "La vérification ferme la boucle"
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 241,
+        "strength": "supporting",
+        "note": "Suivi et vérification après correction"
+      },
+      {
+        "type": "p",
+        "text": "Un ticket fermé sans re-scan ne prouve rien. La vérification compare l'avant et l'après avec le **même scan authentifié** : si la méthode change, la disparition du résultat peut venir du scanner, pas du correctif."
+      },
+      {
+        "type": "h",
+        "text": "Reporting, bounty et divulgation responsable"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Internal reporting** : tableau de bord des délais de traitement, vulnérabilités ouvertes par criticité, tendances.",
+          "**External reporting** : obligations contractuelles ou réglementaires envers clients, auditeurs et autorités.",
+          "**Bounty program** : récompense publique pour la découverte de failles, avec périmètre et règles clairs.",
+          "**Responsible disclosure policy** : canal de signalement, engagement de non-poursuite et délai de correction avant publication."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "Les programmes de **bug bounty** et les politiques de **divulgation responsable** figurent au référentiel §4.3 (Reporting) mais ne sont pas détaillés dans les quatre livres fournis."
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "page": "4.3",
+        "strength": "primary",
+        "note": "Référentiel officiel — reporting, bounty, divulgation responsable"
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "Reporting interne",
+          "points": [
+            "Destinataires : RSSI, propriétaires d'actifs, direction.",
+            "Pilote la priorisation et les délais (SLA de remédiation).",
+            "Sert à mesurer l'efficacité de la boucle."
+          ]
+        },
+        "right": {
+          "title": "Reporting externe",
+          "points": [
+            "Destinataires : clients, partenaires, régulateurs, chercheurs.",
+            "Cadré par des obligations contractuelles ou légales.",
+            "Exige une validation avant diffusion."
+          ]
+        }
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-vuln-loop"
+      },
+      {
+        "type": "check",
+        "q": "Un serveur EOL ne peut plus recevoir de correctif. Quelle est la bonne suite ?",
+        "options": [
+          "Classer la vulnérabilité comme faux positif",
+          "Documenter l'exception, poser un contrôle compensatoire et faire valider par le propriétaire",
+          "Fermer le ticket sans action et attendre le prochain scan",
+          "Supprimer l'actif de l'inventaire"
+        ],
+        "answer": 1,
+        "explain": "L'acceptation de risque doit être explicite, compensée et révisée. Un faux positif est une erreur de détection, pas un choix délibéré."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Remédier = patch, durcissement, segmentation ou contrôle compensatoire.",
+          "Vérifier = re-scan avec la même méthode avant de fermer le ticket.",
+          "Exception = acceptation documentée, validée et datée.",
+          "Reporter : interne pour piloter, externe pour se conformer, bounty/divulgation pour collaborer."
+        ]
+      }
+    ]
+  }
+]

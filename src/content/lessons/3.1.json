@@ -1,0 +1,338 @@
+[
+  {
+    "id": "3.1-01",
+    "objective": "3.1",
+    "order": 1,
+    "title": "Cloud, on-premises et modèles de déploiement",
+    "minutes": 16,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Choisir une architecture, ce n'est pas choisir une technologie : c'est choisir **qui porte la responsabilité de chaque contrôle**. L'examen demande de comparer les implications de sécurité des modèles, pas de réciter des définitions de fournisseurs."
+      },
+      {
+        "type": "h",
+        "text": "Cloud, on-premises, hybride : qui porte quoi ?"
+      },
+      {
+        "type": "p",
+        "text": "Dans le **cloud public**, le fournisseur sécurise l'infrastructure (datacenter, réseau, hyperviseur) tandis que le client reste responsable de ses données, de ses identités, de ses configurations et de ses applications. C'est le principe de **responsabilité partagée** : le cloud déplace le risque, il ne le supprime pas."
+      },
+      {
+        "type": "table",
+        "head": [
+          "Modèle",
+          "Infrastructure possédée par",
+          "Implication de sécurité dominante"
+        ],
+        "rows": [
+          [
+            "Public cloud",
+            "Fournisseur",
+            "Responsabilité partagée ; configuration client = première cause d'exposition"
+          ],
+          [
+            "Private cloud",
+            "Organisation (ou prestataire dédié)",
+            "Contrôle maximal, mais coût et charge de patching conservés"
+          ],
+          [
+            "Community cloud",
+            "Groupe d'organisations",
+            "Confiance entre pairs et isolation logique à gouverner"
+          ],
+          [
+            "Hybrid",
+            "Les deux",
+            " Interface entre mondes = surface d'attaque supplémentaire"
+          ],
+          [
+            "On-premises",
+            "Organisation",
+            "Contrôle total, mais tout est à maintenir (patch, power, recovery)"
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 285,
+        "strength": "primary",
+        "note": "Cloud et modèles de déploiement (services et responsabilités)"
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "—",
+        "page": 56,
+        "printed": 36,
+        "strength": "supporting",
+        "note": "Connaître ce que l'on protège et pourquoi, avant de choisir l'architecture"
+      },
+      {
+        "type": "term",
+        "en": "Hybrid deployment model",
+        "fr": "Déploiement hybride",
+        "field": "Combinaison de ressources on-premises et cloud, reliées par VPN, interconnexion dédiée ou identité fédérée. Le point de jonction doit être traité comme une zone de confiance distincte.",
+        "gap": false
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "En scénario, la bonne réponse est souvent celle qui rappelle que **le client reste responsable de ses données et de ses accès**, même chez un fournisseur cloud. « Le fournisseur gère tout » est faux."
+      },
+      {
+        "type": "h",
+        "text": "Serverless, microservices, infrastructure as code"
+      },
+      {
+        "type": "term",
+        "en": "Serverless",
+        "fr": "Sans serveur (fonctions à la demande)",
+        "field": "Le fournisseur exécute des fonctions sans que vous gériez les systèmes d'exploitation. Vous ne patchiez plus l'OS, mais vous devez sécuriser le code, les identifiants et les déclencheurs.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Microservices",
+        "fr": "Microservices",
+        "field": "Application découpée en petits services indépendants qui communiquent par API. La surface d'attaque devient le nombre d'interfaces, pas la taille du programme.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Infrastructure as Code (IaC)",
+        "fr": "Infrastructure en tant que code",
+        "field": "Description de l'infrastructure dans des fichiers versionnés, appliquée par un pipeline. Avantage : reproductibilité. Risque : un template contenant un secret ou une règle de pare-feu trop large propage l'erreur à grande échelle.",
+        "gap": true
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "chapter": "—",
+        "page": "3.1",
+        "strength": "primary",
+        "note": "Référentiel officiel — aucun des 4 livres ne traite serverless, microservices ou IaC"
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "Serverless, microservices et IaC sont exigés au **§3.1** mais absents des quatre livres fournis. Les définitions ci-dessus proviennent du référentiel et des pratiques de la discipline, sans attribution à un livre."
+      },
+      {
+        "type": "p",
+        "text": "Avec l'IaC, le contrôle n'est plus une commande manuelle mais une **revue de code** : relire les templates, interdire les secrets en clair, analyser les modèles avant déploiement et surveiller la **dérive de configuration** entre l'état déclaré et l'état réel."
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "IaC déclaratif",
+          "points": [
+            "État désiré décrit dans un fichier versionné.",
+            "Reproductible, auditable, relisible en revue de code.",
+            "Une erreur de modèle se propulse à tout l'environnement."
+          ]
+        },
+        "right": {
+          "title": "Configuration manuelle",
+          "points": [
+            "Changements faits à la main, souvent non tracés.",
+            "Dérive rapide entre environnements.",
+            "Difficile à reproduire en cas de reprise."
+          ]
+        }
+      },
+      {
+        "type": "check",
+        "q": "Une équipe déploie des fonctions exécutées à la demande sans gérer de systèmes d'exploitation. Quel risque reste-t-il de son ressort ?",
+        "options": [
+          "Le patching du noyau de l'hôte",
+          "La maintenance du datacenter",
+          "La sécurité du code, des identifiants et des déclencheurs",
+          "Le refroidissement de la salle"
+        ],
+        "answer": 2,
+        "explain": "En serverless, le fournisseur gère l'hôte et le socle. Le client garde la responsabilité du code, des accès et de la configuration des déclencheurs — c'est la responsabilité partagée."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Le cloud déplace la responsabilité, il ne la supprime pas : données, identités et configurations restent au client.",
+          "Public / privé / communautaire / hybride / on-premises se comparent sur le contrôle, le coût et la charge de maintenance.",
+          "Serverless, microservices et IaC sont des notions du référentiel, absentes des livres.",
+          "L'IaC déplace le contrôle vers la revue de code et la détection de dérive."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "3.1-02",
+    "objective": "3.1",
+    "order": 2,
+    "title": "OT, air-gap, segmentation et critères de choix",
+    "minutes": 15,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Toutes les architectures ne se valent pas face à une panne ou à un attaquant. Deux variables reviennent sans cesse dans l'examen : **le niveau d'isolement** et **la criticité des services** à protéger."
+      },
+      {
+        "type": "h",
+        "text": "Operational technology (OT)"
+      },
+      {
+        "type": "term",
+        "en": "Operational technology (OT)",
+        "fr": "Technologie opérationnelle",
+        "field": "Systèmes qui pilotent des procédés physiques (SCADA, ICS, automates). La disponibilité et la sûreté priment sur la confidentialité ; un redémarrage ou un scan agressif peut arrêter une ligne de production."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "—",
+        "page": 145,
+        "printed": 123,
+        "strength": "supporting",
+        "note": "OT / SCADA : environnements industriels et contraintes de disponibilité"
+      },
+      {
+        "type": "h",
+        "text": "Air-gap et segmentation"
+      },
+      {
+        "type": "term",
+        "en": "Air-gapped network",
+        "fr": "Réseau isolé physiquement",
+        "field": "Réseau sans connexion au réseau public ni à l'Internet. Il réduit drastiquement la surface d'attaque, mais impose des transferts contrôlés par médias amovibles et complique les mises à jour."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "—",
+        "page": 103,
+        "printed": 81,
+        "strength": "primary",
+        "note": "Isolement, air-gap et réseaux définis par logiciel"
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "Segmentation physique",
+          "points": [
+            "Séparation par équipements et câblage distincts.",
+            "Isolation forte, coût et complexité élevés.",
+            "Typique de l'OT et des réseaux air-gapped."
+          ]
+        },
+        "right": {
+          "title": "Segmentation logique",
+          "points": [
+            "VLAN, ACL, pare-feu, micro-segmentation.",
+            "Flexible et moins coûteuse, mais dépend de la configuration.",
+            "Une erreur de règle peut annuler la séparation."
+          ]
+        }
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "15",
+        "page": 177,
+        "printed": 155,
+        "strength": "primary",
+        "note": "Segmentation réseau : séparer les zones et limiter le mouvement latéral"
+      },
+      {
+        "type": "h",
+        "text": "Critères techniques et métier"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Critère technique",
+          "Question à poser",
+          "Critère métier lié"
+        ],
+        "rows": [
+          [
+            "Availability / resilience",
+            "Que se passe-t-il si ce service tombe ?",
+            "Coût de l'interruption"
+          ],
+          [
+            "Compute / power requirements",
+            "Quelle charge et quelle alimentation ?",
+            "Environmental requirements"
+          ],
+          [
+            "Responsibility",
+            "Qui patch, qui restaure, qui surveille ?",
+            "Ownership / risque"
+          ],
+          [
+            "Proprietary vs. open source",
+            "Dépendance à un éditeur ou auditabilité ?",
+            "Scalability / lock-in"
+          ],
+          [
+            "Ease of recovery",
+            "Combien de temps pour revenir ?",
+            "Data sovereignty / classification"
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "NET",
+        "chapter": "—",
+        "page": 12,
+        "strength": "primary",
+        "note": "Zones réseau, DMZ et importance du placement"
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "—",
+        "page": 245,
+        "printed": 225,
+        "strength": "supporting",
+        "note": "Architecture, diversité et résilience des systèmes critiques"
+      },
+      {
+        "type": "p",
+        "text": "Le **propriétaire** (open source) permet l'audit du code et évite le verrouillage propriétaire ; une solution propriétaire peut offrir un support et une intégration plus simples. Le bon choix dépend du **risque accepté**, du budget et de la souveraineté des données."
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "Si un scénario mentionne une donnée qui **ne doit pas quitter un pays**, la réponse est la **data sovereignty** : hébergement local ou cloud souverain, pas le chiffrement seul."
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-3.1-arch-models"
+      },
+      {
+        "type": "check",
+        "q": "Une ligne de production ne doit jamais être exposée à Internet et tolère mal les scans actifs. Quelle architecture privilégier ?",
+        "options": [
+          "Cloud public multi-régions",
+          "Réseau OT isolé (air-gapped) avec segmentation physique",
+          "Microservices serverless exposés par API",
+          "Cloud communautaire partagé"
+        ],
+        "answer": 1,
+        "explain": "L'OT privilégie la disponibilité et la sûreté : isolement physique, pas de scans intrusifs et contrôle strict des transferts."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "OT = systèmes physiques ; disponibilité et sûreté avant confidentialité.",
+          "Air-gap = isolement physique ; segmentation logique = VLAN/ACL/pare-feu.",
+          "Responsabilité partagée : le client garde données, identités et configuration.",
+          "Le choix dépend de la criticité, du coût, de la souveraineté et de la facilité de reprise."
+        ]
+      }
+    ]
+  }
+]

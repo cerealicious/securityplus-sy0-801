@@ -1,0 +1,23 @@
+{
+  "id": "pbq-5.6-training",
+  "objective": "5.6",
+  "type": "classify",
+  "title": "Choisir le type de formation selon la situation",
+  "prompt": "Pour chaque situation, sélectionnez le type de formation le plus adapté. Raisonnez sur le déclencheur, pas sur le sujet abordé.",
+  "categories": ["Initiale / onboarding", "Continue / ongoing", "Ciblée / targeted", "Corrective"],
+  "items": [
+    { "id": "i1", "label": "Première semaine d'une nouvelle embauchée : AUP et accès", "cat": "Initiale / onboarding" },
+    { "id": "i2", "label": "Session d'intégration avant la prise de poste d'un nouvel administrateur", "cat": "Initiale / onboarding" },
+    { "id": "i3", "label": "Signature de l'accusé de réception de la politique lors de l'embauche", "cat": "Initiale / onboarding" },
+    { "id": "i4", "label": "Formation annuelle obligatoire pour l'ensemble du personnel", "cat": "Continue / ongoing" },
+    { "id": "i5", "label": "Module trimestriel de mise à jour sur les menaces émergentes", "cat": "Continue / ongoing" },
+    { "id": "i6", "label": "Campagne annuelle de rappel des règles de mots de passe", "cat": "Continue / ongoing" },
+    { "id": "i7", "label": "Session BEC (fraude au virement) pour le service comptable", "cat": "Ciblée / targeted" },
+    { "id": "i8", "label": "Formation MFA renforcée réservée aux comptes administrateurs", "cat": "Ciblée / targeted" },
+    { "id": "i9", "label": "Sécurisation du télétravail pour les équipes distribuées", "cat": "Ciblée / targeted" },
+    { "id": "i10", "label": "Reprise individuelle après un clic sur un phishing simulé", "cat": "Corrective" },
+    { "id": "i11", "label": "Débriefing après l'envoi de données à un mauvais destinataire", "cat": "Corrective" },
+    { "id": "i12", "label": "Formation dédiée à la suite d'une violation impliquant une équipe", "cat": "Corrective" }
+  ],
+  "explain": "Initiale = arrivée ; continue = échéance calendaire ; ciblée = risque ou rôle particulier ; corrective = erreur ou incident constaté. Un même thème (mots de passe) peut relever de plusieurs types selon le déclencheur."
+}

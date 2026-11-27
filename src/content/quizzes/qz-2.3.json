@@ -1,0 +1,90 @@
+{
+  "id": "qz-2.3",
+  "objective": "2.3",
+  "title": "Quiz — Vecteurs et sources de menaces",
+  "questions": [
+    {
+      "id": "q-2.3-01",
+      "type": "single",
+      "q": "Un QR code affiché sur une borne mène à une page de connexion contrefaite. Quel vecteur ?",
+      "options": [
+        "Attachment-based",
+        "Image-based",
+        "Network-based",
+        "Supply chain-based"
+      ],
+      "answer": [1],
+      "explain": "Le QR code et le contenu visuel sont classés image-based ; le quishing en est la variante de phishing.",
+      "ref": "2.3-01"
+    },
+    {
+      "id": "q-2.3-02",
+      "type": "single",
+      "q": "Un attaquant utilise PowerShell et WMI déjà présents sur le système, sans déposer de fichier. Quel vecteur ?",
+      "options": [
+        "External media-based",
+        "Endpoint-based (living-off-the-land)",
+        "Signal-based",
+        "Image-based"
+      ],
+      "answer": [1],
+      "explain": "Les outils natifs de l'endpoint sont un vecteur endpoint-based, détectable par télémétrie comportementale.",
+      "ref": "2.3-02"
+    },
+    {
+      "id": "q-2.3-03",
+      "type": "multi",
+      "q": "Quels vecteurs relèvent de la chaîne d'approvisionnement ? (plusieurs réponses)",
+      "options": [
+        "Managed service provider compromis",
+        "Fournisseur de logiciel dont la mise à jour est malveillante",
+        "SaaS hébergeant vos données",
+        "USB oublié dans le parking"
+      ],
+      "answer": [0, 1, 2],
+      "explain": "MSP, éditeur et SaaS sont des tiers de confiance : supply chain-based. L'USB est un vecteur external media-based.",
+      "ref": "2.3-02"
+    },
+    {
+      "id": "q-2.3-04",
+      "type": "match",
+      "q": "Associez chaque situation à son vecteur.",
+      "pairs": [
+        { "left": "Badge NFC lu par un téléphone hostile", "right": "Signal-based" },
+        { "left": "Caméra IP compromise", "right": "IoT-based" },
+        { "left": "RDP exposé avec mot de passe faible", "right": "Remote access" },
+        { "left": "Faux CAPTCHA téléchargeant un exécutable", "right": "Image-based" }
+      ],
+      "explain": "La famille de vecteur se détermine par le chemin d'entrée, pas par l'outil final.",
+      "ref": "2.3-01"
+    },
+    {
+      "id": "q-2.3-05",
+      "type": "single",
+      "q": "Une APT se distingue principalement par :",
+      "options": [
+        "Un malware unique très destructeur",
+        "Une campagne ciblée, persistante et dotée de ressources",
+        "Un simple e-mail de phishing massif",
+        "Une attaque sur USB uniquement"
+      ],
+      "answer": [1],
+      "explain": "APT qualifie la campagne (ciblage, durée, ressources), pas un outil particulier.",
+      "ref": "2.3-01"
+    },
+    {
+      "id": "q-2.3-06",
+      "type": "single",
+      "q": "Quel vecteur concerne un contrôleur industriel / SCADA ?",
+      "options": [
+        "OT-based",
+        "Browser-based",
+        "Message-based",
+        "Signal-based"
+      ],
+      "answer": [0],
+      "explain": "Les systèmes opérationnels industriels relèvent du vecteur OT-based, distinct du physique et de l'IoT.",
+      "ref": "2.3-02"
+    }
+  ]
+}

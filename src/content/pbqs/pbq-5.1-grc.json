@@ -1,0 +1,23 @@
+{
+  "id": "pbq-5.1-grc",
+  "objective": "5.1",
+  "type": "classify",
+  "title": "Classer les artefacts GRC",
+  "prompt": "Pour chaque description, choisissez la catégorie d'artefact : Politique, Standard, Procédure ou Plan. Raisonnez sur la question à laquelle le document répond, pas sur son titre.",
+  "categories": ["Politique", "Standard", "Procédure", "Plan"],
+  "items": [
+    { "id": "i1", "label": "AUP : définit les usages autorisés des postes de travail et d'Internet", "cat": "Politique" },
+    { "id": "i2", "label": "BYOD : les appareils personnels doivent être enregistrés avant tout accès", "cat": "Politique" },
+    { "id": "i3", "label": "Classification et conservation : les contrats sont conservés 7 ans", "cat": "Politique" },
+    { "id": "i4", "label": "Privacy : les données clients ne sont pas revendues à des tiers", "cat": "Politique" },
+    { "id": "i5", "label": "Toutes les données au repos doivent être chiffrées en AES-256", "cat": "Standard" },
+    { "id": "i6", "label": "Baseline de durcissement Windows : services inutilisés désactivés", "cat": "Standard" },
+    { "id": "i7", "label": "Longueur minimale des mots de passe : 14 caractères", "cat": "Standard" },
+    { "id": "i8", "label": "SOP : étapes de révocation d'un compte lors d'un départ", "cat": "Procédure" },
+    { "id": "i9", "label": "Runbook : redémarrer le service de messagerie et vérifier la file d'attente", "cat": "Procédure" },
+    { "id": "i10", "label": "SOP : instruction d'une demande d'accès temporaire et de sa revue", "cat": "Procédure" },
+    { "id": "i11", "label": "BCP : maintien des opérations critiques pendant la perturbation", "cat": "Plan" },
+    { "id": "i12", "label": "DRP : restauration des systèmes sur le site de reprise chaud", "cat": "Plan" }
+  ],
+  "explain": "Politique = intention générale et obligatoire ; standard = niveau minimal mesurable ; procédure = étapes répétables ; plan = organisation de la continuité ou de la reprise. Une baseline est un standard de configuration, pas une simple recommandation."
+}

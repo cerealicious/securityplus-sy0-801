@@ -1,0 +1,115 @@
+{
+  "id": "fc-2.1",
+  "objective": "2.1",
+  "title": "Caractéristiques des menaces et vulnérabilités",
+  "cards": [
+    {
+      "id": "c-2.1-01",
+      "front": "Menace",
+      "back": "Acteur, événement ou capacité pouvant exploiter une faiblesse pour nuire à un actif.",
+      "tag": "Bases"
+    },
+    {
+      "id": "c-2.1-02",
+      "front": "Vulnérabilité",
+      "back": "Faiblesse d'un système, processus ou contrôle, exploitable par une menace.",
+      "tag": "Bases"
+    },
+    {
+      "id": "c-2.1-03",
+      "front": "Risque (formule)",
+      "back": "Vulnérabilité × menace, ou probabilité × impact.",
+      "tag": "Bases"
+    },
+    {
+      "id": "c-2.1-04",
+      "front": "Likelihood",
+      "back": "Probabilité qu'une menace se matérialise : exposition, facilité d'exploitation, activité des acteurs.",
+      "tag": "Évaluation"
+    },
+    {
+      "id": "c-2.1-05",
+      "front": "Impact",
+      "back": "Conséquence si l'exploitation réussit : dépend de la criticité de l'actif et des services affectés.",
+      "tag": "Évaluation"
+    },
+    {
+      "id": "c-2.1-06",
+      "front": "Threat feed",
+      "back": "Flux continu d'IOC, TTP et avis de vulnérabilités alimentant la détection et la veille.",
+      "tag": "Renseignement"
+    },
+    {
+      "id": "c-2.1-07",
+      "front": "Sources de renseignement",
+      "back": "Internes (logs, EDR, SIEM, incidents passés) et externes (feeds, CERT/ISAC, fournisseurs, agences).",
+      "tag": "Renseignement"
+    },
+    {
+      "id": "c-2.1-08",
+      "front": "Cyber Kill Chain : 7 phases",
+      "back": "Reconnaissance, weaponization, delivery, exploitation, installation, command & control, actions on objectives.",
+      "tag": "Cycle de vie"
+    },
+    {
+      "id": "c-2.1-09",
+      "front": "Première phase de la kill chain",
+      "back": "Reconnaissance : collecte d'informations sur la cible, souvent invisible dans les logs.",
+      "tag": "Cycle de vie"
+    },
+    {
+      "id": "c-2.1-10",
+      "front": "CVSS",
+      "back": "Common Vulnerability Scoring System : score 0 à 10 de la gravité intrinsèque d'une faille.",
+      "tag": "CVSS/CVE"
+    },
+    {
+      "id": "c-2.1-11",
+      "front": "Les 3 groupes de métriques CVSS",
+      "back": "Base (intrinsèque), Temporal (exploit/correctif), Environmental (contexte et contrôles).",
+      "tag": "CVSS/CVE"
+    },
+    {
+      "id": "c-2.1-12",
+      "front": "Score CVSS 9.8",
+      "back": "Critique — mais la gravité ne fait pas la priorité sans contexte d'exposition.",
+      "tag": "CVSS/CVE"
+    },
+    {
+      "id": "c-2.1-13",
+      "front": "CVE",
+      "back": "Common Vulnerabilities and Exposures : identifiant unique public (CVE-2024-xxxx), pas un score.",
+      "tag": "CVSS/CVE"
+    },
+    {
+      "id": "c-2.1-14",
+      "front": "CWE",
+      "back": "Common Weakness Enumeration : classification du type de faiblesse de code (ex. CWE-79 = XSS).",
+      "tag": "CVSS/CVE"
+    },
+    {
+      "id": "c-2.1-15",
+      "front": "Priorité maximale",
+      "back": "Exposé sur Internet + exploit public + actif critique : traitement immédiat.",
+      "tag": "Priorisation"
+    },
+    {
+      "id": "c-2.1-16",
+      "front": "Contrôle compensatoire",
+      "back": "Mesure qui réduit l'exploitabilité quand le correctif est impossible ; abaisse le risque résiduel.",
+      "tag": "Priorisation"
+    },
+    {
+      "id": "c-2.1-17",
+      "front": "Gravité vs priorité",
+      "back": "La gravité est technique (CVSS) ; la priorité intègre exposition, criticité, exploit et correctif.",
+      "tag": "Priorisation"
+    },
+    {
+      "id": "c-2.1-18",
+      "front": "Vérification après remédiation",
+      "back": "Un re-scan ou une vérification est nécessaire pour clore la boucle de gestion des vulnérabilités.",
+      "tag": "Priorisation"
+    }
+  ]
+}

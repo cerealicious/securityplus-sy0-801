@@ -1,0 +1,90 @@
+{
+  "id": "sc-4.3-remediation",
+  "objective": "4.3",
+  "title": "Une alerte de vulnérabilité à traiter",
+  "context": "Le scanner hebdomadaire remonte 214 résultats, dont une faille critical sur un serveur de paiement exposé et une faille sur un vieux serveur interne non patchable. Vous devez conduire le traitement en trois décisions.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "214 résultats viennent d'arriver. Quelle première action ?",
+      "choices": [
+        {
+          "text": "Prioriser par sévérité, exposition et criticité des actifs",
+          "next": "n2",
+          "score": 4,
+          "why": "On ne traite pas 214 résultats dans l'ordre du scanner : le contexte décide de l'ordre de travail."
+        },
+        {
+          "text": "Appliquer tous les correctifs dans l'ordre d'affichage",
+          "next": "n2",
+          "score": 1,
+          "why": "Sans priorisation, on risque de casser la production pour des failles mineures."
+        },
+        {
+          "text": "Fermer les résultats de faible sévérité sans examen",
+          "next": "n2",
+          "score": 0,
+          "why": "Écarter des résultats sans analyse peut masquer une faille exploitable en chaîne."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "Le serveur interne est en fin de vie : aucun correctif n'existe. Que décidez-vous ?",
+      "choices": [
+        {
+          "text": "Documenter l'exception, isoler le serveur, poser une surveillance renforcée et faire valider par le propriétaire",
+          "next": "n3",
+          "score": 4,
+          "why": "C'est une acceptation de risque compensée et datée : la seule réponse défendable."
+        },
+        {
+          "text": "Déclarer un faux positif pour alléger le rapport",
+          "next": "n3",
+          "score": 0,
+          "why": "La faille est réelle : la qualifier de faux positif est une falsification."
+        },
+        {
+          "text": "Ne rien faire tant qu'un correctif n'existe pas",
+          "next": "n3",
+          "score": 1,
+          "why": "L'absence de correctif n'éteint pas le risque : il faut au moins le contenir."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "Le correctif du serveur de paiement est appliqué. Comment clore le dossier ?",
+      "choices": [
+        {
+          "text": "Rescanner avec la même méthode, vérifier la disparition, puis reporter",
+          "next": "n4",
+          "score": 4,
+          "why": "La vérification par re-scan est la preuve de fermeture avant le reporting."
+        },
+        {
+          "text": "Marquer le ticket terminé immédiatement après le redémarrage",
+          "next": "n4",
+          "score": 0,
+          "why": "Le redémarrage ne prouve pas que la vulnérabilité a disparu."
+        },
+        {
+          "text": "Attendre le prochain scan annuel pour vérifier",
+          "next": "n4",
+          "score": 1,
+          "why": "Un délai aussi long laisse la fenêtre d'exposition ouverte."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "Vous avez conduit la boucle complète : priorisation contextuelle, acceptation compensée du risque, vérification par re-scan et reporting."
+    }
+  },
+  "debrief": [
+    "La priorisation combine sévérité, exposition, criticité et exploit connu.",
+    "Un actif non patchable impose une exception documentée et un contrôle compensatoire.",
+    "Sans re-scan avec la même méthode, la clôture n'est pas prouvée."
+  ]
+}

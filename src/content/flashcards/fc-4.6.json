@@ -1,0 +1,127 @@
+{
+  "id": "fc-4.6",
+  "objective": "4.6",
+  "title": "Automatisation et orchestration",
+  "cards": [
+    {
+      "id": "c-4.6-01",
+      "front": "Automatisation vs orchestration",
+      "back": "Automatisation = exécuter une tâche ; orchestration = coordonner plusieurs outils et étapes dans un workflow.",
+      "tag": "Bases"
+    },
+    {
+      "id": "c-4.6-02",
+      "front": "Les cinq cas d'usage",
+      "back": "User provisioning, resource provisioning, desired state management, anomaly detection, ticket management.",
+      "tag": "Cas d'usage"
+    },
+    {
+      "id": "c-4.6-03",
+      "front": "User provisioning automatisé",
+      "back": "Création, attribution de droits et révocation cohérents et rapides à l'entrée comme à la sortie.",
+      "tag": "Cas d'usage"
+    },
+    {
+      "id": "c-4.6-04",
+      "front": "Resource provisioning",
+      "back": "Création automatisée de VM, conteneurs ou comptes cloud, de façon reproductible.",
+      "tag": "Cas d'usage"
+    },
+    {
+      "id": "c-4.6-05",
+      "front": "Desired state management",
+      "back": "Comparer l'état réel à l'état attendu et corriger automatiquement toute dérive de configuration.",
+      "tag": "Cas d'usage"
+    },
+    {
+      "id": "c-4.6-06",
+      "front": "Anomaly detection et ticket management",
+      "back": "Analyse automatique des journaux et baselines ; création, assignation et clôture des tickets sans saisie manuelle.",
+      "tag": "Cas d'usage"
+    },
+    {
+      "id": "c-4.6-07",
+      "front": "Les sept considérations",
+      "back": "Guardrails, automation logic, process engineering, complexity, financial considerations, process risks, deployment.",
+      "tag": "Considérations"
+    },
+    {
+      "id": "c-4.6-08",
+      "front": "Guardrail",
+      "back": "Limite qui borne la portée, la durée ou l'impact d'une action automatisée et impose une approbation si nécessaire.",
+      "tag": "Considérations"
+    },
+    {
+      "id": "c-4.6-09",
+      "front": "Automation logic",
+      "back": "Conditions, ordre des étapes, gestion des erreurs et des cas limites d'un playbook.",
+      "tag": "Considérations"
+    },
+    {
+      "id": "c-4.6-10",
+      "front": "Complexité et coût",
+      "back": "Plus il y a d'outils et de branches, plus le diagnostic est difficile ; licences, calcul et maintenance ont un coût.",
+      "tag": "Considérations"
+    },
+    {
+      "id": "c-4.6-11",
+      "front": "Risque de processus et déploiement",
+      "back": "Une erreur s'applique à vitesse machine : tester, déployer progressivement, surveiller et prévoir le retour arrière.",
+      "tag": "Considérations"
+    },
+    {
+      "id": "c-4.6-12",
+      "front": "Réversibilité",
+      "back": "Toute action automatisée en production doit pouvoir être annulée et doit être journalisée.",
+      "tag": "Considérations"
+    },
+    {
+      "id": "c-4.6-13",
+      "front": "Chatbot",
+      "back": "Assistant conversationnel pour interroger la documentation ou aider à la rédaction d'analyses.",
+      "tag": "IA"
+    },
+    {
+      "id": "c-4.6-14",
+      "front": "Predictive analysis",
+      "back": "Anticipation d'incidents ou de pannes à partir de tendances et de signaux faibles.",
+      "tag": "IA"
+    },
+    {
+      "id": "c-4.6-15",
+      "front": "AI-augmented baselines",
+      "back": "Références comportementales enrichies par apprentissage automatique pour mieux détecter l'anomalie.",
+      "tag": "IA"
+    },
+    {
+      "id": "c-4.6-16",
+      "front": "Agentic AI",
+      "back": "IA capable de planifier et d'exécuter une suite d'actions de façon autonome ; exige des garde-fous. Hors livres (§4.6).",
+      "tag": "IA"
+    },
+    {
+      "id": "c-4.6-17",
+      "front": "Efficacité et baselines",
+      "back": "Gain de temps, application continue de la configuration attendue, moins de tâches répétitives.",
+      "tag": "Résultats"
+    },
+    {
+      "id": "c-4.6-18",
+      "front": "Résultats attendus (six)",
+      "back": "Efficiency/time saving, enforcing baselines, continuous improvements, productivity, reduced downtime, increased proactivity.",
+      "tag": "Résultats"
+    },
+    {
+      "id": "c-4.6-19",
+      "front": "CI/CD et intégrations",
+      "back": "Intégration et déploiement continus appliquent les changements de façon répétable ; les intégrations relient SIEM, SOAR et ticketing.",
+      "tag": "Workflows"
+    },
+    {
+      "id": "c-4.6-20",
+      "front": "Étapes d'un playbook de blocage d'IP",
+      "back": "Déclenchement → enrichissement → décision/approbation → action bornée → vérification et ajustement.",
+      "tag": "Workflows"
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "id": "fc-5.2",
+  "objective": "5.2",
+  "title": "Gestion des risques",
+  "cards": [
+    {
+      "id": "c-5.2-01",
+      "front": "Les 6 étapes de la gestion des risques",
+      "back": "Identification, évaluation, analyse, registre, traitement, suivi. Chaque risque a un propriétaire et une date de revue.",
+      "tag": "Processus"
+    },
+    {
+      "id": "c-5.2-02",
+      "front": "Risk register",
+      "back": "Registre vivant : description, propriétaire, score, traitement prévu, échéance, date de revue. Sans registre, les risques acceptés sont oubliés.",
+      "tag": "Processus"
+    },
+    {
+      "id": "c-5.2-03",
+      "front": "Analyse qualitative",
+      "back": "Échelles faible/moyen/élevé ou 1 à 5, matrice probabilité × impact. Rapide et compréhensible, mais subjective et peu précise financièrement.",
+      "tag": "Analyse"
+    },
+    {
+      "id": "c-5.2-04",
+      "front": "Analyse quantitative",
+      "back": "Valeurs monétaires : SLE, ALE, ARO. Permet de comparer le risque au coût d'un contrôle. Exige des données historiques fiables.",
+      "tag": "Analyse"
+    },
+    {
+      "id": "c-5.2-05",
+      "front": "SLE — Single Loss Expectancy",
+      "back": "Perte attendue pour un événement : valeur de l'actif × facteur d'exposition (EF). Exemple : 100 000 € × 0,4 = 40 000 €.",
+      "tag": "Calcul"
+    },
+    {
+      "id": "c-5.2-06",
+      "front": "ARO — Annualized Rate of Occurrence",
+      "back": "Nombre d'événements par an. Une fois tous les deux ans = 0,5 ; deux fois par an = 2.",
+      "tag": "Calcul"
+    },
+    {
+      "id": "c-5.2-07",
+      "front": "ALE — Annualized Loss Expectancy",
+      "back": "Perte annualisée : SLE × ARO. Exemple : 40 000 € × 0,5 = 20 000 €/an. C'est le chiffre à comparer au coût annuel d'un contrôle.",
+      "tag": "Calcul"
+    },
+    {
+      "id": "c-5.2-08",
+      "front": "Actif 200 000 €, EF 25 %, ARO 2. Quel est l'ALE ?",
+      "back": "SLE = 200 000 × 0,25 = 50 000 €. ALE = 50 000 × 2 = 100 000 €/an. Ne pas oublier l'EF : 200 000 × 2 = 400 000 € est faux.",
+      "tag": "Piège d'examen"
+    },
+    {
+      "id": "c-5.2-09",
+      "front": "Exposure Factor (EF)",
+      "back": "Pourcentage de la valeur de l'actif perdu lors d'un événement. Décrit l'ampleur, pas la fréquence (qui est l'ARO).",
+      "tag": "Calcul"
+    },
+    {
+      "id": "c-5.2-10",
+      "front": "Un contrôle coûte 25 000 €/an et fait passer l'ALE de 30 000 € à 8 000 €. Est-il rentable ?",
+      "back": "Économie = 22 000 €/an, coût = 25 000 €/an. Non rentable en l'état : négocier le prix, choisir un contrôle moins coûteux, ou accepter le risque avec documentation.",
+      "tag": "Décision"
+    },
+    {
+      "id": "c-5.2-11",
+      "front": "Risk mitigation",
+      "back": "Réduire la probabilité ou l'impact : EDR, MFA, segmentation, sauvegardes, formation. Le traitement le plus courant ; son coût se compare à l'ALE.",
+      "tag": "Traitement"
+    },
+    {
+      "id": "c-5.2-12",
+      "front": "Risk transfer",
+      "back": "Déplacer la perte vers un tiers : assurance cyber, clause contractuelle. Ne supprime pas le risque réputationnel ni la responsabilité.",
+      "tag": "Traitement"
+    },
+    {
+      "id": "c-5.2-13",
+      "front": "Risk avoidance",
+      "back": "Supprimer l'activité à risque : ne pas collecter une donnée inutile, ne pas ouvrir un service. Efficace mais parfois impossible ou trop coûteux.",
+      "tag": "Traitement"
+    },
+    {
+      "id": "c-5.2-14",
+      "front": "Risk acceptance",
+      "back": "Assumer le risque, de façon documentée et autorisée, avec une date de revue. Une acceptation non signée n'est pas une acceptation.",
+      "tag": "Traitement"
+    },
+    {
+      "id": "c-5.2-15",
+      "front": "Risque inhérent vs risque résiduel",
+      "back": "Inhérent (brut) : avant tout contrôle. Résiduel : ce qui reste après les contrôles. Le résiduel doit être formellement accepté.",
+      "tag": "Concept"
+    },
+    {
+      "id": "c-5.2-16",
+      "front": "Appétit au risque",
+      "back": "Niveau de risque que l'organisation accepte de rechercher pour atteindre ses objectifs. Décision de direction, traduite en seuils concrets.",
+      "tag": "Concept"
+    },
+    {
+      "id": "c-5.2-17",
+      "front": "Tolérance au risque",
+      "back": "Écart acceptable autour de la cible avant déclenchement d'une action. Différente de l'appétit : l'appétit est le niveau visé, la tolérance est la marge.",
+      "tag": "Concept"
+    },
+    {
+      "id": "c-5.2-18",
+      "front": "BIA — Business Impact Analysis",
+      "back": "Identifie les processus critiques, leur MTD, leur RTO et leur RPO. Relie le risque technique à la continuité d'activité.",
+      "tag": "Continuité"
+    },
+    {
+      "id": "c-5.2-19",
+      "front": "MTD, RTO, RPO",
+      "back": "MTD : indisponibilité maximale tolérable. RTO : délai visé de rétablissement. RPO : perte de données acceptable (fréquence des sauvegardes). Toujours RTO < MTD.",
+      "tag": "Continuité"
+    },
+    {
+      "id": "c-5.2-20",
+      "front": "Qui décide de l'acceptation d'un risque ?",
+      "back": "Une autorité identifiée, généralement la direction ou le propriétaire du risque, sur avis du RSSI. Le RSSI ne porte pas seul le risque : c'est une décision de gouvernance.",
+      "tag": "Gouvernance"
+    },
+    {
+      "id": "c-5.2-21",
+      "front": "Pourquoi revoir un risque accepté ?",
+      "back": "Parce que l'actif, la menace, la probabilité ou l'impact changent. Une acceptation sans date de revue devient une décision obsolète et dangereuse.",
+      "tag": "Suivi"
+    },
+    {
+      "id": "c-5.2-22",
+      "front": "Erreur classique dans un calcul d'ALE",
+      "back": "Multiplier directement la valeur de l'actif par l'ARO en oubliant l'EF. Toujours deux opérations : SLE = valeur × EF, puis ALE = SLE × ARO.",
+      "tag": "Piège d'examen"
+    }
+  ]
+}

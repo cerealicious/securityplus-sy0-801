@@ -1,0 +1,481 @@
+[
+  {
+    "id": "4.4-01",
+    "objective": "4.4",
+    "order": 1,
+    "title": "Ressources surveillées et activités de supervision",
+    "minutes": 16,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Superviser, ce n'est pas « tout collecter ». C'est choisir **quelles ressources** produisent des signaux utiles, puis transformer ces signaux en informations exploitables : agrégation, alertes, archivage, reporting et réglage."
+      },
+      {
+        "type": "h",
+        "text": "Trois niveaux de ressources"
+      },
+      {
+        "type": "p",
+        "text": "Les *11 Strategies* rappellent qu'un SOC doit d'abord savoir **ce qu'il protège et pourquoi**, puis collecter les bonnes données. On distingue la supervision des **systèmes** (CPU, mémoire, disque, services), des **applications** (erreurs, latence, transactions) et de l'**infrastructure** (routeurs, pare-feu, flux réseau)."
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Fundamentals",
+        "page": 39,
+        "printed": 19,
+        "strength": "supporting",
+        "note": "Connaître ce que l'on protège et pourquoi"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Niveau",
+          "Signaux typiques",
+          "Question répondue"
+        ],
+        "rows": [
+          [
+            "Systems monitoring",
+            "CPU, mémoire, disque, processus, services",
+            "Le serveur tient-il la charge ?"
+          ],
+          [
+            "Application monitoring",
+            "Erreurs, latence, transactions, journaux applicatifs",
+            "Le service métier fonctionne-t-il ?"
+          ],
+          [
+            "Infrastructure monitoring",
+            "Interfaces, flux, pare-feu, disponibilité réseau",
+            "Le chemin réseau est-il sain ?"
+          ]
+        ]
+      },
+      {
+        "type": "h",
+        "text": "Les six activités de la supervision"
+      },
+      {
+        "type": "term",
+        "en": "Log aggregation",
+        "fr": "Agrégation des journaux",
+        "field": "Collecte centralisée des événements provenant de sources hétérogènes dans un format et un horodatage cohérents. Étape indispensable avant corrélation.",
+        "gap": false
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "20",
+        "page": 247,
+        "printed": 225,
+        "strength": "primary",
+        "note": "Logging and Monitoring : collecte et exploitation des journaux"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Log aggregation** : centraliser et normaliser les événements.",
+          "**Alerting** : transformer une condition en notification actionnable.",
+          "**Scanning** : mesurer en continu l'état de surface des actifs.",
+          "**Archiving** : conserver les journaux selon la durée légale et métier.",
+          "**Reporting** : produire des vues périodiques pour les parties prenantes.",
+          "**Alert tuning** : réduire le bruit sans perdre les vraies détections."
+        ]
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 190,
+        "strength": "supporting",
+        "note": "SIEM, agrégation et lecture de logs"
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "Ne confondez pas **agrégation** (rassembler les événements) et **corrélation** (relier des événements entre eux pour révéler un scénario). L'agrégation vient d'abord."
+      },
+      {
+        "type": "h",
+        "text": "Archiver n'est pas supprimer"
+      },
+      {
+        "type": "p",
+        "text": "L'**archivage** conserve les journaux dans un stockage souvent immuable et moins coûteux, avec une durée de rétention définie par la réglementation et les besoins d'investigation. Un journal archivé doit rester **recherchable** : sinon il ne sert ni à la conformité ni à l'analyse."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "20",
+        "page": 254,
+        "printed": 232,
+        "strength": "primary",
+        "note": "Conservation et exploitation des journaux"
+      },
+      {
+        "type": "check",
+        "q": "Quelle activité doit précéder la corrélation d'événements provenant de plusieurs équipements ?",
+        "options": [
+          "L'archivage",
+          "L'agrégation des journaux",
+          "Le reporting",
+          "Le réglage des alertes"
+        ],
+        "answer": 1,
+        "explain": "On ne peut corréler que des événements collectés et normalisés au préalable : l'agrégation est le prérequis."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Surveiller les systèmes, les applications et l'infrastructure.",
+          "Agrégation → corrélation → alerte → archivage → reporting → tuning.",
+          "Un journal archivé doit rester recherchable et intact.",
+          "Le tuning réduit le bruit sans sacrifier les vraies détections."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "4.4-02",
+    "objective": "4.4",
+    "order": 2,
+    "title": "Outils et télémétrie : SIEM, NetFlow, SNMP, syslog, SCAP",
+    "minutes": 18,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Le cœur de la supervision est un **SIEM** alimenté par plusieurs protocoles de télémétrie. L'examen attend que vous sachiez quel outil produit quoi, et surtout à quoi sert chaque protocole."
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Strategy 8",
+        "page": 263,
+        "printed": 243,
+        "strength": "primary",
+        "note": "Leverage Tools : SIEM et outils d'analyse"
+      },
+      {
+        "type": "term",
+        "en": "SIEM — Security Information and Event Management",
+        "fr": "Gestion des informations et événements de sécurité",
+        "field": "Plateforme qui agrège, normalise, corrèle, stocke et alerte à partir des journaux de toute l'organisation. C'est le point de convergence, pas un capteur.",
+        "gap": false
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 190,
+        "strength": "supporting",
+        "note": "Définition et rôle du SIEM"
+      },
+      {
+        "type": "h",
+        "text": "Huit outils à connaître"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Outil",
+          "Rôle principal"
+        ],
+        "rows": [
+          [
+            "Benchmarks",
+            "Référentiel de configuration attendue (CIS, STIG), sert de comparateur"
+          ],
+          [
+            "Agents / agentless",
+            "Collecte locale (agent) ou à distance sans logiciel installé (agentless)"
+          ],
+          [
+            "SIEM",
+            "Agrégation, corrélation, alerte, conservation"
+          ],
+          [
+            "Antivirus",
+            "Détection et blocage de malwares sur les hôtes"
+          ],
+          [
+            "DLP",
+            "Détection et blocage des fuites de données"
+          ],
+          [
+            "Vulnerability scanners",
+            "Mesure de la surface de vulnérabilités"
+          ],
+          [
+            "Orchestration",
+            "Enchaînement automatique d'actions (SOAR)"
+          ],
+          [
+            "Packet analyzer",
+            "Inspection fine du trafic (Wireshark, tcpdump)"
+          ]
+        ]
+      },
+      {
+        "type": "h",
+        "text": "Les protocoles de télémétrie"
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "syslog",
+          "points": [
+            "Messages d'événements envoyés par les équipements réseau et systèmes.",
+            "Standard simple, très répandu, transport UDP/TCP.",
+            "Répond à « que s'est-il passé sur cet équipement ? »"
+          ]
+        },
+        "right": {
+          "title": "NetFlow / IPFIX",
+          "points": [
+            "Statistiques de flux : qui parle à qui, sur quel port, pendant combien de temps.",
+            "Pas de contenu des paquets, mais une vision des communications.",
+            "Répond à « quelles conversations réseau ont eu lieu ? »"
+          ]
+        }
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Strategy 7",
+        "page": 228,
+        "printed": 208,
+        "strength": "supporting",
+        "note": "NetFlow et collecte du bon trafic réseau"
+      },
+      {
+        "type": "term",
+        "en": "SNMP — Simple Network Management Protocol",
+        "fr": "Protocole simple de gestion réseau",
+        "field": "Interrogation des équipements réseau pour lire des compteurs (interface, charge, erreurs) ou recevoir des traps (notifications d'événement).",
+        "gap": false
+      },
+      {
+        "type": "source",
+        "book": "NET",
+        "chapter": "—",
+        "page": 21,
+        "strength": "supporting",
+        "note": "Protocoles et analyse réseau comme prérequis"
+      },
+      {
+        "type": "term",
+        "en": "SCAP — Security Content Automation Protocol",
+        "fr": "Protocole d'automatisation du contenu de sécurité",
+        "field": "Standard qui normalise la mesure de conformité et de vulnérabilités (catalogues, règles, résultats) pour automatiser les benchmarks et comparer les outils entre eux.",
+        "gap": true
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "**SCAP** est listé dans le référentiel §4.4 (Protocols and telemetry) mais aucun des quatre livres ne le décrit. Définition issue du référentiel et des usages de la discipline."
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "page": "4.4",
+        "strength": "primary",
+        "note": "Référentiel officiel — SCAP : aucun des 4 livres"
+      },
+      {
+        "type": "p",
+        "text": "Le **miroir de port** (SPAN) copie le trafic d'un port ou d'un VLAN vers un analyseur ou un capteur, sans interrompre la circulation. Contrairement à un tap, il dépend du switch et peut perdre des paquets en cas de saturation."
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-log-flow"
+      },
+      {
+        "type": "check",
+        "q": "Quel protocole fournit des statistiques de conversations réseau (qui parle à qui, sur quel port) plutôt que des messages d'événement ?",
+        "options": [
+          "syslog",
+          "SNMP",
+          "NetFlow",
+          "SCAP"
+        ],
+        "answer": 2,
+        "explain": "NetFlow/IPFIX décrit les flux. syslog transporte des messages d'événements, SNMP des compteurs et traps, SCAP des résultats de conformité."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Le SIEM agrège, corrèle, alerte et archive : c'est une plateforme, pas un capteur.",
+          "syslog = événements ; NetFlow = conversations ; SNMP = compteurs et traps.",
+          "Le miroir de port copie le trafic vers un capteur sans l'interrompre.",
+          "SCAP normalise les benchmarks : notion hors livres, §4.4."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "4.4-03",
+    "objective": "4.4",
+    "order": 3,
+    "title": "Alertes automatisées, réglage et tableaux de bord",
+    "minutes": 15,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Une alerte utile est **actionnable** : elle dit quoi regarder, pourquoi et avec quelle urgence. Le réglage (*tuning*) est le travail permanent qui évite que le SIEM ne devienne une usine à faux positifs."
+      },
+      {
+        "type": "h",
+        "text": "De l'événement à l'alerte"
+      },
+      {
+        "type": "steps",
+        "items": [
+          {
+            "title": "Collecte",
+            "text": "Les sources envoient syslog, flux NetFlow, traps SNMP ou agent vers le SIEM."
+          },
+          {
+            "title": "Normalisation",
+            "text": "Horodatage, format et identité des actifs sont harmonisés."
+          },
+          {
+            "title": "Corrélation",
+            "text": "Les règles relient plusieurs événements pour reconnaître un scénario."
+          },
+          {
+            "title": "Alerte",
+            "text": "Une notification est émise avec sévérité, contexte et destinataire."
+          },
+          {
+            "title": "Tri et tuning",
+            "text": "L'analyste qualifie le résultat et ajuste la règle pour réduire le bruit."
+          }
+        ]
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Strategy 7",
+        "page": 206,
+        "printed": 186,
+        "strength": "primary",
+        "note": "Sélectionner et collecter les bonnes données, éviter le bruit"
+      },
+      {
+        "type": "h",
+        "text": "Qualifier correctement les résultats"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Résultat",
+          "L'activité a eu lieu",
+          "L'alerte a été déclenchée"
+        ],
+        "rows": [
+          [
+            "Vrai positif",
+            "Oui",
+            "Oui — incident réel détecté"
+          ],
+          [
+            "Faux positif",
+            "Non",
+            "Oui — bruit à éliminer par tuning"
+          ],
+          [
+            "Faux négatif",
+            "Oui",
+            "Non — le plus dangereux, détection manquée"
+          ],
+          [
+            "Vrai négatif",
+            "Non",
+            "Non — comportement normal"
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "20",
+        "page": 250,
+        "printed": 228,
+        "strength": "primary",
+        "note": "Lecture de journaux et interprétation des événements"
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "Piège classique : un **vrai positif** est un incident réel **détecté et bloqué** ; un **faux négatif** est un incident réel **non détecté**. Les inverser est une erreur fréquente dans les QCM."
+      },
+      {
+        "type": "h",
+        "text": "Alert tuning : réduire le bruit sans devenir aveugle"
+      },
+      {
+        "type": "term",
+        "en": "Alert tuning",
+        "fr": "Réglage des alertes",
+        "field": "Ajustement documenté des seuils, exclusions et corrélations pour supprimer les alertes sans valeur tout en conservant la sensibilité aux vraies attaques.",
+        "gap": false
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "Identifier la règle qui génère le plus de faux positifs.",
+          "Comprendre la cause : tâche planifiée légitime, version logicielle, horodatage.",
+          "Ajuster le seuil ou exclure **précisément** la source (pas toute la règle).",
+          "Documenter la modification et sa date.",
+          "Mesurer l'effet : volume d'alertes et impact sur la détection."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "warning",
+        "text": "Désactiver une règle entière pour faire taire une alerte répétitive supprime aussi la détection des vraies attaques. Préférez une exclusion ciblée et justifiée."
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Strategy 7",
+        "page": 211,
+        "printed": 191,
+        "strength": "supporting",
+        "note": "Réglage et qualité des données collectées"
+      },
+      {
+        "type": "h",
+        "text": "Dashboards et systèmes de gestion réseau"
+      },
+      {
+        "type": "p",
+        "text": "Un **dashboard** donne une vue synthétique et à jour : volume d'alertes, actifs affectés, délais de traitement, état des capteurs. Le **NMS** (Network Management System) consolide l'état des équipements et leurs alarmes. Ce sont des sorties, pas des sources : elles doivent refléter les données collectées en amont."
+      },
+      {
+        "type": "check",
+        "q": "Une règle déclenche 300 alertes par jour, toutes causées par une sauvegarde nocturne légitime. Quelle est la meilleure action ?",
+        "options": [
+          "Supprimer la règle entière",
+          "Exclure précisément la source de sauvegarde et documenter l'exclusion",
+          "Augmenter le nombre d'analystes",
+          "Désactiver la journalisation de la sauvegarde"
+        ],
+        "answer": 1,
+        "explain": "Une exclusion ciblée élimine le bruit sans priver la règle de sa capacité à détecter de vraies attaques. La documenter permet de la réévaluer."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Une alerte actionnable indique quoi regarder, pourquoi et avec quelle urgence.",
+          "Vrai positif = incident détecté ; faux négatif = incident non détecté.",
+          "Le tuning ajuste précisément, documente et mesure son effet.",
+          "Dashboards et NMS sont des vues, pas des sources."
+        ]
+      }
+    ]
+  }
+]

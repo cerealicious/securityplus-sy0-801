@@ -1,0 +1,90 @@
+{
+  "id": "sc-4.1-control-choice",
+  "objective": "4.1",
+  "title": "Attaque web : sélectionner les contrôles",
+  "context": "Une application web publique subit des injections SQL et des tentatives d'exfiltration de données clients. Vous devez poser trois contrôles pertinents et justifier leurs limites.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "Quel contrôle bloque les injections SQL dans le trafic HTTP avant l'application ?",
+      "choices": [
+        {
+          "text": "Un WAF placé devant l'application web",
+          "next": "n2",
+          "score": 4,
+          "why": "Le WAF inspecte la couche applicative HTTP et bloque les motifs d'injection."
+        },
+        {
+          "text": "Un NIDS en mode détection sur le segment",
+          "next": "n2",
+          "score": 1,
+          "why": "Le NIDS alerterait mais ne bloquerait pas la requête."
+        },
+        {
+          "text": "Un honeypot dans la DMZ",
+          "next": "n2",
+          "score": 0,
+          "why": "Le leurre aide à détecter, pas à bloquer une attaque sur l'application réelle."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "Les attaquants tentent maintenant d'exfiltrer des fichiers clients depuis un poste interne. Quel contrôle cible le mieux ce risque ?",
+      "choices": [
+        {
+          "text": "DLP sur l'agent endpoint et en sortie réseau",
+          "next": "n3",
+          "score": 4,
+          "why": "Le DLP identifie les données sensibles et bloque leur sortie, sur le poste ou au proxy."
+        },
+        {
+          "text": "HIPS sur le serveur web uniquement",
+          "next": "n3",
+          "score": 1,
+          "why": "Le HIPS protège l'hôte, pas le flux de données sortant du poste."
+        },
+        {
+          "text": "BIMI dans la messagerie",
+          "next": "n3",
+          "score": 0,
+          "why": "BIMI affiche un logo de marque : sans rapport avec l'exfiltration."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "Pour détecter tôt un attaquant qui cherche des comptes, quel leurre déployer ?",
+      "choices": [
+        {
+          "text": "Un honeytoken et un canary account jamais utilisés légitimement",
+          "next": "n4",
+          "score": 4,
+          "why": "Toute utilisation de ces appâts est un signal de forte confiance, sans faux positif métier."
+        },
+        {
+          "text": "Un compte administrateur réel avec un mot de passe faible",
+          "next": "n4",
+          "score": 0,
+          "why": "Un vrai compte faible est une vulnérabilité, pas un leurre contrôlé."
+        },
+        {
+          "text": "Désactiver la journalisation pour réduire le bruit",
+          "next": "n4",
+          "score": 0,
+          "why": "Sans journal, vous perdez justement le signal."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "Vous avez bloqué l'injection en couche applicative, arrêté l'exfiltration par DLP et détecté la phase de reconnaissance par des leurres."
+    }
+  },
+  "debrief": [
+    "Le WAF protège la couche applicative ; le NIDS alerte sans bloquer.",
+    "Le DLP agit sur les données sortantes, l'EDR/XDR sur le comportement des endpoints.",
+    "Les leurres (honeytoken, canary) produisent des signaux à haute valeur, sans faux positif."
+  ]
+}

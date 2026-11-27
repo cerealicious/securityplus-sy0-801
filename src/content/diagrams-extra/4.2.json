@@ -1,0 +1,110 @@
+{
+  "diagrams": [
+    {
+      "id": "d-4.2-asset-lifecycle",
+      "kind": "flow",
+      "title": "Cycle de vie d'un actif : Procure → Deploy → Manage → Decommission",
+      "subtitle": "Cliquez chaque étape pour voir les contrôles à appliquer et la preuve qu'elle produit.",
+      "modes": [
+        "explore",
+        "quiz",
+        "order"
+      ],
+      "nodes": [
+        {
+          "id": "plan",
+          "label": "Plan / scope",
+          "sub": "Besoin et criticité",
+          "x": 20,
+          "y": 45,
+          "w": 140,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "Définir le besoin, la criticité métier, les exigences de sécurité et la durée de vie prévue avant toute dépense.",
+          "exam": "Sans planification, l'achat crée un actif fantôme."
+        },
+        {
+          "id": "procure",
+          "label": "Procure",
+          "sub": "Acquisition / achat",
+          "x": 180,
+          "y": 45,
+          "w": 140,
+          "h": 60,
+          "kind": "step",
+          "detail": "Inscrire au cahier des charges chiffrement, durée de support, conformité et possibilité d'effacement certifié.",
+          "exam": "Les exigences de sécurité s'écrivent avant l'achat, pas après."
+        },
+        {
+          "id": "deploy",
+          "label": "Deploy",
+          "sub": "Assign / accounting",
+          "x": 340,
+          "y": 45,
+          "w": 140,
+          "h": 60,
+          "kind": "step",
+          "detail": "Nommer un propriétaire, enregistrer l'actif dans l'inventaire, étiqueter et documenter l'usage autorisé.",
+          "exam": "La fiche d'actif relie propriétaire, criticité, version et données traitées."
+        },
+        {
+          "id": "manage",
+          "label": "Manage",
+          "sub": "Monitor / tracking",
+          "x": 500,
+          "y": 45,
+          "w": 140,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Suivre patchs, mouvements et usage via découverte réseau, MDM et CMDB ; détecter le shadow IT.",
+          "exam": "Un écart entre inventaire et réel signale un appareil rogue à investiguer."
+        },
+        {
+          "id": "decommission",
+          "label": "Decommission",
+          "sub": "Disposal / destruction",
+          "x": 660,
+          "y": 45,
+          "w": 150,
+          "h": 60,
+          "kind": "risk",
+          "detail": "Effacer ou détruire les supports, révoquer comptes et licences, respecter les rétentions légales et produire un certificat de destruction.",
+          "exam": "La mise au rebut sans preuve laisse l'actif exposé au vol de données."
+        }
+      ],
+      "edges": [
+        {
+          "from": "plan",
+          "to": "procure",
+          "label": "besoin validé"
+        },
+        {
+          "from": "procure",
+          "to": "deploy",
+          "label": "actif reçu"
+        },
+        {
+          "from": "deploy",
+          "to": "manage",
+          "label": "inventorié"
+        },
+        {
+          "from": "manage",
+          "to": "decommission",
+          "label": "fin de support"
+        }
+      ],
+      "sequence": [
+        "plan",
+        "procure",
+        "deploy",
+        "manage",
+        "decommission"
+      ],
+      "quiz": {
+        "question": "Quelle étape produit un certificat de destruction et révoque les accès associés ?",
+        "answer": "decommission"
+      }
+    }
+  ]
+}

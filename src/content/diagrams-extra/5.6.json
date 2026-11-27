@@ -1,0 +1,98 @@
+{
+  "diagrams": [
+    {
+      "id": "d-5.6-awareness-program",
+      "kind": "flow",
+      "title": "Le programme de sensibilisation en boucle",
+      "subtitle": "Analyser, former, cibler, corriger, mesurer — puis recommencer avec des données nouvelles.",
+      "modes": ["explore", "quiz", "order"],
+      "sequence": ["analyse", "initial", "ongoing", "targeted", "corrective", "measure"],
+      "quiz": {
+        "question": "Quelle étape est déclenchée par une erreur individuelle constatée ?",
+        "answer": "corrective"
+      },
+      "nodes": [
+        {
+          "id": "analyse",
+          "label": "Analyse des risques",
+          "sub": "publics et menaces",
+          "x": 20,
+          "y": 60,
+          "w": 160,
+          "h": 62,
+          "kind": "neutral",
+          "detail": "Identifier les publics, les comportements à risque et les thèmes à traiter : phishing, BEC, télétravail, OPSEC.",
+          "exam": "Le programme part des risques et des rôles, pas d'un catalogue de cours."
+        },
+        {
+          "id": "initial",
+          "label": "Formation initiale",
+          "sub": "onboarding",
+          "x": 200,
+          "y": 60,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Accueil du nouvel arrivant : politique, AUP, accès et règles de base avant la prise de poste.",
+          "exam": "Déclencheur = arrivée."
+        },
+        {
+          "id": "ongoing",
+          "label": "Formation continue",
+          "sub": "LMS · portails · collectif",
+          "x": 380,
+          "y": 60,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Modules périodiques pour tous via LMS, portails self-service ou diffusion one-to-many.",
+          "exam": "Déclencheur = échéance calendaire. LMS est une notion du §5.6 absente des livres."
+        },
+        {
+          "id": "targeted",
+          "label": "Formation ciblée",
+          "sub": "rôle ou risque spécifique",
+          "x": 560,
+          "y": 60,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "BEC pour la comptabilité, MFA pour les administrateurs, télétravail pour les équipes distribuées.",
+          "exam": "Déclencheur = risque lié au rôle ou au contexte."
+        },
+        {
+          "id": "corrective",
+          "label": "Formation corrective",
+          "sub": "après erreur ou incident",
+          "x": 740,
+          "y": 60,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Reprise individuelle après un clic sur phishing simulé ou une erreur d'envoi de données.",
+          "exam": "Déclencheur = erreur constatée."
+        },
+        {
+          "id": "measure",
+          "label": "Mesure et pilotage",
+          "sub": "métriques · rapports · scoring",
+          "x": 380,
+          "y": 220,
+          "w": 240,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Taux de participation et de réussite, taux de clic et de signalement, score de risque comportemental, rapport à la direction.",
+          "exam": "La hausse du signalement est un signe de vigilance, pas un échec."
+        }
+      ],
+      "edges": [
+        { "from": "analyse", "to": "initial", "label": "arrivée" },
+        { "from": "initial", "to": "ongoing", "label": "pursuivre" },
+        { "from": "ongoing", "to": "targeted", "label": "cibler" },
+        { "from": "targeted", "to": "corrective", "label": "corriger" },
+        { "from": "corrective", "to": "measure", "label": "évaluer" },
+        { "from": "measure", "to": "analyse", "label": "réorienter" }
+      ]
+    }
+  ]
+}

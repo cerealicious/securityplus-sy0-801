@@ -1,0 +1,123 @@
+{
+  "diagrams": [
+    {
+      "id": "d-1.2-cab-flow",
+      "kind": "flow",
+      "title": "Du ticket au CAB : le flux d'une demande de changement",
+      "subtitle": "Cliquez chaque étape pour voir ce qui est exigé avant de passer à la suivante.",
+      "modes": ["explore", "order", "quiz"],
+      "nodes": [
+        {
+          "id": "ticket",
+          "label": "Ticket",
+          "sub": "Demande de changement",
+          "x": 10,
+          "y": 40,
+          "w": 150,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "La demande décrit le changement, sa justification, le système concerné, le propriétaire et les parties prenantes. Sans ticket, il n'y a ni trace ni responsable.",
+          "exam": "Le ticket n'est pas une formalité : c'est la preuve que le changement a été demandé et cadré."
+        },
+        {
+          "id": "owner",
+          "label": "Owner & stakeholders",
+          "sub": "Responsabilités",
+          "x": 185,
+          "y": 40,
+          "w": 160,
+          "h": 60,
+          "kind": "actor",
+          "detail": "Le owner porte le dossier jusqu'à la clôture. Les stakeholders (métier, support, sécurité, fournisseurs) sont identifiés et consultés.",
+          "exam": "Si une question demande « qui est responsable ? », répondez le propriétaire du changement, pas le CAB."
+        },
+        {
+          "id": "impact",
+          "label": "Impact analysis",
+          "sub": "Disponibilité · sécurité · dépendances",
+          "x": 370,
+          "y": 40,
+          "w": 170,
+          "h": 60,
+          "kind": "risk",
+          "detail": "Analyse des services touchés, de la downtime, des redémarrages, des applications legacy, des dépendances et des effets sur les allow/deny lists et contrôles de sécurité.",
+          "exam": "Une analyse d'impact incomplète est la cause la plus fréquente d'incident lié à un changement."
+        },
+        {
+          "id": "cab",
+          "label": "CAB",
+          "sub": "Examen et approbation",
+          "x": 565,
+          "y": 40,
+          "w": 150,
+          "h": 60,
+          "kind": "actor",
+          "detail": "Le Change Advisory Board statue : approuvé, refusé, ou approuvé sous conditions (tests supplémentaires, fenêtre précise). La décision est consignée.",
+          "exam": "Le CAB n'applique pas le changement : il l'évalue et l'autorise."
+        },
+        {
+          "id": "window",
+          "label": "Fenêtre",
+          "sub": "Maintenance window",
+          "x": 565,
+          "y": 150,
+          "w": 150,
+          "h": 60,
+          "kind": "step",
+          "detail": "Créneau à faible impact, annoncé aux métiers, avec une durée suffisante pour le déploiement ET l'éventuel backout.",
+          "exam": "Une fenêtre trop courte rend le backout illusoire."
+        },
+        {
+          "id": "tests",
+          "label": "Tests",
+          "sub": "Résultats consignés",
+          "x": 370,
+          "y": 150,
+          "w": 170,
+          "h": 60,
+          "kind": "step",
+          "detail": "Validation en environnement de test puis en production, avec résultats documentés dans le dossier de changement.",
+          "exam": "Des tests réussis ne dispensent pas du plan de retour arrière."
+        },
+        {
+          "id": "backout",
+          "label": "Backout / fail forward",
+          "sub": "Décision de repli",
+          "x": 185,
+          "y": 150,
+          "w": 160,
+          "h": 60,
+          "kind": "risk",
+          "detail": "Backout : revenir à l'état antérieur. Fail forward : avancer avec un correctif quand le retour est impossible ou plus risqué. La décision est explicite.",
+          "exam": "Le fail forward ne signifie pas « improviser » : il doit être documenté et validé."
+        },
+        {
+          "id": "docs",
+          "label": "Documentation",
+          "sub": "Diagrammes · SOP · version control",
+          "x": 10,
+          "y": 150,
+          "w": 150,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Mise à jour des diagrammes, des politiques/procédures et du version control, puis clôture du ticket.",
+          "exam": "Un changement non documenté rend la prochaine analyse d'impact fausse."
+        }
+      ],
+      "edges": [
+        { "from": "ticket", "to": "owner", "label": "cadrer" },
+        { "from": "owner", "to": "impact", "label": "évaluer" },
+        { "from": "impact", "to": "cab", "label": "soumettre" },
+        { "from": "cab", "to": "window", "label": "approuver" },
+        { "from": "window", "to": "tests", "label": "exécuter" },
+        { "from": "tests", "to": "backout", "label": "décider" },
+        { "from": "backout", "to": "docs", "label": "clore" }
+      ],
+      "sequence": ["ticket", "owner", "impact", "cab", "window", "tests", "backout", "docs"],
+      "quiz": {
+        "question": "Quelle étape décide formellement de l'approbation d'un changement ?",
+        "answer": "cab"
+      }
+    }
+  ]
+}

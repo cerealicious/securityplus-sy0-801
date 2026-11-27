@@ -1,0 +1,18 @@
+{
+  "id": "pbq-1.3-pki",
+  "objective": "1.3",
+  "type": "order",
+  "title": "Reconstituer le cycle d'émission d'un certificat",
+  "prompt": "Remettez dans l'ordre les étapes de l'obtention et de la validation d'un certificat serveur, depuis la génération des clés jusqu'à la révocation en cas de compromission.",
+  "items": [
+    { "id": "s1", "label": "Générer la paire de clés localement et conserver la clé privée", "order": 1 },
+    { "id": "s2", "label": "Créer le CSR avec la clé publique et l'identité (CN, SAN)", "order": 2 },
+    { "id": "s3", "label": "Soumettre le CSR à l'autorité de certification", "order": 3 },
+    { "id": "s4", "label": "La CA valide l'identité du demandeur selon sa politique", "order": 4 },
+    { "id": "s5", "label": "La CA signe le certificat avec sa clé privée", "order": 5 },
+    { "id": "s6", "label": "Déployer le certificat et la chaîne intermédiaire sur le serveur", "order": 6 },
+    { "id": "s7", "label": "Le client valide la chaîne, la validité et le nom d'hôte", "order": 7 },
+    { "id": "s8", "label": "En cas de compromission, demander la révocation (CRL/OCSP)", "order": 8 }
+  ],
+  "explain": "La clé privée ne quitte jamais le demandeur : le CSR ne transporte que la clé publique et une preuve de possession. La CA valide puis signe. Le client remonte la chaîne jusqu'à une racine de confiance et vérifie la révocation. La révocation intervient après l'émission, en cas de compromission ou de départ."
+}

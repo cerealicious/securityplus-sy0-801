@@ -1,0 +1,90 @@
+{
+  "id": "sc-4.4-alert-tuning",
+  "objective": "4.4",
+  "title": "Refuser une alerte, sans devenir aveugle",
+  "context": "Votre SIEM génère 500 alertes par jour. Les analystes sont saturés et vous devez reprendre le contrôle de la supervision en trois décisions.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "Avant de modifier quoi que ce soit, quelle analyse conduisez-vous ?",
+      "choices": [
+        {
+          "text": "Identifier les règles qui produisent le plus de faux positifs et comprendre leur cause",
+          "next": "n2",
+          "score": 4,
+          "why": "Le tuning doit cibler les règles bruyantes et comprendre pourquoi elles le sont."
+        },
+        {
+          "text": "Désactiver toutes les règles pendant une semaine",
+          "next": "n2",
+          "score": 0,
+          "why": "On perdrait toute détection pendant cette période."
+        },
+        {
+          "text": "Recruter davantage d'analystes pour absorber le volume",
+          "next": "n2",
+          "score": 1,
+          "why": "Cela traite le symptôme, pas la cause, et reste coûteux."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "Une règle « échec de connexion » alerte 200 fois par jour à cause d'une tâche de sauvegarde connue. Que faites-vous ?",
+      "choices": [
+        {
+          "text": "Exclure précisément le compte de sauvegarde, documenter l'exclusion et fixer une date de révision",
+          "next": "n3",
+          "score": 4,
+          "why": "L'exclusion ciblée supprime le bruit sans priver la règle de sa capacité à détecter de vraies attaques."
+        },
+        {
+          "text": "Supprimer la règle entière",
+          "next": "n3",
+          "score": 0,
+          "why": "Les vraies tentatives de force brute ne seraient plus détectées."
+        },
+        {
+          "text": "Ignorer les alertes sans trace écrite",
+          "next": "n3",
+          "score": 1,
+          "why": "Sans documentation, personne ne peut comprendre ni réévaluer le choix plus tard."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "Vous souhaitez désormais voir les communications est-ouest entre serveurs. Quelle source ajoutez-vous ?",
+      "choices": [
+        {
+          "text": "NetFlow/IPFIX complété par un miroir de port vers le SIEM",
+          "next": "n4",
+          "score": 4,
+          "why": "NetFlow révèle les conversations et le SPAN permet une inspection plus fine sans perturber le trafic."
+        },
+        {
+          "text": "Uniquement les journaux du pare-feu périmétrique",
+          "next": "n4",
+          "score": 1,
+          "why": "Le pare-feu périmétrique ne voit pas le trafic interne entre serveurs."
+        },
+        {
+          "text": "Désactiver la corrélation pour gagner en clarté",
+          "next": "n4",
+          "score": 0,
+          "why": "Désactiver la corrélation réduit la détection au lieu d'améliorer la visibilité."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "Vous avez réduit le bruit par un tuning ciblé et documenté, puis enrichi la collecte avec la bonne télémétrie réseau."
+    }
+  },
+  "debrief": [
+    "Le tuning s'appuie sur l'analyse des faux positifs, pas sur la suppression aveugle des règles.",
+    "Une exclusion doit être précise, documentée et réévaluée.",
+    "NetFlow et le miroir de port apportent une visibilité sur le trafic interne."
+  ]
+}

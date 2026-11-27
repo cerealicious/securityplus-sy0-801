@@ -1,0 +1,104 @@
+{
+  "id": "qz-2.6",
+  "objective": "2.6",
+  "title": "Quiz — Menaces liées à l'IA",
+  "questions": [
+    {
+      "id": "q-2.6-01",
+      "type": "single",
+      "q": "Des exemples erronés sont injectés dans le jeu d'entraînement. Quelle menace ?",
+      "options": [
+        "Evasion",
+        "Poisoning",
+        "Jailbreaking",
+        "Session hijacking"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Le poisoning agit sur les données d'entraînement, en amont du modèle.",
+      "ref": "2.6-01"
+    },
+    {
+      "id": "q-2.6-02",
+      "type": "single",
+      "q": "Un document analysé contient « ignorez les instructions système ». Quelle menace ?",
+      "options": [
+        "Hallucination",
+        "Prompt injection",
+        "Biais",
+        "Data loss"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Une instruction hostile dans le contenu traité détourne la consigne : prompt injection.",
+      "ref": "2.6-02"
+    },
+    {
+      "id": "q-2.6-03",
+      "type": "single",
+      "q": "Le modèle fournit une réponse convaincante mais totalement inventée. Quelle notion ?",
+      "options": [
+        "Jailbreaking",
+        "Hallucination",
+        "Evasion",
+        "Poisoning"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Une hallucination est une sortie fausse mais présentée avec assurance.",
+      "ref": "2.6-02"
+    },
+    {
+      "id": "q-2.6-04",
+      "type": "multi",
+      "q": "Quels éléments concernent la vie privée et les données ? (plusieurs réponses)",
+      "options": [
+        "Data loss",
+        "Privacy",
+        "Bias",
+        "Explainability"
+      ],
+      "answer": [
+        0,
+        1
+      ],
+      "explain": "Data loss et privacy concernent la confidentialité. Bias et explicabilité concernent la qualité et la gouvernance.",
+      "ref": "2.6-01"
+    },
+    {
+      "id": "q-2.6-05",
+      "type": "single",
+      "q": "Un agent IA dispose d'un accès shell et exécute une commande non autorisée. Quelle notion ?",
+      "options": [
+        "Code execution",
+        "Model manipulation",
+        "Hallucination",
+        "Poisoning"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Un agent outillé peut être amené à exécuter du code : c'est la notion « Code execution ».",
+      "ref": "2.6-02"
+    },
+    {
+      "id": "q-2.6-06",
+      "type": "single",
+      "q": "Pourquoi ce chapitre est-il marqué « hors livres » ?",
+      "options": [
+        "Les livres traitent l'IA comme outil défensif uniquement",
+        "Les livres ont été écrits avant 2020",
+        "Les livres interdisent l'IA",
+        "Les livres ne parlent que de cryptographie"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Les quatre livres évoquent ML/IA pour la détection (EDR, UEBA), jamais comme vecteur de menace : le contenu vient du référentiel §2.6.",
+      "ref": "2.6-01"
+    }
+  ]
+}

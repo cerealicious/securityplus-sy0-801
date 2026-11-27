@@ -1,0 +1,266 @@
+[
+  {
+    "id": "2.6-01",
+    "objective": "2.6",
+    "order": 1,
+    "title": "Menaces contre le modèle et les données d'IA",
+    "minutes": 14,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "L'objectif 2.6 est **nouveau dans la version 8** et aucun des quatre livres fournis ne le traite. Toutes les notions de cette leçon proviennent du **référentiel officiel §2.6** et sont signalées « Hors livres »."
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "Les livres mentionnent l'IA/ML uniquement comme **outil défensif** (détection comportementale, UEBA, EDR — SOC Notes p.109, 196 ; 11 Strategies p.193, 264). Ils ne décrivent aucune menace liée à l'usage de l'IA."
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "page": "2.6",
+        "strength": "primary",
+        "note": "Liste officielle des 13 notions — aucun livre source"
+      },
+      {
+        "type": "h",
+        "text": "Attaquer le modèle lui-même"
+      },
+      {
+        "type": "term",
+        "en": "Model manipulation",
+        "fr": "Manipulation du modèle",
+        "field": "Modification non autorisée du comportement ou des paramètres d'un modèle pour le faire agir autrement que prévu.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Poisoning",
+        "fr": "Empoisonnement",
+        "field": "Injection de données malveillantes dans les données d'entraînement pour biaiser ou fragiliser le modèle appris.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Evasion",
+        "fr": "Évasion",
+        "field": "Élaboration d'entrées adverses conçues pour contourner la détection ou la classification du modèle.",
+        "gap": true
+      },
+      {
+        "type": "p",
+        "text": "Différence à retenir : le **poisoning** agit **en amont**, pendant l'entraînement ; l'**évasion** agit **en aval**, au moment de l'inférence ; la **manipulation** vise le modèle ou ses paramètres directement."
+      },
+      {
+        "type": "h",
+        "text": "Les données comme cible et comme risque"
+      },
+      {
+        "type": "term",
+        "en": "Data loss",
+        "fr": "Perte de données",
+        "field": "Divulgation ou perte d'informations confidentielles via un système d'IA : données sensibles saisies dans un outil public, mémorisées par le modèle ou exposées dans les journaux.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Privacy",
+        "fr": "Confidentialité",
+        "field": "Risque que des données personnelles soient collectées, conservées ou restituées sans base légale ni contrôle de la personne.",
+        "gap": true
+      },
+      {
+        "type": "table",
+        "head": [
+          "Notion",
+          "Moment",
+          "Effet typique"
+        ],
+        "rows": [
+          [
+            "Poisoning",
+            "Entraînement",
+            "Le modèle apprend un comportement trompeur"
+          ],
+          [
+            "Evasion",
+            "Inférence",
+            "L'entrée contourne la détection"
+          ],
+          [
+            "Model manipulation",
+            "Cycle de vie du modèle",
+            "Le comportement est modifié sans autorisation"
+          ],
+          [
+            "Data loss / Privacy",
+            "Saisie, stockage, journalisation",
+            "Données confidentielles exposées"
+          ]
+        ]
+      },
+      {
+        "type": "check",
+        "q": "Un attaquant injecte des exemples étiquetés incorrectement dans le jeu d'entraînement. De quelle menace s'agit-il ?",
+        "options": [
+          "Evasion",
+          "Poisoning",
+          "Prompt injection",
+          "Jailbreaking"
+        ],
+        "answer": 1,
+        "explain": "Le poisoning agit sur les données d'entraînement, donc en amont. L'évasion agit sur les entrées au moment de l'inférence."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Poisoning = amont (entraînement) ; évasion = aval (inférence).",
+          "Manipulation du modèle = changement non autorisé du comportement.",
+          "Data loss et privacy concernent les données confiées au système d'IA."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "2.6-02",
+    "objective": "2.6",
+    "order": 2,
+    "title": "Menaces liées à l'usage et à la sortie de l'IA",
+    "minutes": 15,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "La seconde famille vise l'interaction avec le modèle : ce qu'on lui demande, ce qu'il contourne et ce qu'il produit."
+      },
+      {
+        "type": "h",
+        "text": "Injection de prompt et jailbreaking"
+      },
+      {
+        "type": "term",
+        "en": "Prompt injection",
+        "fr": "Injection de prompt",
+        "field": "Instructions malveillantes dissimulées dans une entrée (document, message, page web) qui détournent le modèle de sa consigne initiale.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Jailbreaking",
+        "fr": "Contournement des garde-fous",
+        "field": "Technique qui vise à faire Ignorer les restrictions de sécurité du modèle pour obtenir un contenu normalement refusé.",
+        "gap": true
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "Prompt injection",
+          "points": [
+            "L'attaque arrive **via le contenu** traité par le modèle.",
+            "Exemple : un PDF contenant « ignore les instructions précédentes ».",
+            "Vise à détourner la tâche demandée."
+          ]
+        },
+        "right": {
+          "title": "Jailbreaking",
+          "points": [
+            "L'attaque vise **les règles de sécurité du modèle**.",
+            "Exemple : rôle fictif, encodage, demandes déguisées.",
+            "Vise à obtenir un contenu interdit."
+          ]
+        }
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "Une instruction hostile cachée dans un document analysé = **prompt injection**. Une suite de demandes pour contourner les règles = **jailbreaking**. Les deux peuvent se combiner."
+      },
+      {
+        "type": "h",
+        "text": "Qualité et fiabilité des sorties"
+      },
+      {
+        "type": "term",
+        "en": "Hallucinations",
+        "fr": "Hallucinations",
+        "field": "Le modèle produit une réponse fluide mais factuellement fausse ou inventée, avec un degré de confiance trompeur.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Bias",
+        "fr": "Biais",
+        "field": "Biais systématique dans les données ou le modèle, produisant des résultats discriminatoires ou déséquilibrés.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Explainability",
+        "fr": "Explicabilité",
+        "field": "Capacité à comprendre et justifier pourquoi un modèle a produit une sortie donnée — critique en sécurité et en conformité.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Ethical considerations",
+        "fr": "Considérations éthiques",
+        "field": "Usage responsable, équité, transparence, responsabilité en cas d'erreur et impact sociétal des systèmes d'IA.",
+        "gap": true
+      },
+      {
+        "type": "h",
+        "text": "Détournement de session et exécution de code"
+      },
+      {
+        "type": "term",
+        "en": "Session hijacking",
+        "fr": "Détournement de session",
+        "field": "Vol ou réutilisation de la session d'un utilisateur ou d'un agent IA pour agir avec ses privilèges.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Code execution",
+        "fr": "Exécution de code",
+        "field": "Un agent IA disposant d'outils peut être amené à exécuter des commandes ou du code non autorisé sur l'environnement hôte.",
+        "gap": true
+      },
+      {
+        "type": "callout",
+        "kind": "warning",
+        "text": "Un agent IA avec accès à des outils (shell, API, base de données) doit être traité comme un **compte privilégié** : moindre privilège, journalisation, garde-fous et réversibilité."
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-ai-threats"
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "page": "2.6",
+        "strength": "primary",
+        "note": "Les 13 notions sont officiellement au programme ; aucune dans les livres"
+      },
+      {
+        "type": "check",
+        "q": "Un chatbot d'entreprise restitue à un autre client un extrait de contrat confidentiel saisi précédemment. Quelle notion est la plus directement concernée ?",
+        "options": [
+          "Hallucination",
+          "Data loss",
+          "Evasion",
+          "Poisoning"
+        ],
+        "answer": 1,
+        "explain": "La fuite d'une donnée confidentielle via le système d'IA est une perte de données (data loss) et un problème de confidentialité."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Prompt injection = contenu hostile ; jailbreaking = contournement des règles.",
+          "Hallucination = faux mais crédible ; biais = résultat systématiquement déséquilibré.",
+          "Explicabilité et éthique encadrent l'usage.",
+          "Agent IA = identité privilégiée à contrôler (session, exécution de code)."
+        ]
+      }
+    ]
+  }
+]

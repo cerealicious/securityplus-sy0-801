@@ -1,0 +1,114 @@
+{
+  "id": "qz-4.3",
+  "objective": "4.3",
+  "title": "Quiz — Gestion des vulnérabilités",
+  "questions": [
+    {
+      "id": "q-4.3-01",
+      "type": "single",
+      "q": "Quel scan permet de vérifier précisément les correctifs manquants sur un hôte ?",
+      "options": [
+        "Scan non authentifié",
+        "Scan authentifié",
+        "Scan de découverte passive",
+        "Scan de ports uniquement"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Le scan authentifié utilise des identifiants pour lire l'état réel du système. Le scan non authentifié ne voit que la surface réseau.",
+      "ref": "4.3-01"
+    },
+    {
+      "id": "q-4.3-02",
+      "type": "single",
+      "q": "Quel outil répond à la question « l'adresse IP détectée appartient-elle à un actif autorisé ? » ?",
+      "options": [
+        "CSPM",
+        "IPAM",
+        "CVSS",
+        "SIEM"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "IPAM gère l'inventaire des adresses et leur affectation. CSPM porte sur la configuration cloud, pas sur l'adressage. Notion hors livres, §4.3.",
+      "ref": "4.3-01"
+    },
+    {
+      "id": "q-4.3-03",
+      "type": "multi",
+      "q": "Quels éléments doivent entrer dans la priorisation d'une vulnérabilité ? (plusieurs réponses)",
+      "options": [
+        "Le score CVSS",
+        "L'exposition de l'actif",
+        "La criticité métier de l'actif",
+        "L'ordre alphabétique du nom de l'hôte"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "explain": "La priorisation combine sévérité technique, exposabilité et criticité. L'ordre alphabétique n'a aucun lien avec le risque.",
+      "ref": "4.3-01"
+    },
+    {
+      "id": "q-4.3-04",
+      "type": "single",
+      "q": "Un produit EOL ne peut plus être corrigé. Quelle action est attendue ?",
+      "options": [
+        "Fermer le ticket sans suite",
+        "Déclarer un faux positif",
+        "Documenter l'exception avec contrôle compensatoire et validation du propriétaire",
+        "Attendre le prochain scan annuel"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "L'acceptation de risque est une décision explicite, compensée et révisée. Un faux positif est une erreur de détection, pas un choix.",
+      "ref": "4.3-02"
+    },
+    {
+      "id": "q-4.3-05",
+      "type": "match",
+      "q": "Associez chaque phase à son action caractéristique.",
+      "pairs": [
+        {
+          "left": "Identification",
+          "right": "Scan authentifié, IPAM, CSPM, revue de code"
+        },
+        {
+          "left": "Prioritization",
+          "right": "Severity assessment et revue du rapport de pentest"
+        },
+        {
+          "left": "Remediation",
+          "right": "Patch, durcissement, contrôle compensatoire"
+        },
+        {
+          "left": "Verification",
+          "right": "Re-scan avec la même méthode"
+        }
+      ],
+      "explain": "Chaque phase a un livrable distinct : découverte, classement, correction, preuve de fermeture.",
+      "ref": "4.3-02"
+    },
+    {
+      "id": "q-4.3-06",
+      "type": "single",
+      "q": "Quelle pratique décrit une divulgation responsable ?",
+      "options": [
+        "Publier l'exploit immédiatement après découverte",
+        "Signaler via un canal dédié et laisser un délai de correction avant publication",
+        "Vendre la faille au plus offrant sans informer l'éditeur",
+        "Supprimer le rapport de scan"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "La divulgation responsable organise le signalement, protège le chercheur et laisse le temps de corriger avant toute publication. Notion hors livres, §4.3.",
+      "ref": "4.3-02"
+    }
+  ]
+}

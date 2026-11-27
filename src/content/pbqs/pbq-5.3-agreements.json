@@ -1,0 +1,18 @@
+{
+  "id": "pbq-5.3-agreements",
+  "objective": "5.3",
+  "type": "match",
+  "title": "Type d'accord et finalité",
+  "prompt": "Associez chaque type d'accord à sa finalité principale.",
+  "pairs": [
+    { "left": "SLA", "right": "Engager le fournisseur sur des niveaux de service mesurables" },
+    { "left": "SLO", "right": "Définir la cible chiffrée de performance du service" },
+    { "left": "MOU", "right": "Formaliser une intention de coopération" },
+    { "left": "MOA", "right": "Formaliser des obligations plus contraignantes" },
+    { "left": "NDA", "right": "Protéger les informations échangées contre la divulgation" },
+    { "left": "MSA", "right": "Poser les conditions générales de la relation contractuelle" },
+    { "left": "SOW", "right": "Décrire une mission précise, ses livrables et son calendrier" },
+    { "left": "Rules of engagement", "right": "Borner et autoriser un test d'intrusion" }
+  ],
+  "explain": "SLA/SLO concernent la performance, NDA la confidentialité, MOU/MOA le degré d'engagement, MSA/SOW le cadre et la mission, et les ROE l'autorisation d'un test."
+}

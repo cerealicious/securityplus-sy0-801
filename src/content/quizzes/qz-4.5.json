@@ -1,0 +1,117 @@
+{
+  "id": "qz-4.5",
+  "objective": "4.5",
+  "title": "Quiz — Identités et accès",
+  "questions": [
+    {
+      "id": "q-4.5-01",
+      "type": "single",
+      "q": "Quelle action fait partie du deprovisioning d'un compte ?",
+      "options": [
+        "Conserver les sessions actives pour ne pas perturber l'utilisateur",
+        "Révoquer les sessions et jetons actifs et transférer la propriété des actifs",
+        "Supprimer les journaux d'audit du compte",
+        "Changer uniquement le mot de passe"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "La révocation doit être complète et immédiate ; les journaux, eux, sont conservés comme preuve.",
+      "ref": "4.5-01"
+    },
+    {
+      "id": "q-4.5-02",
+      "type": "match",
+      "q": "Associez chaque modèle ou protocole à sa définition.",
+      "pairs": [
+        {
+          "left": "RBAC",
+          "right": "Droits attachés à un rôle hérité par l'utilisateur"
+        },
+        {
+          "left": "DAC",
+          "right": "Le propriétaire de la ressource décide des accès"
+        },
+        {
+          "left": "MAC",
+          "right": "Étiquettes et politique centrale imposent la décision"
+        },
+        {
+          "left": "SAML",
+          "right": "Assertion signée entre fournisseur d'identité et service"
+        },
+        {
+          "left": "OAuth",
+          "right": "Délégation d'autorisation avec portées limitées"
+        }
+      ],
+      "explain": "Rôles, propriétaire, étiquettes, authentification fédérée et autorisation déléguée sont cinq notions distinctes. SAML et OAuth sont hors livres (§4.5).",
+      "ref": "4.5-03"
+    },
+    {
+      "id": "q-4.5-03",
+      "type": "multi",
+      "q": "Quelles combinaisons constituent réellement une MFA ? (plusieurs réponses)",
+      "options": [
+        "Mot de passe + jeton matériel",
+        "Mot de passe + code PIN",
+        "Empreinte digitale + jeton logiciel",
+        "Mot de passe + mot de passe secondaire"
+      ],
+      "answer": [
+        0,
+        2
+      ],
+      "explain": "La MFA exige deux catégories différentes : savoir, posséder, être. Deux secrets mémorisés ne suffisent pas.",
+      "ref": "4.5-02"
+    },
+    {
+      "id": "q-4.5-04",
+      "type": "single",
+      "q": "Un administrateur doit disposer d'un accès de production pendant deux heures. Quel modèle est le plus adapté ?",
+      "options": [
+        "Privilège permanent global",
+        "Just-in-time access avec approbation et expiration",
+        "Compte de service partagé",
+        "Accès discrétionnaire sans revue"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Le JIT limite la fenêtre d'exposition au temps nécessaire et révoque automatiquement l'accès.",
+      "ref": "4.5-03"
+    },
+    {
+      "id": "q-4.5-05",
+      "type": "single",
+      "q": "Quelle affirmation sur les passkeys est correcte ?",
+      "options": [
+        "Le secret est envoyé à chaque site qui l'utilise",
+        "La clé cryptographique reste sur l'appareil et le site reçoit une signature",
+        "C'est un mot de passe plus long stocké sur le serveur",
+        "C'est un type de jeton matériel obligatoirement physique"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "La passkey repose sur une paire de clés : le secret privé ne quitte pas l'appareil, ce qui la rend résistante au phishing. Notion hors livres (§4.5).",
+      "ref": "4.5-03"
+    },
+    {
+      "id": "q-4.5-06",
+      "type": "single",
+      "q": "Quelle pratique est à écarter selon les corrections apportées au référentiel ?",
+      "options": [
+        "Vérifier les identifiants contre des bases de fuite",
+        "Imposer une longueur de mot de passe suffisante",
+        "Exiger une rotation systématique tous les 30 jours",
+        "Utiliser la MFA sur les comptes privilégiés"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "La rotation systématique à 30 jours est une recommandation obsolète du livre : NIST SP 800-63B privilégie longueur, fuite et MFA.",
+      "ref": "4.5-03"
+    }
+  ]
+}

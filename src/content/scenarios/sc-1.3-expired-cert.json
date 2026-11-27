@@ -1,0 +1,90 @@
+{
+  "id": "sc-1.3-expired-cert",
+  "objective": "1.3",
+  "title": "Certificat expiré : que faire ?",
+  "context": "Un site interne présente un certificat auto-signé expiré. Les utilisateurs voient un avertissement et certains contournent le contrôle.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "Première action avant toute décision de renouvellement ?",
+      "choices": [
+        {
+          "text": "Désactiver la vérification des certificats côté navigateur",
+          "next": "n2",
+          "score": 0,
+          "why": "Désactiver la validation supprime le contrôle et expose aux attaques on-path."
+        },
+        {
+          "text": "Identifier le propriétaire du certificat et la chaîne de confiance",
+          "next": "n2",
+          "score": 4,
+          "why": "Il faut d'abord savoir qui émet, qui possède la clé privée et si la CA est fiable."
+        },
+        {
+          "text": "Remplacer le certificat par une clé symétrique partagée",
+          "next": "n2",
+          "score": 0,
+          "why": "Une clé symétrique ne fournit pas l'authentification du serveur par certificat."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "Le certificat doit être remplacé par un certificat de CA tiers. Quelle étape vient avant l'émission ?",
+      "choices": [
+        {
+          "text": "Générer une CSR et envoyer la clé privée à la CA",
+          "next": "n3",
+          "score": 0,
+          "why": "La clé privée ne quitte jamais le serveur : seule la CSR est envoyée."
+        },
+        {
+          "text": "Générer une CSR sur le serveur et conserver la clé privée localement",
+          "next": "n3",
+          "score": 4,
+          "why": "La CSR contient la clé publique ; la clé privée reste sur le serveur."
+        },
+        {
+          "text": "Acheter une nouvelle clé privée à la CA",
+          "next": "n3",
+          "score": 0,
+          "why": "Une CA ne fournit pas votre clé privée."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "Comment vérifier rapidement qu'un certificat révoqué n'est plus accepté ?",
+      "choices": [
+        {
+          "text": "Par CRL ou OCSP",
+          "next": "n4",
+          "score": 4,
+          "why": "CRL (liste) et OCSP (requête en ligne) sont les deux mécanismes de vérification de révocation."
+        },
+        {
+          "text": "Par le chiffrement du disque",
+          "next": "n4",
+          "score": 0,
+          "why": "Le chiffrement du disque n'a aucun lien avec la révocation."
+        },
+        {
+          "text": "Par le salage du mot de passe",
+          "next": "n4",
+          "score": 0,
+          "why": "Le salage protège les mots de passe, pas les certificats."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "Vous avez respecté la chaîne : propriétaire → CSR → clé privée locale → vérification CRL/OCSP."
+    }
+  },
+  "debrief": [
+    "La clé privée ne doit jamais être transmise à la CA.",
+    "CSR = demande de signature contenant la clé publique.",
+    "CRL et OCSP vérifient la révocation ; un certificat auto-signé n'apporte pas de confiance tierce."
+  ]
+}

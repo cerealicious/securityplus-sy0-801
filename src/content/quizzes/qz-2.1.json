@@ -1,0 +1,90 @@
+{
+  "id": "qz-2.1",
+  "objective": "2.1",
+  "title": "Quiz — Menaces, vulnérabilités et priorisation",
+  "questions": [
+    {
+      "id": "q-2.1-01",
+      "type": "single",
+      "q": "Quelle formule résume correctement le risque ?",
+      "options": [
+        "Risque = menace + vulnérabilité",
+        "Risque = vulnérabilité × menace",
+        "Risque = CVSS × CVE",
+        "Risque = impact − probabilité"
+      ],
+      "answer": [1],
+      "explain": "Le risque combine la vulnérabilité et la menace qui peut l'exploiter, souvent exprimé en probabilité × impact.",
+      "ref": "2.1-01"
+    },
+    {
+      "id": "q-2.1-02",
+      "type": "single",
+      "q": "Quel facteur augmente la probabilité qu'une vulnérabilité soit exploitée ?",
+      "options": [
+        "Un contrôle compensatoire déployé",
+        "Une exposition sur Internet et un exploit public",
+        "Un système isolé du réseau",
+        "Une faible criticité de l'actif"
+      ],
+      "answer": [1],
+      "explain": "L'exposition et la disponibilité d'un exploit rendent l'exploitation plus probable.",
+      "ref": "2.1-01"
+    },
+    {
+      "id": "q-2.1-03",
+      "type": "multi",
+      "q": "Quelles sont des sources de renseignement sur les menaces ? (plusieurs réponses)",
+      "options": [
+        "Threat feeds commerciaux et communautaires",
+        "Logs internes et télémétrie EDR",
+        "CERT / ISAC et bulletins fournisseurs",
+        "Le nom de code d'un groupe d'attaquants"
+      ],
+      "answer": [0, 1, 2],
+      "explain": "Les sources sont internes et externes. Un simple nom de groupe n'est pas une source de renseignement exploitable.",
+      "ref": "2.1-01"
+    },
+    {
+      "id": "q-2.1-04",
+      "type": "single",
+      "q": "Quel est le rôle du CVSS ?",
+      "options": [
+        "Attribuer un identifiant unique à une faille",
+        "Produire un score de gravité de 0 à 10",
+        "Classer les types de faiblesses de code",
+        "Déclarer un incident"
+      ],
+      "answer": [1],
+      "explain": "CVSS mesure la gravité ; CVE est l'identifiant et CWE le type de faiblesse.",
+      "ref": "2.1-02"
+    },
+    {
+      "id": "q-2.1-05",
+      "type": "match",
+      "q": "Associez chaque notion à sa définition.",
+      "pairs": [
+        { "left": "Base metrics", "right": "Caractéristiques intrinsèques de la faille" },
+        { "left": "Temporal metrics", "right": "Exploit et correctif disponibles" },
+        { "left": "Environmental metrics", "right": "Criticité de l'actif et contrôles locaux" },
+        { "left": "CVE", "right": "Identifiant unique d'une vulnérabilité" }
+      ],
+      "explain": "Les trois groupes de métriques CVSS et le rôle du CVE sont des définitions classiques de l'examen.",
+      "ref": "2.1-02"
+    },
+    {
+      "id": "q-2.1-06",
+      "type": "single",
+      "q": "Deux failles : A = CVSS 9.8 sur banc de test isolé ; B = CVSS 7.5 sur serveur exposé avec exploit public. Laquelle traiter en priorité ?",
+      "options": [
+        "A, car le score est plus élevé",
+        "B, car l'exposition et l'exploit public augmentent le risque",
+        "Aucune, il faut attendre un incident",
+        "Les deux ont la même priorité"
+      ],
+      "answer": [1],
+      "explain": "La priorité dépend du contexte : exposition, exploit et criticité priment sur le seul score CVSS.",
+      "ref": "2.1-02"
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "id": "qz-4.8",
+  "objective": "4.8",
+  "title": "Quiz — Investigation et analyse des preuves",
+  "questions": [
+    {
+      "id": "q-4.8-01",
+      "type": "single",
+      "q": "Quelle action effectuer en premier sur un hôte compromis ?",
+      "options": [
+        "L'éteindre pour stopper l'attaque",
+        "Capturer la mémoire et les connexions actives",
+        "Redémarrer pour obtenir un état propre",
+        "Supprimer les journaux suspects"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "La RAM, les processus et les connexions sont les preuves les plus volatiles : un redémarrage ou une extinction les détruit.",
+      "ref": "4.8-02"
+    },
+    {
+      "id": "q-4.8-02",
+      "type": "match",
+      "q": "Associez chaque artefact à sa description.",
+      "pairs": [
+        {
+          "left": "Memory dump",
+          "right": "Copie de la RAM contenant clés et processus"
+        },
+        {
+          "left": "Image bit-à-bit",
+          "right": "Copie secteur par secteur préservant les fichiers supprimés"
+        },
+        {
+          "left": "Snapshot",
+          "right": "Instantané rapide d'un état à un moment donné"
+        },
+        {
+          "left": "Metadata",
+          "right": "Horodatage, expéditeur, taille et hash d'une donnée"
+        }
+      ],
+      "explain": "Ces quatre artefacts ont des portées différentes : mémoire, disque complet, état instantané et données descriptives.",
+      "ref": "4.8-02"
+    },
+    {
+      "id": "q-4.8-03",
+      "type": "single",
+      "q": "Quelle source permet de connaître le contenu exact d'une requête réseau ?",
+      "options": [
+        "NetFlow / IPFIX",
+        "Une packet capture",
+        "Un dashboard",
+        "Un rapport de scan"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "NetFlow décrit seulement la conversation ; la capture de paquets conserve les octets échangés.",
+      "ref": "4.8-01"
+    },
+    {
+      "id": "q-4.8-04",
+      "type": "multi",
+      "q": "Quelles informations doit consigner une chaîne de possession ? (plusieurs réponses)",
+      "options": [
+        "Le hash de l'artefact",
+        "L'horodatage et la source de la collecte",
+        "Le nom du collecteur et chaque transfert",
+        "Le mot de passe du compte administrateur"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "explain": "La chaîne de possession trace l'identité et l'intégrité de la preuve, jamais des secrets d'authentification.",
+      "ref": "4.8-02"
+    },
+    {
+      "id": "q-4.8-05",
+      "type": "single",
+      "q": "Un legal hold est en vigueur. Que faut-il faire ?",
+      "options": [
+        "Supprimer les données selon la politique de 30 jours",
+        "Suspendre la destruction et consulter le juridique",
+        "Transmettre les preuves au plus grand nombre",
+        "Arrêter la journalisation"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Le legal hold prime sur la politique de rétention et impose la conservation des données concernées.",
+      "ref": "4.8-03"
+    },
+    {
+      "id": "q-4.8-06",
+      "type": "single",
+      "q": "Deux sources donnent des horaires contradictoires. Quelle vérification est prioritaire ?",
+      "options": [
+        "Choisir la source la plus récente",
+        "Vérifier NTP, fuseau et origine des horodatages",
+        "Écarter la source discordante",
+        "Conclure immédiatement"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Une chronologie fiable exige des horloges synchronisées : NTP, UTC et fuseau sont à contrôler avant interprétation.",
+      "ref": "4.8-03"
+    }
+  ]
+}

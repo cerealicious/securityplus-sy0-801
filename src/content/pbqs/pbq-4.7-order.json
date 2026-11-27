@@ -1,0 +1,38 @@
+{
+  "id": "pbq-4.7-order",
+  "objective": "4.7",
+  "type": "order",
+  "title": "Ordonner les phases de réponse à incident",
+  "prompt": "Remettez les phases dans l'ordre chronologique correct.",
+  "items": [
+    {
+      "id": "s1",
+      "label": "Préparation : playbooks, rôles, exercices"
+    },
+    {
+      "id": "s2",
+      "label": "Identification : détection et qualification"
+    },
+    {
+      "id": "s3",
+      "label": "Investigation : preuves et périmètre"
+    },
+    {
+      "id": "s4",
+      "label": "Confinement : isolation"
+    },
+    {
+      "id": "s5",
+      "label": "Éradication et rétablissement"
+    },
+    {
+      "id": "s6",
+      "label": "Notification : parties prenantes et autorités"
+    },
+    {
+      "id": "s7",
+      "label": "Post-incident : leçons apprises et PIR"
+    }
+  ],
+  "explain": "L'ordre est : Préparation → Identification → Investigation → Confinement → Éradication/Récupération → Notification → Post-incident. La notification intervient après la stabilisation, sauf obligation légale immédiate."
+}

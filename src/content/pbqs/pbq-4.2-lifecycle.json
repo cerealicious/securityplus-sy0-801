@@ -1,0 +1,30 @@
+{
+  "id": "pbq-4.2-lifecycle",
+  "objective": "4.2",
+  "type": "order",
+  "title": "Ordonner le cycle de vie des actifs",
+  "prompt": "Remettez les étapes du cycle de vie d'un actif dans l'ordre chronologique correct, de l'expression du besoin à la fin de vie.",
+  "items": [
+    {
+      "id": "s1",
+      "label": "Planification / cadrage : définir le besoin, la criticité et les exigences de sécurité"
+    },
+    {
+      "id": "s2",
+      "label": "Acquisition / achat : intégrer chiffrement, support et conformité au cahier des charges"
+    },
+    {
+      "id": "s3",
+      "label": "Affectation / comptabilisation : nommer le propriétaire et enregistrer l'actif dans l'inventaire"
+    },
+    {
+      "id": "s4",
+      "label": "Suivi / asset tracking : surveiller patchs, mouvements et conformité de l'actif en exploitation"
+    },
+    {
+      "id": "s5",
+      "label": "Mise au rebut : effacer ou détruire les données, révoquer les accès et certifier la fin de vie"
+    }
+  ],
+  "explain": "Ordre correct : s1 → s2 → s3 → s4 → s5. Planifier avant d'acheter, affecter un propriétaire avant d'exploiter, suivre en continu, puis terminer par une mise au rebut prouvée. Une étape sautée crée un actif fantôme non protégé."
+}

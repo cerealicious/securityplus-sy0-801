@@ -1,0 +1,90 @@
+{
+  "id": "sc-4.2-decommission",
+  "objective": "4.2",
+  "title": "Fin de vie d'un serveur : trois décisions",
+  "context": "Un serveur de base de données clients arrive en fin de support. Il contient des données personnelles et certains dossiers sont encore soumis à une obligation de rétention. Vous pilotez son remplacement et sa mise au rebut.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "Avant de remplacer le serveur, que faut-il vérifier en priorité ?",
+      "choices": [
+        {
+          "text": "La criticité, le propriétaire et les dépendances de l'actif dans l'inventaire",
+          "next": "n2",
+          "score": 4,
+          "why": "Sans inventaire à jour, on ne peut ni planifier la migration ni identifier les données concernées."
+        },
+        {
+          "text": "La marque du nouveau serveur",
+          "next": "n2",
+          "score": 0,
+          "why": "Le choix matériel vient après l'analyse du besoin et des dépendances."
+        },
+        {
+          "text": "Le nombre de câbles dans le rack",
+          "next": "n2",
+          "score": 1,
+          "why": "Utile pour le déplacement, mais sans rapport avec la sécurité des données."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "Certains dossiers sont sous obligation de rétention. Que décider ?",
+      "choices": [
+        {
+          "text": "Conserver les données concernées selon la durée légale avant tout effacement",
+          "next": "n3",
+          "score": 4,
+          "why": "Une rétention légale suspend la destruction, même si la politique prévoit une fin de vie plus courte."
+        },
+        {
+          "text": "Effacer immédiatement tout le disque pour éviter toute fuite",
+          "next": "n3",
+          "score": 0,
+          "why": "Effacer des données sous rétention légale crée une violation de conformité."
+        },
+        {
+          "text": "Laisser le disque dans une armoire sans traitement",
+          "next": "n3",
+          "score": 0,
+          "why": "Un stockage sans inventaire ni contrôle reste un actif fantôme exposé."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "Pour le reste du disque, quelle mise au rebut est acceptable ?",
+      "choices": [
+        {
+          "text": "Effacement sécurisé ou destruction physique, révocation des accès et certificat de destruction",
+          "next": "n4",
+          "score": 4,
+          "why": "La preuve de destruction et la révocation des accès ferment le cycle de vie."
+        },
+        {
+          "text": "Effacer seulement les noms de fichiers",
+          "next": "n4",
+          "score": 0,
+          "why": "Supprimer les noms ne rend pas les données illisibles : récupération possible."
+        },
+        {
+          "text": "Revendre le disque avec les identifiants de service encore actifs",
+          "next": "n4",
+          "score": 0,
+          "why": "Les accès associés doivent être révoqués avant tout départ du support."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "Vous avez vérifié l'inventaire, respecté la rétention légale et produit une preuve de destruction avec révocation des accès."
+    }
+  },
+  "debrief": [
+    "Un actif en fin de vie reste dans l'inventaire jusqu'à preuve de sa destruction.",
+    "Les obligations de rétention légale priment sur la politique de suppression.",
+    "Effacement certifié, révocation des accès et certificat de destruction clôturent le cycle."
+  ]
+}

@@ -1,0 +1,361 @@
+[
+  {
+    "id": "5.1-01",
+    "objective": "5.1",
+    "order": 1,
+    "title": "La pyramide documentaire : guidelines, standards, procedures et plans",
+    "minutes": 16,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "La gouvernance ne se résume pas à « écrire des documents ». L'examen attend que vous sachiez **quel artefact répond à quelle question** : une ligne directrice conseille, une norme impose un niveau, une procédure décrit les gestes, un plan organise la reprise."
+      },
+      {
+        "type": "h",
+        "text": "Les lignes directrices : conseiller sans imposer"
+      },
+      {
+        "type": "term",
+        "en": "Guidelines",
+        "fr": "Lignes directrices",
+        "field": "Recommandations non obligatoires qui orientent une décision : benchmarks, advisories, guides d'implémentation, architecture de référence."
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Benchmarks** : valeurs de référence issues des bonnes pratiques ou d'un outil (CIS Benchmarks, par exemple).",
+          "**Advisories** : avis de sécurité émis par un éditeur, un CERT ou une agence.",
+          "**Implementation guides** : modalités recommandées pour déployer un contrôle.",
+          "**Reference architecture** : modèle d'architecture servant de point de comparaison."
+        ]
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 182,
+        "strength": "supporting",
+        "note": "GRC, conformité et vocabulaire des artefacts"
+      },
+      {
+        "type": "h",
+        "text": "Standards et baselines : le niveau minimal obligatoire"
+      },
+      {
+        "type": "term",
+        "en": "Standard",
+        "fr": "Norme / standard",
+        "field": "Exigence obligatoire et mesurable : longueur des mots de passe, chiffrement attendu, configuration physique minimale. Un standard est applicable et vérifiable."
+      },
+      {
+        "type": "term",
+        "en": "Baseline",
+        "fr": "Ligne de base",
+        "field": "Configuration minimale connue et approuvée, servant de point de départ et de référence de conformité pour un système."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "4",
+        "page": 47,
+        "printed": 25,
+        "strength": "primary",
+        "note": "Standards and Procedures : standards, baselines, portée et application"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Artefact",
+          "Question clé",
+          "Caractère",
+          "Exemple"
+        ],
+        "rows": [
+          [
+            "Guideline",
+            "Que recommande-t-on ?",
+            "Conseillé",
+            "Benchmark CIS, avis de sécurité"
+          ],
+          [
+            "Standard",
+            "Quel niveau minimum ?",
+            "Obligatoire",
+            "AES-256, 14 caractères minimum"
+          ],
+          [
+            "Procedure / SOP",
+            "Comment faire, étape par étape ?",
+            "Opérationnel",
+            "Révocation d'un compte, runbook"
+          ],
+          [
+            "Plan",
+            "Qui fait quoi en situation d'exception ?",
+            "Stratégique",
+            "BCP, disaster recovery plan"
+          ]
+        ]
+      },
+      {
+        "type": "h",
+        "text": "Procédures, runbooks et plans"
+      },
+      {
+        "type": "term",
+        "en": "Standard operating procedure (SOP)",
+        "fr": "Procédure opérationnelle standard",
+        "field": "Suite d'étapes documentée, répétable et validée, qui réduit l'improvisation sous pression."
+      },
+      {
+        "type": "term",
+        "en": "Runbook",
+        "fr": "Runbook",
+        "field": "Guide d'exécution orienté tâche pour une équipe d'exploitation : redémarrage, bascule, restauration, vérification."
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "Business continuity plan (BCP)",
+          "points": [
+            "Maintien des **fonctions métier critiques** pendant et après la perturbation.",
+            "Portée organisationnelle : personnes, locaux, fournisseurs, processus.",
+            "Répond à « comment l'activité continue-t-elle ? »"
+          ]
+        },
+        "right": {
+          "title": "Disaster recovery plan (DRP)",
+          "points": [
+            "Restauration des **systèmes et données informatiques**.",
+            "Portée technique : sauvegardes, sites de reprise, RTO et RPO.",
+            "Répond à « comment les systèmes reviennent-ils ? »"
+          ]
+        }
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "—",
+        "page": 61,
+        "printed": 41,
+        "strength": "supporting",
+        "note": "Charte, artefacts formels et gouvernance de la sécurité"
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "Si une question décrit une **action répétable** (« la procédure à suivre pour révoquer un compte »), c'est une procédure/SOP. Si elle décrit un **état minimal à atteindre** (« toutes les bases doivent être chiffrées »), c'est un standard."
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-5.1-grc-pyramid"
+      },
+      {
+        "type": "check",
+        "q": "Quel artefact décrit précisément les étapes de restauration d'un serveur après une panne ?",
+        "options": [
+          "Une ligne directrice",
+          "Un standard",
+          "Une procédure (SOP)",
+          "Une politique"
+        ],
+        "answer": 2,
+        "explain": "Une SOP décrit les étapes opérationnelles. La ligne directrice conseille, le standard fixe un niveau minimal, la politique énonce une règle générale."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Guideline = conseil ; standard = exigence mesurable ; SOP = étapes ; plan = organisation de la reprise.",
+          "Une baseline est la configuration minimale approuvée, pas une simple recommandation.",
+          "BCP couvre l'activité, DRP couvre les systèmes et les données.",
+          "Un runbook est une procédure d'exécution pour l'exploitation courante."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "5.1-02",
+    "objective": "5.1",
+    "order": 2,
+    "title": "Politiques de sécurité et cycle de vie des artefacts GRC",
+    "minutes": 15,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "La **politique** est l'artefact le plus visible de la gouvernance : elle porte l'intention de la direction, s'applique à tous et s'impose aux standards, procédures et plans qui en découlent."
+      },
+      {
+        "type": "h",
+        "text": "Les dix politiques du référentiel"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**BYOD** : conditions d'usage des appareils personnels.",
+          "**Acceptable use policy (AUP)** : usage autorisé des ressources et systèmes.",
+          "**Clean desk** : absence de documents sensibles sur les postes non surveillés.",
+          "**Information security policy** : cadre général de la sécurité de l'information.",
+          "**Incident response policy** : autorités, délais et obligations de signalement."
+        ]
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Data classification and retention policy** : niveaux de sensibilité et durées de conservation.",
+          "**Access control policy** : principes d'attribution et de revue des accès.",
+          "**Data disposal policy** : modes de destruction et preuve.",
+          "**Vulnerability disclosure policy** : qui signaler, comment, dans quel délai.",
+          "**Privacy policy** : collecte, usage et droits des personnes."
+        ]
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "3",
+        "page": 49,
+        "printed": 27,
+        "strength": "primary",
+        "note": "Chapitre Policies : politique de sécurité, AUP, BYOD, classification, disposal"
+      },
+      {
+        "type": "h",
+        "text": "Guides, RFC et architecture de référence"
+      },
+      {
+        "type": "term",
+        "en": "Request for comments (RFC)",
+        "fr": "RFC",
+        "field": "Document de spécification publié par l'IETF ; dans le référentiel, il est cité comme exemple de standard externe de fait.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Reference architecture",
+        "fr": "Architecture de référence",
+        "field": "Modèle d'architecture générique servant de base de comparaison et de guide de conception, sans valeur obligatoire par lui-même.",
+        "gap": true
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "page": "5.1",
+        "strength": "primary",
+        "note": "Référentiel officiel — aucun des 4 livres"
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "La liste des artefacts du **§5.1** (RFC, architecture de référence, advisories, benchmarks) n'est pas détaillée dans les quatre livres fournis. Ces définitions proviennent du référentiel et des usages de la discipline."
+      },
+      {
+        "type": "h",
+        "text": "Le cycle de vie d'un artefact GRC"
+      },
+      {
+        "type": "steps",
+        "items": [
+          {
+            "title": "1. Besoin et propriétaire",
+            "text": "Identifier le risque ou l'obligation, puis nommer le propriétaire du document."
+          },
+          {
+            "title": "2. Rédaction et revue",
+            "text": "Rédiger en langage clair, consulter les parties prenantes (juridique, RH, exploitation)."
+          },
+          {
+            "title": "3. Approbation",
+            "text": "Validation par la direction ou le comité compétent : c'est l'approbation qui donne l'autorité."
+          },
+          {
+            "title": "4. Diffusion et accusé de réception",
+            "text": "Publier, former, recueillir la confirmation de lecture des personnes concernées."
+          },
+          {
+            "title": "5. Revue périodique et versionnage",
+            "text": "Vérifier l'actualité du document, archiver les versions obsolètes, tracer les changements."
+          }
+        ]
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "—",
+        "page": 420,
+        "printed": 400,
+        "strength": "supporting",
+        "note": "Approche stratégique, gouvernance, documentation et amélioration continue"
+      },
+      {
+        "type": "p",
+        "text": "Une politique sans **propriétaire**, sans **approbation** et sans **revue** devient rapidement un document« mort » que personne ne peut appliquer lors d'un audit."
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 91,
+        "strength": "supporting",
+        "note": "Contrôles administratifs, politiques et responsabilités"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Niveau",
+          "Portée",
+          "Exemple"
+        ],
+        "rows": [
+          [
+            "Politique",
+            "Organisation entière, intention générale",
+            "AUP, privacy policy"
+          ],
+          [
+            "Standard",
+            "Technique ou comportement mesurable",
+            "Chiffrement AES-256"
+          ],
+          [
+            "Procédure",
+            "Tâche précise et répétable",
+            "Révocation de compte"
+          ],
+          [
+            "Plan",
+            "Situation exceptionnelle",
+            "BCP, DRP"
+          ]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "L'ordre logique est **politique → standard → procédure → plan**. Si un document contredit la politique approuvée, c'est le document subordonné qui doit être corrigé."
+      },
+      {
+        "type": "check",
+        "q": "Quel élément confère à une politique son autorité formelle dans l'organisation ?",
+        "options": [
+          "Sa longueur",
+          "L'approbation par la direction",
+          "Le nombre de ses procédures associées",
+          "Sa publication sur l'intranet"
+        ],
+        "answer": 1,
+        "explain": "L'approbation par une autorité dirigeante rend la politique opposable. La publication seule ne crée pas l'obligation."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Dix politiques officielles, de BYOD à privacy policy.",
+          "RFC et architecture de référence sont des artefacts du §5.1 non détaillés dans les livres.",
+          "Propriétaire, approbation, diffusion, accusé de réception et revue rythment le cycle de vie.",
+          "La pyramide politique → standard → procédure → plan guide le classement en examen."
+        ]
+      }
+    ]
+  }
+]

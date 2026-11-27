@@ -1,0 +1,294 @@
+[
+  {
+    "id": "1.2-01",
+    "objective": "1.2",
+    "order": 1,
+    "title": "La demande de changement : du ticket au CAB",
+    "minutes": 16,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "En sécurité, un changement non contrôlé est une panne en attente. L'objectif **1.2** mesure votre capacité à expliquer comment un processus de gestion des changements réduit le risque : **qui demande, qui approuve, quels impacts sont analysés, et comment on revient en arrière**."
+      },
+      {
+        "type": "h",
+        "text": "Le changement comme cause d'incident"
+      },
+      {
+        "type": "p",
+        "text": "Les notes SOC consacrent deux pages à la **change request** et au **CAB** : un changement peut être technique (correctif, configuration, application) ou organisationnel (processus, rôle), mais dans tous les cas il doit être **demandé, évalué, approuvé, planifié, testé et documenté**. C'est cette traçabilité que l'examen cherche à vérifier, pas la maîtrise d'un outil de ticketing."
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "Change request / CAB",
+        "page": 135,
+        "strength": "primary",
+        "note": "Change request et Change Advisory Board (p. 135-136)"
+      },
+      {
+        "type": "term",
+        "en": "Change advisory board (CAB)",
+        "fr": "Comité consultatif des changements",
+        "field": "Groupe de parties prenantes (IT, sécurité, métier, exploitation) qui examine les demandes de changement, évalue leur impact et donne ou refuse l'approbation avant mise en production."
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Requester / owner** : celui qui porte la demande et en reste responsable jusqu'à la clôture.",
+          "**CAB** : arbitre le risque et le calendrier, notamment pour les changements à fort impact.",
+          "**Stakeholders** : métier, support, sécurité, fournisseurs — ils subissent ou valident l'effet du changement.",
+          "**Change manager** : instruit le dossier, vérifie la complétude et archive les décisions."
+        ]
+      },
+      {
+        "type": "h",
+        "text": "Les étapes d'une demande complète"
+      },
+      {
+        "type": "steps",
+        "items": [
+          {
+            "title": "1. Ouverture du ticket",
+            "text": "Décrire le changement, sa raison, le système concerné, le propriétaire et les parties prenantes (SOCN p. 38-40)."
+          },
+          {
+            "title": "2. Analyse d'impact",
+            "text": "Identifier les services, dépendances, utilisateurs et contrôles de sécurité affectés."
+          },
+          {
+            "title": "3. Examen par le CAB et approbation",
+            "text": "Le comité statue : approuvé, refusé ou approuvé sous conditions (fenêtre, tests complémentaires)."
+          },
+          {
+            "title": "4. Planification de la fenêtre de maintenance",
+            "text": "Choisir un créneau à faible impact, annoncer la downtime prévue et prévenir les métiers."
+          },
+          {
+            "title": "5. Tests et résultats",
+            "text": "Valider en environnement de test, consigner les résultats, puis appliquer en production."
+          },
+          {
+            "title": "6. Backout et clôture",
+            "text": "Garder un plan de retour arrière exécutable jusqu'à la fin de la fenêtre, puis documenter."
+          }
+        ]
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "Ticketing",
+        "page": 38,
+        "strength": "supporting",
+        "note": "Ouverture et suivi d'un ticket (p. 38-40)"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-1.2-cab-flow"
+      },
+      {
+        "type": "h",
+        "text": "Analyse d'impact, tests et retour arrière"
+      },
+      {
+        "type": "p",
+        "text": "L'**impact analysis** doit couvrir trois dimensions : la disponibilité (downtime, redémarrage), la sécurité (modification des listes d'autorisation, ouverture de ports) et la continuité (dépendances, applications legacy). Un changement « anodin » sur un serveur peut casser une chaîne de dépendances entière."
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Fundamentals",
+        "page": 55,
+        "printed": 35,
+        "strength": "supporting",
+        "note": "Priorisation et impact des opérations sur la disponibilité du SOC (p. imprimée 35-36)"
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "Backout planning",
+          "points": [
+            "**Revenir à l'état antérieur** si le changement échoue.",
+            "Nécessite une sauvegarde, une configuration connue et une procédure testée.",
+            "Réponse typique quand un scénario mentionne une panne immédiate après déploiement."
+          ]
+        },
+        "right": {
+          "title": "Fail forward",
+          "points": [
+            "**Avancer** avec un correctif, un contournement ou une nouvelle version, plutôt que revenir en arrière.",
+            "Choisi quand le retour arrière est impossible ou plus risqué (données déjà migrées).",
+            "Doit rester une décision explicite et documentée, pas une improvisation."
+          ]
+        }
+      },
+      {
+        "type": "callout",
+        "kind": "warning",
+        "text": "Piège classique : présenter le **rollback** comme une solution automatique. Un backout n'est fiable que s'il a été **testé** et si la fenêtre de maintenance laisse assez de temps pour l'exécuter."
+      },
+      {
+        "type": "check",
+        "q": "Un correctif est appliqué en production. Dix minutes plus tard, les authentifications échouent. Quelle action est d'abord attendue ?",
+        "options": [
+          "Ouvrir une nouvelle demande de changement pour le mois prochain",
+          "Exécuter le plan de backout dans la fenêtre de maintenance, puis documenter l'échec",
+          "Redémarrer tous les serveurs sans vérification",
+          "Attendre la fin de la fenêtre pour prévenir le CAB"
+        ],
+        "answer": 1,
+        "explain": "Le plan de retour arrière existe précisément pour ce cas : il doit être exécutable pendant la fenêtre, puis l'échec est consigné et réanalysé par le CAB."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Un changement est demandé, évalué, approuvé, planifié, testé, appliqué et documenté.",
+          "Le CAB arbitre ; le owner porte la responsabilité ; les stakeholders subissent l'impact.",
+          "Analyse d'impact = disponibilité + sécurité + dépendances.",
+          "Backout = retour à l'état antérieur ; fail forward = avancer avec un correctif."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1.2-02",
+    "objective": "1.2",
+    "order": 2,
+    "title": "Implications techniques et documentation du changement",
+    "minutes": 15,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Un changement ne se juge pas seulement sur sa réussite technique : il doit aussi **laisser l'environnement dans un état documenté, cohérent et sécurisé**. C'est la partie la plus souvent oubliée des scénarios de l'examen."
+      },
+      {
+        "type": "h",
+        "text": "Listes d'autorisation, activités restreintes et redémarrages"
+      },
+      {
+        "type": "term",
+        "en": "Allow list / deny list",
+        "fr": "Liste d'autorisation / liste de refus",
+        "field": "Mécanisme de contrôle qui autorise ou bloque explicitement des adresses, applications ou commandes. Un changement peut modifier ces listes : l'effet de sécurité doit être analysé avant application."
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Allow lists / deny lists** : vérifier qu'une nouvelle règle n'ouvre pas un flux interdit (ex. : ajout d'une plage IP à une liste d'autorisation).",
+          "**Restricted activities** : certaines actions nécessitent une autorisation renforcée (accès administrateur, production, maintenance).",
+          "**Downtime** : durée d'indisponibilité annoncée et acceptée pendant la fenêtre.",
+          "**Service restart / application restart** : un redémarrage peut réinitialiser des sessions, des certificats ou des files de traitement.",
+          "**Legacy applications** : une application non supportée peut être le seul système dépendant d'un ancien protocole ou d'un ancien port.",
+          "**Dependencies** : base de données, annuaire, DNS, certificats, API — la reprise dépend du maillon le plus lent."
+        ]
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "Disaster Recovery",
+        "page": 126,
+        "printed": 104,
+        "strength": "primary",
+        "note": "Retour arrière, restauration et dépendances des systèmes (p. imprimée 104)"
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "Si un scénario mentionne une application legacy qui « doit absolument rester disponible », cherchez la **dépendance** cachée (port, service, identifiant de service) dans la réponse attendue."
+      },
+      {
+        "type": "h",
+        "text": "Le changement vu par la sécurité"
+      },
+      {
+        "type": "p",
+        "text": "Un changement qui modifie un contrôle de sécurité (pare-feu, MFA, journalisation, chiffrement) doit être relu par la sécurité **avant** le CAB : c'est souvent là que se cache la régression. Le **Defensive Security Handbook** insiste sur la nécessité de documenter les décisions et de maintenir les procédures à jour après chaque intervention."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "Policies / Standards and Procedures",
+        "page": 166,
+        "printed": 144,
+        "strength": "supporting",
+        "note": "Documentation, standards et procédures tenues à jour (p. imprimée 144)"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Élément à mettre à jour",
+          "Pourquoi"
+        ],
+        "rows": [
+          [
+            "Diagrammes d'architecture et de flux",
+            "Un schéma obsolète rend l'analyse d'impact suivante fausse."
+          ],
+          [
+            "Politiques et procédures / SOP",
+            "La procédure doit refléter la configuration réellement déployée."
+          ],
+          [
+            "Inventaire et version control",
+            "Identifier la version exacte en production permet de revenir arrière et d'auditer."
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "Development / The Extra Mile",
+        "page": 194,
+        "printed": 172,
+        "strength": "supporting",
+        "note": "Contrôle de version et suivi des changements (p. imprimée 172)"
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "Vulnerability Management",
+        "page": 197,
+        "printed": 175,
+        "strength": "supporting",
+        "note": "Gestion des correctifs et suivi des versions (p. imprimée 175)"
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Prioritize Incident Response",
+        "page": 150,
+        "printed": 130,
+        "strength": "supporting",
+        "note": "SOP / runbooks et exécution répétable des opérations (p. imprimée 130-132)"
+      },
+      {
+        "type": "callout",
+        "kind": "warning",
+        "text": "Le **version control** ne se limite pas au code : il couvre aussi les configurations, les scripts de déploiement et les politiques. Sans lui, le backout repose sur la mémoire d'un administrateur."
+      },
+      {
+        "type": "check",
+        "q": "Après un changement réussi, quelles mises à jour font partie de la clôture ?",
+        "options": [
+          "Uniquement le ticket, le reste sera fait lors du prochain audit",
+          "Les diagrammes, les politiques/procédures et le version control",
+          "Seulement la version de l'application dans l'inventaire",
+          "Aucune : le CAB s'en charge automatiquement"
+        ],
+        "answer": 1,
+        "explain": "La documentation post-changement est une exigence explicite : diagrammes, politiques/procédures et version control doivent refléter l'état réel."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Analysez l'effet du changement sur allow/deny lists, redémarrages, downtime et dépendances.",
+          "Les applications legacy et les contrôles de sécurité méritent une attention particulière.",
+          "Clôture = diagrammes + politiques/procédures + version control à jour.",
+          "Un backout non testé ou non documenté n'est pas un plan fiable."
+        ]
+      }
+    ]
+  }
+]

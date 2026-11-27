@@ -1,0 +1,17 @@
+{
+  "id": "pbq-5.5-audit-order",
+  "objective": "5.5",
+  "type": "order",
+  "title": "Ordonner les phases d'un audit et d'un test d'intrusion",
+  "prompt": "Remettez les étapes dans l'ordre chronologique correct, de la charte d'audit au suivi correctif.",
+  "items": [
+    { "id": "s1", "label": "Charte d'audit, fréquence et définition du périmètre" },
+    { "id": "s2", "label": "Collecte de données : échantillonnage, questionnaires, entretiens, assertions" },
+    { "id": "s3", "label": "Gap analysis et benchmarking par rapport au référentiel cible" },
+    { "id": "s4", "label": "Cadrage de l'engagement : type de test et rules of engagement" },
+    { "id": "s5", "label": "Reconnaissance passive puis reconnaissance active" },
+    { "id": "s6", "label": "Tests d'intrusion et exploitation contrôlée des failles" },
+    { "id": "s7", "label": "Rapport, recommandations et suivi des actions correctives" }
+  ],
+  "explain": "On cadre (charte, périmètre), on collecte et on compare (gap analysis), on précise l'engagement et ses ROE, on fait la reconnaissance passive puis active, on teste, puis on restitue et on suit les corrections. Le suivi correctif clôt la boucle d'amélioration."
+}

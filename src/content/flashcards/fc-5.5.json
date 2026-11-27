@@ -1,0 +1,115 @@
+{
+  "id": "fc-5.5",
+  "objective": "5.5",
+  "title": "Audits, évaluations et frameworks d'intrusion",
+  "cards": [
+    {
+      "id": "c-5.5-01",
+      "front": "Audit charter",
+      "back": "Document qui définit l'autorité, le périmètre, les responsabilités et les destinataires d'une mission d'audit.",
+      "tag": "Cadrage"
+    },
+    {
+      "id": "c-5.5-02",
+      "front": "Sampling",
+      "back": "Examen d'un échantillon représentatif d'un contrôle. Notion du §5.5 absente des livres fournis.",
+      "tag": "Lacune"
+    },
+    {
+      "id": "c-5.5-03",
+      "front": "Assertion",
+      "back": "Affirmation vérifiable soumise à l'audit, par exemple « ce contrôle est appliqué depuis janvier ».",
+      "tag": "Lacune"
+    },
+    {
+      "id": "c-5.5-04",
+      "front": "Collecte de données",
+      "back": "Échantillonnage, questionnaires/surveys, entretiens (interviews) et assertions.",
+      "tag": "Collecte"
+    },
+    {
+      "id": "c-5.5-05",
+      "front": "Gap analysis",
+      "back": "Comparaison entre l'état existant et un référentiel cible pour identifier les écarts.",
+      "tag": "Missions"
+    },
+    {
+      "id": "c-5.5-06",
+      "front": "Auto-évaluation vs audit indépendant",
+      "back": "Self-assessment = évaluation par l'équipe ; independent third-party audit = assurance externalisée et opposable.",
+      "tag": "Missions"
+    },
+    {
+      "id": "c-5.5-07",
+      "front": "Benchmarking",
+      "back": "Comparaison des pratiques de l'organisation à celles du secteur ou à un référentiel externe.",
+      "tag": "Missions"
+    },
+    {
+      "id": "c-5.5-08",
+      "front": "Known / unknown / partially known",
+      "back": "Degrés d'information fournie au testeur : tout, rien ou une partie du système.",
+      "tag": "Pentest"
+    },
+    {
+      "id": "c-5.5-09",
+      "front": "Offensive vs defensive vs integrated",
+      "back": "Offensive = attaquer ; defensive = vérifier la détection/réponse ; integrated = travail croisé (purple).",
+      "tag": "Pentest"
+    },
+    {
+      "id": "c-5.5-10",
+      "front": "Reconnaissance passive",
+      "back": "Collecte sans contact avec la cible : sources publiques, aucun journal généré chez la victime.",
+      "tag": "Pentest"
+    },
+    {
+      "id": "c-5.5-11",
+      "front": "Reconnaissance active",
+      "back": "Interaction directe (scans, requêtes) : laisse des traces et doit être autorisée par les ROE.",
+      "tag": "Pentest"
+    },
+    {
+      "id": "c-5.5-12",
+      "front": "Physical penetration testing",
+      "back": "Test autorisé des contrôles physiques : serrures, badges, sas, tailgating.",
+      "tag": "Pentest"
+    },
+    {
+      "id": "c-5.5-13",
+      "front": "Cyber Kill Chain (7 phases)",
+      "back": "Reconnaissance, weaponization, delivery, exploitation, installation, command and control, actions on objectives.",
+      "tag": "Frameworks"
+    },
+    {
+      "id": "c-5.5-14",
+      "front": "MITRE ATT&CK",
+      "back": "Matrice de tactiques et techniques adverses. Enterprise compte 14 tactiques (pas 11).",
+      "tag": "Frameworks"
+    },
+    {
+      "id": "c-5.5-15",
+      "front": "Diamond Model : quatre sommets",
+      "back": "Adversary, victim, capability, infrastructure — avec métadonnées de temps et de contexte. Détail non couvert par les livres.",
+      "tag": "Lacune"
+    },
+    {
+      "id": "c-5.5-16",
+      "front": "Kill Chain vs ATT&CK",
+      "back": "Kill Chain = phases de progression ; ATT&CK = techniques par tactique.",
+      "tag": "Piège"
+    },
+    {
+      "id": "c-5.5-17",
+      "front": "Industry / international / region-specific standards",
+      "back": "Référentiels sectoriels, internationaux ou propres à une région utilisés comme cible d'audit.",
+      "tag": "Référentiels"
+    },
+    {
+      "id": "c-5.5-18",
+      "front": "Functional vs behavioral testing",
+      "back": "Functional = la fonction fait-elle ce qui est attendu ? Behavioral = le système se comporte-t-il comme prévu en situation ?",
+      "tag": "Tests"
+    }
+  ]
+}

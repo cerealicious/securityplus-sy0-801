@@ -1,0 +1,357 @@
+[
+  {
+    "id": "5.2-01",
+    "objective": "5.2",
+    "order": 1,
+    "title": "Le processus de gestion des risques en six étapes",
+    "minutes": 17,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Gérer le risque, ce n'est pas supprimer le risque : c'est décider, avec des critères explicites, ce que l'organisation accepte de supporter et ce qu'elle refuse."
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-5.2-risk-flow"
+      },
+      {
+        "type": "h",
+        "text": "De l'actif au registre"
+      },
+      {
+        "type": "p",
+        "text": "Tout commence par l'**identification des actifs** : ce qui a de la valeur pour l'organisation (données, systèmes, personnes, processus, réputation). Chaque actif a un **propriétaire** — une personne, pas un service — qui répond de sa classification et de son niveau de protection attendu."
+      },
+      {
+        "type": "p",
+        "text": "Vient ensuite l'**évaluation** : noter et catégoriser chaque risque. Puis l'**analyse** : quel est l'impact s'il se réalise, quelle est la probabilité, quelles mitigations existent déjà, et le raisonnement est-il qualitatif ou quantitatif ? Le résultat est consigné dans un **registre des risques**, qui sert à communiquer et à organiser les revues."
+      },
+      {
+        "type": "steps",
+        "items": [
+          {
+            "title": "1. Identification",
+            "text": "Inventorier les actifs, les menaces et les vulnérabilités. Associer un propriétaire par actif."
+          },
+          {
+            "title": "2. Évaluation",
+            "text": "Noter et catégoriser : criticité de l'actif, exposition, niveau de risque brut."
+          },
+          {
+            "title": "3. Analyse",
+            "text": "Estimer impact et probabilité, inventorier les mitigations existantes, choisir qualitatif ou quantitatif."
+          },
+          {
+            "title": "4. Registre",
+            "text": "Documenter chaque risque : description, propriétaire, score, traitement prévu, échéance."
+          },
+          {
+            "title": "5. Traitement",
+            "text": "Choisir : atténuer, transférer, éviter, accepter. Décision tracée et autorisée."
+          },
+          {
+            "title": "6. Suivi",
+            "text": "Revues périodiques, mise à jour des scores, vérification de l'efficacité des mesures."
+          }
+        ]
+      },
+      {
+        "type": "term",
+        "en": "Risk register",
+        "fr": "Registre des risques",
+        "field": "Un tableau vivant, pas un document annuel. Chaque ligne a un propriétaire, un score, un traitement et une date de revue. Sans registre, les décisions se répètent et les risques acceptés sont oubliés."
+      },
+      {
+        "type": "h",
+        "text": "Qualitatif ou quantitatif"
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "Analyse qualitative",
+          "points": [
+            "Échelles : faible / moyen / élevé, ou 1 à 5",
+            "Matrice probabilité × impact",
+            "Rapide, compréhensible par tous",
+            "Subjectivité et manque de précision financière"
+          ]
+        },
+        "right": {
+          "title": "Analyse quantitative",
+          "points": [
+            "Valeurs monétaires : SLE, ALE, ARO",
+            "Comparaison directe avec le coût d'un contrôle",
+            "Nécessite des données historiques fiables",
+            "Plus lente et parfois faussement précise"
+          ]
+        }
+      },
+      {
+        "type": "p",
+        "text": "Les deux approches coexistent. Une **matrice de risque** (5 × 5) suffit pour prioriser un portefeuille de projets. Un calcul **ALE** devient nécessaire quand il faut arbitrer un investissement de plusieurs centaines de milliers d'euros. Le piège consiste à présenter un chiffre quantitatif comme certain alors qu'il repose sur des hypothèses."
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "title": "Risque brut et risque résiduel",
+        "text": "Le **risque inhérent** (ou brut) est celui qui existe avant tout contrôle. Le **risque résiduel** est celui qui reste après application des contrôles. Une question qui demande « le risque restant après mitigation » parle du risque résiduel, pas du risque brut."
+      },
+      {
+        "type": "h",
+        "text": "Appétit, tolérance, seuil"
+      },
+      {
+        "type": "list",
+        "items": [
+          "**Appétit au risque** : niveau de risque que l'organisation accepte de rechercher pour atteindre ses objectifs. Décision de direction.",
+          "**Tolérance au risque** : écart acceptable autour de la cible, avant déclenchement d'une action.",
+          "**Seuil (threshold)** : limite au-delà de laquelle il faut escalader ou traiter.",
+          "**Risque résiduel** : ce qui reste après les contrôles ; il doit être **formellement accepté** par une autorité."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "L'appétit n'est pas uniforme : une fintech peut avoir un appétit faible pour la fraude et élevé pour l'innovation produit. Ce qui est exigible, c'est que l'appétit soit **déclaré**, **traduit en seuils** et **utilisé** dans les décisions — pas un slogan dans un rapport annuel."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "1",
+        "page": 27,
+        "printed": 5,
+        "strength": "primary",
+        "note": "Évaluer menaces et risques, prioriser"
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "page": 184,
+        "strength": "supporting",
+        "note": "RMF, acceptation et transfert"
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "10",
+        "page": 326,
+        "printed": 306,
+        "strength": "supporting",
+        "note": "Métriques et indicateurs de risque"
+      },
+      {
+        "type": "check",
+        "q": "Après déploiement d'un EDR, un risque passe d'un score de 20 à 6 sur une échelle de 25. Comment nomme-t-on le score de 6 ?",
+        "options": [
+          "Risque inhérent",
+          "Risque résiduel",
+          "Appétit au risque",
+          "Impact brut"
+        ],
+        "answer": 1,
+        "explain": "Le score restant après application des contrôles est le risque résiduel. Le score de 20 était le risque inhérent (ou brut). L'appétit est le niveau que l'organisation accepte de rechercher, pas un score mesuré."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Six étapes : identifier, évaluer, analyser, consigner, traiter, suivre.",
+          "Chaque actif a un propriétaire ; chaque risque a un propriétaire et une date de revue.",
+          "Qualitatif = matrice et échelles ; quantitatif = valeurs monétaires (SLE, ALE, ARO).",
+          "Risque résiduel = après contrôles ; il doit être accepté explicitement."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "5.2-02",
+    "objective": "5.2",
+    "order": 2,
+    "title": "Quantifier, traiter et arbitrer le risque",
+    "minutes": 19,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "SLE, ALE, ARO : trois formules simples qui permettent de comparer le coût d'un risque au coût d'un contrôle. L'examen attend le calcul, mais aussi le jugement sur ce que le chiffre signifie."
+      },
+      {
+        "type": "h",
+        "text": "Les trois grandeurs"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Grandeur",
+          "Définition",
+          "Formule",
+          "Exemple"
+        ],
+        "rows": [
+          [
+            "SLE — Single Loss Expectancy",
+            "Perte attendue pour **un** événement",
+            "Valeur de l'actif × facteur d'exposition (EF)",
+            "Serveur 100 000 € × 40 % = 40 000 €"
+          ],
+          [
+            "ARO — Annualized Rate of Occurrence",
+            "Nombre d'événements par an",
+            "Fréquence observée ou estimée",
+            "1 fois tous les 2 ans = 0,5"
+          ],
+          [
+            "ALE — Annualized Loss Expectancy",
+            "Perte annualisée",
+            "SLE × ARO",
+            "40 000 € × 0,5 = 20 000 €"
+          ]
+        ]
+      },
+      {
+        "type": "term",
+        "en": "Exposure Factor (EF)",
+        "fr": "Facteur d'exposition",
+        "field": "Pourcentage de la valeur de l'actif perdu lors d'un événement. Un sinistre qui détruit 40 % de la valeur a un EF de 0,4. Ne pas confondre avec la probabilité : l'EF décrit l'ampleur, l'ARO décrit la fréquence."
+      },
+      {
+        "type": "h",
+        "text": "Trois calculs guidés"
+      },
+      {
+        "type": "p",
+        "text": "**Exemple 1 — serveur de fichiers.** Valeur de remplacement et de reconstruction : 120 000 €. Un rançongiciel détruit 50 % de la valeur (EF = 0,5). SLE = 120 000 × 0,5 = **60 000 €**. L'organisation estime un incident de ce type tous les deux ans : ARO = 0,5. ALE = 60 000 × 0,5 = **30 000 €/an**."
+      },
+      {
+        "type": "p",
+        "text": "**Exemple 2 — fuite de données clients.** Coût d'une violation : notification, amendes, support, réputation = 400 000 €. EF = 1 (perte totale sur l'événement considéré). ARO = 0,2 (une fois tous les cinq ans). ALE = 400 000 × 0,2 = **80 000 €/an**."
+      },
+      {
+        "type": "p",
+        "text": "**Exemple 3 — décision d'investissement.** Un contrôle coûte 25 000 €/an et réduit l'ALE de 30 000 € à 8 000 €. Économie annuelle = 22 000 €. Coût = 25 000 €. Le contrôle coûte **plus** qu'il ne rapporte : 22 000 < 25 000. Il faut soit négocier le prix, soit choisir un contrôle moins coûteux, soit accepter le risque avec documentation."
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "title": "Le piège du calcul",
+        "text": "Une question peut donner la valeur de l'actif, l'EF et l'ARO, puis demander l'ALE. Faites **deux** opérations : SLE = valeur × EF, puis ALE = SLE × ARO. Une erreur fréquente consiste à multiplier directement la valeur de l'actif par l'ARO, en oubliant l'EF."
+      },
+      {
+        "type": "h",
+        "text": "Les quatre traitements"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Traitement",
+          "Principe",
+          "Exemple",
+          "Point d'examen"
+        ],
+        "rows": [
+          [
+            "Atténuation (mitigate)",
+            "Réduire probabilité ou impact",
+            "EDR, MFA, segmentation, sauvegardes",
+            "Le plus courant ; coût à comparer à l'ALE"
+          ],
+          [
+            "Transfert (transfer)",
+            "Déplacer la perte vers un tiers",
+            "Assurance cyber, clause contractuelle",
+            "Ne supprime pas le risque : il reste réputationnel"
+          ],
+          [
+            "Évitement (avoid)",
+            "Supprimer l'activité à risque",
+            "Ne pas collecter une donnée inutile",
+            "Efficace mais parfois impossible"
+          ],
+          [
+            "Acceptation (accept)",
+            "Assumer le risque, documenté",
+            "Système legacy isolé, risque faible",
+            "Doit être autorisée et révisée"
+          ]
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Le **transfert** est souvent mal compris : une assurance ne vous protège pas d'une attaque, elle couvre une partie des coûts. La responsabilité, la confiance des clients et la réputation restent chez vous. De même, une clause de pénalité dans un contrat ne restaure pas les données."
+      },
+      {
+        "type": "h",
+        "text": "Analyse d'impact métier (BIA)"
+      },
+      {
+        "type": "p",
+        "text": "La **BIA** (Business Impact Analysis) identifie les processus critiques, leur **temps d'indisponibilité maximal tolérable (MTD)**, leur **RTO** (objectif de rétablissement) et leur **RPO** (perte de données maximale acceptable). Elle relie le risque technique à la continuité d'activité : sans BIA, on ne sait pas combien de minutes de panne coûtent réellement."
+      },
+      {
+        "type": "list",
+        "items": [
+          "**MTD** : au-delà, l'impact devient inacceptable.",
+          "**RTO** : délai visé pour rétablir le service.",
+          "**RPO** : quantité de données qu'on accepte de perdre (détermine la fréquence des sauvegardes).",
+          "**RTO < MTD** toujours : sinon la continuité est mal conçue."
+        ]
+      },
+      {
+        "type": "h",
+        "text": "Parties prenantes et supervision"
+      },
+      {
+        "type": "p",
+        "text": "La gestion du risque implique la **direction** (appétit, arbitrage), le **métier** (impact, priorité), le **juridique** (obligations), la **conformité** (audit) et la **technique** (contrôles). Le risque ne se délègue pas entièrement au RSSI : c'est une décision de gouvernance, avec une traçabilité."
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "Les formules **SLE, ALE, ARO**, le registre des risques formel, l'appétit au risque et le risque résiduel ne figurent dans **aucun des quatre livres**. Cette leçon est rédigée pour le référentiel ; les sources citées ne couvrent que les notions voisines (priorisation, acceptation, métriques)."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "1",
+        "page": 31,
+        "printed": 9,
+        "strength": "primary",
+        "note": "Priorisation et jalons de réduction du risque"
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "16",
+        "page": 195,
+        "printed": 173,
+        "strength": "supporting",
+        "note": "Acceptation du risque"
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "page": 127,
+        "strength": "supporting",
+        "note": "Analyse d'impact métier (BIA)"
+      },
+      {
+        "type": "check",
+        "q": "Un actif vaut 200 000 €. Un incident détruit 25 % de sa valeur et survient en moyenne deux fois par an. Quel est l'ALE ?",
+        "options": [
+          "50 000 €",
+          "100 000 €",
+          "200 000 €",
+          "25 000 €"
+        ],
+        "answer": 1,
+        "explain": "SLE = 200 000 × 0,25 = 50 000 €. ALE = SLE × ARO = 50 000 × 2 = 100 000 €/an. La réponse 50 000 € est le SLE, pas l'ALE : c'est l'erreur la plus fréquente."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "SLE = valeur × EF ; ALE = SLE × ARO. Deux opérations, pas une.",
+          "Comparer l'ALE à l'économie obtenue, pas au coût total du contrôle seul.",
+          "Quatre traitements : atténuer, transférer, éviter, accepter — chacun tracé.",
+          "BIA : MTD, RTO, RPO relient le risque à la continuité ; RTO < MTD."
+        ]
+      }
+    ]
+  }
+]

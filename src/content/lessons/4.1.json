@@ -1,0 +1,526 @@
+[
+  {
+    "id": "4.1-01",
+    "objective": "4.1",
+    "order": 1,
+    "title": "Segmentation, durcissement, sandboxing et déception",
+    "minutes": 17,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "L'objectif 4.1 est un catalogue de contrôles. L'examen ne demande pas de réciter des produits, mais de **choisir le bon contrôle pour un risque donné**. Commencez par les techniques qui réduisent la surface d'attaque avant même toute détection."
+      },
+      {
+        "type": "h",
+        "text": "Les quatre techniques fondamentales"
+      },
+      {
+        "type": "term",
+        "en": "Segmentation",
+        "fr": "Segmentation",
+        "field": "Découper le réseau en zones pour limiter le mouvement latéral. Un service compromis ne doit pas donner accès à tous les autres.",
+        "gap": false
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 55,
+        "strength": "primary",
+        "note": "Zones Trust / DMZ / Untrust et segmentation"
+      },
+      {
+        "type": "term",
+        "en": "Hardening",
+        "fr": "Durcissement",
+        "field": "Réduire la surface d'attaque : désactiver les services inutiles, appliquer les correctifs, configurer des baselines sécurisées, retirer les comptes par défaut.",
+        "gap": false
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "—",
+        "page": 167,
+        "printed": 145,
+        "strength": "supporting",
+        "note": "Durcissement des systèmes et configuration sécurisée"
+      },
+      {
+        "type": "term",
+        "en": "Access controls",
+        "fr": "Contrôles d'accès",
+        "field": "Moindre privilège, séparation des tâches et authentification avant tout accès à une ressource.",
+        "gap": false
+      },
+      {
+        "type": "term",
+        "en": "Sandboxing",
+        "fr": "Bac à sable",
+        "field": "Exécuter du code ou un fichier suspect dans un environnement isolé pour observer son comportement sans risquer la production.",
+        "gap": false
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 13,
+        "strength": "primary",
+        "note": "Contrôles système, endpoints et exécution isolée"
+      },
+      {
+        "type": "h",
+        "text": "Technologies de déception et de perturbation"
+      },
+      {
+        "type": "p",
+        "text": "La déception ne protège pas par blocage mais par **détection précoce** : on place des leurres qui n'ont aucune raison légitime d'être touchés. Tout contact avec eux est un signal de haute valeur."
+      },
+      {
+        "type": "term",
+        "en": "Honeypot",
+        "fr": "Pot de miel",
+        "field": "Système leurre qui simule une cible vulnérable pour attirer l'attaquant et enregistrer ses techniques.",
+        "gap": false
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "—",
+        "page": 211,
+        "printed": 189,
+        "strength": "primary",
+        "note": "Honeypots et surveillance des leurres"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Leurre",
+          "Nature",
+          "Signal détecté"
+        ],
+        "rows": [
+          [
+            "Honeynet",
+            "Réseau entier de leurres",
+            "Reconnaissance et mouvement latéral"
+          ],
+          [
+            "Honeyfile",
+            "Fichier appât (faux plan, fausse base)",
+            "Ouverture ou copie du fichier"
+          ],
+          [
+            "Honeytoken",
+            "Identifiant ou jeton factice",
+            "Utilisation du jeton"
+          ],
+          [
+            "Canary account",
+            "Compte utilisateur inexistant mais plausible",
+            "Tentative de connexion au compte"
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "chapter": "—",
+        "page": "4.1",
+        "strength": "primary",
+        "note": "Référentiel officiel — honeynet, honeyfile, honeytoken et canary absents des 4 livres"
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "Honeynet, honeyfile, honeytoken et canary account sont exigés au **§4.1** ; seul le honeypot est décrit dans les livres fournis. Ces variantes sont rédigées depuis le référentiel, sans attribution à un livre."
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "—",
+        "page": 359,
+        "printed": 339,
+        "strength": "supporting",
+        "note": "Déception et contrôles applicatifs dans le SOC"
+      },
+      {
+        "type": "check",
+        "q": "Un attaquant tente d'utiliser un identifiant factice glissé dans un fichier de configuration. De quelle technique s'agit-il ?",
+        "options": [
+          "Honeypot",
+          "Honeytoken",
+          "Sandboxing",
+          "Rate limiting"
+        ],
+        "answer": 1,
+        "explain": "Un honeytoken est un identifiant ou jeton factice : son utilisation révèle immédiatement une activité hostile."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Segmentation, durcissement, contrôles d'accès et sandboxing réduisent la surface avant détection.",
+          "Le honeypot est un système leurre ; le honeynet est un réseau entier de leurres.",
+          "Honeyfile, honeytoken et canary account détectent l'usage d'appâts spécifiques.",
+          "Toute interaction avec un leurre est un indicateur de haute confiance."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "4.1-02",
+    "objective": "4.1",
+    "order": 2,
+    "title": "IDS/IPS, pare-feu et contrôle d'accès réseau",
+    "minutes": 17,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "La famille des contrôles réseau se distingue par deux axes : **réseau ou hôte** et **détection ou prévention**. Une fois ces deux axes maîtrisés, les acronymes deviennent évidents."
+      },
+      {
+        "type": "h",
+        "text": "Détecter ou empêcher : IDS contre IPS"
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "IDS — Intrusion Detection System",
+          "points": [
+            "Détecte et alerte, sans bloquer.",
+            "Placé hors chemin (SPAN/tap).",
+            "NIDS = réseau ; HIDS = hôte."
+          ]
+        },
+        "right": {
+          "title": "IPS — Intrusion Prevention System",
+          "points": [
+            "Détecte **et bloque** en temps réel.",
+            "Placé inline sur le chemin du trafic.",
+            "NIPS = réseau ; HIPS = hôte."
+          ]
+        }
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "19",
+        "page": 237,
+        "printed": 215,
+        "strength": "primary",
+        "note": "IDS et IPS : détection, prévention, signatures et anomalies"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Contrôle",
+          "Périmètre",
+          "Position"
+        ],
+        "rows": [
+          [
+            "NIDS",
+            "Trafic réseau, copies",
+            "Hors chemin"
+          ],
+          [
+            "NIPS",
+            "Trafic réseau, en direct",
+            "Inline"
+          ],
+          [
+            "HIDS",
+            "Fichiers, journaux et processus d'un hôte",
+            "Agent local"
+          ],
+          [
+            "HIPS",
+            "Comportements d'un hôte",
+            "Agent local bloquant"
+          ],
+          [
+            "WIPS",
+            "Réseaux sans fil, points d'accès rogue",
+            "Capteurs WiFi dédiés"
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 104,
+        "strength": "primary",
+        "note": "IDS/IPS, agents hôtes et équipements de sécurité"
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "Piège classique : **IDS = détectif**, **IPS = préventif**. Un WIPS agit sur le sans-fil et peut bloquer un point d'accès rogue."
+      },
+      {
+        "type": "h",
+        "text": "Pare-feu et contrôle du trafic"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Rule-based firewall** : règles explicites autoriser/refuser sur IP, port et protocole.",
+          "**Layer 4 / Layer 7 firewall** : filtrage par port (couche 4) ou par contenu applicatif (couche 7).",
+          "**Rate-limiting requests** : limite le nombre de requêtes pour contrer les abus et les floods."
+        ]
+      },
+      {
+        "type": "term",
+        "en": "Web application firewall (WAF)",
+        "fr": "Pare-feu applicatif web",
+        "field": "Filtre le trafic HTTP/HTTPS au niveau applicatif : injection SQL, cross-site scripting, abus de requêtes. Il protège l'application, pas le réseau entier.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Unified threat management (UTM)",
+        "fr": "Gestion unifiée des menaces",
+        "field": "Équipement qui combine plusieurs fonctions (pare-feu, IPS, antivirus, filtrage web, VPN) dans une seule appliance.",
+        "gap": true
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "chapter": "—",
+        "page": "4.1",
+        "strength": "primary",
+        "note": "Référentiel officiel — WAF et UTM absents des 4 livres"
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "WAF et UTM sont exigés au **§4.1** mais absents des livres fournis. Ces définitions proviennent du référentiel et des pratiques de la discipline."
+      },
+      {
+        "type": "h",
+        "text": "Network access control (NAC)"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Captive portals** : authentification avant accès réseau (invités, BYOD).",
+          "**802.1X** : authentification au niveau du port réseau via un serveur RADIUS.",
+          "**Endpoint posture/compliance** : l'appareil est accepté seulement s'il respecte la politique (patchs, antivirus, chiffrement)."
+        ]
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "—",
+        "page": 217,
+        "printed": 197,
+        "strength": "supporting",
+        "note": "Outils de détection, collecte et contrôles réseau"
+      },
+      {
+        "type": "check",
+        "q": "Quel contrôle bloque une requête HTTP contenant une injection SQL avant qu'elle n'atteigne l'application ?",
+        "options": [
+          "NIDS",
+          "HIDS",
+          "WAF",
+          "Captive portal"
+        ],
+        "answer": 2,
+        "explain": "Le WAF inspecte le contenu applicatif HTTP et bloque les attaques web ; un NIDS ne verrait que le trafic réseau et n'empêcherait rien."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "IDS = détection hors chemin ; IPS = prévention inline.",
+          "NIDS/NIPS = réseau ; HIDS/HIPS = hôte ; WIPS = sans-fil.",
+          "WAF = filtrage applicatif HTTP ; UTM = appliance multifonctions.",
+          "NAC : captive portal, 802.1X et conformité de l'appareil avant accès."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "4.1-03",
+    "objective": "4.1",
+    "order": 3,
+    "title": "Endpoint, DLP, messagerie et sécurité du code",
+    "minutes": 18,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Les contrôles modernes dépassent le pare-feu : ils protègent le **poste**, les **données qui sortent**, les **e-mails** et le **code**. C'est aussi la partie du §4.1 la plus absente des livres fournis."
+      },
+      {
+        "type": "h",
+        "text": "Antivirus, EDR et XDR"
+      },
+      {
+        "type": "term",
+        "en": "Antivirus",
+        "fr": "Antivirus",
+        "field": "Détecte et supprime les malwares connus par signatures, complété par de l'analyse heuristique.",
+        "gap": false
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 13,
+        "strength": "primary",
+        "note": "Antivirus et agents de sécurité endpoint"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Technologie",
+          "Périmètre",
+          "Fonction clé"
+        ],
+        "rows": [
+          [
+            "EDR",
+            "Endpoints (postes, serveurs)",
+            "Détecte les comportements, permet isoler et répondre"
+          ],
+          [
+            "XDR",
+            "Endpoints + réseau + cloud + identité",
+            "Corrélation multi-sources"
+          ],
+          [
+            "Agent-based DLP",
+            "Poste de l'utilisateur",
+            "Bloque la copie ou l'envoi de données sensibles"
+          ],
+          [
+            "Centralized proxy",
+            "Flux web sortant",
+            "Filtrage de contenu et journalisation"
+          ]
+        ]
+      },
+      {
+        "type": "term",
+        "en": "Data loss prevention (DLP)",
+        "fr": "Prévention de la perte de données",
+        "field": "Identifie, surveille et bloque les données sensibles en mouvement, au repos ou sur l'endpoint selon des règles de contenu.",
+        "gap": true
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "chapter": "—",
+        "page": "4.1",
+        "strength": "primary",
+        "note": "Référentiel officiel — DLP/EDR/XDR et DMARC/SPF/DKIM/BIMI rédigés depuis le référentiel"
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "EDR/XDR et DLP sont exigés au **§4.1** mais absents des quatre livres. Attention à l'erreur relevée dans SOC Notes : **l'EDR est un agent endpoint, pas un pare-feu de nouvelle génération**."
+      },
+      {
+        "type": "h",
+        "text": "Authentification et réputation des e-mails"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Mécanisme",
+          "Rôle"
+        ],
+        "rows": [
+          [
+            "SPF",
+            "Autorise les serveurs qui peuvent envoyer pour un domaine (enregistrement DNS)"
+          ],
+          [
+            "DKIM",
+            "Signature cryptographique du message, vérifiable par la clé publique publiée en DNS"
+          ],
+          [
+            "DMARC",
+            "Politique d'alignement SPF/DKIM et de traitement des échecs (none/quarantine/reject) + rapports"
+          ],
+          [
+            "BIMI",
+            "Affiche le logo vérifié de la marque dans le client de messagerie"
+          ]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "DMARC n'est **pas un certificat** : c'est un enregistrement DNS de politique. Il s'appuie sur SPF et DKIM. C'est une correction d'une erreur présente dans SOC Notes."
+      },
+      {
+        "type": "h",
+        "text": "Sécurité applicative et système"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Input validation**, **secure cookies** et **static code analysis** : réduire les défauts applicatifs.",
+          "**Code signing** : signer les binaires pour garantir l'origine et l'intégrité.",
+          "**Secrets scanning** : détecter les mots de passe et clés codés en dur dans les dépôts.",
+          "**Group Policy** (Windows) : imposer mots de passe, verrouillage et paramètres de sécurité.",
+          "**SELinux** (Linux) : contrôle d'accès obligatoire (MAC) qui limite même un processus compromis."
+        ]
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "chapter": "—",
+        "page": "4.1",
+        "strength": "primary",
+        "note": "Référentiel officiel — code signing, secrets scanning et SELinux absents des 4 livres"
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "10",
+        "page": 125,
+        "printed": 103,
+        "strength": "supporting",
+        "note": "Infrastructure Windows et politiques de sécurité système"
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 181,
+        "strength": "supporting",
+        "note": "Contrôles applicatifs et messagerie"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-4.1-controls"
+      },
+      {
+        "type": "check",
+        "q": "Un développeur a commité une clé API dans un dépôt public. Quel contrôle aurait dû l'arrêter ?",
+        "options": [
+          "DMARC",
+          "Secrets scanning",
+          "WIPS",
+          "Rate limiting"
+        ],
+        "answer": 1,
+        "explain": "Le secrets scanning analyse le code et l'historique des dépôts pour repérer clés, jetons et mots de passe codés en dur."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "EDR = agent endpoint ; XDR = corrélation multi-sources ; DLP = contrôle des données sensibles.",
+          "SPF autorise l'expéditeur, DKIM signe, DMARC impose la politique, BIMI affiche le logo.",
+          "Code signing, secrets scanning et SELinux sont des notions du référentiel hors livres.",
+          "Choisir le contrôle selon la couche : réseau, endpoint, application ou messagerie."
+        ]
+      }
+    ]
+  }
+]

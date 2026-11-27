@@ -1,0 +1,55 @@
+{
+  "id": "pbq-2.6-ai",
+  "objective": "2.6",
+  "type": "classify",
+  "title": "Classer les menaces liées à l'IA",
+  "prompt": "Classez chaque situation dans la bonne famille : Modèle & données / Utilisation & sortie / Gouvernance & éthique.",
+  "categories": [
+    "Modèle & données",
+    "Utilisation & sortie",
+    "Gouvernance & éthique"
+  ],
+  "items": [
+    {
+      "id": "i1",
+      "label": "Données étiquetées incorrectement ajoutées à l'entraînement",
+      "cat": "Modèle & données"
+    },
+    {
+      "id": "i2",
+      "label": "Instruction hostile cachée dans un PDF analysé",
+      "cat": "Utilisation & sortie"
+    },
+    {
+      "id": "i3",
+      "label": "Le modèle invente une référence inexistante",
+      "cat": "Utilisation & sortie"
+    },
+    {
+      "id": "i4",
+      "label": "Réponse discriminatoire due à un jeu de données déséquilibré",
+      "cat": "Gouvernance & éthique"
+    },
+    {
+      "id": "i5",
+      "label": "Impossible d'expliquer la décision du modèle",
+      "cat": "Gouvernance & éthique"
+    },
+    {
+      "id": "i6",
+      "label": "Agent IA exécutant une commande non autorisée",
+      "cat": "Utilisation & sortie"
+    },
+    {
+      "id": "i7",
+      "label": "Paramètres du modèle modifiés sans autorisation",
+      "cat": "Modèle & données"
+    },
+    {
+      "id": "i8",
+      "label": "Données confidentielles restituées à un autre utilisateur",
+      "cat": "Modèle & données"
+    }
+  ],
+  "explain": "Modèle & données : poisoning, manipulation, fuite de données. Utilisation & sortie : prompt injection, jailbreaking, hallucinations, exécution de code. Gouvernance & éthique : biais, explicabilité, considérations éthiques."
+}

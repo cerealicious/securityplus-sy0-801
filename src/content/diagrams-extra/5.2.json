@@ -1,0 +1,107 @@
+{
+  "diagrams": [
+    {
+      "id": "d-5.2-risk-flow",
+      "kind": "flow",
+      "title": "Le processus de gestion des risques",
+      "subtitle": "Cliquez une étape, puis tentez de reconstituer l'ordre.",
+      "modes": [
+        "explore",
+        "quiz",
+        "order"
+      ],
+      "nodes": [
+        {
+          "id": "identify",
+          "label": "Identifier",
+          "sub": "Actifs + parties prenantes",
+          "x": 25,
+          "y": 45,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Inventaire des actifs et des propriétaires : on ne protège que ce que l'on connaît.",
+          "exam": "Sans identification des actifs, aucune analyse n'est fiable."
+        },
+        {
+          "id": "assess",
+          "label": "Évaluer",
+          "sub": "Scoring, catégories",
+          "x": 225,
+          "y": 45,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Classer les risques par catégorie et attribuer un score.",
+          "exam": "Évaluation ≠ analyse : l'évaluation classe, l'analyse approfondit."
+        },
+        {
+          "id": "analyze",
+          "label": "Analyser",
+          "sub": "Impact × probabilité",
+          "x": 425,
+          "y": 45,
+          "w": 160,
+          "h": 62,
+          "kind": "step",
+          "detail": "Qualitatif (experts) ou quantitatif (SLE × ARO = ALE).",
+          "exam": "Impact × probabilité donne la criticité ; ALE donne la perte financière annuelle."
+        },
+        {
+          "id": "treat",
+          "label": "Traiter",
+          "sub": "Éviter / Transférer / Mitiger / Accepter",
+          "x": 625,
+          "y": 45,
+          "w": 160,
+          "h": 62,
+          "kind": "risk",
+          "detail": "Quatre options : avoid, transfer, mitigate, accept. L'acceptation est un dernier recours daté.",
+          "exam": "Accepter n'efface pas le risque : c'est un « fix » sur le papier."
+        },
+        {
+          "id": "monitor",
+          "label": "Surveiller",
+          "sub": "Registre + revues",
+          "x": 425,
+          "y": 190,
+          "w": 160,
+          "h": 62,
+          "kind": "neutral",
+          "detail": "Registre des risques, communication, revues périodiques et risque résiduel.",
+          "exam": "Le risque résiduel subsiste toujours après traitement."
+        }
+      ],
+      "edges": [
+        {
+          "from": "identify",
+          "to": "assess"
+        },
+        {
+          "from": "assess",
+          "to": "analyze"
+        },
+        {
+          "from": "analyze",
+          "to": "treat"
+        },
+        {
+          "from": "treat",
+          "to": "monitor",
+          "label": "boucle"
+        }
+      ],
+      "sequence": [
+        "identify",
+        "assess",
+        "analyze",
+        "treat",
+        "monitor"
+      ],
+      "quiz": {
+        "question": "Quelle option consiste à souscrire une assurance ?",
+        "answer": "treat"
+      }
+    }
+  ]
+}

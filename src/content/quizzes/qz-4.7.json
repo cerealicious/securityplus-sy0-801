@@ -1,0 +1,216 @@
+{
+  "id": "qz-4.7",
+  "objective": "4.7",
+  "title": "Quiz — Réponse aux incidents",
+  "questions": [
+    {
+      "id": "q-4.7-01",
+      "type": "single",
+      "q": "Quelle est la première phase du cycle de réponse aux incidents ?",
+      "options": [
+        "Détection",
+        "Préparation",
+        "Confinement",
+        "Éradication"
+      ],
+      "answer": [1],
+      "explain": "La préparation précède l'incident : playbooks, rôles, outils, exercices. Sans elle, les phases suivantes sont improvisées.",
+      "ref": "4.7-01"
+    },
+    {
+      "id": "q-4.7-02",
+      "type": "single",
+      "q": "Un poste héberge un implant en mémoire. L'équipe veut l'éteindre immédiatement. Quel est le principal risque ?",
+      "options": [
+        "Le poste redémarrera trop vite",
+        "La mémoire volatile sera perdue, ainsi que la preuve principale",
+        "Le pare-feu bloquera le redémarrage",
+        "L'antivirus supprimera l'implant"
+      ],
+      "answer": [1],
+      "explain": "L'extinction efface la mémoire et donc l'implant fileless, les connexions et les artefacts d'exécution. Il faut isoler le réseau puis capturer la mémoire.",
+      "ref": "4.7-01"
+    },
+    {
+      "id": "q-4.7-03",
+      "type": "single",
+      "q": "Quel est le livrable de la phase de détection et analyse ?",
+      "options": [
+        "Un correctif déployé",
+        "Un ticket qualifié avec gravité et périmètre initial",
+        "Une sauvegarde restaurée",
+        "Un rapport post-incident"
+      ],
+      "answer": [1],
+      "explain": "La détection établit les faits et qualifie l'incident : vrai/faux positif, gravité, périmètre, escalade. Elle ne décide pas encore de la réponse.",
+      "ref": "4.7-01"
+    },
+    {
+      "id": "q-4.7-04",
+      "type": "single",
+      "q": "Quelle phase supprime la cause racine et l'accès de l'attaquant ?",
+      "options": [
+        "Confinement",
+        "Éradication",
+        "Rétablissement",
+        "Post-incident"
+      ],
+      "answer": [1],
+      "explain": "L'éradication supprime l'accès, corrige la vulnérabilité et reconstruit les systèmes compromis. Le confinement limite la propagation.",
+      "ref": "4.7-01"
+    },
+    {
+      "id": "q-4.7-05",
+      "type": "single",
+      "q": "Pourquoi vérifier l'intégrité d'une sauvegarde avant de restaurer ?",
+      "options": [
+        "Pour accélérer la restauration",
+        "Parce qu'une sauvegarde compromise peut réinstaller le rançongiciel ou l'implant",
+        "Parce que la loi l'exige toujours",
+        "Pour réduire la taille du disque"
+      ],
+      "answer": [1],
+      "explain": "Restaurer sans vérifier peut réintroduire la compromission. La sauvegarde doit être testée et son intégrité confirmée.",
+      "ref": "4.7-01"
+    },
+    {
+      "id": "q-4.7-06",
+      "type": "single",
+      "q": "Quel rôle coordonne l'incident, arbitre les priorités et porte la communication ?",
+      "options": [
+        "L'analyste forensique",
+        "L'incident commander",
+        "Le propriétaire métier",
+        "Le DPO"
+      ],
+      "answer": [1],
+      "explain": "L'incident commander coordonne et arbitre. Sans lui, les décisions se contredisent et les actions se dupliquent.",
+      "ref": "4.7-02"
+    },
+    {
+      "id": "q-4.7-07",
+      "type": "single",
+      "q": "Qu'est-ce qu'un exercice tabletop ?",
+      "options": [
+        "Une simulation technique complète sur les systèmes réels",
+        "Une discussion guidée d'un scénario, sans toucher aux systèmes",
+        "Un scan de vulnérabilités",
+        "Une restauration de sauvegarde"
+      ],
+      "answer": [1],
+      "explain": "Le tabletop teste les décisions et la coordination par la discussion. La simulation exécute des actions et teste les outils.",
+      "ref": "4.7-02"
+    },
+    {
+      "id": "q-4.7-08",
+      "type": "single",
+      "q": "Quel est le livrable le plus important d'un tabletop ?",
+      "options": [
+        "Un rapport de vulnérabilités techniques",
+        "La liste des hypothèses non vérifiées et des décisions ambiguës",
+        "La preuve que l'équipe a bien répondu",
+        "Un nouveau pare-feu configuré"
+      ],
+      "answer": [1],
+      "explain": "Le tabletop révèle les écarts de compréhension et les rôles flous. Ces constats deviennent des actions correctives datées.",
+      "ref": "4.7-02"
+    },
+    {
+      "id": "q-4.7-09",
+      "type": "single",
+      "q": "Quel est l'ordre de volatilité correct pour la collecte de preuves ?",
+      "options": [
+        "Disque, mémoire, réseau, sauvegardes",
+        "Mémoire, réseau, disque, sauvegardes",
+        "Sauvegardes, disque, réseau, mémoire",
+        "Réseau, sauvegardes, mémoire, disque"
+      ],
+      "answer": [1],
+      "explain": "On capture d'abord ce qui disparaît le plus vite : mémoire, puis réseau, puis disque, puis sauvegardes.",
+      "ref": "4.7-03"
+    },
+    {
+      "id": "q-4.7-10",
+      "type": "single",
+      "q": "Que documente la chaîne de possession ?",
+      "options": [
+        "Le coût de l'incident",
+        "Qui a collecté et manipulé chaque preuve, quand et avec quel hash",
+        "Les identifiants des administrateurs",
+        "La configuration du pare-feu"
+      ],
+      "answer": [1],
+      "explain": "La chaîne de possession trace la collecte et les manipulations. Une rupture peut rendre la preuve contestable.",
+      "ref": "4.7-03"
+    },
+    {
+      "id": "q-4.7-11",
+      "type": "single",
+      "q": "Une violation de données personnelles est découverte lundi à 10:00. Quel est le délai RGPD de notification à l'autorité de contrôle ?",
+      "options": [
+        "24 heures",
+        "72 heures",
+        "7 jours",
+        "30 jours"
+      ],
+      "answer": [1],
+      "explain": "Le RGPD impose 72 heures après la prise de connaissance, sauf absence de risque. On notifie avec les informations disponibles, sans attendre la fin de l'investigation.",
+      "ref": "4.7-03"
+    },
+    {
+      "id": "q-4.7-12",
+      "type": "single",
+      "q": "Que signifie un legal hold dans le contexte d'un incident ?",
+      "options": [
+        "Le gel des comptes utilisateurs",
+        "La suspension de la destruction des données potentiellement pertinentes",
+        "Le blocage du réseau",
+        "La mise en quarantaine des e-mails"
+      ],
+      "answer": [1],
+      "explain": "Le legal hold suspend les suppressions et destructions automatiques dès qu'un litige ou une enquête est envisageable.",
+      "ref": "4.7-03"
+    },
+    {
+      "id": "q-4.7-13",
+      "type": "single",
+      "q": "Quelle est la différence entre cause immédiate et cause racine ?",
+      "options": [
+        "Aucune, ce sont des synonymes",
+        "La cause immédiate est l'événement visible ; la cause racine est la condition qui l'a rendu possible",
+        "La cause racine est toujours technique",
+        "La cause immédiate est juridique"
+      ],
+      "answer": [1],
+      "explain": "« Le serveur a été chiffré » est immédiat. « Un compte de service sans MFA permettait l'accès RDP exposé » est la condition racine.",
+      "ref": "4.7-03"
+    },
+    {
+      "id": "q-4.7-14",
+      "type": "match",
+      "q": "Associez chaque phase à son livrable principal.",
+      "pairs": [
+        { "left": "Préparation", "right": "Playbooks et rôles testés" },
+        { "left": "Confinement", "right": "Hôtes isolés et comptes bloqués" },
+        { "left": "Rétablissement", "right": "Restauration vérifiée et surveillance renforcée" },
+        { "left": "Post-incident", "right": "Rapport PIR et actions datées" }
+      ],
+      "explain": "Chaque phase produit un artefact vérifiable. Un PIR sans actions datées n'est qu'un récit.",
+      "ref": "4.7-01"
+    },
+    {
+      "id": "q-4.7-15",
+      "type": "multi",
+      "q": "Quels éléments doivent figurer dans un rapport post-incident ? (plusieurs réponses)",
+      "options": [
+        "Une chronologie horodatée et sourcée",
+        "La cause racine",
+        "Des actions correctives avec responsable et échéance",
+        "Le nom des personnes à sanctionner"
+      ],
+      "answer": [0, 1, 2],
+      "explain": "Le PIR documente les faits, la cause racine et les actions. Il ne vise pas à désigner des coupables : la recherche de responsabilité individuelle bloque le retour d'expérience.",
+      "ref": "4.7-03"
+    }
+  ]
+}

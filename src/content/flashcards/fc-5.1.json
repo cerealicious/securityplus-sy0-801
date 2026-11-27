@@ -1,0 +1,115 @@
+{
+  "id": "fc-5.1",
+  "objective": "5.1",
+  "title": "Artefacts de gouvernance, risques et conformité",
+  "cards": [
+    {
+      "id": "c-5.1-01",
+      "front": "Guideline",
+      "back": "Ligne directrice : recommandation non obligatoire (benchmark, advisory, guide d'implémentation, architecture de référence).",
+      "tag": "Pyramide"
+    },
+    {
+      "id": "c-5.1-02",
+      "front": "Standard",
+      "back": "Norme obligatoire et mesurable qui fixe un niveau minimal : chiffrement, longueur de mot de passe, configuration physique.",
+      "tag": "Pyramide"
+    },
+    {
+      "id": "c-5.1-03",
+      "front": "Baseline",
+      "back": "Configuration minimale connue et approuvée servant de référence de conformité pour un système.",
+      "tag": "Pyramide"
+    },
+    {
+      "id": "c-5.1-04",
+      "front": "SOP",
+      "back": "Standard operating procedure : suite d'étapes documentée et répétable pour une tâche opérationnelle.",
+      "tag": "Pyramide"
+    },
+    {
+      "id": "c-5.1-05",
+      "front": "Runbook",
+      "back": "Guide d'exécution orienté tâche pour l'exploitation : redémarrage, bascule, restauration, vérification.",
+      "tag": "Pyramide"
+    },
+    {
+      "id": "c-5.1-06",
+      "front": "BCP vs DRP",
+      "back": "BCP = continuité des fonctions métier ; DRP = restauration des systèmes et données informatiques.",
+      "tag": "Plans"
+    },
+    {
+      "id": "c-5.1-07",
+      "front": "Politique d'utilisation acceptable (AUP)",
+      "back": "Définit ce qui est autorisé ou interdit dans l'usage des ressources et systèmes de l'organisation.",
+      "tag": "Politiques"
+    },
+    {
+      "id": "c-5.1-08",
+      "front": "BYOD policy",
+      "back": "Fixe les conditions d'usage d'un appareil personnel : enregistrement, conformité, accès et révocation.",
+      "tag": "Politiques"
+    },
+    {
+      "id": "c-5.1-09",
+      "front": "Clean desk policy",
+      "back": "Interdit de laisser des documents ou supports sensibles exposés sur un poste non surveillé.",
+      "tag": "Politiques"
+    },
+    {
+      "id": "c-5.1-10",
+      "front": "Information security policy",
+      "back": "Politique cadre qui énonce l'intention de la direction et les principes généraux de sécurité de l'information.",
+      "tag": "Politiques"
+    },
+    {
+      "id": "c-5.1-11",
+      "front": "Incident response policy",
+      "back": "Définit les autorités, les délais de signalement et les obligations lors d'un incident.",
+      "tag": "Politiques"
+    },
+    {
+      "id": "c-5.1-12",
+      "front": "Data classification and retention policy",
+      "back": "Définit les niveaux de sensibilité des données et leurs durées de conservation.",
+      "tag": "Politiques"
+    },
+    {
+      "id": "c-5.1-13",
+      "front": "Access control policy",
+      "back": "Énonce les principes d'attribution, de revue et de révocation des accès.",
+      "tag": "Politiques"
+    },
+    {
+      "id": "c-5.1-14",
+      "front": "Data disposal policy",
+      "back": "Décrit les modes de destruction des données et la preuve de destruction exigée.",
+      "tag": "Politiques"
+    },
+    {
+      "id": "c-5.1-15",
+      "front": "Vulnerability disclosure policy",
+      "back": "Indique à qui et comment signaler une vulnérabilité, et dans quel délai.",
+      "tag": "Politiques"
+    },
+    {
+      "id": "c-5.1-16",
+      "front": "Privacy policy",
+      "back": "Explique la collecte, l'usage, la conservation et les droits des personnes sur leurs données.",
+      "tag": "Politiques"
+    },
+    {
+      "id": "c-5.1-17",
+      "front": "Cycle de vie d'un artefact",
+      "back": "Besoin/propriétaire → rédaction/revue → approbation → diffusion/accusé de réception → revue et versionnage.",
+      "tag": "Gouvernance"
+    },
+    {
+      "id": "c-5.1-18",
+      "front": "RFC (exemple de standard)",
+      "back": "Document de spécification de l'IETF, cité au §5.1 comme standard externe de fait. Notion non détaillée dans les livres fournis.",
+      "tag": "Lacune"
+    }
+  ]
+}

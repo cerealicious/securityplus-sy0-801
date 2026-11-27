@@ -1,0 +1,104 @@
+{
+  "diagrams": [
+    {
+      "id": "d-4.1-controls",
+      "kind": "matrix",
+      "title": "Matrice des contrôles : quel contrôle pour quelle couche ?",
+      "subtitle": "Chaque case donne un contrôle et l'effet recherché. Cliquez les cases pour comparer détection, prévention et réponse.",
+      "matrix": {
+        "columns": [
+          "Réseau / périmètre",
+          "Endpoint / identité",
+          "Application / données",
+          "Messagerie"
+        ],
+        "rows": [
+          {
+            "label": "Détection",
+            "cells": [
+              {
+                "text": "NIDS, WIPS",
+                "detail": "Le NIDS analyse une copie du trafic hors chemin ; le WIPS surveille les points d'accès sans fil rogue. Aucun des deux ne bloque par lui-même."
+              },
+              {
+                "text": "HIDS, EDR, XDR",
+                "detail": "Le HIDS alerte sur les changements de fichiers ; l'EDR détecte les comportements sur l'agent ; le XDR corrèle plusieurs sources."
+              },
+              {
+                "text": "Secrets scanning",
+                "detail": "Détecte les clés et mots de passe codés en dur dans le code et l'historique des dépôts. Contrôle du référentiel, absent des livres."
+              },
+              {
+                "text": "DMARC (rapports)",
+                "detail": "Les rapports DMARC révèlent les expéditeurs qui usurpent le domaine et les messages qui échouent à l'alignement."
+              }
+            ]
+          },
+          {
+            "label": "Prévention",
+            "cells": [
+              {
+                "text": "NIPS, WAF, 802.1X",
+                "detail": "Le NIPS bloque inline, le WAF filtre le HTTP au niveau applicatif, le 802.1X refuse l'accès avant authentification."
+              },
+              {
+                "text": "HIPS, MDM, SELinux",
+                "detail": "Le HIPS bloque localement, le MDM impose la politique mobile, SELinux applique un contrôle d'accès obligatoire."
+              },
+              {
+                "text": "Input validation, code signing",
+                "detail": "Valider les entrées empêche l'injection ; signer le code garantit origine et intégrité des binaires."
+              },
+              {
+                "text": "SPF, DKIM, DMARC",
+                "detail": "SPF liste les serveurs autorisés, DKIM signe le message, DMARC refuse ou met en quarantaine les échecs d'alignement."
+              }
+            ]
+          },
+          {
+            "label": "Réponse / correction",
+            "cells": [
+              {
+                "text": "Rate limiting, blocage d'IP",
+                "detail": "Limite l'abus de requêtes et réduit l'impact d'un flood sans attendre l'analyse complète."
+              },
+              {
+                "text": "Isolation EDR, quarantaine",
+                "detail": "L'EDR isole un poste compromis du réseau ; la quarantaine bloque un fichier suspect détecté par l'antivirus."
+              },
+              {
+                "text": "DLP block, rollback",
+                "detail": "Le DLP bloque la copie ou l'envoi d'une donnée sensible ; le rollback restaure un état sain."
+              },
+              {
+                "text": "BIMI, politique reject",
+                "detail": "BIMI affiche le logo vérifié et DMARC en politique reject bloque l'usurpation du domaine."
+              }
+            ]
+          },
+          {
+            "label": "Déception",
+            "cells": [
+              {
+                "text": "Honeynet",
+                "detail": "Réseau entier de leurres : révèle la reconnaissance et le mouvement latéral dans la zone simulée."
+              },
+              {
+                "text": "Canary account, honeytoken",
+                "detail": "Compte ou jeton factice : tout usage est un signal de haute confiance."
+              },
+              {
+                "text": "Honeyfile",
+                "detail": "Fichier appât dont l'ouverture ou la copie trahit un accès non légitime."
+              },
+              {
+                "text": "Adresse d'appât",
+                "detail": "Une adresse email factice surveillée révèle les campagnes de collecte d'adresses."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

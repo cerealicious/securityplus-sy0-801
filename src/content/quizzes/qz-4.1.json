@@ -1,0 +1,114 @@
+{
+  "id": "qz-4.1",
+  "objective": "4.1",
+  "title": "Quiz — Contrôles et techniques de protection",
+  "questions": [
+    {
+      "id": "q-4.1-01",
+      "type": "single",
+      "q": "Quel contrôle détecte sans bloquer et se place hors du chemin du trafic ?",
+      "options": [
+        "IPS",
+        "NIDS",
+        "WAF",
+        "HIPS"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Le NIDS est détectif : il reçoit une copie du trafic via SPAN/tap et n'interrompt pas le flux.",
+      "ref": "4.1-02"
+    },
+    {
+      "id": "q-4.1-02",
+      "type": "single",
+      "q": "Quel mécanisme permet de vérifier qu'un e-mail a été signé par le domaine expéditeur ?",
+      "options": [
+        "SPF",
+        "DKIM",
+        "BIMI",
+        "Rate limiting"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "DKIM ajoute une signature cryptographique vérifiable par la clé publique publiée en DNS. SPF, lui, liste les serveurs autorisés.",
+      "ref": "4.1-03"
+    },
+    {
+      "id": "q-4.1-03",
+      "type": "multi",
+      "q": "Quelles technologies relèvent de la déception ? (plusieurs réponses)",
+      "options": [
+        "Honeynet",
+        "Honeytoken",
+        "Canary account",
+        "HIDS"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "explain": "Honeynet, honeytoken et canary account sont des leurres. Le HIDS est un agent de détection sur hôte.",
+      "ref": "4.1-01"
+    },
+    {
+      "id": "q-4.1-04",
+      "type": "match",
+      "q": "Associez chaque contrôle à la couche qu'il protège.",
+      "pairs": [
+        {
+          "left": "WAF",
+          "right": "Trafic HTTP / application web"
+        },
+        {
+          "left": "EDR",
+          "right": "Poste et serveur (endpoint)"
+        },
+        {
+          "left": "DLP",
+          "right": "Données sensibles en sortie"
+        },
+        {
+          "left": "DMARC",
+          "right": "Authentification et politique de messagerie"
+        }
+      ],
+      "explain": "Choisir le contrôle revient à identifier la couche et le flux concernés par le risque.",
+      "ref": "4.1-03"
+    },
+    {
+      "id": "q-4.1-05",
+      "type": "single",
+      "q": "Un attaquant compromet un poste et tente de modifier des fichiers système. Quel contrôle hôte peut bloquer l'action ?",
+      "options": [
+        "NIDS",
+        "HIPS",
+        "WAF",
+        "Captive portal"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Le HIPS est un agent hôte préventif : il bloque les comportements suspects localement. Le HIDS se contenterait d'alerter.",
+      "ref": "4.1-02"
+    },
+    {
+      "id": "q-4.1-06",
+      "type": "single",
+      "q": "Quelle affirmation sur l'EDR est correcte ?",
+      "options": [
+        "C'est un pare-feu de nouvelle génération",
+        "C'est un agent installé sur l'endpoint pour détecter et répondre",
+        "C'est un enregistrement DNS de messagerie",
+        "C'est un serveur de journalisation centralisé"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "L'EDR est un agent endpoint. L'affirmation « next generation firewall » est une erreur présente dans SOC Notes et corrigée ici.",
+      "ref": "4.1-03"
+    }
+  ]
+}

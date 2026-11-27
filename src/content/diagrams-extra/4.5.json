@@ -1,0 +1,138 @@
+{
+  "diagrams": [
+    {
+      "id": "d-access-models",
+      "kind": "matrix",
+      "title": "Matrice des modèles de contrôle d'accès",
+      "subtitle": "Qui décide, sur quelle base, pendant combien de temps ? Six modèles du référentiel §4.5, dont cinq hors livres.",
+      "matrix": {
+        "columns": [
+          "DAC",
+          "MAC",
+          "RBAC",
+          "Rule-based",
+          "Time-based",
+          "JIT"
+        ],
+        "rows": [
+          {
+            "label": "Qui décide ?",
+            "cells": [
+              {
+                "text": "Le propriétaire",
+                "detail": "Le propriétaire de la ressource accorde ou retire l'accès à sa discrétion."
+              },
+              {
+                "text": "La politique centrale",
+                "detail": "Une autorité définit les étiquettes et les règles : même le propriétaire ne peut pas y déroger."
+              },
+              {
+                "text": "L'administrateur via les rôles",
+                "detail": "Les droits sont attachés à un rôle, hérité par les utilisateurs qui y sont affectés."
+              },
+              {
+                "text": "L'administrateur via les règles",
+                "detail": "Des règles explicites (ACL, plage IP, liste d'autorisation) s'appliquent à tous."
+              },
+              {
+                "text": "La politique temporelle",
+                "detail": "Une fenêtre horaire ou une date d'expiration décide de l'autorisation."
+              },
+              {
+                "text": "Le workflow d'approbation",
+                "detail": "Une demande validée déclenche une élévation limitée dans le temps."
+              }
+            ]
+          },
+          {
+            "label": "Base de la décision",
+            "cells": [
+              {
+                "text": "Volonté du propriétaire",
+                "detail": "Flexible mais difficile à auditer : les droits se propagent sans contrôle central."
+              },
+              {
+                "text": "Étiquettes de sécurité",
+                "detail": "Classification et « need to know » : modèle strict, adapté aux environnements sensibles."
+              },
+              {
+                "text": "Appartenance à un rôle",
+                "detail": "Modèle dominant en entreprise : simple à auditer, à accorder et à révoquer."
+              },
+              {
+                "text": "Condition explicite",
+                "detail": "Règle appliquée uniformément, indépendamment de l'identité ou du rôle."
+              },
+              {
+                "text": "Horloge et calendrier",
+                "detail": "Heures de bureau, durée de mission, date de fin de contrat."
+              },
+              {
+                "text": "Besoin immédiat et approuvé",
+                "detail": "Durée courte, souvent quelques heures, avec révocation automatique."
+              }
+            ]
+          },
+          {
+            "label": "Point d'examen",
+            "cells": [
+              {
+                "text": "Propagation incontrôlée",
+                "detail": "DAC = souplesse, mais le propriétaire peut transmettre des droits sans visibilité centrale."
+              },
+              {
+                "text": "Non-dérogable",
+                "detail": "MAC s'impose même contre le propriétaire : c'est le critère qui le distingue de DAC."
+              },
+              {
+                "text": "Révocation par le rôle",
+                "detail": "Retirer l'utilisateur du rôle retire tous ses droits : c'est la force de RBAC."
+              },
+              {
+                "text": "Pas de cas par cas",
+                "detail": "Rule-based s'applique à tous indistinctement, contrairement à DAC."
+              },
+              {
+                "text": "Expiration planifiée",
+                "detail": "Time-based prévoit la fin d'accès dès l'attribution."
+              },
+              {
+                "text": "Fenêtre d'exposition minimale",
+                "detail": "JIT réduit la durée pendant laquelle un privilège élevé est actif."
+              }
+            ]
+          },
+          {
+            "label": "Couverture livre",
+            "cells": [
+              {
+                "text": "Hors livres",
+                "detail": "Référentiel §4.5, aucun des quatre livres fournis."
+              },
+              {
+                "text": "Hors livres",
+                "detail": "Référentiel §4.5, aucun des quatre livres fournis."
+              },
+              {
+                "text": "Partiellement couvert",
+                "detail": "Notion de rôles et de moindre privilège dans le Defensive Security Handbook."
+              },
+              {
+                "text": "Hors livres",
+                "detail": "Référentiel §4.5, aucun des quatre livres fournis."
+              },
+              {
+                "text": "Hors livres",
+                "detail": "Référentiel §4.5, aucun des quatre livres fournis."
+              },
+              {
+                "text": "Hors livres",
+                "detail": "Référentiel §4.5, aucun des quatre livres fournis."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

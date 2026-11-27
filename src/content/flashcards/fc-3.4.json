@@ -1,0 +1,115 @@
+{
+  "id": "fc-3.4",
+  "objective": "3.4",
+  "title": "Résilience et récupération",
+  "cards": [
+    {
+      "id": "c-3.4-01",
+      "front": "Différence BCP / DR",
+      "back": "BCP = continuité globale de l'activité ; DR = processus informatiques qui restaurent les systèmes pour atteindre les objectifs du BCP.",
+      "tag": "Bases"
+    },
+    {
+      "id": "c-3.4-02",
+      "front": "Site chaud (hot site)",
+      "back": "Opérationnel en continu, données synchronisées, reprise en minutes, coût le plus élevé.",
+      "tag": "Sites"
+    },
+    {
+      "id": "c-3.4-03",
+      "front": "Site tiède (warm site)",
+      "back": "Matériel prêt, données à restaurer, reprise en heures.",
+      "tag": "Sites"
+    },
+    {
+      "id": "c-3.4-04",
+      "front": "Site froid (cold site)",
+      "back": "Locaux seuls, matériel et données à installer, reprise en jours, coût minimal.",
+      "tag": "Sites"
+    },
+    {
+      "id": "c-3.4-05",
+      "front": "RPO",
+      "back": "Recovery Point Objective : perte de données maximale acceptable, mesurée avant l'incident.",
+      "tag": "Métriques"
+    },
+    {
+      "id": "c-3.4-06",
+      "front": "RTO",
+      "back": "Recovery Time Objective : durée maximale d'interruption de service acceptable.",
+      "tag": "Métriques"
+    },
+    {
+      "id": "c-3.4-07",
+      "front": "MTTR",
+      "back": "Mean Time To Repair : temps moyen de réparation d'un équipement défaillant.",
+      "tag": "Métriques"
+    },
+    {
+      "id": "c-3.4-08",
+      "front": "MTBF",
+      "back": "Mean Time Between Failures : temps moyen entre deux pannes ; indicateur de fiabilité.",
+      "tag": "Métriques"
+    },
+    {
+      "id": "c-3.4-09",
+      "front": "Exemple de dépendance RTO",
+      "back": "Serveur RTO 1 h sur réseau RTO 3 h → RTO effectif du serveur = 3 h.",
+      "tag": "Piège"
+    },
+    {
+      "id": "c-3.4-10",
+      "front": "Quatre solutions de redondance",
+      "back": "Load balancing, clustering, autoscaling, haute disponibilité (plus multicloud).",
+      "tag": "Redondance"
+    },
+    {
+      "id": "c-3.4-11",
+      "front": "UPS",
+      "back": "Uninterruptible Power Supply : alimentation sans interruption, autonomie courte.",
+      "tag": "Alimentation"
+    },
+    {
+      "id": "c-3.4-12",
+      "front": "RPS",
+      "back": "Redundant Power Supply : alimentation redondante dans un équipement.",
+      "tag": "Alimentation"
+    },
+    {
+      "id": "c-3.4-13",
+      "front": "Générateur et parasurge",
+      "back": "Generator = autonomie longue ; surge protector = protection contre les surtensions.",
+      "tag": "Alimentation"
+    },
+    {
+      "id": "c-3.4-14",
+      "front": "Sauvegarde immuable",
+      "back": "Copie non modifiable même par un administrateur : défense clé contre le ransomware.",
+      "tag": "Sauvegarde"
+    },
+    {
+      "id": "c-3.4-15",
+      "front": "Quatre attributs d'une sauvegarde",
+      "back": "Retention, immutability, scope, restoration testing.",
+      "tag": "Sauvegarde"
+    },
+    {
+      "id": "c-3.4-16",
+      "front": "Failover vs failback",
+      "back": "Failover = bascule vers le secours ; failback = retour vers le site principal.",
+      "tag": "Tests"
+    },
+    {
+      "id": "c-3.4-17",
+      "front": "Simulation et traitement parallèle",
+      "back": "Simulation = exercice contrôlé ; parallel processing = traiter sur les deux sites pour comparer.",
+      "tag": "Tests"
+    },
+    {
+      "id": "c-3.4-18",
+      "front": "Air-gapped / diversité",
+      "back": "Isolement physique et diversité fournisseur, matériel et virtualisation réduisent le risque commun.",
+      "tag": "Architecture"
+    }
+  ]
+}

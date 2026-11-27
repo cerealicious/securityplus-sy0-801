@@ -1,0 +1,363 @@
+[
+  {
+    "id": "1.1-01",
+    "objective": "1.1",
+    "order": 1,
+    "title": "CIA, AAA et non-répudiation : les principes qui fondent tout le reste",
+    "minutes": 14,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Avant les outils, il y a trois questions : l'information est-elle protégée, peut-on savoir qui a fait quoi, et peut-on le prouver ? Toute la sécurité repose sur ces réponses."
+      },
+      {
+        "type": "h",
+        "text": "La triade CIA"
+      },
+      {
+        "type": "p",
+        "text": "**Confidentiality** (confidentialité) : seules les personnes autorisées accèdent à l'information. Elle se garantit par le chiffrement, le contrôle d'accès, la classification et la segmentation."
+      },
+      {
+        "type": "p",
+        "text": "**Integrity** (intégrité) : l'information n'est ni modifiée ni altérée de façon non détectée. Elle se garantit par le hachage, les signatures, les contrôles de version et les journaux inviolables."
+      },
+      {
+        "type": "p",
+        "text": "**Availability** (disponibilité) : l'information et les services sont accessibles quand on en a besoin. Elle se garantit par la redondance, les sauvegardes, la protection contre le déni de service et la capacité dimensionnée."
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "title": "Le piège classique",
+        "text": "Chiffrer un disque protège la **confidentialité**, pas la disponibilité. Un rançongiciel attaque la **disponibilité** en chiffrant les données : le chiffrement devient ici l'arme, pas la défense. Lisez toujours la question en vous demandant **quel pilier est visé**."
+      },
+      {
+        "type": "h",
+        "text": "AAA : authentification, autorisation, traçabilité"
+      },
+      {
+        "type": "p",
+        "text": "**Authentication** répond à « qui êtes-vous ? ». **Authorization** répond à « avez-vous le droit ? ». **Accounting** (ou auditing) répond à « qu'avez-vous fait ? ». L'ordre est important : on ne peut pas autoriser sans avoir authentifié, ni tracer sans avoir identifié."
+      },
+      {
+        "type": "term",
+        "en": "Authentication, Authorization, Accounting (AAA)",
+        "fr": "Authentification, autorisation, traçabilité",
+        "field": "Les Anglo-Saxons disent parfois « AAA framework ». Ne confondez pas avec le protocole réseau AAA (RADIUS, TACACS+) qui implémente ces trois fonctions."
+      },
+      {
+        "type": "table",
+        "head": ["Fonction", "Question posée", "Exemple de contrôle", "Échec typique"],
+        "rows": [
+          ["Authentication", "Qui êtes-vous ?", "Mot de passe + MFA, certificat, biométrie", "Identifiants volés, MFA contournée"],
+          ["Authorization", "Avez-vous le droit ?", "RBAC, ACL, moindre privilège", "Élévation de privilèges, rôle trop large"],
+          ["Accounting", "Qu'avez-vous fait ?", "Journaux, SIEM, horodatage", "Journaux incomplets ou modifiables"]
+        ]
+      },
+      {
+        "type": "h",
+        "text": "Non-répudiation"
+      },
+      {
+        "type": "p",
+        "text": "La **non-répudiation** garantit qu'une partie ne peut pas nier avoir effectué une action. Elle repose sur une preuve vérifiable par un tiers : signature numérique avec une clé privée, horodatage fiable, journalisation protégée en intégrité. Un simple mot de passe partagé ne prouve rien : n'importe qui ayant le mot de passe aurait pu agir."
+      },
+      {
+        "type": "term",
+        "en": "Non-repudiation",
+        "fr": "Non-répudiation",
+        "field": "En pratique : signature électronique qualifiée, horodatage, journal d'audit en écriture seule. La non-répudiation est une exigence **juridique** autant que technique."
+      },
+      {
+        "type": "callout",
+        "kind": "tip",
+        "title": "Signature ≠ chiffrement",
+        "text": "On **signe** avec sa clé privée pour prouver l'origine (authenticité, intégrité, non-répudiation). On **chiffre** avec la clé publique du destinataire pour protéger la confidentialité. Les deux opérations peuvent coexister sur le même message."
+      },
+      {
+        "type": "h",
+        "text": "Moindre privilège et séparation des tâches"
+      },
+      {
+        "type": "p",
+        "text": "Le **least privilege** consiste à donner à chaque identité le minimum d'accès nécessaire, pour la durée nécessaire. La **separation of duties** empêche qu'une seule personne puisse mener une action critique de bout en bout : demander, approuver et payer une dépense, ou développer et déployer en production sans revue."
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "page": 11,
+        "strength": "supporting",
+        "note": "Triade CIA développée en détail"
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "11",
+        "page": 133,
+        "printed": 111,
+        "strength": "supporting",
+        "note": "Moindre privilège appliqué aux comptes"
+      },
+      {
+        "type": "check",
+        "q": "Une attaque par rançongiciel chiffre les fichiers d'un service et les rend inaccessibles. Quel pilier est principalement atteint ?",
+        "options": [
+          "La confidentialité, parce que les données sont chiffrées",
+          "La disponibilité, parce que les données ne sont plus accessibles",
+          "L'intégrité, parce que les fichiers ont changé",
+          "La non-répudiation, parce qu'on ne sait pas qui a chiffré"
+        ],
+        "answer": 1,
+        "explain": "Le rançongiciel utilise le chiffrement comme arme, mais l'effet recherché est l'indisponibilité. L'intégrité est aussi touchée, mais la finalité de l'attaque est de bloquer l'accès pour extorquer un paiement."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "CIA : confidentialité, intégrité, disponibilité — trois piliers distincts, trois familles de contrôles.",
+          "AAA : authentifier, autoriser, tracer — dans cet ordre.",
+          "La non-répudiation exige une preuve vérifiable par un tiers, pas seulement un journal local.",
+          "Moindre privilège et séparation des tâches réduisent la surface d'action d'un compte compromis."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1.1-02",
+    "objective": "1.1",
+    "order": 2,
+    "title": "Défense en profondeur et Zero Trust : deux réponses à la même question",
+    "minutes": 15,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Aucun contrôle n'est infaillible. La défense en profondeur parie sur l'empilement ; le Zero Trust parie sur la vérification continue. Les deux sont exigibles, et ils ne s'opposent pas."
+      },
+      {
+        "type": "h",
+        "text": "Défense en profondeur"
+      },
+      {
+        "type": "p",
+        "text": "La **defense in depth** empile des contrôles indépendants pour qu'un échec unique ne suffise pas à compromettre l'actif. Un utilisateur clique sur un lien : le filtre e-mail l'aurait bloqué, l'EDR peut arrêter l'exécution, la segmentation limite la propagation, la sauvegarde permet la restauration."
+      },
+      {
+        "type": "p",
+        "text": "La profondeur n'est pas le nombre de produits. Trois antivirus sur le même poste ne constituent pas une défense en profondeur : ils couvrent la même couche et la même défaillance. La profondeur vient de la **diversité des couches** : périmètre, réseau, hôte, application, données, identité, humain, physique."
+      },
+      {
+        "type": "term",
+        "en": "Defense in depth",
+        "fr": "Défense en profondeur",
+        "field": "Aussi appelée « layered defense ». En français : « défense en profondeur » ou « défense multicouche »."
+      },
+      {
+        "type": "list",
+        "items": [
+          "**Périmètre** : pare-feu, passerelle web, filtrage e-mail.",
+          "**Réseau** : segmentation, IDS/IPS, contrôle d'accès réseau (NAC).",
+          "**Hôte** : durcissement, EDR, contrôle applicatif.",
+          "**Application** : validation des entrées, authentification, analyse statique.",
+          "**Données** : classification, chiffrement, DLP, sauvegardes.",
+          "**Identité** : MFA, moindre privilège, revue des accès.",
+          "**Humain** : sensibilisation, procédures, séparation des tâches.",
+          "**Physique** : badge, sas, vidéosurveillance."
+        ]
+      },
+      {
+        "type": "h",
+        "text": "Zero Trust"
+      },
+      {
+        "type": "p",
+        "text": "Le **Zero Trust** part du principe qu'aucune zone réseau n'est digne de confiance par défaut, y compris le réseau interne. Chaque accès est vérifié selon le contexte : identité, appareil, application, sensibilité de la donnée, comportement. Le slogan « never trust, always verify » résume l'idée ; « assume breach » en découle : on conçoit comme si l'attaquant était déjà à l'intérieur."
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "Approche périmétrique classique",
+          "points": [
+            "Un intranet « de confiance » derrière le pare-feu",
+            "Vérification à l'entrée, puis confiance implicite",
+            "Latéralisation facile une fois le périmètre franchi",
+            "VPN = accès large au réseau"
+          ]
+        },
+        "right": {
+          "title": "Zero Trust",
+          "points": [
+            "Aucune confiance implicite, même à l'intérieur",
+            "Vérification à chaque requête, selon le contexte",
+            "Microsegmentation et accès applicatif, pas réseau",
+            "ZTNA remplace le VPN « tunnel large »"
+          ]
+        }
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "title": "Zero Trust n'est pas un produit",
+        "text": "On ne « déploie » pas un Zero Trust en achetant une appliance. C'est une **architecture** : politique d'identité, inventaire des appareils, segmentation, journalisation, authentification forte. Un vendeur qui prétend vendre « la solution Zero Trust » vend une brique, pas l'architecture."
+      },
+      {
+        "type": "p",
+        "text": "Les principes Zero Trust que l'examen attend : vérifier explicitement, utiliser le moindre privilège, supposer la compromission, authentifier et autoriser en continu, segmenter l'accès par application, et journaliser chaque décision pour l'audit."
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "7",
+        "page": 230,
+        "printed": 210,
+        "strength": "supporting",
+        "note": "Zero Trust et supervision"
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "page": 59,
+        "strength": "supporting",
+        "note": "Défense en profondeur : contrôles empilés"
+      },
+      {
+        "type": "check",
+        "q": "Une entreprise ajoute un second antivirus sur ses postes. S'agit-il d'une amélioration de la défense en profondeur ?",
+        "options": [
+          "Oui : deux contrôles valent mieux qu'un",
+          "Non : les deux contrôles couvrent la même couche et la même défaillance",
+          "Oui, à condition que les deux éditeurs soient différents",
+          "Non : l'antivirus n'est jamais un contrôle de sécurité"
+        ],
+        "answer": 1,
+        "explain": "La défense en profondeur repose sur la diversité des couches. Deux antivirus sur le même hôte apportent peu de profondeur supplémentaire, peuvent se gêner et augmentent la charge. La question à poser est : quelle défaillance ce nouveau contrôle couvre-t-il que le précédent ne couvre pas ?"
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Défense en profondeur = couches **diverses**, pas empilement de produits identiques.",
+          "Zero Trust = aucune confiance implicite, vérification contextuelle continue.",
+          "Microsegmentation et ZTNA remplacent le modèle « intranet de confiance + VPN large ».",
+          "Les deux approches se complètent : profondeur des contrôles, zéro confiance dans les accès."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1.1-03",
+    "objective": "1.1",
+    "order": 3,
+    "title": "Catégories et types de contrôles : la grille à connaître par cœur",
+    "minutes": 16,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "L'examen ne demande pas seulement de citer un contrôle : il demande de le classer. Un même contrôle a une catégorie (par quoi il agit) et un type (quand et comment il agit)."
+      },
+      {
+        "type": "p",
+        "text": "La **catégorie** décrit la nature du contrôle : technique/logique, managérial/administratif, physique/environnemental, opérationnel. Le **type** décrit sa fonction dans le temps : préventif, dissuasif, correctif, détectif, compensatoire, directif."
+      },
+      {
+        "type": "term",
+        "en": "Control categories",
+        "fr": "Catégories de contrôles",
+        "field": "Technical/logical, managerial/administrative, physical/environmental, operational. Les livres emploient souvent « administrative » là où l'examen dit « managerial »."
+      },
+      {
+        "type": "term",
+        "en": "Control types",
+        "fr": "Types de contrôles",
+        "field": "Preventive, deterring, corrective, detective, compensating, directive. Attention : « deterrent » et « directive » ne sont pas synonymes."
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-controls-matrix"
+      },
+      {
+        "type": "h",
+        "text": "Les six types, un par un"
+      },
+      {
+        "type": "list",
+        "items": [
+          "**Préventif** : empêche l'événement. Pare-feu, MFA, serrure, correctif.",
+          "**Dissuasif** : décourage par la crainte de la conséquence. Caméra visible, bannière d'avertissement, sanction annoncée.",
+          "**Correctif** : réduit l'impact après l'événement. Restauration, rollback, quarantaine.",
+          "**Détectif** : constate l'événement. IDS, SIEM, détecteur de fumée, revue de journaux.",
+          "**Compensatoire** : remplace un contrôle impossible ou défaillant. Surveillance renforcée d'un système non patchable.",
+          "**Directif** : oriente le comportement. Politique, procédure, panneau « sens interdit »."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "title": "Les confusions qui coûtent des points",
+        "text": "Une **caméra** est dissuasive si elle est visible, détective si l'on analyse les images. Un **IPS** est préventif (il bloque), un **IDS** est détectif (il alerte). Un **plan de réponse** est directif avant l'incident, correctif pendant. Le même objet change de type selon l'usage : lisez l'intention décrite dans l'énoncé."
+      },
+      {
+        "type": "h",
+        "text": "Les quatre catégories"
+      },
+      {
+        "type": "p",
+        "text": "**Technique/logique** : implémenté dans un système (pare-feu, ACL, chiffrement). **Managérial/administratif** : défini par une règle ou une organisation (politique, formation, séparation des tâches). **Physique/environnemental** : agit sur le monde matériel (badge, sas, onduleur). **Opérationnel** : lié à l'exploitation quotidienne (sauvegarde, supervision, revue de journaux, maintenance)."
+      },
+      {
+        "type": "table",
+        "head": ["Contrôle", "Catégorie", "Type", "Pourquoi"],
+        "rows": [
+          ["MFA sur l'accès administrateur", "Technique", "Préventif", "Empêche l'usage d'un mot de passe seul"],
+          ["Politique de mot de passe", "Managérial", "Directif", "Fixe la règle, ne l'applique pas"],
+          ["Badge + sas d'accès", "Physique", "Préventif", "Empêche l'entrée non autorisée et le tailgating"],
+          ["Sauvegarde quotidienne testée", "Opérationnel", "Correctif", "Permet la restauration après incident"],
+          ["Honeypot", "Technique", "Détectif", "Révèle une activité anormale"],
+          ["Audit externe annuel", "Managérial", "Détectif", "Constate les écarts a posteriori"]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "9",
+        "page": 93,
+        "printed": 71,
+        "strength": "supporting",
+        "note": "Contrôles physiques concrets"
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "2",
+        "page": 61,
+        "printed": 41,
+        "strength": "supporting",
+        "note": "Autorités écrites : contrôle directif"
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "La double taxonomie **catégories × types** n'est exposée dans aucun des quatre livres. Elle est rédigée ici pour le référentiel, avec des exemples vérifiés."
+      },
+      {
+        "type": "check",
+        "q": "Un système critique ne peut pas recevoir de correctif. L'équipe ajoute une surveillance réseau renforcée et un pare-feu applicatif devant l'application. Comment qualifier ce contrôle ?",
+        "options": [
+          "Préventif uniquement",
+          "Compensatoire",
+          "Directif",
+          "Dissuasif"
+        ],
+        "answer": 1,
+        "explain": "Le contrôle compense une vulnérabilité qui ne peut pas être corrigée. Il peut aussi être préventif dans sa mécanique (le WAF bloque), mais sa **fonction** dans le raisonnement est compensatoire : il remplace le correctif absent."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Catégorie = nature du contrôle (technique, managérial, physique, opérationnel).",
+          "Type = fonction temporelle (préventif, dissuasif, correctif, détectif, compensatoire, directif).",
+          "Un même contrôle peut changer de type selon l'usage : l'intention de l'énoncé tranche.",
+          "Savoir classer vaut mieux que savoir citer : l'examen teste la classification."
+        ]
+      }
+    ]
+  }
+]

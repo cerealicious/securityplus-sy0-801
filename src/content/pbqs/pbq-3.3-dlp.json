@@ -1,0 +1,36 @@
+{
+  "id": "pbq-3.3-dlp",
+  "objective": "3.3",
+  "type": "classify",
+  "title": "Choisir la protection de données",
+  "prompt": "Pour chaque type de données, choisissez la méthode de protection la plus adaptée.",
+  "categories": [
+    "Tokenisation",
+    "Masquage",
+    "Chiffrement",
+    "Déidentification"
+  ],
+  "items": [
+    {
+      "id": "i1",
+      "label": "Numéro de carte enregistré dans une base de paiement",
+      "cat": "Tokenisation"
+    },
+    {
+      "id": "i2",
+      "label": "Affichage des 4 derniers chiffres à l'écran",
+      "cat": "Masquage"
+    },
+    {
+      "id": "i3",
+      "label": "Disque portable contenant des dossiers de santé",
+      "cat": "Chiffrement"
+    },
+    {
+      "id": "i4",
+      "label": "Jeu de données de recherche avec identifiants retirés",
+      "cat": "Déidentification"
+    }
+  ],
+  "explain": "Tokenisation = substitut réversible contrôlé ; masquage = occultation à l'affichage ; chiffrement = protection par clé ; déidentification = retrait des identifiants personnels."
+}

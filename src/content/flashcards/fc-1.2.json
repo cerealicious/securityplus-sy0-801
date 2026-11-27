@@ -1,0 +1,115 @@
+{
+  "id": "fc-1.2",
+  "objective": "1.2",
+  "title": "Gestion des changements",
+  "cards": [
+    {
+      "id": "c-1.2-01",
+      "front": "CAB",
+      "back": "Change Advisory Board : comité de parties prenantes qui examine, évalue l'impact et approuve ou refuse un changement avant production.",
+      "tag": "Processus"
+    },
+    {
+      "id": "c-1.2-02",
+      "front": "Owner du changement",
+      "back": "Personne responsable de la demande et de sa clôture, de l'ouverture du ticket jusqu'à la documentation finale.",
+      "tag": "Processus"
+    },
+    {
+      "id": "c-1.2-03",
+      "front": "Stakeholders",
+      "back": "Parties prenantes affectées ou consultées : métier, support, sécurité, exploitation, fournisseurs.",
+      "tag": "Processus"
+    },
+    {
+      "id": "c-1.2-04",
+      "front": "Ordre des étapes d'un changement",
+      "back": "Ticket → propriétaire et parties prenantes → analyse d'impact → CAB/approbation → fenêtre de maintenance → tests → implémentation → documentation.",
+      "tag": "Processus"
+    },
+    {
+      "id": "c-1.2-05",
+      "front": "Analyse d'impact",
+      "back": "Évalue les effets sur disponibilité, sécurité et dépendances (services, applications legacy, contrôles).",
+      "tag": "Analyse"
+    },
+    {
+      "id": "c-1.2-06",
+      "front": "Test results",
+      "back": "Résultats des tests pré-déploiement, consignés dans le dossier de changement et présentés au CAB.",
+      "tag": "Analyse"
+    },
+    {
+      "id": "c-1.2-07",
+      "front": "Backout planning",
+      "back": "Plan de retour à l'état antérieur si le changement échoue ; doit être testé et applicable dans la fenêtre.",
+      "tag": "Analyse"
+    },
+    {
+      "id": "c-1.2-08",
+      "front": "Fail forward",
+      "back": "Avancer avec un correctif ou un contournement plutôt que revenir en arrière, quand le rollback est impossible ou plus risqué.",
+      "tag": "Analyse"
+    },
+    {
+      "id": "c-1.2-09",
+      "front": "Maintenance window",
+      "back": "Créneau planifié à faible impact, annoncé aux métiers, pendant lequel le changement et son backout peuvent être réalisés.",
+      "tag": "Processus"
+    },
+    {
+      "id": "c-1.2-10",
+      "front": "SOP",
+      "back": "Standard Operating Procedure : procédure normalisée qui rend l'exécution répétable et réduit l'improvisation.",
+      "tag": "Documentation"
+    },
+    {
+      "id": "c-1.2-11",
+      "front": "Allow list / deny list",
+      "back": "Contrôle explicite qui autorise ou bloque adresses, applications ou commandes ; toute modification doit être analysée.",
+      "tag": "Technique"
+    },
+    {
+      "id": "c-1.2-12",
+      "front": "Restricted activities",
+      "back": "Actions nécessitant une autorisation renforcée : accès administrateur, production, interventions sensibles.",
+      "tag": "Technique"
+    },
+    {
+      "id": "c-1.2-13",
+      "front": "Downtime",
+      "back": "Période d'indisponibilité annoncée et acceptée pendant la fenêtre de maintenance.",
+      "tag": "Technique"
+    },
+    {
+      "id": "c-1.2-14",
+      "front": "Service restart vs application restart",
+      "back": "Redémarrage d'un service ou de l'application ; peut casser des sessions, des certificats ou des files de traitement.",
+      "tag": "Technique"
+    },
+    {
+      "id": "c-1.2-15",
+      "front": "Legacy application",
+      "back": "Application ancienne ou non supportée, souvent dépendante d'un protocole ou d'un port qu'un changement peut supprimer.",
+      "tag": "Technique"
+    },
+    {
+      "id": "c-1.2-16",
+      "front": "Dependencies",
+      "back": "Services dont dépend le changement (DNS, base, annuaire, certificats) : la reprise ne va pas plus vite que le maillon le plus lent.",
+      "tag": "Technique"
+    },
+    {
+      "id": "c-1.2-17",
+      "front": "Documentation après changement",
+      "back": "Mettre à jour diagrammes, politiques/procédures et version control ; sinon la prochaine analyse d'impact sera fausse.",
+      "tag": "Documentation"
+    },
+    {
+      "id": "c-1.2-18",
+      "front": "Version control",
+      "back": "Suivi des versions du code, des configurations et des politiques : indispensable pour auditer et revenir arrière.",
+      "tag": "Documentation"
+    }
+  ]
+}

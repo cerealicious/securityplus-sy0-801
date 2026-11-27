@@ -1,0 +1,115 @@
+{
+  "id": "fc-5.6",
+  "objective": "5.6",
+  "title": "Sensibilisation à la sécurité",
+  "cards": [
+    {
+      "id": "c-5.6-01",
+      "front": "Formation initiale / onboarding",
+      "back": "Dispensée à l'arrivée, avant ou lors de la prise de poste. Notion du §5.6 absente des livres.",
+      "tag": "Lacune"
+    },
+    {
+      "id": "c-5.6-02",
+      "front": "Formation continue / ongoing",
+      "back": "Formation périodique pour toute l'organisation qui maintient les connaissances à jour.",
+      "tag": "Lacune"
+    },
+    {
+      "id": "c-5.6-03",
+      "front": "Formation ciblée / targeted",
+      "back": "Destinée à un rôle ou à un risque spécifique : finance, administrateurs, télétravail.",
+      "tag": "Lacune"
+    },
+    {
+      "id": "c-5.6-04",
+      "front": "Formation corrective",
+      "back": "Déclenchée après une erreur ou un incident pour corriger un comportement.",
+      "tag": "Lacune"
+    },
+    {
+      "id": "c-5.6-05",
+      "front": "Critère de choix du type",
+      "back": "Le déclencheur : arrivée, échéance, risque lié au rôle, ou erreur constatée.",
+      "tag": "Piège"
+    },
+    {
+      "id": "c-5.6-06",
+      "front": "Learning management system (LMS)",
+      "back": "Plateforme de cours, suivi et certifications. Notion du §5.6 absente des livres.",
+      "tag": "Lacune"
+    },
+    {
+      "id": "c-5.6-07",
+      "front": "Self-service portals",
+      "back": "Ressources de formation consultables à la demande par les employés.",
+      "tag": "Canaux"
+    },
+    {
+      "id": "c-5.6-08",
+      "front": "One-to-one vs one-to-many",
+      "back": "One-to-one = accompagnement individuel ; one-to-many = campagne ou présentation collective.",
+      "tag": "Canaux"
+    },
+    {
+      "id": "c-5.6-09",
+      "front": "Social engineering",
+      "back": "Sujet de formation : phishing, prétextes et manipulations psychologiques.",
+      "tag": "Sujets"
+    },
+    {
+      "id": "c-5.6-10",
+      "front": "Password and credential management",
+      "back": "Sujet de formation : gestionnaire de mots de passe, MFA, réutilisation et fuite d'identifiants.",
+      "tag": "Sujets"
+    },
+    {
+      "id": "c-5.6-11",
+      "front": "Business email compromise (BEC)",
+      "back": "Fraude au président et détournement de virement. Sujet du §5.6 non détaillé dans les livres.",
+      "tag": "Lacune"
+    },
+    {
+      "id": "c-5.6-12",
+      "front": "Remote work / teleworking / hybrid",
+      "back": "Sujet du §5.6 : réseau domestique, visioconférence, appareils et lieu de travail.",
+      "tag": "Lacune"
+    },
+    {
+      "id": "c-5.6-13",
+      "front": "BYOD et supports amovibles",
+      "back": "Appareils personnels, clés USB et câbles non approuvés : sujets de sensibilisation.",
+      "tag": "Sujets"
+    },
+    {
+      "id": "c-5.6-14",
+      "front": "Situational awareness",
+      "back": "Vigilance à l'environnement : portes ouvertes, épaules, lieux publics.",
+      "tag": "Sujets"
+    },
+    {
+      "id": "c-5.6-15",
+      "front": "Operational security (OPSEC)",
+      "back": "Ne pas révéler involontairement des informations exploitables. Sujet du §5.6 non détaillé dans les livres.",
+      "tag": "Lacune"
+    },
+    {
+      "id": "c-5.6-16",
+      "front": "Metrics et managerial reports",
+      "back": "Indicateurs chiffrés du programme et synthèses périodiques pour la direction.",
+      "tag": "Mesure"
+    },
+    {
+      "id": "c-5.6-17",
+      "front": "Personnel behavior risk scoring",
+      "back": "Score de risque comportemental : agrégation des signaux pour cibler les formations.",
+      "tag": "Mesure"
+    },
+    {
+      "id": "c-5.6-18",
+      "front": "Phishing : bon indicateur",
+      "back": "Baisse du taux de clic et hausse du taux de signalement = vigilance améliorée.",
+      "tag": "Mesure"
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "id": "qz-2.2",
+  "objective": "2.2",
+  "title": "Quiz — Acteurs de menace et motivations",
+  "questions": [
+    {
+      "id": "q-2.2-01",
+      "type": "single",
+      "q": "Quel acteur dispose déjà d'un accès légitime à l'environnement ?",
+      "options": [
+        "Unskilled attacker",
+        "Insider",
+        "State-sponsored actor",
+        "Terrorist"
+      ],
+      "answer": [1],
+      "explain": "L'insider est un utilisateur autorisé : les contrôles périmétriques ne le bloquent pas.",
+      "ref": "2.2-02"
+    },
+    {
+      "id": "q-2.2-02",
+      "type": "single",
+      "q": "Une campagne de ransomware avec demande de paiement relève principalement de quelle motivation ?",
+      "options": [
+        "Ideological motivation",
+        "Financial motivation / extortion",
+        "General curiosity",
+        "Ethical motivation"
+      ],
+      "answer": [1],
+      "explain": "Le gain financier et l'extortion caractérisent le crime organisé, même si l'outil peut être réutilisé par d'autres acteurs.",
+      "ref": "2.2-01"
+    },
+    {
+      "id": "q-2.2-03",
+      "type": "match",
+      "q": "Associez chaque acteur à sa motivation la plus typique.",
+      "pairs": [
+        { "left": "Hacktivist", "right": "Ideological / political motivation" },
+        { "left": "Competitor", "right": "Intellectual property" },
+        { "left": "State-sponsored actor", "right": "Espionage" },
+        { "left": "Unskilled attacker", "right": "Notoriety / curiosity" }
+      ],
+      "explain": "La motivation est le critère de classement fiable, indépendamment de l'outil employé.",
+      "ref": "2.2-01"
+    },
+    {
+      "id": "q-2.2-04",
+      "type": "multi",
+      "q": "Quels attributs servent à caractériser un acteur ? (plusieurs réponses)",
+      "options": [
+        "Internal / external",
+        "Resources / funding",
+        "Level of sophistication / capability",
+        "Couleur de son interface de chat"
+      ],
+      "answer": [0, 1, 2],
+      "explain": "Ce sont les trois attributs officiels du référentiel §2.2.",
+      "ref": "2.2-02"
+    },
+    {
+      "id": "q-2.2-05",
+      "type": "single",
+      "q": "Quelle approche d'attribution est correcte ?",
+      "options": [
+        "Attribuer sur la base d'une seule adresse IP",
+        "Attribuer sur un faisceau d'indices, avec un niveau de confiance",
+        "Attribuer systématiquement à une APT",
+        "Refuser toute attribution, même avec des preuves"
+      ],
+      "answer": [1],
+      "explain": "Les outils et infrastructures sont partagés : l'attribution est probabiliste et doit être réévaluée.",
+      "ref": "2.2-02"
+    },
+    {
+      "id": "q-2.2-06",
+      "type": "single",
+      "q": "Un utilisateur clique sur un lien de phishing sans intention de nuire. Quel acteur décrit le mieux ce profil ?",
+      "options": [
+        "Insider malveillant",
+        "Accidental / unintentional actor",
+        "Terrorist",
+        "Competitor"
+      ],
+      "answer": [1],
+      "explain": "L'absence d'intention qualifie l'acteur accidentel, même si son action ouvre la porte à un autre acteur.",
+      "ref": "2.2-01"
+    }
+  ]
+}

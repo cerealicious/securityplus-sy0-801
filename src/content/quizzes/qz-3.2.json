@@ -1,0 +1,114 @@
+{
+  "id": "qz-3.2",
+  "objective": "3.2",
+  "title": "Quiz — Protection de l'infrastructure",
+  "questions": [
+    {
+      "id": "q-3.2-01",
+      "type": "single",
+      "q": "Quelle zone héberge typiquement les serveurs publics tout en protégeant le réseau interne ?",
+      "options": [
+        "Untrust",
+        "DMZ",
+        "Trust",
+        "Management"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "La DMZ est la zone tampon où l'on expose les services publics sans exposer directement la zone interne.",
+      "ref": "3.2-01"
+    },
+    {
+      "id": "q-3.2-02",
+      "type": "single",
+      "q": "Un contrôle doit voir le trafic sans jamais le bloquer. Quel placement choisir ?",
+      "options": [
+        "Inline",
+        "Hors chemin sur port miroir",
+        "En série après le pare-feu",
+        "Sur le serveur uniquement"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Un IDS détectif reçoit une copie du trafic via SPAN/tap : il n'est pas sur le chemin et ne peut pas bloquer.",
+      "ref": "3.2-01"
+    },
+    {
+      "id": "q-3.2-03",
+      "type": "multi",
+      "q": "Quels signaux une architecture Zero Trust vérifie-t-elle avant d'accorder un accès ? (plusieurs réponses)",
+      "options": [
+        "L'authentification de l'utilisateur",
+        "La santé de l'appareil",
+        "L'appartenance de l'appareil à l'inventaire",
+        "L'adresse IP publique du fournisseur d'accès"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "explain": "Zero Trust vérifie utilisateur, santé de l'appareil, inventaire et contrôle applicatif — pas la seule localisation réseau.",
+      "ref": "3.2-02"
+    },
+    {
+      "id": "q-3.2-04",
+      "type": "single",
+      "q": "Quel mode de défaillance privilégie la disponibilité du service ?",
+      "options": [
+        "Fail-closed",
+        "Fail-open",
+        "Fail-safe",
+        "Failover"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "En fail-open, le trafic passe si le contrôle tombe : la disponibilité est prioritaire, au risque d'un contournement.",
+      "ref": "3.2-01"
+    },
+    {
+      "id": "q-3.2-05",
+      "type": "match",
+      "q": "Associez chaque mécanisme à son rôle.",
+      "pairs": [
+        {
+          "left": "Bastion",
+          "right": "Point d'entrée unique pour l'administration hors-bande"
+        },
+        {
+          "left": "VPN",
+          "right": "Tunnel chiffré pour l'accès distant"
+        },
+        {
+          "left": "gMSA",
+          "right": "Mot de passe de compte de service renouvelé automatiquement"
+        },
+        {
+          "left": "SSE",
+          "right": "Services de sécurité cloud proches de l'utilisateur"
+        }
+      ],
+      "explain": "SSE et gMSA sont des notions du référentiel absentes des livres fournis.",
+      "ref": "3.2-02"
+    },
+    {
+      "id": "q-3.2-06",
+      "type": "single",
+      "q": "Un utilisateur change de poste et conserve ses anciens droits d'administration. Comment appelle-t-on cette situation ?",
+      "options": [
+        "Privilege creep",
+        "Least privilege",
+        "Device drift",
+        "Fail-open"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "La dérive des privilèges (privilege creep) est l'accumulation de droits non retirés ; la parade est la revue périodique des accès.",
+      "ref": "3.2-02"
+    }
+  ]
+}

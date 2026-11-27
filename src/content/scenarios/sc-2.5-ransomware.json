@@ -1,0 +1,90 @@
+{
+  "id": "sc-2.5-ransomware",
+  "objective": "2.5",
+  "title": "Scénario : alerte ransomware",
+  "context": "Il est 02:14. Le SIEM remonte une série de créations de fichiers chiffrés sur le serveur FIN-01, suivie d'une note de rançon. Vous êtes l'analyste de garde.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "Quel indicateur confirme le plus directement un ransomware ?",
+      "choices": [
+        {
+          "text": "Une augmentation du trafic DNS sortant",
+          "next": "n2",
+          "score": 1,
+          "why": "C'est un signal possible mais non spécifique."
+        },
+        {
+          "text": "Des centaines de fichiers renommés avec la même extension et une note de rançon",
+          "next": "n2",
+          "score": 4,
+          "why": "L'extension masse et la note sont la signature comportementale du ransomware."
+        },
+        {
+          "text": "Un échec de connexion sur un compte",
+          "next": "n2",
+          "score": 0,
+          "why": "Ce signal est trop générique."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "Vous trouvez une connexion sortante vers une IP inconnue. Quel IOC notez-vous en priorité ?",
+      "choices": [
+        {
+          "text": "L'adresse IP, l'horodatage et le hash du processus",
+          "next": "n3",
+          "score": 4,
+          "why": "IP, timestamp et hash constituent des IOC exploitables pour la corrélation et le blocage."
+        },
+        {
+          "text": "Le nom du serveur uniquement",
+          "next": "n3",
+          "score": 0,
+          "why": "Trop pauvre : impossible de correlER ou de bloquer."
+        },
+        {
+          "text": "La couleur de l'alerte dans le SIEM",
+          "next": "n3",
+          "score": 0,
+          "why": "La couleur est une présentation, pas une donnée d'investigation."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "Le processus responsable est `powershell.exe` avec une chaîne encodée. Quelle est l'interprétation la plus probable ?",
+      "choices": [
+        {
+          "text": "Mise à jour Windows légitime",
+          "next": "n4",
+          "score": 0,
+          "why": "Une chaîne encodée et un comportement de chiffrement orientent vers un usage malveillant."
+        },
+        {
+          "text": "Malware fileless / living-off-the-land",
+          "next": "n4",
+          "score": 4,
+          "why": "L'abus d'outils natifs avec charge utile encodée est typique du fileless."
+        },
+        {
+          "text": "Erreur de configuration du SIEM",
+          "next": "n4",
+          "score": 0,
+          "why": "Les artefacts sont cohérents entre eux : ce n'est pas un bruit de règle."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "Vous avez qualifié l'attaque, collecté les IOC et identifié le vecteur fileless : trois réflexes clés de l'objectif 2.5."
+    }
+  },
+  "debrief": [
+    "Le ransomware se confirme par le comportement de chiffrement et la note, pas par une alerte isolée.",
+    "Un IOC utile est précis, horodaté et partageable (IP, domaine, hash, chemin).",
+    "L'abus de PowerShell avec chaîne encodée évoque le fileless / living-off-the-land."
+  ]
+}

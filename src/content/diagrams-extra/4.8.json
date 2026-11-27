@@ -1,0 +1,161 @@
+{
+  "diagrams": [
+    {
+      "id": "d-forensic-sources",
+      "kind": "flow",
+      "title": "Sources forensiques et ordre de volatilité",
+      "subtitle": "De la mémoire au stockage : plus une source est volatile, plus elle doit être capturée tôt.",
+      "modes": [
+        "explore",
+        "order",
+        "quiz"
+      ],
+      "nodes": [
+        {
+          "id": "ram",
+          "label": "Mémoire (RAM)",
+          "sub": "la plus volatile",
+          "x": 14,
+          "y": 90,
+          "w": 150,
+          "h": 64,
+          "kind": "risk",
+          "detail": "Clés de chiffrement, charges utiles, processus fileless, connexions. Disparaît à l'extinction et au redémarrage.",
+          "exam": "Capturez la RAM avant toute isolation ou extinction."
+        },
+        {
+          "id": "network",
+          "label": "État réseau",
+          "sub": "connexions, ARP, sockets",
+          "x": 180,
+          "y": 90,
+          "w": 150,
+          "h": 64,
+          "kind": "step",
+          "detail": "Connexions actives, table ARP, sockets et état des processus. Change en quelques secondes.",
+          "exam": "Une isolation réseau peut rompre les connexions : capturez d'abord."
+        },
+        {
+          "id": "volatilelogs",
+          "label": "Caches & tampons",
+          "sub": "journaux non écrits",
+          "x": 346,
+          "y": 90,
+          "w": 150,
+          "h": 64,
+          "kind": "step",
+          "detail": "Données en attente d'écriture, caches applicatifs, tampons du système de journaux.",
+          "exam": "Ces données ne figurent pas encore dans les fichiers de log sur disque."
+        },
+        {
+          "id": "disk",
+          "label": "Disque & images",
+          "sub": "bit-à-bit, snapshot",
+          "x": 512,
+          "y": 90,
+          "w": 150,
+          "h": 64,
+          "kind": "artifact",
+          "detail": "Fichiers, registre, journaux persistants. L'image bit-à-bit préserve aussi les fichiers supprimés et l'espace non alloué.",
+          "exam": "System image = copie de travail ; bit-level copy = copie exacte."
+        },
+        {
+          "id": "backups",
+          "label": "Sauvegardes",
+          "sub": "le moins volatile",
+          "x": 680,
+          "y": 90,
+          "w": 150,
+          "h": 64,
+          "kind": "artifact",
+          "detail": "Archives et stockage hors ligne. Stables dans le temps, mais à protéger contre le ransomware et l'altération.",
+          "exam": "Une sauvegarde non vérifiée n'est pas une preuve fiable."
+        },
+        {
+          "id": "logs",
+          "label": "Logs & NetFlow",
+          "sub": "sources complémentaires",
+          "x": 14,
+          "y": 196,
+          "w": 150,
+          "h": 64,
+          "kind": "neutral",
+          "detail": "Access, authentication, audit, device, endpoint, network logs et métadonnées. NetFlow montre les conversations.",
+          "exam": "NetFlow = qui parle à qui ; packet capture = le contenu exact."
+        },
+        {
+          "id": "hash",
+          "label": "Intégrité",
+          "sub": "hash + chaîne de possession",
+          "x": 346,
+          "y": 196,
+          "w": 150,
+          "h": 64,
+          "kind": "step",
+          "detail": "Hasher dès la collecte, consigner source, horodatage, collecteur et chaque transfert. Détails hors livres, §4.8.",
+          "exam": "Sans hash et registre de transfert, la preuve perd sa valeur."
+        },
+        {
+          "id": "stake",
+          "label": "Parties prenantes",
+          "sub": "RH, comptes, legal",
+          "x": 680,
+          "y": 196,
+          "w": 150,
+          "h": 64,
+          "kind": "actor",
+          "detail": "RH apporte le contexte humain, les comptes les preuves financières, le juridique la base légale et le legal hold.",
+          "exam": "Un legal hold suspend la destruction même si la rétention est courte."
+        }
+      ],
+      "edges": [
+        {
+          "from": "ram",
+          "to": "network",
+          "label": "ensuite"
+        },
+        {
+          "from": "network",
+          "to": "volatilelogs",
+          "label": "ensuite"
+        },
+        {
+          "from": "volatilelogs",
+          "to": "disk",
+          "label": "ensuite"
+        },
+        {
+          "from": "disk",
+          "to": "backups",
+          "label": "ensuite"
+        },
+        {
+          "from": "logs",
+          "to": "disk",
+          "label": "corrélation"
+        },
+        {
+          "from": "disk",
+          "to": "hash",
+          "label": "scellé"
+        },
+        {
+          "from": "hash",
+          "to": "stake",
+          "label": "communication"
+        }
+      ],
+      "sequence": [
+        "ram",
+        "network",
+        "volatilelogs",
+        "disk",
+        "backups"
+      ],
+      "quiz": {
+        "question": "Quelle source faut-il capturer avant toute extinction de l'hôte ?",
+        "answer": "ram"
+      }
+    }
+  ]
+}

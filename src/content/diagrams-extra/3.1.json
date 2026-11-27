@@ -1,0 +1,128 @@
+{
+  "diagrams": [
+    {
+      "id": "d-3.1-arch-models",
+      "kind": "flow",
+      "title": "Modèles de déploiement : responsabilité et isolement",
+      "subtitle": "Du on-premises au cloud, puis IaC et OT : cliquez chaque modèle pour voir ce qui change en sécurité.",
+      "modes": [
+        "explore",
+        "quiz",
+        "order"
+      ],
+      "nodes": [
+        {
+          "id": "onprem",
+          "label": "On-premises",
+          "sub": "Infrastructure possédée",
+          "x": 20,
+          "y": 40,
+          "w": 150,
+          "h": 62,
+          "kind": "neutral",
+          "detail": "L'organisation possède et administre serveurs, réseau et stockage. Elle porte toute la charge : patching, alimentation, sauvegardes, reprise.",
+          "exam": "Contrôle total ne veut pas dire sécurité garantie : la charge de maintenance reste entière."
+        },
+        {
+          "id": "public",
+          "label": "Cloud public",
+          "sub": "Responsabilité partagée",
+          "x": 200,
+          "y": 40,
+          "w": 150,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Le fournisseur gère l'infrastructure ; le client garde données, identités, applications et configuration. Le serveur sans OS à maintenir est la variante serverless.",
+          "exam": "Une mauvaise configuration client reste la première cause d'exposition dans le cloud."
+        },
+        {
+          "id": "private",
+          "label": "Cloud privé / communautaire",
+          "sub": "Infrastructure dédiée",
+          "x": 380,
+          "y": 40,
+          "w": 160,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Infrastructure dédiée à une organisation ou partagée par une communauté de pairs. Contrôle renforcé, coût plus élevé, gouvernance de la confiance entre pairs.",
+          "exam": "Community cloud = confiance entre organisations du même groupement."
+        },
+        {
+          "id": "hybrid",
+          "label": "Hybride",
+          "sub": "Jonction à sécuriser",
+          "x": 560,
+          "y": 40,
+          "w": 150,
+          "h": 62,
+          "kind": "risk",
+          "detail": "Combinaison on-premises et cloud reliée par VPN, interconnexion dédiée ou identité fédérée. La jonction est une zone de confiance supplémentaire.",
+          "exam": "Dans un scénario hybride, cherchez le contrôle sur la jonction, pas seulement dans le cloud."
+        },
+        {
+          "id": "iac",
+          "label": "IaC / microservices",
+          "sub": "Infrastructure en code",
+          "x": 200,
+          "y": 170,
+          "w": 190,
+          "h": 62,
+          "kind": "step",
+          "detail": "L'infrastructure est décrite dans des fichiers versionnés ; les applications sont découpées en services communiquant par API. Le contrôle devient revue de code et détection de dérive.",
+          "exam": "Notions du référentiel §3.1, absentes des quatre livres fournis."
+        },
+        {
+          "id": "ot",
+          "label": "OT / air-gapped",
+          "sub": "Isolement physique",
+          "x": 470,
+          "y": 170,
+          "w": 170,
+          "h": 62,
+          "kind": "risk",
+          "detail": "Systèmes industriels isolés d'Internet : disponibilité et sûreté priment, transferts par médias contrôlés, scans actifs proscrits.",
+          "exam": "La segmentation physique offre la meilleure isolation ; la segmentation logique dépend de la configuration."
+        }
+      ],
+      "edges": [
+        {
+          "from": "onprem",
+          "to": "public",
+          "label": "déplacement de la charge"
+        },
+        {
+          "from": "public",
+          "to": "private",
+          "label": "dédié"
+        },
+        {
+          "from": "private",
+          "to": "hybrid",
+          "label": "jonction"
+        },
+        {
+          "from": "onprem",
+          "to": "iac",
+          "label": "automatisation"
+        },
+        {
+          "from": "hybrid",
+          "to": "ot",
+          "label": "isolement"
+        }
+      ],
+      "sequence": [
+        "onprem",
+        "public",
+        "private",
+        "hybrid",
+        "iac",
+        "ot"
+      ],
+      "quiz": {
+        "question": "Quel modèle conserve la responsabilité des données et de la configuration au client tout en déléguant l'infrastructure ?",
+        "answer": "public"
+      }
+    }
+  ]
+}

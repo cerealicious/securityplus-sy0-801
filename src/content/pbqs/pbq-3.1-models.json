@@ -1,0 +1,77 @@
+{
+  "id": "pbq-3.1-models",
+  "objective": "3.1",
+  "type": "classify",
+  "title": "Classer les modèles de déploiement",
+  "prompt": "Pour chaque situation, sélectionnez le modèle d'architecture qui correspond le mieux : Cloud public, Cloud privé, Hybride, On-premises ou Air-gapped/OT.",
+  "categories": [
+    "Cloud public",
+    "Cloud privé",
+    "Hybride",
+    "On-premises",
+    "Air-gapped/OT"
+  ],
+  "items": [
+    {
+      "id": "i1",
+      "label": "Le client configure ses identités et ses données chez un fournisseur ; l'infrastructure reste au fournisseur",
+      "cat": "Cloud public"
+    },
+    {
+      "id": "i2",
+      "label": "Datacenter dédié à une seule organisation, avec patching et alimentation gérés en interne",
+      "cat": "Cloud privé"
+    },
+    {
+      "id": "i3",
+      "label": "Application cloud reliée à une base on-premises par VPN et identité fédérée",
+      "cat": "Hybride"
+    },
+    {
+      "id": "i4",
+      "label": "Serveurs, stockage et sauvegardes possédés et administrés entièrement sur site",
+      "cat": "On-premises"
+    },
+    {
+      "id": "i5",
+      "label": "Ligne de production SCADA sans connexion à Internet ; transferts par médias contrôlés",
+      "cat": "Air-gapped/OT"
+    },
+    {
+      "id": "i6",
+      "label": "Réseau de laboratoire physiquement séparé du réseau bureautique",
+      "cat": "Air-gapped/OT"
+    },
+    {
+      "id": "i7",
+      "label": "Charge de travail fonctionnant à la demande chez un fournisseur, sans OS à maintenir",
+      "cat": "Cloud public"
+    },
+    {
+      "id": "i8",
+      "label": "Infrastructure partagée entre plusieurs hôpitaux d'un même groupement",
+      "cat": "Cloud privé"
+    },
+    {
+      "id": "i9",
+      "label": "Données sensibles conservées sur site, analytics hébergé dans le cloud",
+      "cat": "Hybride"
+    },
+    {
+      "id": "i10",
+      "label": "Équipements et câblage réseau entièrement dédiés à un environnement critique",
+      "cat": "On-premises"
+    },
+    {
+      "id": "i11",
+      "label": "Restauration et patchs entièrement à la charge de l'organisation, sans prestataire d'infrastructure",
+      "cat": "On-premises"
+    },
+    {
+      "id": "i12",
+      "label": "Services répartis chez deux fournisseurs pour réduire la dépendance à un seul éditeur",
+      "cat": "Cloud public"
+    }
+  ],
+  "explain": "Raisonnez sur la possession de l'infrastructure, la responsabilité des contrôles et le niveau d'isolement. Serverless et multicloud restent des variantes du cloud public ; le point de jonction d'un modèle hybride est une zone de confiance distincte."
+}

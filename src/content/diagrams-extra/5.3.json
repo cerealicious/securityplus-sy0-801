@@ -1,0 +1,84 @@
+{
+  "diagrams": [
+    {
+      "id": "d-5.3-vendor-flow",
+      "kind": "flow",
+      "title": "Du besoin au suivi du prestataire",
+      "subtitle": "Sélection → accord → surveillance : chaque étape produit un artefact vérifiable en audit.",
+      "modes": ["explore", "quiz", "order"],
+      "sequence": ["need", "select", "agreement", "monitor", "exit"],
+      "quiz": {
+        "question": "À quelle étape intervient le droit d'audit ?",
+        "answer": "monitor"
+      },
+      "nodes": [
+        {
+          "id": "need",
+          "label": "Besoin cadré",
+          "sub": "périmètre, risques",
+          "x": 20,
+          "y": 100,
+          "w": 150,
+          "h": 62,
+          "kind": "neutral",
+          "detail": "Définir ce qui est confié au tiers, les données concernées, la juridiction et les contraintes internes avant toute consultation.",
+          "exam": "Un besoin imprécis rend la due diligence impossible : c'est le point de départ de tout le processus."
+        },
+        {
+          "id": "select",
+          "label": "Sélection",
+          "sub": "EOI · RFI · RFP · RFQ",
+          "x": 190,
+          "y": 100,
+          "w": 160,
+          "h": 62,
+          "kind": "actor",
+          "detail": "Sonder l'intérêt (EOI), recueillir des informations (RFI), demander une proposition (RFP) puis un prix (RFQ). La due diligence vérifie la sécurité et la conformité.",
+          "exam": "RFP = proposition, RFQ = prix. Ces documents ne sont pas dans les livres fournis."
+        },
+        {
+          "id": "agreement",
+          "label": "Accord",
+          "sub": "MSA · SOW · SLA · NDA",
+          "x": 370,
+          "y": 100,
+          "w": 170,
+          "h": 62,
+          "kind": "artifact",
+          "detail": "Le MSA fixe les conditions générales, le SOW la mission, le SLA les niveaux de service, le NDA la confidentialité, le MOU/MOA le degré d'engagement.",
+          "exam": "Les ROE bornent tout test d'intrusion réalisé par ou pour le prestataire."
+        },
+        {
+          "id": "monitor",
+          "label": "Surveillance",
+          "sub": "droit d'audit · attestation",
+          "x": 560,
+          "y": 100,
+          "w": 170,
+          "h": 62,
+          "kind": "step",
+          "detail": "Suivi des SLA, évaluation périodique, attestation de conformité et droit d'audit. Le registre des tiers centralise les responsabilités.",
+          "exam": "Le droit d'audit et le registre des tiers sont des notions du §5.3 absentes des livres."
+        },
+        {
+          "id": "exit",
+          "label": "Limites et sortie",
+          "sub": "lock-in · juridiction",
+          "x": 750,
+          "y": 100,
+          "w": 160,
+          "h": 62,
+          "kind": "risk",
+          "detail": "Documenter effectif, ressources, environnement, juridiction, ROI, assurance et verrouillage. Prévoir des clauses de sortie et des formats exportables.",
+          "exam": "Une sortie brutale sans plan de migration est plus risquée qu'une dérive contractuelle surveillée."
+        }
+      ],
+      "edges": [
+        { "from": "need", "to": "select", "label": "consulter" },
+        { "from": "select", "to": "agreement", "label": "contracter" },
+        { "from": "agreement", "to": "monitor", "label": "vérifier" },
+        { "from": "monitor", "to": "exit", "label": "anticiper" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "id": "fc-3.1",
+  "objective": "3.1",
+  "title": "Modèles d'architecture et implications de sécurité",
+  "cards": [
+    {
+      "id": "c-3.1-01",
+      "front": "Responsabilité partagée dans le cloud",
+      "back": "Le fournisseur sécurise l'infrastructure ; le client reste responsable de ses données, identités, applications et configurations.",
+      "tag": "Cloud"
+    },
+    {
+      "id": "c-3.1-02",
+      "front": "Public cloud",
+      "back": "Infrastructure possédée par le fournisseur, consommée à la demande. Risque dominant : mauvaise configuration client.",
+      "tag": "Cloud"
+    },
+    {
+      "id": "c-3.1-03",
+      "front": "Private cloud",
+      "back": "Infrastructure dédiée à une organisation. Contrôle maximal, mais coût et maintenance conservés.",
+      "tag": "Cloud"
+    },
+    {
+      "id": "c-3.1-04",
+      "front": "Community cloud",
+      "back": "Infrastructure partagée entre organisations d'une même communauté ; confiance et isolation entre pairs à gouverner.",
+      "tag": "Cloud"
+    },
+    {
+      "id": "c-3.1-05",
+      "front": "Hybrid deployment model",
+      "back": "Mélange on-premises et cloud. La jonction (VPN, identité fédérée) est une surface d'attaque à part entière.",
+      "tag": "Cloud"
+    },
+    {
+      "id": "c-3.1-06",
+      "front": "Multicloud",
+      "back": "Services répartis chez plusieurs fournisseurs : résilience accrue, mais complexité de gouvernance et d'identité.",
+      "tag": "Cloud"
+    },
+    {
+      "id": "c-3.1-07",
+      "front": "On-premises",
+      "back": "Infrastructure possédée et exploitée par l'organisation : contrôle total, charge complète de patching et de reprise.",
+      "tag": "Architecture"
+    },
+    {
+      "id": "c-3.1-08",
+      "front": "Serverless",
+      "back": "Fonctions exécutées sans gérer l'OS : le client sécurise le code, les identifiants et les déclencheurs.",
+      "tag": "Moderne"
+    },
+    {
+      "id": "c-3.1-09",
+      "front": "Microservices",
+      "back": "Application découpée en services communiquant par API : la surface d'attaque est le nombre d'interfaces.",
+      "tag": "Moderne"
+    },
+    {
+      "id": "c-3.1-10",
+      "front": "Infrastructure as Code (IaC)",
+      "back": "Infrastructure décrite dans des fichiers versionnés ; reproductible, mais un template fautif se propage partout.",
+      "tag": "Moderne"
+    },
+    {
+      "id": "c-3.1-11",
+      "front": "Dérive de configuration",
+      "back": "Écart entre l'état déclaré dans l'IaC et l'état réel ; à détecter en continu.",
+      "tag": "Moderne"
+    },
+    {
+      "id": "c-3.1-12",
+      "front": "Operational technology (OT)",
+      "back": "Systèmes SCADA/ICS pilotant le physique : disponibilité et sûreté priment ; éviter les scans actifs.",
+      "tag": "OT"
+    },
+    {
+      "id": "c-3.1-13",
+      "front": "Air-gapped network",
+      "back": "Réseau physiquement isolé d'Internet ; transferts par médias contrôlés, mises à jour difficiles.",
+      "tag": "Isolation"
+    },
+    {
+      "id": "c-3.1-14",
+      "front": "Segmentation physique vs logique",
+      "back": "Physique = équipements et câblage séparés ; logique = VLAN, ACL et pare-feu (moins coûteux, dépend de la configuration).",
+      "tag": "Isolation"
+    },
+    {
+      "id": "c-3.1-15",
+      "front": "Data sovereignty",
+      "back": "Contrainte selon laquelle les données doivent rester dans une juridiction donnée ; influe sur le choix du cloud.",
+      "tag": "Métier"
+    },
+    {
+      "id": "c-3.1-16",
+      "front": "Availability vs resilience",
+      "back": "Availability = service accessible ; resilience = capacité à absorber et revenir après une panne.",
+      "tag": "Critères"
+    },
+    {
+      "id": "c-3.1-17",
+      "front": "Proprietary vs open source",
+      "back": "Open source = auditabilité et pas de lock-in ; propriétaire = support intégré mais dépendance à l'éditeur.",
+      "tag": "Critères"
+    },
+    {
+      "id": "c-3.1-18",
+      "front": "Ease of recovery",
+      "back": "Critère de choix : rapidité et simplicité avec lesquelles un environnement peut être restauré après incident.",
+      "tag": "Critères"
+    }
+  ]
+}

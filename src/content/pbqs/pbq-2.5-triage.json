@@ -1,0 +1,46 @@
+{
+  "id": "pbq-2.5-triage",
+  "objective": "2.5",
+  "type": "classify",
+  "title": "Trier les indicateurs d'activité malveillante",
+  "prompt": "Classez chaque indicateur dans la famille d'attaque correspondante.",
+  "categories": [
+    "Malware",
+    "Réseau",
+    "Ingénierie sociale",
+    "Identifiants"
+  ],
+  "items": [
+    {
+      "id": "i1",
+      "label": "Extension de fichier .lockbit et note de rançon",
+      "cat": "Malware"
+    },
+    {
+      "id": "i2",
+      "label": "Pic de trafic UDP sortant vers une IP unique",
+      "cat": "Réseau"
+    },
+    {
+      "id": "i3",
+      "label": "SMS invitant à cliquer sur un lien de livraison",
+      "cat": "Ingénierie sociale"
+    },
+    {
+      "id": "i4",
+      "label": "500 échecs de connexion sur 200 comptes différents",
+      "cat": "Identifiants"
+    },
+    {
+      "id": "i5",
+      "label": "Processus inconnu avec connexion vers un domaine récent",
+      "cat": "Malware"
+    },
+    {
+      "id": "i6",
+      "label": "Requête DNSvers un domaine à forte entropie",
+      "cat": "Réseau"
+    }
+  ],
+  "explain": "La famille se déduit de l'artefact observé, pas de la gravité. Un même incident peut produire des indicateurs dans plusieurs familles."
+}

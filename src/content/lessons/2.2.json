@@ -1,0 +1,314 @@
+[
+  {
+    "id": "2.2-01",
+    "objective": "2.2",
+    "order": 1,
+    "title": "Acteurs malveillants et motivations : la matrice officielle",
+    "minutes": 16,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "L'objectif **2.2** attend une classification : **qui attaque, pourquoi, et avec quels moyens**. Les quatre livres fournis parlent d'acteurs et de renseignement, mais ne donnent pas la matrice complète demande par le référentiel : elle est donc rédigée ici à partir du référentiel officiel et signalée comme telle."
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-2.2-actors-flow"
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "chapter": "2.2",
+        "page": "2.2",
+        "strength": "primary",
+        "note": "Référentiel officiel — aucun des 4 livres ne fournit la matrice complète acteurs × motivations"
+      },
+      {
+        "type": "term",
+        "en": "Threat actor",
+        "fr": "Acteur de menace",
+        "field": "Individu ou groupe qui conduit une activité malveillante. Le référentiel en distingue huit catégories, classées notamment par motivation, ressources et niveau de sophistication.",
+        "gap": true
+      },
+      {
+        "type": "h",
+        "text": "Les huit catégories d'acteurs"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Acteur (référentiel)",
+          "Profil type",
+          "Motivation dominante"
+        ],
+        "rows": [
+          [
+            "Crime syndicate / organized crime",
+            "Groupes structurés, souvent avec un modèle économique et des outils professionnels",
+            "Financial motivation, extortion"
+          ],
+          [
+            "Terrorist",
+            "Violence ou coercition pour une cause",
+            "Fear / chaos, ideological motivation"
+          ],
+          [
+            "Unskilled attacker",
+            "Peu de compétences, scripts et outils grand public",
+            "Notoriety, curiosity"
+          ],
+          [
+            "Hacktivist",
+            "Collectif motivé par une cause",
+            "Ideological / political motivation, influence"
+          ],
+          [
+            "Insider",
+            "Personne autorisée disposant d'un accès légitime",
+            "Revenge, financial motivation, espionage"
+          ],
+          [
+            "Accidental / unintentional actor",
+            "Utilisateur qui commet une erreur sans intention",
+            "Aucune volonté : mauvaise configuration, clic sur phishing"
+          ],
+          [
+            "Competitor",
+            "Entreprise rivale ou agent économique",
+            "Intellectual property, espionage"
+          ],
+          [
+            "State-sponsored actor",
+            "Groupe soutenu par un État, souvent APT",
+            "Espionage, influence, intellectual property"
+          ]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "Cette matrice des huit acteurs et de leurs motivations est **exigée au §2.2** du référentiel SY0-801, mais aucun des quatre livres ne la présente sous cette forme. Les exemples ci-dessus sont des applications pédagogiques du référentiel, pas des citations d'un livre."
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Cyber Threat Intelligence",
+        "page": 181,
+        "printed": 161,
+        "strength": "supporting",
+        "note": "Acteurs, attribution et renseignement sur les menaces (p. imprimée 161-167) — source partielle, pas la taxonomie officielle"
+      },
+      {
+        "type": "h",
+        "text": "Les douze motivations"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Financial motivation** : gain monétaire, fraude, vol de données revendues.",
+          "**Influence** : orienter une opinion ou un comportement.",
+          "**Intellectual property** : vol de secrets industriels ou de recherche.",
+          "**Notoriety** : se faire connaître, revendiquer une exploit.",
+          "**Espionage** : collecte d'information pour un État ou un employeur.",
+          "**Fear / chaos** : provoquer la panique ou la paralysie.",
+          "**Extortion** : rançon, chantage, menace de divulgation.",
+          "**General curiosity** : explorer sans objectif lucratif.",
+          "**Revenge** : représailles contre un employeur ou un tiers.",
+          "**Ideological motivation** : agir pour une croyance, un mouvement.",
+          "**Political motivation** : servir un objectif politique ou électoral.",
+          "**Ethical motivation** : « tester » ou dénoncer, sans autorisation — motif souvent invoqué par les hacktivistes."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "La motivation est le **critère de classement** le plus fiable : un même outil (ransomware) peut être financier chez le crime organisé ou idéologique chez un hacktiviste. L'outil ne définit pas l'acteur."
+      },
+      {
+        "type": "p",
+        "text": "Les notes SOC et le Defensive Security Handbook fournissent des repères utiles — attaquant externe, menace interne, campagnes ciblées — mais ils ne remplacent pas les catégories officielles. Retenez l'association **acteur ↔ motivation** plutôt que des noms de groupes, explicitement exclus du programme."
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "Threat actors",
+        "page": 19,
+        "strength": "supporting",
+        "note": "Notions d'acteur et de risque (p. 19)"
+      },
+      {
+        "type": "check",
+        "q": "Un employé mécontent exfiltre des données clients pour nuire à son employeur. Quelle association acteur ↔ motivation est correcte ?",
+        "options": [
+          "Hacktivist / ideological motivation",
+          "Insider / revenge",
+          "Unskilled attacker / curiosity",
+          "Competitor / espionage"
+        ],
+        "answer": 1,
+        "explain": "L'accès légitime qualifie l'acteur d'insider ; la vengeance est la motivation décrite."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Huit acteurs : crime organisé, terroriste, non qualifié, hacktiviste, initié, accidentel, concurrent, État.",
+          "Douze motivations, de l'argent à l'éthique en passant par l'idéologie et la vengeance.",
+          "La motivation classe l'acteur, pas l'outil utilisé.",
+          "Matrice officielle = référentiel §2.2, absente des quatre livres."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "2.2-02",
+    "objective": "2.2",
+    "order": 2,
+    "title": "Attributs des acteurs et attribution",
+    "minutes": 15,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Identifier un acteur ne se limite pas à son nom : l'examen attend que vous raisenzie sur **trois attributs** — position interne ou externe, ressources financières et niveau de sophistication — puis sur la **confiance** que l'on peut accorder à une attribution."
+      },
+      {
+        "type": "term",
+        "en": "Internal / external actor",
+        "fr": "Acteur interne / externe",
+        "field": "Un acteur interne possède un accès légitime à l'environnement ; un acteur externe doit d'abord franchir la frontière. L'insider est le cas le plus dangereux car il contourne les contrôles périmétriques.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Resources / funding",
+        "fr": "Ressources / financement",
+        "field": "Capacité financière et matérielle de l'acteur : elle conditionne la durée d'une campagne, l'achat d'outils ou de vulnérabilités et le recours à des tiers.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Level of sophistication / capability",
+        "fr": "Niveau de sophistication / capacité",
+        "field": "De l'usage de scripts grand public au développement d'outils sur mesure et à l'exploitation de zero-days. Une APT se distingue par la persistance et l'adaptation.",
+        "gap": true
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "chapter": "2.2",
+        "page": "2.2",
+        "strength": "primary",
+        "note": "Référentiel officiel — aucun des 4 livres ne donne la taxonomie complète des attributs"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Attribut",
+          "Question à poser",
+          "Indice concret"
+        ],
+        "rows": [
+          [
+            "Internal / external",
+            "L'acteur a-t-il déjà un accès autorisé ?",
+            "Identifiant valide, badge, session VPN interne"
+          ],
+          [
+            "Resources / funding",
+            "Quel budget et quels outils ?",
+            "Infrastructure dédiée, outils commerciaux, campagne longue"
+          ],
+          [
+            "Sophistication",
+            "Scripts grand public ou outils sur mesure ?",
+            "Zero-day, evasion, mouvements latéraux discrets"
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Cyber Threat Intelligence",
+        "page": 187,
+        "printed": 167,
+        "strength": "supporting",
+        "note": "Attribution, associés et caractérisation des acteurs (p. imprimée 161-167)"
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "MITRE ATT&CK",
+        "page": 67,
+        "strength": "supporting",
+        "note": "Tactiques et techniques utilisées pour profiler une campagne"
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "Introduction",
+        "page": 28,
+        "printed": 6,
+        "strength": "supporting",
+        "note": "Menaces ciblées et profils d'attaquants (p. imprimée 6-7)"
+      },
+      {
+        "type": "h",
+        "text": "Construire un profil sans sur-interpréter"
+      },
+      {
+        "type": "steps",
+        "items": [
+          {
+            "title": "1. Observer les techniques",
+            "text": "Tactiques et techniques observées (phishing, mouvements latéraux, exfiltration) plutôt qu'un simple IOC."
+          },
+          {
+            "title": "2. Évaluer les attributs",
+            "text": "Interne ou externe, ressources, sophistication : trois axes de caractérisation."
+          },
+          {
+            "title": "3. Confronter aux motivations",
+            "text": "L'objectif visé (argent, espionnage, idéologie) oriente la catégorie d'acteur."
+          },
+          {
+            "title": "4. Attribuer avec prudence",
+            "text": "Exprimer un niveau de confiance et mettre à jour le profil quand de nouveaux éléments arrivent."
+          }
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "warning",
+        "text": "Piège : attribuer un acteur sur une seule adresse IP ou un seul outil. Les outils sont partagés et les infrastructures peuvent être louées. L'examen privilégie un **faisceau d'indices** et une motivation cohérente."
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "Interview / SOC",
+        "page": 227,
+        "strength": "supporting",
+        "note": "Récits d'investigation : profiler sans certitude absolue"
+      },
+      {
+        "type": "check",
+        "q": "Quel élément permet le mieux de distinguer un acteur state-sponsored d'un acteur non qualifié ?",
+        "options": [
+          "Le nombre de CVE utilisées",
+          "Le niveau de sophistication et les ressources engagées sur une longue campagne",
+          "La présence d'un e-mail de phishing",
+          "Le type de navigateur de la victime"
+        ],
+        "answer": 1,
+        "explain": "Les attributs (ressources et sophistication) distinguent une APT soutenue d'un opportuniste utilisant des scripts grand public."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Trois attributs : interne/externe, ressources/financement, sophistication.",
+          "Un insider dispose déjà d'un accès légitime : les contrôles périmétriques ne le bloquent pas.",
+          "L'attribution repose sur un faisceau d'indices et s'exprime en niveau de confiance.",
+          "La taxonomie complète est fournie par le référentiel §2.2, pas par les livres."
+        ]
+      }
+    ]
+  }
+]

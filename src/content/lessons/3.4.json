@@ -1,0 +1,351 @@
+[
+  {
+    "id": "3.4-01",
+    "objective": "3.4",
+    "order": 1,
+    "title": "Résilience : sites de reprise, diversité et redondance",
+    "minutes": 16,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "La résilience ne se limite pas à « avoir des sauvegardes ». Elle répond à une question précise : **comment le service continue-t-il, puis revient-il, après une panne ou une catastrophe ?** L'examen attend que vous distinguiez les sites de reprise, la redondance et les mécanismes de continuité."
+      },
+      {
+        "type": "h",
+        "text": "Continuité d'activité et reprise après sinistre"
+      },
+      {
+        "type": "p",
+        "text": "Le **Defensive Security Handbook** sépare clairement les deux : la continuité d'activité vise la poursuite globale des affaires, tandis que la reprise après sinistre désigne les processus informatiques qui permettent d'atteindre les objectifs fixés par la continuité."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "7",
+        "page": 75,
+        "printed": 53,
+        "strength": "primary",
+        "note": "Distinction BCP / Disaster Recovery"
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "Ne confondez pas : **BCP** = maintenir l'organisation en fonctionnement ; **DR** = restaurer les systèmes et données. Le DR sert le BCP."
+      },
+      {
+        "type": "h",
+        "text": "Les trois sites de reprise"
+      },
+      {
+        "type": "term",
+        "en": "Hot site",
+        "fr": "Site chaud",
+        "field": "Site entièrement opérationnel, données synchronisées en continu. Reprise en minutes, coût le plus élevé.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Warm site",
+        "fr": "Site tiède",
+        "field": "Équipement installé et configuré, données restaurées à partir de sauvegardes récentes. Reprise en heures.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Cold site",
+        "fr": "Site froid",
+        "field": "Locaux et alimentation seulement ; matériel et données à installer. Reprise en jours, coût le plus faible.",
+        "gap": true
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "Les trois niveaux de site sont **exigés par le référentiel SY0-801 §3.4**, mais aucun des quatre livres fournis ne les nomme explicitement. Les définitions ci-dessus proviennent du référentiel et des usages de la discipline, pas d'une attribution à un livre."
+      },
+      {
+        "type": "table",
+        "head": [
+          "Site",
+          "Données",
+          "Délai de reprise",
+          "Coût"
+        ],
+        "rows": [
+          [
+            "Chaud (hot)",
+            "Synchronisées en continu",
+            "Minutes",
+            "Très élevé"
+          ],
+          [
+            "Tiède (warm)",
+            "Restauration récente",
+            "Heures",
+            "Moyen"
+          ],
+          [
+            "Froid (cold)",
+            "À rapatrier",
+            "Jours / semaines",
+            "Faible"
+          ]
+        ]
+      },
+      {
+        "type": "h",
+        "text": "Diversité de plateforme et redondance"
+      },
+      {
+        "type": "p",
+        "text": "La **diversité** réduit le risque qu'une même défaillance touche tous les environnements : fournisseur, matériel, virtualisation. La **redondance** supprime les points de défaillance uniques via répartition de charge, clustering, autoscaling, haute disponibilité et multicloud."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "7",
+        "page": 78,
+        "printed": 56,
+        "strength": "primary",
+        "note": "Haute disponibilité en cluster et systèmes alternatifs"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Load balancing** : répartit la charge entre plusieurs serveurs.",
+          "**Clustering** : plusieurs nœuds agissant comme un service unique.",
+          "**Autoscaling** : ajuste automatiquement la capacité à la demande.",
+          "**High availability** : redundancy qui vise une interruption minimale.",
+          "**Multicloud systems** : répartir les services entre plusieurs fournisseurs."
+        ]
+      },
+      {
+        "type": "h",
+        "text": "Alimentation électrique"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Élément",
+          "Rôle"
+        ],
+        "rows": [
+          [
+            "UPS",
+            "Alimentation sans interruption, autonomie courte, temps de bascule vers le générateur"
+          ],
+          [
+            "RPS",
+            "Alimentation redondante dans un même équipement"
+          ],
+          [
+            "Power generator",
+            "Autonomie longue sur coupure prolongée"
+          ],
+          [
+            "Surge protector",
+            "Protection contre les surtensions"
+          ]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "UPS, RPS, générateur et parasurge sont listés dans le **référentiel §3.4** ; aucun livre ne les détaille. À mémoriser comme liste."
+      },
+      {
+        "type": "check",
+        "q": "Un site dispose des serveurs et du réseau, mais les données doivent être restaurées depuis la dernière sauvegarde avant redémarrage. De quel site s'agit-il ?",
+        "options": [
+          "Site chaud",
+          "Site tiède",
+          "Site froid",
+          "Site en cluster"
+        ],
+        "answer": 1,
+        "explain": "Le site tiède (warm site) est pré-équipé mais nécessite une restauration de données. Le site chaud est synchronisé en continu ; le site froid nécessite aussi l'installation du matériel."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "BCP = continuité globale ; DR = restauration informatique.",
+          "Hot = minutes, Warm = heures, Cold = jours.",
+          "Redondance : load balancing, clustering, autoscaling, HA, multicloud.",
+          "Alimentation : UPS, RPS, générateur, parasurge."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "3.4-02",
+    "objective": "3.4",
+    "order": 2,
+    "title": "RTO, RPO, MTTR, MTBF et tests de reprise",
+    "minutes": 15,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Les métriques de reprise transforment une vague exigence (« il faut rétablir vite ») en objectif mesurable. Elles sont au cœur des questions de scénario de l'examen."
+      },
+      {
+        "type": "h",
+        "text": "Deux objectifs, deux questions différentes"
+      },
+      {
+        "type": "simulation",
+        "simId": "sim-rto-rpo"
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "RPO — Recovery Point Objective",
+          "points": [
+            "**Quelle perte de données est acceptable ?**",
+            "Mesuré dans le temps, avant l'incident.",
+            "Un RPO de 1 heure impose des sauvegardes ou une réplication au moins horaire."
+          ]
+        },
+        "right": {
+          "title": "RTO — Recovery Time Objective",
+          "points": [
+            "** Combien de temps pour rétablir le service ?**",
+            "Mesuré après l'incident.",
+            "Un RTO de 1 heure impose un mécanisme de reprise en moins d'une heure."
+          ]
+        }
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "7",
+        "page": 76,
+        "printed": 54,
+        "strength": "primary",
+        "note": "Définitions RPO et RTO, exemple chiffré"
+      },
+      {
+        "type": "term",
+        "en": "MTTR — Mean Time To Repair",
+        "fr": "Temps moyen de réparation",
+        "field": "Durée moyenne nécessaire pour réparer un équipement défaillant et le remettre en service.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "MTBF — Mean Time Between Failures",
+        "fr": "Temps moyen entre pannes",
+        "field": "Durée moyenne de fonctionnement entre deux défaillances ; mesure la fiabilité.",
+        "gap": true
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "MTTR et MTBF sont exigés au **§3.4** ; absents des quatre livres. L'ordre de grandeur importe peu, la distinction fiabilité (MTBF) vs temps de rétablissement (MTTR) est ce qui est testé."
+      },
+      {
+        "type": "h",
+        "text": "Le piège des dépendances"
+      },
+      {
+        "type": "p",
+        "text": "Le livre donne un exemple frappant : un serveur de messagerie avec un RTO d'une heure, sur un réseau dont le RTO est de trois heures. Le RTO réel de la messagerie est donc de **trois heures** : la reprise ne peut pas être plus rapide que son élément le plus lent."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "7",
+        "page": 79,
+        "printed": 57,
+        "strength": "primary",
+        "note": "Dépendances et RTO effectif"
+      },
+      {
+        "type": "h",
+        "text": "Sauvegardes : ce que le référentiel exige"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Retention** : durée de conservation des copies.",
+          "**Immutability** : copies non modifiables, y compris par un compte administrateur compromis — rempart contre le ransomware.",
+          "**Scope** : périmètre exact des données sauvegardées.",
+          "**Restoration testing** : une sauvegarde non testée n'est pas une sauvegarde."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "Une sauvegarde immuable est souvent la réponse attendue quand un scénario mentionne un ransomware qui chiffre ou supprime les sauvegardes."
+      },
+      {
+        "type": "h",
+        "text": "Tester la reprise"
+      },
+      {
+        "type": "steps",
+        "items": [
+          {
+            "title": "Failover",
+            "text": "Bascule effective vers le site ou le système de secours, avec autorités nommées."
+          },
+          {
+            "title": "Simulation",
+            "text": "Exercice contrôlé qui valide la procédure sans interrompre la production."
+          },
+          {
+            "title": "Parallel processing",
+            "text": "Traitement simultané sur les deux sites pour comparer les résultats."
+          },
+          {
+            "title": "Failback",
+            "text": "Retour vers le site principal une fois le incident résolu — souvent oublié !"
+          }
+        ]
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "7",
+        "page": 80,
+        "printed": 58,
+        "strength": "primary",
+        "note": "Failover, failback, autorités et tests"
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "—",
+        "page": 116,
+        "printed": 96,
+        "strength": "supporting",
+        "note": "COOP : éviter la sur-conception, planar les occurrences courantes"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-dr-timeline"
+      },
+      {
+        "type": "check",
+        "q": "Une panne dure 4 heures. Les données ont été perdues sur les 45 dernières minutes. Quelles métriques décrivent cela ?",
+        "options": [
+          "RTO = 45 min, RPO = 4 h",
+          "RPO = 45 min, RTO = 4 h",
+          "MTBF = 45 min, MTTR = 4 h",
+          "RPO = 4 h, MTTR = 45 min"
+        ],
+        "answer": 1,
+        "explain": "Le RPO mesure la perte de données (45 min) ; le RTO mesure l'interruption de service (4 h). MTTR est la durée moyenne de réparation, pas la durée de cet incident."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "RPO = perte de données acceptable ; RTO = durée d'interruption acceptable.",
+          "MTTR = réparation ; MTBF = fiabilité.",
+          "Une chaîne de reprise vaut autant que son maillon le plus lent.",
+          "Immuabilité et tests de restauration sont indispensables."
+        ]
+      }
+    ]
+  }
+]

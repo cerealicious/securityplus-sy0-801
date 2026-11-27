@@ -1,0 +1,90 @@
+{
+  "id": "sc-3.3-data",
+  "objective": "3.3",
+  "title": "Données clients exposées : choisir les protections",
+  "context": "Une équipe commerciale exporte un fichier de clients pour une campagne. Le fichier contient noms, e-mails, numéros de carte et dates de naissance. Trois décisions s'imposent.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "Les numéros de carte doivent être stockés dans la base de paiement. Quelle méthode limite le risque sans casser le processus ?",
+      "choices": [
+        {
+          "text": "Les afficher en clair dans l'application pour simplifier le support",
+          "next": "n2",
+          "score": 0,
+          "why": "L'exposition en clair augmente la surface de vol et la portée de la conformité PCI DSS."
+        },
+        {
+          "text": "Les remplacer par des jetons et n'afficher que les 4 derniers chiffres",
+          "next": "n2",
+          "score": 4,
+          "why": "Tokenisation côté stockage et masquage à l'affichage : les deux protections sont complémentaires."
+        },
+        {
+          "text": "Les hacher avec SHA-256 dans la base",
+          "next": "n2",
+          "score": 1,
+          "why": "Un hash n'est pas réversible : il ne permet pas de restituer la carte pour un paiement."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "Le fichier d'export doit être partagé avec un partenaire pour une analyse statistique. Quelle est la meilleure approche ?",
+      "choices": [
+        {
+          "text": "Transmettre le fichier complet par e-mail chiffré",
+          "next": "n3",
+          "score": 1,
+          "why": "Le chiffrement protège le transit mais transmet des données personnelles inutiles au partenaire."
+        },
+        {
+          "text": "Déidentifier le jeu de données puis limiter l'accès par rôle",
+          "next": "n3",
+          "score": 4,
+          "why": "La déidentification réduit le périmètre de données personnelles et le moindre privilège limite l'accès."
+        },
+        {
+          "text": "Supprimer simplement la colonne e-mail",
+          "next": "n3",
+          "score": 2,
+          "why": "Partiel : d'autres champs (nom, date de naissance) permettent une réidentification."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "Quel rôle doit porter la responsabilité finale de cette donnée ?",
+      "choices": [
+        {
+          "text": "Le data owner (propriétaire de la donnée)",
+          "next": "n4",
+          "score": 4,
+          "why": "Le propriétaire décide de la classification et des règles d'accès ; le custodian applique les contrôles."
+        },
+        {
+          "text": "Le développeur qui a écrit le script d'export",
+          "next": "n4",
+          "score": 0,
+          "why": "Le développeur met en œuvre, il ne définit pas la politique de la donnée."
+        },
+        {
+          "text": "Le prestataire qui reçoit le fichier",
+          "next": "n4",
+          "score": 0,
+          "why": "Le sous-traitant est un acteur de traitement, pas le propriétaire de la donnée."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "Vous avez distingué tokenisation, masquage, déidentification et rôles de protection des données."
+    }
+  },
+  "debrief": [
+    "Tokenisation = substitut réversible contrôlé ; masquage = occultation à l'affichage.",
+    "La déidentification réduit le périmètre des données personnelles partagées.",
+    "Data owner = décision et classification ; data custodian = mise en œuvre des contrôles."
+  ]
+}

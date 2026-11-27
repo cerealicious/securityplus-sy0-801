@@ -1,0 +1,110 @@
+{
+  "id": "qz-5.5",
+  "objective": "5.5",
+  "title": "Quiz — Audits et évaluations",
+  "questions": [
+    {
+      "id": "q-5.5-01",
+      "type": "single",
+      "q": "Quel document cadre l'autorité et le périmètre d'une mission d'audit ?",
+      "options": [
+        "Une assertion",
+        "Une charte d'audit",
+        "Un échantillon",
+        "Une kill chain"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "La charte d'audit définit l'autorité, le périmètre, les responsabilités et les destinataires du rapport.",
+      "ref": "5.5-01"
+    },
+    {
+      "id": "q-5.5-02",
+      "type": "multi",
+      "q": "Quelles techniques appartiennent à la collecte de données d'audit ? (plusieurs réponses)",
+      "options": [
+        "Sampling",
+        "Questionnaires",
+        "Interviews",
+        "Loss of license"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "explain": "Échantillonnage, questionnaires et entretiens sont des techniques de collecte. La perte de licence est une conséquence de non-conformité (5.4).",
+      "ref": "5.5-01"
+    },
+    {
+      "id": "q-5.5-03",
+      "type": "single",
+      "q": "Quel type de test fournit au testeur toutes les informations internes sur le système ?",
+      "options": [
+        "Unknown environment",
+        "Partially known environment",
+        "Known environment",
+        "Passive reconnaissance"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Le test en environnement connu fournit architecture, codes et accès ; il est plus ciblé et rapide.",
+      "ref": "5.5-02"
+    },
+    {
+      "id": "q-5.5-04",
+      "type": "single",
+      "q": "Quelle reconnaissance n'interagit pas avec la cible et ne laisse aucune trace dans ses journaux ?",
+      "options": [
+        "Active reconnaissance",
+        "Passive reconnaissance",
+        "Physical testing",
+        "Defensive testing"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "La reconnaissance passive utilise des sources publiques sans contacter la cible ; la reconnaissance active génère des traces.",
+      "ref": "5.5-02"
+    },
+    {
+      "id": "q-5.5-05",
+      "type": "match",
+      "q": "Associez chaque framework à sa question centrale.",
+      "pairs": [
+        {
+          "left": "Cyber Kill Chain",
+          "right": "À quelle phase de l'intrusion en est l'attaque ?"
+        },
+        {
+          "left": "MITRE ATT&CK",
+          "right": "Quelle technique est utilisée par l'adversaire ?"
+        },
+        {
+          "left": "Diamond Model",
+          "right": "Qui attaque qui, avec quoi et depuis où ?"
+        }
+      ],
+      "explain": "Kill Chain = phases, ATT&CK = techniques, Diamond Model = relation entre quatre éléments.",
+      "ref": "5.5-03"
+    },
+    {
+      "id": "q-5.5-06",
+      "type": "single",
+      "q": "Combien de tactiques compte la matrice MITRE ATT&CK Enterprise dans sa version actuelle ?",
+      "options": [
+        "7",
+        "11",
+        "14",
+        "20"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "La matrice Enterprise compte 14 tactiques. Le tableau du livre 11 Strategies en montre 11 : c'est une version ancienne à ne pas reproduire.",
+      "ref": "5.5-03"
+    }
+  ]
+}

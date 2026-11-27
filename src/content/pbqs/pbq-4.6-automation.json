@@ -1,0 +1,61 @@
+{
+  "id": "pbq-4.6-automation",
+  "objective": "4.6",
+  "type": "classify",
+  "title": "Classer les cas d'usage d'automatisation et d'IA",
+  "prompt": "Classez chaque scénario dans la catégorie d'automatisation ou de capacité d'IA qui correspond.",
+  "categories": [
+    "Provisioning / état désiré",
+    "Détection / analyse",
+    "Ticketing / coordination",
+    "IA appliquée"
+  ],
+  "items": [
+    {
+      "id": "i1",
+      "label": "Créer automatiquement le compte d'un nouvel employé et attribuer les droits de son rôle",
+      "cat": "Provisioning / état désiré"
+    },
+    {
+      "id": "i2",
+      "label": "Déployer une machine virtuelle à la demande à partir d'un modèle validé",
+      "cat": "Provisioning / état désiré"
+    },
+    {
+      "id": "i3",
+      "label": "Comparer la configuration réelle au référentiel et corriger la dérive",
+      "cat": "Provisioning / état désiré"
+    },
+    {
+      "id": "i4",
+      "label": "Repérer une anomalie dans les journaux à partir d'une baseline",
+      "cat": "Détection / analyse"
+    },
+    {
+      "id": "i5",
+      "label": "Assistant conversationnel qui aide l'analyste à rédiger sa note",
+      "cat": "IA appliquée"
+    },
+    {
+      "id": "i6",
+      "label": "Anticiper une panne à partir de tendances observées",
+      "cat": "IA appliquée"
+    },
+    {
+      "id": "i7",
+      "label": "Baseline comportementale enrichie par apprentissage automatique",
+      "cat": "IA appliquée"
+    },
+    {
+      "id": "i8",
+      "label": "Agent d'IA qui enchaîne qualifier, bloquer et documenter sous garde-fous",
+      "cat": "IA appliquée"
+    },
+    {
+      "id": "i9",
+      "label": "Créer, assigner et clôturer un ticket à partir d'une alerte",
+      "cat": "Ticketing / coordination"
+    }
+  ],
+  "explain": "Le provisioning et l'état désiré agissent sur les ressources ; la détection produit des signaux ; le ticketing assure la coordination ; les quatre capacités d'IA (chatbot, prédiction, baselines augmentées, agentic AI) forment la dernière catégorie. L'IA agentique est hors livres, §4.6."
+}

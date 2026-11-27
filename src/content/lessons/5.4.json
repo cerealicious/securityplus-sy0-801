@@ -1,0 +1,340 @@
+[
+  {
+    "id": "5.4-01",
+    "objective": "5.4",
+    "order": 1,
+    "title": "Conformité : formation, supervision et conséquences",
+    "minutes": 16,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Une conformité efficace ne se limite pas à cocher des cases : elle combine **formation**, **preuves de supervision** et **conséquences connues** en cas d'écart. L'examen teste surtout la capacité à relier chaque contrôle à son obligation."
+      },
+      {
+        "type": "h",
+        "text": "Pourquoi la conformité structure la sécurité"
+      },
+      {
+        "type": "p",
+        "text": "Le **Defensive Security Handbook** consacre un chapitre à la conformité : lois, réglementations sectorielles et frameworks définissent des exigences minimales que l'organisation doit démontrer, pas seulement respecter."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "8",
+        "page": 83,
+        "printed": 61,
+        "strength": "primary",
+        "note": "Chapitre Compliance : lois, réglementations et démonstration de conformité"
+      },
+      {
+        "type": "h",
+        "text": "Former aux obligations applicables"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Data handling training** : manipulation correcte des données sensibles et confidentielles.",
+          "**AML / CTF** : anti-money laundering et counter-terrorism financing, pour les secteurs financiers.",
+          "**Anti-bribery training** : prévention de la corruption et des conflits d'intérêts."
+        ]
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "8",
+        "page": 85,
+        "printed": 63,
+        "strength": "primary",
+        "note": "PCI DSS, HIPAA, GLBA, FERPA, SOX et formation du personnel"
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 185,
+        "strength": "supporting",
+        "note": "GRC, risques et conformité"
+      },
+      {
+        "type": "h",
+        "text": "Superviser : attestations et accusés de réception"
+      },
+      {
+        "type": "term",
+        "en": "Attestation",
+        "fr": "Attestation",
+        "field": "Déclaration formelle par laquelle une personne ou un tiers confirme un état de conformité ou l'exécution d'une obligation.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Acknowledgement",
+        "fr": "Accusé de réception / confirmation",
+        "field": "Confirmation enregistrée qu'une personne a pris connaissance d'une politique ou d'une obligation et l'a acceptée.",
+        "gap": true
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "page": "5.4",
+        "strength": "primary",
+        "note": "Référentiel officiel — aucun des 4 livres"
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "**Attestations** et **acknowledgements** sont exigés au §5.4 sans être développés dans les livres fournis. Ils servent de **preuve** lors d'un audit : dire « nous avons formé » ne suffit pas."
+      },
+      {
+        "type": "h",
+        "text": "Les conséquences d'un manquement"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Conséquence",
+          "Manifestation concrète"
+        ],
+        "rows": [
+          [
+            "Reputational damage",
+            "Perte de confiance des clients, mauvaise publicité"
+          ],
+          [
+            "Financial consequences",
+            "Amendes, coûts de remédiation, perte de chiffre d'affaires"
+          ],
+          [
+            "Legal consequences",
+            "Poursuites, obligations de notification, responsabilité des dirigeants"
+          ],
+          [
+            "Contractual consequences",
+            "Rupture de contrat, pénalités avec un client ou un fournisseur"
+          ],
+          [
+            "Sanctions",
+            "Sanctions réglementaires ou disciplinaires prononcées contre l'entité ou les personnes"
+          ],
+          [
+            "Loss of license",
+            "Retrait d'une certification ou d'une autorisation d'exercer"
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "—",
+        "page": 157,
+        "printed": 137,
+        "strength": "supporting",
+        "note": "Risques, responsabilité et conséquences organisationnelles des manquements"
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "Si un scénario mentionne la **perte d'une certification ou d'une licence d'exploitation**, répondez « loss of license ». Si la perte est d'abord une image publique dégradée, répondez « reputational damage »."
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-5.4-compliance-flow"
+      },
+      {
+        "type": "check",
+        "q": "Une entreprise perd son autorisation de traiter des paiements par carte après un audit. Quelle conséquence cela illustre-t-il ?",
+        "options": [
+          "Reputational damage",
+          "Financial consequences",
+          "Loss of license",
+          "Acknowledgement"
+        ],
+        "answer": 2,
+        "explain": "La perte d'autorisation ou de certification est une loss of license, distincte d'une simple amende financière."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Formation : traitement des données, AML/CTF, anti-corruption.",
+          "Attestations et acknowledgements sont les preuves attendues en audit.",
+          "Six conséquences : réputation, finance, juridique, contrat, sanctions, perte de licence.",
+          "Une obligation sans preuve de formation et de supervision est difficile à démontrer."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "5.4-02",
+    "objective": "5.4",
+    "order": 2,
+    "title": "Vie privée, conservation et obligations légales",
+    "minutes": 15,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "La conformité ne s'arrête pas à la sécurité technique : elle encadre ce que l'on peut faire des données personnelles, combien de temps les conserver et quand la loi suspend leur destruction."
+      },
+      {
+        "type": "h",
+        "text": "Droits des personnes et choix de traitement"
+      },
+      {
+        "type": "term",
+        "en": "Right to be forgotten",
+        "fr": "Droit à l'oubli",
+        "field": "Droit d'une personne d'obtenir l'effacement de ses données lorsque les conditions légales sont réunies.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Opt-in / opt-out",
+        "fr": "Opt-in / opt-out",
+        "field": "Opt-in : consentement explicite préalable ; opt-out : possibilité de refuser ou de se retirer d'un traitement.",
+        "gap": true
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Data correction** : rectifier une information inexacte.",
+          "**Processing restrictions** : limiter les usages autorisés d'une donnée.",
+          "**Processing prevention** : empêcher un traitement non conforme au consentement donné.",
+          "**Data ownership** : identifier qui décide de l'usage et de la conservation de la donnée."
+        ]
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "page": "5.4",
+        "strength": "primary",
+        "note": "Référentiel officiel — aucun des 4 livres"
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "Droit à l'oubli, opt-in/opt-out, correction et restrictions de traitement sont listés au **§5.4** et absents des quatre livres. Retenez la distinction **consentement préalable (opt-in)** vs **refus possible (opt-out)**."
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "Data controller",
+          "points": [
+            "Décide des finalités et des moyens du traitement.",
+            "Porte la responsabilité principale de la conformité.",
+            "Répond aux demandes d'exercice des droits."
+          ]
+        },
+        "right": {
+          "title": "Data processor",
+          "points": [
+            "Traite les données **pour le compte** du responsable de traitement.",
+            "Doit suivre les instructions documentées et sécuriser les données.",
+            "Peut être un prestataire externe (voir 5.3)."
+          ]
+        }
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "8",
+        "page": 86,
+        "printed": 64,
+        "strength": "primary",
+        "note": "Données personnelles, réglementations sectorielles et responsabilités"
+      },
+      {
+        "type": "h",
+        "text": "Conservation légale et legal hold"
+      },
+      {
+        "type": "term",
+        "en": "Legal hold",
+        "fr": "Gel juridique / conservation obligatoire",
+        "field": "Instruction qui suspend la destruction normale de données parce qu'elles sont pertinentes pour une affaire, une enquête ou une obligation légale.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Legal orders",
+        "fr": "Ordres légaux",
+        "field": "Décisions d'autorités (tribunal, régulateur) imposant une action : produire, conserver ou communiquer des données."
+      },
+      {
+        "type": "term",
+        "en": "Data retention requirements",
+        "fr": "Exigences de conservation",
+        "field": "Durées minimales ou maximales de conservation définies par la loi, le contrat ou la politique interne."
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 51,
+        "strength": "supporting",
+        "note": "Classification des données et contraintes de conservation"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Situation",
+          "Action attendue"
+        ],
+        "rows": [
+          [
+            "Politique de rétention de 30 jours",
+            "Supprimer selon la règle, sauf exception documentée"
+          ],
+          [
+            "Legal hold en cours",
+            "Suspendre la suppression et conserver les preuves intactes"
+          ],
+          [
+            "Demande d'effacement valide",
+            "Effacer les données, hors obligations légales contraires"
+          ],
+          [
+            "Ordre d'un régulateur",
+            "Produire les données demandées dans les délais impartis"
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "—",
+        "page": 64,
+        "printed": 44,
+        "strength": "supporting",
+        "note": "Contraintes légales et réglementaires pesant sur les opérations de sécurité"
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "Le piège classique : une **legal hold** bat la politique de rétention. Même si la politique prévoit 30 jours, une donnée sous gel juridique ne doit pas être détruite."
+      },
+      {
+        "type": "check",
+        "q": "Une procédure prévoit la suppression des journaux après 30 jours, mais une enquête judiciaire est en cours. Que faire ?",
+        "options": [
+          "Supprimer les journaux conformément à la politique",
+          "Suspendre la suppression en appliquant le legal hold",
+          "Chiffrer les journaux puis les supprimer",
+          "Transférer les journaux vers un prestataire tiers"
+        ],
+        "answer": 1,
+        "explain": "Un legal hold suspend la rétention normale : les données pertinentes pour une procédure doivent être conservées intactes."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Droits : oubli, correction, opt-in/opt-out, restrictions et prevention.",
+          "Controller décide des finalités ; processor agit pour son compte.",
+          "Legal hold et ordres légaux priment sur la rétention habituelle.",
+          "Toute exception de conservation doit être documentée et tracée."
+        ]
+      }
+    ]
+  }
+]

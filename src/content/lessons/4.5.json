@@ -1,0 +1,523 @@
+[
+  {
+    "id": "4.5-01",
+    "objective": "4.5",
+    "order": 1,
+    "title": "Cycle de vie des identités et types de comptes",
+    "minutes": 15,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Une identité naît, change, accumule des droits, puis doit disparaître. La majorité des incidents d'accès viennent d'une étape du cycle de vie **mal fermée** : compte oublié, privileges excessifs, compte de service partagé."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "10",
+        "page": 105,
+        "printed": 83,
+        "strength": "primary",
+        "note": "Gestion des comptes et de l'infrastructure Windows"
+      },
+      {
+        "type": "simulation",
+        "simId": "sim-iam-flow"
+      },
+      {
+        "type": "h",
+        "text": "Provisioning et deprovisioning"
+      },
+      {
+        "type": "term",
+        "en": "Provisioning / deprovisioning",
+        "fr": "Création / suppression d'un compte",
+        "field": "Créer une identité avec les attributs et droits corrects, puis révoquer l'accès immédiatement à la fin du besoin : désactivation, révocation des sessions, transfert de la propriété des fichiers et journalisation de l'action.",
+        "gap": false
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Fundamentals",
+        "page": 57,
+        "printed": 37,
+        "strength": "supporting",
+        "note": "Identité, accès et responsabilité dans le SOC"
+      },
+      {
+        "type": "steps",
+        "items": [
+          {
+            "title": "Demande validée",
+            "text": "Le besoin est formulé et approuvé par le responsable hiérarchique ou le propriétaire de la ressource."
+          },
+          {
+            "title": "Identity proofing",
+            "text": "Vérification que la personne est bien celle qu'elle prétend être avant la création du compte."
+          },
+          {
+            "title": "Attribution minimale",
+            "text": "Droits strictement nécessaires au rôle, avec une date d'expiration si l'accès est temporaire."
+          },
+          {
+            "title": "Suivi et revue",
+            "text": "Journalisation des attributions et revue périodique des droits effectifs."
+          },
+          {
+            "title": "Révocation",
+            "text": "Désactivation, révocation des jetons et sessions, transfert des actifs, archivage des preuves."
+          }
+        ]
+      },
+      {
+        "type": "h",
+        "text": "Identity proofing"
+      },
+      {
+        "type": "term",
+        "en": "Identity proofing",
+        "fr": "Vérification d'identité",
+        "field": "Processus qui établit qu'une personne réelle correspond bien à l'identité numérique demandée, avant la délivrance d'identifiants (pièce d'identité, vérification téléphonique, signature).",
+        "gap": false
+      },
+      {
+        "type": "p",
+        "text": "La force de l'authentification dépend de la qualité de cette étape : un MFA parfait ne protège pas si le compte a été créé pour une identité fictive. C'est le sens du couple **identity proofing + authentication**."
+      },
+      {
+        "type": "h",
+        "text": "Six types de comptes à distinguer"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Type de compte",
+          "Usage",
+          "Risque principal"
+        ],
+        "rows": [
+          [
+            "User account",
+            "Accès individuel quotidien",
+            "Accumulation de droits avec le temps"
+          ],
+          [
+            "Privileged account (global)",
+            "Administration multi-systèmes (domaine, cloud)",
+            "Compte « roi » : cible prioritaire"
+          ],
+          [
+            "Privileged account (local)",
+            "Administration d'un seul système",
+            "Oublié lors des revues"
+          ],
+          [
+            "Service account",
+            "Exécution d'un service ou d'une tâche automatisée",
+            "Mot de passe codé en dur, jamais rotationné"
+          ],
+          [
+            "Third-party account",
+            "Accès d'un prestataire",
+            "Révoqué trop tard après la fin du contrat"
+          ],
+          [
+            "Emergency access account",
+            "Accès de secours en situation d'urgence",
+            "Trop puissant et non surveillé au quotidien"
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "10",
+        "page": 144,
+        "printed": 122,
+        "strength": "primary",
+        "note": "Comptes privilégiés et séparation des rôles"
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 25,
+        "strength": "supporting",
+        "note": "Notions d'identité et de contrôle d'accès"
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "Un compte d'**urgence** doit rester disponible mais être **verrouillé au quotidien**, avec une procédure de déverrouillage tracée. Un compte de **service** doit être dédié, à moindre privilège et surveillé — jamais partagé avec un humain."
+      },
+      {
+        "type": "check",
+        "q": "Un prestataire quitte l'entreprise. Quelle est la première action de deprovisioning ?",
+        "options": [
+          "Attendre la fin du contrat de maintenance",
+          "Désactiver le compte et révoquer ses sessions et jetons actifs",
+          "Changer uniquement son mot de passe",
+          "Supprimer les journaux d'audit le concernant"
+        ],
+        "answer": 1,
+        "explain": "La révocation doit être immédiate et couvrir sessions et jetons, pas seulement le mot de passe. Les journaux au contraire doivent être conservés."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Le cycle de vie inclut la révocation : c'est l'étape la plus souvent négligée.",
+          "Identity proofing précède la délivrance des identifiants.",
+          "Six types de comptes, dont service et accès d'urgence, à traiter à part.",
+          "Attribution minimale, expiration et journalisation à chaque étape."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "4.5-02",
+    "objective": "4.5",
+    "order": 2,
+    "title": "Fédération, SSO et authentification multifacteur",
+    "minutes": 16,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "La fédération permet à une organisation de faire confiance à une identité gérée ailleurs ; le SSO évite de multiplier les mots de passe. La MFA ajoute des facteurs : c'est le socle de la protection des comptes."
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Fundamentals",
+        "page": 58,
+        "printed": 38,
+        "strength": "supporting",
+        "note": "Identité fédérée et gestion centralisée des accès"
+      },
+      {
+        "type": "term",
+        "en": "Federation",
+        "fr": "Fédération d'identités",
+        "field": "Accord entre domaines distincts permettant à un fournisseur d'identité d'authentifier un utilisateur et à un service de faire confiance à cette affirmation, sans créer de compte local.",
+        "gap": false
+      },
+      {
+        "type": "term",
+        "en": "SSO — Single Sign-On",
+        "fr": "Authentification unique",
+        "field": "Une seule authentification donne accès à plusieurs applications. Réduit la fatigue de mots de passe mais centralise le risque : la compromission du compte d'identité ouvre tous les services.",
+        "gap": false
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 86,
+        "strength": "supporting",
+        "note": "SSO et concepts d'identité"
+      },
+      {
+        "type": "h",
+        "text": "Les protocoles d'identité"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Protocole",
+          "Rôle",
+          "À retenir"
+        ],
+        "rows": [
+          [
+            "LDAP",
+            "Interrogation d'un annuaire (comptes, groupes, attributs)",
+            "Annuaire, pas protocole d'authentification fédérée"
+          ],
+          [
+            "SAML",
+            "Échange d'assertions d'authentification entre IdP et service",
+            "XML, très utilisé en entreprise (gap)"
+          ],
+          [
+            "OAuth",
+            "Délégation d'autorisation à une application tierce",
+            "Autorisation, pas authentification (gap)"
+          ]
+        ]
+      },
+      {
+        "type": "term",
+        "en": "SAML — Security Assertion Markup Language",
+        "fr": "Langage de balisage d'assertions de sécurité",
+        "field": "Format d'assertions signées échangées entre un fournisseur d'identité et un fournisseur de service : le service fait confiance à l'assertion plutôt que de demander le mot de passe.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "OAuth — Open Authorization",
+        "fr": "Autorisation ouverte",
+        "field": "Protocole de délégation : un utilisateur autorise une application à agir pour son compte auprès d'un service, avec des portées limitées, sans transmettre son mot de passe.",
+        "gap": true
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "**SAML** et **OAuth** figurent au référentiel §4.5 (Federation and SSO) mais ne sont pas réellement traités dans les quatre livres fournis. Définitions issues du référentiel et des usages de la discipline. Attention à ne pas confondre **authentification** (SAML) et **autorisation déléguée** (OAuth)."
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "page": "4.5",
+        "strength": "primary",
+        "note": "Référentiel officiel — SAML et OAuth : aucun des 4 livres"
+      },
+      {
+        "type": "h",
+        "text": "Les facteurs d'authentification"
+      },
+      {
+        "type": "p",
+        "text": "La MFA combine au moins deux catégories : **quelque chose que l'on sait** (mot de passe, PIN), **quelque chose que l'on possède** (jeton matériel ou logiciel) et **quelque chose que l'on est** (biométrie). Deux facteurs de la même catégorie ne constituent pas une MFA."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "13",
+        "page": 147,
+        "printed": 125,
+        "strength": "primary",
+        "note": "Passwords & MFA : facteurs et jetons"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Mécanisme",
+          "Catégorie",
+          "Point d'examen"
+        ],
+        "rows": [
+          [
+            "Hard token",
+            "Possession",
+            "Matériel dédié, résistant au phishing du code"
+          ],
+          [
+            "Soft token / OTP",
+            "Possession",
+            "Application ou code à usage unique, TOTP/HOTP"
+          ],
+          [
+            "Biometrics",
+            "Être",
+            "Empreinte, visage : données irrévocables, à protéger"
+          ],
+          [
+            "Backup code",
+            "Possession",
+            "Code de secours à conserver hors ligne, à usage unique"
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 89,
+        "strength": "supporting",
+        "note": "MFA et jetons dans les notes SOC"
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "Un **backup code** fait partie de la MFA : le stocker dans le même coffre que le mot de passe annule sa valeur. Un SMS, bien que courant, est un facteur de possession faible (SIM swap)."
+      },
+      {
+        "type": "check",
+        "q": "Quelle affirmation est correcte concernant OAuth ?",
+        "options": [
+          "C'est un protocole d'authentification qui remplace le mot de passe",
+          "C'est une délégation d'autorisation avec portées limitées",
+          "C'est un annuaire d'entreprise",
+          "C'est un type de jeton matériel"
+        ],
+        "answer": 1,
+        "explain": "OAuth délègue une autorisation à une application tierce. SAML porte l'authentification fédérée et LDAP interroge un annuaire. Notion hors livres, §4.5."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Fédération = confiance entre domaines ; SSO = une authentification, plusieurs services.",
+          "LDAP = annuaire ; SAML = assertion d'authentification ; OAuth = autorisation déléguée.",
+          "MFA = deux catégories de facteurs distinctes au minimum.",
+          "SAML et OAuth sont des notions hors livres, signalées §4.5."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "4.5-03",
+    "objective": "4.5",
+    "order": 3,
+    "title": "Modèles d'accès, revue et concepts de mots de passe",
+    "minutes": 18,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Les modèles de contrôle d'accès répondent à une question simple : **qui décide de l'accès, et sur quelle base ?** La revue vérifie ensuite que les droits attribués restent justifiés dans le temps."
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-access-models"
+      },
+      {
+        "type": "term",
+        "en": "RBAC — Role-Based Access Control",
+        "fr": "Contrôle d'accès basé sur les rôles",
+        "field": "Les droits sont attachés à un rôle, et les utilisateurs héritent du rôle. C'est le modèle dominant en entreprise : simple à auditer et à révoquer.",
+        "gap": false
+      },
+      {
+        "type": "term",
+        "en": "Rule-based access control",
+        "fr": "Contrôle d'accès par règles",
+        "field": "Décision fondée sur des règles explicites appliquées à tous : liste d'autorisation, plage d'adresses, condition définie par l'administrateur.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "Time-based access control",
+        "fr": "Contrôle d'accès temporel",
+        "field": "Accès autorisé seulement dans une fenêtre de temps définie : horaires de bureau, durée de mission, expiration programmée.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "DAC — Discretionary Access Control",
+        "fr": "Contrôle d'accès discrétionnaire",
+        "field": "Le propriétaire de la ressource décide lui-même qui y accède. Flexible, mais la propagation des droits est difficile à maîtriser.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "MAC — Mandatory Access Control",
+        "fr": "Contrôle d'accès obligatoire",
+        "field": "Des étiquettes de sécurité et une politique centrale imposent la décision, même contre la volonté du propriétaire. Utilisé pour les données à classification stricte.",
+        "gap": true
+      },
+      {
+        "type": "term",
+        "en": "JIT — Just-in-time access",
+        "fr": "Accès juste à temps",
+        "field": "Droits élevés accordés pour une durée courte et précise, souvent avec approbation et révocation automatique. Réduit la fenêtre d'exposition des comptes privilégiés.",
+        "gap": true
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "Les modèles **rule-based, time-based, mandatory, discretionary et JIT** sont exigés par le référentiel §4.5 (Access control models) et ne sont pas développés dans les quatre livres fournis."
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "page": "4.5",
+        "strength": "primary",
+        "note": "Référentiel officiel — modèles d'accès, revue, passkeys et passwordless : aucun des 4 livres"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Authentication** : l'identité est prouvée avant tout accès.",
+          "**Logical/technical policies** : règles appliquées par les systèmes (ACL, MFA, SSO).",
+          "**Administrative/business policies** : règles organisationnelles (séparation des tâches, approbations).",
+          "**Access review** : examen périodique des droits effectifs, avec retrait des accès injustifiés."
+        ]
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Strategy 1",
+        "page": 66,
+        "printed": 46,
+        "strength": "supporting",
+        "note": "Savoir ce que l'on protège et responsabilités"
+      },
+      {
+        "type": "term",
+        "en": "Access review",
+        "fr": "Revue d'accès",
+        "field": "Vérification périodique, par le propriétaire de la ressource, que chaque compte et chaque privilège reste nécessaire. Doit aboutir à des révocations tracées, pas seulement à une attestation.",
+        "gap": true
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "10",
+        "page": 174,
+        "printed": 152,
+        "strength": "primary",
+        "note": "Privilèges, moindre privilège et revues"
+      },
+      {
+        "type": "h",
+        "text": "Concepts de mots de passe"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Notion",
+          "Ce que l'examen attend"
+        ],
+        "rows": [
+          [
+            "Password length / complexity",
+            "Privilégier la longueur ; la complexité imposée pousse aux raccourcis prévisibles"
+          ],
+          [
+            "Password reuse",
+            "Interdit : une fuite sur un service réutilise ailleurs les mêmes identifiants"
+          ],
+          [
+            "Compromised credential monitoring",
+            "Vérifier les identifiants contre des bases de fuites connues"
+          ],
+          [
+            "Account auditing / policy report",
+            "Tracer créations, changements, échecs et produire des rapports de conformité"
+          ]
+        ]
+      },
+      {
+        "type": "term",
+        "en": "Passkey / Passwordless",
+        "fr": "Clé d'accès / sans mot de passe",
+        "field": "Passkey : identifiant cryptographique dont le secret ne quitte pas l'appareil et qui résiste au phishing. Passwordless : authentification sans secret mémorisé (passkey, biométrie, jeton), ce qui supprime réutilisation et phishing de mot de passe.",
+        "gap": true
+      },
+      {
+        "type": "callout",
+        "kind": "warning",
+        "text": "Le *Defensive Security Handbook* recommande une rotation des mots de passe à 30 jours (p. imprimée 133–136). **Ne reproduisez pas cette règle** : NIST SP 800-63B et le référentiel privilégient longueur, vérification de fuite et MFA. La rotation systématique est une des erreurs à corriger (E.3)."
+      },
+      {
+        "type": "check",
+        "q": "Quel modèle accorde des droits élevés pour une courte durée, avec révocation automatique et souvent approbation ?",
+        "options": [
+          "DAC",
+          "MAC",
+          "Just-in-time access",
+          "Rule-based access control"
+        ],
+        "answer": 2,
+        "explain": "Le JIT réduit la fenêtre d'exposition des privilèges : ils existent seulement le temps du besoin. DAC et MAC décrivent qui décide, pas la durée."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "RBAC = rôles ; DAC = propriétaire ; MAC = étiquettes et politique centrale.",
+          "Rule-based = règles ; time-based = fenêtre temporelle ; JIT = durée courte et révocation auto.",
+          "La revue d'accès doit aboutir à des révocations tracées.",
+          "Longueur, fuite et MFA priment sur la rotation à 30 jours (erreur du livre)."
+        ]
+      }
+    ]
+  }
+]

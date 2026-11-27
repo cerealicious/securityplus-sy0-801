@@ -1,0 +1,105 @@
+{
+  "id": "qz-3.4",
+  "objective": "3.4",
+  "title": "Quiz — Résilience et récupération",
+  "questions": [
+    {
+      "id": "q-3.4-01",
+      "type": "single",
+      "q": "Quel site de reprise nécessite l'installation du matériel en plus de la restauration des données ?",
+      "options": [
+        "Hot site",
+        "Warm site",
+        "Cold site",
+        "Cluster haute disponibilité"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Le site froid ne fournit que les locaux et les utilités ; matériel et données sont à installer.",
+      "ref": "3.4-01"
+    },
+    {
+      "id": "q-3.4-02",
+      "type": "single",
+      "q": "Une entreprise accepte de perdre 15 minutes de transactions. Quelle métrique cela décrit-il ?",
+      "options": [
+        "RTO",
+        "RPO",
+        "MTBF",
+        "MTTR"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "La perte de données acceptable est le RPO. Le RTO décrit la durée d'interruption du service.",
+      "ref": "3.4-02"
+    },
+    {
+      "id": "q-3.4-03",
+      "type": "single",
+      "q": "Quelle mesure protège le mieux les sauvegardes contre un ransomware qui supprime les copies ?",
+      "options": [
+        "Chiffrement des sauvegardes",
+        "Immuabilité des sauvegardes",
+        "Compression des sauvegardes",
+        "Rotation des mots de passe"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Une copie immuable ne peut être ni modifiée ni supprimée, même avec des droits administrateur.",
+      "ref": "3.4-02"
+    },
+    {
+      "id": "q-3.4-04",
+      "type": "multi",
+      "q": "Quels éléments relèvent de la redondance ? (plusieurs réponses)",
+      "options": [
+        "Load balancing",
+        "Clustering",
+        "Autoscaling",
+        "Air-gapped network"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "explain": "L'air-gap est une séparation, pas une redondance. Les trois autres suppriment un point de défaillance unique.",
+      "ref": "3.4-01"
+    },
+    {
+      "id": "q-3.4-05",
+      "type": "single",
+      "q": "Un service critique a un RTO de 2 h mais dépend du réseau dont le RTO est de 6 h. Quel est le RTO réaliste ?",
+      "options": [
+        "2 h",
+        "4 h",
+        "6 h",
+        "8 h"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "La reprise ne peut aller plus vite que le maillon le plus lent : le réseau impose 6 h.",
+      "ref": "3.4-02"
+    },
+    {
+      "id": "q-3.4-06",
+      "type": "single",
+      "q": "Quelle métrique mesure la fiabilité d'un équipement ?",
+      "options": [
+        "MTTR",
+        "MTBF",
+        "RPO",
+        "RTO"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "MTBF (Mean Time Between Failures) mesure le temps moyen entre pannes. MTTR mesure la réparation.",
+      "ref": "3.4-02"
+    }
+  ]
+}

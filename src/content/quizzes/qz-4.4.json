@@ -1,0 +1,114 @@
+{
+  "id": "qz-4.4",
+  "objective": "4.4",
+  "title": "Quiz — Surveillance et alertes",
+  "questions": [
+    {
+      "id": "q-4.4-01",
+      "type": "single",
+      "q": "Quelle plateforme agrège, corrèle et alerte à partir des journaux de toute l'organisation ?",
+      "options": [
+        "Un packet analyzer",
+        "Un SIEM",
+        "Un NMS",
+        "Un vulnerability scanner"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Le SIEM est le point de convergence des journaux : agrégation, corrélation, alerte et archivage.",
+      "ref": "4.4-02"
+    },
+    {
+      "id": "q-4.4-02",
+      "type": "match",
+      "q": "Associez chaque protocole à ce qu'il fournit.",
+      "pairs": [
+        {
+          "left": "syslog",
+          "right": "Messages d'événements des équipements"
+        },
+        {
+          "left": "NetFlow",
+          "right": "Statistiques de conversations réseau"
+        },
+        {
+          "left": "SNMP",
+          "right": "Compteurs et traps d'équipements"
+        },
+        {
+          "left": "SCAP",
+          "right": "Mesures de conformité normalisées"
+        }
+      ],
+      "explain": "Chaque protocole a une nature de données distincte : événement, flux, compteur, conformité. SCAP est hors livres (§4.4).",
+      "ref": "4.4-02"
+    },
+    {
+      "id": "q-4.4-03",
+      "type": "single",
+      "q": "Un incident réel a eu lieu mais aucune alerte n'a été émise. Comment qualifie-t-on ce cas ?",
+      "options": [
+        "Vrai positif",
+        "Faux positif",
+        "Faux négatif",
+        "Vrai négatif"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Faux négatif = activité malveillante réelle non détectée. C'est le cas le plus dangereux.",
+      "ref": "4.4-03"
+    },
+    {
+      "id": "q-4.4-04",
+      "type": "multi",
+      "q": "Quelles actions relèvent d'un alert tuning correct ? (plusieurs réponses)",
+      "options": [
+        "Exclure précisément une source légitime",
+        "Documenter la modification",
+        "Mesurer l'effet sur le volume d'alertes",
+        "Supprimer la règle entière"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "explain": "Le tuning est ciblé, documenté et mesuré. Supprimer la règle détruit aussi la détection des vraies attaques.",
+      "ref": "4.4-03"
+    },
+    {
+      "id": "q-4.4-05",
+      "type": "single",
+      "q": "Quel mécanisme copie le trafic d'un port switch vers un capteur sans interrompre la circulation ?",
+      "options": [
+        "Le miroir de port (SPAN)",
+        "Le chiffrement TLS",
+        "L'archivage des journaux",
+        "Le SCAP"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Le SPAN réplique le trafic vers un analyseur ; contrairement à un tap, il dépend du switch et peut saturer.",
+      "ref": "4.4-02"
+    },
+    {
+      "id": "q-4.4-06",
+      "type": "single",
+      "q": "Quelle activité est un prérequis à la corrélation d'événements multi-sources ?",
+      "options": [
+        "Le reporting",
+        "L'agrégation et la normalisation des journaux",
+        "L'archivage immuable",
+        "Le réglage du pare-feu"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "On ne corrèle que des événements collectés, horodatés et normalisés au préalable.",
+      "ref": "4.4-01"
+    }
+  ]
+}

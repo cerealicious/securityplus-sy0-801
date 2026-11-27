@@ -1,0 +1,145 @@
+{
+  "diagrams": [
+    {
+      "id": "d-3.2-zero-trust",
+      "kind": "flow",
+      "title": "Zones de confiance et chemin Zero Trust",
+      "subtitle": "Du flux non fiable à la ressource : chaque franchissement vérifie identité, appareil et privilège.",
+      "modes": [
+        "explore",
+        "quiz",
+        "order"
+      ],
+      "nodes": [
+        {
+          "id": "untrust",
+          "label": "Untrust",
+          "sub": "Internet / externe",
+          "x": 20,
+          "y": 40,
+          "w": 140,
+          "h": 60,
+          "kind": "risk",
+          "detail": "Aucune confiance implicite : tout flux entrant est suspect, y compris s'il provient du réseau interne plus tard.",
+          "exam": "Zero Trust ne fait pas de distinction de confiance entre « inside » et « outside »."
+        },
+        {
+          "id": "dmz",
+          "label": "DMZ",
+          "sub": "Zone tampon",
+          "x": 190,
+          "y": 40,
+          "w": 140,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "Pare-feu périmétrique, proxy et capteurs détectifs. Les serveurs publics y sont exposés sans exposer l'interne.",
+          "exam": "Un IDS détectif se place hors chemin (SPAN/tap) ; un IPS préventif est inline."
+        },
+        {
+          "id": "identity",
+          "label": "Vérification identité",
+          "sub": "User authentication",
+          "x": 360,
+          "y": 40,
+          "w": 150,
+          "h": 60,
+          "kind": "actor",
+          "detail": "MFA, fédération et moindre privilège : l'utilisateur est authentifié à chaque session, pas une fois pour toutes.",
+          "exam": "Le VPN authentifie le tunnel ; Zero Trust authentifie l'utilisateur et la ressource."
+        },
+        {
+          "id": "device",
+          "label": "Santé & inventaire",
+          "sub": "Device health / inventory",
+          "x": 540,
+          "y": 40,
+          "w": 150,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Patchs, antivirus, chiffrement et présence dans l'inventaire. Un appareil inconnu est refusé ou quarantené.",
+          "exam": "Device health et device inventory sont deux contrôles distincts du §3.2."
+        },
+        {
+          "id": "oob",
+          "label": "Hors-bande",
+          "sub": "Bastion / OOB",
+          "x": 190,
+          "y": 170,
+          "w": 160,
+          "h": 60,
+          "kind": "step",
+          "detail": "Réseau d'administration séparé, point d'entrée bastion unique avec MFA et session enregistrée.",
+          "exam": "L'administration ne passe jamais par le réseau utilisateur en architecture mature."
+        },
+        {
+          "id": "app",
+          "label": "Accès applicatif",
+          "sub": "Least privilege",
+          "x": 420,
+          "y": 170,
+          "w": 160,
+          "h": 60,
+          "kind": "artifact",
+          "detail": "Droit minimal à la ressource demandée, réévalué en continu. Les gMSA évitent les mots de passe de service codés en dur.",
+          "exam": "SSE et gMSA sont du référentiel §3.2, absents des quatre livres fournis."
+        },
+        {
+          "id": "internal",
+          "label": "Trust interne",
+          "sub": "Segmentation",
+          "x": 620,
+          "y": 170,
+          "w": 130,
+          "h": 60,
+          "kind": "neutral",
+          "detail": "Pare-feu interne et segmentation limitent le mouvement latéral entre départements.",
+          "exam": "Le mode de défaillance (fail-open / fail-closed) se décide selon la criticité du service."
+        }
+      ],
+      "edges": [
+        {
+          "from": "untrust",
+          "to": "dmz",
+          "label": "flux entrant"
+        },
+        {
+          "from": "dmz",
+          "to": "identity",
+          "label": "authentifier"
+        },
+        {
+          "from": "identity",
+          "to": "device",
+          "label": "vérifier"
+        },
+        {
+          "from": "device",
+          "to": "app",
+          "label": "autoriser"
+        },
+        {
+          "from": "oob",
+          "to": "app",
+          "label": "administrer"
+        },
+        {
+          "from": "app",
+          "to": "internal",
+          "label": "accès minimal"
+        }
+      ],
+      "sequence": [
+        "untrust",
+        "dmz",
+        "identity",
+        "device",
+        "app",
+        "internal"
+      ],
+      "quiz": {
+        "question": "Quel nœud vérifie que l'appareil est connu et en bonne santé avant l'accès applicatif ?",
+        "answer": "device"
+      }
+    }
+  ]
+}

@@ -1,0 +1,342 @@
+[
+  {
+    "id": "4.6-01",
+    "objective": "4.6",
+    "order": 1,
+    "title": "Cas d'usage de l'automatisation et considérations",
+    "minutes": 16,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "L'automatisation exécute une tâche sans intervention humaine ; l'**orchestration** coordonne plusieurs outils et étapes dans un workflow. L'examen teste moins la syntaxe des scripts que le **choix du bon cas d'usage** et les garde-fous."
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Fundamentals",
+        "page": 41,
+        "printed": 21,
+        "strength": "supporting",
+        "note": "Rôle de l'automatisation dans les opérations de sécurité"
+      },
+      {
+        "type": "h",
+        "text": "Cinq cas d'usage"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Cas d'usage",
+          "Ce qui est automatisé",
+          "Bénéfice"
+        ],
+        "rows": [
+          [
+            "User provisioning",
+            "Création, attribution de droits, révocation",
+            "Cohérence et rapidité d'intégration / sortie"
+          ],
+          [
+            "Resource provisioning",
+            "Création de VM, conteneurs, comptes cloud",
+            "Déploiement reproductible"
+          ],
+          [
+            "Desired state management",
+            "Comparaison état réel / état attendu et correction",
+            "Dérive de configuration maîtrisée"
+          ],
+          [
+            "Anomaly detection",
+            "Analyse de journaux et de baselines",
+            "Détection plus précoce"
+          ],
+          [
+            "Ticket management",
+            "Création, assignation, mise à jour, clôture",
+            "Traçabilité et fluidité du traitement"
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "1",
+        "page": 40,
+        "printed": 18,
+        "strength": "supporting",
+        "note": "Automatisation dans le programme de sécurité"
+      },
+      {
+        "type": "term",
+        "en": "Desired state management",
+        "fr": "Gestion de l'état désiré",
+        "field": "Définition de la configuration attendue puis convergence automatique de l'état réel vers cet état : si une dérive apparaît, elle est détectée et corrigée sans action manuelle.",
+        "gap": false
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "14",
+        "page": 124,
+        "printed": 102,
+        "strength": "supporting",
+        "note": "Configuration et automatisation de l'infrastructure réseau"
+      },
+      {
+        "type": "h",
+        "text": "Les sept considérations"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Guardrails** : limites qui empêchent une action automatisée de sortir du périmètre prévu.",
+          "**Automation logic** : conditions, ordre des étapes, gestion des erreurs et des cas limites.",
+          "**Process engineering** : le processus doit être compris avant d'être automatisé.",
+          "**Complexity** : plus il y a d'outils et de branches, plus la panne est difficile à diagnostiquer.",
+          "**Financial considerations** : coût des licences, du calcul et de la maintenance du playbook.",
+          "**Process risks** : une action erronée s'applique à la vitesse de la machine.",
+          "**Deployment** : test, progressivité, surveillance et possibilité de retour arrière."
+        ]
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Strategy 11",
+        "page": 290,
+        "printed": 270,
+        "strength": "primary",
+        "note": "SOAR : garde-fous, réversibilité et erreurs d'automatisation"
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "Un playbook qui modifie la production doit être **réversible** et **traçable** : journaliser chaque action, limiter sa portée et prévoir un retour arrière. L'automatisation ne dispense pas de l'approbation pour les actions irréversibles."
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "17",
+        "page": 137,
+        "printed": 115,
+        "strength": "supporting",
+        "note": "Intégration, tests et sécurité des pipelines automatisés"
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-soar-workflow"
+      },
+      {
+        "type": "check",
+        "q": "Quel élément empêche un playbook de bloquer une plage d'adresses entière à cause d'une erreur de qualification ?",
+        "options": [
+          "Un garde-fou (guardrail) limitant la portée et la durée de l'action",
+          "Une suppression des journaux du playbook",
+          "L'absence de tests",
+          "Une exécution simultanée sur tous les outils"
+        ],
+        "answer": 0,
+        "explain": "Les garde-fous bornent l'impact d'une décision automatisée erronée : portée, durée, approbation et réversibilité."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Cinq cas d'usage : user/resource provisioning, état désiré, anomalie, tickets.",
+          "L'orchestration coordonne plusieurs outils dans un workflow.",
+          "Sept considérations, dont garde-fous, complexité, coût et déploiement.",
+          "Réversibilité, journalisation et limitations de portée sont essentielles."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "4.6-02",
+    "objective": "4.6",
+    "order": 2,
+    "title": "IA appliquée, résultats attendus et workflows",
+    "minutes": 15,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "L'IA s'invite dans les opérations : rédaction de notes, corrélation, prédiction, agents capables d'enchaîner des actions. Le référentiel exige quatre capacités dont la principale — l'IA **agentique** — n'est dans aucun des livres fournis."
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 196,
+        "strength": "supporting",
+        "note": "Automatisation, SOAR et apports du machine learning défensif"
+      },
+      {
+        "type": "h",
+        "text": "Quatre capacités d'IA"
+      },
+      {
+        "type": "term",
+        "en": "Agentic AI",
+        "fr": "IA agentique",
+        "field": "Système d'IA capable de planifier et d'exécuter une suite d'actions pour atteindre un objectif, avec un certain degré d'autonomie. En sécurité, cela impose des garde-fous explicites sur ce que l'agent peut réellement modifier.",
+        "gap": true
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "**Chatbot** : assistant conversationnel pour interroger la documentation ou aider à la rédaction.",
+          "**Predictive analysis** : anticipation d'incidents ou de pannes à partir de tendances.",
+          "**AI-augmented baselines** : références comportementales enrichies par apprentissage automatique.",
+          "**Agentic AI** : exécution autonome d'actions en chaîne, sous garde-fous."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "text": "L'**IA agentique** est exigée au référentiel §4.6 (AI capabilities) et absente des quatre livres. Les livres évoquent le machine learning uniquement comme outil défensif (SOC Notes p.196–198 ; 11 Strategies p.193, 264) — jamais comme agent autonome d'exécution."
+      },
+      {
+        "type": "source",
+        "book": "OBJ",
+        "page": "4.6",
+        "strength": "primary",
+        "note": "Référentiel officiel — agentic AI et capacités d'IA : aucun des 4 livres"
+      },
+      {
+        "type": "h",
+        "text": "Les résultats attendus"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Résultat",
+          "Manifestation concrète"
+        ],
+        "rows": [
+          [
+            "Efficiency / time saving",
+            "Moins de tâches répétitives, traitement plus rapide des alertes"
+          ],
+          [
+            "Enforcing baselines",
+            "La configuration attendue est appliquée en continu"
+          ],
+          [
+            "Continuous improvements",
+            "Les playbooks sont ajustés à partir des retours d'expérience"
+          ],
+          [
+            "Productivity improvements",
+            "L'analyste se concentre sur les cas à forte valeur"
+          ],
+          [
+            "Reduced downtime",
+            "Détection et réaction plus rapides"
+          ],
+          [
+            "Increased proactivity",
+            "Recherche active et remédiation avant l'impact"
+          ]
+        ]
+      },
+      {
+        "type": "h",
+        "text": "Workflows, intégrations et CI/CD"
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "Automatisation",
+          "points": [
+            "Exécute **une tâche** définie à l'avance.",
+            "Exemple : créer un compte, appliquer un patch."
+          ]
+        },
+        "right": {
+          "title": "Orchestration",
+          "points": [
+            "Coordonne **plusieurs tâches et outils** dans un scénario.",
+            "Exemple : alerte → enrichissement → décision → blocage → ticket."
+          ]
+        }
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Strategy 8",
+        "page": 248,
+        "printed": 228,
+        "strength": "supporting",
+        "note": "CI/CD et intégration outillage / automatisation"
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "chapter": "—",
+        "page": 171,
+        "strength": "supporting",
+        "note": "CI/CD et pipelines automatisés"
+      },
+      {
+        "type": "steps",
+        "items": [
+          {
+            "title": "Déclenchement",
+            "text": "Le SIEM émet une alerte : tentative de connexion depuis une IP externe."
+          },
+          {
+            "title": "Enrichissement",
+            "text": "Le playbook interroge la réputation de l'IP et l'historique des connexions."
+          },
+          {
+            "title": "Décision",
+            "text": "Une règle qualifie le score de risque ; au-delà du seuil, une approbation est demandée."
+          },
+          {
+            "title": "Action",
+            "text": "Blocage de l'IP sur le pare-feu avec durée limitée, journalisation et ouverture d'un ticket."
+          },
+          {
+            "title": "Vérification",
+            "text": "Contrôle de l'effet, surveillance des faux positifs et ajustement du playbook."
+          }
+        ]
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "Strategy 1",
+        "page": 150,
+        "printed": 130,
+        "strength": "supporting",
+        "note": "Standardisation des procédures avant automatisation"
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "text": "N'automatisez **pas** un processus mal défini : la logique d'automation doit être documentée, testée et mesurée. Une erreur dans un playbook se propage à toute la infrastructure en quelques secondes."
+      },
+      {
+        "type": "check",
+        "q": "Quelle différence distingue l'orchestration de l'automatisation ?",
+        "options": [
+          "L'orchestration coordonne plusieurs outils et étapes dans un workflow complet",
+          "L'automatisation nécessite toujours une IA agentique",
+          "L'orchestration ne produit jamais de journaux",
+          "L'automatisation est toujours plus lente"
+        ],
+        "answer": 0,
+        "explain": "L'automatisation exécute une tâche ; l'orchestration enchaîne plusieurs tâches et outils dans un scénario cohérent."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "IA : chatbot, prédiction, baselines augmentées, agentic AI (hors livres).",
+          "Automatisation = une tâche ; orchestration = un workflow multi-outils.",
+          "Résultats : temps gagné, baselines tenues, proactivité, moins de downtime.",
+          "Tout playbook doit être réversible, journalisé et mesuré."
+        ]
+      }
+    ]
+  }
+]

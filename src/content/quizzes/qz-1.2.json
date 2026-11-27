@@ -1,0 +1,91 @@
+{
+  "id": "qz-1.2",
+  "objective": "1.2",
+  "title": "Quiz — Gestion des changements",
+  "questions": [
+    {
+      "id": "q-1.2-01",
+      "type": "single",
+      "q": "Quel organisme donne l'approbation formelle d'un changement à fort impact ?",
+      "options": [
+        "Le Change Advisory Board (CAB)",
+        "Le fournisseur du logiciel",
+        "Le service de facturation",
+        "Le dernier administrateur connecté"
+      ],
+      "answer": [0],
+      "explain": "Le CAB réunit les parties prenantes et arbitre le risque avant la mise en production.",
+      "ref": "1.2-01"
+    },
+    {
+      "id": "q-1.2-02",
+      "type": "single",
+      "q": "Un correctif échoue immédiatement après déploiement. Quelle décision est attendue en premier ?",
+      "options": [
+        "Attendre la prochaine réunion du CAB",
+        "Exécuter le plan de backout pendant la fenêtre de maintenance",
+        "Réinstaller complètement le système sans sauvegarde",
+        "Fermer le ticket comme résolu"
+      ],
+      "answer": [1],
+      "explain": "Le backout planning permet de revenir à un état connu ; il doit être applicable dans la fenêtre prévue.",
+      "ref": "1.2-01"
+    },
+    {
+      "id": "q-1.2-03",
+      "type": "multi",
+      "q": "Quels éléments doivent être analysés avant d'approuver un changement ? (plusieurs réponses)",
+      "options": [
+        "L'impact sur les services et dépendances",
+        "Les résultats des tests",
+        "L'effet sur les allow/deny lists et contrôles de sécurité",
+        "La couleur du ticket dans l'outil"
+      ],
+      "answer": [0, 1, 2],
+      "explain": "L'analyse d'impact couvre disponibilité, dépendances et sécurité, et s'appuie sur des tests consignés.",
+      "ref": "1.2-01"
+    },
+    {
+      "id": "q-1.2-04",
+      "type": "single",
+      "q": "Quand le retour arrière est impossible car les données ont déjà été migrées, quelle stratégie est correcte ?",
+      "options": [
+        "Backout planning",
+        "Fail forward",
+        "Deny list",
+        "Service restart"
+      ],
+      "answer": [1],
+      "explain": "Le fail forward consiste à avancer avec un correctif ou un contournement lorsque le rollback est plus risqué.",
+      "ref": "1.2-01"
+    },
+    {
+      "id": "q-1.2-05",
+      "type": "single",
+      "q": "Quelle action fait partie de la clôture d'une demande de changement ?",
+      "options": [
+        "Supprimer le ticket",
+        "Mettre à jour les diagrammes et le version control",
+        "Désactiver la journalisation",
+        "Annuler la fenêtre de maintenance"
+      ],
+      "answer": [1],
+      "explain": "Diagrammes, politiques/procédures et version control doivent refléter l'état réel après le changement.",
+      "ref": "1.2-02"
+    },
+    {
+      "id": "q-1.2-06",
+      "type": "single",
+      "q": "Quel risque est spécifiquement lié aux applications legacy dans une analyse de changement ?",
+      "options": [
+        "Elles sont toujours chiffrées",
+        "Elles dépendent d'anciens protocoles ou ports qu'un changement peut supprimer",
+        "Elles ne produisent jamais de logs",
+        "Elles ne peuvent pas être inventoriées"
+      ],
+      "answer": [1],
+      "explain": "Une application non supportée est souvent le seul élément encore dépendant d'un protocole ou port ancien : c'est une dépendance critique.",
+      "ref": "1.2-02"
+    }
+  ]
+}

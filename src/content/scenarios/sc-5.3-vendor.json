@@ -1,0 +1,90 @@
+{
+  "id": "sc-5.3-vendor",
+  "objective": "5.3",
+  "title": "Choisir et encadrer un prestataire cloud",
+  "context": "Votre organisation externalise l'hébergement d'une application critique. Vous devez conduire la sélection, signer les bons documents puis organiser la surveillance.",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "text": "Avant de consulter les fournisseurs, que faites-vous en premier ?",
+      "choices": [
+        {
+          "text": "Définir le besoin et conduire une due diligence (sécurité, conformité, juridiction)",
+          "next": "n2",
+          "score": 4,
+          "why": "Le besoin cadré et la diligence raisonnable conditionnent tous les choix suivants."
+        },
+        {
+          "text": "Signer immédiatement un NDA avec le premier fournisseur venu",
+          "next": "n2",
+          "score": 0,
+          "why": "La confidentialité ne remplace pas l'évaluation du candidat et du besoin."
+        },
+        {
+          "text": "Demander un RFQ avant de savoir ce qui est attendu",
+          "next": "n2",
+          "score": 1,
+          "why": "Une demande de prix suppose une prestation déjà précisément définie."
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "text": "Le fournisseur retenu accepte un contrat-cadre. Comment décrire la mission d'hébergement précise ?",
+      "choices": [
+        {
+          "text": "Dans un SOW rattaché au MSA, avec livrables, périmètre et calendrier",
+          "next": "n3",
+          "score": 4,
+          "why": "Le MSA porte les conditions générales ; le SOW décrit chaque mission."
+        },
+        {
+          "text": "Dans un MOU unique, sans détails de livrables",
+          "next": "n3",
+          "score": 0,
+          "why": "Un MOU exprime une intention, il ne définit pas une mission opérationnelle."
+        },
+        {
+          "text": "Dans un RFI envoyé après la signature",
+          "next": "n3",
+          "score": 0,
+          "why": "La RFI est un document de consultation en amont, pas un document contractuel."
+        }
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "text": "Six mois plus tard, les délais de rétablissement se dégradent. Quelle est la meilleure réponse ?",
+      "choices": [
+        {
+          "text": "Mesurer les SLA, demander une attestation et prévoir une clause de sortie",
+          "next": "n4",
+          "score": 4,
+          "why": "Le suivi contractuel, la preuve de conformité et la réversibilité traitent la dérive."
+        },
+        {
+          "text": "Augmenter le budget sans modifier le contrat",
+          "next": "n4",
+          "score": 0,
+          "why": "Payer davantage sans levier contractuel ne corrige pas le manquement."
+        },
+        {
+          "text": "Résilier immédiatement sans vérifier les dépendances",
+          "next": "n4",
+          "score": 1,
+          "why": "Le verrouillage fournisseur peut rendre une sortie brutale plus risquée que la dérive."
+        }
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "outcome": "Vous avez cadré la sélection, articulé MSA/SOW et mis en place une surveillance contractuelle avec sortie maîtrisée."
+    }
+  },
+  "debrief": [
+    "La sélection commence par le besoin et la due diligence, pas par le prix.",
+    "MSA = conditions générales ; SOW = mission particulière ; SLA/SLO = performance attendue.",
+    "Surveillance continue et réversibilité limitent le risque tiers dans la durée."
+  ]
+}

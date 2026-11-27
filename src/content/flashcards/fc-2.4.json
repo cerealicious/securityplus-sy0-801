@@ -1,0 +1,115 @@
+{
+  "id": "fc-2.4",
+  "objective": "2.4",
+  "title": "Vulnérabilités et surfaces d'attaque",
+  "cards": [
+    {
+      "id": "c-2.4-01",
+      "front": "Surface d'attaque",
+      "back": "Ensemble des points par lesquels un attaquant peut interagir avec un système : ports, services, identités, code, tiers, données exposées.",
+      "tag": "Bases"
+    },
+    {
+      "id": "c-2.4-02",
+      "front": "Unsupported product",
+      "back": "Produit plus supporté par l'éditeur : aucun correctif, aucun correctif de sécurité.",
+      "tag": "Système"
+    },
+    {
+      "id": "c-2.4-03",
+      "front": "Unpatched system",
+      "back": "Correctif disponible mais non appliqué : faille connue et exploitable.",
+      "tag": "Système"
+    },
+    {
+      "id": "c-2.4-04",
+      "front": "Obsolete system",
+      "back": "Technologie dépassée par une version plus récente, avec incompatibilités et dépendances anciennes.",
+      "tag": "Système"
+    },
+    {
+      "id": "c-2.4-05",
+      "front": "Unmanaged system",
+      "back": "Hors inventaire et hors outils de gestion : personne ne le patch ni ne le supervise.",
+      "tag": "Système"
+    },
+    {
+      "id": "c-2.4-06",
+      "front": "Ports and services",
+      "back": "Chaque port ouvert est une interface exposée ; un service oublié élargit la surface.",
+      "tag": "Système"
+    },
+    {
+      "id": "c-2.4-07",
+      "front": "Virtualization vulnerability",
+      "back": "Hyperviseur, VM non patchées, mouvement latéral entre invités ou évasion de bac à sable.",
+      "tag": "Système"
+    },
+    {
+      "id": "c-2.4-08",
+      "front": "Zero-day",
+      "back": "Faille inconnue de l'éditeur et sans correctif : réduire la surface et détecter le comportement.",
+      "tag": "Système"
+    },
+    {
+      "id": "c-2.4-09",
+      "front": "Cryptographic vulnerability",
+      "back": "Algorithme faible (MD5, SHA-1, 3DES), clé courte, TLS obsolète ou mauvaise gestion des clés.",
+      "tag": "Système"
+    },
+    {
+      "id": "c-2.4-10",
+      "front": "Race condition / TOC / TOU",
+      "back": "Vérification (check) puis usage séparés dans le temps ; l'attaquant modifie l'état entre les deux.",
+      "tag": "Code"
+    },
+    {
+      "id": "c-2.4-11",
+      "front": "Malicious update",
+      "back": "Mise à jour compromise distribuée par le canal légitime du fournisseur.",
+      "tag": "Code"
+    },
+    {
+      "id": "c-2.4-12",
+      "front": "Hardcoded secrets",
+      "back": "Mot de passe ou clé API écrit dans le code : à remplacer par un coffre et une rotation.",
+      "tag": "Code"
+    },
+    {
+      "id": "c-2.4-13",
+      "front": "Unsafe exception handling",
+      "back": "Erreurs verbeuses qui révèlent chemins, requêtes ou identifiants.",
+      "tag": "Code"
+    },
+    {
+      "id": "c-2.4-14",
+      "front": "Stale credentials / rogue devices",
+      "back": "Comptes oubliés et appareils non autorisés branchés au réseau : accès persistant.",
+      "tag": "Identité"
+    },
+    {
+      "id": "c-2.4-15",
+      "front": "Shadow IT",
+      "back": "Service utilisé sans validation sécurité, hors inventaire et hors supervision.",
+      "tag": "Identité"
+    },
+    {
+      "id": "c-2.4-16",
+      "front": "Identity provider / mobile",
+      "back": "IdP = service central d'authentification et de jetons ; mobile = applications, permissions et stockage local.",
+      "tag": "Identité"
+    },
+    {
+      "id": "c-2.4-17",
+      "front": "Misconfiguration",
+      "back": "Bucket public, port ouvert, permission excessive ou valeur par défaut inchangée.",
+      "tag": "Moderne"
+    },
+    {
+      "id": "c-2.4-18",
+      "front": "LLM / public repos / object storage",
+      "back": "LLM = prompt injection et fuite de données ; dépôt public = secrets exposés ; stockage objet public = bucket accessible sans auth.",
+      "tag": "Moderne"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "id": "pbq-1.2-change-order",
+  "objective": "1.2",
+  "type": "order",
+  "title": "Remettre une demande de changement dans l'ordre",
+  "prompt": "L'administrateur doit déployer un correctif de sécurité en production. Classez les étapes suivantes dans l'ordre correct, de l'ouverture de la demande à la clôture.",
+  "items": [
+    {
+      "id": "s1",
+      "label": "Ouvrir le ticket de changement avec le propriétaire et les parties prenantes"
+    },
+    {
+      "id": "s2",
+      "label": "Réaliser l'analyse d'impact : services, dépendances, contrôles de sécurité"
+    },
+    {
+      "id": "s3",
+      "label": "Présenter le dossier au CAB et obtenir l'approbation"
+    },
+    {
+      "id": "s4",
+      "label": "Planifier la fenêtre de maintenance et annoncer la downtime"
+    },
+    {
+      "id": "s5",
+      "label": "Exécuter les tests et consigner les résultats"
+    },
+    {
+      "id": "s6",
+      "label": "Déployer en production avec le plan de backout prêt à être appliqué"
+    },
+    {
+      "id": "s7",
+      "label": "Vérifier le service après redémarrage et décider, si besoin, du backout ou du fail forward"
+    },
+    {
+      "id": "s8",
+      "label": "Mettre à jour diagrammes, politiques/procedures et version control, puis clore le ticket"
+    }
+  ],
+  "explain": "L'ordre attendu est : ticket et responsabilités → analyse d'impact → approbation CAB → fenêtre de maintenance → tests → implémentation avec backout → vérification/décision → documentation et clôture. Un backout non testé ou une documentation omise sont les erreurs les plus fréquentes."
+}

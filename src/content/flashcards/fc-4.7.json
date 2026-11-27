@@ -1,0 +1,127 @@
+{
+  "id": "fc-4.7",
+  "objective": "4.7",
+  "title": "Réponse aux incidents",
+  "cards": [
+    {
+      "id": "c-4.7-01",
+      "front": "Les 7 phases de la réponse aux incidents",
+      "back": "Préparation, détection et analyse, investigation, confinement, éradication, rétablissement, post-incident. Chaque phase a un livrable et un critère de passage.",
+      "tag": "Cycle"
+    },
+    {
+      "id": "c-4.7-02",
+      "front": "Livrable de la phase de préparation",
+      "back": "Playbooks testés, annuaire de contacts, rôles et matrice RACI, accès pré-autorisés, outils forensiques prêts, exercices réalisés.",
+      "tag": "Phase"
+    },
+    {
+      "id": "c-4.7-03",
+      "front": "Livrable de la détection et analyse",
+      "back": "Un ticket qualifié : vrai ou faux positif, gravité, périmètre initial, niveau d'escalade. La détection établit les faits, elle ne décide pas encore de la réponse.",
+      "tag": "Phase"
+    },
+    {
+      "id": "c-4.7-04",
+      "front": "Confinement : pourquoi ne pas éteindre la machine ?",
+      "back": "L'extinction détruit la mémoire volatile : implant fileless, connexions actives, clés en clair. On isole le réseau en gardant la machine allumée pour l'analyse.",
+      "tag": "Piège d'examen"
+    },
+    {
+      "id": "c-4.7-05",
+      "front": "Éradication",
+      "back": "Supprimer la cause : retirer l'accès de l'attaquant, corriger la vulnérabilité, reconstruire les systèmes compromis, réinitialiser les identifiants.",
+      "tag": "Phase"
+    },
+    {
+      "id": "c-4.7-06",
+      "front": "Rétablissement",
+      "back": "Restaurer depuis une sauvegarde vérifiée, remettre en service progressivement, surveiller renforcé pendant la période de risque. Restaurer sans vérifier peut réinstaller le rançongiciel.",
+      "tag": "Phase"
+    },
+    {
+      "id": "c-4.7-07",
+      "front": "Post-incident : le livrable attendu",
+      "back": "Le PIR (Post-Incident Report) : chronologie, cause racine, impact, décisions, efficacité, actions correctives avec responsable et date.",
+      "tag": "Phase"
+    },
+    {
+      "id": "c-4.7-08",
+      "front": "Incident Commander",
+      "back": "Une seule personne coordonne, arbitre et communique. Sans IC, les décisions se contredisent et les actions se dupliquent.",
+      "tag": "Rôle"
+    },
+    {
+      "id": "c-4.7-09",
+      "front": "Matrice RACI",
+      "back": "Responsable de l'exécution (R), Accountable de la décision finale (A), Consulté (C), Informé (I). Elle évite le piège « tout le monde est informé, personne n'est responsable ».",
+      "tag": "Rôle"
+    },
+    {
+      "id": "c-4.7-10",
+      "front": "Tabletop vs simulation",
+      "back": "Tabletop : discussion guidée d'un scénario, teste les décisions et la coordination. Simulation : exécution réelle contrôlée, teste les outils et les procédures.",
+      "tag": "Exercice"
+    },
+    {
+      "id": "c-4.7-11",
+      "front": "Livrable d'un tabletop",
+      "back": "La liste des hypothèses non vérifiées, des rôles flous et des décisions ambiguës, transformée en actions correctives datées.",
+      "tag": "Exercice"
+    },
+    {
+      "id": "c-4.7-12",
+      "front": "Ordre de volatilité des preuves",
+      "back": "Mémoire, puis réseau, puis disque, puis sauvegardes et archives. On capture d'abord ce qui disparaît le plus vite.",
+      "tag": "Forensique"
+    },
+    {
+      "id": "c-4.7-13",
+      "front": "Chain of custody",
+      "back": "Traçabilité de chaque preuve : qui l'a collectée, quand, où, avec quel outil, quel hash, qui l'a manipulée. Une rupture peut rendre la preuve contestable.",
+      "tag": "Forensique"
+    },
+    {
+      "id": "c-4.7-14",
+      "front": "Comment prouve-t-on l'intégrité d'une preuve ?",
+      "back": "Par un hash calculé à la collecte et recalculé avant analyse. Une image bit à bit préserve les zones non allouées et les métadonnées.",
+      "tag": "Forensique"
+    },
+    {
+      "id": "c-4.7-15",
+      "front": "Legal hold",
+      "back": "Suspension des suppressions et destructions automatiques dès qu'un litige ou une enquête est raisonnablement envisageable. Conserve boîtes mail, journaux et versions.",
+      "tag": "Juridique"
+    },
+    {
+      "id": "c-4.7-16",
+      "front": "E-discovery",
+      "back": "Recherche et production de preuves électroniques dans un cadre juridique. Exige préservation, traçabilité et méthodes reproductibles.",
+      "tag": "Juridique"
+    },
+    {
+      "id": "c-4.7-17",
+      "front": "Délai RGPD de notification à l'autorité de contrôle",
+      "back": "72 heures après la prise de connaissance d'une violation de données personnelles, sauf absence de risque pour les droits et libertés. On notifie avec les informations disponibles.",
+      "tag": "Notification"
+    },
+    {
+      "id": "c-4.7-18",
+      "front": "Qui notifier, et dans quel ordre ?",
+      "back": "Direction et RSSI, propriétaire métier, juridique/DPO, clients ou partenaires selon obligation, autorités selon seuil, forces de l'ordre en cas d'infraction, assureur selon police.",
+      "tag": "Notification"
+    },
+    {
+      "id": "c-4.7-19",
+      "front": "Faut-il payer une rançon ?",
+      "back": "Décision juridique et éthique, pas technique. Payer finance l'écosystème criminel, ne garantit pas la restitution et peut violer des sanctions. La direction décide sur avis juridique, et la décision est documentée.",
+      "tag": "Juridique"
+    },
+    {
+      "id": "c-4.7-20",
+      "front": "Root cause analysis",
+      "back": "Distinguer la cause immédiate (« le serveur a été chiffré ») de la cause racine (« un compte de service sans MFA permettait l'accès RDP exposé »). La RCA cherche la condition qui a rendu l'attaque possible.",
+      "tag": "Post-incident"
+    }
+  ]
+}

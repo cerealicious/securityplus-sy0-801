@@ -1,0 +1,551 @@
+[
+  {
+    "id": "2.5-01",
+    "objective": "2.5",
+    "order": 1,
+    "title": "Les indicateurs de compromission : lire les traces",
+    "minutes": 16,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Un indicateur n'est pas une conclusion. C'est un fait observable qui devient significatif quand on le corrèle à un contexte, une baseline et une chronologie."
+      },
+      {
+        "type": "diagram",
+        "diagramId": "d-2.5-ioc-flow"
+      },
+      {
+        "type": "simulation",
+        "simId": "sim-network-attack"
+      },
+      {
+        "type": "h",
+        "text": "IOC et IOA : l'artefact et le comportement"
+      },
+      {
+        "type": "p",
+        "text": "Un **IOC** (Indicator of Compromise) est un artefact observé après coup : un hash de malware, une adresse IP de commande et contrôle, un domaine, une clé de registre. Un **IOA** (Indicator of Attack) décrit un **comportement** : un processus qui lance PowerShell encodé, une connexion sortante anormale, une élévation de privilèges soudaine. L'IOC est statique et facile à bloquer mais vite obsolète ; l'IOA est plus durable mais plus difficile à détecter."
+      },
+      {
+        "type": "term",
+        "en": "Indicator of Compromise (IOC)",
+        "fr": "Indicateur de compromission",
+        "field": "Souvent échangé via des flux de threat intelligence (STIX/TAXII). Un IOC seul ne prouve rien : il doit être corrélé."
+      },
+      {
+        "type": "term",
+        "en": "Indicator of Attack (IOA)",
+        "fr": "Indicateur d'attaque",
+        "field": "Comportemental, aligné sur MITRE ATT&CK. Plus résistant aux changements d'infrastructure de l'attaquant."
+      },
+      {
+        "type": "h",
+        "text": "Les douze indicateurs officiels"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Indicateur",
+          "Ce qu'on observe",
+          "Exemple concret"
+        ],
+        "rows": [
+          [
+            "Hash",
+            "Empreinte d'un fichier malveillant",
+            "SHA-256 inconnu de la base de réputation"
+          ],
+          [
+            "Adresse IP",
+            "Communication vers une infrastructure suspecte",
+            "Connexion répétée vers une IP en liste de blocage"
+          ],
+          [
+            "Domaine",
+            "Résolution DNS vers un domaine généré algorithmiquement",
+            "`xj3k9q.example` résolu à 03:12"
+          ],
+          [
+            "Processus malveillant",
+            "Processus anormal, nom trompeur, chemin inhabituel",
+            "`svch0st.exe` lancé depuis `%TEMP%`"
+          ],
+          [
+            "Artefacts du système de fichiers",
+            "Fichiers déposés, horodatages incohérents",
+            "Fichier créé à 02:00 puis supprimé"
+          ],
+          [
+            "Horodatage",
+            "Écart entre l'heure système et les journaux",
+            "Journal antérieur à l'installation du système"
+          ],
+          [
+            "Manipulation de journaux",
+            "Effacement, troncature, désactivation de l'audit",
+            "Event ID 1102 : journal de sécurité effacé"
+          ],
+          [
+            "Consommation excessive de ressources",
+            "CPU, mémoire, disque ou réseau anormaux",
+            "Minage : CPU à 100 % sur un serveur inactif"
+          ],
+          [
+            "Chaînes en clair",
+            "Identifiants ou clés dans un binaire ou un script",
+            "Mot de passe en Base64 dans un fichier de config"
+          ],
+          [
+            "Verrouillage de compte",
+            "Tentatives répétées sur un compte",
+            "20 échecs en 2 minutes sur `admin`"
+          ],
+          [
+            "Déplacement impossible",
+            "Deux connexions géographiquement incompatibles",
+            "Paris 09:00, Singapour 09:20"
+          ],
+          [
+            "Sessions simultanées",
+            "Deux sessions actives pour un même compte",
+            "Deux adresses IP distinctes, même jeton"
+          ]
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "title": "Déplacement impossible et sessions simultanées",
+        "text": "Les deux se ressemblent mais ne disent pas la même chose. **Impossible travel** : deux authentifications trop éloignées dans le temps et l'espace pour un déplacement physique. **Sessions simultanées** : le même compte actif depuis deux endroits en même temps. Les deux suggèrent un vol d'identifiants ou de jeton, pas nécessairement une attaque différente."
+      },
+      {
+        "type": "h",
+        "text": "Pourquoi la corrélation change tout"
+      },
+      {
+        "type": "p",
+        "text": "Un verrouillage de compte peut être un utilisateur qui a oublié son mot de passe. Vingt verrouillages sur dix comptes en cinq minutes, suivis d'une connexion réussie depuis une IP inconnue, racontent une autre histoire : une **pulvérisation de mots de passe** ou une attaque par force brute distribuée. L'analyse consiste à passer de l'événement isolé à la **séquence**."
+      },
+      {
+        "type": "p",
+        "text": "La **manipulation de journaux** est un indicateur particulièrement grave : un attaquant qui efface les journaux cherche à détruire les preuves. Surveillez les événements d'effacement, les redémarrages du service d'audit, les modifications de stratégie d'audit et les journaux qui « sautent » une période."
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "page": 191,
+        "strength": "primary",
+        "note": "IOC/IOA, journaux, normalisation et corrélation"
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "6",
+        "page": 67,
+        "printed": 45,
+        "strength": "supporting",
+        "note": "Détection et analyse d'incident"
+      },
+      {
+        "type": "source",
+        "book": "STRAT",
+        "chapter": "7",
+        "page": 191,
+        "printed": 171,
+        "strength": "supporting",
+        "note": "Détection d'intrusion et supervision réseau"
+      },
+      {
+        "type": "check",
+        "q": "Un analyste voit un compte se connecter depuis Paris à 09:00 puis depuis Singapour à 09:20. Quel indicateur est le plus directement concerné ?",
+        "options": [
+          "Consommation excessive de ressources",
+          "Déplacement impossible (impossible travel)",
+          "Manipulation de journaux",
+          "Chaînes en clair"
+        ],
+        "answer": 1,
+        "explain": "Le trajet Paris–Singapour en 20 minutes est physiquement impossible. Cela suggère un vol d'identifiants ou de session. Il faut ensuite vérifier s'il s'agit de deux sessions simultanées, d'un VPN ou d'un proxy, avant de conclure à une compromission."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "IOC = artefact (hash, IP, domaine) ; IOA = comportement (processus, séquence).",
+          "Les douze indicateurs officiels doivent être reconnus dans un scénario, pas seulement cités.",
+          "Un indicateur isolé n'est pas une preuve : la corrélation et la chronologie font l'analyse.",
+          "L'effacement de journaux est un indicateur de dissimulation, donc un signal fort."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "2.5-02",
+    "objective": "2.5",
+    "order": 2,
+    "title": "Malwares et attaques réseau : reconnaître le mode opératoire",
+    "minutes": 18,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Le nom d'un malware décrit souvent son mode de propagation ou son effet. Savoir distinguer un ver d'un virus, un cheval de Troie d'un rootkit, change la réponse à apporter."
+      },
+      {
+        "type": "h",
+        "text": "Les dix familles de malwares"
+      },
+      {
+        "type": "list",
+        "items": [
+          "**Ransomware** : chiffre les données et exige un paiement. Indicateurs : extensions modifiées, notes de rançon, accès massif aux fichiers, suppression des clichés instantanés.",
+          "**Trojan** : se présente comme un logiciel légitime. Il n'infecte pas d'autres fichiers : il ouvre une porte.",
+          "**Worm** : se propage seul par le réseau, sans action de l'utilisateur. Indicateurs : scans internes rapides, explosions de connexions.",
+          "**Spyware** : collecte des informations (navigation, frappe, écran). Indicateurs : trafic sortant régulier, accès aux capteurs.",
+          "**Adware** : affiche des publicités, souvent installé avec un logiciel gratuit. Indicateurs : redirections, extensions navigateur.",
+          "**Virus** : s'attache à un fichier ou un secteur d'amorçage et se propage à l'exécution. Indicateurs : fichiers modifiés, taille anormale.",
+          "**Rootkit** : masque la compromission au niveau du noyau ou du firmware. Indicateurs : écarts entre outils, processus invisibles.",
+          "**Keylogger** : enregistre les frappes. Indicateurs : hook clavier, fichier de journal local, exfiltration périodique.",
+          "**Logic bomb** : déclenche une action à une date ou un événement. Indicateurs : code conditionnel, tâche planifiée suspecte.",
+          "**Fileless malware** : vit en mémoire, sans fichier sur disque. Indicateurs : PowerShell encodé, injection de processus, WMI."
+        ]
+      },
+      {
+        "type": "term",
+        "en": "Fileless malware",
+        "fr": "Malware sans fichier",
+        "field": "S'appuie sur des outils natifs (PowerShell, WMI, mshta, regsvr32) : c'est le « living off the land ». Les antivirus à signature sont aveugles ; l'EDR et la télémétrie comportementale sont nécessaires."
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "title": "Ver, virus, trojan : la distinction exacte",
+        "text": "Un **ver** se propage seul par le réseau. Un **virus** a besoin d'un hôte (fichier, secteur d'amorçage) et d'une exécution. Un **trojan** ne se propage pas : il trompe l'utilisateur pour être exécuté. Un **rootkit** ne se propage pas non plus : il cache. Une question peut combiner les termes ; revenez à la définition de propagation."
+      },
+      {
+        "type": "h",
+        "text": "Attaques réseau"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Attaque",
+          "Mécanisme",
+          "Indicateur observable"
+        ],
+        "rows": [
+          [
+            "DDoS",
+            "Saturation par volume ou par requêtes",
+            "Trafic entrant massif, latence, épuisement de connexions"
+          ],
+          [
+            "Protocol downgrade",
+            "Forcer TLS vers une version faible",
+            "Négociation TLS 1.0/1.1, alertes de handshake"
+          ],
+          [
+            "Rogue device",
+            "Équipement non autorisé sur le réseau",
+            "Nouvelle adresse MAC, DHCP inconnu, port actif"
+          ],
+          [
+            "Sniffing",
+            "Capture passive du trafic",
+            "Interface en mode promiscuité, miroir de port non autorisé"
+          ],
+          [
+            "Spoofing",
+            "Usurpation d'adresse IP, MAC ou DNS",
+            "Conflit ARP, IP source incohérente"
+          ],
+          [
+            "On-path attack",
+            "Interception et relais du trafic",
+            "Certificat inattendu, latence, ARP empoisonné"
+          ],
+          [
+            "DNS attack",
+            "Empoisonnement de cache, tunneling DNS",
+            "Réponses incohérentes, requêtes TXT volumineuses"
+          ],
+          [
+            "Cache poisoning",
+            "Injection d'entrées falsifiées dans un cache",
+            "Réponse DNS ou ARP incorrecte persistante"
+          ]
+        ]
+      },
+      {
+        "type": "p",
+        "text": "L'attaque **on-path** (autrefois appelée man-in-the-middle) place l'attaquant entre deux parties. Il peut lire, modifier ou rejouer le trafic. Sans chiffrement, il voit tout ; avec TLS correctement validé, il ne voit que le chiffré — d'où l'importance de la validation de certificat et de l'absence de « cliquer pour ignorer l'avertissement »."
+      },
+      {
+        "type": "callout",
+        "kind": "gap",
+        "title": "Terminologie d'examen",
+        "text": "Les livres emploient **MITM** (man-in-the-middle). Le référentiel SY0-801 utilise **on-path attack**. À l'examen, cherchez « on-path » ; dans la littérature, « MITM » reste courant."
+      },
+      {
+        "type": "h",
+        "text": "Attaques physiques"
+      },
+      {
+        "type": "p",
+        "text": "Le **tailgating** consiste à suivre une personne autorisée sans badge. Le **shoulder surfing** consiste à lire par-dessus l'épaule (écran, clavier, code PIN). Le **skimming** copie une piste de carte bancaire. Le **forced entry** est l'effraction physique. Les contrôles correspondants sont le sas (mantrap), la séparation des zones, l'écran filtrant et la vérification des badges."
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "page": 65,
+        "strength": "primary",
+        "note": "Kill Chain, MITM, mouvement latéral, sévérité des alertes"
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "19",
+        "page": 237,
+        "printed": 215,
+        "strength": "supporting",
+        "note": "Détection par signatures et réduction du bruit"
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "page": 249,
+        "strength": "supporting",
+        "note": "Investigation de malware, drive-by download"
+      },
+      {
+        "type": "check",
+        "q": "Un serveur montre une consommation CPU à 100 % en dehors des heures ouvrées, un trafic sortant régulier vers une IP inconnue et aucun fichier suspect sur disque. Quelle hypothèse est la plus probable ?",
+        "options": [
+          "Un virus classique attaché à un fichier système",
+          "Un malware sans fichier, possiblement un mineur ou un implant en mémoire",
+          "Un rootkit de firmware",
+          "Une attaque par déni de service entrant"
+        ],
+        "answer": 1,
+        "explain": "L'absence de fichier sur disque, la consommation CPU et le trafic sortant régulier évoquent un malware fileless (PowerShell, injection de processus) ou un mineur. Un virus laisserait des fichiers modifiés ; un DDoS entrant saturerait le réseau, pas le CPU de cette manière."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Ver = propagation autonome ; virus = hôte + exécution ; trojan = tromperie ; rootkit = dissimulation.",
+          "Fileless = mémoire et outils natifs : l'EDR et la télémétrie priment sur la signature.",
+          "On-path (MITM) : interception ; la validation TLS est la contre-mesure clé.",
+          "Chaque attaque réseau a un indicateur observable : corrélez trafic, journaux et configuration."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "2.5-03",
+    "objective": "2.5",
+    "order": 3,
+    "title": "Ingénierie sociale, attaques applicatives et d'identifiants",
+    "minutes": 17,
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Les attaques les plus efficaces ne cassent pas la cryptographie : elles convainquent un humain, exploitent une entrée non validée ou réutilisent un identifiant volé."
+      },
+      {
+        "type": "h",
+        "text": "Ingénierie sociale"
+      },
+      {
+        "type": "table",
+        "head": [
+          "Attaque",
+          "Canal",
+          "Signal d'alerte"
+        ],
+        "rows": [
+          [
+            "Phishing",
+            "E-mail de masse",
+            "Urgence, lien trompeur, domaine ressemblant"
+          ],
+          [
+            "Spear phishing",
+            "E-mail ciblé",
+            "Connaissance du poste, du projet, du manager"
+          ],
+          [
+            "Whaling",
+            "E-mail ciblant un dirigeant",
+            "Demande de virement, pièce jointe « confidentielle »"
+          ],
+          [
+            "Vishing",
+            "Téléphone",
+            "Pression, numéro usurpé, demande de code MFA"
+          ],
+          [
+            "Smishing",
+            "SMS",
+            "Lien raccourci, colis, amende, compte bloqué"
+          ],
+          [
+            "Quishing",
+            "QR code",
+            "QR collé sur un terminal, lien de paiement"
+          ],
+          [
+            "Impersonation",
+            "Tout canal",
+            "Identité usurpée (support, banque, dirigeant)"
+          ],
+          [
+            "Deepfake",
+            "Vidéo ou voix",
+            "Voix synthétique, incohérences labiales, urgence"
+          ]
+        ]
+      },
+      {
+        "type": "term",
+        "en": "Quishing",
+        "fr": "Hameçonnage par QR code",
+        "field": "Le QR code contourne les filtres e-mail qui analysent le texte et les URL. Il est souvent collé sur un terminal de paiement ou inclus dans un PDF."
+      },
+      {
+        "type": "term",
+        "en": "Deepfake",
+        "fr": "Hypertrucage",
+        "field": "Vidéo ou voix générée par IA. Utilisé pour la fraude au président et l'extorsion. La vérification par un second canal reste la meilleure défense."
+      },
+      {
+        "type": "p",
+        "text": "Le **watering hole** est une variante : l'attaquant compromet un site légitime fréquenté par la cible (syndicat professionnel, portail fournisseur) pour infecter ses visiteurs. L'indicateur est un changement de comportement d'un site de confiance, pas un e-mail suspect."
+      },
+      {
+        "type": "h",
+        "text": "Attaques applicatives"
+      },
+      {
+        "type": "list",
+        "items": [
+          "**Injection** (SQL, commande, LDAP) : une entrée non validée est interprétée comme du code. Indicateur : erreurs SQL, requêtes anormales, `' OR 1=1`.",
+          "**Buffer overflow** : écriture au-delà de la mémoire allouée, provoquant un crash ou une exécution. Indicateur : plantages répétés, corruption mémoire.",
+          "**Replay** : rejeu d'une requête ou d'un jeton valide. Indicateur : même requête répétée, jeton réutilisé hors fenêtre.",
+          "**Privilege escalation** : passage d'un compte standard à un compte administrateur. Indicateur : ajout à un groupe privilégié, token élevé.",
+          "**Forgery** (CSRF, falsification de requête) : action exécutée au nom de l'utilisateur sans son consentement. Indicateur : requêtes POST sans jeton anti-CSRF.",
+          "**Directory traversal** : accès à un fichier hors du répertoire prévu via `../`. Indicateur : requêtes contenant `../` ou `%2e%2e`."
+        ]
+      },
+      {
+        "type": "callout",
+        "kind": "exam",
+        "title": "Injection : le principe avant le nom",
+        "text": "Toute injection repose sur la même erreur : **mélanger données et instructions**. La parade est structurelle (requêtes paramétrées, validation stricte, moindre privilège), pas un simple filtrage de caractères."
+      },
+      {
+        "type": "h",
+        "text": "Attaques d'identifiants"
+      },
+      {
+        "type": "compare",
+        "left": {
+          "title": "Force brute",
+          "points": [
+            "Beaucoup de tentatives sur **un** compte",
+            "Verrouillage de compte visible",
+            "Détection : seuil d'échecs par compte"
+          ]
+        },
+        "right": {
+          "title": "Pulvérisation (password spraying)",
+          "points": [
+            "Un mot de passe courant sur **beaucoup** de comptes",
+            "Évite le verrouillage par compte",
+            "Détection : échecs répartis, même créneau, même IP"
+          ]
+        }
+      },
+      {
+        "type": "p",
+        "text": "L'**énumération d'utilisateurs** consiste à déterminer quels comptes existent (messages d'erreur différents, temps de réponse). Le **replay** réutilise un jeton ou une authentification capturée. Le **contournement MFA** exploite le push fatigue (répétition de notifications), l'OTP intercepté, ou un flux de réinitialisation mal protégé."
+      },
+      {
+        "type": "table",
+        "head": [
+          "Attaque",
+          "Ce qu'on voit dans les journaux",
+          "Réponse immédiate"
+        ],
+        "rows": [
+          [
+            "Force brute",
+            "Rafale d'échecs sur un compte",
+            "Verrouillage, blocage IP, notification"
+          ],
+          [
+            "Pulvérisation",
+            "Échecs sur de nombreux comptes, même IP",
+            "Blocage progressif, MFA, détection comportementale"
+          ],
+          [
+            "Énumération",
+            "Beaucoup de noms de comptes inexistants",
+            "Réponses uniformes, limitation de débit"
+          ],
+          [
+            "Replay",
+            "Jeton réutilisé, même requête",
+            "Invalidation de session, rotation de jeton"
+          ],
+          [
+            "MFA bypass",
+            "Push répétés, code validé hors contexte",
+            "Number matching, clés FIDO2, blocage du compte"
+          ]
+        ]
+      },
+      {
+        "type": "source",
+        "book": "SOCN",
+        "page": 177,
+        "strength": "supporting",
+        "note": "OWASP, XSS, SQLi"
+      },
+      {
+        "type": "source",
+        "book": "DSH",
+        "chapter": "17",
+        "page": 201,
+        "printed": 179,
+        "strength": "supporting",
+        "note": "Codage sécurisé et validation des entrées"
+      },
+      {
+        "type": "source",
+        "book": "NET",
+        "page": 28,
+        "strength": "supporting",
+        "note": "Triage d'alerte réseau"
+      },
+      {
+        "type": "check",
+        "q": "Un attaquant teste le mot de passe `Été2026!` sur 300 comptes différents, une fois chacun, en cinq minutes. De quelle attaque s'agit-il ?",
+        "options": [
+          "Force brute",
+          "Pulvérisation de mots de passe",
+          "Énumération d'utilisateurs",
+          "Rejeu de session"
+        ],
+        "answer": 1,
+        "explain": "Un seul mot de passe essayé sur de nombreux comptes, à faible fréquence par compte, est une pulvérisation. Elle contourne le verrouillage par compte et exploite la réutilisation de mots de passe. La force brute concentrerait les tentatives sur un compte."
+      },
+      {
+        "type": "summary",
+        "items": [
+          "Phishing, spear, whaling, vishing, smishing, quishing, deepfake : le canal et le ciblage changent, pas le principe.",
+          "Injection = données interprétées comme instructions ; la parade est structurelle.",
+          "Force brute = un compte ; pulvérisation = un mot de passe sur beaucoup de comptes.",
+          "La réponse à une attaque d'identifiants commence par l'invalidation de session et le renforcement MFA."
+        ]
+      }
+    ]
+  }
+]
